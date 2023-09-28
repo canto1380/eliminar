@@ -1,0 +1,311 @@
+// if (parteDiarioData.length > 0) {
+  //   if (parteDiarioData[0].blockchainPaymentData) {
+    //     page1.addRow({
+      //       name: parteDiarioData.name,
+      //       cmb: parteDiarioData.cmb,
+      //       rendimientoCMB: parteDiarioData.rendimientoCMB + '%',
+      //     })
+      //     page1.getRow(2).font = {
+        //       name: 'Calibri',
+        //       bold: false,
+        //       underline: false,
+        //       size: 12,
+        //     }
+        //     page1.getRow(2).alignment = { horizontal: 'center' }
+        //     page1.getCell('C2').numFmt = '0.000%'
+        //   }
+        //   parteDiarioData.forEach((data) => {
+          //     page1.addRow({
+  //       name: data.name,
+  //       cmb: data.cmb,
+  //       rendimientoCMB: data.rendimientoCMB,
+  //     })
+  //   })
+  // }
+
+
+  // page1.columns = [
+  //   {
+  //     header: 'Name',
+  //     key: 'name',
+  //     width: 10,
+  //     style: {
+  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
+  //     },
+  //   },
+  //   {
+  //     header: 'CMB',
+  //     key: 'cmb',
+  //     width: 10,
+  //     style: {
+  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
+  //     },
+  //   },
+  //   {
+  //     header: '% CMB',
+  //     key: 'rendimientoCMB',
+  //     width: 10,
+  //     style: {
+  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
+  //     },
+  //   },
+  // ]
+
+IDEM PARA ROW 1 3 5 6 13 16 27 28 30 31 32
+  // page1.getRow(1).border = {
+  //   top: { style: 'medium', color: { argb: '000000' } },
+  //   left: { style: 'medium', color: { argb: '000000' } },
+  //   bottom: { style: 'medium', color: { argb: '000000' } },
+  //   right: { style: 'medium', color: { argb: '000000' } },
+  // }
+
+
+
+
+  if (dataEnd !== null) {
+      setD1(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Ca�a molida bruta (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD1(
+        dataa.filter(
+          (d) => d.field1 === 'Ca�a molida bruta (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD2(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Rendimientos de ca�a molida bruta (%)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD2(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Rendimientos de ca�a molida bruta (%)' &&
+            d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD3(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Ca�a molida Neta (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD3(
+        dataa.filter(
+          (d) => d.field1 === 'Ca�a molida Neta (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+    if (dataEnd !== null) {
+      setD4(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Rendimiento de ca�a molida Neta (%)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD4(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Rendimiento de ca�a molida Neta (%)' &&
+            d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD5(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car equivalente (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD5(
+        dataa.filter(
+          (d) => d.field1 === 'Az�car equivalente (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD6(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car crudo (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD6(
+        dataa.filter(
+          (d) => d.field1 === 'Az�car crudo (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD7(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car blanco com�n tipo A (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD7(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car blanco com�n tipo A (t)' &&
+            d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD8(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car refinado (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD8(
+        dataa.filter(
+          (d) => d.field1 === 'Az�car refinado (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD9(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Az�car org�nico (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD9(
+        dataa.filter(
+          (d) => d.field1 === 'Az�car org�nico (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD10(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Otros az�cares (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD10(
+        dataa.filter(
+          (d) => d.field1 === 'Otros az�cares (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+    if (dataEnd !== null) {
+      setD11(
+        dataa.filter(
+          (d) =>
+            d.field1 === 'Ca�a molida bruta (t)' &&
+            d.field2 !== 'Fecha' &&
+            d.field2 <= dataEnd
+        )
+      )
+    } else {
+      setD11(
+        dataa.filter(
+          (d) => d.field1 === 'Ca�a molida bruta (t)' && d.field2 !== 'Fecha'
+        )
+      )
+    }
+
+
+
+    parteDiariosHistoricos?.ParteDiarios?.forEach((d) => {
+      // switch (d.IngenioNombre) {
+      // case 'Aguilares': {
+      //   d1.push(d)
+      //   break
+      // }
+      // default: {
+      //   break
+      // }
+    // }
+      // case 'Rendimientos de ca�a molida bruta (%)': {
+      //   data2.push(d)
+      //   break
+      // }
+      // case 'Ca�a molida Neta (t)': {
+      //   data3.push(d)
+      //   break
+      // }
+      // case 'Rendimiento de ca�a molida Neta (%)': {
+      //   data4.push(d)
+      //   break
+      // }
+      // case 'Az�car equivalente (t)': {
+      //   data5.push(d)
+      //   break
+      // }
+      // case 'Az�car crudo (t)': {
+      //   data6.push(d)
+      //   break
+      // }
+      // case 'Az�car blanco com�n tipo A (t)': {
+      //   data7.push(d)
+      //   break
+      // }
+      // case 'Az�car refinado (t)': {
+      //   data8.push(d)
+      //   break
+      // }
+      // case 'Az�car org�nico (t)': {
+      //   data9.push(d)
+      //   break
+      // }
+      // case 'Otros az�cares (t)': {
+      //   data10.push(d)
+      //   break
+      // }
+      // case 'Ca�a molida bruta (t)': {
+      //   data11.push(d)
+      //   break
+      // }
+      // }
+      // setD1(data1)
+    })

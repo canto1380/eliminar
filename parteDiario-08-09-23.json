@@ -1,0 +1,526 @@
+[
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Ca�a molida bruta (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"01/09/2023","field3":"4810","field4":"5712","field5":"16238","field6":"4504","field7":"11654","field8":"6688","field9":"15347","field10":"9406","field11":"15646","field12":"8912","field13":"3890","field14":"5172","field15":"-","field16":"4700","field17":"7189","field18":"119868"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"02/09/2023","field3":"5211","field4":"6582","field5":"18947","field6":"4592","field7":"7267","field8":"5452","field9":"15204","field10":"10191","field11":"14084","field12":"8514","field13":"4592","field14":"5200","field15":"-","field16":"5718","field17":"8825","field18":"120379"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"03/09/2023","field3":"4977","field4":"6208","field5":"15238","field6":"4499","field7":"2430","field8":"2272","field9":"15577","field10":"9739","field11":"11348","field12":"8956","field13":"540","field14":"2995","field15":"-","field16":"0","field17":"7623","field18":"92402"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"04/09/2023","field3":"3601","field4":"5669","field5":"17762","field6":"4655","field7":"4242","field8":"6203","field9":"15280","field10":"4736","field11":"13342","field12":"7879","field13":"0","field14":"2818","field15":"-","field16":"2110","field17":"8412","field18":"96709"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"05/09/2023","field3":"5007","field4":"4250","field5":"16387","field6":"4626","field7":"5853","field8":"3245","field9":"14452","field10":"10389","field11":"11865","field12":"9184","field13":"1969","field14":"4118","field15":"-","field16":"222","field17":"8048","field18":"99615"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"06/09/2023","field3":"4868","field4":"975","field5":"-","field6":"4357","field7":"799","field8":"3346","field9":"11985","field10":"0","field11":"11584","field12":"8427","field13":"3600","field14":"190","field15":"-","field16":"0","field17":"6314","field18":"56445"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"Total qna.","field3":"28474","field4":"29396","field5":"84572","field6":"27233","field7":"32245","field8":"27206","field9":"87845","field10":"44461","field11":"77869","field12":"51872","field13":"14591","field14":"20493","field15":"0","field16":"12750","field17":"46411","field18":"585418"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"Total mes","field3":"28474","field4":"29396","field5":"84572","field6":"27233","field7":"32245","field8":"27206","field9":"87845","field10":"44461","field11":"77869","field12":"51872","field13":"14591","field14":"20493","field15":"0","field16":"12750","field17":"46411","field18":"585418"}
+,
+{"field1":"Ca�a molida bruta (t)","field2":"Total zafra","field3":"331781","field4":"518845","field5":"1338629","field6":"379213","field7":"488152","field8":"522440","field9":"1491794","field10":"963165","field11":"1128907","field12":"663273","field13":"338676","field14":"268351","field15":"0","field16":"295357","field17":"826020","field18":"9554603"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"01/09/2023","field3":"8.409","field4":"9.176","field5":"10.031","field6":"8.88","field7":"9.989","field8":"8.72","field9":"8.831","field10":"10.976","field11":"8.643","field12":"9.039","field13":"10.098","field14":"8.21","field15":"-","field16":"9.483","field17":"8.599","field18":"9.286"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"02/09/2023","field3":"8.414","field4":"9.152","field5":"9.849","field6":"8.884","field7":"10.158","field8":"8.75","field9":"8.843","field10":"10.871","field11":"8.612","field12":"8.89","field13":"10.045","field14":"8.26","field15":"-","field16":"9.534","field17":"8.602","field18":"9.26"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"03/09/2023","field3":"8.418","field4":"9.092","field5":"9.694","field6":"8.891","field7":"10.256","field8":"8.76","field9":"8.85","field10":"10.862","field11":"8.717","field12":"8.528","field13":"10.129","field14":"8.26","field15":"-","field16":"0","field17":"8.598","field18":"9.151"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"04/09/2023","field3":"8.422","field4":"9.132","field5":"9.758","field6":"8.85","field7":"9.993","field8":"8.8","field9":"8.872","field10":"10.338","field11":"8.716","field12":"9.018","field13":"0","field14":"7.87","field15":"-","field16":"9.131","field17":"8.606","field18":"9.092"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"05/09/2023","field3":"8.427","field4":"9.126","field5":"9.816","field6":"8.885","field7":"10.046","field8":"8.75","field9":"8.879","field10":"10.425","field11":"8.533","field12":"8.683","field13":"10.082","field14":"8.03","field15":"-","field16":"9.727","field17":"8.696","field18":"9.163"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"06/09/2023","field3":"8.431","field4":"9.129","field5":"-","field6":"8.882","field7":"10.157","field8":"8.78","field9":"8.884","field10":"0","field11":"8.631","field12":"8.325","field13":"9.892","field14":"7.8","field15":"-","field16":"0","field17":"8.711","field18":"8.766"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"Total qna.","field3":"8.42","field4":"9.135","field5":"9.83","field6":"8.878","field7":"10.062","field8":"8.758","field9":"8.858","field10":"10.73","field11":"8.642","field12":"8.744","field13":"10.029","field14":"8.143","field15":"0","field16":"9.451","field17":"8.632","field18":"9.156"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"Total mes","field3":"8.42","field4":"9.135","field5":"9.83","field6":"8.878","field7":"10.062","field8":"8.758","field9":"8.858","field10":"10.73","field11":"8.642","field12":"8.744","field13":"10.029","field14":"8.143","field15":"0","field16":"9.451","field17":"8.632","field18":"9.156"}
+,
+{"field1":"Rendimientos de ca�a molida bruta (%)","field2":"Total zafra","field3":"7.764","field4":"7.55","field5":"8.368","field6":"7.604","field7":"8.522","field8":"7.1","field9":"7.185","field10":"8.601","field11":"7.332","field12":"7.563","field13":"8.104","field14":"7.498","field15":"0","field16":"7.909","field17":"7.337","field18":"7.734"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Ca�a molida Neta (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"01/09/2023","field3":"4407","field4":"5128","field5":"14621","field6":"3991","field7":"10556","field8":"5957","field9":"13508","field10":"9406","field11":"13799","field12":"7917","field13":"3471","field14":"4627","field15":"-","field16":"4157","field17":"6347","field18":"107892"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"02/09/2023","field3":"4787","field4":"5888","field5":"17125","field6":"4049","field7":"6580","field8":"4850","field9":"13475","field10":"10191","field11":"12504","field12":"7593","field13":"4094","field14":"4645","field15":"-","field16":"5052","field17":"7820","field18":"108653"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"03/09/2023","field3":"4575","field4":"5561","field5":"13639","field6":"3966","field7":"2194","field8":"2035","field9":"13714","field10":"9739","field11":"10186","field12":"7948","field13":"480","field14":"2665","field15":"-","field16":"0","field17":"6693","field18":"83395"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"04/09/2023","field3":"3296","field4":"5086","field5":"15887","field6":"4098","field7":"3844","field8":"5521","field9":"13471","field10":"4736","field11":"11848","field12":"7131","field13":"0","field14":"2520","field15":"-","field16":"1869","field17":"7435","field18":"86742"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"05/09/2023","field3":"4539","field4":"3801","field5":"14717","field6":"4070","field7":"5303","field8":"2870","field9":"12726","field10":"10389","field11":"10546","field12":"8212","field13":"1747","field14":"3707","field15":"-","field16":"199","field17":"7080","field18":"89906"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"06/09/2023","field3":"4355","field4":"871","field5":"-","field6":"3842","field7":"724","field8":"2940","field9":"10548","field10":"0","field11":"10250","field12":"7494","field13":"3184","field14":"168","field15":"-","field16":"0","field17":"5444","field18":"49820"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"Total qna.","field3":"25959","field4":"26335","field5":"75989","field6":"24016","field7":"29201","field8":"24173","field9":"77442","field10":"44461","field11":"69133","field12":"46295","field13":"12976","field14":"18332","field15":"0","field16":"11277","field17":"40819","field18":"526408"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"Total mes","field3":"25959","field4":"26335","field5":"75989","field6":"24016","field7":"29201","field8":"24173","field9":"77442","field10":"44461","field11":"69133","field12":"46295","field13":"12976","field14":"18332","field15":"0","field16":"11277","field17":"40819","field18":"526408"}
+,
+{"field1":"Ca�a molida Neta (t)","field2":"Total zafra","field3":"299138","field4":"454908","field5":"1177803","field6":"326329","field7":"437346","field8":"458565","field9":"1286880","field10":"963171","field11":"996646","field12":"580570","field13":"298785","field14":"239575","field15":"0","field16":"261349","field17":"726810","field18":"8507875"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"01/09/2023","field3":"9.177","field4":"10.221","field5":"11.14","field6":"10.021","field7":"11.028","field8":"9.79","field9":"10.033","field10":"10.975","field11":"9.799","field12":"10.175","field13":"11.316","field14":"9.177","field15":"-","field16":"10.721","field17":"9.739","field18":"10.317"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"02/09/2023","field3":"9.159","field4":"10.23","field5":"10.896","field6":"10.075","field7":"11.218","field8":"9.836","field9":"9.977","field10":"10.871","field11":"9.7","field12":"9.968","field13":"11.266","field14":"9.246","field15":"-","field16":"10.79","field17":"9.707","field18":"10.259"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"03/09/2023","field3":"9.157","field4":"10.149","field5":"10.83","field6":"10.085","field7":"11.359","field8":"9.78","field9":"10.052","field10":"10.862","field11":"9.711","field12":"9.609","field13":"11.395","field14":"9.282","field15":"-","field16":"0","field17":"9.792","field18":"10.139"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"04/09/2023","field3":"9.201","field4":"10.178","field5":"10.909","field6":"10.052","field7":"11.027","field8":"9.887","field9":"10.063","field10":"10.338","field11":"9.815","field12":"9.963","field13":"0","field14":"8.8","field15":"-","field16":"10.308","field17":"9.736","field18":"10.136"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"05/09/2023","field3":"9.295","field4":"10.204","field5":"10.929","field6":"10.098","field7":"11.087","field8":"9.893","field9":"10.083","field10":"10.425","field11":"9.6","field12":"9.71","field13":"11.363","field14":"8.92","field15":"-","field16":"10.851","field17":"9.884","field18":"10.152"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"06/09/2023","field3":"9.424","field4":"10.219","field5":"-","field6":"10.072","field7":"11.209","field8":"9.992","field9":"10.094","field10":"0","field11":"9.754","field12":"9.361","field13":"11.184","field14":"8.821","field15":"-","field16":"0","field17":"10.103","field18":"9.932"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"Total qna.","field3":"9.235","field4":"10.197","field5":"10.94","field6":"10.067","field7":"11.111","field8":"9.857","field9":"10.048","field10":"10.73","field11":"9.734","field12":"9.797","field13":"11.277","field14":"9.103","field15":"0","field16":"10.686","field17":"9.815","field18":"10.182"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"Total mes","field3":"9.235","field4":"10.197","field5":"10.94","field6":"10.067","field7":"11.111","field8":"9.857","field9":"10.048","field10":"10.73","field11":"9.734","field12":"9.797","field13":"11.277","field14":"9.103","field15":"0","field16":"10.686","field17":"9.815","field18":"10.182"}
+,
+{"field1":"Rendimiento de ca�a molida Neta (%)","field2":"Total zafra","field3":"8.611","field4":"8.611","field5":"9.51","field6":"8.837","field7":"9.512","field8":"8.089","field9":"8.33","field10":"8.601","field11":"8.305","field12":"8.64","field13":"9.186","field14":"8.399","field15":"0","field16":"8.938","field17":"8.338","field18":"8.686"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Az�car equivalente (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Az�car equivalente (t)","field2":"01/09/2023","field3":"404.472","field4":"524.133","field5":"1628.833","field6":"399.955","field7":"1164.118","field8":"583.193","field9":"1355.293","field10":"1032.402","field11":"1352.283","field12":"805.555","field13":"392.812","field14":"424.621","field15":"-","field16":"445.701","field17":"618.182","field18":"11131.553"}
+,
+{"field1":"Az�car equivalente (t)","field2":"02/09/2023","field3":"438.453","field4":"602.384","field5":"1866.09","field6":"407.953","field7":"738.181","field8":"477.05","field9":"1344.489","field10":"1107.863","field11":"1212.914","field12":"756.894","field13":"461.266","field14":"429.52","field15":"-","field16":"545.154","field17":"759.126","field18":"11147.337"}
+,
+{"field1":"Az�car equivalente (t)","field2":"03/09/2023","field3":"418.963","field4":"564.431","field5":"1477.171","field6":"400.006","field7":"249.22","field8":"199.027","field9":"1378.564","field10":"1057.85","field11":"989.205","field12":"763.767","field13":"54.696","field14":"247.387","field15":"-","field16":"0","field17":"655.425","field18":"8455.712"}
+,
+{"field1":"Az�car equivalente (t)","field2":"04/09/2023","field3":"303.276","field4":"517.693","field5":"1733.215","field6":"411.967","field7":"423.903","field8":"545.864","field9":"1355.641","field10":"489.607","field11":"1162.888","field12":"710.528","field13":"0","field14":"221.776","field15":"-","field16":"192.664","field17":"723.936","field18":"8792.958"}
+,
+{"field1":"Az�car equivalente (t)","field2":"05/09/2023","field3":"421.939","field4":"387.855","field5":"1608.547","field6":"411.02","field7":"587.992","field8":"283.937","field9":"1283.193","field10":"1083.053","field11":"1012.44","field12":"797.446","field13":"198.514","field14":"330.675","field15":"-","field16":"21.593","field17":"699.854","field18":"9128.058"}
+,
+{"field1":"Az�car equivalente (t)","field2":"06/09/2023","field3":"410.421","field4":"89.007","field5":"-","field6":"386.988","field7":"81.154","field8":"293.778","field9":"1064.747","field10":"0","field11":"999.815","field12":"701.547","field13":"356.111","field14":"14.82","field15":"-","field16":"0","field17":"550.012","field18":"4948.4"}
+,
+{"field1":"Az�car equivalente (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car equivalente (t)","field2":"Total qna.","field3":"2397.524","field4":"2685.503","field5":"8313.856","field6":"2417.889","field7":"3244.568","field8":"2382.849","field9":"7781.927","field10":"4770.775","field11":"6729.545","field12":"4535.737","field13":"1463.399","field14":"1668.799","field15":"0","field16":"1205.112","field17":"4006.535","field18":"53604.018"}
+,
+{"field1":"Az�car equivalente (t)","field2":"Total mes","field3":"2397.524","field4":"2685.503","field5":"8313.856","field6":"2417.889","field7":"3244.568","field8":"2382.849","field9":"7781.927","field10":"4770.775","field11":"6729.545","field12":"4535.737","field13":"1463.399","field14":"1668.799","field15":"0","field16":"1205.112","field17":"4006.535","field18":"53604.018"}
+,
+{"field1":"Az�car equivalente (t)","field2":"Total zafra","field3":"25761.255","field4":"39176.031","field5":"112020.313","field6":"28837.997","field7":"41602.989","field8":"37095.877","field9":"107198.139","field10":"82847.794","field11":"82778.986","field12":"50165.429","field13":"27448.149","field14":"20122.248","field15":"0","field16":"23360.25","field17":"60606.082","field18":"739021.539"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Az�car crudo (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Az�car crudo (t)","field2":"01/09/2023","field3":"195","field4":"0","field5":"184","field6":"404","field7":"52","field8":"0","field9":"0","field10":"0","field11":"56","field12":"0","field13":"0","field14":"0","field15":"-","field16":"63","field17":"0","field18":"954"}
+,
+{"field1":"Az�car crudo (t)","field2":"02/09/2023","field3":"166","field4":"0","field5":"90","field6":"434","field7":"44","field8":"0","field9":"0","field10":"0","field11":"15","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"749"}
+,
+{"field1":"Az�car crudo (t)","field2":"03/09/2023","field3":"185","field4":"0","field5":"31","field6":"372","field7":"46","field8":"0","field9":"0","field10":"0","field11":"5","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"639"}
+,
+{"field1":"Az�car crudo (t)","field2":"04/09/2023","field3":"88","field4":"0","field5":"89","field6":"367","field7":"51","field8":"0","field9":"15","field10":"0","field11":"23","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"633"}
+,
+{"field1":"Az�car crudo (t)","field2":"05/09/2023","field3":"180","field4":"0","field5":"0","field6":"440","field7":"31","field8":"0","field9":"0","field10":"0","field11":"17","field12":"110","field13":"0","field14":"0","field15":"-","field16":"4","field17":"0","field18":"782"}
+,
+{"field1":"Az�car crudo (t)","field2":"06/09/2023","field3":"159","field4":"0","field5":"-","field6":"332","field7":"0","field8":"0","field9":"0","field10":"0","field11":"16","field12":"120","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"627"}
+,
+{"field1":"Az�car crudo (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car crudo (t)","field2":"Total qna.","field3":"973","field4":"0","field5":"394","field6":"2349","field7":"224","field8":"0","field9":"15","field10":"0","field11":"132","field12":"230","field13":"0","field14":"0","field15":"0","field16":"67","field17":"0","field18":"4384"}
+,
+{"field1":"Az�car crudo (t)","field2":"Total mes","field3":"973","field4":"0","field5":"394","field6":"2349","field7":"224","field8":"0","field9":"15","field10":"0","field11":"132","field12":"230","field13":"0","field14":"0","field15":"0","field16":"67","field17":"0","field18":"4384"}
+,
+{"field1":"Az�car crudo (t)","field2":"Total zafra","field3":"11592","field4":"459","field5":"18840","field6":"28562","field7":"1733","field8":"0","field9":"22292","field10":"0","field11":"1314","field12":"3250","field13":"0","field14":"0","field15":"0","field16":"3520","field17":"0","field18":"91562"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"01/09/2023","field3":"235","field4":"557","field5":"1400","field6":"0","field7":"826","field8":"371","field9":"790","field10":"1066","field11":"1135","field12":"368","field13":"415","field14":"417","field15":"-","field16":"379","field17":"580","field18":"8539"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"02/09/2023","field3":"256","field4":"603","field5":"1800","field6":"0","field7":"225","field8":"179","field9":"790","field10":"1073","field11":"1178","field12":"312","field13":"480","field14":"455","field15":"-","field16":"451","field17":"571","field18":"8373"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"03/09/2023","field3":"256","field4":"518","field5":"1440","field6":"0","field7":"298","field8":"159","field9":"786","field10":"1069","field11":"1054","field12":"317","field13":"90","field14":"283","field15":"-","field16":"242","field17":"578","field18":"7090"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"04/09/2023","field3":"282","field4":"522","field5":"1650","field6":"0","field7":"202","field8":"170","field9":"788","field10":"684","field11":"893","field12":"367","field13":"0","field14":"233","field15":"-","field16":"26","field17":"612","field18":"6429"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"05/09/2023","field3":"226","field4":"437","field5":"1600","field6":"0","field7":"257","field8":"452","field9":"768","field10":"1046","field11":"981","field12":"343","field13":"228","field14":"318","field15":"-","field16":"103","field17":"633","field18":"7392"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"06/09/2023","field3":"262","field4":"291","field5":"-","field6":"0","field7":"0","field8":"123","field9":"631","field10":"536","field11":"928","field12":"246","field13":"370","field14":"188","field15":"-","field16":"0","field17":"507","field18":"4082"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"Total qna.","field3":"1517","field4":"2928","field5":"7890","field6":"0","field7":"1808","field8":"1454","field9":"4553","field10":"5474","field11":"6169","field12":"1953","field13":"1583","field14":"1894","field15":"0","field16":"1201","field17":"3481","field18":"41905"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"Total mes","field3":"1517","field4":"2928","field5":"7890","field6":"0","field7":"1808","field8":"1454","field9":"4553","field10":"5474","field11":"6169","field12":"1953","field13":"1583","field14":"1894","field15":"0","field16":"1201","field17":"3481","field18":"41905"}
+,
+{"field1":"Az�car blanco com�n tipo A (t)","field2":"Total zafra","field3":"13666","field4":"34137","field5":"89449","field6":"0","field7":"16125","field8":"22594","field9":"35405","field10":"78279","field11":"69033","field12":"15815","field13":"27240","field14":"19747","field15":"0","field16":"19519","field17":"50390","field18":"491399"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Az�car refinado (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Az�car refinado (t)","field2":"01/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"396","field8":"0","field9":"0","field10":"0","field11":"0","field12":"293","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"689"}
+,
+{"field1":"Az�car refinado (t)","field2":"02/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"478","field8":"0","field9":"0","field10":"0","field11":"0","field12":"309","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"787"}
+,
+{"field1":"Az�car refinado (t)","field2":"03/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"317","field8":"0","field9":"0","field10":"0","field11":"0","field12":"301","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"618"}
+,
+{"field1":"Az�car refinado (t)","field2":"04/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"41","field8":"0","field9":"0","field10":"0","field11":"0","field12":"216","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"257"}
+,
+{"field1":"Az�car refinado (t)","field2":"05/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"138","field8":"0","field9":"0","field10":"0","field11":"0","field12":"201","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"339"}
+,
+{"field1":"Az�car refinado (t)","field2":"06/09/2023","field3":"0","field4":"0","field5":"-","field6":"0","field7":"351","field8":"0","field9":"0","field10":"0","field11":"0","field12":"209","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"560"}
+,
+{"field1":"Az�car refinado (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car refinado (t)","field2":"Total qna.","field3":"0","field4":"0","field5":"0","field6":"0","field7":"1721","field8":"0","field9":"0","field10":"0","field11":"0","field12":"1529","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"3250"}
+,
+{"field1":"Az�car refinado (t)","field2":"Total mes","field3":"0","field4":"0","field5":"0","field6":"0","field7":"1721","field8":"0","field9":"0","field10":"0","field11":"0","field12":"1529","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"3250"}
+,
+{"field1":"Az�car refinado (t)","field2":"Total zafra","field3":"0","field4":"0","field5":"2200","field6":"0","field7":"23432","field8":"0","field9":"0","field10":"0","field11":"0","field12":"20564","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"46196"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Az�car org�nico (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Az�car org�nico (t)","field2":"01/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"02/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"03/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"04/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"05/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"06/09/2023","field3":"0","field4":"0","field5":"-","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"Total qna.","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"Total mes","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Az�car org�nico (t)","field2":"Total zafra","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"4217","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"4217"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Otros az�cares (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Otros az�cares (t)","field2":"01/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"02/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"03/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"04/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"05/09/2023","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"06/09/2023","field3":"0","field4":"0","field5":"-","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"-","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"Total qna.","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"Total mes","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"0","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"0"}
+,
+{"field1":"Otros az�cares (t)","field2":"Total zafra","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"0","field9":"0","field10":"187","field11":"0","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"187"}
+,
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Alcohol hidratado (l)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Alcohol hidratado (l)","field2":"01/09/2023","field3":"-","field4":"0","field5":"247313","field6":"-","field7":"0","field8":"157509","field9":"762753","field10":"-","field11":"180359","field12":"149048","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1496982"},
+{"field1":"Alcohol hidratado (l)","field2":"02/09/2023","field3":"-","field4":"0","field5":"248792","field6":"-","field7":"0","field8":"137877","field9":"779459","field10":"-","field11":"180928","field12":"142795","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1489851"},
+{"field1":"Alcohol hidratado (l)","field2":"03/09/2023","field3":"-","field4":"0","field5":"211407","field6":"-","field7":"0","field8":"0","field9":"773975","field10":"-","field11":"184893","field12":"142319","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1312594"},
+{"field1":"Alcohol hidratado (l)","field2":"04/09/2023","field3":"-","field4":"0","field5":"264923","field6":"-","field7":"0","field8":"37215","field9":"763124","field10":"-","field11":"185692","field12":"118786","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1369740"},
+{"field1":"Alcohol hidratado (l)","field2":"05/09/2023","field3":"-","field4":"40959","field5":"216454","field6":"-","field7":"0","field8":"67536","field9":"726259","field10":"-","field11":"184431","field12":"114985","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1350624"},
+{"field1":"Alcohol hidratado (l)","field2":"06/09/2023","field3":"-","field4":"0","field5":"-","field6":"-","field7":"0","field8":"0","field9":"717794","field10":"-","field11":"186319","field12":"138391","field13":"-","field14":"-","field15":"-","field16":"-","field17":"0","field18":"1042504"},
+{"field1":"Alcohol hidratado (l)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol hidratado (l)","field2":"Total qna.","field3":"0","field4":"40959","field5":"1188889","field6":"0","field7":"0","field8":"400137","field9":"4523364","field10":"0","field11":"1102622","field12":"806324","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"8062295"},
+{"field1":"Alcohol hidratado (l)","field2":"Total mes","field3":"0","field4":"40959","field5":"1188889","field6":"0","field7":"0","field8":"400137","field9":"4523364","field10":"0","field11":"1102622","field12":"806324","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"8062295"},
+{"field1":"Alcohol hidratado (l)","field2":"Total zafra","field3":"0","field4":"4636468","field5":"14706654","field6":"0","field7":"117985","field8":"10335568","field9":"63776578","field10":"0","field11":"15973192","field12":"10096173","field13":"0","field14":"0","field15":"0","field16":"0","field17":"0","field18":"119642618"},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Alcohol anhidro (l)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Alcohol anhidro (l)","field2":"01/09/2023","field3":"-","field4":"0","field5":"0","field6":"-","field7":"0","field8":"124181","field9":"0","field10":"-","field11":"58027","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"131739","field18":"313947"},
+{"field1":"Alcohol anhidro (l)","field2":"02/09/2023","field3":"-","field4":"0","field5":"0","field6":"-","field7":"0","field8":"120753","field9":"215216","field10":"-","field11":"60489","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"135959","field18":"532417"},
+{"field1":"Alcohol anhidro (l)","field2":"03/09/2023","field3":"-","field4":"0","field5":"0","field6":"-","field7":"0","field8":"0","field9":"307452","field10":"-","field11":"57675","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"131916","field18":"497043"},
+{"field1":"Alcohol anhidro (l)","field2":"04/09/2023","field3":"-","field4":"0","field5":"0","field6":"-","field7":"0","field8":"0","field9":"306454","field10":"-","field11":"54862","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"125385","field18":"486701"},
+{"field1":"Alcohol anhidro (l)","field2":"05/09/2023","field3":"-","field4":"0","field5":"0","field6":"-","field7":"0","field8":"0","field9":"308215","field10":"-","field11":"68929","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"134165","field18":"511309"},
+{"field1":"Alcohol anhidro (l)","field2":"06/09/2023","field3":"-","field4":"0","field5":"-","field6":"-","field7":"0","field8":"0","field9":"307784","field10":"-","field11":"65412","field12":"0","field13":"-","field14":"-","field15":"-","field16":"-","field17":"139143","field18":"512339"},
+{"field1":"Alcohol anhidro (l)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol anhidro (l)","field2":"Total qna.","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"244934","field9":"1445121","field10":"0","field11":"365394","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"798307","field18":"2853756"},
+{"field1":"Alcohol anhidro (l)","field2":"Total mes","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"244934","field9":"1445121","field10":"0","field11":"365394","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"798307","field18":"2853756"},
+{"field1":"Alcohol anhidro (l)","field2":"Total zafra","field3":"0","field4":"0","field5":"0","field6":"0","field7":"0","field8":"8453815","field9":"36134583","field10":"0","field11":"5194041","field12":"0","field13":"0","field14":"0","field15":"0","field16":"0","field17":"13789914","field18":"63572353"},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Alcohol total (l)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Alcohol total (l)","field2":"01/09/2023","field3":"-","field4":"0","field5":"247313","field6":"-","field7":"0","field8":"157509","field9":"762753","field10":"-","field11":"180359","field12":"149048","field13":"-","field14":"-","field15":"-","field16":"-","field17":"136953","field18":"1633935"},
+{"field1":"Alcohol total (l)","field2":"02/09/2023","field3":"-","field4":"0","field5":"248792","field6":"-","field7":"0","field8":"137877","field9":"779459","field10":"-","field11":"180928","field12":"142795","field13":"-","field14":"-","field15":"-","field16":"-","field17":"141340","field18":"1631191"},
+{"field1":"Alcohol total (l)","field2":"03/09/2023","field3":"-","field4":"0","field5":"211407","field6":"-","field7":"0","field8":"0","field9":"773975","field10":"-","field11":"184893","field12":"142319","field13":"-","field14":"-","field15":"-","field16":"-","field17":"137137","field18":"1449731"},
+{"field1":"Alcohol total (l)","field2":"04/09/2023","field3":"-","field4":"0","field5":"264923","field6":"-","field7":"0","field8":"37215","field9":"763124","field10":"-","field11":"185692","field12":"118786","field13":"-","field14":"-","field15":"-","field16":"-","field17":"130348","field18":"1500088"},
+{"field1":"Alcohol total (l)","field2":"05/09/2023","field3":"-","field4":"40959","field5":"216454","field6":"-","field7":"0","field8":"67536","field9":"725259","field10":"-","field11":"184431","field12":"114985","field13":"-","field14":"-","field15":"-","field16":"-","field17":"139475","field18":"1489099"},
+{"field1":"Alcohol total (l)","field2":"06/09/2023","field3":"-","field4":"0","field5":"-","field6":"-","field7":"0","field8":"0","field9":"717794","field10":"-","field11":"186319","field12":"138391","field13":"-","field14":"-","field15":"-","field16":"-","field17":"144650","field18":"1187154"},
+{"field1":"Alcohol total (l)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Alcohol total (l)","field2":"Total qna.","field3":"0","field4":"40959","field5":"1188889","field6":"0","field7":"0","field8":"400137","field9":"4522364","field10":"0","field11":"1102622","field12":"806324","field13":"0","field14":"0","field15":"0","field16":"0","field17":"829903","field18":"8891198"},
+{"field1":"Alcohol total (l)","field2":"Total mes","field3":"0","field4":"40959","field5":"1188889","field6":"0","field7":"0","field8":"400137","field9":"4522364","field10":"0","field11":"1102622","field12":"806324","field13":"0","field14":"0","field15":"0","field16":"0","field17":"829903","field18":"8891198"},
+{"field1":"Alcohol total (l)","field2":"Total zafra","field3":"0","field4":"4636468","field5":"14706654","field6":"0","field7":"117985","field8":"10335568","field9":"63775578","field10":"0","field11":"15972835","field12":"10096173","field13":"0","field14":"0","field15":"0","field16":"0","field17":"14335716","field18":"133976977"},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"","field2":"","field3":"","field4":"","field5":"","field6":"","field7":"","field8":"","field9":"","field10":"","field11":"","field12":"","field13":"","field14":"","field15":"","field16":"","field17":"","field18":""},
+{"field1":"Melaza (t)","field2":"Fecha","field3":"Aguilares","field4":"Bella Vista","field5":"Concepci�n","field6":"Cruz Alta","field7":"Famaill�","field8":"La Corona","field9":"La Florida","field10":"La Providencia","field11":"La Trinidad","field12":"Leales","field13":"Marapa","field14":"�u�orco","field15":"San Juan","field16":"Santa Barbara","field17":"Santa Rosa","field18":"Total por D�a"}
+,
+{"field1":"Melaza (t)","field2":"01/09/2023","field3":"168","field4":"330","field5":"840","field6":"165","field7":"453","field8":"440","field9":"710","field10":"583","field11":"886","field12":"435","field13":"210","field14":"375","field15":"-","field16":"301","field17":"400","field18":"6296"},
+{"field1":"Melaza (t)","field2":"02/09/2023","field3":"181","field4":"326","field5":"980","field6":"170","field7":"431","field8":"419","field9":"700","field10":"546","field11":"889","field12":"428","field13":"200","field14":"380","field15":"-","field16":"354","field17":"570","field18":"6574"},
+{"field1":"Melaza (t)","field2":"03/09/2023","field3":"174","field4":"300","field5":"775","field6":"165","field7":"356","field8":"542","field9":"640","field10":"522","field11":"809","field12":"437","field13":"150","field14":"350","field15":"-","field16":"220","field17":"500","field18":"5940"},
+{"field1":"Melaza (t)","field2":"04/09/2023","field3":"127","field4":"240","field5":"925","field6":"170","field7":"202","field8":"347","field9":"650","field10":"393","field11":"774","field12":"395","field13":"0","field14":"285","field15":"-","field16":"115","field17":"400","field18":"5023"},
+{"field1":"Melaza (t)","field2":"05/09/2023","field3":"174","field4":"234","field5":"850","field6":"175","field7":"299","field8":"238","field9":"740","field10":"402","field11":"770","field12":"412","field13":"110","field14":"315","field15":"-","field16":"9","field17":"600","field18":"5328"},
+{"field1":"Melaza (t)","field2":"06/09/2023","field3":"172","field4":"222","field5":"-","field6":"160","field7":"267","field8":"131","field9":"630","field10":"201","field11":"616","field12":"396","field13":"200","field14":"225","field15":"-","field16":"0","field17":"300","field18":"3520"},
+{"field1":"Melaza (t)","field2":"07/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"08/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"09/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"10/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"11/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"12/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"13/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"14/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"15/09/2023","field3":"-","field4":"-","field5":"-","field6":"-","field7":"-","field8":"-","field9":"-","field10":"-","field11":"-","field12":"-","field13":"-","field14":"-","field15":"-","field16":"-","field17":"-","field18":"0"},
+{"field1":"Melaza (t)","field2":"Total qna.","field3":"996","field4":"1652","field5":"4370","field6":"1005","field7":"2008","field8":"2117","field9":"4070","field10":"2647","field11":"4744","field12":"2503","field13":"870","field14":"1930","field15":"0","field16":"999","field17":"2770","field18":"32681"},
+{"field1":"Melaza (t)","field2":"Total mes","field3":"996","field4":"1652","field5":"4370","field6":"1005","field7":"2008","field8":"2117","field9":"4070","field10":"2647","field11":"4744","field12":"2503","field13":"870","field14":"1930","field15":"0","field16":"999","field17":"2770","field18":"32681"},
+{"field1":"Melaza (t)","field2":"Total zafra","field3":"12437","field4":"24453","field5":"65025","field6":"14585","field7":"26999","field8":"34152","field9":"78835","field10":"47807","field11":"76218","field12":"31057","field13":"18559","field14":"18366","field15":"0","field16":"15992","field17":"51517","field18":"516002"}
+]

@@ -1,0 +1,28 @@
+.containerLogin{
+  position: fixed !important;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border: 2px solid green !important; 
+}
+.containerForm {
+  border: 1px solid rgb(221, 221, 221) !important;
+  padding: 30px 20px;
+  border-radius: 2px;
+}
+
+.titleLogin{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.container-admin{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.container-admin-data{
+  overflow-y: scroll;
+}

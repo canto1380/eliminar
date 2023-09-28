@@ -1,0 +1,96 @@
+import { ingenios } from '../../utils/seeders'
+export const columns = [
+  {
+    key: 'Id',
+    title: 'Fecha',
+    dataIndex: 'FechaParte',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.FechaParte > b.FechaParte,
+  },
+  {
+    key: 'Id',
+    title: 'Caña Molida Bruta (C.M.B.)',
+    dataIndex: 'MoliendaCanaBruta',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.MoliendaCanaBruta > b.MoliendaCanaBruta,
+  },
+  {
+    key: 'Id',
+    title: 'Rto % CMB Total',
+    dataIndex: 'RendimientoCanaBruta',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.RendimientoCanaBruta > b.RendimientoCanaBruta,
+  },
+  {
+    key: 'Id',
+    title: 'Caña Molida Neta (C.M.N.) ',
+    dataIndex: 'MoliendaCanaNeta',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.MoliendaCanaNeta > b.MoliendaCanaNeta,
+  },
+  {
+    key: 'Id',
+    title: 'Rto % CMN Total',
+    dataIndex: 'RendimientoCanaNeta',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.RendimientoCanaNeta > b.RendimientoCanaNeta,
+  },
+  {
+    key: 'Id',
+    title: 'Azúcar Equivalente',
+    dataIndex: 'AzucarEquivalente',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.AzucarEquivalente > b.AzucarEquivalente,
+  },
+  {
+    key: 'Id',
+    title: 'Total Azúcar Blanco',
+    dataIndex: 'AzucarBlancoProducido',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.AzucarBlancoProducido > b.AzucarBlancoProducido,
+  },
+  {
+    key: 'Id',
+    title: 'Total Azúcar Crudo',
+    dataIndex: 'AzucarCrudoProducido',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.AzucarCrudoProducido > b.AzucarCrudoProducido,
+  },
+  {
+    key: 'Id',
+    title: 'Azúcar Refinada',
+    dataIndex: '',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.FechaParte > b.FechaParte,
+  },
+  {
+    key: 'Id',
+    title: 'Azúcar orgnánica',
+    dataIndex: '',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.FechaParte > b.FechaParte,
+  },
+  {
+    key: 'Id',
+    title: 'Otros Azúcares',
+    dataIndex: '',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.FechaParte > b.FechaParte,
+  },
+  {
+    key: 'Id',
+    title: 'Melaza',
+    dataIndex: 'MelazaProducida',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.MelazaProducida > b.MelazaProducida,
+  },
+  {
+    key: 'Id',
+    title: 'Alcohol Total Hidratado',
+    dataIndex: 'AlcoholProducido',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.AlcoholProducido > b.AlcoholProducido,
+  },
+  
+
+]
