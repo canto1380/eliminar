@@ -5,7 +5,7 @@
 
 .sidebar {
   height: 770px;
-  width: 15%;
+  width: 20%;
   background-color: rgb(46, 53, 63);
 }
 .sidebarInactivo {
@@ -69,7 +69,7 @@
     /* position: absolute;
     top: 57px; */
     height: 795px;
-    width: 23%;
+    width: 25%;
   }
   .parte2 {
     /* width: 77%; */
@@ -89,7 +89,7 @@
 @media (max-width: 768px) {
   .sidebar {
     height: 970px;
-    width: 25%;
+    width: 30%;
   }
   .parte2 {
     /* width: 75%; */
@@ -106,22 +106,7 @@
 }
 
 @media (max-width: 710px) {
-  /* .sidebar {
-    height: 795px;
-    width: 25%;
-  }
-  .parte2 {
-    width: 75%;
-    height: 100%;
-  }
-  .sidebarInactivo {
-    width: 10%;
-    height: 795px;
-  }
-  .parte2Inactivo {
-    width: 90%;
-    height: 100%;
-  } */
+
 }
 @media (max-width: 650px) {
   .sidebar {

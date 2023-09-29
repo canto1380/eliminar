@@ -26,7 +26,7 @@ export const getTokenLS = () => {
 export const getToken = (ctx) => {
   let token
   token = Cookies.get('token-ipaat-v2')
-  return token || null
+  return token || undefined
 }
 // export const getIdUser = (ctx) => {
 //   let idUser

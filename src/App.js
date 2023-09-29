@@ -4,7 +4,7 @@ import UserProvider from './context/UserProvider'
 
 function App() {
   return (
-    <div className='App'>
+    <div className=''>
       <UserProvider>
         <AppRouter />
       </UserProvider>

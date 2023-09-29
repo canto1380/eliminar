@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button, Form, Input } from 'antd'
 import { Container, Row, Col, Spinner, Image } from 'react-bootstrap'
 import { validaEmail, validaClave } from '../../utils/validations/validation'
@@ -11,6 +11,7 @@ import { userData } from '../../utils/seeders'
 import { Link } from 'react-router-dom'
 import { redirectBase } from '../../helpers/redirect'
 import ImageLogo from '../../images/IPAAT-10-anios.png'
+import { User } from '../../context/UserProvider'
 
 export const COOKIES = {
   authToken: 'token-ipaat-v2',
@@ -42,6 +43,11 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
       }, 3000)
     }
   }
+  const { dispatch } = useContext(User);
+  const aaas = (item) => {
+    dispatch({ type: "LOGIN", payload: { item } });
+  };
+
   const login = async (values) => {
     try {
       if (
@@ -61,6 +67,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
 
         setToken(token)
         setDataToken(userData.user)
+        aaas(userData)
 
         setLoading(true)
         setTimeout(() => {
@@ -203,25 +210,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
             </Form>
           </Col>
         </Row>
-        {/* <Row className="justify-content-center align-items-center">
-          <Col xs={10} sm={8} md={6} className="">
-            {errorValid && (
-              <MsgError
-                text1="Datos incorrectos."
-                text2="Ingrese un mail y clave valida."
-              />
-            )}
-            {dataError && (
-              <MsgError text1="Datos incorrectos." text2={msgDataError} />
-            )}
-            {errorServer && (
-              <MsgError
-                text1="Hubo un problema en el servidor."
-                text2="Intente mas tarde"
-              />
-            )}
-          </Col>
-        </Row> */}
+
       </Container>
       <div className={`justify-content-center align-items-center alert`}>
         {dataError && (

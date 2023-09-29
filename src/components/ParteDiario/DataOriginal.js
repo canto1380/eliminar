@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import moment from 'moment'
 import { dateConverted } from '../../helpers/helpers'
 
@@ -292,7 +293,6 @@ export const dataPorTipo = (
   }
   setDataDiasZafra(mayor)
   setFechasInicioIngenios(dataInicioIngenios)
-
   for (let i = 1; i <= 14; i++) {
     let varName1 = 'a' + i
     let varName2 = 'b' + i
@@ -318,6 +318,7 @@ export const dataPorTipo = (
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
+      
       a1 = a1 + data.MoliendaCanaBruta || 0
       b1 = b1 + data.MoliendaCanaNeta || 0
       c1 = c1 + data.AzucarEquivalente || 0
@@ -333,6 +334,7 @@ export const dataPorTipo = (
         K10: e1,
         M10: f1,
         N10: g1,
+        
       }
     }
 

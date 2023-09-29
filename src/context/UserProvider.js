@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from 'react'
-import { getTokenLS } from '../helpers/helpers'
-// console.log(getTokenLS())
+import { getTokenLS, setDataToken, setToken } from '../helpers/helpers'
 export const User = createContext()
 
 const dataUser = getTokenLS()
@@ -9,8 +8,16 @@ const initialState = {
 }
 
 function reducer(state, action) {
-  console.log(state)
   console.log(action)
+  switch (action.type) {
+    case 'LOGIN': {
+      // setToken(action?.payload?.item?.token)
+      // setDataToken(action?.payload?.user)
+      return {...state, userToken: action?.payload?.item?.token}
+    }
+    default:
+      return state;
+  }
 }
 
 const UserProvider = ({ children }) => {

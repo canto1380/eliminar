@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { dateConverted } from "../../helpers/helpers";
 
 let dataAguilares = {
