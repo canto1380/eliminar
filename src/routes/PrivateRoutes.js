@@ -5,9 +5,8 @@ import Perfil from '../container/Admin/index'
 const PrivateRoutes = ({ token }) => {
   return (
     <Routes>
-      {/* <Route exact path='/admin/parte-diario' element={<Home />} /> */}
-      {/* <Route exact path='/admin/-perfil' element={<Noticias />} /> */}
-      <Route exact path='/admin/-perfil' element={< Perfil/>} />
+      <Route exact path='/admin/perfil' element={<Perfil />} />
+      <Route exact path='/admin/parte-diario' element={<Perfil />} />
       {token.length && window?.location?.pathname === '/' ? (
         <Route
           path='*'

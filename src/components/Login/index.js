@@ -1,47 +1,47 @@
-import { useState } from "react";
-import { Button, Form, Input } from "antd";
-import { Container, Row, Col, Spinner, Image } from "react-bootstrap";
-import { validaEmail, validaClave } from "../../utils/validations/validation";
-import Cookies from "js-cookie";
-import { setToken, setDataToken } from "../../helpers/helpers";
-import MsgError from "../../components/Messages/MsgError";
+import { useState } from 'react'
+import { Button, Form, Input } from 'antd'
+import { Container, Row, Col, Spinner, Image } from 'react-bootstrap'
+import { validaEmail, validaClave } from '../../utils/validations/validation'
+import Cookies from 'js-cookie'
+import { setToken, setDataToken } from '../../helpers/helpers'
+import MsgError from '../../components/Messages/MsgError'
 // import loginAPI from "../../utils/authentication/login";
-import "./Login.css";
-import { userData } from "../../utils/seeders";
-import { Link } from "react-router-dom";
-import { redirectBase } from "../../helpers/redirect";
-import ImageLogo from "../../images/IPAAT-10-anios.png";
+import './Login.css'
+import { userData } from '../../utils/seeders'
+import { Link } from 'react-router-dom'
+import { redirectBase } from '../../helpers/redirect'
+import ImageLogo from '../../images/IPAAT-10-anios.png'
 
 export const COOKIES = {
-  authToken: "token",
-  authId: "idUser",
-};
+  authToken: 'token-ipaat-v2',
+  authId: 'idUser',
+}
 
-const Login = ({banderaLogin, setBanderaLogin}) => {
-  const [loading, setLoading] = useState(false);
+const Login = ({ banderaLogin, setBanderaLogin }) => {
+  const [loading, setLoading] = useState(false)
 
-  const [dataError, setDataError] = useState(false);
-  const [msgDataError, setMsgDataError] = useState("");
-  const [errorServer, setErrorServer] = useState(false);
-  const [errorValid, setErrorValid] = useState(false);
+  const [dataError, setDataError] = useState(false)
+  const [msgDataError, setMsgDataError] = useState('')
+  const [errorServer, setErrorServer] = useState(false)
+  const [errorValid, setErrorValid] = useState(false)
 
   const handleSubmit = (values) => {
     try {
       if (validaEmail(values.email) && validaClave(values.password)) {
-        login(values);
+        login(values)
       } else {
-        setErrorValid(true);
+        setErrorValid(true)
         setTimeout(() => {
-          setErrorValid(false);
-        }, 3000);
+          setErrorValid(false)
+        }, 3000)
       }
     } catch (error) {
-      setErrorServer(true);
+      setErrorServer(true)
       setTimeout(() => {
-        setErrorServer(false);
-      }, 3000);
+        setErrorServer(false)
+      }, 3000)
     }
-  };
+  }
   const login = async (values) => {
     try {
       if (
@@ -51,29 +51,29 @@ const Login = ({banderaLogin, setBanderaLogin}) => {
         const {
           token,
           user: { _id },
-        } = userData;
+        } = userData
         Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API, {
           expires: 1,
-        });
+        })
         Cookies.set(COOKIES.authId, _id, process.env.REACT_APP_API, {
           expires: 1,
-        });
+        })
 
-        setToken(token);
-        setDataToken(userData.user);
+        setToken(token)
+        setDataToken(userData.user)
 
-        setLoading(true);
+        setLoading(true)
         setTimeout(() => {
           setBanderaLogin(!banderaLogin)
-          setLoading(false);
-        }, 3000);
-        redirectBase("admin/parte-diario");
+          setLoading(false)
+        }, 3000)
+        redirectBase('admin/parte-diario')
       } else {
-        setDataError(true);
-        setMsgDataError("Error en el usuario o clave ingresada");
+        setDataError(true)
+        setMsgDataError('Error en el usuario o clave ingresada')
         setTimeout(() => {
-          setDataError(false);
-        }, 2500);
+          setDataError(false)
+        }, 2500)
       }
       // const res = await loginAPI(values);
       // if (res.status === 200) {
@@ -110,51 +110,51 @@ const Login = ({banderaLogin, setBanderaLogin}) => {
       //   }, 3000);
       // }
     } catch (error) {}
-  };
+  }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
   return (
     <div className={`containerLogin`}>
       <Container>
-        <Row className="justify-content-center align-items-center">
+        <Row className='justify-content-center align-items-center'>
           <Col xs={10} sm={8} md={6} className={`containerForm`}>
             <div
               className={`d-flex justify-content-between align-items-center pb-4`}
             >
-              <div className="">
+              <div className=''>
                 <h2 className={`titleLogin text-center mb-0`}>Inciar sesión</h2>
               </div>
               <div>
-                <Link to="/login" target="_parent">
+                <Link to='/login' target='_parent'>
                   <Image
                     src={ImageLogo}
-                    alt="Clara Calzados"
-                    height="70"
-                    width="70"
+                    alt='Clara Calzados'
+                    height='70'
+                    width='70'
                   />
                 </Link>
               </div>
             </div>
             <Form
-              name="basic"
+              name='basic'
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 22 }}
               initialValues={{ remember: true }}
               // onSubmit={handleSubmit}
               onFinish={handleSubmit}
               onFinishFailed={onFinishFailed}
-              autoComplete="off"
+              autoComplete='off'
             >
               <Form.Item
-                label="Usuario"
-                name="email"
+                label='Usuario'
+                name='email'
                 rules={[
                   {
                     required: true,
-                    message: "Debe ingresar un email!",
+                    message: 'Debe ingresar un email!',
                   },
                 ]}
               >
@@ -162,17 +162,17 @@ const Login = ({banderaLogin, setBanderaLogin}) => {
               </Form.Item>
 
               <Form.Item
-                label="Clave"
-                name="password"
+                label='Clave'
+                name='password'
                 rules={[
-                  { required: true, message: "Debe ingresar su clave!" },
+                  { required: true, message: 'Debe ingresar su clave!' },
                   {
                     max: 14,
-                    message: "Hasta 14 caracteres",
+                    message: 'Hasta 14 caracteres',
                   },
                   {
                     min: 8,
-                    message: "Minimo 8 caracteres",
+                    message: 'Minimo 8 caracteres',
                   },
                 ]}
               >
@@ -181,21 +181,21 @@ const Login = ({banderaLogin, setBanderaLogin}) => {
 
               <Form.Item
                 wrapperCol={{ offset: 1, span: 22 }}
-                className="text-center pt-4"
+                className='text-center pt-4'
               >
                 {loading ? (
-                  <Button disabled type="primary" htmlType="submit">
+                  <Button disabled type='primary' htmlType='submit'>
                     <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
+                      as='span'
+                      animation='border'
+                      size='sm'
+                      role='status'
+                      aria-hidden='true'
                     />
-                    <span className="ms-2">Ingresando</span>
+                    <span className='ms-2'>Ingresando</span>
                   </Button>
                 ) : (
-                  <Button type="primary" htmlType="submit">
+                  <Button type='primary' htmlType='submit'>
                     Ingresar
                   </Button>
                 )}
@@ -225,23 +225,23 @@ const Login = ({banderaLogin, setBanderaLogin}) => {
       </Container>
       <div className={`justify-content-center align-items-center alert`}>
         {dataError && (
-          <MsgError text1="Datos incorrectos." text2={msgDataError} />
+          <MsgError text1='Datos incorrectos.' text2={msgDataError} />
         )}
         {errorValid && (
           <MsgError
-            text1="Datos incorrectos."
-            text2="Ingrese un mail y clave valida."
+            text1='Datos incorrectos.'
+            text2='Ingrese un mail y clave valida.'
           />
         )}
         {errorServer && (
           <MsgError
-            text1="Hubo un problema en el servidor."
-            text2="Intente mas tarde"
+            text1='Hubo un problema en el servidor.'
+            text2='Intente mas tarde'
           />
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

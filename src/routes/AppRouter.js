@@ -1,68 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from 'react'
 import {
   BrowserRouter as Router,
   Navigate,
   Route,
   Routes,
-} from "react-router-dom";
-import PrivateRoutes from "./PrivateRoutes";
-import PublicRoutes from "./PublicRoutes";
+} from 'react-router-dom'
+import PrivateRoutes from './PrivateRoutes'
+import PublicRoutes from './PublicRoutes'
 
-// import { User } from "../context/UserProvider";
-import { getDataToken, getToken } from "../helpers/helpers";
+import { User } from '../context/UserProvider'
+import { getDataToken, getToken } from '../helpers/helpers'
 
 const AppRouter = () => {
   const [dataToken, setDataToken] = useState(undefined)
   const [token, setToken] = useState(undefined)
   const [banderaLogin, setBanderaLogin] = useState(false)
-  useEffect(() => {
-    const token = getToken()
-    const data = getDataToken()
-    setToken(token)
-    setDataToken(data)
-  },[banderaLogin])
+
+  const { state } = useContext(User)
+  console.log(state)
+
+  // useEffect(() => {
+  //   const token = getToken()
+  //   const data = getDataToken()
+  //   setToken(token)
+  //   setDataToken(data)
+  // }, [banderaLogin])
+
+  // console.log(token)
   return (
     <div>
       <Router>
         <Routes>
-          {window?.location?.pathname === "/" && (
-            <Route path="*" element={<Navigate to="/" replace />} />
-          )}
-          {!token || token.length === 0 ? (
-            <Route
-              path="/*"
-              element={
-                <PublicRoutes
-                banderaLogin={banderaLogin}
-                setBanderaLogin={setBanderaLogin}
-                />
-              }
-            />
-          ) : (
-            <Route
-              path="/*"
-              element={<PrivateRoutes token={token} dataToken={dataToken} />}
-            />
+          {window?.location?.pathname === '/' && (
+            <Route path='*' element={<Navigate to='/login' replace />} />
           )}
 
           {/* {!state.userToken || state.userToken.length === 0 ? (
             <Route
-              path="/*"
+              path='/*'
               element={
                 <PublicRoutes
+                  banderaLogin={banderaLogin}
+                  setBanderaLogin={setBanderaLogin}
                 />
               }
             />
           ) : (
             <Route
-              path="/*"
-              element={<PrivateRoutes token={state.userToken} />}
+              path='/*'
+              element={
+                <PrivateRoutes token={state.userToken} dataToken={dataToken} />
+              }
             />
           )} */}
         </Routes>
       </Router>
     </div>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter

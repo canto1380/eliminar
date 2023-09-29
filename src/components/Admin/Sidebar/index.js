@@ -12,8 +12,7 @@ import {
   deleteToken,
   getDataToken,
 } from '../../../helpers/helpers'
-// import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
   const [initial, setInitial] = useState('')
@@ -31,7 +30,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
   const cerrarSesion = async (e) => {
     deleteToken()
     deleteCookies()
-    window.location.href = "/admin/login";
+    window.location.href = '/admin/login'
     // await push('/admin/login')
   }
 
@@ -119,7 +118,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
           <Link
             key={i}
             className='text-white text-decoration-none'
-            href={`/admin/${items.title}`}
+            to={`/admin/${items.title}`}
           >
             <li
               // onClick={() => changeTab(items.title)}
