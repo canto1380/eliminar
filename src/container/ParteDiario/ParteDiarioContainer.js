@@ -3,7 +3,10 @@ import { Container } from 'react-bootstrap'
 import TitlePage from '../../components/TitlePages'
 import ParteDiario from '../../components/ParteDiario/ParteDiario'
 import Filtros from '../../components/Filtros'
-import { getDataPartesDiarios } from '../../utils/queryAPI/partesDiariosQuery'
+import {
+  getDataPartesDiarios,
+  getDataPartesDiariosBE,
+} from '../../utils/queryAPI/partesDiariosQuery'
 import moment from 'moment'
 import Spinn from '../../components/Spinner'
 import MsgError from '../../components/Messages/MsgError'
@@ -19,43 +22,63 @@ const ParteDiarioContainer = () => {
     useState(null)
   const [dataImport, setDataImport] = useState(null)
   const [dataImportComparativa, setDataImportComparativa] = useState(null)
-  const [banderaDataNull, setBanderaDataNull] = useState(false);
+  const [banderaDataNull, setBanderaDataNull] = useState(false)
 
-  useEffect(() => {
-    if (dataZafra !== null) {
-      getData()
-    }
-  }, [dataZafra])
+  // useEffect(() => {
+  //   if (dataZafra !== null) {
+  //     getData()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dataZafra])
+
   const getData = async () => {
     setDataParteDiariosHistoricos(null)
     const params = {
       fechadesde: `25-04-${dataZafra}`,
       fechahasta: `24-04-${dataZafra + 1}`,
     }
-    const data = await getDataPartesDiarios(params)
-    setDataParteDiariosHistoricos(data?.ParteDiarios)
+    /***** DEDE FRONTEND *****/
+    // const data = await getDataPartesDiarios(params) DESDE FRONTEND
+    // setDataParteDiariosHistoricos(data?.ParteDiarios)
+
+    /***** DESDE BACKEND *****/
+    const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
+    setDataParteDiariosHistoricos(data)
   }
 
   useEffect(() => {
     if (dataEnd !== null) {
       getDataImport()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataEnd])
+
   const getDataImport = async () => {
     const anioDataEnd = dataEnd.getFullYear()
-    const params = {
-      fechadesde: `25-04-${anioDataEnd}`,
-      fechahasta: `24-04-${anioDataEnd + 1}`,
-    }
-    const data = await getDataPartesDiarios(params)
-    setDataImport(data?.ParteDiarios)
 
-    const params1 = {
-      fechadesde: `25-04-${anioDataEnd - 1}`,
-      fechahasta: `24-04-${anioDataEnd}`,
+    /***** DESDE FRONTEND *****/
+    // const params = {
+    //   fechadesde: `25-04-${anioDataEnd}`,
+    //   fechahasta: `24-04-${anioDataEnd + 1}`,
+    // }
+    // const params1 = {
+    //   fechadesde: `25-04-${anioDataEnd - 1}`,
+    //   fechahasta: `24-04-${anioDataEnd}`,
+    // }
+    // const data = await getDataPartesDiarios(params)
+    //setDataImport(data?.ParteDiarios)
+    // const dataComparativa = await getDataPartesDiarios(params1)
+    // setDataImportComparativa(dataComparativa?.ParteDiarios)
+
+    /***** DESDE BACKEND *****/
+    const params = {
+      dataEnd,
     }
-    const dataComparativa = await getDataPartesDiarios(params1)
-    setDataImportComparativa(dataComparativa?.ParteDiarios)
+    const data = await getDataPartesDiariosBE(params, '/parteDiario')
+    setDataImport(data)
+
+    const dataComparativa = await getDataPartesDiariosBE(params, '/parteDiario')
+    setDataImportComparativa(dataComparativa)
   }
 
   useEffect(() => {
@@ -81,11 +104,14 @@ const ParteDiarioContainer = () => {
   return (
     <Container fluid>
       {banderaDataNull && (
-          <MsgError text1="Estamos procesando la información." text2='Intente de nuevo' />
-        )}
+        <MsgError
+          text1='Estamos procesando la información.'
+          text2='Intente de nuevo'
+        />
+      )}
       <TitlePage titlePage='Parte Diario Directorio' />
       <hr className='mx-3 mt-1' />
-      {dataParteDiariosHistoricos === null ? (
+      {dataParteDiariosHistoricos !== null ? (
         <div className='d-flex justify-content-center align-items-center text-center'>
           <Spinn type='data' />
         </div>
