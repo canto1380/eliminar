@@ -18,10 +18,8 @@ export const api = async (method, params) => {
       method,
       url: `${url}`,
     })
-    console.log(res)
     return res
   } catch (error) {
-    console.log(error)
     return error
   }
 }

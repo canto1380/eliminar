@@ -24,12 +24,12 @@ const ParteDiarioContainer = () => {
   const [dataImportComparativa, setDataImportComparativa] = useState(null)
   const [banderaDataNull, setBanderaDataNull] = useState(false)
 
-  // useEffect(() => {
-  //   if (dataZafra !== null) {
-  //     getData()
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [dataZafra])
+  useEffect(() => {
+    if (dataZafra !== null) {
+      getData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataZafra])
 
   const getData = async () => {
     setDataParteDiariosHistoricos(null)
@@ -57,27 +57,34 @@ const ParteDiarioContainer = () => {
     const anioDataEnd = dataEnd.getFullYear()
 
     /***** DESDE FRONTEND *****/
-    // const params = {
-    //   fechadesde: `25-04-${anioDataEnd}`,
-    //   fechahasta: `24-04-${anioDataEnd + 1}`,
-    // }
-    // const params1 = {
-    //   fechadesde: `25-04-${anioDataEnd - 1}`,
-    //   fechahasta: `24-04-${anioDataEnd}`,
-    // }
+    const params = {
+      fechadesde: `25-04-${anioDataEnd}`,
+      fechahasta: `24-04-${anioDataEnd + 1}`,
+    }
+    const params1 = {
+      fechadesde: `25-04-${anioDataEnd - 1}`,
+      fechahasta: `24-04-${anioDataEnd}`,
+    }
     // const data = await getDataPartesDiarios(params)
     //setDataImport(data?.ParteDiarios)
     // const dataComparativa = await getDataPartesDiarios(params1)
     // setDataImportComparativa(dataComparativa?.ParteDiarios)
 
     /***** DESDE BACKEND *****/
-    const params = {
-      dataEnd,
-    }
+    // const params = {
+    //   dataEnd,
+    // }
+    // const anioComparativo = anioDataEnd - 1
+    // const params1 = {
+    //   anioComparativo,
+    // }
     const data = await getDataPartesDiariosBE(params, '/parteDiario')
     setDataImport(data)
 
-    const dataComparativa = await getDataPartesDiariosBE(params, '/parteDiario')
+    const dataComparativa = await getDataPartesDiariosBE(
+      params1,
+      '/parteDiario'
+    )
     setDataImportComparativa(dataComparativa)
   }
 
@@ -111,7 +118,7 @@ const ParteDiarioContainer = () => {
       )}
       <TitlePage titlePage='Parte Diario Directorio' />
       <hr className='mx-3 mt-1' />
-      {dataParteDiariosHistoricos !== null ? (
+      {dataParteDiariosHistoricos === null ? (
         <div className='d-flex justify-content-center align-items-center text-center'>
           <Spinn type='data' />
         </div>
