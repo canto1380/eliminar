@@ -26,6 +26,10 @@ export const api = async (method, params) => {
 
 export const apiBEPATH = async (method, params, urlPath) => {
   const url = process.env.REACT_APP_API
+    ? process.env.REACT_APP_API
+    : process.env.REACT_APP_PRODUCTION
+
+  console.log(url)
   const credentialData = {
     username: 'externo',
     password: 'Externo@2022*',
