@@ -4,6 +4,7 @@ import { ingenios } from '../utils/seeders'
 import dataConstante from './dataConstanteParteDiario.json'
 
 export const CreateExcelWorkbook = async (
+  setLoadingDownload,
   dataEnd,
   d1,
   d2,
@@ -43,8 +44,9 @@ export const CreateExcelWorkbook = async (
   dataDiasZafra,
   fechasInicioIngeniosComparativa,
   dataDiasZafraComparativa,
-  fechasFinIngeniosComparativa
+  fechasFinIngeniosComparativa,
 ) => {
+  setLoadingDownload(true)
   const parteDiarioData = dataImport ? dataImport : undefined
   const parteDiarioDataComparativa = dataImportComparativa
     ? dataImportComparativa
@@ -210,10 +212,16 @@ export const CreateExcelWorkbook = async (
     page1.getRow(32).font = functionFont('Arial Narrow', true, 14)
     page1.getRow(42).font = functionFont('Calibri', true, 14)
     page1.getRow(42).alignment = alignStart
-    page1.getRow(44).fill = bgGris
-    page1.getRow(47).fill = bgGris
-    page1.getRow(51).fill = bgGris
-    page1.getRow(55).fill = bgGris
+    for(let i =1; i<=20; i++) {
+      page1.getCell(44, i).fill = bgGris
+      page1.getCell(47, i).fill = bgGris
+      page1.getCell(51, i).fill = bgGris
+      page1.getCell(55, i).fill = bgGris
+    }
+    // page1.getRow(44).fill = bgGris
+    // page1.getRow(47).fill = bgGris
+    // page1.getRow(51).fill = bgGris
+    // page1.getRow(55).fill = bgGris
     page1.getRow(58).font = functionFont('Calibri', true, 22)
 
     /***** BORDES *****/
@@ -1195,7 +1203,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     /**** AZUCARES ****/
     page1.mergeCells('A39:G40')
     page1.getCell('A39').value =
-      'PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA 2023 '
+      `PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA ${date.getFullYear()}`
     page1.getCell('A39').font = functionFont('Bodoni MT', true, 16)
     page1.getCell('A39').alignment = alignCenter
     page1.getCell('A39').fill = bgVerde
@@ -1259,7 +1267,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     /**** ALCOHOL ****/
     page1.mergeCells('H39:T40')
     page1.getCell('H39').value =
-      'PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO -  CAMPAÑA 2023 (INICIO: 21/05)'
+      'PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO -  CAMPAÑA 2023 (INICIO: )'
     page1.getCell('H39').font = functionFont('Bodoni MT', true, 16)
     page1.getCell('H39').alignment = alignCenter
     page1.getCell('H39').fill = bgAzul
@@ -1403,12 +1411,12 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     /**** EXPORTACIONES ****/
     page1.mergeCells('U39:X40')
     page1.getCell('U39').value =
-      'MERCADO EXTERNO DEL AZÚCAR - ZAFRA 2023 Al 31/08/2023'
+      `MERCADO EXTERNO DEL AZÚCAR - ZAFRA ${date.getFullYear()} Al ${dateFormat}`
     page1.getCell('U39').alignment = alignCenter
     page1.getCell('U39').font = functionFont('Bodoni MT', true, 12)
 
     page1.mergeCells('Y39:AA40')
-    page1.getCell('Y39').value = 'Acumulado: 4.621,60 [t]'
+    page1.getCell('Y39').value = 'Acumulado: '
     page1.getCell('Y39').alignment = alignCenter
     page1.getCell('Y39').font = functionFont('Bodoni MT', true, 12)
 
@@ -1797,6 +1805,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
           document.body.removeChild(link)
         }
       }
+      setLoadingDownload(false)
     } catch (error) {
       console.log(error)
     }

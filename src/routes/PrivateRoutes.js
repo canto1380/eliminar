@@ -4,7 +4,6 @@ import Perfil from '../container/Admin/index'
 import ContainerIndexParteDiario from '../container/ParteDiario'
 
 const PrivateRoutes = ({ token }) => {
-  console.log(token)
   return (
     <Routes>
       {(window?.location?.pathname === "/" || window?.location?.pathname === "/login") ? (

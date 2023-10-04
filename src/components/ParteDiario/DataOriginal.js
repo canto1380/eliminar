@@ -165,7 +165,7 @@ export const dataPorTipo = (
   setFechasInicioIngenios,
   setDataDiasZafra
 ) => {
-  const dateEndFormat = moment(dataEnd).format('DD/MM/YYYY')
+  // const dateEndFormat = moment(dataEnd).format('DD/MM/YYYY')
 
   const aguil = dataImport?.find(
     (d) =>
@@ -293,6 +293,7 @@ export const dataPorTipo = (
   }
   setDataDiasZafra(mayor)
   setFechasInicioIngenios(dataInicioIngenios)
+  
   for (let i = 1; i <= 14; i++) {
     let varName1 = 'a' + i
     let varName2 = 'b' + i

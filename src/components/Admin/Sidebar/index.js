@@ -17,15 +17,14 @@ import { Link } from 'react-router-dom'
 const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
   const [initial, setInitial] = useState('')
   const [initialSurname, setInitialSurname] = useState('')
-  // const { push } = useRouter()
 
-  // useEffect(() => {
-  //   const data = getDataToken()
-  //   const a = data?.name?.toUpperCase()
-  //   const b = data?.surname?.toUpperCase()
-  //   setInitial(a?.substr(0, 1))
-  //   setInitialSurname(b?.substr(0, 1))
-  // }, [dataUser])
+  useEffect(() => {
+    const data = getDataToken()
+    const a = data?.name?.toUpperCase()
+    const b = data?.surname?.toUpperCase()
+    setInitial(a?.substr(0, 1))
+    setInitialSurname(b?.substr(0, 1))
+  }, [dataUser])
 
   const cerrarSesion = async (e) => {
     deleteToken()

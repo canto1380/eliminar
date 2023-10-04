@@ -63,6 +63,7 @@ const ParteDiario = ({
     useState(null);
   const [fechasFinIngeniosComparativa, setFechasFinIngeniosComparativa] =
     useState(null);
+  const [loadingDownload, setLoadingDownload] = useState(false);
 
   const { state, dataUser } = useContext(User);
   useEffect(() => {
@@ -135,6 +136,7 @@ const ParteDiario = ({
             }`}
             onClick={() =>
               CreateExcelWorkbook(
+                setLoadingDownload,
                 dataEnd,
                 d1,
                 d2,
@@ -174,7 +176,7 @@ const ParteDiario = ({
                 dataDiasZafra,
                 fechasInicioIngeniosComparativa,
                 dataDiasZafraComparativa,
-                fechasFinIngeniosComparativa
+                fechasFinIngeniosComparativa,
               )
             }
           >
@@ -193,6 +195,17 @@ const ParteDiario = ({
                   aria-hidden="true"
                 />
                 Procesando
+              </>
+            ) : loadingDownload ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                Descargando
               </>
             ) : (
               "Descargar"

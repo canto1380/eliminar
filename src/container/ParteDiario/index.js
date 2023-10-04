@@ -9,12 +9,14 @@ import Unauthorized from '../../components/Unauthorized'
 import Spinn from '../../components/Spinner'
 import { User } from '../../context/UserProvider'
 import { Helmet } from 'react-helmet'
+import { logoutForInactivity } from '../../utils/logoutInactividad'
 
 const ContainerIndexParteDiario = () => {
   const [inactivo, setInactivo] = useState(false)
   const [tokenAuth, setTokenAuth] = useState(null)
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [inactivoUser, setInactivoUser] = useState(false)
 
   const { state, dataUser } = useContext(User)
   useEffect(() => {
@@ -28,13 +30,48 @@ const ContainerIndexParteDiario = () => {
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    if (tokenAuth === null) {
+      setModalUnauthorized(true)
+    } else {
+      setModalUnauthorized(false)
+    }
+  }, [tokenAuth])
+
   // useEffect(() => {
-  //   if (tokenAuth === null) {
-  //     setModalUnauthorized(true)
-  //   } else {
-  //     setModalUnauthorized(false)
-  //   }
-  // }, [tokenAuth])
+  //   logoutForInactivity(setInactivoUser, setModalUnauthorized) 
+  // }, [])
+  useEffect(() => {
+    let tiempoInactivo;
+
+    const reiniciarTemporizador = () => {
+      clearTimeout(tiempoInactivo);
+      tiempoInactivo = setTimeout(() => {
+        console.log('Se ha alcanzado el tiempo de inactividad');
+        setInactivoUser(true);
+        setModalUnauthorized(true)
+      }, 10000); 
+    };
+
+    reiniciarTemporizador();
+
+    const manejarActividad = () => {
+      setInactivoUser(false);
+      reiniciarTemporizador();
+    };
+
+    // Agrega los event listeners necesarios para detectar la actividad del usuario
+    document.addEventListener('mousemove', manejarActividad);
+    document.addEventListener('keydown', manejarActividad);
+
+    return () => {
+      // Limpia los event listeners cuando el componente se desmonta
+      clearTimeout(tiempoInactivo);
+      document.removeEventListener('mousemove', manejarActividad);
+      document.removeEventListener('keydown', manejarActividad);
+    };
+  }, []);
+
 
   return (
     <div>

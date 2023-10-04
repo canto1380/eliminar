@@ -11,7 +11,6 @@ const PanelAdmin = () => {
   const [dataAuth, setDataAuth] = useState([])
   const [userData, setUserData] = useState([])
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
-  console.log('aa')
   return (
     <Container
       fluid
