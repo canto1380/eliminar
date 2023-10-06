@@ -55,7 +55,7 @@ export const CreateExcelWorkbook = async (
     setBanderaDataNull(true)
     setTimeout(() => {
       setBanderaDataNull(false)
-    }, 5000)
+    }, 2000)
   } else {
     const workbook = new ExcelJS.Workbook()
     /** Fecha Hasta parte Dairio **/
@@ -93,7 +93,6 @@ export const CreateExcelWorkbook = async (
         fitToWidth: 1,
       },
       properties: { tabColor: { argb: '0000B2' } },
-      // views: [{ state: 'frozen', ySplit: 1 }],
     })
     page1.headerFooter.differentFirst = true
 
@@ -1751,6 +1750,13 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
 
     /*******************/
 
+    /**** PRODUCCION AZUCAR DISCRIMINADA ****/
+    page1.getCell('C43').value = parseInt(d1['J10'])
+    page1.getCell('D43').value = parseInt(d1['D43'])
+    page1.getCell('E43').value = parseFloat(d1['K10'])
+    page1.getCell('F43').value = parseInt(d1['F43'])
+    page1.getCell('G43').value = parseInt(d1['G43'])
+
     /**COLUMNA RTO CMB */
     for (let i = 10; i <= 25; i++) {
       if (page1.getCell(i, 5).value === 0) {
@@ -1770,14 +1776,6 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
         page1.getCell(i, 22).value = { formula: `=T${i}/S${i}*100`, result: 7 }
       }
     }
-
-    // workbook.xlsx.writeBuffer('output.xlsx')
-    // .then((buffer) => {
-    //   console.log('Workbook created successfully.');
-    // })
-    // .catch(function (error) {
-    //   console.log('Error creating workbook:', error);
-    // });
 
     try {
       const buffer = await workbook.xlsx.writeBuffer()

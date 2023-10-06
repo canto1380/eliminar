@@ -10,6 +10,9 @@ let dataAguilares = {
     K10: 0,
     M10: 0,
     N10: 0,
+    D43: 0,
+    F43: 0,
+    G43: 0
   },
   dataCruzAlta = {
     E11: 0,
@@ -302,6 +305,9 @@ export const dataPorTipo = (
     let varName5 = 'e' + i
     let varName6 = 'f' + i
     let varName7 = 'g' + i
+    let varName8 = 'h' + i
+    let varName9 = 'i' + i
+    let varName10 = 'j' + i
 
     window[varName1] = 0
     window[varName2] = 0
@@ -310,6 +316,9 @@ export const dataPorTipo = (
     window[varName5] = 0
     window[varName6] = 0
     window[varName7] = 0
+    window[varName8] = 0
+    window[varName9] = 0
+    window[varName10] = 0
   }
   dataImport?.forEach((data) => {
     const newDate = dateConverted(data?.FechaParte)
@@ -323,10 +332,14 @@ export const dataPorTipo = (
       a1 = a1 + data.MoliendaCanaBruta || 0
       b1 = b1 + data.MoliendaCanaNeta || 0
       c1 = c1 + data.AzucarEquivalente || 0
-      z1 = z1 + data.AzucarBlancoProducido || 0
+      z1 = z1 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e1 = e1 + data.AzucarCrudoProducido || 0
       f1 = f1 + data.MelazaProducida || 0
       g1 = g1 + data.AlcoholProducido || 0
+      h1 = h1 + data.AzucarRefinado || 0
+      i1 = i1 + data.AzucarOrganico || 0
+      j1 = j1 + data.OtrosAzucar  || 0
+
       dataAguilares = {
         E10: a1,
         F10: b1,
@@ -335,7 +348,9 @@ export const dataPorTipo = (
         K10: e1,
         M10: f1,
         N10: g1,
-        
+        D43: h1,
+        F43: i1,
+        G43: j1
       }
     }
 
@@ -347,7 +362,7 @@ export const dataPorTipo = (
       a2 = a2 + data.MoliendaCanaBruta
       b2 = b2 + data.MoliendaCanaNeta
       c2 = c2 + data.AzucarEquivalente
-      z2 = z2 + data.AzucarBlancoProducido
+      z2 = z2 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e2 = e2 + data.AzucarCrudoProducido
       f2 = f2 + data.MelazaProducida
       g2 = g2 + data.AlcoholProducido
@@ -370,7 +385,7 @@ export const dataPorTipo = (
       a3 = a3 + data.MoliendaCanaBruta
       b3 = b3 + data.MoliendaCanaNeta
       c3 = c3 + data.AzucarEquivalente
-      z3 = z3 + data.AzucarBlancoProducido
+      z3 = z3 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e3 = e3 + data.AzucarCrudoProducido
       f3 = f3 + data.MelazaProducida
       g3 = g3 + data.AlcoholProducido
@@ -393,7 +408,7 @@ export const dataPorTipo = (
       a4 = a4 + data.MoliendaCanaBruta
       b4 = b4 + data.MoliendaCanaNeta
       c4 = c4 + data.AzucarEquivalente
-      z4 = z4 + data.AzucarBlancoProducido
+      z4 = z4 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e4 = e4 + data.AzucarCrudoProducido
       f4 = f4 + data.MelazaProducida
       g4 = g4 + data.AlcoholProducido
@@ -416,7 +431,7 @@ export const dataPorTipo = (
       a5 = a5 + data.MoliendaCanaBruta
       b5 = b5 + data.MoliendaCanaNeta
       c5 = c5 + data.AzucarEquivalente
-      z5 = z5 + data.AzucarBlancoProducido
+      z5 = z5 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e5 = e5 + data.AzucarCrudoProducido
       f5 = f5 + data.MelazaProducida
       g5 = g5 + data.AlcoholProducido
@@ -439,7 +454,7 @@ export const dataPorTipo = (
       a6 = a6 + data.MoliendaCanaBruta
       b6 = b6 + data.MoliendaCanaNeta
       c6 = c6 + data.AzucarEquivalente
-      z6 = z6 + data.AzucarBlancoProducido
+      z6 = z6 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e6 = e6 + data.AzucarCrudoProducido
       f6 = f6 + data.MelazaProducida
       g6 = g6 + data.AlcoholProducido
@@ -462,7 +477,7 @@ export const dataPorTipo = (
       a7 = a7 + data.MoliendaCanaBruta
       b7 = b7 + data.MoliendaCanaNeta
       c7 = c7 + data.AzucarEquivalente
-      z7 = z7 + data.AzucarBlancoProducido
+      z7 = z7 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e7 = e7 + data.AzucarCrudoProducido
       f7 = f7 + data.MelazaProducida
       g7 = g7 + data.AlcoholProducido
@@ -485,7 +500,7 @@ export const dataPorTipo = (
       a8 = a8 + data.MoliendaCanaBruta
       b8 = b8 + data.MoliendaCanaNeta
       c8 = c8 + data.AzucarEquivalente
-      z8 = z8 + data.AzucarBlancoProducido
+      z8 = z8 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e8 = e8 + data.AzucarCrudoProducido
       f8 = f8 + data.MelazaProducida
       g8 = g8 + data.AlcoholProducido
@@ -508,8 +523,8 @@ export const dataPorTipo = (
       a9 = a9 + data.MoliendaCanaBruta
       b9 = b9 + data.MoliendaCanaNeta
       c9 = c9 + data.AzucarEquivalente
-      z9 = z9 + data.AzucarBlancoProducido
-      e9 = e9 + data.AzucarCrudoProducido
+      z9 = z9 + data.AzucarBlancoProducido // + data?.AzucarRefinada
+      e9 = e9 + data.AzucarCrudoProducido // data?.AzucarOrganico + data?.otrosAzucares
       f9 = f9 + data.MelazaProducida
       g9 = g9 + data.AlcoholProducido
       dataLaProvidencia = {
@@ -531,7 +546,7 @@ export const dataPorTipo = (
       a10 = a10 + data.MoliendaCanaBruta
       b10 = b10 + data.MoliendaCanaNeta
       c10 = c10 + data.AzucarEquivalente
-      z10 = z10 + data.AzucarBlancoProducido
+      z10 = z10 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e10 = e10 + data.AzucarCrudoProducido
       f10 = f10 + data.MelazaProducida
       g10 = g10 + data.AlcoholProducido
@@ -554,7 +569,7 @@ export const dataPorTipo = (
       a11 = a11 + data.MoliendaCanaBruta
       b11 = b11 + data.MoliendaCanaNeta
       c11 = c11 + data.AzucarEquivalente
-      z11 = z11 + data.AzucarBlancoProducido
+      z11 = z11 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e11 = e11 + data.AzucarCrudoProducido
       f11 = f11 + data.MelazaProducida
       g11 = g11 + data.AlcoholProducido
@@ -577,7 +592,7 @@ export const dataPorTipo = (
       a12 = a12 + data?.MoliendaCanaBruta
       b12 = b12 + data?.MoliendaCanaNeta
       c12 = c12 + data?.AzucarEquivalente
-      z12 = z12 + data?.AzucarBlancoProducido
+      z12 = z12 + data?.AzucarBlancoProducido // + data?.AzucarRefinada
       e12 = e12 + data?.AzucarCrudoProducido
       f12 = f12 + data?.MelazaProducida
       g12 = g12 + data?.AlcoholProducido
@@ -600,7 +615,7 @@ export const dataPorTipo = (
       a13 = a13 + data.MoliendaCanaBruta
       b13 = b13 + data.MoliendaCanaNeta
       c13 = c13 + data.AzucarEquivalente
-      z13 = z13 + data.AzucarBlancoProducido
+      z13 = z13 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e13 = e13 + data.AzucarCrudoProducido
       f13 = f13 + data.MelazaProducida
       g13 = g13 + data.AlcoholProducido
@@ -623,7 +638,7 @@ export const dataPorTipo = (
       a14 = a14 + data.MoliendaCanaBruta
       b14 = b14 + data.MoliendaCanaNeta
       c14 = c14 + data.AzucarEquivalente
-      z14 = z14 + data.AzucarBlancoProducido
+      z14 = z14 + data.AzucarBlancoProducido // + data?.AzucarRefinada
       e14 = e14 + data.AzucarCrudoProducido
       f14 = f14 + data.MelazaProducida
       g14 = g14 + data.AlcoholProducido

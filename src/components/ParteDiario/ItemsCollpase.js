@@ -2,18 +2,13 @@ import ListadoDatos from './ListadoDatos'
 import { useState, useEffect } from 'react'
 import { Collapse } from 'antd'
 import { CaretRightOutlined } from '@ant-design/icons'
-import moment from 'moment'
 import { dateConverted } from '../../helpers/helpers'
 
 const ItemCollpse = ({
   dataAnio,
-  setDataAnio,
   dataMes,
-  setDataMes,
   dataQuincena,
-  setDataQuincena,
   dataZafra,
-  setDataZafra,
   dataParteDiariosHistoricos,
 }) => {
   const [dataQuincenal, setDataQuincenal] = useState([])
@@ -32,7 +27,7 @@ const ItemCollpse = ({
   const [santaRosa, setSantaRosa] = useState([])
   const [nunorco, setNunorco] = useState([])
   
-
+  console.log(dataParteDiariosHistoricos)
   const panelStyle = {
     marginBottom: 24,
     border: 'none',
@@ -47,16 +42,21 @@ const ItemCollpse = ({
     
     dataParteDiariosHistoricos?.forEach((data) => {
       const newDate = dateConverted(data.FechaParte)
+      function getLastDayOfMonth(month) {
+        const date = new Date();
+        date.setMonth(month);
+        date.setDate(0);
+        return date.getDate();
+      }
 
       /**FORMATO (OBJECT):  Sat Sep 16 2023 00:00:00 GMT-0300 (hora estándar de Argentina)  **/
       const fechaParametro1 = new Date(
         `${dataMes}/${dataQuincena === 1 ? 1 : 16}/${dataAnio}`
       )
       const fechaParametro2 = new Date(
-        `${dataMes}/${dataQuincena === 1 ? 15 : 31}/${dataAnio}`
+        `${dataMes}/${dataQuincena === 1 ? 15 : getLastDayOfMonth(dataMes)}/${dataAnio}`
       )
       if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
-        // console.log(data)
         arr.push(data)
       }
     })

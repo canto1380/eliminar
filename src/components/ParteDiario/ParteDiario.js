@@ -220,10 +220,6 @@ const ParteDiario = ({
             dataMes={dataMes}
             dataQuincena={dataQuincena}
             dataZafra={dataZafra}
-            setDataAnio={setDataAnio}
-            setDataMes={setDataMes}
-            setDataQuincena={setDataQuincena}
-            setDataZafra={setDataZafra}
             dataParteDiariosHistoricos={dataParteDiariosHistoricos}
           />
         </Col>

@@ -6,7 +6,6 @@ export const logoutForInactivity = ({setInactivoUser, setModalUnauthorized}) => 
     const reiniciarTemporizador = () => {
       clearTimeout(tiempoInactivo);
       tiempoInactivo = setTimeout(() => {
-        console.log('Se ha alcanzado el tiempo de inactividad');
         setInactivoUser(true);
         setModalUnauthorized(true)
       }, 10000); 
