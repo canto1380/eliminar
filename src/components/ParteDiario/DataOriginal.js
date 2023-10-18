@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import moment from 'moment'
 import { dateConverted } from '../../helpers/helpers'
 
 let dataAguilares = {
@@ -22,6 +21,9 @@ let dataAguilares = {
     K11: 0,
     M11: 0,
     N11: 0,
+    D47: 0,
+    F47: 0,
+    G47: 0
   },
   dataLaFlorida = {
     E12: 0,
@@ -31,6 +33,9 @@ let dataAguilares = {
     K12: 0,
     M12: 0,
     N12: 0,
+    D50: 0,
+    F50: 0,
+    G50: 0
   },
   dataConcepcion = {
     E14: 0,
@@ -40,6 +45,9 @@ let dataAguilares = {
     K14: 0,
     M14: 0,
     N14: 0,
+    D46: 0,
+    F46: 0,
+    G46: 0
   },
   dataMarapa = {
     E15: 0,
@@ -49,6 +57,9 @@ let dataAguilares = {
     K15: 0,
     M15: 0,
     N15: 0,
+    D54: 0,
+    F54: 0,
+    G54: 0
   },
   dataBellaVista = {
     E17: 0,
@@ -58,6 +69,9 @@ let dataAguilares = {
     K17: 0,
     M17: 0,
     N17: 0,
+    D45: 0,
+    F45: 0,
+    G45: 0
   },
   dataFamailla = {
     E18: 0,
@@ -67,6 +81,9 @@ let dataAguilares = {
     K18: 0,
     M18: 0,
     N18: 0,
+    D48: 0,
+    F48: 0,
+    G48: 0
   },
   dataLaCorona = {
     E19: 0,
@@ -76,6 +93,9 @@ let dataAguilares = {
     K19: 0,
     M19: 0,
     N19: 0,
+    D49: 0,
+    F49: 0,
+    G49: 0
   },
   dataLaProvidencia = {
     E20: 0,
@@ -85,6 +105,9 @@ let dataAguilares = {
     K20: 0,
     M20: 0,
     N20: 0,
+    D51: 0,
+    F51: 0,
+    G51: 0
   },
   dataLaTrinidad = {
     E21: 0,
@@ -94,6 +117,9 @@ let dataAguilares = {
     K21: 0,
     M21: 0,
     N21: 0,
+    D52: 0,
+    F52: 0,
+    G52: 0
   },
   dataLeales = {
     E22: 0,
@@ -103,6 +129,9 @@ let dataAguilares = {
     K22: 0,
     M22: 0,
     N22: 0,
+    D53: 0,
+    F53: 0,
+    G53: 0
   },
   dataÑuñorco = {
     E23: 0,
@@ -112,6 +141,9 @@ let dataAguilares = {
     K23: 0,
     M23: 0,
     N23: 0,
+    D55: 0,
+    F55: 0,
+    G55: 0
   },
   dataStaBarbara = {
     E24: 0,
@@ -121,6 +153,9 @@ let dataAguilares = {
     K24: 0,
     M24: 0,
     N24: 0,
+    D56: 0,
+    F56: 0,
+    G56: 0
   },
   dataStaRosa = {
     E25: 0,
@@ -130,6 +165,9 @@ let dataAguilares = {
     K25: 0,
     M25: 0,
     N25: 0,
+    D57: 0,
+    F57: 0,
+    G57: 0
   },
   dataInicioIngenios = {
     Cell10: 0,
@@ -168,8 +206,6 @@ export const dataPorTipo = (
   setFechasInicioIngenios,
   setDataDiasZafra
 ) => {
-  // const dateEndFormat = moment(dataEnd).format('DD/MM/YYYY')
-
   const aguil = dataImport?.find(
     (d) =>
       d.IngenioNombre === 'Aguilares' &&
@@ -366,6 +402,9 @@ export const dataPorTipo = (
       e2 = e2 + data.AzucarCrudoProducido
       f2 = f2 + data.MelazaProducida
       g2 = g2 + data.AlcoholProducido
+      h2 = h2 + data.AzucarRefinado || 0
+      i2 = i2 + data.AzucarOrganico || 0
+      j2 = j2 + data.OtrosAzucar  || 0
       dataCruzAlta = {
         E11: a2,
         F11: b2,
@@ -374,6 +413,9 @@ export const dataPorTipo = (
         K11: e2,
         M11: f2,
         N11: g2,
+        D47: h2,
+        F47: i2,
+        G47: j2
       }
     }
 
@@ -389,6 +431,9 @@ export const dataPorTipo = (
       e3 = e3 + data.AzucarCrudoProducido
       f3 = f3 + data.MelazaProducida
       g3 = g3 + data.AlcoholProducido
+      h3 = h3 + data.AzucarRefinado || 0
+      i3 = i3 + data.AzucarOrganico || 0
+      j3 = j3 + data.OtrosAzucar  || 0
       dataLaFlorida = {
         E12: a3,
         F12: b3,
@@ -397,6 +442,9 @@ export const dataPorTipo = (
         K12: e3,
         M12: f3,
         N12: g3,
+        D50: h3,
+        F50: i3,
+        G50: j3
       }
     }
 
@@ -412,6 +460,9 @@ export const dataPorTipo = (
       e4 = e4 + data.AzucarCrudoProducido
       f4 = f4 + data.MelazaProducida
       g4 = g4 + data.AlcoholProducido
+      h4 = h4 + data.AzucarRefinado || 0
+      i4 = i4 + data.AzucarOrganico || 0
+      j4 = j4 + data.OtrosAzucar  || 0
       dataConcepcion = {
         E14: a4,
         F14: b4,
@@ -420,6 +471,9 @@ export const dataPorTipo = (
         K14: e4,
         M14: f4,
         N14: g4,
+        D46: h4,
+        F46: i4,
+        G46: j4
       }
     }
 
@@ -435,6 +489,9 @@ export const dataPorTipo = (
       e5 = e5 + data.AzucarCrudoProducido
       f5 = f5 + data.MelazaProducida
       g5 = g5 + data.AlcoholProducido
+      h5 = h5 + data.AzucarRefinado || 0
+      i5 = i5 + data.AzucarOrganico || 0
+      j5 = j5 + data.OtrosAzucar  || 0
       dataMarapa = {
         E15: a5,
         F15: b5,
@@ -443,6 +500,9 @@ export const dataPorTipo = (
         K15: e5,
         M15: f5,
         N15: g5,
+        D54: h5,
+        F54: i5,
+        G54: j5
       }
     }
 
@@ -458,6 +518,9 @@ export const dataPorTipo = (
       e6 = e6 + data.AzucarCrudoProducido
       f6 = f6 + data.MelazaProducida
       g6 = g6 + data.AlcoholProducido
+      h6 = h6 + data.AzucarRefinado || 0
+      i6 = i6 + data.AzucarOrganico || 0
+      j6 = j6 + data.OtrosAzucar  || 0
       dataBellaVista = {
         E17: a6,
         F17: b6,
@@ -466,6 +529,9 @@ export const dataPorTipo = (
         K17: e6,
         M17: f6,
         N17: g6,
+        D45: h6,
+        F45: i6,
+        G45: j6
       }
     }
 
@@ -481,6 +547,9 @@ export const dataPorTipo = (
       e7 = e7 + data.AzucarCrudoProducido
       f7 = f7 + data.MelazaProducida
       g7 = g7 + data.AlcoholProducido
+      h7 = h7 + data.AzucarRefinado || 0
+      i7 = i7 + data.AzucarOrganico || 0
+      j7 = j7 + data.OtrosAzucar  || 0
       dataFamailla = {
         E18: a7,
         F18: b7,
@@ -489,6 +558,9 @@ export const dataPorTipo = (
         K18: e7,
         M18: f7,
         N18: g7,
+        D48: h7,
+        F48: i7,
+        G48: j7
       }
     }
 
@@ -504,6 +576,9 @@ export const dataPorTipo = (
       e8 = e8 + data.AzucarCrudoProducido
       f8 = f8 + data.MelazaProducida
       g8 = g8 + data.AlcoholProducido
+      h8 = h8 + data.AzucarRefinado || 0
+      i8 = i8 + data.AzucarOrganico || 0
+      j8 = j8 + data.OtrosAzucar  || 0
       dataLaCorona = {
         E19: a8,
         F19: b8,
@@ -512,6 +587,9 @@ export const dataPorTipo = (
         K19: e8,
         M19: f8,
         N19: g8,
+        D49: h8,
+        F49: i8,
+        G49: j8
       }
     }
 
@@ -527,6 +605,9 @@ export const dataPorTipo = (
       e9 = e9 + data.AzucarCrudoProducido // data?.AzucarOrganico + data?.otrosAzucares
       f9 = f9 + data.MelazaProducida
       g9 = g9 + data.AlcoholProducido
+      h9 = h9 + data.AzucarRefinado || 0
+      i9 = i9 + data.AzucarOrganico || 0
+      j9 = j9 + data.OtrosAzucar  || 0
       dataLaProvidencia = {
         E20: a9,
         F20: b9,
@@ -535,6 +616,9 @@ export const dataPorTipo = (
         K20: e9,
         M20: f9,
         N20: g9,
+        D51: h9,
+        F51: i9,
+        G51: j9
       }
     }
 
@@ -550,6 +634,9 @@ export const dataPorTipo = (
       e10 = e10 + data.AzucarCrudoProducido
       f10 = f10 + data.MelazaProducida
       g10 = g10 + data.AlcoholProducido
+      h10 = h10 + data.AzucarRefinado || 0
+      i10 = i10 + data.AzucarOrganico || 0
+      j10 = j10 + data.OtrosAzucar  || 0
       dataLaTrinidad = {
         E21: a10,
         F21: b10,
@@ -558,6 +645,9 @@ export const dataPorTipo = (
         K21: e10,
         M21: f10,
         N21: g10,
+        D52: h10,
+        F52: i10,
+        G52: j10
       }
     }
 
@@ -573,6 +663,9 @@ export const dataPorTipo = (
       e11 = e11 + data.AzucarCrudoProducido
       f11 = f11 + data.MelazaProducida
       g11 = g11 + data.AlcoholProducido
+      h11 = h11 + data.AzucarRefinado || 0
+      i11 = i11 + data.AzucarOrganico || 0
+      j11 = j11 + data.OtrosAzucar  || 0
       dataLeales = {
         E22: a11,
         F22: b11,
@@ -581,6 +674,9 @@ export const dataPorTipo = (
         K22: e11,
         M22: f11,
         N22: g11,
+        D53: h11,
+        F53: i11,
+        G53: j11
       }
     }
 
@@ -596,6 +692,9 @@ export const dataPorTipo = (
       e12 = e12 + data?.AzucarCrudoProducido
       f12 = f12 + data?.MelazaProducida
       g12 = g12 + data?.AlcoholProducido
+      h12 = h12 + data.AzucarRefinado || 0
+      i12 = i12 + data.AzucarOrganico || 0
+      j12 = j12 + data.OtrosAzucar  || 0
       dataÑuñorco = {
         E23: a12,
         F23: b12,
@@ -604,6 +703,9 @@ export const dataPorTipo = (
         K23: e12,
         M23: f12,
         N23: g12,
+        D55: h12,
+        F55: i12,
+        G55: j12
       }
     }
 
@@ -619,6 +721,9 @@ export const dataPorTipo = (
       e13 = e13 + data.AzucarCrudoProducido
       f13 = f13 + data.MelazaProducida
       g13 = g13 + data.AlcoholProducido
+      h13 = h13 + data.AzucarRefinado || 0
+      i13 = i13 + data.AzucarOrganico || 0
+      j13 = j13 + data.OtrosAzucar  || 0
       dataStaBarbara = {
         E24: a13,
         F24: b13,
@@ -627,6 +732,9 @@ export const dataPorTipo = (
         K24: e13,
         M24: f13,
         N24: g13,
+        D56: h13,
+        F56: i13,
+        G56: j13
       }
     }
 
@@ -642,6 +750,9 @@ export const dataPorTipo = (
       e14 = e14 + data.AzucarCrudoProducido
       f14 = f14 + data.MelazaProducida
       g14 = g14 + data.AlcoholProducido
+      h14 = h14 + data.AzucarRefinado || 0
+      i14 = i14 + data.AzucarOrganico || 0
+      j14 = j14 + data.OtrosAzucar  || 0
       dataStaRosa = {
         E25: a14,
         F25: b14,
@@ -650,6 +761,9 @@ export const dataPorTipo = (
         K25: e14,
         M25: f14,
         N25: g14,
+        D57: h14,
+        F57: i14,
+        G57: j14
       }
     }
   })

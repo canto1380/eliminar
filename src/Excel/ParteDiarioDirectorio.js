@@ -2,6 +2,7 @@ import ExcelJS from 'exceljs'
 import moment from 'moment'
 import { ingenios } from '../utils/seeders'
 import dataConstante from './dataConstanteParteDiario.json'
+import { getDataPartesDiariosBE1 } from '../utils/queryAPI/partesDiariosQuery'
 
 export const CreateExcelWorkbook = async (
   setLoadingDownload,
@@ -68,7 +69,6 @@ export const CreateExcelWorkbook = async (
     /** Formatos **/
     const dateFormat = moment(date).format('DD-MM-YYYY')
     const dateComparativaFormat = moment(dateComparativa).format('DD-MM-YYYY')
-
     workbook.creator = `${dataUser?.name} ${dataUser?.surname}`
     workbook.created = date
     workbook.modified = date
@@ -417,7 +417,7 @@ export const CreateExcelWorkbook = async (
       '000000'
     )
 
-    for (let i = 40; i <= 57; i++) {
+    for (let i = 40; i <= 59; i++) {
       page1.getRow(i).border = borders(
         'medium',
         '000000',
@@ -1483,6 +1483,13 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       }
     }
 
+    /***** ACLARACIONES *****/
+    page1.mergeCells('A59:I63')
+    page1.mergeCells('J59:T63')
+
+
+    /***** *****/
+
     /*********  DATOS  *********/
     /** DATOS 2023 **/
     if (parteDiarioData.length > 0) {
@@ -1751,11 +1758,91 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     /*******************/
 
     /**** PRODUCCION AZUCAR DISCRIMINADA ****/
-    page1.getCell('C43').value = parseInt(d1['J10'])
-    page1.getCell('D43').value = parseInt(d1['D43'])
-    page1.getCell('E43').value = parseFloat(d1['K10'])
-    page1.getCell('F43').value = parseInt(d1['F43'])
-    page1.getCell('G43').value = parseInt(d1['G43'])
+    page1.getCell('C44').value = parseInt(d1['J10'])
+    page1.getCell('D44').value = parseInt(d1['D43'])
+    page1.getCell('E44').value = parseFloat(d1['K10'])
+    page1.getCell('F44').value = parseInt(d1['F43'])
+    page1.getCell('G44').value = parseInt(d1['G43'])
+    
+    page1.getCell('C45').value = parseInt(d6['J17'])
+    page1.getCell('D45').value = parseInt(d6['D45'])
+    page1.getCell('E45').value = parseFloat(d6['K17'])
+    page1.getCell('F45').value = parseInt(d6['F45'])
+    page1.getCell('G45').value = parseInt(d6['G45'])
+
+    page1.getCell('C46').value = parseInt(d4['J14'])
+    page1.getCell('D46').value = parseInt(d4['D46'])
+    page1.getCell('E46').value = parseFloat(d4['K14'])
+    page1.getCell('F46').value = parseInt(d4['F46'])
+    page1.getCell('G46').value = parseInt(d4['G46'])
+
+    page1.getCell('C47').value = parseInt(d2['J11'])
+    page1.getCell('D47').value = parseInt(d2['D47'])
+    page1.getCell('E47').value = parseFloat(d2['K11'])
+    page1.getCell('F47').value = parseInt(d2['F47'])
+    page1.getCell('G47').value = parseInt(d2['G47'])
+
+    page1.getCell('C48').value = parseInt(d7['J18'])
+    page1.getCell('D48').value = parseInt(d7['D48'])
+    page1.getCell('E48').value = parseFloat(d7['K18'])
+    page1.getCell('F48').value = parseInt(d7['F48'])
+    page1.getCell('G48').value = parseInt(d7['G48'])
+
+    page1.getCell('C49').value = parseInt(d8['J19'])
+    page1.getCell('D49').value = parseInt(d8['D49'])
+    page1.getCell('E49').value = parseFloat(d8['K19'])
+    page1.getCell('F49').value = parseInt(d8['F49'])
+    page1.getCell('G49').value = parseInt(d8['G49'])
+
+    page1.getCell('C50').value = parseInt(d3['J12'])
+    page1.getCell('D50').value = parseInt(d3['D50'])
+    page1.getCell('E50').value = parseFloat(d3['K12'])
+    page1.getCell('F50').value = parseInt(d3['F50'])
+    page1.getCell('G50').value = parseInt(d3['G50'])
+
+    page1.getCell('C51').value = parseInt(d9['J20'])
+    page1.getCell('D51').value = parseInt(d9['D51'])
+    page1.getCell('E51').value = parseFloat(d9['K20'])
+    page1.getCell('F51').value = parseInt(d9['F51'])
+    page1.getCell('G51').value = parseInt(d9['G51'])
+
+    page1.getCell('C52').value = parseInt(d10['J21'])
+    page1.getCell('D52').value = parseInt(d10['D52'])
+    page1.getCell('E52').value = parseFloat(d10['K21'])
+    page1.getCell('F52').value = parseInt(d10['F52'])
+    page1.getCell('G52').value = parseInt(d10['G52'])
+
+    page1.getCell('C53').value = parseInt(d11['J22'])
+    page1.getCell('D53').value = parseInt(d11['D53'])
+    page1.getCell('E53').value = parseFloat(d11['K22'])
+    page1.getCell('F53').value = parseInt(d11['F53'])
+    page1.getCell('G53').value = parseInt(d11['G53'])
+
+    page1.getCell('C54').value = parseInt(d5['J15'])
+    page1.getCell('D54').value = parseInt(d5['D54'])
+    page1.getCell('E54').value = parseFloat(d5['K15'])
+    page1.getCell('F54').value = parseInt(d5['F54'])
+    page1.getCell('G54').value = parseInt(d5['G54'])
+
+    page1.getCell('C55').value = parseInt(d12['J23'])
+    page1.getCell('D55').value = parseInt(d12['D55'])
+    page1.getCell('E55').value = parseFloat(d12['K23'])
+    page1.getCell('F55').value = parseInt(d12['F55'])
+    page1.getCell('G55').value = parseInt(d12['G55'])
+
+    page1.getCell('C56').value = parseInt(d13['J24'])
+    page1.getCell('D56').value = parseInt(d13['D56'])
+    page1.getCell('E56').value = parseFloat(d13['K24'])
+    page1.getCell('F56').value = parseInt(d13['F56'])
+    page1.getCell('G56').value = parseInt(d13['G56'])
+
+    page1.getCell('C57').value = parseInt(d14['J25'])
+    page1.getCell('D57').value = parseInt(d14['D57'])
+    page1.getCell('E57').value = parseFloat(d14['K25'])
+    page1.getCell('F57').value = parseInt(d14['F57'])
+    page1.getCell('G57').value = parseInt(d14['G57'])
+
+    /****** ******/
 
     /**COLUMNA RTO CMB */
     for (let i = 10; i <= 25; i++) {
@@ -1777,35 +1864,63 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       }
     }
 
-    try {
-      const buffer = await workbook.xlsx.writeBuffer()
-      const fileType =
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-      const EXCEL_EXTENSION = '.xlsx'
-      const blob = new Blob([buffer], { type: fileType })
-      if (navigator.msSaveBlog) {
-        navigator.msSaveBlog(
-          blob,
-          `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-        )
-      } else {
-        const link = document.createElement('a')
-        if (link.download !== undefined) {
-          const url = URL.createObjectURL(blob)
-          link.setAttribute('href', url)
-          link.setAttribute(
-            'download',
-            `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-          )
-          link.style.visibility = 'hidden'
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        }
-      }
+      console.log(typeof workbook)
+      const res = await getDataPartesDiariosBE1( '/descargar', workbook)
+      console.log(res)
       setLoadingDownload(false)
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const buffer = await workbook.xlsx.writeBuffer()
+    //   const fileType =
+    //     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    //   const EXCEL_EXTENSION = '.xlsx'
+    //   const blob = new Blob([buffer], { type: fileType })
+    //   if (navigator.msSaveBlog) {
+    //     navigator.msSaveBlog(
+    //       blob,
+    //       `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+    //     )
+    //   } else {
+    //     const link = document.createElement('a')
+    //     if (link.download !== undefined) {
+    //       const url = URL.createObjectURL(blob)
+    //       link.setAttribute('href', url)
+    //       link.setAttribute(
+    //         'download',
+    //         `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+    //       )
+    //       link.style.visibility = 'hidden'
+    //       document.body.appendChild(link)
+    //       link.click()
+    //       document.body.removeChild(link)
+    //     }
+    //   }
+    //   setLoadingDownload(false)
+    // } catch (error) {
+    //   console.log(error)
+    // }
+
+
+
+    const workbook1 = new ExcelJS.Workbook();
+
+    // Agregar una hoja al libro
+    const worksheet = workbook1.addWorksheet('Hoja 1');
+
+    // Agregar una imagen a una celda
+    const image = workbook1.addImage({
+        filename: 'ruta/a/la/imagen.png',
+        extension: 'png',
+    });
+
+    worksheet.addImage(image, {
+        tl: { col: 2, row: 2 },
+        br: { col: 6, row: 6 },
+    });
+
+    // Crear el archivo Excel
+    const buffer = await workbook1.xlsx.writeBuffer();
+
+    // Descargar el archivo Excel
+    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'archivo_excel.xlsx');
   }
 }

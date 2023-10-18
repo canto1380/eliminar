@@ -38,9 +38,6 @@ const ContainerIndexParteDiario = () => {
     }
   }, [tokenAuth])
 
-  // useEffect(() => {
-  //   logoutForInactivity(setInactivoUser, setModalUnauthorized) 
-  // }, [])
   useEffect(() => {
     let tiempoInactivo;
 

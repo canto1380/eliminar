@@ -27,7 +27,6 @@ const ItemCollpse = ({
   const [santaRosa, setSantaRosa] = useState([])
   const [nunorco, setNunorco] = useState([])
   
-  console.log(dataParteDiariosHistoricos)
   const panelStyle = {
     marginBottom: 24,
     border: 'none',

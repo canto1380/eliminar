@@ -6,6 +6,7 @@ import ItemCollpse from "./ItemsCollpase";
 import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
+import { getDataPartesDiariosBE, getDataPartesDiariosBE1 } from "../../utils/queryAPI/partesDiariosQuery";
 
 const ParteDiario = ({
   dataEnd,
@@ -119,11 +120,14 @@ const ParteDiario = ({
     );
     setInicioZafraComparativa(fecha2?.FechaParte);
   };
-
+  // const aasd = async() => {
+  //   const res =  await getDataPartesDiariosBE1( '/descargar', d1)
+  // }
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
         <Col xs={12} className="text-start mb-5 mt-4">
+          {/* <Button onClick={() => aasd()}>PRUEBA</Button> */}
           <Button
             className={`${
               (dataEnd === null ||
