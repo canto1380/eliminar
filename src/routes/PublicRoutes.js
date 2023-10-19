@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../container/Login";
 
 const PublicRoutes = ({ token, banderaLogin, setBanderaLogin }) => {
-  console.log(token)
   return (
     <Routes>
       {window?.location?.pathname === "/" && (

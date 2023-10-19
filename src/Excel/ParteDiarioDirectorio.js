@@ -7,6 +7,7 @@ import { getDataPartesDiariosBE1 } from '../utils/queryAPI/partesDiariosQuery'
 export const CreateExcelWorkbook = async (
   setLoadingDownload,
   dataEnd,
+  setDataEnd,
   d1,
   d2,
   d3,
@@ -46,6 +47,8 @@ export const CreateExcelWorkbook = async (
   fechasInicioIngeniosComparativa,
   dataDiasZafraComparativa,
   fechasFinIngeniosComparativa,
+  setDataImport,
+  setDataImportComparativa,
 ) => {
   setLoadingDownload(true)
   const parteDiarioData = dataImport ? dataImport : undefined
@@ -1525,7 +1528,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       page1.getCell('F14').value = parseInt(d4['F14'])
       page1.getCell('G14').value = parseFloat(d4['G14'])
       page1.getCell('J14').value = parseInt(d4['J14'])
-      page1.getCell('J14').note = 'FALTA AZ REFINADO'
+      if(date.getFullYear() === 2023) page1.getCell('J14').note = 'FALTA AZ REFINADO'
       page1.getCell('K14').value = parseInt(d4['K14'])
       page1.getCell('M14').value = parseInt(d4['M14'])
       page1.getCell('N14').value = parseInt(d4['N14'])
@@ -1553,7 +1556,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       page1.getCell('F18').value = parseInt(d7['F18'])
       page1.getCell('G18').value = parseFloat(d7['G18'])
       page1.getCell('J18').value = parseInt(d7['J18'])
-      page1.getCell('J18').note = 'FALTA AZ REFINADO'
+      if(date.getFullYear() === 2023) page1.getCell('J18').note = 'FALTA AZ REFINADO'
       page1.getCell('K18').value = parseInt(d7['K18'])
       page1.getCell('M18').value = parseInt(d7['M18'])
       page1.getCell('N18').value = parseInt(d7['N18'])
@@ -1573,7 +1576,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       page1.getCell('G20').value = parseFloat(d9['G20'])
       page1.getCell('J20').value = parseInt(d9['J20'])
       page1.getCell('K20').value = parseInt(d9['K20'])
-      page1.getCell('K20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
+      if(date.getFullYear() === 2023) page1.getCell('K20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
       page1.getCell('M20').value = parseInt(d9['M20'])
       page1.getCell('N20').value = parseInt(d9['N20'])
 
@@ -1591,7 +1594,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       page1.getCell('F22').value = parseInt(d11['F22'])
       page1.getCell('G22').value = parseFloat(d11['G22'])
       page1.getCell('J22').value = parseInt(d11['J22'])
-      page1.getCell('J22').note = 'FALTA AZ REFINADO'
+      if(date.getFullYear() === 2023) page1.getCell('J22').note = 'FALTA AZ REFINADO'
       page1.getCell('K22').value = parseInt(d11['K22'])
       page1.getCell('M22').value = parseInt(d11['M22'])
       page1.getCell('N22').value = parseInt(d11['N22'])
@@ -1657,7 +1660,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('S14').value = parseInt(dc4['S14'])
     page1.getCell('T14').value = parseFloat(dc4['T14'])
     page1.getCell('W14').value = parseInt(dc4['W14'])
-    page1.getCell('W14').note = 'FALTA AZ REFINADO'
+    if(date.getFullYear() -1 === 2023) page1.getCell('W14').note = 'FALTA AZ REFINADO'
     page1.getCell('X14').value = parseInt(dc4['X14'])
     page1.getCell('Z14').value = parseInt(dc4['Z14'])
     page1.getCell('AA14').value = parseInt(dc4['AA14'])
@@ -1685,7 +1688,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('S18').value = parseInt(dc7['S18'])
     page1.getCell('T18').value = parseFloat(dc7['T18'])
     page1.getCell('W18').value = parseInt(dc7['W18'])
-    page1.getCell('W18').note = 'FALTA AZ REFINADO'
+    if(date.getFullYear() -1 === 2023) page1.getCell('W18').note = 'FALTA AZ REFINADO'
     page1.getCell('X18').value = parseInt(dc7['X18'])
     page1.getCell('Z18').value = parseInt(dc7['Z18'])
     page1.getCell('AA18').value = parseInt(dc7['AA18'])
@@ -1705,7 +1708,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('T20').value = parseFloat(dc9['T20'])
     page1.getCell('W20').value = parseInt(dc9['W20'])
     page1.getCell('X20').value = parseInt(dc9['X20'])
-    page1.getCell('X20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
+    if(date.getFullYear() -1 === 2023) page1.getCell('X20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
     page1.getCell('Z20').value = parseInt(dc9['Z20'])
     page1.getCell('AA20').value = parseInt(dc9['AA20'])
 
@@ -1723,7 +1726,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('S22').value = parseInt(dc11['S22'])
     page1.getCell('T22').value = parseFloat(dc11['T22'])
     page1.getCell('W22').value = parseInt(dc11['W22'])
-    page1.getCell('W22').note = 'FALTA AZ REFINADO'
+    if(date.getFullYear() -1 === 2023) page1.getCell('W22').note = 'FALTA AZ REFINADO'
     page1.getCell('X22').value = parseInt(dc11['X22'])
     page1.getCell('Z22').value = parseInt(dc11['Z22'])
     page1.getCell('AA22').value = parseInt(dc11['AA22'])
@@ -1864,63 +1867,66 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       }
     }
 
-      console.log(typeof workbook)
-      const res = await getDataPartesDiariosBE1( '/descargar', workbook)
-      console.log(res)
+      // console.log(typeof workbook)
+      // const res = await getDataPartesDiariosBE1( '/descargar', workbook)
+      // console.log(res)
+      // setLoadingDownload(false)
+    try {
+      const buffer = await workbook.xlsx.writeBuffer()
+      const fileType =
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+      const EXCEL_EXTENSION = '.xlsx'
+      const blob = new Blob([buffer], { type: fileType })
+      if (navigator.msSaveBlog) {
+        navigator.msSaveBlog(
+          blob,
+          `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+        )
+      } else {
+        const link = document.createElement('a')
+        if (link.download !== undefined) {
+          const url = URL.createObjectURL(blob)
+          link.setAttribute('href', url)
+          link.setAttribute(
+            'download',
+            `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+          )
+          link.style.visibility = 'hidden'
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+        }
+      }
       setLoadingDownload(false)
-    // try {
-    //   const buffer = await workbook.xlsx.writeBuffer()
-    //   const fileType =
-    //     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-    //   const EXCEL_EXTENSION = '.xlsx'
-    //   const blob = new Blob([buffer], { type: fileType })
-    //   if (navigator.msSaveBlog) {
-    //     navigator.msSaveBlog(
-    //       blob,
-    //       `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-    //     )
-    //   } else {
-    //     const link = document.createElement('a')
-    //     if (link.download !== undefined) {
-    //       const url = URL.createObjectURL(blob)
-    //       link.setAttribute('href', url)
-    //       link.setAttribute(
-    //         'download',
-    //         `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-    //       )
-    //       link.style.visibility = 'hidden'
-    //       document.body.appendChild(link)
-    //       link.click()
-    //       document.body.removeChild(link)
-    //     }
-    //   }
-    //   setLoadingDownload(false)
-    // } catch (error) {
-    //   console.log(error)
-    // }
+      setDataEnd(null)
+      setDataImport(null)
+      setDataImportComparativa(null)
+    } catch (error) {
+      console.log(error)
+    }
 
 
 
-    const workbook1 = new ExcelJS.Workbook();
+    // const workbook1 = new ExcelJS.Workbook();
 
-    // Agregar una hoja al libro
-    const worksheet = workbook1.addWorksheet('Hoja 1');
+    // // Agregar una hoja al libro
+    // const worksheet = workbook1.addWorksheet('Hoja 1');
 
-    // Agregar una imagen a una celda
-    const image = workbook1.addImage({
-        filename: 'ruta/a/la/imagen.png',
-        extension: 'png',
-    });
+    // // Agregar una imagen a una celda
+    // const image = workbook1.addImage({
+    //     filename: 'ruta/a/la/imagen.png',
+    //     extension: 'png',
+    // });
 
-    worksheet.addImage(image, {
-        tl: { col: 2, row: 2 },
-        br: { col: 6, row: 6 },
-    });
+    // worksheet.addImage(image, {
+    //     tl: { col: 2, row: 2 },
+    //     br: { col: 6, row: 6 },
+    // });
 
-    // Crear el archivo Excel
-    const buffer = await workbook1.xlsx.writeBuffer();
+    // // Crear el archivo Excel
+    // const buffer = await workbook1.xlsx.writeBuffer();
 
-    // Descargar el archivo Excel
-    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'archivo_excel.xlsx');
+    // // Descargar el archivo Excel
+    // saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'archivo_excel.xlsx');
   }
 }

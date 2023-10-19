@@ -157,6 +157,9 @@ const ParteDiarioContainer = () => {
             dataImport={dataImport}
             dataImportComparativa={dataImportComparativa}
             setBanderaDataNull={setBanderaDataNull}
+            setDataEnd={setDataEnd}
+            setDataImport={setDataImport}
+            setDataImportComparativa={setDataImportComparativa}
           />
         </>
       )}

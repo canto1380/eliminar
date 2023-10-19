@@ -5,9 +5,9 @@ import { redirectBase } from '../../helpers/redirect'
 
 const Unauthorized = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  deleteCookies()
+  deleteToken()
   const redirectLogin = async () => {
-    deleteCookies()
-    deleteToken()
     redirectBase('login')
   }
   useEffect(() => {

@@ -46,7 +46,7 @@ const ContainerIndexParteDiario = () => {
       tiempoInactivo = setTimeout(() => {
         setInactivoUser(true);
         setModalUnauthorized(true)
-      }, 1800000000); 
+      }, 18000); 
     };
 
     reiniciarTemporizador();

@@ -6,7 +6,10 @@ import ItemCollpse from "./ItemsCollpase";
 import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
-import { getDataPartesDiariosBE, getDataPartesDiariosBE1 } from "../../utils/queryAPI/partesDiariosQuery";
+import {
+  getDataPartesDiariosBE,
+  getDataPartesDiariosBE1,
+} from "../../utils/queryAPI/partesDiariosQuery";
 
 const ParteDiario = ({
   dataEnd,
@@ -22,6 +25,9 @@ const ParteDiario = ({
   dataImport,
   dataImportComparativa,
   setBanderaDataNull,
+  setDataEnd,
+  setDataImport,
+  setDataImportComparativa,
 }) => {
   // moment.locale('es')
   // console.log(moment.locale())
@@ -142,6 +148,7 @@ const ParteDiario = ({
               CreateExcelWorkbook(
                 setLoadingDownload,
                 dataEnd,
+                setDataEnd,
                 d1,
                 d2,
                 d3,
@@ -181,6 +188,8 @@ const ParteDiario = ({
                 fechasInicioIngeniosComparativa,
                 dataDiasZafraComparativa,
                 fechasFinIngeniosComparativa,
+                setDataImport,
+                setDataImportComparativa
               )
             }
           >
