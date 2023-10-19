@@ -90,7 +90,7 @@ export const CreateExcelWorkbook = async (
       pageSetup: {
         paperSize: 9,
         orientation: 'landscape',
-        printArea: 'A1:AA63',
+        printArea: 'A1:AB63',
         scale: 75,
         fitToPage: true,
         fitToWidth: 1,
@@ -119,7 +119,7 @@ export const CreateExcelWorkbook = async (
       },
     ]
     page1.addConditionalFormatting({
-      ref: 'E31:N32',
+      ref: 'F31:O32',
       rules: rulesFgRed,
     })
 
@@ -148,6 +148,8 @@ export const CreateExcelWorkbook = async (
     for (let i = 2; i <= 27; i++) {
       page1.getColumn(i).width = '15'
     }
+    page1.getColumn(15).width = '18.5'
+    page1.getColumn(31).width = '18.5'
 
     for (let i = 44; i <= 57; i++) {
       page1.getRow(i).height = '50'
@@ -182,19 +184,19 @@ export const CreateExcelWorkbook = async (
       fgColor: { argb: 'D9E1F2' },
     }
 
-    for (let i = 5; i <= 14; i++) {
+    for (let i = 6; i <= 15; i++) {
       page1.getCell(7, i).fill = bgVerde
       page1.getCell(9, i).fill = bgVerde
     }
 
-    for (let i = 18; i <= 27; i++) {
+    for (let i = 19; i <= 28; i++) {
       page1.getCell(7, i).fill = bgAzul
       page1.getCell(9, i).fill = bgAzul
     }
-    for (let i = 1; i < 28; i++) {
+    for (let i = 1; i < 29; i++) {
       page1.getCell(28, i).fill = bgAzul
     }
-    for (let i = 1; i < 28; i++) {
+    for (let i = 1; i < 29; i++) {
       page1.getCell(7, i).fill = bgGris
     }
 
@@ -236,7 +238,7 @@ export const CreateExcelWorkbook = async (
       }
     }
 
-    for (let i = 1; i < 28; i++) {
+    for (let i = 1; i < 29; i++) {
       page1.getCell(1, i).border = borders(
         'medium',
         '000000',
@@ -433,7 +435,7 @@ export const CreateExcelWorkbook = async (
       )
     }
 
-    for (let i = 1; i <= 27; i++) {
+    for (let i = 1; i <= 28; i++) {
       page1.getColumn(i).border = {
         top: { style: 'thin', color: { argb: '000000' } },
         left: { style: 'medium', color: { argb: '000000' } },
@@ -451,28 +453,28 @@ export const CreateExcelWorkbook = async (
     }
 
     /***** FORMATO DE NUMEROS *****/
-    for (let i = 5; i <= 7; i++) {
+    for (let i = 6; i <= 8; i++) {
       page1.getColumn(i).numFmt = '#,##0'
     }
-    page1.getColumn(8).numFmt = '0.##0'
     page1.getColumn(9).numFmt = '0.##0'
-    for (let i = 10; i <= 14; i++) {
+    page1.getColumn(10).numFmt = '0.##0'
+    for (let i = 11; i <= 15; i++) {
       page1.getColumn(i).numFmt = '#,##0'
     }
-    for (let i = 18; i <= 20; i++) {
+    for (let i = 19; i <= 21; i++) {
       page1.getColumn(i).numFmt = '#,##0'
     }
-    page1.getColumn(21).numFmt = '#.##0'
     page1.getColumn(22).numFmt = '#.##0'
-    for (let i = 23; i <= 27; i++) {
+    page1.getColumn(23).numFmt = '#.##0'
+    for (let i = 24; i <= 28; i++) {
       page1.getColumn(i).numFmt = '#,##0'
     }
 
-    for (let i = 5; i <= 14; i++) {
+    for (let i = 6; i <= 15; i++) {
       page1.getCell(32, i).numFmt = '0.000%'
     }
 
-    page1.getCell('T32').numFmt = '#.##%'
+    page1.getCell('U32').numFmt = '#.##%'
     // page1.getCell('G5').numFmt = 'DD/MM/YYYY'
     page1.getCell('F34').numFmt = '#,##0'
     page1.getCell('F35').numFmt = '#,##0'
@@ -486,23 +488,23 @@ export const CreateExcelWorkbook = async (
 
 
     /** CELDAS ENCABEZADOS **/
-    page1.mergeCells('A1:G4')
-    page1.getCell('G4').value = 'Icono IPAAT'
-    page1.getCell('G4').border = {
+    page1.mergeCells('A1:F4')
+    page1.getCell('F4').value = 'Icono IPAAT'
+    page1.getCell('F4').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'medium', color: { argb: '000000' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'medium', color: { argb: '000000' } },
     }
 
-    page1.mergeCells('H1:W2')
+    page1.mergeCells('G1:W2')
     page1.getCell('W2').value = `COMPARATIVO ZAFRA ${date.getFullYear()}/${
       date.getFullYear() - 1
     }`
     page1.getCell('W2').alignment = { horizontal: 'center' }
     page1.getCell('W2').font = { name: 'Bodoni MT', bold: true, size: 24 }
 
-    page1.mergeCells('H3:W4')
+    page1.mergeCells('G3:W4')
     page1.getCell('W4').value = `DATOS PRODUCTIVOS SEGÚN PARTE DIARIO ${Math.ceil(dataDiasZafra)}`
     page1.getCell('W4').font = { name: 'Calibri', bold: true, size: 16 }
     page1.getCell('W4').alignment = {
@@ -510,32 +512,32 @@ export const CreateExcelWorkbook = async (
       vertical: 'middle',
     }
 
-    page1.mergeCells('X1:AA4')
-    page1.getCell('AA4').value = 'Icono Tucuman'
+    page1.mergeCells('X1:AB4')
+    page1.getCell('X1').value = 'Icono Tucuman'
 
-    page1.mergeCells('A5:F5')
-    page1.getCell('F5').value = 'Fecha de Reunión de Directorio'
-    page1.getCell('F5').alignment = { horizontal: 'start' }
-    page1.getCell('F5').font = { name: 'Calirbi', bold: false, size: 12 }
+    page1.mergeCells('A5:E5')
+    page1.getCell('E5').value = 'Fecha de Reunión de Directorio'
+    page1.getCell('E5').alignment = { horizontal: 'start' }
+    page1.getCell('E5').font = { name: 'Calirbi', bold: false, size: 12 }
 
     // page1.getCell('G5').value = new Date()
     // page1.getCell('G5').alignment = { horizontal: 'center' }
     // page1.getCell('G5').font = { name: 'Calirbi', bold: true, size: 12 }
 
-    page1.mergeCells('H5:AA5')
+    page1.mergeCells('G5:AB5')
 
     /** ENCABEZADOS Y COLUMNAS DE TABLA **/
     page1.mergeCells('A6:B9')
     page1.getCell('A9').value = 'INGENIOS DE LA PROVINCIA DE TUCUMÁN'
     page1.getCell('A9').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.mergeCells('C6:N6')
-    page1.getCell('N6').value = `ZAFRA ${date.getFullYear()}`
-    page1.getCell('N6').font = { name: 'Bodoni MT', bold: true, size: 18 }
+    page1.mergeCells('C6:O6')
+    page1.getCell('O6').value = `ZAFRA ${date.getFullYear()}`
+    page1.getCell('O6').font = { name: 'Bodoni MT', bold: true, size: 18 }
 
-    page1.mergeCells('O6:AA6')
-    page1.getCell('AA6').value = `ZAFRA ${date.getFullYear() - 1}`
-    page1.getCell('AA6').font = { name: 'Bodoni MT', bold: true, size: 18 }
+    page1.mergeCells('P6:AB6')
+    page1.getCell('AB6').value = `ZAFRA ${date.getFullYear() - 1}`
+    page1.getCell('AB6').font = { name: 'Bodoni MT', bold: true, size: 18 }
 
     /** Zafra 2023 **/
     // page1.mergeCells('B7:B9')
@@ -550,80 +552,84 @@ export const CreateExcelWorkbook = async (
     page1.getCell('D9').value = 'N° Días de avance'
     page1.getCell('D9').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.mergeCells('E7:E8')
-    page1.getCell('E8').value = 'Caña Molida Bruta (C.M.B.)'
+    page1.mergeCells('E7:E9')
+    page1.getCell('E9').value = `fin de zafra ${date.getFullYear()}`
+    page1.getCell('E9').font = { name: 'Calibri', bold: true, size: 11 }
+
     page1.mergeCells('F7:F8')
-    page1.getCell('F8').value = 'Caña Molida Neta (C.M.N.) '
+    page1.getCell('F8').value = 'Caña Molida Bruta (C.M.B.)'
     page1.mergeCells('G7:G8')
-    page1.getCell('G8').value = 'Azúcar Equivalente'
+    page1.getCell('G8').value = 'Caña Molida Neta (C.M.N.) '
     page1.mergeCells('H7:H8')
-    page1.getCell('H8').value = `Rto % CMB Total `
+    page1.getCell('H8').value = 'Azúcar Equivalente'
     page1.mergeCells('I7:I8')
-    page1.getCell('I8').value = `Rto % CMN Total`
+    page1.getCell('I8').value = `Rto % CMB Total `
     page1.mergeCells('J7:J8')
-    page1.getCell('J8').value = 'Total Azúcar Blanco'
+    page1.getCell('J8').value = `Rto % CMN Total`
     page1.mergeCells('K7:K8')
-    page1.getCell('K8').value = 'Total Azúcar Crudo'
+    page1.getCell('K8').value = 'Total Azúcar Blanco'
     page1.mergeCells('L7:L8')
-    page1.getCell('L8').value = 'Total Azúcar Elaborada'
+    page1.getCell('L8').value = 'Total Azúcar Crudo'
     page1.mergeCells('M7:M8')
-    page1.getCell('M8').value = 'MELAZA'
+    page1.getCell('M8').value = 'Total Azúcar Elaborada'
     page1.mergeCells('N7:N8')
-    page1.getCell('N8').value = 'ALCOHOL TOTAL HIDRATADO'
-    page1.getCell('E9').value = '[Tn]'
+    page1.getCell('N8').value = 'MELAZA'
+    page1.mergeCells('O7:O8')
+    page1.getCell('O8').value = 'ALCOHOL TOTAL HIDRATADO'
     page1.getCell('F9').value = '[Tn]'
     page1.getCell('G9').value = '[Tn]'
-    page1.getCell('H9').value = '%'
+    page1.getCell('H9').value = '[Tn]'
     page1.getCell('I9').value = '%'
-    page1.getCell('J9').value = '[Tn]'
+    page1.getCell('J9').value = '%'
     page1.getCell('K9').value = '[Tn]'
     page1.getCell('L9').value = '[Tn]'
     page1.getCell('M9').value = '[Tn]'
-    page1.getCell('N9').value = '[m3]'
+    page1.getCell('N9').value = '[Tn]'
+    page1.getCell('O9').value = '[m3]'
 
     /** Zafra 2022 **/
-    page1.mergeCells('O7:O9')
-    page1.getCell('O9').value = `Inicio de Zafra ${date.getFullYear() - 1}`
-    page1.getCell('O9').font = { name: 'Calibri', bold: true, size: 11 }
-
     page1.mergeCells('P7:P9')
-    page1.getCell('P9').value = 'N° Días de Avance'
+    page1.getCell('P9').value = `Inicio de Zafra ${date.getFullYear() - 1}`
     page1.getCell('P9').font = { name: 'Calibri', bold: true, size: 11 }
 
     page1.mergeCells('Q7:Q9')
-    page1.getCell('Q9').value = `Fin de Zafra ${date.getFullYear() - 1}`
+    page1.getCell('Q9').value = 'N° Días de Avance'
     page1.getCell('Q9').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.mergeCells('R7:R8')
-    page1.getCell('R8').value = 'Caña Molida Bruta (C.M.B.)'
+    page1.mergeCells('R7:R9')
+    page1.getCell('R9').value = `Fin de Zafra ${date.getFullYear() - 1}`
+    page1.getCell('R9').font = { name: 'Calibri', bold: true, size: 11 }
+
     page1.mergeCells('S7:S8')
-    page1.getCell('S8').value = 'Caña Molida Neta (C.M.N.) '
+    page1.getCell('S8').value = 'Caña Molida Bruta (C.M.B.)'
     page1.mergeCells('T7:T8')
-    page1.getCell('T8').value = 'Azúcar Equivalente'
+    page1.getCell('T8').value = 'Caña Molida Neta (C.M.N.) '
     page1.mergeCells('U7:U8')
-    page1.getCell('U8').value = `Rto % CMB Total `
+    page1.getCell('U8').value = 'Azúcar Equivalente'
     page1.mergeCells('V7:V8')
-    page1.getCell('V8').value = `Rto % CMN Total`
+    page1.getCell('V8').value = `Rto % CMB Total `
     page1.mergeCells('W7:W8')
-    page1.getCell('W8').value = 'Total Azúcar Blanco'
+    page1.getCell('W8').value = `Rto % CMN Total`
     page1.mergeCells('X7:X8')
-    page1.getCell('X8').value = 'Total Azúcar Crudo'
+    page1.getCell('X8').value = 'Total Azúcar Blanco'
     page1.mergeCells('Y7:Y8')
-    page1.getCell('Y8').value = 'Total Azúcar Elaborada'
+    page1.getCell('Y8').value = 'Total Azúcar Crudo'
     page1.mergeCells('Z7:Z8')
-    page1.getCell('Z8').value = 'MELAZA'
+    page1.getCell('Z8').value = 'Total Azúcar Elaborada'
     page1.mergeCells('AA7:AA8')
-    page1.getCell('AA8').value = 'ALCOHOL TOTAL HIDRATADO'
-    page1.getCell('R9').value = '[Tn]'
+    page1.getCell('AA8').value = 'MELAZA'
+    page1.mergeCells('AB7:AB8')
+    page1.getCell('AB8').value = 'ALCOHOL TOTAL HIDRATADO'
     page1.getCell('S9').value = '[Tn]'
     page1.getCell('T9').value = '[Tn]'
-    page1.getCell('U9').value = '%'
+    page1.getCell('U9').value = '[Tn]'
     page1.getCell('V9').value = '%'
-    page1.getCell('W9').value = '[Tn]'
+    page1.getCell('W9').value = '%'
     page1.getCell('X9').value = '[Tn]'
     page1.getCell('Y9').value = '[Tn]'
     page1.getCell('Z9').value = '[Tn]'
-    page1.getCell('AA9').value = '[m3]'
+    page1.getCell('AA9').value = '[Tn]'
+    page1.getCell('AB9').value = '[m3]'
 
     /** COLUMNA TABLA - INGENIOS **/
     for (let i = 10; i <= 26; i++) {
@@ -743,197 +749,184 @@ export const CreateExcelWorkbook = async (
 
     /** COLUMNA FECHA INICIO 2022 **/
 
-    page1.getCell('O10').value = fechasInicioIngeniosComparativa.Cell10
-    page1.getCell('O10').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O11').value = fechasInicioIngeniosComparativa.Cell11
-    page1.getCell('O11').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O12').value = fechasInicioIngeniosComparativa.Cell12
-    page1.getCell('O12').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O14').value = fechasInicioIngeniosComparativa.Cell14
-    page1.getCell('O14').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O15').value = fechasInicioIngeniosComparativa.Cell15
-    page1.getCell('O16').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O17').value = fechasInicioIngeniosComparativa.Cell17
-    page1.getCell('O17').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O18').value = fechasInicioIngeniosComparativa.Cell18
-    page1.getCell('O18').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O19').value = fechasInicioIngeniosComparativa.Cell19
-    page1.getCell('O19').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O20').value = fechasInicioIngeniosComparativa.Cell20
-    page1.getCell('O20').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O21').value = fechasInicioIngeniosComparativa.Cell21
-    page1.getCell('O21').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O22').value = fechasInicioIngeniosComparativa.Cell22
-    page1.getCell('O22').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O23').value = fechasInicioIngeniosComparativa.Cell23
-    page1.getCell('O23').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O24').value = fechasInicioIngeniosComparativa.Cell24
-    page1.getCell('O24').font = { name: 'Calibri', bold: true, size: 11 }
-
-    page1.getCell('O25').value = fechasInicioIngeniosComparativa.Cell25
-    page1.getCell('O25').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P10').value = fechasInicioIngeniosComparativa.Cell10
+    page1.getCell('P10').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P11').value = fechasInicioIngeniosComparativa.Cell11
+    page1.getCell('P11').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P12').value = fechasInicioIngeniosComparativa.Cell12
+    page1.getCell('P12').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P14').value = fechasInicioIngeniosComparativa.Cell14
+    page1.getCell('P14').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P15').value = fechasInicioIngeniosComparativa.Cell15
+    page1.getCell('P16').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P17').value = fechasInicioIngeniosComparativa.Cell17
+    page1.getCell('P17').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P18').value = fechasInicioIngeniosComparativa.Cell18
+    page1.getCell('P18').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P19').value = fechasInicioIngeniosComparativa.Cell19
+    page1.getCell('P19').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P20').value = fechasInicioIngeniosComparativa.Cell20
+    page1.getCell('P20').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P21').value = fechasInicioIngeniosComparativa.Cell21
+    page1.getCell('P21').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P22').value = fechasInicioIngeniosComparativa.Cell22
+    page1.getCell('P22').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P23').value = fechasInicioIngeniosComparativa.Cell23
+    page1.getCell('P23').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P24').value = fechasInicioIngeniosComparativa.Cell24
+    page1.getCell('P24').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('P25').value = fechasInicioIngeniosComparativa.Cell25
+    page1.getCell('P25').font = { name: 'Calibri', bold: true, size: 11 }
 
     /** COLUMNA FIN DE ZAFRA 2022 **/
-    page1.getCell('Q10').value =
+    page1.getCell('R10').value =
       fechasFinIngeniosComparativa?.CellQ10
-    page1.getCell('Q10').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R10').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q11').value =
+    page1.getCell('R11').value =
       fechasFinIngeniosComparativa?.CellQ11
-    page1.getCell('Q11').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R11').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q12').value =
+    page1.getCell('R12').value =
       fechasFinIngeniosComparativa?.CellQ12
-    page1.getCell('Q12').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R12').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q14').value =
+    page1.getCell('R14').value =
       fechasFinIngeniosComparativa?.CellQ14
-    page1.getCell('Q14').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R14').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q15').value =
+    page1.getCell('R15').value =
       fechasFinIngeniosComparativa?.CellQ15
-    page1.getCell('Q16').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R16').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q17').value =
+    page1.getCell('R17').value =
       fechasFinIngeniosComparativa?.CellQ17
-    page1.getCell('Q17').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R17').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q18').value =
+    page1.getCell('R18').value =
       fechasFinIngeniosComparativa?.CellQ18
-    page1.getCell('Q18').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R18').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q19').value =
+    page1.getCell('R19').value =
       fechasFinIngeniosComparativa?.CellQ19
-    page1.getCell('Q19').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R19').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q20').value =
+    page1.getCell('R20').value =
       fechasFinIngeniosComparativa?.CellQ20
-    page1.getCell('Q20').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R20').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q21').value =
+    page1.getCell('R21').value =
       fechasFinIngeniosComparativa?.CellQ21
-    page1.getCell('Q21').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R21').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q22').value =
+    page1.getCell('R22').value =
       fechasFinIngeniosComparativa?.CellQ22
-    page1.getCell('Q22').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R22').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q23').value =
+    page1.getCell('R23').value =
       fechasFinIngeniosComparativa?.CellQ23
-    page1.getCell('Q23').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R23').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q24').value =
+    page1.getCell('R24').value =
       fechasFinIngeniosComparativa?.CellQ24
-    page1.getCell('Q24').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R24').font = { name: 'Calibri', bold: true, size: 11 }
 
-    page1.getCell('Q25').value =
+    page1.getCell('R25').value =
     fechasFinIngeniosComparativa?.CellQ25
-    page1.getCell('Q25').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('R25').font = { name: 'Calibri', bold: true, size: 11 }
     /************/
 
     /** COLUMNA DIAS DE AVANCE 2022**/
-    page1.getCell('P10').value = { formula: '=if(Q10="",Q28-O10+1,Q10-O10+1)', result: 7 }
-    page1.getCell('P10').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P11').value = { formula: '=if(Q11="",Q28-O11+1,Q11-O11+1)', result: 7 }
-    page1.getCell('P11').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P12').value = { formula: '=if(Q12="",Q28-O12+1,Q12-O12+1)', result: 7 }
-    page1.getCell('P12').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P13').value = ''
-    page1.getCell('P14').value = { formula: '=if(Q14="",Q28-O14+1,Q14-O14+1)', result: 7 }
-    page1.getCell('P14').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P15').value = { formula: '=if(Q15="",Q28-O15+1,Q15-O15+1)', result: 7 }
-    page1.getCell('P15').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P16').value = ''
-    page1.getCell('P17').value = { formula: '=if(Q17="",Q28-O17+1,Q17-O17+1)', result: 7 }
-    page1.getCell('P17').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P18').value = { formula: '=if(Q18="",Q28-O18+1,Q18-O18+1)', result: 7 }
-    page1.getCell('P18').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P19').value = { formula: '=if(Q19="",Q28-O19+1,Q19-O19+1)', result: 7 }
-    page1.getCell('P19').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P20').value = { formula: '=if(Q20="",Q28-O20+1,Q20-O20+1)', result: 7 }
-    page1.getCell('P20').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P21').value = { formula: '=if(Q21="",Q28-O21+1,Q21-O21+1)', result: 7 }
-    page1.getCell('P21').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P22').value = { formula: '=if(Q22="",Q28-O22+1,Q22-O22+1)', result: 7 }
-    page1.getCell('P22').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P23').value = { formula: '=if(Q23="",Q28-O23+1,Q23-O23+1)', result: 7 }
-    page1.getCell('P23').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P24').value = { formula: '=if(Q24="",Q28-O24+1,Q24-O24+1)', result: 7 }
-    page1.getCell('P24').font = { name: 'Calibri', bold: true, size: 11 }
-    page1.getCell('P25').value = { formula: '=if(Q25="",Q28-O25+1,Q25-O25+1)', result: 7 }
-    page1.getCell('P25').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q10').value = { formula: '=if(R10="",R28-P10+1,R10-P10+1)', result: 7 }
+    page1.getCell('Q10').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q11').value = { formula: '=if(R11="",R28-P11+1,R11-P11+1)', result: 7 }
+    page1.getCell('Q11').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q12').value = { formula: '=if(R12="",R28-P12+1,R12-P12+1)', result: 7 }
+    page1.getCell('Q12').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q13').value = ''
+    page1.getCell('Q14').value = { formula: '=if(R14="",R28-P14+1,R14-P14+1)', result: 7 }
+    page1.getCell('Q14').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q15').value = { formula: '=if(R15="",R28-P15+1,R15-P15+1)', result: 7 }
+    page1.getCell('Q15').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q16').value = ''
+    page1.getCell('Q17').value = { formula: '=if(R17="",R28-P17+1,R17-P17+1)', result: 7 }
+    page1.getCell('Q17').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q18').value = { formula: '=if(R18="",R28-P18+1,R18-P18+1)', result: 7 }
+    page1.getCell('Q18').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q19').value = { formula: '=if(R19="",R28-P19+1,R19-P19+1)', result: 7 }
+    page1.getCell('Q19').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q20').value = { formula: '=if(R20="",R28-P20+1,R20-P20+1)', result: 7 }
+    page1.getCell('Q20').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q21').value = { formula: '=if(R21="",R28-P21+1,R21-P21+1)', result: 7 }
+    page1.getCell('Q21').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q22').value = { formula: '=if(R22="",R28-P22+1,R22-P22+1)', result: 7 }
+    page1.getCell('Q22').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q23').value = { formula: '=if(R23="",R28-P23+1,R23-P23+1)', result: 7 }
+    page1.getCell('Q23').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q24').value = { formula: '=if(R24="",R28-P24+1,R24-P24+1)', result: 7 }
+    page1.getCell('Q24').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('Q25').value = { formula: '=if(R25="",R28-P25+1,R25-P25+1)', result: 7 }
+    page1.getCell('Q25').font = { name: 'Calibri', bold: true, size: 11 }
     /*****************/
 
     /**TOTAL AZUCAR **/
     for (let i = 10; i <= 12; i++) {
-      page1.getCell(i, 12).value = { formula: `SUM(J${i}:K${i})`, result: 7 }
+      page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 }
     }
     for (let i = 14; i <= 15; i++) {
-      page1.getCell(i, 12).value = { formula: `SUM(J${i}:K${i})`, result: 7 }
+      page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 }
     }
     for (let i = 17; i <= 25; i++) {
-      page1.getCell(i, 12).value = { formula: `SUM(J${i}:K${i})`, result: 7 }
+      page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 }
     }
 
     for (let i = 10; i <= 12; i++) {
-      page1.getCell(i, 25).value = { formula: `SUM(W${i}:X${i})`, result: 7 }
+      page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 }
     }
     for (let i = 14; i <= 15; i++) {
-      page1.getCell(i, 25).value = { formula: `SUM(W${i}:X${i})`, result: 7 }
+      page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 }
     }
     for (let i = 17; i <= 25; i++) {
-      page1.getCell(i, 25).value = { formula: `SUM(W${i}:X${i})`, result: 7 }
+      page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 }
     }
 
     /** FILA LOS BALCANES **/
-    page1.getCell('E13').value = { formula: '=SUM(E10:E12)', result: 7 }
     page1.getCell('F13').value = { formula: '=SUM(F10:F12)', result: 7 }
     page1.getCell('G13').value = { formula: '=SUM(G10:G12)', result: 7 }
-    page1.getCell('J13').value = { formula: '=SUM(J10:J12)', result: 7 }
+    page1.getCell('H13').value = { formula: '=SUM(H10:H12)', result: 7 }
     page1.getCell('K13').value = { formula: '=SUM(K10:K12)', result: 7 }
     page1.getCell('L13').value = { formula: '=SUM(L10:L12)', result: 7 }
     page1.getCell('M13').value = { formula: '=SUM(M10:M12)', result: 7 }
     page1.getCell('N13').value = { formula: '=SUM(N10:N12)', result: 7 }
+    page1.getCell('O13').value = { formula: '=SUM(O10:O12)', result: 7 }
 
-    page1.getCell('R13').value = { formula: '=SUM(R10:R12)', result: 7 }
     page1.getCell('S13').value = { formula: '=SUM(S10:S12)', result: 7 }
     page1.getCell('T13').value = { formula: '=SUM(T10:T12)', result: 7 }
-    page1.getCell('W13').value = { formula: '=SUM(W10:W12)', result: 7 }
+    page1.getCell('U13').value = { formula: '=SUM(U10:U12)', result: 7 }
     page1.getCell('X13').value = { formula: '=SUM(X10:X12)', result: 7 }
     page1.getCell('Y13').value = { formula: '=SUM(Y10:Y12)', result: 7 }
     page1.getCell('Z13').value = { formula: '=SUM(Z10:Z12)', result: 7 }
     page1.getCell('AA13').value = { formula: '=SUM(AA10:AA12)', result: 7 }
+    page1.getCell('AB13').value = { formula: '=SUM(AB10:AB12)', result: 7 }
 
     /** FILA CASS **/
-    page1.getCell('E16').value = { formula: '=SUM(E14:E15)', result: 7 }
     page1.getCell('F16').value = { formula: '=SUM(F14:F15)', result: 7 }
     page1.getCell('G16').value = { formula: '=SUM(G14:G15)', result: 7 }
-    page1.getCell('J16').value = { formula: '=SUM(J14:J15)', result: 7 }
+    page1.getCell('H16').value = { formula: '=SUM(H14:H15)', result: 7 }
     page1.getCell('K16').value = { formula: '=SUM(K14:K15)', result: 7 }
     page1.getCell('L16').value = { formula: '=SUM(L14:L15)', result: 7 }
     page1.getCell('M16').value = { formula: '=SUM(M14:M15)', result: 7 }
     page1.getCell('N16').value = { formula: '=SUM(N14:N15)', result: 7 }
+    page1.getCell('O16').value = { formula: '=SUM(NO14:NO15)', result: 7 }
 
-    page1.getCell('R16').value = { formula: '=SUM(R14:R15)', result: 7 }
     page1.getCell('S16').value = { formula: '=SUM(S14:S15)', result: 7 }
     page1.getCell('T16').value = { formula: '=SUM(T14:T15)', result: 7 }
-    page1.getCell('W16').value = { formula: '=SUM(W14:W15)', result: 7 }
+    page1.getCell('U16').value = { formula: '=SUM(U14:U15)', result: 7 }
     page1.getCell('X16').value = { formula: '=SUM(X14:X15)', result: 7 }
     page1.getCell('Y16').value = { formula: '=SUM(Y14:Y15)', result: 7 }
     page1.getCell('Z16').value = { formula: '=SUM(Z14:Z15)', result: 7 }
     page1.getCell('AA16').value = { formula: '=SUM(AA14:AA15)', result: 7 }
+    page1.getCell('AB16').value = { formula: '=SUM(AB14:AB15)', result: 7 }
 
     /** FILA TOTALES  2023**/
     page1.mergeCells('B27:C27')
@@ -945,10 +938,7 @@ export const CreateExcelWorkbook = async (
     }
     page1.getCell('D27').value = Math.ceil(dataDiasZafra)
     page1.getCell('D27').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('E27').value = {
-      formula: '=SUM(E10:E12,E14:E15,E17:E25)',
-      result: 7,
-    }
+    
     page1.getCell('F27').value = {
       formula: '=SUM(F10:F12,F14:F15,F17:F25)',
       result: 7,
@@ -957,18 +947,18 @@ export const CreateExcelWorkbook = async (
       formula: '=SUM(G10:G12,G14:G15,G17:G25)',
       result: 7,
     }
-    page1.getCell('H27').value = { formula: '=G27/E27*100', result: 7 }
-    page1.getCell('I27').value = { formula: '=G27/F27*100', result: 7 }
-    page1.getCell('J27').value = {
-      formula: '=SUM(J10:J12,J14:J15,J17:J25)',
+    page1.getCell('H27').value = {
+      formula: '=SUM(H10:H12,H14:H15,H17:H25)',
       result: 7,
     }
+    page1.getCell('I27').value = { formula: '=H27/F27*100', result: 7 }
+    page1.getCell('J27').value = { formula: '=H27/G27*100', result: 7 }
     page1.getCell('K27').value = {
-      formula: '=K24+K22+K21+K20+K19+K18+K17+K15+K14+K12+K11+K10',
+      formula: '=SUM(K10:K12,K14:K15,K17:K25)',
       result: 7,
     }
     page1.getCell('L27').value = {
-      formula: '=SUM(L10:L12,L14:L15,L17:L25)',
+      formula: '=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10',
       result: 7,
     }
     page1.getCell('M27').value = {
@@ -976,16 +966,16 @@ export const CreateExcelWorkbook = async (
       result: 7,
     }
     page1.getCell('N27').value = {
-      formula: '=N24+N25+N22+N21+N19+N18+N17+N15+N14+N12',
+      formula: '=SUM(N10:N12,N14:N15,N17:N25)',
+      result: 7,
+    }
+    page1.getCell('O27').value = {
+      formula: '=O24+O25+O22+O21+O19+O18+O17+O15+O14+O12',
       result: 7,
     }
     /** FILAS TOTALES 2022 2*/
-    page1.getCell('P27').value = Math.ceil(dataDiasZafraComparativa)
-    page1.getCell('P27').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('R27').value = {
-      formula: '=SUM(R10:R12,R14:R15,R17:R25)',
-      result: 7,
-    }
+    page1.getCell('Q27').value = Math.ceil(dataDiasZafraComparativa)
+    page1.getCell('Q27').font = { name: 'Calibri', bold: true, size: 12 }
     page1.getCell('S27').value = {
       formula: '=SUM(S10:S12,S14:S15,S17:S25)',
       result: 7,
@@ -994,18 +984,18 @@ export const CreateExcelWorkbook = async (
       formula: '=SUM(T10:T12,T14:T15,T17:T25)',
       result: 7,
     }
-    page1.getCell('U27').value = { formula: '=T27/R27*100', result: 7 }
-    page1.getCell('V27').value = { formula: '=T27/S27*100', result: 7 }
-    page1.getCell('W27').value = {
-      formula: '=SUM(W10:W12,W14:W15,W17:W25)',
+    page1.getCell('U27').value = {
+      formula: '=SUM(U10:U12,U14:U15,U17:U25)',
       result: 7,
     }
+    page1.getCell('V27').value = { formula: '=U27/S27*100', result: 7 }
+    page1.getCell('W27').value = { formula: '=U27/T27*100', result: 7 }
     page1.getCell('X27').value = {
-      formula: '=X24+X22+X21+X20+X19+X18+X17+X15+X14+X12+X11+X10',
+      formula: '=SUM(X10:X12,X14:X15,X17:X25)',
       result: 7,
     }
     page1.getCell('Y27').value = {
-      formula: '=SUM(Y10:Y12,Y14:Y15,Y17:Y25)',
+      formula: '=Y24+Y22+Y21+Y20+Y19+Y18+Y17+Y15+Y14+Y12+Y11+Y10',
       result: 7,
     }
     page1.getCell('Z27').value = {
@@ -1013,7 +1003,11 @@ export const CreateExcelWorkbook = async (
       result: 7,
     }
     page1.getCell('AA27').value = {
-      formula: '=AA24+AA25+AA22+AA21+AA19+AA18+AA17+AA15+AA14+AA12',
+      formula: '=SUM(AA10:AA12,AA14:AA15,AA17:AA25)',
+      result: 7,
+    }
+    page1.getCell('AB27').value = {
+      formula: '=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12',
       result: 7,
     }
     /***********/
@@ -1043,59 +1037,58 @@ export const CreateExcelWorkbook = async (
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.mergeCells('E28:N28')
-    page1.getCell('E28').value = `ACUMULADO HASTA ${dateFormat}`
-    page1.getCell('E28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('E28').alignment = {
+    page1.mergeCells('F28:O28')
+    page1.getCell('F28').value = `ACUMULADO HASTA ${dateFormat}`
+    page1.getCell('F28').font = { name: 'Calibri', bold: true, size: 14 }
+    page1.getCell('F28').alignment = {
       horizontal: 'center',
       vertical: 'middle',
     }
 
-    page1.mergeCells('O28:P28')
-    page1.getCell('O28').value = 'Datos hasta la fecha: '
-    page1.getCell('O28').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('O28').alignment = {
+    page1.mergeCells('P28:Q28')
+    page1.getCell('P28').value = 'Datos hasta la fecha: '
+    page1.getCell('P28').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P28').alignment = {
       horizontal: 'right',
       vertical: 'middle',
     }
-    page1.getCell('O28').border = {
+    page1.getCell('P28').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.getCell('Q28').value = dateComparativaFormat
-    page1.getCell('Q28').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('Q28').alignment = {
+    page1.getCell('R28').value = dateComparativaFormat
+    page1.getCell('R28').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R28').alignment = {
       horizontal: 'start',
       vertical: 'middle',
     }
-    page1.getCell('Q28').border = {
+    page1.getCell('R28').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.mergeCells('R28:AA28')
-    page1.getCell('R28').value = `ACUMULADO HASTA ${dateComparativaFormat}`
-    page1.getCell('R28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('R28').alignment = {
+    page1.mergeCells('S28:AB28')
+    page1.getCell('S28').value = `ACUMULADO HASTA ${dateComparativaFormat}`
+    page1.getCell('S28').font = { name: 'Calibri', bold: true, size: 14 }
+    page1.getCell('S28').alignment = {
       horizontal: 'center',
       vertical: 'middle',
     }
 
     /** COMPARATIVOS **/
-    page1.mergeCells('A30:N30')
+    page1.mergeCells('A30:O30')
     page1.getCell('A30').value = `COMPARATIVO ZAFRA ${date.getFullYear()}/${
       date.getFullYear() - 1
     } - VARIACIÓN %  HASTA EL ${dateFormat}`
     page1.getCell('A30').alignment = alignCenter
     page1.getCell('A30').font = functionFont('Calibri', true, 14)
 
-    page1.mergeCells('A31:D31')
+    page1.mergeCells('A31:E31')
     page1.getCell('A31').value = 'DIFERENCIA'
 
-    page1.getCell('E31').value = { formula: 'E27-R27' }
     page1.getCell('F31').value = { formula: 'F27-S27' }
     page1.getCell('G31').value = { formula: 'G27-T27' }
     page1.getCell('H31').value = { formula: 'H27-U27' }
@@ -1105,12 +1098,12 @@ export const CreateExcelWorkbook = async (
     page1.getCell('L31').value = { formula: 'L27-Y27' }
     page1.getCell('M31').value = { formula: 'M27-Z27' }
     page1.getCell('N31').value = { formula: 'N27-AA27' }
+    page1.getCell('O31').value = { formula: 'O27-AB27' }
 
-    page1.mergeCells('A32:D32')
+    page1.mergeCells('A32:E32')
     page1.getCell('A32').value = '%'
     page1.getCell('A32').alignment = alignCenter
 
-    page1.getCell('E32').value = { formula: '=if(R27=0,"100%",E31/R27)', result: 7 }
     page1.getCell('F32').value = { formula: '=if(S27=0,"100%",F31/S27)', result: 7 }
     page1.getCell('G32').value = { formula: '=if(T27=0,"100%",G31/T27)', result: 7 }
     page1.getCell('H32').value = { formula: '=if(U27=0,"100%",H31/U27)', result: 7 }
@@ -1120,24 +1113,25 @@ export const CreateExcelWorkbook = async (
     page1.getCell('L32').value = { formula: '=if(Y27=0,"100%",L31/Y27)', result: 7 }
     page1.getCell('M32').value = { formula: '=if(Z27=0,"100%",M31/Z27)', result: 7 }
     page1.getCell('N32').value = { formula: '=if(AA27=0,"100%",N31/AA27)', result: 7 }
+    page1.getCell('O32').value = { formula: '=if(AB27=0,"100%",O31/AB27)', result: 7 }
 
-    page1.mergeCells('O30:AA31')
+    page1.mergeCells('P30:AB31')
     page1.getCell(
-      'O30'
+      'P30'
     ).value = `Inicio de zafra ${date.getFullYear()}: ${inicioZafra}
 Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
-    page1.getCell('O30').alignment = alignStart
+    page1.getCell('P30').alignment = alignStart
 
-    page1.mergeCells('O32:S32')
-    page1.getCell('O32').value = 'Diferencia de Grado de avance'
-    page1.getCell('O32').font = functionFont('Bodoni MT', true, 18)
-    page1.getCell('O32').alignment = alignStart
-    page1.mergeCells('T32:U32')
-    page1.getCell('T32').font = functionFont('Bodoni MT', true, 18)
-    page1.getCell('T32').value = { formula: '(V36-F36)/100' }
-    page1.getCell('T32').alignment = alignStart
+    page1.mergeCells('P32:T32')
+    page1.getCell('P32').value = 'Diferencia de Grado de avance'
+    page1.getCell('P32').font = functionFont('Bodoni MT', true, 18)
+    page1.getCell('P32').alignment = alignStart
+    page1.mergeCells('U32:V32')
+    page1.getCell('U32').font = functionFont('Bodoni MT', true, 18)
+    page1.getCell('U32').value = { formula: '(V36-F36)/100' }
+    page1.getCell('U32').alignment = alignStart
 
-    page1.mergeCells('V32:AA32')
+    page1.mergeCells('W32:AB32')
 
     /*** ESTIMACIONES ***/
     for (let i = 34; i <= 37; i++) {
@@ -1150,7 +1144,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       'Grado de Avance con respecto a la previsión por E.E.A.O.C.'
     page1.getCell('A37').value = 'Diferencia'
     page1.getCell('F34').value = parseInt(dataConstante?.estimacionEEAOC2023)
-    page1.getCell('F35').value = { formula: 'E27' }
+    page1.getCell('F35').value = { formula: 'F27' }
     page1.getCell('F36').value = { formula: 'F35/F34*100' }
     page1.getCell('F37').value = { formula: '100-F36' }
     page1.getCell('H34').value = 'Tn'
@@ -1188,7 +1182,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       'Grado de Avance con respecto a lo declarado al IPAAT, por los ingenios de Tucumán'
     page1.getCell('O37').value = 'Diferencia'
     page1.getCell('V34').value = parseInt(dataConstante?.CMBPorDDJJIPAAT2022)
-    page1.getCell('V35').value = { formula: 'R27' }
+    page1.getCell('V35').value = { formula: 'S27' }
     page1.getCell('V36').value = { formula: 'V35/V34*100' }
     page1.getCell('V37').value = { formula: '100-V36' }
     page1.getCell('X34').value = 'Tn'
@@ -1196,7 +1190,7 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('X36').value = '%'
     page1.getCell('X37').value = '%'
 
-    page1.mergeCells('Y34:AA37')
+    page1.mergeCells('Y34:AB37')
     page1.getCell('Y34').value = `ZAFRA ${date.getFullYear() - 1}`
     page1.getCell('Y34').font = functionFont('Bodoni MT', true, 16)
     page1.getCell('Y34').alignment = alignCenter
@@ -1411,21 +1405,22 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     page1.getCell('R58').numFmt = '0,000.000'
 
     /**** EXPORTACIONES ****/
-    page1.mergeCells('U39:X40')
+    page1.mergeCells('U39:Y40')
     page1.getCell('U39').value =
       `MERCADO EXTERNO DEL AZÚCAR - ZAFRA ${date.getFullYear()} Al ${dateFormat}`
     page1.getCell('U39').alignment = alignCenter
     page1.getCell('U39').font = functionFont('Bodoni MT', true, 12)
 
-    page1.mergeCells('Y39:AA40')
-    page1.getCell('Y39').value = 'Acumulado: '
-    page1.getCell('Y39').alignment = alignCenter
-    page1.getCell('Y39').font = functionFont('Bodoni MT', true, 12)
+    page1.mergeCells('Z39:AB40')
+    page1.getCell('Z39').value = 'Acumulado: '
+    page1.getCell('Z39').alignment = alignCenter
+    page1.getCell('Z39').font = functionFont('Bodoni MT', true, 12)
 
-    page1.mergeCells('U41:AA63')
+    page1.mergeCells('U41:AB63')
 
     page1.getRow(1).alignment = { horizontal: 'center', vertical: 'middle' }
 
+    /**** BORDES + ****/
     page1.getRow(29).border = borders(
       'medium',
       '000000',
@@ -1456,9 +1451,33 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       'thin',
       'EAEAEA'
     )
+    for(let i=3; i<6;i++) {
+      page1.getCell(7,i).border = borders(
+        'medium',
+      '000000',
+      'medium',
+      '000000',
+      'medium',
+      '000000',
+      'medium',
+      '000000'
+      )
+    }
+    for(let i=16; i<19;i++) {
+      page1.getCell(7,i).border = borders(
+        'medium',
+      '000000',
+      'medium',
+      '000000',
+      'medium',
+      '000000',
+      'medium',
+      '000000'
+      )
+    }
 
     for (let j = 1; j <= 1000; j++) {
-      for (let i = 28; i <= 1000; i++) {
+      for (let i = 29; i <= 1000; i++) {
         page1.getCell(j, i).border = borders(
           'thin',
           'EAEAEA',
@@ -1497,266 +1516,266 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
     /** DATOS 2023 **/
     if (parteDiarioData.length > 0) {
       /** AGUILARES **/
-      page1.getCell('E10').value = parseInt(d1['E10'])
-      page1.getCell('F10').value = parseInt(d1['F10'])
-      page1.getCell('G10').value = parseFloat(d1['G10'])
-      page1.getCell('J10').value = parseInt(d1['J10'])
-      page1.getCell('K10').value = parseInt(d1['K10'])
-      page1.getCell('M10').value = parseInt(d1['M10'])
-      page1.getCell('N10').value = parseInt(d1['N10'])
+      page1.getCell('F10').value = parseInt(d1['E10'])
+      page1.getCell('G10').value = parseInt(d1['F10'])
+      page1.getCell('H10').value = parseFloat(d1['G10'])
+      page1.getCell('K10').value = parseInt(d1['J10'])
+      page1.getCell('L10').value = parseInt(d1['K10'])
+      page1.getCell('N10').value = parseInt(d1['M10'])
+      page1.getCell('O10').value = parseInt(d1['N10'])
 
       /** Cruz Alta **/
-      page1.getCell('E11').value = parseInt(d2['E11'])
-      page1.getCell('F11').value = parseInt(d2['F11'])
-      page1.getCell('G11').value = parseFloat(d2['G11'])
-      page1.getCell('J11').value = parseInt(d2['J11'])
-      page1.getCell('K11').value = parseInt(d2['K11'])
-      page1.getCell('M11').value = parseInt(d2['M11'])
-      page1.getCell('N11').value = parseInt(d2['N11'])
+      page1.getCell('F11').value = parseInt(d2['E11'])
+      page1.getCell('G11').value = parseInt(d2['F11'])
+      page1.getCell('H11').value = parseFloat(d2['G11'])
+      page1.getCell('K11').value = parseInt(d2['J11'])
+      page1.getCell('L11').value = parseInt(d2['K11'])
+      page1.getCell('N11').value = parseInt(d2['M11'])
+      page1.getCell('O11').value = parseInt(d2['N11'])
 
       /** La Florida **/
-      page1.getCell('E12').value = parseInt(d3['E12'])
-      page1.getCell('F12').value = parseInt(d3['F12'])
-      page1.getCell('G12').value = parseFloat(d3['G12'])
-      page1.getCell('J12').value = parseInt(d3['J12'])
-      page1.getCell('K12').value = parseInt(d3['K12'])
-      page1.getCell('M12').value = parseInt(d3['M12'])
-      page1.getCell('N12').value = parseInt(d3['N12'])
+      page1.getCell('F12').value = parseInt(d3['E12'])
+      page1.getCell('G12').value = parseInt(d3['F12'])
+      page1.getCell('H12').value = parseFloat(d3['G12'])
+      page1.getCell('K12').value = parseInt(d3['J12'])
+      page1.getCell('L12').value = parseInt(d3['K12'])
+      page1.getCell('N12').value = parseInt(d3['M12'])
+      page1.getCell('O12').value = parseInt(d3['N12'])
 
       /** Concepcion **/
-      page1.getCell('E14').value = parseInt(d4['E14'])
-      page1.getCell('F14').value = parseInt(d4['F14'])
-      page1.getCell('G14').value = parseFloat(d4['G14'])
-      page1.getCell('J14').value = parseInt(d4['J14'])
-      if(date.getFullYear() === 2023) page1.getCell('J14').note = 'FALTA AZ REFINADO'
-      page1.getCell('K14').value = parseInt(d4['K14'])
-      page1.getCell('M14').value = parseInt(d4['M14'])
-      page1.getCell('N14').value = parseInt(d4['N14'])
+      page1.getCell('F14').value = parseInt(d4['E14'])
+      page1.getCell('G14').value = parseInt(d4['F14'])
+      page1.getCell('H14').value = parseFloat(d4['G14'])
+      page1.getCell('K14').value = parseInt(d4['J14'])
+      if(date.getFullYear() === 2023) page1.getCell('K14').note = 'FALTA AZ REFINADO'
+      page1.getCell('L14').value = parseInt(d4['K14'])
+      page1.getCell('N14').value = parseInt(d4['M14'])
+      page1.getCell('O14').value = parseInt(d4['N14'])
 
       /** Marapa **/
-      page1.getCell('E15').value = parseInt(d5['E15'])
-      page1.getCell('F15').value = parseInt(d5['F15'])
-      page1.getCell('G15').value = parseFloat(d5['G15'])
-      page1.getCell('J15').value = parseInt(d5['J15'])
-      page1.getCell('K15').value = parseInt(d5['K15'])
-      page1.getCell('M15').value = parseInt(d5['M15'])
-      page1.getCell('N15').value = parseInt(d5['N15'])
+      page1.getCell('F15').value = parseInt(d5['E15'])
+      page1.getCell('G15').value = parseInt(d5['F15'])
+      page1.getCell('H15').value = parseFloat(d5['G15'])
+      page1.getCell('K15').value = parseInt(d5['J15'])
+      page1.getCell('L15').value = parseInt(d5['K15'])
+      page1.getCell('N15').value = parseInt(d5['M15'])
+      page1.getCell('O15').value = parseInt(d5['N15'])
 
       /** Bella Vista **/
-      page1.getCell('E17').value = parseInt(d6['E17'])
-      page1.getCell('F17').value = parseInt(d6['F17'])
-      page1.getCell('G17').value = parseFloat(d6['G17'])
-      page1.getCell('J17').value = parseInt(d6['J17'])
-      page1.getCell('K17').value = parseInt(d6['K17'])
-      page1.getCell('M17').value = parseInt(d6['M17'])
-      page1.getCell('N17').value = parseInt(d6['N17'])
+      page1.getCell('F17').value = parseInt(d6['E17'])
+      page1.getCell('G17').value = parseInt(d6['F17'])
+      page1.getCell('H17').value = parseFloat(d6['G17'])
+      page1.getCell('K17').value = parseInt(d6['J17'])
+      page1.getCell('L17').value = parseInt(d6['K17'])
+      page1.getCell('N17').value = parseInt(d6['M17'])
+      page1.getCell('O17').value = parseInt(d6['N17'])
 
       /** Famailla **/
-      page1.getCell('E18').value = parseInt(d7['E18'])
-      page1.getCell('F18').value = parseInt(d7['F18'])
-      page1.getCell('G18').value = parseFloat(d7['G18'])
-      page1.getCell('J18').value = parseInt(d7['J18'])
-      if(date.getFullYear() === 2023) page1.getCell('J18').note = 'FALTA AZ REFINADO'
-      page1.getCell('K18').value = parseInt(d7['K18'])
-      page1.getCell('M18').value = parseInt(d7['M18'])
-      page1.getCell('N18').value = parseInt(d7['N18'])
+      page1.getCell('F18').value = parseInt(d7['E18'])
+      page1.getCell('G18').value = parseInt(d7['F18'])
+      page1.getCell('H18').value = parseFloat(d7['G18'])
+      page1.getCell('K18').value = parseInt(d7['J18'])
+      if(date.getFullYear() === 2023) page1.getCell('K18').note = 'FALTA AZ REFINADO'
+      page1.getCell('L18').value = parseInt(d7['K18'])
+      page1.getCell('N18').value = parseInt(d7['M18'])
+      page1.getCell('O18').value = parseInt(d7['N18'])
 
       /** La Corona **/
-      page1.getCell('E19').value = parseInt(d8['E19'])
-      page1.getCell('F19').value = parseInt(d8['F19'])
-      page1.getCell('G19').value = parseFloat(d8['G19'])
-      page1.getCell('J19').value = parseInt(d8['J19'])
-      page1.getCell('K19').value = parseInt(d8['K19'])
-      page1.getCell('M19').value = parseInt(d8['M19'])
-      page1.getCell('N19').value = parseInt(d8['N19'])
+      page1.getCell('F19').value = parseInt(d8['E19'])
+      page1.getCell('G19').value = parseInt(d8['F19'])
+      page1.getCell('H19').value = parseFloat(d8['G19'])
+      page1.getCell('K19').value = parseInt(d8['J19'])
+      page1.getCell('L19').value = parseInt(d8['K19'])
+      page1.getCell('N19').value = parseInt(d8['M19'])
+      page1.getCell('O19').value = parseInt(d8['N19'])
 
       /** La Providencia **/
-      page1.getCell('E20').value = parseInt(d9['E20'])
-      page1.getCell('F20').value = parseInt(d9['F20'])
-      page1.getCell('G20').value = parseFloat(d9['G20'])
-      page1.getCell('J20').value = parseInt(d9['J20'])
-      page1.getCell('K20').value = parseInt(d9['K20'])
-      if(date.getFullYear() === 2023) page1.getCell('K20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
-      page1.getCell('M20').value = parseInt(d9['M20'])
-      page1.getCell('N20').value = parseInt(d9['N20'])
+      page1.getCell('F20').value = parseInt(d9['E20'])
+      page1.getCell('G20').value = parseInt(d9['F20'])
+      page1.getCell('H20').value = parseFloat(d9['G20'])
+      page1.getCell('K20').value = parseInt(d9['J20'])
+      page1.getCell('L20').value = parseInt(d9['K20'])
+      if(date.getFullYear() === 2023) page1.getCell('L20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
+      page1.getCell('N20').value = parseInt(d9['M20'])
+      page1.getCell('O20').value = parseInt(d9['N20'])
 
       /** La Trinidad **/
-      page1.getCell('E21').value = parseInt(d10['E21'])
-      page1.getCell('F21').value = parseInt(d10['F21'])
-      page1.getCell('G21').value = parseFloat(d10['G21'])
-      page1.getCell('J21').value = parseInt(d10['J21'])
-      page1.getCell('K21').value = parseInt(d10['K21'])
-      page1.getCell('M21').value = parseInt(d10['M21'])
-      page1.getCell('N21').value = parseInt(d10['N21'])
+      page1.getCell('F21').value = parseInt(d10['E21'])
+      page1.getCell('G21').value = parseInt(d10['F21'])
+      page1.getCell('H21').value = parseFloat(d10['G21'])
+      page1.getCell('K21').value = parseInt(d10['J21'])
+      page1.getCell('L21').value = parseInt(d10['K21'])
+      page1.getCell('N21').value = parseInt(d10['M21'])
+      page1.getCell('O21').value = parseInt(d10['N21'])
 
       /** Leales **/
-      page1.getCell('E22').value = parseInt(d11['E22'])
-      page1.getCell('F22').value = parseInt(d11['F22'])
-      page1.getCell('G22').value = parseFloat(d11['G22'])
-      page1.getCell('J22').value = parseInt(d11['J22'])
-      if(date.getFullYear() === 2023) page1.getCell('J22').note = 'FALTA AZ REFINADO'
-      page1.getCell('K22').value = parseInt(d11['K22'])
-      page1.getCell('M22').value = parseInt(d11['M22'])
-      page1.getCell('N22').value = parseInt(d11['N22'])
+      page1.getCell('F22').value = parseInt(d11['E22'])
+      page1.getCell('G22').value = parseInt(d11['F22'])
+      page1.getCell('H22').value = parseFloat(d11['G22'])
+      page1.getCell('K22').value = parseInt(d11['J22'])
+      if(date.getFullYear() === 2023) page1.getCell('K22').note = 'FALTA AZ REFINADO'
+      page1.getCell('L22').value = parseInt(d11['K22'])
+      page1.getCell('N22').value = parseInt(d11['M22'])
+      page1.getCell('O22').value = parseInt(d11['N22'])
 
       /** Nunorco **/
-      page1.getCell('E23').value = parseInt(d12['E23'])
-      page1.getCell('F23').value = parseInt(d12['F23'])
-      page1.getCell('G23').value = parseFloat(d12['G23'])
-      page1.getCell('J23').value = parseInt(d12['J23'])
-      page1.getCell('K23').value = parseInt(d12['K23'])
-      page1.getCell('M23').value = parseInt(d12['M23'])
-      page1.getCell('N23').value = parseInt(d12['N23'])
+      page1.getCell('F23').value = parseInt(d12['E23'])
+      page1.getCell('G23').value = parseInt(d12['F23'])
+      page1.getCell('H23').value = parseFloat(d12['G23'])
+      page1.getCell('K23').value = parseInt(d12['J23'])
+      page1.getCell('L23').value = parseInt(d12['K23'])
+      page1.getCell('N23').value = parseInt(d12['M23'])
+      page1.getCell('O23').value = parseInt(d12['N23'])
 
       /** Santa Barbara **/
-      page1.getCell('E24').value = parseInt(d13['E24'])
-      page1.getCell('F24').value = parseInt(d13['F24'])
-      page1.getCell('G24').value = parseFloat(d13['G24'])
-      page1.getCell('J24').value = parseInt(d13['J24'])
-      page1.getCell('K24').value = parseInt(d13['K24'])
-      page1.getCell('M24').value = parseInt(d13['M24'])
-      page1.getCell('N24').value = parseInt(d13['N24'])
+      page1.getCell('F24').value = parseInt(d13['E24'])
+      page1.getCell('G24').value = parseInt(d13['F24'])
+      page1.getCell('H24').value = parseFloat(d13['G24'])
+      page1.getCell('K24').value = parseInt(d13['J24'])
+      page1.getCell('L24').value = parseInt(d13['K24'])
+      page1.getCell('N24').value = parseInt(d13['M24'])
+      page1.getCell('O24').value = parseInt(d13['N24'])
 
       /** Sta Rosa **/
-      page1.getCell('E25').value = parseInt(d14['E25'])
-      page1.getCell('F25').value = parseInt(d14['F25'])
-      page1.getCell('G25').value = parseFloat(d14['G25'])
-      page1.getCell('J25').value = parseInt(d14['J25'])
-      page1.getCell('K25').value = parseInt(d14['K25'])
-      page1.getCell('M25').value = parseInt(d14['M25'])
-      page1.getCell('N25').value = parseInt(d14['N25'])
+      page1.getCell('F25').value = parseInt(d14['E25'])
+      page1.getCell('G25').value = parseInt(d14['F25'])
+      page1.getCell('H25').value = parseFloat(d14['G25'])
+      page1.getCell('K25').value = parseInt(d14['J25'])
+      page1.getCell('L25').value = parseInt(d14['K25'])
+      page1.getCell('N25').value = parseInt(d14['M25'])
+      page1.getCell('O25').value = parseInt(d14['N25'])
     }
 
     /** DATOS 2022 **/
     /** AGUILARES **/
-    page1.getCell('R10').value = parseInt(dc1['R10'])
-    page1.getCell('S10').value = parseInt(dc1['S10'])
-    page1.getCell('T10').value = parseFloat(dc1['T10'])
-    page1.getCell('W10').value = parseInt(dc1['W10'])
-    page1.getCell('X10').value = parseInt(dc1['X10'])
-    page1.getCell('Z10').value = parseInt(dc1['Z10'])
-    page1.getCell('AA10').value = parseInt(dc1['AA10'])
+    page1.getCell('S10').value = parseInt(dc1['R10'])
+    page1.getCell('T10').value = parseInt(dc1['S10'])
+    page1.getCell('U10').value = parseFloat(dc1['T10'])
+    page1.getCell('X10').value = parseInt(dc1['W10'])
+    page1.getCell('Y10').value = parseInt(dc1['X10'])
+    page1.getCell('AA10').value = parseInt(dc1['Z10'])
+    page1.getCell('AB10').value = parseInt(dc1['AA10'])
 
     /** Cruz Alta **/
-    page1.getCell('R11').value = parseInt(dc2['R11'])
-    page1.getCell('S11').value = parseInt(dc2['S11'])
-    page1.getCell('T11').value = parseFloat(dc2['T11'])
-    page1.getCell('W11').value = parseInt(dc2['W11'])
-    page1.getCell('X11').value = parseInt(dc2['X11'])
-    page1.getCell('Z11').value = parseInt(dc2['Z11'])
-    page1.getCell('AA11').value = parseInt(dc2['AA11'])
+    page1.getCell('S11').value = parseInt(dc2['R11'])
+    page1.getCell('T11').value = parseInt(dc2['S11'])
+    page1.getCell('U11').value = parseFloat(dc2['T11'])
+    page1.getCell('X11').value = parseInt(dc2['W11'])
+    page1.getCell('Y11').value = parseInt(dc2['X11'])
+    page1.getCell('AA11').value = parseInt(dc2['Z11'])
+    page1.getCell('AB11').value = parseInt(dc2['AA11'])
 
     /** La Florida **/
-    page1.getCell('R12').value = parseInt(dc3['R12'])
-    page1.getCell('S12').value = parseInt(dc3['S12'])
-    page1.getCell('T12').value = parseFloat(dc3['T12'])
-    page1.getCell('W12').value = parseInt(dc3['W12'])
-    page1.getCell('X12').value = parseInt(dc3['X12'])
-    page1.getCell('Z12').value = parseInt(dc3['Z12'])
-    page1.getCell('AA12').value = parseInt(dc3['AA12'])
+    page1.getCell('S12').value = parseInt(dc3['R12'])
+    page1.getCell('T12').value = parseInt(dc3['S12'])
+    page1.getCell('U12').value = parseFloat(dc3['T12'])
+    page1.getCell('X12').value = parseInt(dc3['W12'])
+    page1.getCell('Y12').value = parseInt(dc3['X12'])
+    page1.getCell('AA12').value = parseInt(dc3['Z12'])
+    page1.getCell('AB12').value = parseInt(dc3['AA12'])
 
     /** Concepcion **/
-    page1.getCell('R14').value = parseInt(dc4['R14'])
-    page1.getCell('S14').value = parseInt(dc4['S14'])
-    page1.getCell('T14').value = parseFloat(dc4['T14'])
-    page1.getCell('W14').value = parseInt(dc4['W14'])
-    if(date.getFullYear() -1 === 2023) page1.getCell('W14').note = 'FALTA AZ REFINADO'
-    page1.getCell('X14').value = parseInt(dc4['X14'])
-    page1.getCell('Z14').value = parseInt(dc4['Z14'])
-    page1.getCell('AA14').value = parseInt(dc4['AA14'])
+    page1.getCell('S14').value = parseInt(dc4['R14'])
+    page1.getCell('T14').value = parseInt(dc4['S14'])
+    page1.getCell('U14').value = parseFloat(dc4['T14'])
+    page1.getCell('X14').value = parseInt(dc4['W14'])
+    if(date.getFullYear() -1 === 2023) page1.getCell('X14').note = 'FALTA AZ REFINADO'
+    page1.getCell('Y14').value = parseInt(dc4['X14'])
+    page1.getCell('AA14').value = parseInt(dc4['Z14'])
+    page1.getCell('AB14').value = parseInt(dc4['AA14'])
 
     /** Marapa **/
-    page1.getCell('R15').value = parseInt(dc5['R15'])
-    page1.getCell('S15').value = parseInt(dc5['S15'])
-    page1.getCell('T15').value = parseFloat(dc5['T15'])
-    page1.getCell('W15').value = parseInt(dc5['W15'])
-    page1.getCell('X15').value = parseInt(dc5['X15'])
-    page1.getCell('Z15').value = parseInt(dc5['Z15'])
-    page1.getCell('AA15').value = parseInt(dc5['AA15'])
+    page1.getCell('S15').value = parseInt(dc5['R15'])
+    page1.getCell('T15').value = parseInt(dc5['S15'])
+    page1.getCell('U15').value = parseFloat(dc5['T15'])
+    page1.getCell('X15').value = parseInt(dc5['W15'])
+    page1.getCell('Y15').value = parseInt(dc5['X15'])
+    page1.getCell('AA15').value = parseInt(dc5['Z15'])
+    page1.getCell('AB15').value = parseInt(dc5['AA15'])
 
     /** Bella Vista **/
-    page1.getCell('R17').value = parseInt(dc6['R17'])
-    page1.getCell('S17').value = parseInt(dc6['S17'])
-    page1.getCell('T17').value = parseFloat(dc6['T17'])
-    page1.getCell('W17').value = parseInt(dc6['W17'])
-    page1.getCell('X17').value = parseInt(dc6['X17'])
-    page1.getCell('Z17').value = parseInt(dc6['Z17'])
-    page1.getCell('AA17').value = parseInt(dc6['AA17'])
+    page1.getCell('S17').value = parseInt(dc6['R17'])
+    page1.getCell('T17').value = parseInt(dc6['S17'])
+    page1.getCell('U17').value = parseFloat(dc6['T17'])
+    page1.getCell('X17').value = parseInt(dc6['W17'])
+    page1.getCell('Y17').value = parseInt(dc6['X17'])
+    page1.getCell('AA17').value = parseInt(dc6['Z17'])
+    page1.getCell('AB17').value = parseInt(dc6['AA17'])
 
     /** Famailla **/
-    page1.getCell('R18').value = parseInt(dc7['R18'])
-    page1.getCell('S18').value = parseInt(dc7['S18'])
-    page1.getCell('T18').value = parseFloat(dc7['T18'])
-    page1.getCell('W18').value = parseInt(dc7['W18'])
-    if(date.getFullYear() -1 === 2023) page1.getCell('W18').note = 'FALTA AZ REFINADO'
-    page1.getCell('X18').value = parseInt(dc7['X18'])
-    page1.getCell('Z18').value = parseInt(dc7['Z18'])
-    page1.getCell('AA18').value = parseInt(dc7['AA18'])
+    page1.getCell('S18').value = parseInt(dc7['R18'])
+    page1.getCell('T18').value = parseInt(dc7['S18'])
+    page1.getCell('U18').value = parseFloat(dc7['T18'])
+    page1.getCell('X18').value = parseInt(dc7['W18'])
+    if(date.getFullYear() -1 === 2023) page1.getCell('X18').note = 'FALTA AZ REFINADO'
+    page1.getCell('Y18').value = parseInt(dc7['X18'])
+    page1.getCell('AA18').value = parseInt(dc7['Z18'])
+    page1.getCell('AB18').value = parseInt(dc7['AA18'])
 
     /** La Corona **/
-    page1.getCell('R19').value = parseInt(dc8['R19'])
-    page1.getCell('S19').value = parseInt(dc8['S19'])
-    page1.getCell('T19').value = parseFloat(dc8['T19'])
-    page1.getCell('W19').value = parseInt(dc8['W19'])
-    page1.getCell('X19').value = parseInt(dc8['X19'])
-    page1.getCell('Z19').value = parseInt(dc8['Z19'])
-    page1.getCell('AA19').value = parseInt(dc8['AA19'])
+    page1.getCell('S19').value = parseInt(dc8['R19'])
+    page1.getCell('T19').value = parseInt(dc8['S19'])
+    page1.getCell('U19').value = parseFloat(dc8['T19'])
+    page1.getCell('X19').value = parseInt(dc8['W19'])
+    page1.getCell('Y19').value = parseInt(dc8['X19'])
+    page1.getCell('AA19').value = parseInt(dc8['Z19'])
+    page1.getCell('AB19').value = parseInt(dc8['AA19'])
 
     /** La Providencia **/
-    page1.getCell('R20').value = parseInt(dc9['R20'])
-    page1.getCell('S20').value = parseInt(dc9['S20'])
-    page1.getCell('T20').value = parseFloat(dc9['T20'])
-    page1.getCell('W20').value = parseInt(dc9['W20'])
-    page1.getCell('X20').value = parseInt(dc9['X20'])
-    if(date.getFullYear() -1 === 2023) page1.getCell('X20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
-    page1.getCell('Z20').value = parseInt(dc9['Z20'])
-    page1.getCell('AA20').value = parseInt(dc9['AA20'])
+    page1.getCell('S20').value = parseInt(dc9['R20'])
+    page1.getCell('T20').value = parseInt(dc9['S20'])
+    page1.getCell('U20').value = parseFloat(dc9['T20'])
+    page1.getCell('X20').value = parseInt(dc9['W20'])
+    page1.getCell('Y20').value = parseInt(dc9['X20'])
+    if(date.getFullYear() -1 === 2023) page1.getCell('Y20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
+    page1.getCell('AA20').value = parseInt(dc9['Z20'])
+    page1.getCell('AB20').value = parseInt(dc9['AA20'])
 
     /** La Trinidad **/
-    page1.getCell('R21').value = parseInt(dc10['R21'])
-    page1.getCell('S21').value = parseInt(dc10['S21'])
-    page1.getCell('T21').value = parseFloat(dc10['T21'])
-    page1.getCell('W21').value = parseInt(dc10['W21'])
-    page1.getCell('X21').value = parseInt(dc10['X21'])
-    page1.getCell('Z21').value = parseInt(dc10['Z21'])
-    page1.getCell('AA21').value = parseInt(dc10['AA21'])
+    page1.getCell('S21').value = parseInt(dc10['R21'])
+    page1.getCell('T21').value = parseInt(dc10['S21'])
+    page1.getCell('U21').value = parseFloat(dc10['T21'])
+    page1.getCell('X21').value = parseInt(dc10['W21'])
+    page1.getCell('Y21').value = parseInt(dc10['X21'])
+    page1.getCell('AA21').value = parseInt(dc10['Z21'])
+    page1.getCell('AB21').value = parseInt(dc10['AA21'])
 
     /** Leales **/
-    page1.getCell('R22').value = parseInt(dc11['R22'])
-    page1.getCell('S22').value = parseInt(dc11['S22'])
-    page1.getCell('T22').value = parseFloat(dc11['T22'])
-    page1.getCell('W22').value = parseInt(dc11['W22'])
-    if(date.getFullYear() -1 === 2023) page1.getCell('W22').note = 'FALTA AZ REFINADO'
-    page1.getCell('X22').value = parseInt(dc11['X22'])
-    page1.getCell('Z22').value = parseInt(dc11['Z22'])
-    page1.getCell('AA22').value = parseInt(dc11['AA22'])
+    page1.getCell('S22').value = parseInt(dc11['R22'])
+    page1.getCell('T22').value = parseInt(dc11['S22'])
+    page1.getCell('U22').value = parseFloat(dc11['T22'])
+    page1.getCell('X22').value = parseInt(dc11['W22'])
+    if(date.getFullYear() -1 === 2023) page1.getCell('X22').note = 'FALTA AZ REFINADO'
+    page1.getCell('Y22').value = parseInt(dc11['X22'])
+    page1.getCell('AA22').value = parseInt(dc11['Z22'])
+    page1.getCell('AB22').value = parseInt(dc11['AA22'])
 
     /** Nunorco **/
-    page1.getCell('R23').value = parseInt(dc12['R23'])
-    page1.getCell('S23').value = parseInt(dc12['S23'])
-    page1.getCell('T23').value = parseFloat(dc12['T23'])
-    page1.getCell('W23').value = parseInt(dc12['W23'])
-    page1.getCell('X23').value = parseInt(dc12['X23'])
-    page1.getCell('Z23').value = parseInt(dc12['Z23'])
-    page1.getCell('AA23').value = parseInt(dc12['AA23'])
+    page1.getCell('S23').value = parseInt(dc12['R23'])
+    page1.getCell('T23').value = parseInt(dc12['S23'])
+    page1.getCell('U23').value = parseFloat(dc12['T23'])
+    page1.getCell('X23').value = parseInt(dc12['W23'])
+    page1.getCell('Y23').value = parseInt(dc12['X23'])
+    page1.getCell('AA23').value = parseInt(dc12['Z23'])
+    page1.getCell('AB23').value = parseInt(dc12['AA23'])
 
     /** Santa Barbara **/
-    page1.getCell('R24').value = parseInt(dc13['R24'])
-    page1.getCell('S24').value = parseInt(dc13['S24'])
-    page1.getCell('T24').value = parseFloat(dc13['T24'])
-    page1.getCell('W24').value = parseInt(dc13['W24'])
-    page1.getCell('X24').value = parseInt(dc13['X24'])
-    page1.getCell('Z24').value = parseInt(dc13['Z24'])
-    page1.getCell('AA24').value = parseInt(dc13['AA24'])
+    page1.getCell('S24').value = parseInt(dc13['R24'])
+    page1.getCell('T24').value = parseInt(dc13['S24'])
+    page1.getCell('U24').value = parseFloat(dc13['T24'])
+    page1.getCell('X24').value = parseInt(dc13['W24'])
+    page1.getCell('Y24').value = parseInt(dc13['X24'])
+    page1.getCell('AA24').value = parseInt(dc13['Z24'])
+    page1.getCell('AB24').value = parseInt(dc13['AA24'])
 
     /** Sta Rosa **/
-    page1.getCell('R25').value = parseInt(dc14['R25'])
-    page1.getCell('S25').value = parseInt(dc14['S25'])
-    page1.getCell('T25').value = parseFloat(dc14['T25'])
-    page1.getCell('W25').value = parseInt(dc14['W25'])
-    page1.getCell('X25').value = parseInt(dc14['X25'])
-    page1.getCell('Z25').value = parseInt(dc14['Z25'])
-    page1.getCell('AA25').value = parseInt(dc14['AA25'])
+    page1.getCell('S25').value = parseInt(dc14['R25'])
+    page1.getCell('T25').value = parseInt(dc14['S25'])
+    page1.getCell('U25').value = parseFloat(dc14['T25'])
+    page1.getCell('X25').value = parseInt(dc14['W25'])
+    page1.getCell('Y25').value = parseInt(dc14['X25'])
+    page1.getCell('AA25').value = parseInt(dc14['Z25'])
+    page1.getCell('AB25').value = parseInt(dc14['AA25'])
 
     /*******************/
 
@@ -1849,21 +1868,21 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
 
     /**COLUMNA RTO CMB */
     for (let i = 10; i <= 25; i++) {
-      if (page1.getCell(i, 5).value === 0) {
-        page1.getCell(i, 8).value = 0
+      if (page1.getCell(i, 6).value === 0) {
         page1.getCell(i, 9).value = 0
+        page1.getCell(i, 10).value = 0
       } else {
-        page1.getCell(i, 8).value = { formula: `=G${i}/E${i}*100`, result: 7 }
-        page1.getCell(i, 9).value = { formula: `=G${i}/F${i}*100`, result: 7 }
+        page1.getCell(i, 9).value = { formula: `=H${i}/F${i}*100`, result: 7 }
+        page1.getCell(i, 10).value = { formula: `=H${i}/G${i}*100`, result: 7 }
       }
     }
     for (let i = 10; i <= 25; i++) {
-      if (page1.getCell(i, 18).value === 0) {
-        page1.getCell(i, 21).value = 0
+      if (page1.getCell(i, 19).value === 0) {
         page1.getCell(i, 22).value = 0
+        page1.getCell(i, 23).value = 0
       } else {
-        page1.getCell(i, 21).value = { formula: `=T${i}/R${i}*100`, result: 7 }
-        page1.getCell(i, 22).value = { formula: `=T${i}/S${i}*100`, result: 7 }
+        page1.getCell(i, 22).value = { formula: `=U${i}/S${i}*100`, result: 7 }
+        page1.getCell(i, 23).value = { formula: `=U${i}/T${i}*100`, result: 7 }
       }
     }
 
