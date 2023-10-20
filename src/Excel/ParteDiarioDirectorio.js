@@ -49,6 +49,7 @@ export const CreateExcelWorkbook = async (
   fechasFinIngeniosComparativa,
   setDataImport,
   setDataImportComparativa,
+  fechasFinIngenios
 ) => {
   setLoadingDownload(true)
   const parteDiarioData = dataImport ? dataImport : undefined
@@ -715,6 +716,36 @@ export const CreateExcelWorkbook = async (
     page1.getCell('C25').value = fechasInicioIngenios.Cell25
     page1.getCell('C25').font = { name: 'Calibri', bold: true, size: 11 }
 
+    /** COLUMNA FIN DE ZAFRA 2023 **/
+    page1.getCell('E10').value = fechasFinIngenios?.CellQ10
+    page1.getCell('E10').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E11').value = fechasFinIngenios?.CellQ11
+    page1.getCell('E11').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E12').value = fechasFinIngenios?.CellQ12
+    page1.getCell('E12').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E14').value = fechasFinIngenios?.CellQ14
+    page1.getCell('E14').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E15').value = fechasFinIngenios?.CellQ15
+    page1.getCell('E15').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E17').value = fechasFinIngenios?.CellQ17
+    page1.getCell('E17').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E18').value = fechasFinIngenios?.CellQ18
+    page1.getCell('E18').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E19').value = fechasFinIngenios?.CellQ19
+    page1.getCell('E19').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E20').value = fechasFinIngenios?.CellQ20
+    page1.getCell('E20').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E21').value = fechasFinIngenios?.CellQ21
+    page1.getCell('E21').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E22').value = fechasFinIngenios?.CellQ22
+    page1.getCell('E22').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E23').value = fechasFinIngenios?.CellQ23
+    page1.getCell('E23').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E24').value = fechasFinIngenios?.CellQ24
+    page1.getCell('E24').font = { name: 'Calibri', bold: true, size: 11 }
+    page1.getCell('E25').value = fechasFinIngenios?.CellQ25
+    page1.getCell('E25').font = { name: 'Calibri', bold: true, size: 11 }
+
     /** COLUMNA DIAS DE AVANCE 2023**/
     page1.getCell('D10').value = { formula: '=if(C10="","",C28-C10+1)', result: 7 }
     page1.getCell('D10').font = { name: 'Calibri', bold: true, size: 11 }
@@ -917,7 +948,7 @@ export const CreateExcelWorkbook = async (
     page1.getCell('L16').value = { formula: '=SUM(L14:L15)', result: 7 }
     page1.getCell('M16').value = { formula: '=SUM(M14:M15)', result: 7 }
     page1.getCell('N16').value = { formula: '=SUM(N14:N15)', result: 7 }
-    page1.getCell('O16').value = { formula: '=SUM(NO14:NO15)', result: 7 }
+    page1.getCell('O16').value = { formula: '=SUM(O14:O15)', result: 7 }
 
     page1.getCell('S16').value = { formula: '=SUM(S14:S15)', result: 7 }
     page1.getCell('T16').value = { formula: '=SUM(T14:T15)', result: 7 }

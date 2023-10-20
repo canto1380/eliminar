@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { dateConverted } from '../../helpers/helpers'
+import { dateConverted } from "../../helpers/helpers";
 
 let dataAguilares = {
     E10: 0,
@@ -11,7 +11,7 @@ let dataAguilares = {
     N10: 0,
     D43: 0,
     F43: 0,
-    G43: 0
+    G43: 0,
   },
   dataCruzAlta = {
     E11: 0,
@@ -23,7 +23,7 @@ let dataAguilares = {
     N11: 0,
     D47: 0,
     F47: 0,
-    G47: 0
+    G47: 0,
   },
   dataLaFlorida = {
     E12: 0,
@@ -35,7 +35,7 @@ let dataAguilares = {
     N12: 0,
     D50: 0,
     F50: 0,
-    G50: 0
+    G50: 0,
   },
   dataConcepcion = {
     E14: 0,
@@ -47,7 +47,7 @@ let dataAguilares = {
     N14: 0,
     D46: 0,
     F46: 0,
-    G46: 0
+    G46: 0,
   },
   dataMarapa = {
     E15: 0,
@@ -59,7 +59,7 @@ let dataAguilares = {
     N15: 0,
     D54: 0,
     F54: 0,
-    G54: 0
+    G54: 0,
   },
   dataBellaVista = {
     E17: 0,
@@ -71,7 +71,7 @@ let dataAguilares = {
     N17: 0,
     D45: 0,
     F45: 0,
-    G45: 0
+    G45: 0,
   },
   dataFamailla = {
     E18: 0,
@@ -83,7 +83,7 @@ let dataAguilares = {
     N18: 0,
     D48: 0,
     F48: 0,
-    G48: 0
+    G48: 0,
   },
   dataLaCorona = {
     E19: 0,
@@ -95,7 +95,7 @@ let dataAguilares = {
     N19: 0,
     D49: 0,
     F49: 0,
-    G49: 0
+    G49: 0,
   },
   dataLaProvidencia = {
     E20: 0,
@@ -107,7 +107,7 @@ let dataAguilares = {
     N20: 0,
     D51: 0,
     F51: 0,
-    G51: 0
+    G51: 0,
   },
   dataLaTrinidad = {
     E21: 0,
@@ -119,7 +119,7 @@ let dataAguilares = {
     N21: 0,
     D52: 0,
     F52: 0,
-    G52: 0
+    G52: 0,
   },
   dataLeales = {
     E22: 0,
@@ -131,7 +131,7 @@ let dataAguilares = {
     N22: 0,
     D53: 0,
     F53: 0,
-    G53: 0
+    G53: 0,
   },
   dataÑuñorco = {
     E23: 0,
@@ -143,7 +143,7 @@ let dataAguilares = {
     N23: 0,
     D55: 0,
     F55: 0,
-    G55: 0
+    G55: 0,
   },
   dataStaBarbara = {
     E24: 0,
@@ -155,7 +155,7 @@ let dataAguilares = {
     N24: 0,
     D56: 0,
     F56: 0,
-    G56: 0
+    G56: 0,
   },
   dataStaRosa = {
     E25: 0,
@@ -167,7 +167,7 @@ let dataAguilares = {
     N25: 0,
     D57: 0,
     F57: 0,
-    G57: 0
+    G57: 0,
   },
   dataInicioIngenios = {
     Cell10: 0,
@@ -184,7 +184,23 @@ let dataAguilares = {
     Cell23: 0,
     Cell24: 0,
     Cell25: 0,
-  }
+  },
+  dataFinIngenios = {
+    CellQ10: 0,
+    CellQ11: 0,
+    CellQ12: 0,
+    CellQ14: 0,
+    CellQ15: 0,
+    CellQ17: 0,
+    CellQ18: 0,
+    CellQ19: 0,
+    CellQ20: 0,
+    CellQ21: 0,
+    CellQ22: 0,
+    CellQ23: 0,
+    CellQ24: 0,
+    CellQ25: 0,
+  };
 
 export const dataPorTipo = (
   dataImport,
@@ -204,105 +220,108 @@ export const dataPorTipo = (
   setD13,
   setD14,
   setFechasInicioIngenios,
-  setDataDiasZafra
+  setDataDiasZafra,
+  setFechasFinIngenios
 ) => {
+  const FechaHoy = new Date();
+
   const aguil = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Aguilares' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Aguilares" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const cruz = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Cruz Alta' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Cruz Alta" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const florida = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'La Florida' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "La Florida" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const concep = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Concepción' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Concepción" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const marapa = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Marapa' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Marapa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const bellaVista = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Bella Vista' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Bella Vista" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const famail = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Famaillá' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Famaillá" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const corona = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'La Corona' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "La Corona" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const providencia = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'La Providencia' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "La Providencia" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const trinidad = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'La Trinidad' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "La Trinidad" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const leales = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Leales' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Leales" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0 &&
-      parseInt(d.FechaParte.split('/')[1]) >= 5
-  )
+      parseInt(d.FechaParte.split("/")[1]) >= 5
+  );
 
   const nunorco = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Ñuñorco' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Ñuñorco" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
 
   const stabarbara = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Santa Barbara' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Santa Barbara" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
   const starosa = dataImport?.find(
     (d) =>
-      d.IngenioNombre === 'Santa Rosa' &&
-      parseInt(d.FechaParte.split('/')[2]) === dataEnd.getFullYear() &&
+      d.IngenioNombre === "Santa Rosa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
       d.MoliendaCanaBruta !== 0
-  )
+  );
   dataInicioIngenios = {
     Cell10: aguil?.FechaParte,
     Cell11: cruz?.FechaParte,
@@ -318,63 +337,457 @@ export const dataPorTipo = (
     Cell23: nunorco?.FechaParte,
     Cell24: stabarbara?.FechaParte,
     Cell25: starosa?.FechaParte,
+  };
+
+  /** FECHAS FIN DE ZAFRA **/
+
+  let aguilFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Aguilares" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (aguilFinal && aguilFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const aguilConverted = aguilFinal && aguilFinal[aguilFinal.length - 1];
+      aguilFinal =
+        aguilConverted.MoliendaCanaBruta || aguilConverted.CantidadTara
+          ? ""
+          : aguilFinal[aguilFinal.length - 1].FechaParte;
+    } else {
+      const aguilConverted =
+        aguilFinal && dateConverted(aguilFinal[aguilFinal.length - 1].FechaParte);
+      const aguilDiff = (aguilConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      aguilFinal =
+        aguilDiff < 0 ? aguilFinal[aguilFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    aguilFinal = null;
   }
-  let mayor = 0
+
+  let cruzFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Cruz Alta" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (cruzFinal && cruzFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const cruzConverted = cruzFinal && cruzFinal[cruzFinal.length - 1];
+      cruzFinal =
+        cruzConverted.MoliendaCanaBruta || cruzConverted.CantidadTara
+          ? ""
+          : cruzFinal[cruzFinal.length - 1].FechaParte;
+    } else {
+      const cruzConverted =
+        cruzFinal && dateConverted(cruzFinal[cruzFinal.length - 1].FechaParte);
+      const cruzDiff = (cruzConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      cruzFinal = cruzDiff < 0 ? cruzFinal[cruzFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    cruzFinal = null;
+  }
+
+  let floridaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Florida" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (floridaFinal && floridaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const floridaConverted = floridaFinal && floridaFinal[floridaFinal.length - 1];
+      floridaFinal =
+        floridaConverted.MoliendaCanaBruta || floridaConverted.CantidadTara
+          ? ""
+          : floridaFinal[floridaFinal.length - 1].FechaParte;
+    } else {
+      const floridaConverted =
+        floridaFinal &&
+        dateConverted(floridaFinal[floridaFinal.length - 1].FechaParte);
+      const floridaDiff = (floridaConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      floridaFinal =
+        floridaDiff < 0 ? floridaFinal[floridaFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    floridaFinal = null;
+  }
+
+  let concepFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Concepción" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (concepFinal && concepFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const concepConverted = concepFinal && concepFinal[concepFinal.length - 1];
+      concepFinal =
+        concepConverted.MoliendaCanaBruta || concepConverted.CantidadTara
+          ? ""
+          : concepFinal[concepFinal.length - 1].FechaParte;
+    } else {
+      const concepConverted =
+        concepFinal &&
+        dateConverted(concepFinal[concepFinal.length - 1].FechaParte);
+      const concepDiff = (concepConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      concepFinal =
+        concepDiff < 0 ? concepFinal[concepFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    concepFinal = 0;
+  }
+
+  let marapaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Marapa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (marapaFinal && marapaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const marapaConvert = marapaFinal && marapaFinal[marapaFinal.length - 1];
+      marapaFinal =
+        marapaConvert.MoliendaCanaBruta || marapaConvert.CantidadTara
+          ? ""
+          : marapaFinal[marapaFinal.length - 1].FechaParte;
+    } else {
+      const marapaConvert =
+        marapaFinal &&
+        dateConverted(marapaFinal[marapaFinal.length - 1].FechaParte);
+      const marapaDiff = (marapaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      marapaFinal =
+        marapaDiff < 0 ? marapaFinal[marapaFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    marapaFinal = null;
+  }
+
+  let bellaVistaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Bella Vista" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (bellaVistaFinal && bellaVistaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const bellaVistaConvert = bellaVistaFinal && bellaVistaFinal[bellaVistaFinal.length - 1];
+      bellaVistaFinal =
+        bellaVistaConvert.MoliendaCanaBruta || bellaVistaConvert.CantidadTara
+          ? ""
+          : bellaVistaFinal[bellaVistaFinal.length - 1].FechaParte;
+    } else {
+      const bellaVistaConvert =
+        bellaVistaFinal &&
+        dateConverted(bellaVistaFinal[bellaVistaFinal.length - 1].FechaParte);
+      const vellaVistaDiff =
+        (bellaVistaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      bellaVistaFinal =
+        vellaVistaDiff < 0
+          ? bellaVistaFinal[bellaVistaFinal.length - 1].FechaParte
+          : "";
+    }
+  } else {
+    bellaVistaFinal = null;
+  }
+
+  let famailFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Famaillá" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (famailFinal && famailFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const famailConvert = famailFinal && famailFinal[famailFinal.length - 1];
+      famailFinal =
+        famailConvert.MoliendaCanaBruta || famailConvert.CantidadTara
+          ? ""
+          : famailFinal[famailFinal.length - 1].FechaParte;
+    } else {
+      const famailConvert =
+        famailFinal &&
+        dateConverted(famailFinal[famailFinal.length - 1].FechaParte);
+      const famailDiff = (famailConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      famailFinal =
+        famailDiff < 0 ? famailFinal[famailFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    famailFinal = null;
+  }
+
+  let coronaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Corona" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (coronaFinal && coronaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const coronaConvert = coronaFinal && coronaFinal[coronaFinal.length - 1];
+      coronaFinal =
+        coronaConvert.MoliendaCanaBruta || coronaConvert.CantidadTara
+          ? ""
+          : coronaFinal[coronaFinal.length - 1].FechaParte;
+    } else {
+      const coronaConvert =
+        coronaFinal &&
+        dateConverted(coronaFinal[coronaFinal.length - 1].FechaParte);
+      const coronaDiff = (coronaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      coronaFinal =
+        coronaDiff < 0 ? coronaFinal[coronaFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    coronaFinal = null;
+  }
+
+  let providenciaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Providencia" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (providenciaFinal && providenciaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const providenciaConvert = providenciaFinal && providenciaFinal[providenciaFinal.length - 1];
+      providenciaFinal =
+        providenciaConvert.MoliendaCanaBruta || providenciaConvert.CantidadTara
+          ? ""
+          : providenciaFinal[providenciaFinal.length - 1].FechaParte;
+    } else {
+      const providenciaConvert =
+        providenciaFinal &&
+        dateConverted(providenciaFinal[providenciaFinal.length - 1].FechaParte);
+      const providenciaDiff =
+        (providenciaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      providenciaFinal =
+        providenciaDiff < 0
+          ? providenciaFinal[providenciaFinal.length - 1].FechaParte
+          : "";
+    }
+  } else {
+    providenciaFinal = null;
+  }
+
+  let trinidadFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Trinidad" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (trinidadFinal && trinidadFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const trinidadConvert = trinidadFinal && trinidadFinal[trinidadFinal.length - 1];
+      trinidadFinal =
+        trinidadConvert.MoliendaCanaBruta || trinidadConvert.CantidadTara
+          ? ""
+          : trinidadFinal[trinidadFinal.length - 1].FechaParte;
+    } else {
+      const trinidadConvert =
+        trinidadFinal &&
+        dateConverted(trinidadFinal[trinidadFinal.length - 1].FechaParte);
+      const trinidadDiff = (trinidadConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      trinidadFinal =
+        trinidadDiff < 0
+          ? trinidadFinal[trinidadFinal.length - 1].FechaParte
+          : "";
+    }
+  } else {
+    trinidadFinal = null;
+  }
+
+  let lealesFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Leales" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (lealesFinal && lealesFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const lealesConvert = lealesFinal && lealesFinal[lealesFinal.length - 1];
+      lealesFinal =
+        lealesConvert.MoliendaCanaBruta || lealesConvert.CantidadTara
+          ? ""
+          : lealesFinal[lealesFinal.length - 1].FechaParte;
+    } else {
+      const lealesConvert =
+        lealesFinal &&
+        dateConverted(lealesFinal[lealesFinal.length - 1].FechaParte);
+      const lealesDiff = (lealesConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      lealesFinal =
+        lealesDiff < 0 ? lealesFinal[lealesFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    lealesFinal = null;
+  }
+
+  let nunorcoFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Ñuñorco" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (nunorcoFinal && nunorcoFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const nunorcoConvert =
+        nunorcoFinal && nunorcoFinal[nunorcoFinal.length - 1];
+      nunorcoFinal =
+        nunorcoConvert.MoliendaCanaBruta || nunorcoConvert.CantidadTara
+          ? ""
+          : nunorcoFinal[nunorcoFinal.length - 1].FechaParte;
+    } else {
+      const nunorcoConvert =
+        nunorcoFinal &&
+        dateConverted(nunorcoFinal[nunorcoFinal.length - 1].FechaParte);
+      const nunorcoDiff = (nunorcoConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      nunorcoFinal =
+        nunorcoDiff < 0 ? nunorcoFinal[nunorcoFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    nunorcoFinal = null;
+  }
+
+  let stabarbaraFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Santa Barbara" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (stabarbaraFinal && stabarbaraFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const stabarbaraConvert = stabarbaraFinal && stabarbaraFinal[stabarbaraFinal.length - 1];
+      stabarbaraFinal =
+        stabarbaraConvert.MoliendaCanaBruta || stabarbaraConvert.CantidadTara
+          ? ""
+          : stabarbaraFinal[stabarbaraFinal.length - 1].FechaParte;
+    } else {
+      const stabarbaraConvert =
+        stabarbaraFinal &&
+        dateConverted(stabarbaraFinal[stabarbaraFinal.length - 1].FechaParte);
+      const stabarbaraDiff =
+        (stabarbaraConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      stabarbaraFinal =
+        stabarbaraDiff < 0
+          ? stabarbaraFinal[stabarbaraFinal.length - 1].FechaParte
+          : "";
+    }
+  } else {
+    stabarbaraFinal = null;
+  }
+
+  let starosaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Santa Rosa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (starosaFinal && starosaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      const starosaConvert = starosaFinal && starosaFinal[starosaFinal.length - 1];
+      starosaFinal =
+        starosaConvert.MoliendaCanaBruta || starosaConvert.CantidadTara
+          ? ""
+          : starosaFinal[starosaFinal.length - 1].FechaParte;
+    } else {
+      const starosaConvert =
+        starosaFinal &&
+        dateConverted(starosaFinal[starosaFinal.length - 1].FechaParte);
+      const starosaDiff = (starosaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      starosaFinal =
+        starosaDiff < 0 ? starosaFinal[starosaFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    starosaFinal = null;
+  }
+
+  dataFinIngenios = {
+    CellQ10: aguilFinal,
+    CellQ11: cruzFinal,
+    CellQ12: floridaFinal,
+    CellQ14: concepFinal,
+    CellQ15: marapaFinal,
+    CellQ17: bellaVistaFinal,
+    CellQ18: famailFinal,
+    CellQ19: coronaFinal,
+    CellQ20: providenciaFinal,
+    CellQ21: trinidadFinal,
+    CellQ22: lealesFinal,
+    CellQ23: nunorcoFinal,
+    CellQ24: stabarbaraFinal,
+    CellQ25: starosaFinal,
+  };
+  /**** ****/
+
+  let mayor = 0;
   if (dataEnd) {
     for (let clave in dataInicioIngenios) {
-      const dateConvert = dateConverted(dataInicioIngenios[clave])
-      const diffDate = dataEnd - dateConvert
-      const daysDate = diffDate / (1000 * 60 * 60 * 24)
-      if(daysDate >= mayor) {
-        mayor = Math.ceil(daysDate)
+      const dateConvert = dateConverted(dataInicioIngenios[clave]);
+      const diffDate = dataEnd - dateConvert;
+      const daysDate = diffDate / (1000 * 60 * 60 * 24);
+      if (daysDate >= mayor) {
+        mayor = Math.ceil(daysDate);
       }
     }
   }
-  setDataDiasZafra(mayor)
-  setFechasInicioIngenios(dataInicioIngenios)
-  
-  for (let i = 1; i <= 14; i++) {
-    let varName1 = 'a' + i
-    let varName2 = 'b' + i
-    let varName3 = 'c' + i
-    let varName4 = 'z' + i
-    let varName5 = 'e' + i
-    let varName6 = 'f' + i
-    let varName7 = 'g' + i
-    let varName8 = 'h' + i
-    let varName9 = 'i' + i
-    let varName10 = 'j' + i
+  setDataDiasZafra(mayor);
+  setFechasInicioIngenios(dataInicioIngenios);
+  setFechasFinIngenios(dataFinIngenios);
 
-    window[varName1] = 0
-    window[varName2] = 0
-    window[varName3] = 0
-    window[varName4] = 0
-    window[varName5] = 0
-    window[varName6] = 0
-    window[varName7] = 0
-    window[varName8] = 0
-    window[varName9] = 0
-    window[varName10] = 0
+  for (let i = 1; i <= 14; i++) {
+    let varName1 = "a" + i;
+    let varName2 = "b" + i;
+    let varName3 = "c" + i;
+    let varName4 = "z" + i;
+    let varName5 = "e" + i;
+    let varName6 = "f" + i;
+    let varName7 = "g" + i;
+    let varName8 = "h" + i;
+    let varName9 = "i" + i;
+    let varName10 = "j" + i;
+
+    window[varName1] = 0;
+    window[varName2] = 0;
+    window[varName3] = 0;
+    window[varName4] = 0;
+    window[varName5] = 0;
+    window[varName6] = 0;
+    window[varName7] = 0;
+    window[varName8] = 0;
+    window[varName9] = 0;
+    window[varName10] = 0;
   }
   dataImport?.forEach((data) => {
-    const newDate = dateConverted(data?.FechaParte)
-    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date()
+    const newDate = dateConverted(data?.FechaParte);
+    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     if (
-      data.IngenioNombre === 'Aguilares' &&
+      data.IngenioNombre === "Aguilares" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      
-      a1 = a1 + data.MoliendaCanaBruta || 0
-      b1 = b1 + data.MoliendaCanaNeta || 0
-      c1 = c1 + data.AzucarEquivalente || 0
-      z1 = z1 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e1 = e1 + data.AzucarCrudoProducido || 0
-      f1 = f1 + data.MelazaProducida || 0
-      g1 = g1 + data.AlcoholProducido || 0
-      h1 = h1 + data.AzucarRefinado || 0
-      i1 = i1 + data.AzucarOrganico || 0
-      j1 = j1 + data.OtrosAzucar  || 0
+      a1 = a1 + data.MoliendaCanaBruta || 0;
+      b1 = b1 + data.MoliendaCanaNeta || 0;
+      c1 = c1 + data.AzucarEquivalente || 0;
+      z1 = z1 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e1 = e1 + data.AzucarCrudoProducido || 0;
+      f1 = f1 + data.MelazaProducida || 0;
+      g1 = g1 + data.AlcoholProducido || 0;
+      h1 = h1 + data.AzucarRefinado || 0;
+      i1 = i1 + data.AzucarOrganico || 0;
+      j1 = j1 + data.OtrosAzucar || 0;
 
       dataAguilares = {
         E10: a1,
@@ -386,25 +799,25 @@ export const dataPorTipo = (
         N10: g1,
         D43: h1,
         F43: i1,
-        G43: j1
-      }
+        G43: j1,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Cruz Alta' &&
+      data.IngenioNombre === "Cruz Alta" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a2 = a2 + data.MoliendaCanaBruta
-      b2 = b2 + data.MoliendaCanaNeta
-      c2 = c2 + data.AzucarEquivalente
-      z2 = z2 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e2 = e2 + data.AzucarCrudoProducido
-      f2 = f2 + data.MelazaProducida
-      g2 = g2 + data.AlcoholProducido
-      h2 = h2 + data.AzucarRefinado || 0
-      i2 = i2 + data.AzucarOrganico || 0
-      j2 = j2 + data.OtrosAzucar  || 0
+      a2 = a2 + data.MoliendaCanaBruta;
+      b2 = b2 + data.MoliendaCanaNeta;
+      c2 = c2 + data.AzucarEquivalente;
+      z2 = z2 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e2 = e2 + data.AzucarCrudoProducido;
+      f2 = f2 + data.MelazaProducida;
+      g2 = g2 + data.AlcoholProducido;
+      h2 = h2 + data.AzucarRefinado || 0;
+      i2 = i2 + data.AzucarOrganico || 0;
+      j2 = j2 + data.OtrosAzucar || 0;
       dataCruzAlta = {
         E11: a2,
         F11: b2,
@@ -415,25 +828,25 @@ export const dataPorTipo = (
         N11: g2,
         D47: h2,
         F47: i2,
-        G47: j2
-      }
+        G47: j2,
+      };
     }
 
     if (
-      data.IngenioNombre === 'La Florida' &&
+      data.IngenioNombre === "La Florida" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a3 = a3 + data.MoliendaCanaBruta
-      b3 = b3 + data.MoliendaCanaNeta
-      c3 = c3 + data.AzucarEquivalente
-      z3 = z3 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e3 = e3 + data.AzucarCrudoProducido
-      f3 = f3 + data.MelazaProducida
-      g3 = g3 + data.AlcoholProducido
-      h3 = h3 + data.AzucarRefinado || 0
-      i3 = i3 + data.AzucarOrganico || 0
-      j3 = j3 + data.OtrosAzucar  || 0
+      a3 = a3 + data.MoliendaCanaBruta;
+      b3 = b3 + data.MoliendaCanaNeta;
+      c3 = c3 + data.AzucarEquivalente;
+      z3 = z3 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e3 = e3 + data.AzucarCrudoProducido;
+      f3 = f3 + data.MelazaProducida;
+      g3 = g3 + data.AlcoholProducido;
+      h3 = h3 + data.AzucarRefinado || 0;
+      i3 = i3 + data.AzucarOrganico || 0;
+      j3 = j3 + data.OtrosAzucar || 0;
       dataLaFlorida = {
         E12: a3,
         F12: b3,
@@ -444,25 +857,25 @@ export const dataPorTipo = (
         N12: g3,
         D50: h3,
         F50: i3,
-        G50: j3
-      }
+        G50: j3,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Concepción' &&
+      data.IngenioNombre === "Concepción" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a4 = a4 + data.MoliendaCanaBruta
-      b4 = b4 + data.MoliendaCanaNeta
-      c4 = c4 + data.AzucarEquivalente
-      z4 = z4 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e4 = e4 + data.AzucarCrudoProducido
-      f4 = f4 + data.MelazaProducida
-      g4 = g4 + data.AlcoholProducido
-      h4 = h4 + data.AzucarRefinado || 0
-      i4 = i4 + data.AzucarOrganico || 0
-      j4 = j4 + data.OtrosAzucar  || 0
+      a4 = a4 + data.MoliendaCanaBruta;
+      b4 = b4 + data.MoliendaCanaNeta;
+      c4 = c4 + data.AzucarEquivalente;
+      z4 = z4 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e4 = e4 + data.AzucarCrudoProducido;
+      f4 = f4 + data.MelazaProducida;
+      g4 = g4 + data.AlcoholProducido;
+      h4 = h4 + data.AzucarRefinado || 0;
+      i4 = i4 + data.AzucarOrganico || 0;
+      j4 = j4 + data.OtrosAzucar || 0;
       dataConcepcion = {
         E14: a4,
         F14: b4,
@@ -473,25 +886,25 @@ export const dataPorTipo = (
         N14: g4,
         D46: h4,
         F46: i4,
-        G46: j4
-      }
+        G46: j4,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Marapa' &&
+      data.IngenioNombre === "Marapa" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a5 = a5 + data.MoliendaCanaBruta
-      b5 = b5 + data.MoliendaCanaNeta
-      c5 = c5 + data.AzucarEquivalente
-      z5 = z5 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e5 = e5 + data.AzucarCrudoProducido
-      f5 = f5 + data.MelazaProducida
-      g5 = g5 + data.AlcoholProducido
-      h5 = h5 + data.AzucarRefinado || 0
-      i5 = i5 + data.AzucarOrganico || 0
-      j5 = j5 + data.OtrosAzucar  || 0
+      a5 = a5 + data.MoliendaCanaBruta;
+      b5 = b5 + data.MoliendaCanaNeta;
+      c5 = c5 + data.AzucarEquivalente;
+      z5 = z5 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e5 = e5 + data.AzucarCrudoProducido;
+      f5 = f5 + data.MelazaProducida;
+      g5 = g5 + data.AlcoholProducido;
+      h5 = h5 + data.AzucarRefinado || 0;
+      i5 = i5 + data.AzucarOrganico || 0;
+      j5 = j5 + data.OtrosAzucar || 0;
       dataMarapa = {
         E15: a5,
         F15: b5,
@@ -502,25 +915,25 @@ export const dataPorTipo = (
         N15: g5,
         D54: h5,
         F54: i5,
-        G54: j5
-      }
+        G54: j5,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Bella Vista' &&
+      data.IngenioNombre === "Bella Vista" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a6 = a6 + data.MoliendaCanaBruta
-      b6 = b6 + data.MoliendaCanaNeta
-      c6 = c6 + data.AzucarEquivalente
-      z6 = z6 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e6 = e6 + data.AzucarCrudoProducido
-      f6 = f6 + data.MelazaProducida
-      g6 = g6 + data.AlcoholProducido
-      h6 = h6 + data.AzucarRefinado || 0
-      i6 = i6 + data.AzucarOrganico || 0
-      j6 = j6 + data.OtrosAzucar  || 0
+      a6 = a6 + data.MoliendaCanaBruta;
+      b6 = b6 + data.MoliendaCanaNeta;
+      c6 = c6 + data.AzucarEquivalente;
+      z6 = z6 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e6 = e6 + data.AzucarCrudoProducido;
+      f6 = f6 + data.MelazaProducida;
+      g6 = g6 + data.AlcoholProducido;
+      h6 = h6 + data.AzucarRefinado || 0;
+      i6 = i6 + data.AzucarOrganico || 0;
+      j6 = j6 + data.OtrosAzucar || 0;
       dataBellaVista = {
         E17: a6,
         F17: b6,
@@ -531,25 +944,25 @@ export const dataPorTipo = (
         N17: g6,
         D45: h6,
         F45: i6,
-        G45: j6
-      }
+        G45: j6,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Famaillá' &&
+      data.IngenioNombre === "Famaillá" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a7 = a7 + data.MoliendaCanaBruta
-      b7 = b7 + data.MoliendaCanaNeta
-      c7 = c7 + data.AzucarEquivalente
-      z7 = z7 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e7 = e7 + data.AzucarCrudoProducido
-      f7 = f7 + data.MelazaProducida
-      g7 = g7 + data.AlcoholProducido
-      h7 = h7 + data.AzucarRefinado || 0
-      i7 = i7 + data.AzucarOrganico || 0
-      j7 = j7 + data.OtrosAzucar  || 0
+      a7 = a7 + data.MoliendaCanaBruta;
+      b7 = b7 + data.MoliendaCanaNeta;
+      c7 = c7 + data.AzucarEquivalente;
+      z7 = z7 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e7 = e7 + data.AzucarCrudoProducido;
+      f7 = f7 + data.MelazaProducida;
+      g7 = g7 + data.AlcoholProducido;
+      h7 = h7 + data.AzucarRefinado || 0;
+      i7 = i7 + data.AzucarOrganico || 0;
+      j7 = j7 + data.OtrosAzucar || 0;
       dataFamailla = {
         E18: a7,
         F18: b7,
@@ -560,25 +973,25 @@ export const dataPorTipo = (
         N18: g7,
         D48: h7,
         F48: i7,
-        G48: j7
-      }
+        G48: j7,
+      };
     }
 
     if (
-      data.IngenioNombre === 'La Corona' &&
+      data.IngenioNombre === "La Corona" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a8 = a8 + data.MoliendaCanaBruta
-      b8 = b8 + data.MoliendaCanaNeta
-      c8 = c8 + data.AzucarEquivalente
-      z8 = z8 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e8 = e8 + data.AzucarCrudoProducido
-      f8 = f8 + data.MelazaProducida
-      g8 = g8 + data.AlcoholProducido
-      h8 = h8 + data.AzucarRefinado || 0
-      i8 = i8 + data.AzucarOrganico || 0
-      j8 = j8 + data.OtrosAzucar  || 0
+      a8 = a8 + data.MoliendaCanaBruta;
+      b8 = b8 + data.MoliendaCanaNeta;
+      c8 = c8 + data.AzucarEquivalente;
+      z8 = z8 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e8 = e8 + data.AzucarCrudoProducido;
+      f8 = f8 + data.MelazaProducida;
+      g8 = g8 + data.AlcoholProducido;
+      h8 = h8 + data.AzucarRefinado || 0;
+      i8 = i8 + data.AzucarOrganico || 0;
+      j8 = j8 + data.OtrosAzucar || 0;
       dataLaCorona = {
         E19: a8,
         F19: b8,
@@ -589,25 +1002,25 @@ export const dataPorTipo = (
         N19: g8,
         D49: h8,
         F49: i8,
-        G49: j8
-      }
+        G49: j8,
+      };
     }
 
     if (
-      data.IngenioNombre === 'La Providencia' &&
+      data.IngenioNombre === "La Providencia" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a9 = a9 + data.MoliendaCanaBruta
-      b9 = b9 + data.MoliendaCanaNeta
-      c9 = c9 + data.AzucarEquivalente
-      z9 = z9 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e9 = e9 + data.AzucarCrudoProducido // data?.AzucarOrganico + data?.otrosAzucares
-      f9 = f9 + data.MelazaProducida
-      g9 = g9 + data.AlcoholProducido
-      h9 = h9 + data.AzucarRefinado || 0
-      i9 = i9 + data.AzucarOrganico || 0
-      j9 = j9 + data.OtrosAzucar  || 0
+      a9 = a9 + data.MoliendaCanaBruta;
+      b9 = b9 + data.MoliendaCanaNeta;
+      c9 = c9 + data.AzucarEquivalente;
+      z9 = z9 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e9 = e9 + data.AzucarCrudoProducido; // data?.AzucarOrganico + data?.otrosAzucares
+      f9 = f9 + data.MelazaProducida;
+      g9 = g9 + data.AlcoholProducido;
+      h9 = h9 + data.AzucarRefinado || 0;
+      i9 = i9 + data.AzucarOrganico || 0;
+      j9 = j9 + data.OtrosAzucar || 0;
       dataLaProvidencia = {
         E20: a9,
         F20: b9,
@@ -618,25 +1031,25 @@ export const dataPorTipo = (
         N20: g9,
         D51: h9,
         F51: i9,
-        G51: j9
-      }
+        G51: j9,
+      };
     }
 
     if (
-      data.IngenioNombre === 'La Trinidad' &&
+      data.IngenioNombre === "La Trinidad" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a10 = a10 + data.MoliendaCanaBruta
-      b10 = b10 + data.MoliendaCanaNeta
-      c10 = c10 + data.AzucarEquivalente
-      z10 = z10 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e10 = e10 + data.AzucarCrudoProducido
-      f10 = f10 + data.MelazaProducida
-      g10 = g10 + data.AlcoholProducido
-      h10 = h10 + data.AzucarRefinado || 0
-      i10 = i10 + data.AzucarOrganico || 0
-      j10 = j10 + data.OtrosAzucar  || 0
+      a10 = a10 + data.MoliendaCanaBruta;
+      b10 = b10 + data.MoliendaCanaNeta;
+      c10 = c10 + data.AzucarEquivalente;
+      z10 = z10 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e10 = e10 + data.AzucarCrudoProducido;
+      f10 = f10 + data.MelazaProducida;
+      g10 = g10 + data.AlcoholProducido;
+      h10 = h10 + data.AzucarRefinado || 0;
+      i10 = i10 + data.AzucarOrganico || 0;
+      j10 = j10 + data.OtrosAzucar || 0;
       dataLaTrinidad = {
         E21: a10,
         F21: b10,
@@ -647,25 +1060,25 @@ export const dataPorTipo = (
         N21: g10,
         D52: h10,
         F52: i10,
-        G52: j10
-      }
+        G52: j10,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Leales' &&
+      data.IngenioNombre === "Leales" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a11 = a11 + data.MoliendaCanaBruta
-      b11 = b11 + data.MoliendaCanaNeta
-      c11 = c11 + data.AzucarEquivalente
-      z11 = z11 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e11 = e11 + data.AzucarCrudoProducido
-      f11 = f11 + data.MelazaProducida
-      g11 = g11 + data.AlcoholProducido
-      h11 = h11 + data.AzucarRefinado || 0
-      i11 = i11 + data.AzucarOrganico || 0
-      j11 = j11 + data.OtrosAzucar  || 0
+      a11 = a11 + data.MoliendaCanaBruta;
+      b11 = b11 + data.MoliendaCanaNeta;
+      c11 = c11 + data.AzucarEquivalente;
+      z11 = z11 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e11 = e11 + data.AzucarCrudoProducido;
+      f11 = f11 + data.MelazaProducida;
+      g11 = g11 + data.AlcoholProducido;
+      h11 = h11 + data.AzucarRefinado || 0;
+      i11 = i11 + data.AzucarOrganico || 0;
+      j11 = j11 + data.OtrosAzucar || 0;
       dataLeales = {
         E22: a11,
         F22: b11,
@@ -676,25 +1089,25 @@ export const dataPorTipo = (
         N22: g11,
         D53: h11,
         F53: i11,
-        G53: j11
-      }
+        G53: j11,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Ñuñorco' &&
+      data.IngenioNombre === "Ñuñorco" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a12 = a12 + data?.MoliendaCanaBruta
-      b12 = b12 + data?.MoliendaCanaNeta
-      c12 = c12 + data?.AzucarEquivalente
-      z12 = z12 + data?.AzucarBlancoProducido // + data?.AzucarRefinada
-      e12 = e12 + data?.AzucarCrudoProducido
-      f12 = f12 + data?.MelazaProducida
-      g12 = g12 + data?.AlcoholProducido
-      h12 = h12 + data.AzucarRefinado || 0
-      i12 = i12 + data.AzucarOrganico || 0
-      j12 = j12 + data.OtrosAzucar  || 0
+      a12 = a12 + data?.MoliendaCanaBruta;
+      b12 = b12 + data?.MoliendaCanaNeta;
+      c12 = c12 + data?.AzucarEquivalente;
+      z12 = z12 + data?.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e12 = e12 + data?.AzucarCrudoProducido;
+      f12 = f12 + data?.MelazaProducida;
+      g12 = g12 + data?.AlcoholProducido;
+      h12 = h12 + data.AzucarRefinado || 0;
+      i12 = i12 + data.AzucarOrganico || 0;
+      j12 = j12 + data.OtrosAzucar || 0;
       dataÑuñorco = {
         E23: a12,
         F23: b12,
@@ -705,25 +1118,25 @@ export const dataPorTipo = (
         N23: g12,
         D55: h12,
         F55: i12,
-        G55: j12
-      }
+        G55: j12,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Santa Barbara' &&
+      data.IngenioNombre === "Santa Barbara" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a13 = a13 + data.MoliendaCanaBruta
-      b13 = b13 + data.MoliendaCanaNeta
-      c13 = c13 + data.AzucarEquivalente
-      z13 = z13 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e13 = e13 + data.AzucarCrudoProducido
-      f13 = f13 + data.MelazaProducida
-      g13 = g13 + data.AlcoholProducido
-      h13 = h13 + data.AzucarRefinado || 0
-      i13 = i13 + data.AzucarOrganico || 0
-      j13 = j13 + data.OtrosAzucar  || 0
+      a13 = a13 + data.MoliendaCanaBruta;
+      b13 = b13 + data.MoliendaCanaNeta;
+      c13 = c13 + data.AzucarEquivalente;
+      z13 = z13 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e13 = e13 + data.AzucarCrudoProducido;
+      f13 = f13 + data.MelazaProducida;
+      g13 = g13 + data.AlcoholProducido;
+      h13 = h13 + data.AzucarRefinado || 0;
+      i13 = i13 + data.AzucarOrganico || 0;
+      j13 = j13 + data.OtrosAzucar || 0;
       dataStaBarbara = {
         E24: a13,
         F24: b13,
@@ -734,25 +1147,25 @@ export const dataPorTipo = (
         N24: g13,
         D56: h13,
         F56: i13,
-        G56: j13
-      }
+        G56: j13,
+      };
     }
 
     if (
-      data.IngenioNombre === 'Santa Rosa' &&
+      data.IngenioNombre === "Santa Rosa" &&
       newDate <= fechaParametro &&
       newDate.getFullYear() === fechaParametro.getFullYear()
     ) {
-      a14 = a14 + data.MoliendaCanaBruta
-      b14 = b14 + data.MoliendaCanaNeta
-      c14 = c14 + data.AzucarEquivalente
-      z14 = z14 + data.AzucarBlancoProducido // + data?.AzucarRefinada
-      e14 = e14 + data.AzucarCrudoProducido
-      f14 = f14 + data.MelazaProducida
-      g14 = g14 + data.AlcoholProducido
-      h14 = h14 + data.AzucarRefinado || 0
-      i14 = i14 + data.AzucarOrganico || 0
-      j14 = j14 + data.OtrosAzucar  || 0
+      a14 = a14 + data.MoliendaCanaBruta;
+      b14 = b14 + data.MoliendaCanaNeta;
+      c14 = c14 + data.AzucarEquivalente;
+      z14 = z14 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e14 = e14 + data.AzucarCrudoProducido;
+      f14 = f14 + data.MelazaProducida;
+      g14 = g14 + data.AlcoholProducido;
+      h14 = h14 + data.AzucarRefinado || 0;
+      i14 = i14 + data.AzucarOrganico || 0;
+      j14 = j14 + data.OtrosAzucar || 0;
       dataStaRosa = {
         E25: a14,
         F25: b14,
@@ -763,22 +1176,22 @@ export const dataPorTipo = (
         N25: g14,
         D57: h14,
         F57: i14,
-        G57: j14
-      }
+        G57: j14,
+      };
     }
-  })
-  setD1(dataAguilares)
-  setD2(dataCruzAlta)
-  setD3(dataLaFlorida)
-  setD4(dataConcepcion)
-  setD5(dataMarapa)
-  setD6(dataBellaVista)
-  setD7(dataFamailla)
-  setD8(dataLaCorona)
-  setD9(dataLaProvidencia)
-  setD10(dataLaTrinidad)
-  setD11(dataLeales)
-  setD12(dataÑuñorco)
-  setD13(dataStaBarbara)
-  setD14(dataStaRosa)
-}
+  });
+  setD1(dataAguilares);
+  setD2(dataCruzAlta);
+  setD3(dataLaFlorida);
+  setD4(dataConcepcion);
+  setD5(dataMarapa);
+  setD6(dataBellaVista);
+  setD7(dataFamailla);
+  setD8(dataLaCorona);
+  setD9(dataLaProvidencia);
+  setD10(dataLaTrinidad);
+  setD11(dataLeales);
+  setD12(dataÑuñorco);
+  setD13(dataStaBarbara);
+  setD14(dataStaRosa);
+};

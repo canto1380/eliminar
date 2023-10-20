@@ -394,7 +394,6 @@ export const dataComparativaPorTipo = (
   } else {
     concepComparativoFinal = 0;
   }
-
   let marapaComparativoFinal = dataImportComparativa?.filter(
     (d) =>
       d.IngenioNombre === "Marapa" &&
@@ -551,13 +550,14 @@ export const dataComparativaPorTipo = (
       dateConverted(
         lealesComparativoFinal[lealesComparativoFinal.length - 1].FechaParte
       );
-    const lealesDiff = (lealesConvert - dateComparativa) / (1000 * 60 * 60 * 24);
+    const lealesDiff =
+      (lealesConvert - dateComparativa) / (1000 * 60 * 60 * 24);
     lealesComparativoFinal =
       lealesDiff < 0
         ? lealesComparativoFinal[lealesComparativoFinal.length - 1].FechaParte
         : "";
   } else {
-    lealesComparativoFinal = null
+    lealesComparativoFinal = null;
   }
 
   let nunorcoComparativoFinal = dataImportComparativa?.filter(
@@ -580,7 +580,7 @@ export const dataComparativaPorTipo = (
         ? nunorcoComparativoFinal[nunorcoComparativoFinal.length - 1].FechaParte
         : "";
   } else {
-    nunorcoComparativoFinal = null
+    nunorcoComparativoFinal = null;
   }
 
   let stabarbaraComparativoFinal = dataImportComparativa?.filter(
@@ -615,7 +615,7 @@ export const dataComparativaPorTipo = (
       d.MoliendaCanaBruta !== 0 &&
       d?.CantidadTara !== 0
   );
-  if (starosaComparativoFinal && starosaComparativoFinal.length > 0 ) {
+  if (starosaComparativoFinal && starosaComparativoFinal.length > 0) {
     const starosaConvert =
       starosaComparativoFinal &&
       dateConverted(
@@ -628,7 +628,7 @@ export const dataComparativaPorTipo = (
         ? starosaComparativoFinal[starosaComparativoFinal.length - 1].FechaParte
         : "";
   } else {
-    starosaComparativoFinal = null
+    starosaComparativoFinal = null;
   }
 
   dataFinIngenios = {
@@ -649,11 +649,31 @@ export const dataComparativaPorTipo = (
   };
 
   /** MAYOR DIA DE ZAFRA **/
-  let mayor = 0;
+  let mayor = 0, fin=0;
+
+  const fechaFin = dataImportComparativa?.filter(
+    (d) => d.MoliendaCanaBruta !== 0 && d?.CantidadTara !== 0
+  );
+  fin = fechaFin && fechaFin[fechaFin.length -1].FechaParte
+  fin = dateConverted(fin)
+  console.log(fin)
+
+  const diff = fin - dateComparativa
+  const diff1 =diff / (1000*60*60*24)
+  console.log(diff1)
+
+
+
+  const fechaFinalParaComparar = diff1 < 0 ? fin : dateComparativa
+  console.log(fechaFinalParaComparar)
+
   if (dataEnd && dataInicioIngenios && dataImportComparativa) {
     for (let clave in dataInicioIngenios) {
       const dateConvert = dateConverted(dataInicioIngenios[clave]);
-      const diffDate = dateComparativa - dateConvert;
+      console.log(dateConvert)
+      const diffDate = fechaFinalParaComparar - dateConvert;
+      console.log(diffDate)
+      console.log(dateComparativa)
       const daysDate = diffDate / (1000 * 60 * 60 * 24);
       if (daysDate >= mayor) {
         mayor = daysDate;

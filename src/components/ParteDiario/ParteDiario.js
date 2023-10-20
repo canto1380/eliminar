@@ -70,6 +70,7 @@ const ParteDiario = ({
     useState(null);
   const [fechasFinIngeniosComparativa, setFechasFinIngeniosComparativa] =
     useState(null);
+  const [fechasFinIngenios, setFechasFinIngenios] = useState(null);
   const [loadingDownload, setLoadingDownload] = useState(false);
 
   const { state, dataUser } = useContext(User);
@@ -92,7 +93,8 @@ const ParteDiario = ({
       setD13,
       setD14,
       setFechasInicioIngenios,
-      setDataDiasZafra
+      setDataDiasZafra,
+      setFechasFinIngenios
     );
     dataComparativaPorTipo(
       dataImportComparativa,
@@ -116,6 +118,7 @@ const ParteDiario = ({
       setDataDiasZafraComparativa
     );
     dataInicioZafras();
+    // dataFinZafraComparativa()
   }, [dataImport, dataImportComparativa]);
 
   const dataInicioZafras = () => {
@@ -126,9 +129,13 @@ const ParteDiario = ({
     );
     setInicioZafraComparativa(fecha2?.FechaParte);
   };
-  // const aasd = async() => {
-  //   const res =  await getDataPartesDiariosBE1( '/descargar', d1)
+  // console.log(dataEnd.getFullYear() -1)
+  // const dataFinZafraComparativa = () => {
+  //   const fechaFin = dataImportComparativa?.filter((d) => d.MoliendaCanaBruta !== 0 || d.CantidadTara !== 0)
+  //   const ultimoRegistro = fechaFin && fechaFin[fechaFin.length -1]
+  //   console.log(ultimoRegistro)
   // }
+
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
@@ -189,7 +196,8 @@ const ParteDiario = ({
                 dataDiasZafraComparativa,
                 fechasFinIngeniosComparativa,
                 setDataImport,
-                setDataImportComparativa
+                setDataImportComparativa,
+                fechasFinIngenios
               )
             }
           >
