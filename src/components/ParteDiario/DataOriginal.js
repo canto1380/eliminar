@@ -732,11 +732,21 @@ export const dataPorTipo = (
   };
   /**** ****/
 
-  let mayor = 0;
+  let mayor = 0, fin=0;
+
+  const fechaFin = dataImport?.filter((d) => d.MoliendaCanaBruta!== 0 && d?.CantidadTara !==0)
+  fin = fechaFin && fechaFin[fechaFin.length -1].FechaParte
+  fin = dateConverted(fin)
+
+  const diff = fin - dataEnd
+  const diff1 = diff / (1000*60*60*24)
+
+  const fechaFinalParaComparar = diff1 < 0 ? fin : dataEnd
+
   if (dataEnd) {
     for (let clave in dataInicioIngenios) {
       const dateConvert = dateConverted(dataInicioIngenios[clave]);
-      const diffDate = dataEnd - dateConvert;
+      const diffDate = fechaFinalParaComparar - dateConvert;
       const daysDate = diffDate / (1000 * 60 * 60 * 24);
       if (daysDate >= mayor) {
         mayor = Math.ceil(daysDate);

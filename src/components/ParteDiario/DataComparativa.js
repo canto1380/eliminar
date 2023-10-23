@@ -656,24 +656,16 @@ export const dataComparativaPorTipo = (
   );
   fin = fechaFin && fechaFin[fechaFin.length -1].FechaParte
   fin = dateConverted(fin)
-  console.log(fin)
 
   const diff = fin - dateComparativa
   const diff1 =diff / (1000*60*60*24)
-  console.log(diff1)
-
-
 
   const fechaFinalParaComparar = diff1 < 0 ? fin : dateComparativa
-  console.log(fechaFinalParaComparar)
 
   if (dataEnd && dataInicioIngenios && dataImportComparativa) {
     for (let clave in dataInicioIngenios) {
       const dateConvert = dateConverted(dataInicioIngenios[clave]);
-      console.log(dateConvert)
       const diffDate = fechaFinalParaComparar - dateConvert;
-      console.log(diffDate)
-      console.log(dateComparativa)
       const daysDate = diffDate / (1000 * 60 * 60 * 24);
       if (daysDate >= mayor) {
         mayor = daysDate;
