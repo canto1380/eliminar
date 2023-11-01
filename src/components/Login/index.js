@@ -44,7 +44,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
     }
   }
   const { dispatch } = useContext(User);
-  const aaas = (item) => {
+  const loginContextData = (item) => {
     dispatch({ type: "LOGIN", payload: { item } });
   };
 
@@ -67,7 +67,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
 
         setToken(token)
         setDataToken(userData.user)
-        aaas(userData)
+        loginContextData(userData)
 
         setLoading(true)
         setTimeout(() => {

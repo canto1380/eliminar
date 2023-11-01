@@ -1,17 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
 import { User } from "../context/UserProvider";
-import { deleteCookies, deleteToken } from "../helpers/helpers";
-import { redirectBase } from "../helpers/redirect";
 
 const AppRouter = () => {
   const [banderaLogin, setBanderaLogin] = useState(false);
-  const [inactivoUser, setInactivoUser] = useState(false);
-  const { state, action } = useContext(User);
-  
+  const { state } = useContext(User);
   return (
     <div>
       <Router>

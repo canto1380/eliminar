@@ -160,6 +160,30 @@ export const anios = [
     id: 11,
     anio: 2023
   },
+  {
+    id: 12,
+    anio: 2024
+  },
+  {
+    id: 13,
+    anio: 2025
+  },
+  {
+    id: 14,
+    anio: 2026
+  },
+  {
+    id: 15,
+    anio: 2027
+  },
+  {
+    id: 16,
+    anio: 2028
+  },
+  {
+    id: 17,
+    anio: 2029
+  },
 ]
 
 export const quincenas= [

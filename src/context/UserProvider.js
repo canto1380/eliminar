@@ -9,15 +9,15 @@ const initialState = {
 
 function reducer(state, action) {
   console.log(action)
-  switch (action.type) {
-    case 'LOGIN': {
-      // setToken(action?.payload?.item?.token)
-      // setDataToken(action?.payload?.user)
-      return {...state, userToken: action?.payload?.item?.token}
-    }
-    default:
-      return state;
-  }
+  // switch (action.type) {
+  //   case 'LOGIN': {
+  //     // setToken(action?.payload?.item?.token)
+  //     // setDataToken(action?.payload?.user)
+  //     return {...state, userToken: action?.payload?.item?.token}
+  //   }
+  //   default:
+  //     return state;
+  // }
 }
 
 const UserProvider = ({ children }) => {

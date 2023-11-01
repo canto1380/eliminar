@@ -4,6 +4,7 @@ import {
   BsFillCaretRightFill,
   BsFillCaretLeftFill,
   BsNewspaper,
+  BsClipboardData
 } from 'react-icons/bs'
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
 import './Sidebar.css'
@@ -37,6 +38,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
       title: 'parte-diario',
       iconName: <BsNewspaper className='sizeIcon' />,
       name: 'Parte diario',
+    },
+    {
+      title: 'datos-comparativos',
+      iconName: <BsClipboardData className='sizeIcon' />,
+      name: 'Datos comparativos',
     },
 
     {
@@ -119,7 +125,6 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
             to={`/admin/${items.title}`}
           >
             <li
-              // onClick={() => changeTab(items.title)}
               title={items.title}
               className={`${
                 inactivo

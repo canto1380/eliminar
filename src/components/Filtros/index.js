@@ -1,6 +1,8 @@
 import { Col, Row } from "react-bootstrap";
-import { Select, DatePicker } from "antd";
+import { Select, DatePicker, Space, Input } from "antd";
 import { anios, meses, quincenas } from "../../utils/seeders";
+
+const { Search } = Input
 
 const Filtros = ({
   setDataEnd,
@@ -12,6 +14,13 @@ const Filtros = ({
   dataMes,
   dataQuincena,
   dataZafra,
+  setSearch,
+  bandFilterZafraAnio,
+  bandFilterAnio,
+  bandFilterMes,
+  bandFilterQuincena,
+  BandFilterDiaParteDirectorio,
+  bandFilterSearch
 }) => {
   const changeData = (e) => {
     if (e !== null) {
@@ -34,6 +43,9 @@ const Filtros = ({
   const handleQuincena = (e) => {
     setDataQuincena(e);
   };
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
 
   let optionsMeses = [];
   meses?.forEach((d) => {
@@ -43,7 +55,7 @@ const Filtros = ({
     };
     optionsMeses.push(option);
   });
-  let optionsAnios = [];
+  let optionsAnios = [{value: null, label: 'Todos'}];
   anios?.forEach((d) => {
     const option = {
       value: d.anio,
@@ -70,6 +82,7 @@ const Filtros = ({
         </Col>
       </Row>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
+        {bandFilterZafraAnio && (
         <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
           <span className="me-4">Zafra:</span>
           <Select
@@ -87,6 +100,8 @@ const Filtros = ({
             defaultValue={dataZafra}
           />
         </Col>
+        )}
+        {bandFilterAnio && (
         <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
           <span className="me-4">Año:</span>
           <Select
@@ -104,6 +119,8 @@ const Filtros = ({
             defaultValue={dataAnio}
           />
         </Col>
+        )}
+        {bandFilterMes && (
         <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
           <span className="me-4">Mes:</span>
           <Select
@@ -121,6 +138,8 @@ const Filtros = ({
             defaultValue={dataMes}
           />
         </Col>
+        )}
+        {bandFilterQuincena && (
         <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
           <span className="me-4">Quincena:</span>
           <Select
@@ -143,9 +162,23 @@ const Filtros = ({
             defaultValue={dataQuincena}
           />
         </Col>
-
+        )}
+        {bandFilterSearch && (
+        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
+          <span className="me-4">Buscar:</span>
+            <Search
+              style={{ width: '100%' }}
+              placeholder={`Nombre`}
+              enterButton='Buscar'
+              size='medium'
+              width={100}
+              onChange={(e) => handleChange(e)}
+            />
+        </Col>
+        )}
       </Row>
-
+      {BandFilterDiaParteDirectorio && (
+        <>
       <Row>
         <Col className="mt-3">
           <div className={`pt-4 pb-0 px-4`}>
@@ -160,6 +193,8 @@ const Filtros = ({
           <DatePicker format={"DD/MM/YYYY"} onChange={changeData} />
         </Col>
       </Row>
+      </>
+      )}
     </>
   );
 };

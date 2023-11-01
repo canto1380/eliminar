@@ -1,5 +1,10 @@
-
 {
-  "estimacionEEAOC2023": "14440000",
-  "CMBPorDDJJIPAAT2022": "14354298"
+  "dataComparativa": [
+    { "anio": "2023", "estimacionEEAOC": "14440000", "CMBPorDDJJIPAAT": "0" },
+    { "anio": "2022", "estimacionEEAOC": "0", "CMBPorDDJJIPAAT": "14354298" },
+    { "anio": "2021", "estimacionEEAOC": "0", "CMBPorDDJJIPAAT": "0" },
+    { "anio": "2020", "estimacionEEAOC": "0", "CMBPorDDJJIPAAT": "0" },
+    { "anio": "2019", "estimacionEEAOC": "0", "CMBPorDDJJIPAAT": "0" },
+    { "anio": "2018", "estimacionEEAOC": "0", "CMBPorDDJJIPAAT": "0" }
+  ]
 }

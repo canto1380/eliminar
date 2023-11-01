@@ -6,10 +6,6 @@ import ItemCollpse from "./ItemsCollpase";
 import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
-import {
-  getDataPartesDiariosBE,
-  getDataPartesDiariosBE1,
-} from "../../utils/queryAPI/partesDiariosQuery";
 
 const ParteDiario = ({
   dataEnd,
@@ -17,10 +13,6 @@ const ParteDiario = ({
   dataMes,
   dataQuincena,
   dataZafra,
-  setDataAnio,
-  setDataMes,
-  setDataQuincena,
-  setDataZafra,
   dataParteDiariosHistoricos,
   dataImport,
   dataImportComparativa,
@@ -29,6 +21,7 @@ const ParteDiario = ({
   setDataImport,
   setDataImportComparativa,
 }) => {
+
   // moment.locale('es')
   // console.log(moment.locale())
   const [d1, setD1] = useState([]);
@@ -129,18 +122,11 @@ const ParteDiario = ({
     );
     setInicioZafraComparativa(fecha2?.FechaParte);
   };
-  // console.log(dataEnd.getFullYear() -1)
-  // const dataFinZafraComparativa = () => {
-  //   const fechaFin = dataImportComparativa?.filter((d) => d.MoliendaCanaBruta !== 0 || d.CantidadTara !== 0)
-  //   const ultimoRegistro = fechaFin && fechaFin[fechaFin.length -1]
-  //   console.log(ultimoRegistro)
-  // }
 
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
         <Col xs={12} className="text-start mb-5 mt-4">
-          {/* <Button onClick={() => aasd()}>PRUEBA</Button> */}
           <Button
             className={`${
               (dataEnd === null ||

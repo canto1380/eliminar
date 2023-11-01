@@ -4,15 +4,12 @@ import TitlePage from '../../components/TitlePages'
 import ParteDiario from '../../components/ParteDiario/ParteDiario'
 import Filtros from '../../components/Filtros'
 import {
-  getDataPartesDiarios,
   getDataPartesDiariosBE,
 } from '../../utils/queryAPI/partesDiariosQuery'
-import moment from 'moment'
 import Spinn from '../../components/Spinner'
 import MsgError from '../../components/Messages/MsgError'
 
 const ParteDiarioContainer = () => {
-  const [idNewsCategory, setIdNewsCategory] = useState('')
   const [dataEnd, setDataEnd] = useState(null)
   const [dataZafra, setDataZafra] = useState(null)
   const [dataAnio, setDataAnio] = useState(null)
@@ -37,7 +34,7 @@ const ParteDiarioContainer = () => {
       fechadesde: `25-04-${dataZafra}`,
       fechahasta: `24-04-${dataZafra + 1}`,
     }
-    /***** DEDE FRONTEND *****/
+    /***** DESDE FRONTEND *****/
     // const data = await getDataPartesDiarios(params) DESDE FRONTEND
     // setDataParteDiariosHistoricos(data?.ParteDiarios)
 
@@ -113,7 +110,7 @@ const ParteDiarioContainer = () => {
       {banderaDataNull && (
         <MsgError
           text1='Estamos procesando la información.'
-          text2='Intente de nuevo'
+          text2='Intente de nuevo.'
         />
       )}
       <TitlePage titlePage='Parte Diario Directorio' />
@@ -131,7 +128,6 @@ const ParteDiarioContainer = () => {
             </span>
           </div>
           <Filtros
-            setIdNewsCategory={setIdNewsCategory}
             setDataEnd={setDataEnd}
             setDataAnio={setDataAnio}
             setDataMes={setDataMes}
@@ -141,9 +137,13 @@ const ParteDiarioContainer = () => {
             dataMes={dataMes}
             dataQuincena={dataQuincena}
             dataZafra={dataZafra}
+            bandFilterZafraAnio={true}
+            bandFilterAnio={true}
+            bandFilterMes={true}
+            bandFilterQuincena={true}
+            BandFilterDiaParteDirectorio={true}
           />
           <ParteDiario
-            idNewsCategory={idNewsCategory}
             dataEnd={dataEnd}
             dataAnio={dataAnio}
             dataMes={dataMes}

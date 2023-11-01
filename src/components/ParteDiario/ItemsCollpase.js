@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Collapse } from 'antd'
 import { CaretRightOutlined } from '@ant-design/icons'
 import { dateConverted } from '../../helpers/helpers'
+import { columns } from './ColumnasTablaListadoDatos'
 
 const ItemCollpse = ({
   dataAnio,
@@ -80,72 +81,72 @@ const ItemCollpse = ({
     {
       key: '1',
       label: 'Aguilares',
-      children: <ListadoDatos data={aguilares} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={aguilares} />,
     },
     {
       key: '2',
       label: 'Bella Vista',
-      children: <ListadoDatos data={bellaVista} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={bellaVista} />,
     },
     {
       key: '3',
       label: 'Concepción',
-      children: <ListadoDatos data={concepcion} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={concepcion} />,
     },
     {
       key: '4',
       label: 'Cruz Alta',
-      children: <ListadoDatos data={cruzAlta} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={cruzAlta} />,
     },
     {
       key: '5',
       label: 'Famaillá',
-      children: <ListadoDatos data={famailla} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={famailla} />,
     },
     {
       key: '6',
       label: 'La Corona',
-      children: <ListadoDatos data={laCorona} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={laCorona} />,
     },
     {
       key: '7',
       label: 'La Florida',
-      children: <ListadoDatos data={laFlorida} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={laFlorida} />,
     },
     {
       key: '8',
       label: 'La Providencia',
-      children: <ListadoDatos data={laProvidencia} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={laProvidencia} />,
     },
     {
       key: '9',
       label: 'La Trinidad',
-      children: <ListadoDatos data={laTrinidad} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={laTrinidad} />,
     },
     {
       key: '10',
       label: 'Leales',
-      children: <ListadoDatos data={leales} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={leales} />,
     },
     {
       key: '11',
       label: 'Marapa',
-      children: <ListadoDatos data={marapa} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={marapa} />,
     },
     {
       key: '12',
       label: 'Santa Barbara',
-      children: <ListadoDatos data={santaBarbara} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={santaBarbara} />,
     },
     {
       key: '13',
       label: 'Santa Rosa',
-      children: <ListadoDatos data={santaRosa} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={santaRosa} />,
     },
     {
       key: '14',
       label: 'Ñuñorco',
-      children: <ListadoDatos data={nunorco} />,
+      children: <ListadoDatos columns={columns} scroll={2000} data={nunorco} />,
     },
   ]
   return (

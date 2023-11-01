@@ -18,8 +18,6 @@ export const getTokenLS = () => {
   if (tok !== null) {
     tok = tok.replace(/['"]+/g, '')
     return tok
-  } else {
-    return null
   }
 }
 

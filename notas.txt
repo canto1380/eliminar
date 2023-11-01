@@ -1,311 +1,527 @@
-// if (parteDiarioData.length > 0) {
-  //   if (parteDiarioData[0].blockchainPaymentData) {
-    //     page1.addRow({
-      //       name: parteDiarioData.name,
-      //       cmb: parteDiarioData.cmb,
-      //       rendimientoCMB: parteDiarioData.rendimientoCMB + '%',
-      //     })
-      //     page1.getRow(2).font = {
-        //       name: 'Calibri',
-        //       bold: false,
-        //       underline: false,
-        //       size: 12,
-        //     }
-        //     page1.getRow(2).alignment = { horizontal: 'center' }
-        //     page1.getCell('C2').numFmt = '0.000%'
-        //   }
-        //   parteDiarioData.forEach((data) => {
-          //     page1.addRow({
-  //       name: data.name,
-  //       cmb: data.cmb,
-  //       rendimientoCMB: data.rendimientoCMB,
-  //     })
-  //   })
-  // }
+/**FECHA FINAL INGENIOS - ANIO ACTUAL **/
+
+dataFinIngenios = {
+    CellQ10: 0,
+    CellQ11: 0,
+    CellQ12: 0,
+    CellQ14: 0,
+    CellQ15: 0,
+    CellQ17: 0,
+    CellQ18: 0,
+    CellQ19: 0,
+    CellQ20: 0,
+    CellQ21: 0,
+    CellQ22: 0,
+    CellQ23: 0,
+    CellQ24: 0,
+    CellQ25: 0,
+  };
+
+  const FechaHoy = new Date();
 
 
-  // page1.columns = [
-  //   {
-  //     header: 'Name',
-  //     key: 'name',
-  //     width: 10,
-  //     style: {
-  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
-  //     },
-  //   },
-  //   {
-  //     header: 'CMB',
-  //     key: 'cmb',
-  //     width: 10,
-  //     style: {
-  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
-  //     },
-  //   },
-  //   {
-  //     header: '% CMB',
-  //     key: 'rendimientoCMB',
-  //     width: 10,
-  //     style: {
-  //       font: { name: 'Cambria', bold: true, underline: false, size: 14 },
-  //     },
-  //   },
-  // ]
+let aguilFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Aguilares" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (aguilFinal && aguilFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let aguilFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Aguilares" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
 
-IDEM PARA ROW 1 3 5 6 13 16 27 28 30 31 32
-  // page1.getRow(1).border = {
-  //   top: { style: 'medium', color: { argb: '000000' } },
-  //   left: { style: 'medium', color: { argb: '000000' } },
-  //   bottom: { style: 'medium', color: { argb: '000000' } },
-  //   right: { style: 'medium', color: { argb: '000000' } },
-  // }
-
-
-
-
-  if (dataEnd !== null) {
-      setD1(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Ca�a molida bruta (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+      const aguilaresConverted = aguilFinal1 && aguilFinal1[aguilFinal1.length - 1];
+      const aguilaresConverted1 = aguilFinal1 && aguilFinal1[aguilFinal1.length - 2];
+      if(aguilaresConverted.MoliendaCanaBruta === 0 && aguilaresConverted.CantidadTara === null && aguilaresConverted1.MoliendaCanaBruta === 0 && aguilaresConverted1.CantidadTara === null) {
+        aguilFinal = aguilFinal1[aguilFinal1.length - 3].FechaParte
+      } else {
+        aguilFinal = ''
+      }
     } else {
-      setD1(
-        dataa.filter(
-          (d) => d.field1 === 'Ca�a molida bruta (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const aguilConverted =
+        aguilFinal && dateConverted(aguilFinal[aguilFinal.length - 1].FechaParte);
+      const aguilDiff = (aguilConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      aguilFinal =
+        aguilDiff < 0 ? aguilFinal[aguilFinal.length - 1].FechaParte : "";
     }
+  } else {
+    aguilFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD2(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Rendimientos de ca�a molida bruta (%)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let cruzFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Cruz Alta" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (cruzFinal && cruzFinal.length > 0) {
+    /** Si es data del anio actual, se debe hacer verificaciones extras,
+     *  ya que puede ser que no haya terminado la zafra
+     */
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+
+      let cruzFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Cruz Alta" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+
+      const cruzConverted = cruzFinal1 && cruzFinal1[cruzFinal1.length - 1];
+      const cruzConverted1 = cruzFinal1 && cruzFinal1[cruzFinal1.length - 2];
+      if(cruzConverted.MoliendaCanaBruta === 0 && cruzConverted.CantidadTara === null && cruzConverted1.MoliendaCanaBruta === 0 && cruzConverted1.CantidadTara === null) {
+        cruzFinal = cruzFinal1[cruzFinal1.length - 3].FechaParte
+      } else {
+        cruzFinal = ''
+      }
+
     } else {
-      setD2(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Rendimientos de ca�a molida bruta (%)' &&
-            d.field2 !== 'Fecha'
-        )
-      )
+      /** Anios anteriores, donde la zafra ya termino **/
+      const cruzConverted =
+        cruzFinal && dateConverted(cruzFinal[cruzFinal.length - 1].FechaParte);
+      const cruzDiff = (cruzConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      cruzFinal = cruzDiff < 0 ? cruzFinal[cruzFinal.length - 1].FechaParte : "";
     }
+  } else {
+    cruzFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD3(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Ca�a molida Neta (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let floridaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Florida" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (floridaFinal && floridaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let floridaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "La Florida" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const floridaConverted = floridaFinal1 && floridaFinal1[floridaFinal1.length - 1];
+      const floridaConverted1 = floridaFinal1 && floridaFinal1[floridaFinal1.length - 2];
+      if(floridaConverted.MoliendaCanaBruta === 0 && floridaConverted.CantidadTara === null && floridaConverted1.MoliendaCanaBruta === 0 && floridaConverted1.CantidadTara === null) {
+        floridaFinal = floridaFinal1[floridaFinal1.length - 3].FechaParte
+      } else {
+        floridaFinal = ''
+      }
     } else {
-      setD3(
-        dataa.filter(
-          (d) => d.field1 === 'Ca�a molida Neta (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const floridaConverted =
+        floridaFinal &&
+        dateConverted(floridaFinal[floridaFinal.length - 1].FechaParte);
+      const floridaDiff = (floridaConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      floridaFinal =
+        floridaDiff < 0 ? floridaFinal[floridaFinal.length - 1].FechaParte : "";
     }
-    if (dataEnd !== null) {
-      setD4(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Rendimiento de ca�a molida Neta (%)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  } else {
+    floridaFinal = null;
+  }
+
+  let concepFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Concepción" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (concepFinal && concepFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let concepFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Concepción" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const concepConverted = concepFinal1 && concepFinal1[concepFinal1.length - 1];
+      const concepConverted1 = concepFinal1 && concepFinal1[concepFinal1.length - 2];
+      if(concepConverted.MoliendaCanaBruta === 0 && concepConverted.CantidadTara === null && concepConverted1.MoliendaCanaBruta === 0 && concepConverted1.CantidadTara === null) {
+        concepFinal = concepFinal1[concepFinal1.length - 3].FechaParte
+      } else {
+        concepFinal = ''
+      }
     } else {
-      setD4(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Rendimiento de ca�a molida Neta (%)' &&
-            d.field2 !== 'Fecha'
-        )
-      )
+      const concepConverted =
+        concepFinal &&
+        dateConverted(concepFinal[concepFinal.length - 1].FechaParte);
+      const concepDiff = (concepConverted - dataEnd) / (1000 * 60 * 60 * 24);
+      concepFinal =
+        concepDiff < 0 ? concepFinal[concepFinal.length - 1].FechaParte : "";
     }
+  } else {
+    concepFinal = 0;
+  }
 
-    if (dataEnd !== null) {
-      setD5(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car equivalente (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let marapaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Marapa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (marapaFinal && marapaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let marapaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Marapa" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const marapaConverted = marapaFinal1 && marapaFinal1[marapaFinal1.length - 1];
+      const marapaConverted1 = marapaFinal1 && marapaFinal1[marapaFinal1.length - 2];
+      if(marapaConverted.MoliendaCanaBruta === 0 && marapaConverted.CantidadTara === null && marapaConverted1.MoliendaCanaBruta === 0 && marapaConverted1.CantidadTara === null) {
+        marapaFinal = marapaFinal1[marapaFinal1.length - 3].FechaParte
+      } else {
+        marapaFinal = ''
+      }
     } else {
-      setD5(
-        dataa.filter(
-          (d) => d.field1 === 'Az�car equivalente (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const marapaConvert =
+        marapaFinal &&
+        dateConverted(marapaFinal[marapaFinal.length - 1].FechaParte);
+      const marapaDiff = (marapaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      marapaFinal =
+        marapaDiff < 0 ? marapaFinal[marapaFinal.length - 1].FechaParte : "";
     }
+  } else {
+    marapaFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD6(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car crudo (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let bellaVistaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Bella Vista" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (bellaVistaFinal && bellaVistaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let bellaVistaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Bella Vista" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const bellaVistaConverted = bellaVistaFinal1 && bellaVistaFinal1[bellaVistaFinal1.length - 1];
+      const bellaVistaConverted1 = bellaVistaFinal1 && bellaVistaFinal1[bellaVistaFinal1.length - 2];
+      if(bellaVistaConverted.MoliendaCanaBruta === 0 && bellaVistaConverted.CantidadTara === null && bellaVistaConverted1.MoliendaCanaBruta === 0 && bellaVistaConverted1.CantidadTara === null) {
+        bellaVistaFinal = bellaVistaFinal1[bellaVistaFinal1.length - 3].FechaParte
+      } else {
+        bellaVistaFinal = ''
+      }
     } else {
-      setD6(
-        dataa.filter(
-          (d) => d.field1 === 'Az�car crudo (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const bellaVistaConvert =
+        bellaVistaFinal &&
+        dateConverted(bellaVistaFinal[bellaVistaFinal.length - 1].FechaParte);
+      const vellaVistaDiff =
+        (bellaVistaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      bellaVistaFinal =
+        vellaVistaDiff < 0
+          ? bellaVistaFinal[bellaVistaFinal.length - 1].FechaParte
+          : "";
     }
+  } else {
+    bellaVistaFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD7(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car blanco com�n tipo A (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let famailFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Famaillá" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (famailFinal && famailFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let famaillaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Famaillá" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const famaillaConverted = famaillaFinal1 && famaillaFinal1[famaillaFinal1.length - 1];
+      const famaillaConverted1 = famaillaFinal1 && famaillaFinal1[famaillaFinal1.length - 2];
+      if(famaillaConverted.MoliendaCanaBruta === 0 && famaillaConverted.CantidadTara === null && famaillaConverted1.MoliendaCanaBruta === 0 && famaillaConverted1.CantidadTara === null) {
+        famailFinal = famaillaFinal1[famaillaFinal1.length - 3].FechaParte
+      } else {
+        famailFinal = ''
+      }
     } else {
-      setD7(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car blanco com�n tipo A (t)' &&
-            d.field2 !== 'Fecha'
-        )
-      )
+      const famailConvert =
+        famailFinal &&
+        dateConverted(famailFinal[famailFinal.length - 1].FechaParte);
+      const famailDiff = (famailConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      famailFinal =
+        famailDiff < 0 ? famailFinal[famailFinal.length - 1].FechaParte : "";
     }
+  } else {
+    famailFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD8(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car refinado (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let coronaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Corona" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (coronaFinal && coronaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let laCoronaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "La Corona" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const laCoronaConverted = laCoronaFinal1 && laCoronaFinal1[laCoronaFinal1.length - 1];
+      const laCoronaConverted1 = laCoronaFinal1 && laCoronaFinal1[laCoronaFinal1.length - 2];
+      if(laCoronaConverted.MoliendaCanaBruta === 0 && laCoronaConverted.CantidadTara === null && laCoronaConverted1.MoliendaCanaBruta === 0 && laCoronaConverted1.CantidadTara === null) {
+        coronaFinal = laCoronaFinal1[laCoronaFinal1.length - 3].FechaParte
+      } else {
+        coronaFinal = ''
+      }
     } else {
-      setD8(
-        dataa.filter(
-          (d) => d.field1 === 'Az�car refinado (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const coronaConvert =
+        coronaFinal &&
+        dateConverted(coronaFinal[coronaFinal.length - 1].FechaParte);
+      const coronaDiff = (coronaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      coronaFinal =
+        coronaDiff < 0 ? coronaFinal[coronaFinal.length - 1].FechaParte : "";
     }
+  } else {
+    coronaFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD9(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Az�car org�nico (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let providenciaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Providencia" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (providenciaFinal && providenciaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let providenciaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "La Providencia" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+      const providenciaConverted = providenciaFinal1 && providenciaFinal1[providenciaFinal1.length - 1];
+      const providenciaConverted1 = providenciaFinal1 && providenciaFinal1[providenciaFinal1.length - 2];
+      if(providenciaConverted.MoliendaCanaBruta === 0 && providenciaConverted.CantidadTara === null && providenciaConverted1.MoliendaCanaBruta === 0 && providenciaConverted1.CantidadTara === null) {
+        providenciaFinal = providenciaFinal1[providenciaFinal1.length - 3].FechaParte
+      } else {
+        providenciaFinal = ''
+      }
     } else {
-      setD9(
-        dataa.filter(
-          (d) => d.field1 === 'Az�car org�nico (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const providenciaConvert =
+        providenciaFinal &&
+        dateConverted(providenciaFinal[providenciaFinal.length - 1].FechaParte);
+      const providenciaDiff =
+        (providenciaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      providenciaFinal =
+        providenciaDiff < 0
+          ? providenciaFinal[providenciaFinal.length - 1].FechaParte
+          : "";
     }
+  } else {
+    providenciaFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD10(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Otros az�cares (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let trinidadFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "La Trinidad" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (trinidadFinal && trinidadFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let trinidadFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "La Trinidad" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+
+      const laTrinidadConverted = trinidadFinal1 && trinidadFinal1[trinidadFinal1.length - 1];
+      const laTrinidadConverted1 = trinidadFinal1 && trinidadFinal1[trinidadFinal1.length - 2];
+      if(laTrinidadConverted.MoliendaCanaBruta === 0 && laTrinidadConverted.CantidadTara === null && laTrinidadConverted1.MoliendaCanaBruta === 0 && laTrinidadConverted1.CantidadTara === null) {
+        trinidadFinal = trinidadFinal1[trinidadFinal1.length - 3].FechaParte
+      } else {
+        trinidadFinal = ''
+      }
     } else {
-      setD10(
-        dataa.filter(
-          (d) => d.field1 === 'Otros az�cares (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const trinidadConvert =
+        trinidadFinal &&
+        dateConverted(trinidadFinal[trinidadFinal.length - 1].FechaParte);
+      const trinidadDiff = (trinidadConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      trinidadFinal =
+        trinidadDiff < 0
+          ? trinidadFinal[trinidadFinal.length - 1].FechaParte
+          : "";
     }
+  } else {
+    trinidadFinal = null;
+  }
 
-    if (dataEnd !== null) {
-      setD11(
-        dataa.filter(
-          (d) =>
-            d.field1 === 'Ca�a molida bruta (t)' &&
-            d.field2 !== 'Fecha' &&
-            d.field2 <= dataEnd
-        )
-      )
+  let lealesFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Leales" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (lealesFinal && lealesFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      
+      let lealesFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Leales" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+
+      const lealesConverted = lealesFinal1 && lealesFinal1[lealesFinal1.length - 1];
+      const lealesConverted1 = lealesFinal1 && lealesFinal1[lealesFinal1.length - 2];
+      if(lealesConverted.MoliendaCanaBruta === 0 && lealesConverted.CantidadTara === null && lealesConverted1.MoliendaCanaBruta === 0 && lealesConverted1.CantidadTara === null) {
+        lealesFinal = lealesFinal1[lealesFinal1.length - 3].FechaParte
+      } else {
+        lealesFinal = ''
+      }
+
     } else {
-      setD11(
-        dataa.filter(
-          (d) => d.field1 === 'Ca�a molida bruta (t)' && d.field2 !== 'Fecha'
-        )
-      )
+      const lealesConvert =
+        lealesFinal &&
+        dateConverted(lealesFinal[lealesFinal.length - 1].FechaParte);
+      const lealesDiff = (lealesConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      lealesFinal =
+        lealesDiff < 0 ? lealesFinal[lealesFinal.length - 1].FechaParte : "";
     }
+  } else {
+    lealesFinal = null;
+  }
 
+  let nunorcoFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Ñuñorco" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (nunorcoFinal && nunorcoFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let nunorcoFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Ñuñorco" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
 
+      const nunorcoConverted = nunorcoFinal1 && nunorcoFinal1[nunorcoFinal1.length - 1];
+      const nunorcoConverted1 = nunorcoFinal1 && nunorcoFinal1[nunorcoFinal1.length - 2];
+      if(nunorcoConverted.MoliendaCanaBruta === 0 && nunorcoConverted.CantidadTara === null && nunorcoConverted1.MoliendaCanaBruta === 0 && nunorcoConverted1.CantidadTara === null) {
+        nunorcoFinal = nunorcoFinal1[nunorcoFinal1.length - 3].FechaParte
+      } else {
+        nunorcoFinal = ''
+      }
+    } else {
+      const nunorcoConvert =
+        nunorcoFinal &&
+        dateConverted(nunorcoFinal[nunorcoFinal.length - 1].FechaParte);
+      const nunorcoDiff = (nunorcoConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      nunorcoFinal =
+        nunorcoDiff < 0 ? nunorcoFinal[nunorcoFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    nunorcoFinal = null;
+  }
 
-    parteDiariosHistoricos?.ParteDiarios?.forEach((d) => {
-      // switch (d.IngenioNombre) {
-      // case 'Aguilares': {
-      //   d1.push(d)
-      //   break
-      // }
-      // default: {
-      //   break
-      // }
-    // }
-      // case 'Rendimientos de ca�a molida bruta (%)': {
-      //   data2.push(d)
-      //   break
-      // }
-      // case 'Ca�a molida Neta (t)': {
-      //   data3.push(d)
-      //   break
-      // }
-      // case 'Rendimiento de ca�a molida Neta (%)': {
-      //   data4.push(d)
-      //   break
-      // }
-      // case 'Az�car equivalente (t)': {
-      //   data5.push(d)
-      //   break
-      // }
-      // case 'Az�car crudo (t)': {
-      //   data6.push(d)
-      //   break
-      // }
-      // case 'Az�car blanco com�n tipo A (t)': {
-      //   data7.push(d)
-      //   break
-      // }
-      // case 'Az�car refinado (t)': {
-      //   data8.push(d)
-      //   break
-      // }
-      // case 'Az�car org�nico (t)': {
-      //   data9.push(d)
-      //   break
-      // }
-      // case 'Otros az�cares (t)': {
-      //   data10.push(d)
-      //   break
-      // }
-      // case 'Ca�a molida bruta (t)': {
-      //   data11.push(d)
-      //   break
-      // }
-      // }
-      // setD1(data1)
-    })
+  let stabarbaraFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Santa Barbara" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (stabarbaraFinal && stabarbaraFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      let staBarbaraFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Santa Barbara" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+
+      const staBarbaraConverted = staBarbaraFinal1 && staBarbaraFinal1[staBarbaraFinal1.length - 1];
+      const staBarbaraConverted1 = staBarbaraFinal1 && staBarbaraFinal1[staBarbaraFinal1.length - 2];
+      if(staBarbaraConverted.MoliendaCanaBruta === 0 && staBarbaraConverted.CantidadTara === null && staBarbaraConverted1.MoliendaCanaBruta === 0 && staBarbaraConverted1.CantidadTara === null) {
+        stabarbaraFinal = staBarbaraFinal1[staBarbaraFinal1.length - 3].FechaParte
+      } else {
+        stabarbaraFinal = ''
+      }
+    } else {
+      const stabarbaraConvert =
+        stabarbaraFinal &&
+        dateConverted(stabarbaraFinal[stabarbaraFinal.length - 1].FechaParte);
+      const stabarbaraDiff =
+        (stabarbaraConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      stabarbaraFinal =
+        stabarbaraDiff < 0
+          ? stabarbaraFinal[stabarbaraFinal.length - 1].FechaParte
+          : "";
+    }
+  } else {
+    stabarbaraFinal = null;
+  }
+
+  let starosaFinal = dataImport?.filter(
+    (d) =>
+      d.IngenioNombre === "Santa Rosa" &&
+      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
+      d.MoliendaCanaBruta !== 0 &&
+      d?.CantidadTara !== 0
+  );
+  if (starosaFinal && starosaFinal.length > 0) {
+    if (dataEnd.getFullYear() === FechaHoy.getFullYear()) {
+      
+      let staRosaFinal1 = dataImport?.filter(
+        (d) =>
+          d.IngenioNombre === "Santa Rosa" &&
+          parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear()
+      );
+
+      const staRosaConverted = staRosaFinal1 && staRosaFinal1[staRosaFinal1.length - 1];
+      const staRosaConverted1 = staRosaFinal1 && staRosaFinal1[staRosaFinal1.length - 2];
+      if(staRosaConverted.MoliendaCanaBruta === 0 && staRosaConverted.CantidadTara === null && staRosaConverted1.MoliendaCanaBruta === 0 && staRosaConverted1.CantidadTara === null) {
+        starosaFinal = staRosaFinal1[staRosaFinal1.length - 3].FechaParte
+      } else {
+        starosaFinal = ''
+      }
+
+    } else {
+      const starosaConvert =
+        starosaFinal &&
+        dateConverted(starosaFinal[starosaFinal.length - 1].FechaParte);
+      const starosaDiff = (starosaConvert - dataEnd) / (1000 * 60 * 60 * 24);
+      starosaFinal =
+        starosaDiff < 0 ? starosaFinal[starosaFinal.length - 1].FechaParte : "";
+    }
+  } else {
+    starosaFinal = null;
+  }
+
+  dataFinIngenios = {
+    CellQ10: aguilFinal,
+    CellQ11: cruzFinal,
+    CellQ12: floridaFinal,
+    CellQ14: concepFinal,
+    CellQ15: marapaFinal,
+    CellQ17: bellaVistaFinal,
+    CellQ18: famailFinal,
+    CellQ19: coronaFinal,
+    CellQ20: providenciaFinal,
+    CellQ21: trinidadFinal,
+    CellQ22: lealesFinal,
+    CellQ23: nunorcoFinal,
+    CellQ24: stabarbaraFinal,
+    CellQ25: starosaFinal,
+  };
+
+  /***** *****/

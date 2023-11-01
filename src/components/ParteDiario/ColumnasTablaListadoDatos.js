@@ -1,4 +1,3 @@
-import { ingenios } from '../../utils/seeders'
 export const columns = [
   {
     key: 'Id',

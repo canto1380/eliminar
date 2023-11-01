@@ -29,7 +29,6 @@ export const apiBEPATH = async (method, params, urlPath) => {
     ? process.env.REACT_APP_API
     : process.env.REACT_APP_PRODUCTION
 
-  console.log(url)
   const credentialData = {
     username: 'externo',
     password: 'Externo@2022*',

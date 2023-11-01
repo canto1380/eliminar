@@ -1,23 +1,27 @@
-import { useState, useEffect, useContext } from "react";
-import { Container } from "react-bootstrap";
-import Title from "../../components/Title";
-import "../../components/Admin/Sidebar/Sidebar.css";
-import ParteDiarioContainer from "../../container/ParteDiario/ParteDiarioContainer";
-import Sidebar from "../../components/Admin/Sidebar";
-import { getToken, getTokenLS } from "../../helpers/helpers";
-import Unauthorized from "../../components/Unauthorized";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import dataComparativa from "../../Excel/dataConstanteParteDiario.json";
 import Spinn from "../../components/Spinner";
+import { Container } from "react-bootstrap";
+import Sidebar from "../../components/Admin/Sidebar";
+import Unauthorized from "../../components/Unauthorized";
 import { User } from "../../context/UserProvider";
+import Title from "../../components/Title";
+import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
+import DataComparativaHistorica from "../../components/DataComparativa";
 
-const ContainerIndexParteDiario = () => {
+const NewData = () => {
+  const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
   const [inactivoUser, setInactivoUser] = useState(false);
 
-  const { dataUser } = useContext(User);
+  const { anio } = useParams();
+  const {dataUser} = useContext(User)
+  
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -43,9 +47,19 @@ const ContainerIndexParteDiario = () => {
 
   useEffect(() => {
     inactivityTime(setModalUnauthorized, setInactivoUser)
-    
   }, []);
 
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [anio]);
+  const getData = () => {
+    const data = dataComparativa?.dataComparativa;
+    if (anio !== undefined) {
+      const aa = data.filter((d) => d.anio === anio);
+      setDataRegisterEdit(aa);
+    }
+  };
   return (
     <div>
       {loading ? (
@@ -54,7 +68,9 @@ const ContainerIndexParteDiario = () => {
         </div>
       ) : (
         <>
-          <Title title={`Parte Diario`} />
+          <Title
+            titlePage={`${anio ? "Editar registro" : "Nuevo registro"} `}
+          />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}
@@ -66,7 +82,7 @@ const ContainerIndexParteDiario = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-              <ParteDiarioContainer tokenAuth={tokenAuth} />
+            <DataComparativaHistorica dataRegisterEdit={dataRegisterEdit} />
             </div>
             {modalUnauthorized && (
               <div className="">
@@ -79,4 +95,4 @@ const ContainerIndexParteDiario = () => {
     </div>
   );
 };
-export default ContainerIndexParteDiario;
+export default NewData;

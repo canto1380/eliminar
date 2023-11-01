@@ -1,9 +1,6 @@
 import { Table } from "antd";
-import { columns } from "./ColumnasTablaListadoDatos";
-import { useEffect, useState } from "react";
 
-const ListadoDatos = ({ data }) => {
-  
+const ListadoDatos = ({ columns, scroll, data }) => {
   return (
     <>
       <Table
@@ -11,7 +8,7 @@ const ListadoDatos = ({ data }) => {
         dataSource={data}
         key={data?.Id}
         size="small"
-        scroll={{ x: 2000 }}
+        scroll={{ x: scroll }}
         pagination={{ defaultPageSize: "1000", hideOnSinglePage: true }}
       />
     </>
