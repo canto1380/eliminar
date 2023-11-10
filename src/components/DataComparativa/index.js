@@ -1,24 +1,43 @@
-import { Container } from "react-bootstrap"
-import TitlePage from "../TitlePages"
-import FormAddEditDataComparativa from "./FormAddEdit"
-import { useEffect, useState } from "react"
-import dataComparativa from "../../Excel/dataConstanteParteDiario.json";
+import { Container } from "react-bootstrap";
+import TitlePage from "../TitlePages";
+import FormAddEditDataComparativa from "./FormAddEdit";
+import { useState } from "react";
+import Spinn from "../Spinner";
 
-const DataComparativaHistorica = ({dataRegisterEdit}) => {
-  const [dataComparativaJSON, setDataComparativaJSON] = useState(undefined)
-  useEffect(() => {
-    getData()
-  },[])
-  const getData = () => {
-    const data = dataComparativa?.dataComparativa;
-      setDataComparativaJSON(data);
-  };
-return (
-  <Container fluid>
-    <TitlePage titlePage={`${dataRegisterEdit ? 'Editar Dato Comparativo' : 'Nuevo Dato Comparativo'}`} btnBack={true} btnLink={'/admin/datos-comparativos'} />
-    <hr className='mx-3 mt-1' />
-    <FormAddEditDataComparativa dataRegisterEdit={dataRegisterEdit} dataComparativaJSON={dataComparativaJSON} />
-  </Container>
-)
-}
-export default DataComparativaHistorica
+const DataComparativaHistorica = ({
+  dataRegisterEdit,
+  dataComparativaData,
+  anio,
+  aniosData,
+}) => {
+  return (
+    <Container fluid>
+      <TitlePage
+        titlePage={`${
+          dataRegisterEdit
+            ? "Editar Dato Comparativo"
+            : "Nuevo Dato Comparativo"
+        }`}
+        btnBack={true}
+        btnLink={"/admin/datos-comparativos"}
+        anio={anio}
+      />
+      <hr className="mx-3 mt-1" />
+      {
+        !dataComparativaData || !aniosData? (
+          <div className="d-flex justify-content-center align-items-center text-center">
+          <Spinn type="data" />
+        </div>
+        ) : (
+          <FormAddEditDataComparativa
+            dataRegisterEdit={dataRegisterEdit}
+            dataComparativaData={dataComparativaData}
+            anio={anio}
+            aniosData={aniosData}
+          />
+        )
+      }
+    </Container>
+  );
+};
+export default DataComparativaHistorica;

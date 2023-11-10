@@ -2,7 +2,6 @@ import ExcelJS from 'exceljs'
 import moment from 'moment'
 import { ingenios } from '../utils/seeders'
 import dataConstante from './dataConstanteParteDiario.json'
-import { getDataPartesDiariosBE1 } from '../utils/queryAPI/partesDiariosQuery'
 
 export const CreateExcelWorkbook = async (
   setLoadingDownload,
@@ -1932,10 +1931,6 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       }
     }
 
-      // console.log(typeof workbook)
-      // const res = await getDataPartesDiariosBE1( '/descargar', workbook)
-      // console.log(res)
-      // setLoadingDownload(false)
     try {
       const buffer = await workbook.xlsx.writeBuffer()
       const fileType =

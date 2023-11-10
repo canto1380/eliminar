@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import "../../components/Admin/Sidebar/Sidebar.css";
 import Spinn from "../../components/Spinner";
-import Title from "antd/es/skeleton/Title";
+import Title from "../../components/Title";
 import Sidebar from "../../components/Admin/Sidebar";
 import DataComparativaContainer from "./DataComparativaContainer";
 import Unauthorized from "../../components/Unauthorized";
@@ -46,7 +46,7 @@ const DataComparativa = () => {
   return (
     <div>
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center text-center divCenter ">
+        <div className="d-flex justify-content-center align-items-center text-center divCenter">
           <Spinn />
         </div>
       ) : (
@@ -63,7 +63,7 @@ const DataComparativa = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-              <DataComparativaContainer tokenAuth={tokenAuth} />
+              <DataComparativaContainer tokenAuth={tokenAuth} routeAPI={'dataComparativa'}/>
             </div>
           {modalUnauthorized && (
             <div>

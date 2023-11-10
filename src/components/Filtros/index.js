@@ -1,6 +1,10 @@
 import { Col, Row } from "react-bootstrap";
-import { Select, DatePicker, Space, Input } from "antd";
+import { Select, DatePicker, Input } from "antd";
 import { anios, meses, quincenas } from "../../utils/seeders";
+import { getAnios } from "../../utils/queryAPI/anios";
+import { getMeses } from "../../utils/queryAPI/meses";
+import { getQuincenas } from '../../utils/queryAPI/quincenas'
+import { useEffect, useState } from "react";
 
 const { Search } = Input
 
@@ -20,8 +24,28 @@ const Filtros = ({
   bandFilterMes,
   bandFilterQuincena,
   BandFilterDiaParteDirectorio,
-  bandFilterSearch
+  bandFilterSearch,
+  placeHolderSearch
 }) => {
+  const [dataAnios, setDataAnios] = useState(null)
+  const [dataMeses, setDataMeses] = useState(null)
+  const [dataQuincenas, setDataQuincenas] = useState(null)
+
+  useEffect(() => {
+    dataFecha()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const dataFecha = async() => {
+    const aniosData = await getAnios()
+    const mesesData = await getMeses ()
+    const quincenasData = await getQuincenas()
+
+    setDataAnios(aniosData)
+    setDataMeses(mesesData)
+    setDataQuincenas(quincenasData)
+  }
+
   const changeData = (e) => {
     if (e !== null) {
       setDataEnd(e.$d);
@@ -48,26 +72,26 @@ const Filtros = ({
   }
 
   let optionsMeses = [];
-  meses?.forEach((d) => {
+  dataMeses?.forEach((d) => {
     const option = {
       value: d.id,
-      label: d.name,
+      label: d.mes_zafra,
     };
     optionsMeses.push(option);
   });
   let optionsAnios = [{value: null, label: 'Todos'}];
-  anios?.forEach((d) => {
+  dataAnios?.forEach((d) => {
     const option = {
-      value: d.anio,
-      label: d.anio,
+      value: d.anio_zafra,
+      label: d.anio_zafra,
     };
     optionsAnios.push(option);
   });
   let optionsQuincena = [];
-  quincenas?.forEach((d) => {
+  dataQuincenas?.forEach((d) => {
     const option = {
       value: d.id,
-      label: d.quincena,
+      label: d.quincena_zafra,
     };
     optionsQuincena.push(option);
   });
@@ -168,7 +192,7 @@ const Filtros = ({
           <span className="me-4">Buscar:</span>
             <Search
               style={{ width: '100%' }}
-              placeholder={`Nombre`}
+              placeholder={placeHolderSearch}
               enterButton='Buscar'
               size='medium'
               width={100}

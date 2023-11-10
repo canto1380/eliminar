@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const url =  process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
 export const api = async (method, endpoint, data, token) => {
   try {
     const res = await axios({
@@ -8,7 +8,7 @@ export const api = async (method, endpoint, data, token) => {
         authorization: `${token}`,
       },
       method,
-      url: `${process.env.REACT_APP_API}/${endpoint}`,
+      url: `${url}/${endpoint}`,
     });
     return res
   } catch (error) {
@@ -25,7 +25,7 @@ export const apiParams = async (method, params, endpoint, data, token) => {
         authorization: `${token}`,
       },
       method,
-      url: `${process.env.REACT_APP_API}/${endpoint}`,
+      url: `${url}/${endpoint}`,
     });
     return res
   } catch (error) {

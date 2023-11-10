@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import dataComparativa from "../../Excel/dataConstanteParteDiario.json";
 import Spinn from "../../components/Spinner";
@@ -10,25 +10,31 @@ import Title from "../../components/Title";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
 import DataComparativaHistorica from "../../components/DataComparativa";
+import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
+import { getAnios } from "../../utils/queryAPI/anios";
 
 const NewData = () => {
+  const [dataComparativaData, setDataComparativaData] = useState(undefined);
   const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
   const [inactivoUser, setInactivoUser] = useState(false);
+  const [aniosData, setAniosData] = useState(undefined);
+  
 
   const { anio } = useParams();
-  const {dataUser} = useContext(User)
-  
+  const { dataUser } = useContext(User);
+  let navigate = useNavigate();
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
     if (token === tokenLS) {
       setTokenAuth(token);
     }
-  setTimeout(() => {
+    setTimeout(() => {
       setLoading(false);
     }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,30 +42,45 @@ const NewData = () => {
 
   useEffect(() => {
     if (tokenAuth === null && dataUser) {
-      setTokenAuth(dataUser)
+      setTokenAuth(dataUser);
       setModalUnauthorized(false);
-    } 
-    if(tokenAuth === null && !dataUser) {
+    }
+    if (tokenAuth === null && !dataUser) {
       setModalUnauthorized(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized, setInactivoUser)
+    inactivityTime(setModalUnauthorized, setInactivoUser);
   }, []);
 
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [anio]);
-  const getData = () => {
-    const data = dataComparativa?.dataComparativa;
-    if (anio !== undefined) {
-      const aa = data.filter((d) => d.anio === anio);
-      setDataRegisterEdit(aa);
+  const getData = async () => {
+    const data = await getDataComparativa();
+    setDataComparativaData(data);
+    if(anio) {
+      const data1 = data.filter((d) => d.anio_zafra === parseInt(anio));
+      if (data1.length === 0) {
+        navigate("/admin/noticias");
+      } else {
+        setDataRegisterEdit(data1[0]);
+      }
     }
   };
+
+  useEffect(() => {
+    dataAnios();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const dataAnios = async () => {
+    const data = await getAnios();
+    setAniosData(data);
+  };
+
   return (
     <div>
       {loading ? (
@@ -68,9 +89,6 @@ const NewData = () => {
         </div>
       ) : (
         <>
-          <Title
-            titlePage={`${anio ? "Editar registro" : "Nuevo registro"} `}
-          />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}
@@ -82,7 +100,12 @@ const NewData = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-            <DataComparativaHistorica dataRegisterEdit={dataRegisterEdit} />
+              <DataComparativaHistorica
+                dataRegisterEdit={dataRegisterEdit}
+                dataComparativaData={dataComparativaData}
+                anio={anio}
+                aniosData={aniosData}
+              />
             </div>
             {modalUnauthorized && (
               <div className="">

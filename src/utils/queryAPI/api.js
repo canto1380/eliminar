@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-// const url = process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
-
 export const api = async (method, params) => {
   const url = 'http://sistemaweb.ipaat.gov.ar:8084/api/partediario'
   const credentialData = {
@@ -40,32 +38,6 @@ export const apiBEPATH = async (method, params, urlPath) => {
         'Content-Type': 'application/json',
       },
       auth: credentialData,
-      method,
-      url: `${url}${urlPath}`,
-    })
-    return res
-  } catch (error) {
-    return error
-  }
-}
-
-
-export const apiBEPATH1 = async (method, urlPath, data) => {
-  const url = process.env.REACT_APP_API
-    ? process.env.REACT_APP_API
-    : process.env.REACT_APP_PRODUCTION
-
-  // const credentialData = {
-  //   username: 'externo',
-  //   password: 'Externo@2022*',
-  // }
-  try {
-    const res = await axios({
-      data,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // auth: credentialData,
       method,
       url: `${url}${urlPath}`,
     })

@@ -1,10 +1,10 @@
 import { Table } from "antd";
 
-const ListadoDatos = ({ columns, scroll, data }) => {
+const ListadoDatos = ({ columns, scroll, data, handleDelete }) => {
   return (
     <>
       <Table
-        columns={columns}
+        columns={columns(handleDelete())}
         dataSource={data}
         key={data?.Id}
         size="small"
