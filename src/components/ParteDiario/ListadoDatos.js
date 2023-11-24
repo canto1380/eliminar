@@ -4,7 +4,7 @@ const ListadoDatos = ({ columns, scroll, data, handleDelete }) => {
   return (
     <>
       <Table
-        columns={columns(handleDelete())}
+        columns={columns}
         dataSource={data}
         key={data?.Id}
         size="small"

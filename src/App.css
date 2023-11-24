@@ -54,6 +54,34 @@ a {
   font-weight: 700;
 }
 
+.styleIcons {
+  font-size: 20px !important;
+}
+
+.c-green {
+  color:white !important;
+}
+.c-green:hover {
+  color: #00150b !important;
+}
+
+.c-red {
+  color: white !important;
+}
+.c-red:hover {
+  color: #6c000b !important;
+}
+.btn-edit:hover{
+  border: 0;
+  color: #282b2d !important
+}
+.loadingSpin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

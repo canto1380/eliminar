@@ -475,7 +475,6 @@ export const CreateExcelWorkbook = async (
     }
 
     page1.getCell('U32').numFmt = '#.##%'
-    // page1.getCell('G5').numFmt = 'DD/MM/YYYY'
     page1.getCell('F34').numFmt = '#,##0'
     page1.getCell('F35').numFmt = '#,##0'
     page1.getCell('F36').numFmt = '0.00'

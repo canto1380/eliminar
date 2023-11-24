@@ -1,16 +1,8 @@
-import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Button } from "antd";
 const ListHeader = ({
   title,
-  formAdd,
-  setFormAdd,
-  loading,
-  setLoading,
-  formEdit,
-  setFormEdit,
-  resetValuesEdit,
+  btnLink
 }) => {
   return (
     <div className="pt-4 pb-3 px-4">
@@ -20,7 +12,7 @@ const ListHeader = ({
         </div>
         <div>
           <Button
-            href="/admin/datos-comparativos/nuevo"
+            href={btnLink}
             type="primary"
             icon={<AiOutlinePlus className="" />}
           >

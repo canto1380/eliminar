@@ -5,15 +5,20 @@ import Spinn from "../../components/Spinner";
 import Filtros from "../../components/Filtros";
 import ListHeader from "../../components/ListHeader";
 import ListadoDatos from "../../components/ParteDiario/ListadoDatos";
-import { columnsDataComparativa } from "../../components/ColumnsTables/DataComparativaColumnas";
 import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
 import { api } from "../../utils/api";
+import { Space, Button, Spin } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  RollbackOutlined
+} from "@ant-design/icons";
+import Unauthorized from "../../components/Unauthorized";
 
 const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
   const [dataComparativa, setDataComparativa] = useState(null);
   const [dataZafra, setDataZafra] = useState(null);
   const [search, setSearch] = useState(null);
-  const [initLoading, setInitLoading] = useState(true)
   const [loading, setLoading] = useState(false)
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
   const [band, setBand] = useState(false)
@@ -29,13 +34,12 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
     setDataComparativa(data)
   };
 
-  const convertRoute = routeAPI[0].toUpperCase() + routeAPI.slice(1)
   const handleDelete = async (deleted, id) => {
     try {
       if (deleted) {
         const res = await api(
           'PATCH',
-          `${routeAPI}/restore${convertRoute}/${id}`,
+          `${routeAPI}/restore/${id}`,
           null,
           tokenAuth
         )
@@ -52,7 +56,7 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
       } else {
         const res = await api(
           'PATCH',
-          `${routeAPI}/delete${convertRoute}/${id}`,
+          `${routeAPI}/delete/${id}`,
           null,
           tokenAuth
         )
@@ -70,7 +74,67 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
     } catch (error) {}
   }
 
-
+  const columnsData = [
+    {
+      key: "anio",
+      title: "Año",
+      dataIndex: "anio_zafra",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.anio_zafra > b.anio_zafra,
+    },
+    {
+      key: "CMBPorDDJJIPAAT",
+      title: "CMB por DDJJ",
+      dataIndex: "CMB_DDJJ",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.CMB_DDJJ > b.CMB_DDJJ,
+    },
+    {
+      key: "estimacionEEAOC",
+      title: "Estimación EEAOC",
+      dataIndex: "estimacion_EEAOC",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.estimacion_EEAOC > b.estimacion_EEAOC,
+    },
+    {
+      key: "CMBPorDDJJIPAAT",
+      title: "CMB por DDJJ",
+      dataIndex: "CMB_DDJJ",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.CMB_DDJJ > b.CMB_DDJJ,
+    },
+    {
+      key: "estimacionEEAOC",
+      title: "Estimación EEAOC",
+      dataIndex: "estimacion_EEAOC",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.estimacion_EEAOC > b.estimacion_EEAOC,
+    },
+    {
+      key: "actions",
+      title: "Acciones",
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <Button
+            className="bg-secondary btn-edit"
+              href={`/admin/datos-comparativos/editar/${record?.anio_zafra}`}
+              style={{ color: "white" }}
+              icon={<EditOutlined className="" />}
+              title='Editar'
+            ></Button>
+            <Button
+              className={`${record?.deleted ? 'bg-success' : 'bg-danger'}`}
+              onClick={()=>handleDelete(record?.deleted, record?.id)}
+              type="primary"
+              icon={record?.deleted ? <RollbackOutlined className="c-green" /> : <DeleteOutlined className="c-red" />}
+              title={record?.deleted ? 'Restaurar' : 'Eliminar'}
+            ></Button>
+          </Space>
+        );
+      },
+    },
+  ];
 
   return (
     <Container fluid>
@@ -89,17 +153,26 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
             bandFilterSearch={true}
             placeHolderSearch='Valor'
           />
-          <ListHeader title={"Datos comparativos"} />
+          <ListHeader title={"Datos comparativos"} btnLink={'/admin/datos-comparativos/nuevo'}/>
           <div className='pb-1 pt-3 px-4'>
           <ListadoDatos
-            columns={columnsDataComparativa}
+            columns={columnsData}
             scroll={30}
             data={dataComparativa}
-            handleDelete={handleDelete}
           />
           </div>
         </>
       )}
+      {loading && (
+        <div className='loadingSpin'>
+          <Spin/>
+        </div>
+      )}
+      {modalUnauthorized && (
+            <div>
+              <Unauthorized />
+            </div>
+          )}
     </Container>
   );
 };

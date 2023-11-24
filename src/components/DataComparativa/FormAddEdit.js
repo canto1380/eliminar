@@ -48,7 +48,7 @@ const FormAddEditDataComparativa = ({
   const createDataComparativa = async (values) => {
     try {
       const res = await api("POST", "dataComparativa", values);
-      if (res.status === 200) {
+      if (res.status === 201) {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
@@ -186,7 +186,6 @@ const FormAddEditDataComparativa = ({
             : null}
           {serverError ? <MsgError text2="Server internal Error" /> : null}
         </Form>
-      {/* )} */}
     </div>
   );
 };

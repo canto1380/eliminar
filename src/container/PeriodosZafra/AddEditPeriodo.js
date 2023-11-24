@@ -1,20 +1,19 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import dataComparativa from "../../Excel/dataConstanteParteDiario.json";
+import { useState, useEffect, useContext } from "react";
+import { inactivityTime } from "../../helpers/inactivityTime";
+import { getAnios } from "../../utils/queryAPI/anios";
 import Spinn from "../../components/Spinner";
 import { Container } from "react-bootstrap";
 import Sidebar from "../../components/Admin/Sidebar";
 import Unauthorized from "../../components/Unauthorized";
+import { useParams, useNavigate } from "react-router-dom";
 import { User } from "../../context/UserProvider";
-import Title from "../../components/Title";
 import { getToken, getTokenLS } from "../../helpers/helpers";
-import { inactivityTime } from "../../helpers/inactivityTime";
-import DataComparativaHistorica from "../../components/DataComparativa";
-import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
-import { getAnios } from "../../utils/queryAPI/anios";
+import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
+import PeriodosZafraHistorico from "../../components/PeriodosZafra";
+import { getIngenios } from "../../utils/queryAPI/ingenios";
 
-const NewData = () => {
-  const [dataComparativaData, setDataComparativaData] = useState(undefined);
+const AddEditPeriodoContainer = () => {
+  const [periodosZafra, setPeriodosZafra] = useState(undefined);
   const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState(null);
@@ -22,9 +21,9 @@ const NewData = () => {
   const [loading, setLoading] = useState(false);
   const [inactivoUser, setInactivoUser] = useState(false);
   const [aniosData, setAniosData] = useState(undefined);
-  
+  const [ingeniosData, setIngeniosData] = useState(undefined)
 
-  const { anio } = useParams();
+  const { id } = useParams();
   const { dataUser } = useContext(User);
   let navigate = useNavigate();
 
@@ -58,12 +57,12 @@ const NewData = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anio]);
+  }, [id]);
   const getData = async () => {
-    const data = await getDataComparativa();
-    setDataComparativaData(data);
-    if(anio) {
-      const data1 = data.filter((d) => d.anio_zafra === parseInt(anio));
+    const data = await getPeriodoZafra();
+    setPeriodosZafra(data);
+    if(id) {
+      const data1 = data.filter((d) => d.id === parseInt(id));
       if (data1.length === 0) {
         navigate("/admin/parte-diario");
       } else {
@@ -81,7 +80,15 @@ const NewData = () => {
     setAniosData(data);
   };
 
-  return (
+  useEffect(() => {
+    dataIngenios()
+  },[])
+  const dataIngenios = async() => {
+    const data = await getIngenios()
+    setIngeniosData(data)
+  }
+
+  return(
     <div>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center text-center divCenter">
@@ -100,11 +107,12 @@ const NewData = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-              <DataComparativaHistorica
+              <PeriodosZafraHistorico
                 dataRegisterEdit={dataRegisterEdit}
-                dataComparativaData={dataComparativaData}
-                anio={anio}
+                periodosZafra={periodosZafra}
+                id={id}
                 aniosData={aniosData}
+                ingeniosData={ingeniosData}
               />
             </div>
             {modalUnauthorized && (
@@ -116,6 +124,6 @@ const NewData = () => {
         </>
       )}
     </div>
-  );
-};
-export default NewData;
+  )
+}
+export default AddEditPeriodoContainer

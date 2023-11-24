@@ -1,7 +1,6 @@
 import { Container } from "react-bootstrap";
 import TitlePage from "../TitlePages";
 import FormAddEditDataComparativa from "./FormAddEdit";
-import { useState } from "react";
 import Spinn from "../Spinner";
 
 const DataComparativaHistorica = ({

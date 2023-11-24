@@ -44,7 +44,11 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
       iconName: <BsClipboardData className='sizeIcon' />,
       name: 'Datos comparativos',
     },
-
+    {
+      title: 'periodos-zafra',
+      iconName: <BsClipboardData className='sizeIcon' />,
+      name: 'Periodos Ingenios',
+    },
     {
       title: 'perfil',
       iconName: <BiUserCircle className='sizeIcon' />,

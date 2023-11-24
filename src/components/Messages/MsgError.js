@@ -6,7 +6,7 @@ const MsgError = (props) => {
   <Alert
   className='text-center'
     // message="Error"
-    description={`${props.text1} ${props.text2}`}
+    description={`${props.text1}: ${props.text2}`}
     type="error"
     showIcon
   />

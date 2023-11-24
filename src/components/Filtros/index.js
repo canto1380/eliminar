@@ -1,6 +1,5 @@
 import { Col, Row } from "react-bootstrap";
 import { Select, DatePicker, Input } from "antd";
-import { anios, meses, quincenas } from "../../utils/seeders";
 import { getAnios } from "../../utils/queryAPI/anios";
 import { getMeses } from "../../utils/queryAPI/meses";
 import { getQuincenas } from '../../utils/queryAPI/quincenas'
@@ -79,7 +78,7 @@ const Filtros = ({
     };
     optionsMeses.push(option);
   });
-  let optionsAnios = [{value: null, label: 'Todos'}];
+  let optionsAnios = [{value: '', label: 'Todos'}];
   dataAnios?.forEach((d) => {
     const option = {
       value: d.anio_zafra,
