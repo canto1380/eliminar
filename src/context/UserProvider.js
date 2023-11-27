@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react'
-import { getTokenLS, setDataToken, setToken } from '../helpers/helpers'
+import { getTokenLS } from '../helpers/helpers'
 export const User = createContext()
 
 const dataUser = getTokenLS()

@@ -20,10 +20,9 @@ const ParteDiario = ({
   setDataEnd,
   setDataImport,
   setDataImportComparativa,
+  dateInicioIngenios
 }) => {
-
-  // moment.locale('es')
-  // console.log(moment.locale())
+  console.log(dateInicioIngenios)
   const [d1, setD1] = useState([]);
   const [d2, setD2] = useState([]);
   const [d3, setD3] = useState([]);
@@ -66,6 +65,7 @@ const ParteDiario = ({
   const [fechasFinIngenios, setFechasFinIngenios] = useState(null);
   const [loadingDownload, setLoadingDownload] = useState(false);
 
+  
   const { state, dataUser } = useContext(User);
   useEffect(() => {
     dataPorTipo(
@@ -87,7 +87,7 @@ const ParteDiario = ({
       setD14,
       setFechasInicioIngenios,
       setDataDiasZafra,
-      setFechasFinIngenios
+      setFechasFinIngenios,
     );
     dataComparativaPorTipo(
       dataImportComparativa,
@@ -110,18 +110,34 @@ const ParteDiario = ({
       setFechasFinIngeniosComparativa,
       setDataDiasZafraComparativa
     );
-    dataInicioZafras();
-    // dataFinZafraComparativa()
+    dataInicioZafras()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataImport, dataImportComparativa]);
 
+  
   const dataInicioZafras = () => {
     const fecha1 = dataImport?.find((d) => d.MoliendaCanaBruta !== 0);
     setInicioZafra(fecha1?.FechaParte);
     const fecha2 = dataImportComparativa?.find(
       (d) => d.MoliendaCanaBruta !== 0
-    );
+      );
     setInicioZafraComparativa(fecha2?.FechaParte);
   };
+  
+  
+  
+  // const starosa = fechasInicioIngenios1?.filter(
+  //   (d) =>
+  //   {
+  //     const as = new Date(d.inicio_zafra)
+  //   return(
+  //     dataEnd &&
+  //     // d.nombre_ingenio === "Santa Rosa" &&
+  //     as.getFullYear() === dataEnd.getFullYear()
+  //   )
+  //   }
+  // );
+  // console.log(starosa)
 
   return (
     <>
@@ -183,7 +199,8 @@ const ParteDiario = ({
                 fechasFinIngeniosComparativa,
                 setDataImport,
                 setDataImportComparativa,
-                fechasFinIngenios
+                fechasFinIngenios,
+                dateInicioIngenios
               )
             }
           >

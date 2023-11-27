@@ -8,6 +8,7 @@ import {
 } from '../../utils/queryAPI/partesDiariosQuery'
 import Spinn from '../../components/Spinner'
 import MsgError from '../../components/Messages/MsgError'
+import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
 
 const ParteDiarioContainer = () => {
   const [dataEnd, setDataEnd] = useState(null)
@@ -20,6 +21,7 @@ const ParteDiarioContainer = () => {
   const [dataImport, setDataImport] = useState(null)
   const [dataImportComparativa, setDataImportComparativa] = useState(null)
   const [banderaDataNull, setBanderaDataNull] = useState(false)
+  const [dateInicioIngenios, setDateInicioIngenios] = useState(null)
 
   useEffect(() => {
     if (dataZafra !== null) {
@@ -106,6 +108,19 @@ const ParteDiarioContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  useEffect(() => {
+    if(dataEnd) {
+      getDataPeriodos()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dataEnd])
+
+  const getDataPeriodos = async() => {
+    const params = {limit: 10000, anio: dataEnd.getFullYear()}
+    console.log(params)
+    const data = await getPeriodoZafra(params)
+    setDateInicioIngenios(data)
+  }
   return (
     <Container fluid>
       {banderaDataNull && (
@@ -161,6 +176,7 @@ const ParteDiarioContainer = () => {
             setDataEnd={setDataEnd}
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}
+            dateInicioIngenios={dateInicioIngenios}
           />
         </>
       )}

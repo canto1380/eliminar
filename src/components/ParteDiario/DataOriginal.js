@@ -206,9 +206,9 @@ export const dataPorTipo = (
   setD14,
   setFechasInicioIngenios,
   setDataDiasZafra,
+
   // setFechasFinIngenios
 ) => {
-
   const aguil = dataImport?.find(
     (d) =>
       d.IngenioNombre === "Aguilares" &&
@@ -322,7 +322,7 @@ export const dataPorTipo = (
     Cell24: stabarbara?.FechaParte,
     Cell25: starosa?.FechaParte,
   };
-
+  
   /** FECHAS FIN DE ZAFRA **/
   /**** ****/
 
@@ -473,7 +473,7 @@ export const dataPorTipo = (
       a4 = a4 + data.MoliendaCanaBruta;
       b4 = b4 + data.MoliendaCanaNeta;
       c4 = c4 + data.AzucarEquivalente;
-      z4 = z4 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      z4 = z4 + data.AzucarBlancoProducido + data?.AzucarRefinado
       e4 = e4 + data.AzucarCrudoProducido;
       f4 = f4 + data.MelazaProducida;
       g4 = g4 + data.AlcoholProducido;
@@ -560,7 +560,7 @@ export const dataPorTipo = (
       a7 = a7 + data.MoliendaCanaBruta;
       b7 = b7 + data.MoliendaCanaNeta;
       c7 = c7 + data.AzucarEquivalente;
-      z7 = z7 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      z7 = z7 + data.AzucarBlancoProducido + data?.AzucarRefinado
       e7 = e7 + data.AzucarCrudoProducido;
       f7 = f7 + data.MelazaProducida;
       g7 = g7 + data.AlcoholProducido;
@@ -619,7 +619,7 @@ export const dataPorTipo = (
       b9 = b9 + data.MoliendaCanaNeta;
       c9 = c9 + data.AzucarEquivalente;
       z9 = z9 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e9 = e9 + data.AzucarCrudoProducido; // data?.AzucarOrganico + data?.otrosAzucares
+      e9 = e9 + data.AzucarCrudoProducido + data?.AzucarOrganico + data?.OtroAzucar
       f9 = f9 + data.MelazaProducida;
       g9 = g9 + data.AlcoholProducido;
       h9 = h9 + data.AzucarRefinado || 0;
@@ -676,7 +676,7 @@ export const dataPorTipo = (
       a11 = a11 + data.MoliendaCanaBruta;
       b11 = b11 + data.MoliendaCanaNeta;
       c11 = c11 + data.AzucarEquivalente;
-      z11 = z11 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      z11 = z11 + data.AzucarBlancoProducido + data?.AzucarRefinado
       e11 = e11 + data.AzucarCrudoProducido;
       f11 = f11 + data.MelazaProducida;
       g11 = g11 + data.AlcoholProducido;

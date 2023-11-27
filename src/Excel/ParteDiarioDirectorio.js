@@ -48,8 +48,17 @@ export const CreateExcelWorkbook = async (
   fechasFinIngeniosComparativa,
   setDataImport,
   setDataImportComparativa,
-  fechasFinIngenios
+  fechasFinIngenios,
+  dateInicioIngenios
 ) => {
+  console.log(dateInicioIngenios.filter((d) => {
+    const awq = d.nombre_ingenio === "Santa Rosa"
+    return awq.inicio_zafra
+  }
+    // console.log(as)
+    // return ( as.inicio_zafra)
+  ))
+
   setLoadingDownload(true)
   const parteDiarioData = dataImport ? dataImport : undefined
   const parteDiarioDataComparativa = dataImportComparativa
@@ -1930,39 +1939,39 @@ Inicio de zafra ${date.getFullYear() - 1}: ${inicioZafraComparativa}`
       }
     }
 
-    try {
-      const buffer = await workbook.xlsx.writeBuffer()
-      const fileType =
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-      const EXCEL_EXTENSION = '.xlsx'
-      const blob = new Blob([buffer], { type: fileType })
-      if (navigator.msSaveBlog) {
-        navigator.msSaveBlog(
-          blob,
-          `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-        )
-      } else {
-        const link = document.createElement('a')
-        if (link.download !== undefined) {
-          const url = URL.createObjectURL(blob)
-          link.setAttribute('href', url)
-          link.setAttribute(
-            'download',
-            `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-          )
-          link.style.visibility = 'hidden'
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        }
-      }
-      setLoadingDownload(false)
-      setDataEnd(null)
-      setDataImport(null)
-      setDataImportComparativa(null)
-    } catch (error) {
-      console.log(error)
-    }
+    // try {
+    //   const buffer = await workbook.xlsx.writeBuffer()
+    //   const fileType =
+    //     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    //   const EXCEL_EXTENSION = '.xlsx'
+    //   const blob = new Blob([buffer], { type: fileType })
+    //   if (navigator.msSaveBlog) {
+    //     navigator.msSaveBlog(
+    //       blob,
+    //       `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+    //     )
+    //   } else {
+    //     const link = document.createElement('a')
+    //     if (link.download !== undefined) {
+    //       const url = URL.createObjectURL(blob)
+    //       link.setAttribute('href', url)
+    //       link.setAttribute(
+    //         'download',
+    //         `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
+    //       )
+    //       link.style.visibility = 'hidden'
+    //       document.body.appendChild(link)
+    //       link.click()
+    //       document.body.removeChild(link)
+    //     }
+    //   }
+    //   setLoadingDownload(false)
+    //   setDataEnd(null)
+    //   setDataImport(null)
+    //   setDataImportComparativa(null)
+    // } catch (error) {
+    //   console.log(error)
+    // }
 
 
 

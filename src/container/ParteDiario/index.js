@@ -15,7 +15,6 @@ const ContainerIndexParteDiario = () => {
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [inactivoUser, setInactivoUser] = useState(false);
 
   const { dataUser } = useContext(User);
   useEffect(() => {
@@ -42,7 +41,7 @@ const ContainerIndexParteDiario = () => {
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized, setInactivoUser)
+    inactivityTime(setModalUnauthorized)
     
   }, []);
 
