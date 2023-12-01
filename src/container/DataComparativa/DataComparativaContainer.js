@@ -97,20 +97,6 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
       sorter: (a, b) => a.estimacion_EEAOC > b.estimacion_EEAOC,
     },
     {
-      key: "CMBPorDDJJIPAAT",
-      title: "CMB por DDJJ",
-      dataIndex: "CMB_DDJJ",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.CMB_DDJJ > b.CMB_DDJJ,
-    },
-    {
-      key: "estimacionEEAOC",
-      title: "Estimación EEAOC",
-      dataIndex: "estimacion_EEAOC",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.estimacion_EEAOC > b.estimacion_EEAOC,
-    },
-    {
       key: "actions",
       title: "Acciones",
       render: (_, record) => {

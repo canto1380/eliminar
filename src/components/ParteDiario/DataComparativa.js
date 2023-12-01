@@ -129,40 +129,39 @@ let dataAguilares = {
   },
   dataInicioIngenios = {
     Cell10: 0,
+    CellR10: 0,
     Cell11: 0,
+    CellR11: 0,
     Cell12: 0,
+    CellR12: 0,
     Cell14: 0,
+    CellR14: 0,
     Cell15: 0,
+    CellR15: 0,
     Cell17: 0,
+    CellR17: 0,
     Cell18: 0,
+    CellR18: 0,
     Cell19: 0,
+    CellR19: 0,
     Cell20: 0,
+    CellR20: 0,
     Cell21: 0,
+    CellR21: 0,
     Cell22: 0,
+    CellR22: 0,
     Cell23: 0,
+    CellR23: 0,
     Cell24: 0,
+    CellR24: 0,
     Cell25: 0,
-  },
-  dataFinIngenios = {
-    CellQ10: 0,
-    CellQ11: 0,
-    CellQ12: 0,
-    CellQ14: 0,
-    CellQ15: 0,
-    CellQ17: 0,
-    CellQ18: 0,
-    CellQ19: 0,
-    CellQ20: 0,
-    CellQ21: 0,
-    CellQ22: 0,
-    CellQ23: 0,
-    CellQ24: 0,
-    CellQ25: 0,
-  };
+    CellR25: 0,
+  }
 
 export const dataComparativaPorTipo = (
   dataImportComparativa,
   dataEnd,
+  dateFinIngenios,
   setDc1,
   setDc2,
   setDc3,
@@ -178,8 +177,6 @@ export const dataComparativaPorTipo = (
   setDc13,
   setDc14,
   setFechasInicioIngeniosComparativa,
-  setFechasFinIngeniosComparativa,
-  setDataDiasZafraComparativa
 ) => {
   const date = dataEnd !== null ? new Date(dataEnd) : new Date();
   const anioDataComparativa = date.getFullYear() - 1;
@@ -187,494 +184,109 @@ export const dataComparativaPorTipo = (
   dateComparativa.setFullYear(anioDataComparativa);
 
   /** FECHAS INICIOS DE ZAFRA **/
-  const aguil = dataImportComparativa?.find(
+  // const aguil = dataImportComparativa?.find(
+  //   (d) =>
+  //     d.IngenioNombre === "Aguilares" &&
+  //     parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
+  //     d.MoliendaCanaBruta !== 0
+  // );
+
+  const aguil = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Aguilares" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Aguilares"
   );
 
-  const cruz = dataImportComparativa?.find(
+  const cruz = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Cruz Alta" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Cruz Alta"
   );
 
-  const florida = dataImportComparativa?.find(
+  const florida = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "La Florida" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "La Florida" 
   );
 
-  const concep = dataImportComparativa?.find(
+  const concep = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Concepción" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Concepción" 
   );
 
-  const marapa = dataImportComparativa?.find(
+  const marapa = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Marapa" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Marapa" 
   );
 
-  const bellaVista = dataImportComparativa?.find(
+  const bellaVista = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Bella Vista"
+  )
+
+  const famail = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Bella Vista" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Famaillá" 
   );
 
-  const famail = dataImportComparativa?.find(
+  const corona = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Famaillá" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "La Corona" 
   );
 
-  const corona = dataImportComparativa?.find(
+  const providencia = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "La Corona" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "La Providencia" 
   );
 
-  const providencia = dataImportComparativa?.find(
+  const trinidad = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "La Providencia" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "La Trinidad" 
   );
 
-  const trinidad = dataImportComparativa?.find(
+  const leales = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "La Trinidad" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+      d.nombre_ingenio === "Leales"
   );
 
-  const leales = dataImportComparativa?.find(
+  const nunorco = dateFinIngenios?.find(
     (d) =>
-      d.IngenioNombre === "Leales" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0 &&
-      parseInt(d.FechaParte.split("/")[1]) >= 5
+      d.nombre_ingenio === "Ñuñorco" 
   );
-
-  const nunorco = dataImportComparativa?.find(
-    (d) =>
-      d.IngenioNombre === "Ñuñorco" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
-  );
-
-  const stabarbara = dataImportComparativa?.find(
-    (d) =>
-      d.IngenioNombre === "Santa Barbara" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
-  );
-
-  const starosa = dataImportComparativa?.find(
-    (d) =>
-      d.IngenioNombre === "Santa Rosa" &&
-      parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
-      d.MoliendaCanaBruta !== 0
+  const stabarbara = dateFinIngenios?.find(
+      (d) => d.nombre_ingenio === "Santa Bárbara"
+  )
+  const starosa = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Santa Rosa"
   );
 
   dataInicioIngenios = {
-    Cell10: aguil?.FechaParte,
-    Cell11: cruz?.FechaParte,
-    Cell12: florida?.FechaParte,
-    Cell14: concep?.FechaParte,
-    Cell15: marapa?.FechaParte,
-    Cell17: bellaVista?.FechaParte,
-    Cell18: famail?.FechaParte,
-    Cell19: corona?.FechaParte,
-    Cell20: providencia?.FechaParte,
-    Cell21: trinidad?.FechaParte,
-    Cell22: leales?.FechaParte,
-    Cell23: nunorco?.FechaParte,
-    Cell24: stabarbara?.FechaParte,
-    Cell25: starosa?.FechaParte,
+    Cell10: aguil?.inicio_zafra,
+    CellR10: aguil?.fin_zafra,
+    Cell11: cruz?.inicio_zafra,
+    CellR11: cruz?.fin_zafra,
+    Cell12: florida?.inicio_zafra,
+    CellR12: florida?.fin_zafra,
+    Cell14: concep?.inicio_zafra,
+    CellR14: concep?.fin_zafra,
+    Cell15: marapa?.inicio_zafra,
+    CellR15: marapa?.fin_zafra,
+    Cell17: bellaVista?.inicio_zafra,
+    CellR17: bellaVista?.fin_zafra,
+    Cell18: famail?.inicio_zafra,
+    CellR18: famail?.fin_zafra,
+    Cell19: corona?.inicio_zafra,
+    CellR19: corona?.fin_zafra,
+    Cell20: providencia?.inicio_zafra,
+    CellR20: providencia?.fin_zafra,
+    Cell21: trinidad?.inicio_zafra,
+    CellR21: trinidad?.fin_zafra,
+    Cell22: leales?.inicio_zafra,
+    CellR22: leales?.fin_zafra,
+    Cell23: nunorco?.inicio_zafra,
+    CellR23: nunorco?.fin_zafra,
+    Cell24: stabarbara?.inicio_zafra,
+    CellR24: stabarbara?.fin_zafra,
+    Cell25: starosa?.inicio_zafra,
+    CellR25: starosa?.fin_zafra
   };
-
-  /** FECHAS FIN DE ZAFRA **/
-  let aguilComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Aguilares" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (aguilComparativoFinal && aguilComparativoFinal.length > 0) {
-    const aguilConverted =
-      aguilComparativoFinal &&
-      dateConverted(
-        aguilComparativoFinal[aguilComparativoFinal.length - 1].FechaParte
-      );
-    const aguilDiff =
-      (aguilConverted - dateComparativa) / (1000 * 60 * 60 * 24);
-    aguilComparativoFinal =
-      aguilDiff < 0
-        ? aguilComparativoFinal[aguilComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    aguilComparativoFinal = null;
-  }
-
-  let cruzComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Cruz Alta" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (cruzComparativoFinal && cruzComparativoFinal.length > 0) {
-    const cruzConverted =
-      cruzComparativoFinal &&
-      dateConverted(
-        cruzComparativoFinal[cruzComparativoFinal.length - 1].FechaParte
-      );
-    const cruzDiff = (cruzConverted - dateComparativa) / (1000 * 60 * 60 * 24);
-    cruzComparativoFinal =
-      cruzDiff < 0
-        ? cruzComparativoFinal[cruzComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    cruzComparativoFinal = null;
-  }
-
-  let floridaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "La Florida" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (floridaComparativoFinal && floridaComparativoFinal.length > 0) {
-    const floridaConverted =
-      floridaComparativoFinal &&
-      dateConverted(
-        floridaComparativoFinal[floridaComparativoFinal.length - 1].FechaParte
-      );
-    const floridaDiff =
-      (floridaConverted - dateComparativa) / (1000 * 60 * 60 * 24);
-    floridaComparativoFinal =
-      floridaDiff < 0
-        ? floridaComparativoFinal[floridaComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    floridaComparativoFinal = null;
-  }
-
-  let concepComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Concepción" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (concepComparativoFinal && concepComparativoFinal.length > 0) {
-    const concepConverted =
-      concepComparativoFinal &&
-      dateConverted(
-        concepComparativoFinal[concepComparativoFinal.length - 1].FechaParte
-      );
-    const concepDiff =
-      (concepConverted - dateComparativa) / (1000 * 60 * 60 * 24);
-    concepComparativoFinal =
-      concepDiff < 0
-        ? concepComparativoFinal[concepComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    concepComparativoFinal = 0;
-  }
-  let marapaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Marapa" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (marapaComparativoFinal && marapaComparativoFinal.length > 0) {
-    const marapaConvert =
-      marapaComparativoFinal &&
-      dateConverted(
-        marapaComparativoFinal[marapaComparativoFinal.length - 1].FechaParte
-      );
-    const marapaDiff =
-      (marapaConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    marapaComparativoFinal =
-      marapaDiff < 0
-        ? marapaComparativoFinal[marapaComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    marapaComparativoFinal = null;
-  }
-
-  let bellaVistaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Bella Vista" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (bellaVistaComparativoFinal && bellaVistaComparativoFinal.length > 0) {
-    const bellaVistaConvert =
-      bellaVistaComparativoFinal &&
-      dateConverted(
-        bellaVistaComparativoFinal[bellaVistaComparativoFinal.length - 1]
-          .FechaParte
-      );
-    const vellaVistaDiff =
-      (bellaVistaConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    bellaVistaComparativoFinal =
-      vellaVistaDiff < 0
-        ? bellaVistaComparativoFinal[bellaVistaComparativoFinal.length - 1]
-            .FechaParte
-        : "";
-  } else {
-    bellaVistaComparativoFinal = null;
-  }
-
-  let famailComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Famaillá" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (famailComparativoFinal && famailComparativoFinal.length > 0) {
-    const famailConvert =
-      famailComparativoFinal &&
-      dateConverted(
-        famailComparativoFinal[famailComparativoFinal.length - 1].FechaParte
-      );
-    const famailDiff =
-      (famailConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    famailComparativoFinal =
-      famailDiff < 0
-        ? famailComparativoFinal[famailComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    famailComparativoFinal = null;
-  }
-
-  let coronaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "La Corona" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (coronaComparativoFinal && coronaComparativoFinal.length > 0) {
-    const coronaConvert =
-      coronaComparativoFinal &&
-      dateConverted(
-        coronaComparativoFinal[coronaComparativoFinal.length - 1].FechaParte
-      );
-    const coronaDiff =
-      (coronaConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    coronaComparativoFinal =
-      coronaDiff < 0
-        ? coronaComparativoFinal[coronaComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    coronaComparativoFinal = null;
-  }
-
-  let providenciaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "La Providencia" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (providenciaComparativoFinal && providenciaComparativoFinal.length > 0) {
-    const providenciaConvert =
-      providenciaComparativoFinal &&
-      dateConverted(
-        providenciaComparativoFinal[providenciaComparativoFinal.length - 1]
-          .FechaParte
-      );
-    const providenciaDiff =
-      (providenciaConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    providenciaComparativoFinal =
-      providenciaDiff < 0
-        ? providenciaComparativoFinal[providenciaComparativoFinal.length - 1]
-            .FechaParte
-        : "";
-  } else {
-    providenciaComparativoFinal = null;
-  }
-
-  let trinidadComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "La Trinidad" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (trinidadComparativoFinal && trinidadComparativoFinal.length > 0) {
-    const trinidadConvert =
-      trinidadComparativoFinal &&
-      dateConverted(
-        trinidadComparativoFinal[trinidadComparativoFinal.length - 1].FechaParte
-      );
-    const trinidadDiff =
-      (trinidadConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    trinidadComparativoFinal =
-      trinidadDiff < 0
-        ? trinidadComparativoFinal[trinidadComparativoFinal.length - 1]
-            .FechaParte
-        : "";
-  } else {
-    trinidadComparativoFinal = null;
-  }
-
-  let lealesComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Leales" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (lealesComparativoFinal && lealesComparativoFinal.length > 0) {
-    const lealesConvert =
-      lealesComparativoFinal &&
-      dateConverted(
-        lealesComparativoFinal[lealesComparativoFinal.length - 1].FechaParte
-      );
-    const lealesDiff =
-      (lealesConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    lealesComparativoFinal =
-      lealesDiff < 0
-        ? lealesComparativoFinal[lealesComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    lealesComparativoFinal = null;
-  }
-
-  let nunorcoComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Ñuñorco" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (nunorcoComparativoFinal && nunorcoComparativoFinal.length > 0) {
-    const nunorcoConvert =
-      nunorcoComparativoFinal &&
-      dateConverted(
-        nunorcoComparativoFinal[nunorcoComparativoFinal.length - 1].FechaParte
-      );
-    const nunorcoDiff =
-      (nunorcoConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    nunorcoComparativoFinal =
-      nunorcoDiff < 0
-        ? nunorcoComparativoFinal[nunorcoComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    nunorcoComparativoFinal = null;
-  }
-
-  let stabarbaraComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Santa Barbara" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (stabarbaraComparativoFinal && stabarbaraComparativoFinal.length > 0) {
-    const stabarbaraConvert =
-      stabarbaraComparativoFinal &&
-      dateConverted(
-        stabarbaraComparativoFinal[stabarbaraComparativoFinal.length - 1]
-          .FechaParte
-      );
-    const stabarbaraDiff =
-      (stabarbaraConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    stabarbaraComparativoFinal =
-      stabarbaraDiff < 0
-        ? stabarbaraComparativoFinal[stabarbaraComparativoFinal.length - 1]
-            .FechaParte
-        : "";
-  } else {
-    stabarbaraComparativoFinal = null;
-  }
-
-  let starosaComparativoFinal = dataImportComparativa?.filter(
-    (d) =>
-      d.IngenioNombre === "Santa Rosa" &&
-      parseInt(d.FechaParte.split("/")[2]) === anioDataComparativa &&
-      d.MoliendaCanaBruta !== 0 &&
-      d?.CantidadTara !== 0
-  );
-  if (starosaComparativoFinal && starosaComparativoFinal.length > 0) {
-    const starosaConvert =
-      starosaComparativoFinal &&
-      dateConverted(
-        starosaComparativoFinal[starosaComparativoFinal.length - 1].FechaParte
-      );
-    const starosaDiff =
-      (starosaConvert - dateComparativa) / (1000 * 60 * 60 * 24);
-    starosaComparativoFinal =
-      starosaDiff < 0
-        ? starosaComparativoFinal[starosaComparativoFinal.length - 1].FechaParte
-        : "";
-  } else {
-    starosaComparativoFinal = null;
-  }
-
-  dataFinIngenios = {
-    CellQ10: aguilComparativoFinal,
-    CellQ11: cruzComparativoFinal,
-    CellQ12: floridaComparativoFinal,
-    CellQ14: concepComparativoFinal,
-    CellQ15: marapaComparativoFinal,
-    CellQ17: bellaVistaComparativoFinal,
-    CellQ18: famailComparativoFinal,
-    CellQ19: coronaComparativoFinal,
-    CellQ20: providenciaComparativoFinal,
-    CellQ21: trinidadComparativoFinal,
-    CellQ22: lealesComparativoFinal,
-    CellQ23: nunorcoComparativoFinal,
-    CellQ24: stabarbaraComparativoFinal,
-    CellQ25: starosaComparativoFinal,
-  };
-
-  /** MAYOR DIA DE ZAFRA **/
-  let mayor = 0, fin=0;
-
-  const fechaFin = dataImportComparativa?.filter(
-    (d) => d.MoliendaCanaBruta !== 0 && d?.CantidadTara !== 0
-  );
-  fin = fechaFin && fechaFin[fechaFin.length -1].FechaParte
-  fin = dateConverted(fin)
-
-  const diff = fin - dateComparativa
-  const diff1 =diff / (1000*60*60*24)
-
-  const fechaFinalParaComparar = diff1 < 0 ? fin : dateComparativa
-
-  if (dataEnd && dataInicioIngenios && dataImportComparativa) {
-    for (let clave in dataInicioIngenios) {
-      const dateConvert = dateConverted(dataInicioIngenios[clave]);
-      const diffDate = fechaFinalParaComparar - dateConvert;
-      const daysDate = diffDate / (1000 * 60 * 60 * 24);
-      if (daysDate >= mayor) {
-        mayor = daysDate;
-      }
-    }
-  }
   setFechasInicioIngeniosComparativa(dataInicioIngenios);
-  setFechasFinIngeniosComparativa(dataFinIngenios);
-  setDataDiasZafraComparativa(mayor);
 
   for (let i = 1; i <= 14; i++) {
     let varName1 = "a" + i;

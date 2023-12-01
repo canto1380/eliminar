@@ -20,9 +20,10 @@ const ParteDiario = ({
   setDataEnd,
   setDataImport,
   setDataImportComparativa,
-  dateInicioIngenios
+  dateInicioIngenios,
+  dateFinIngenios,
+  dataIngenios,
 }) => {
-  console.log(dateInicioIngenios)
   const [d1, setD1] = useState([]);
   const [d2, setD2] = useState([]);
   const [d3, setD3] = useState([]);
@@ -54,23 +55,23 @@ const ParteDiario = ({
   const [dc14, setDc14] = useState([]);
   const [inicioZafra, setInicioZafra] = useState(null);
   const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
+  const [finZafra, setFinZafra] = useState("");
+  const [finZafraComparativa, setFinZafraComparativa] = useState("");
   const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null);
   const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
     useState(null);
   const [dataDiasZafra, setDataDiasZafra] = useState(null);
   const [dataDiasZafraComparativa, setDataDiasZafraComparativa] =
     useState(null);
-  const [fechasFinIngeniosComparativa, setFechasFinIngeniosComparativa] =
     useState(null);
-  const [fechasFinIngenios, setFechasFinIngenios] = useState(null);
   const [loadingDownload, setLoadingDownload] = useState(false);
 
-  
-  const { state, dataUser } = useContext(User);
+  const { dataUser } = useContext(User);
   useEffect(() => {
     dataPorTipo(
       dataImport,
       dataEnd,
+      dateInicioIngenios,
       setD1,
       setD2,
       setD3,
@@ -86,12 +87,11 @@ const ParteDiario = ({
       setD13,
       setD14,
       setFechasInicioIngenios,
-      setDataDiasZafra,
-      setFechasFinIngenios,
     );
     dataComparativaPorTipo(
       dataImportComparativa,
       dataEnd,
+      dateFinIngenios,
       setDc1,
       setDc2,
       setDc3,
@@ -107,37 +107,110 @@ const ParteDiario = ({
       setDc13,
       setDc14,
       setFechasInicioIngeniosComparativa,
-      setFechasFinIngeniosComparativa,
-      setDataDiasZafraComparativa
     );
-    dataInicioZafras()
+    // dataInicioZafras();
+    dataFinZafra();
+    dataFinZafraComparativa();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataImport, dataImportComparativa]);
 
-  
-  const dataInicioZafras = () => {
-    const fecha1 = dataImport?.find((d) => d.MoliendaCanaBruta !== 0);
-    setInicioZafra(fecha1?.FechaParte);
-    const fecha2 = dataImportComparativa?.find(
-      (d) => d.MoliendaCanaBruta !== 0
-      );
-    setInicioZafraComparativa(fecha2?.FechaParte);
+
+  let inicioZafraa = new Date('3/10/2100');
+  let finZafraa = null;
+  const dataFinZafra = () => {
+    for (let clave in fechasInicioIngenios) {
+      if (fechasInicioIngenios[clave] === null) {
+        setFinZafra("");
+        return finZafraa;
+      } else {
+        finZafraa =
+          new Date(fechasInicioIngenios[clave]) > finZafraa
+            ? new Date(fechasInicioIngenios[clave])
+            : finZafraa;
+        setFinZafra(finZafraa);
+
+        inicioZafraa =
+          new Date(fechasInicioIngenios[clave]) < inicioZafraa
+            ? new Date(fechasInicioIngenios[clave])
+            : inicioZafraa;
+        setInicioZafra(inicioZafraa)
+      }
+    }
+  };
+
+  let inicioZafraaComparativa = new Date('3/10/2100');
+  let finZafraaComparativa = null;
+  const dataFinZafraComparativa = () => {
+    for (let clave in fechasInicioIngeniosComparativa) {
+      if (fechasInicioIngeniosComparativa[clave] === null) {
+        setFinZafraComparativa("");
+        return finZafraaComparativa;
+      } else {
+        finZafraaComparativa =
+          new Date(fechasInicioIngeniosComparativa[clave]) > finZafraaComparativa
+            ? new Date(fechasInicioIngeniosComparativa[clave])
+            : finZafraaComparativa;
+        setFinZafraComparativa(finZafraaComparativa);
+
+        inicioZafraaComparativa =
+          new Date(fechasInicioIngeniosComparativa[clave]) < inicioZafraaComparativa
+            ? new Date(fechasInicioIngeniosComparativa[clave])
+            : inicioZafraaComparativa;
+        setInicioZafraComparativa(inicioZafraaComparativa)
+      }
+    }
+  }
+
+  useEffect(() => {
+    cantDiasZafra();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inicioZafra, finZafra]);
+  const cantDiasZafra = () => {
+    if (finZafra !== "" && dataEnd < finZafra) {
+      const diffDates = new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafra(Math.ceil(diffTotal));
+    }
+    if(finZafra !== "" && dataEnd >= finZafra) {
+      const diffDates = new Date(finZafra).getTime() - new Date(inicioZafra).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafra(Math.ceil(diffTotal));
+    }
+    if(finZafra === '') {
+      const diffDates = new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafra(Math.ceil(diffTotal));
+    }
   };
   
-  
-  
-  // const starosa = fechasInicioIngenios1?.filter(
-  //   (d) =>
-  //   {
-  //     const as = new Date(d.inicio_zafra)
-  //   return(
-  //     dataEnd &&
-  //     // d.nombre_ingenio === "Santa Rosa" &&
-  //     as.getFullYear() === dataEnd.getFullYear()
-  //   )
-  //   }
-  // );
-  // console.log(starosa)
+
+  useEffect(() => {
+    cantDiasZafraComparativa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inicioZafraComparativa, finZafraComparativa]);
+  const cantDiasZafraComparativa = () => {
+    const date = new Date(dataEnd)
+    const anioDate = date.getFullYear() -1
+    const dateComparativa = new Date(date)
+    dateComparativa.setFullYear(anioDate)
+    
+    if (finZafraComparativa !== "" && dateComparativa < finZafraComparativa) {
+      const diffDates = new Date(dateComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    }
+    if(finZafraComparativa !== "" && dateComparativa >= finZafraComparativa) {
+      const diffDates = new Date(finZafraComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    }
+    if(finZafraComparativa === '') {
+      const diffDates = new Date(dateComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    }
+  }
 
   return (
     <>
@@ -149,7 +222,7 @@ const ParteDiario = ({
                 dataImport === null ||
                 dataImportComparativa === null ||
                 fechasInicioIngenios === null ||
-                fechasFinIngeniosComparativa === null ||
+                // fechasFinIngeniosComparativa === null ||
                 fechasInicioIngeniosComparativa === null) &&
               "disabled"
             }`}
@@ -196,11 +269,11 @@ const ParteDiario = ({
                 dataDiasZafra,
                 fechasInicioIngeniosComparativa,
                 dataDiasZafraComparativa,
-                fechasFinIngeniosComparativa,
                 setDataImport,
                 setDataImportComparativa,
-                fechasFinIngenios,
-                dateInicioIngenios
+                dataIngenios,
+                finZafra,
+                finZafraComparativa
               )
             }
           >

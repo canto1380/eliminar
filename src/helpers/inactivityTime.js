@@ -5,7 +5,7 @@ export const inactivityTime = (setModalUnauthorized) => {
     clearTimeout(tiempoInactivo);
     tiempoInactivo = setTimeout(() => {
       setModalUnauthorized(true);
-    }, 18000);
+    }, 180000000);
   };
 
   reiniciarTemporizador();

@@ -12,7 +12,6 @@ const ItemCollpse = ({
   dataZafra,
   dataParteDiariosHistoricos,
 }) => {
-  const [dataQuincenal, setDataQuincenal] = useState([])
   const [aguilares, setAguilares] = useState([])
   const [bellaVista, setBellaVista] = useState([])
   const [concepcion, setConcepcion] = useState([])
@@ -35,6 +34,7 @@ const ItemCollpse = ({
 
   useEffect(() => {
     dataPorQuincena()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataZafra, dataAnio, dataMes, dataQuincena])
 
   const dataPorQuincena = () => {
@@ -60,7 +60,6 @@ const ItemCollpse = ({
         arr.push(data)
       }
     })
-    setDataQuincenal(arr)
     setAguilares(arr.filter((d) => d.IngenioNombre === 'Aguilares'))
     setBellaVista(arr.filter((d) => d.IngenioNombre === 'Bella Vista'))
     setConcepcion(arr.filter((d) => d.IngenioNombre === 'Concepción'))

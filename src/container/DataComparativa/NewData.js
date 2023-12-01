@@ -1,12 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import dataComparativa from "../../Excel/dataConstanteParteDiario.json";
 import Spinn from "../../components/Spinner";
 import { Container } from "react-bootstrap";
 import Sidebar from "../../components/Admin/Sidebar";
 import Unauthorized from "../../components/Unauthorized";
 import { User } from "../../context/UserProvider";
-import Title from "../../components/Title";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
 import DataComparativaHistorica from "../../components/DataComparativa";
@@ -20,7 +18,6 @@ const NewData = () => {
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [inactivoUser, setInactivoUser] = useState(false);
   const [aniosData, setAniosData] = useState(undefined);
   
 
@@ -52,7 +49,7 @@ const NewData = () => {
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized, setInactivoUser);
+    inactivityTime(setModalUnauthorized);
   }, []);
 
   useEffect(() => {

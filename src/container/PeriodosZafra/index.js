@@ -14,7 +14,6 @@ const PeriodosZafra = () => {
   const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
-  const [inactivoUser, setInactivoUser] = useState(false);
 
   const { dataUser } = useContext(User);
   useEffect(() => {
@@ -39,7 +38,7 @@ const PeriodosZafra = () => {
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized, setInactivoUser)
+    inactivityTime(setModalUnauthorized)
   }, []);
 
   return(

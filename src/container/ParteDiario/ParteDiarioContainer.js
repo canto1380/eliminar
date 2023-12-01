@@ -9,6 +9,7 @@ import {
 import Spinn from '../../components/Spinner'
 import MsgError from '../../components/Messages/MsgError'
 import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
+import {getIngenios} from '../../utils/queryAPI/ingenios'
 
 const ParteDiarioContainer = () => {
   const [dataEnd, setDataEnd] = useState(null)
@@ -22,6 +23,8 @@ const ParteDiarioContainer = () => {
   const [dataImportComparativa, setDataImportComparativa] = useState(null)
   const [banderaDataNull, setBanderaDataNull] = useState(false)
   const [dateInicioIngenios, setDateInicioIngenios] = useState(null)
+  const [dateFinIngenios, setDateFinIngenios] = useState(null)
+  const [dataIngenios, setDataIngenios] = useState(null)
 
   useEffect(() => {
     if (dataZafra !== null) {
@@ -64,19 +67,8 @@ const ParteDiarioContainer = () => {
       fechadesde: `25-04-${anioDataEnd - 1}`,
       fechahasta: `24-04-${anioDataEnd}`,
     }
-    // const data = await getDataPartesDiarios(params)
-    //setDataImport(data?.ParteDiarios)
-    // const dataComparativa = await getDataPartesDiarios(params1)
-    // setDataImportComparativa(dataComparativa?.ParteDiarios)
 
     /***** DESDE BACKEND *****/
-    // const params = {
-    //   dataEnd,
-    // }
-    // const anioComparativo = anioDataEnd - 1
-    // const params1 = {
-    //   anioComparativo,
-    // }
     const data = await getDataPartesDiariosBE(params, '/parteDiario')
     setDataImport(data)
 
@@ -117,9 +109,20 @@ const ParteDiarioContainer = () => {
 
   const getDataPeriodos = async() => {
     const params = {limit: 10000, anio: dataEnd.getFullYear()}
-    console.log(params)
     const data = await getPeriodoZafra(params)
     setDateInicioIngenios(data)
+
+    const params1 = {limit: 1000, anio: dataEnd.getFullYear() -1}
+    const data1 = await getPeriodoZafra(params1)
+    setDateFinIngenios(data1)
+  }
+
+  useEffect(() => {
+    getDataIngenios()
+  },[])
+  const getDataIngenios = async() => {
+    const data = await getIngenios()
+    setDataIngenios(data)
   }
   return (
     <Container fluid>
@@ -177,6 +180,8 @@ const ParteDiarioContainer = () => {
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}
             dateInicioIngenios={dateInicioIngenios}
+            dateFinIngenios={dateFinIngenios}
+            dataIngenios={dataIngenios}
           />
         </>
       )}

@@ -23,7 +23,7 @@ const PeriodoZafraContainer = ({tokenAuth, routeAPI}) => {
   },[search, yearZafra])
 
   const dataPeriodosZafra = async() => {
-    const params = {search, ano: yearZafra}
+    const params = {search, anio: yearZafra}
     const data =  await getPeriodoZafra(params)
     setPeriodosZafra(data)
   }
@@ -61,6 +61,7 @@ const PeriodoZafraContainer = ({tokenAuth, routeAPI}) => {
     {
       key: "actions",
       title: "Acciones",
+      
       render: (_, record) => {
         return (
           <Space size="middle">
@@ -77,6 +78,7 @@ const PeriodoZafraContainer = ({tokenAuth, routeAPI}) => {
     },
     
   ]
+  console.log(periodosZafra)
   return (
     <Container fluid>
       <TitlePage titlePage={"Periodos de zafra"} />

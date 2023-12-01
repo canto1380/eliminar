@@ -19,7 +19,6 @@ const AddEditPeriodoContainer = () => {
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [inactivoUser, setInactivoUser] = useState(false);
   const [aniosData, setAniosData] = useState(undefined);
   const [ingeniosData, setIngeniosData] = useState(undefined)
 
@@ -51,7 +50,7 @@ const AddEditPeriodoContainer = () => {
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized, setInactivoUser);
+    inactivityTime(setModalUnauthorized);
   }, []);
 
   useEffect(() => {
