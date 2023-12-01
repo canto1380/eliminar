@@ -50,7 +50,6 @@ const FormAddEditPeriodos = ({
   const createPeriodo = async (values) => {
     values.inicio_zafra = startDate;
     values.fin_zafra = endDate;
-    console.log(values);
 
     try {
       const res = await api("POST", "periodoZafra", values);

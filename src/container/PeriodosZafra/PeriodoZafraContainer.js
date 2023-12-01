@@ -78,7 +78,6 @@ const PeriodoZafraContainer = ({tokenAuth, routeAPI}) => {
     },
     
   ]
-  console.log(periodosZafra)
   return (
     <Container fluid>
       <TitlePage titlePage={"Periodos de zafra"} />
