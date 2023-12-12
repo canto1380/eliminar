@@ -11,68 +11,68 @@ import { Space, Button, Spin } from "antd";
 import {
   EditOutlined,
   DeleteOutlined,
-  RollbackOutlined
+  RollbackOutlined,
 } from "@ant-design/icons";
 import Unauthorized from "../../components/Unauthorized";
 
-const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
+const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
   const [dataComparativa, setDataComparativa] = useState(null);
   const [dataZafra, setDataZafra] = useState(null);
   const [search, setSearch] = useState(null);
-  const [loading, setLoading] = useState(false)
-  const [modalUnauthorized, setModalUnauthorized] = useState(false)
-  const [band, setBand] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [modalUnauthorized, setModalUnauthorized] = useState(false);
+  const [band, setBand] = useState(false);
 
   useEffect(() => {
     dataComparativaGet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, dataZafra, band]);
 
-  const dataComparativaGet = async() => {
-    const params = {search, anio: dataZafra}
-    const data = await getDataComparativa(params)
-    setDataComparativa(data)
+  const dataComparativaGet = async () => {
+    const params = { search, anio: dataZafra };
+    const data = await getDataComparativa(params);
+    setDataComparativa(data);
   };
 
   const handleDelete = async (deleted, id) => {
     try {
       if (deleted) {
         const res = await api(
-          'PATCH',
+          "PATCH",
           `${routeAPI}/restore/${id}`,
           null,
           tokenAuth
-        )
+        );
         if (res.status === 200) {
-          setLoading(true)
+          setLoading(true);
           setTimeout(() => {
-            setLoading(false)
-            setBand(!band)
-          }, 2500)
+            setLoading(false);
+            setBand(!band);
+          }, 2500);
         }
         if (res.response.status === 401) {
-          setModalUnauthorized(true)
+          setModalUnauthorized(true);
         }
       } else {
         const res = await api(
-          'PATCH',
+          "PATCH",
           `${routeAPI}/delete/${id}`,
           null,
           tokenAuth
-        )
+        );
         if (res.status === 200) {
-          setLoading(true)
+          setLoading(true);
           setTimeout(() => {
-            setLoading(false)
-            setBand(!band)
-          }, 2500)
+            setLoading(false);
+            setBand(!band);
+          }, 2500);
         }
         if (res.response.status === 401) {
-          setModalUnauthorized(true)
+          setModalUnauthorized(true);
         }
       }
     } catch (error) {}
-  }
+  };
 
   const columnsData = [
     {
@@ -103,18 +103,26 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
         return (
           <Space size="middle">
             <Button
-            className="bg-secondary btn-edit"
+              className="bg-secondary btn-edit"
+              key={record?._id}
               href={`/admin/datos-comparativos/editar/${record?.anio_zafra}`}
               style={{ color: "white" }}
               icon={<EditOutlined className="" />}
-              title='Editar'
+              title="Editar"
             ></Button>
             <Button
-              className={`${record?.deleted ? 'bg-success' : 'bg-danger'}`}
-              onClick={()=>handleDelete(record?.deleted, record?.id)}
+              key={record?._id}
+              className={`${record?.deleted ? "bg-success" : "bg-danger"}`}
+              onClick={() => handleDelete(record?.deleted, record?.id)}
               type="primary"
-              icon={record?.deleted ? <RollbackOutlined className="c-green" /> : <DeleteOutlined className="c-red" />}
-              title={record?.deleted ? 'Restaurar' : 'Eliminar'}
+              icon={
+                record?.deleted ? (
+                  <RollbackOutlined className="c-green" />
+                ) : (
+                  <DeleteOutlined className="c-red" />
+                )
+              }
+              title={record?.deleted ? "Restaurar" : "Eliminar"}
             ></Button>
           </Space>
         );
@@ -137,28 +145,31 @@ const DataComparativaContainer = ({tokenAuth, routeAPI}) => {
             setDataZafra={setDataZafra}
             bandFilterZafraAnio={true}
             bandFilterSearch={true}
-            placeHolderSearch='Valor'
+            placeHolderSearch="Valor"
           />
-          <ListHeader title={"Datos comparativos"} btnLink={'/admin/datos-comparativos/nuevo'}/>
-          <div className='pb-1 pt-3 px-4'>
-          <ListadoDatos
-            columns={columnsData}
-            scroll={30}
-            data={dataComparativa}
+          <ListHeader
+            title={"Datos comparativos"}
+            btnLink={"/admin/datos-comparativos/nuevo"}
           />
+          <div className="pb-1 pt-3 px-4">
+            <ListadoDatos
+              columns={columnsData}
+              scroll={30}
+              data={dataComparativa}
+            />
           </div>
         </>
       )}
       {loading && (
-        <div className='loadingSpin'>
-          <Spin/>
+        <div className="loadingSpin">
+          <Spin />
         </div>
       )}
       {modalUnauthorized && (
-            <div>
-              <Unauthorized />
-            </div>
-          )}
+        <div>
+          <Unauthorized />
+        </div>
+      )}
     </Container>
   );
 };

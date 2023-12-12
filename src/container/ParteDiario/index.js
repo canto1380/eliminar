@@ -42,7 +42,6 @@ const ContainerIndexParteDiario = () => {
 
   useEffect(() => {
     inactivityTime(setModalUnauthorized)
-    
   }, []);
 
   return (

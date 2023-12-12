@@ -13,6 +13,7 @@ const Filtros = ({
   setDataMes,
   setDataQuincena,
   setDataZafra,
+  dataEnd,
   dataAnio,
   dataMes,
   dataQuincena,
@@ -24,7 +25,7 @@ const Filtros = ({
   bandFilterQuincena,
   BandFilterDiaParteDirectorio,
   bandFilterSearch,
-  placeHolderSearch
+  placeHolderSearch,
 }) => {
   const [dataAnios, setDataAnios] = useState(null)
   const [dataMeses, setDataMeses] = useState(null)
@@ -213,7 +214,7 @@ const Filtros = ({
 
         <Col xs={12} lg={4} className="mb-1 mt-1">
           <p className="me-4 mb-0">Dia del parte:</p>
-          <DatePicker format={"DD/MM/YYYY"} onChange={changeData} />
+          <DatePicker format={"DD/MM/YYYY"} onChange={changeData}/>
         </Col>
       </Row>
       </>

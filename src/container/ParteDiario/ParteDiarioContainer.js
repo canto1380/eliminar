@@ -1,148 +1,145 @@
-import { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
-import TitlePage from '../../components/TitlePages'
-import ParteDiario from '../../components/ParteDiario/ParteDiario'
-import Filtros from '../../components/Filtros'
-import {
-  getDataPartesDiariosBE,
-} from '../../utils/queryAPI/partesDiariosQuery'
-import Spinn from '../../components/Spinner'
-import MsgError from '../../components/Messages/MsgError'
-import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
-import {getIngenios} from '../../utils/queryAPI/ingenios'
+import { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import TitlePage from "../../components/TitlePages";
+import ParteDiario from "../../components/ParteDiario/ParteDiario";
+import Filtros from "../../components/Filtros";
+import { getDataPartesDiariosBE } from "../../utils/queryAPI/partesDiariosQuery";
+import Spinn from "../../components/Spinner";
+import MsgError from "../../components/Messages/MsgError";
+import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
+import { getIngenios } from "../../utils/queryAPI/ingenios";
 
 const ParteDiarioContainer = () => {
-  const [dataEnd, setDataEnd] = useState(null)
-  const [dataZafra, setDataZafra] = useState(null)
-  const [dataAnio, setDataAnio] = useState(null)
-  const [dataMes, setDataMes] = useState(null)
-  const [dataQuincena, setDataQuincena] = useState(null)
+  const [dataEnd, setDataEnd] = useState(null);
+  const [dataZafra, setDataZafra] = useState(null);
+  const [dataAnio, setDataAnio] = useState(null);
+  const [dataMes, setDataMes] = useState(null);
+  const [dataQuincena, setDataQuincena] = useState(null);
   const [dataParteDiariosHistoricos, setDataParteDiariosHistoricos] =
-    useState(null)
-  const [dataImport, setDataImport] = useState(null)
-  const [dataImportComparativa, setDataImportComparativa] = useState(null)
-  const [banderaDataNull, setBanderaDataNull] = useState(false)
-  const [dateInicioIngenios, setDateInicioIngenios] = useState(null)
-  const [dateFinIngenios, setDateFinIngenios] = useState(null)
-  const [dataIngenios, setDataIngenios] = useState(null)
-
+    useState(null);
+  const [dataImport, setDataImport] = useState(null);
+  const [dataImportComparativa, setDataImportComparativa] = useState(null);
+  const [banderaDataNull, setBanderaDataNull] = useState(false);
+  const [dateInicioIngenios, setDateInicioIngenios] = useState(null);
+  const [dateFinIngenios, setDateFinIngenios] = useState(null);
+  const [dataIngenios, setDataIngenios] = useState(null);
+  
   useEffect(() => {
     if (dataZafra !== null) {
-      getData()
+      getData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra])
+  }, [dataZafra]);
 
   const getData = async () => {
-    setDataParteDiariosHistoricos(null)
+    setDataParteDiariosHistoricos(null);
     const params = {
       fechadesde: `25-04-${dataZafra}`,
       fechahasta: `24-04-${dataZafra + 1}`,
-    }
+    };
     /***** DESDE FRONTEND *****/
     // const data = await getDataPartesDiarios(params) DESDE FRONTEND
     // setDataParteDiariosHistoricos(data?.ParteDiarios)
 
     /***** DESDE BACKEND *****/
-    const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
-    setDataParteDiariosHistoricos(data)
-  }
+    const data = await getDataPartesDiariosBE(params, "/dataQuincenal"); // DESDE BACKEND
+    setDataParteDiariosHistoricos(data);
+  };
 
   useEffect(() => {
     if (dataEnd !== null) {
-      getDataImport()
+      getDataImport();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataEnd])
+  }, [dataEnd]);
 
   const getDataImport = async () => {
-    const anioDataEnd = dataEnd.getFullYear()
+    const anioDataEnd = dataEnd.getFullYear();
 
-    /***** DESDE FRONTEND *****/
     const params = {
       fechadesde: `25-04-${anioDataEnd}`,
       fechahasta: `24-04-${anioDataEnd + 1}`,
-    }
+    };
     const params1 = {
       fechadesde: `25-04-${anioDataEnd - 1}`,
       fechahasta: `24-04-${anioDataEnd}`,
-    }
+    };
 
     /***** DESDE BACKEND *****/
-    const data = await getDataPartesDiariosBE(params, '/parteDiario')
-    setDataImport(data)
+    const data = await getDataPartesDiariosBE(params, "/parteDiario");
+    setDataImport(data);
 
     const dataComparativa = await getDataPartesDiariosBE(
       params1,
-      '/parteDiario'
-    )
-    setDataImportComparativa(dataComparativa)
-  }
+      "/parteDiario"
+    );
+    setDataImportComparativa(dataComparativa);
+  };
 
   useEffect(() => {
-    const dataNow = new Date()
+    const dataNow = new Date();
     if (dataZafra === null) {
-      setDataZafra(dataNow.getFullYear())
+      setDataZafra(dataNow.getFullYear());
     }
 
     if (dataAnio === null) {
-      setDataAnio(dataNow.getFullYear())
+      setDataAnio(dataNow.getFullYear());
     }
     if (dataMes === null) {
-      setDataMes(dataNow.getMonth() + 1)
+      setDataMes(dataNow.getMonth() + 1);
     }
     if (dataQuincena === null) {
       if (dataNow.getDate() <= 15) {
-        setDataQuincena(1)
+        setDataQuincena(1);
       } else {
-        setDataQuincena(2)
+        setDataQuincena(2);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
   useEffect(() => {
-    if(dataEnd) {
-      getDataPeriodos()
+    if (dataEnd) {
+      getDataPeriodos();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dataEnd])
+  }, [dataEnd]);
 
-  const getDataPeriodos = async() => {
-    const params = {limit: 10000, anio: dataEnd.getFullYear()}
-    const data = await getPeriodoZafra(params)
-    setDateInicioIngenios(data)
+  const getDataPeriodos = async () => {
+    const params = { limit: 10000, anio: dataEnd.getFullYear() };
+    const data = await getPeriodoZafra(params);
+    setDateInicioIngenios(data);
 
-    const params1 = {limit: 1000, anio: dataEnd.getFullYear() -1}
-    const data1 = await getPeriodoZafra(params1)
-    setDateFinIngenios(data1)
-  }
+    const params1 = { limit: 1000, anio: dataEnd.getFullYear() - 1 };
+    const data1 = await getPeriodoZafra(params1);
+    setDateFinIngenios(data1);
+  };
 
   useEffect(() => {
-    getDataIngenios()
-  },[])
-  const getDataIngenios = async() => {
-    const data = await getIngenios()
-    setDataIngenios(data)
-  }
+    getDataIngenios();
+  }, []);
+  const getDataIngenios = async () => {
+    const data = await getIngenios();
+    setDataIngenios(data);
+  };
   return (
     <Container fluid>
       {banderaDataNull && (
         <MsgError
-          text1='Estamos procesando la información.'
-          text2='Intente de nuevo.'
+          text1="Estamos procesando la información."
+          text2="Intente de nuevo."
         />
       )}
-      <TitlePage titlePage='Parte Diario Directorio' />
-      <hr className='mx-3 mt-1' />
+      <TitlePage titlePage="Parte Diario Directorio" />
+      <hr className="mx-3 mt-1" />
       {dataParteDiariosHistoricos === null ? (
-        <div className='d-flex justify-content-center align-items-center text-center'>
-          <Spinn type='data' />
+        <div className="d-flex justify-content-center align-items-center text-center">
+          <Spinn type="data" />
         </div>
       ) : (
         <>
-          <div className='px-4'>
-            <span className='text-danger fw-bolder'>*</span>
-            <span className='text-legend'>
+          <div className="px-4">
+            <span className="text-danger fw-bolder">*</span>
+            <span className="text-legend">
               Periodos desde 25/04 al 24/04 del siguiente año
             </span>
           </div>
@@ -152,6 +149,7 @@ const ParteDiarioContainer = () => {
             setDataMes={setDataMes}
             setDataQuincena={setDataQuincena}
             setDataZafra={setDataZafra}
+            dataEnd={dataEnd}
             dataAnio={dataAnio}
             dataMes={dataMes}
             dataQuincena={dataQuincena}
@@ -186,6 +184,6 @@ const ParteDiarioContainer = () => {
         </>
       )}
     </Container>
-  )
-}
-export default ParteDiarioContainer
+  );
+};
+export default ParteDiarioContainer;

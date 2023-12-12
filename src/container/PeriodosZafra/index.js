@@ -49,7 +49,7 @@ const PeriodosZafra = () => {
         </div>
       ) : (
         <>
-          <Title title={"Datos Comparativos"} />
+          <Title title={"Zafra Ingenios"} />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}

@@ -2181,14 +2181,15 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     try {
       const buffer = await workbook.xlsx.writeBuffer();
       const fileType =
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
       const EXCEL_EXTENSION = ".xlsx";
       const blob = new Blob([buffer], { type: fileType });
       if (navigator.msSaveBlog) {
         navigator.msSaveBlog(
           blob,
           `Parte diario directorio - ${dateFormat}` + EXCEL_EXTENSION
-        );
+          );
+          window.location.href='/admin/home'
       } else {
         const link = document.createElement("a");
         if (link.download !== undefined) {
@@ -2203,9 +2204,9 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
           link.click();
           document.body.removeChild(link);
         }
+        window.location.href='/admin/home'
       }
       setLoadingDownload(false);
-      setDataEnd(null);
       setDataImport(null);
       setDataImportComparativa(null);
     } catch (error) {
