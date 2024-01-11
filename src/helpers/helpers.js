@@ -44,7 +44,7 @@ export const deleteToken = () => {
 }
 
 export const deleteCookies = () => {
-  Cookies.remove('token')
+  Cookies.remove('token-ipaat-v2')
   Cookies.remove('idUser')
 }
 

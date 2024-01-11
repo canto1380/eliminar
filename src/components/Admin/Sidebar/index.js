@@ -7,6 +7,7 @@ import {
   BsClipboardData
 } from 'react-icons/bs'
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
+import { RiDatabaseLine } from "react-icons/ri"
 import './Sidebar.css'
 import {
   deleteCookies,
@@ -15,16 +16,18 @@ import {
 } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
 
-const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
+const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
   const [initial, setInitial] = useState('')
   const [initialSurname, setInitialSurname] = useState('')
+  const [nick, setNick] = useState('')
 
   useEffect(() => {
     const data = getDataToken()
-    const a = data?.name?.toUpperCase()
-    const b = data?.surname?.toUpperCase()
+    const a = data?.nombre?.toUpperCase()
+    const b = data?.apellido?.toUpperCase()
     setInitial(a?.substr(0, 1))
     setInitialSurname(b?.substr(0, 1))
+    setNick(data?.nickname)
   }, [dataUser])
 
   const cerrarSesion = async (e) => {
@@ -41,7 +44,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
     },
     {
       title: 'datos-comparativos',
-      iconName: <BsClipboardData className='sizeIcon' />,
+      iconName: <RiDatabaseLine className='sizeIcon' />,
       name: 'Datos comparativos',
     },
     {
@@ -86,7 +89,7 @@ const Sidebar = ({ inactivo, setInactivo, dataAuth, dataUser }) => {
         </Col>
         <Col xs={6} className='px-1'>
           <p className={`${inactivo ? `inactivo` : 'mb-0'}`}>
-            {dataAuth?.nickname}
+            {nick}
           </p>
         </Col>
 

@@ -41,7 +41,6 @@ const DataComparativa = () => {
   useEffect(() => {
     inactivityTime(setModalUnauthorized)
   }, []);
-
   return (
     <div>
       {loading ? (
