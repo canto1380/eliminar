@@ -1,4 +1,4 @@
-import { api, apiParams } from "../api";
+import { api } from "../api";
 
 export const getUsuariosById = async ( id, token) => {
   const res = await api("GET", `usuarios/${id}`, "", token);
