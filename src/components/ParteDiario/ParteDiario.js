@@ -108,16 +108,15 @@ const ParteDiario = ({
       setDc14,
       setFechasInicioIngeniosComparativa,
     );
-    // dataInicioZafras();
     dataFinZafra();
     dataFinZafraComparativa();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataImport, dataImportComparativa]);
 
-
   let inicioZafraa = new Date('3/10/2100');
   let finZafraa = null;
+
   const dataFinZafra = () => {
     for (let clave in fechasInicioIngenios) {
       if (fechasInicioIngenios[clave] === null) {
@@ -211,7 +210,6 @@ const ParteDiario = ({
       setDataDiasZafraComparativa(Math.ceil(diffTotal));
     }
   }
-
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">

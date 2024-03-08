@@ -401,16 +401,13 @@ export const dataPorTipo = (
     window[varName13] = 0;
     window[varName14] = 0;
   }
-
   dataImport?.forEach((data) => {
     
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-    
     if (
       data.IngenioNombre === "Aguilares" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a1 = a1 + data.MoliendaCanaBruta || 0;
       b1 = b1 + data.MoliendaCanaNeta || 0;
@@ -443,8 +440,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Cruz Alta" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a2 = a2 + data.MoliendaCanaBruta;
       b2 = b2 + data.MoliendaCanaNeta;
@@ -476,8 +472,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Florida" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a3 = a3 + data.MoliendaCanaBruta;
       b3 = b3 + data.MoliendaCanaNeta;
@@ -509,8 +504,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Concepción" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a4 = a4 + data.MoliendaCanaBruta;
       b4 = b4 + data.MoliendaCanaNeta;
@@ -544,8 +538,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Marapa" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a5 = a5 + data.MoliendaCanaBruta;
       b5 = b5 + data.MoliendaCanaNeta;
@@ -577,8 +570,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Bella Vista" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a6 = a6 + data.MoliendaCanaBruta;
       b6 = b6 + data.MoliendaCanaNeta;
@@ -609,8 +601,7 @@ export const dataPorTipo = (
     }
     if (
       data.IngenioNombre === "Famaillá" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a7 = a7 + data.MoliendaCanaBruta;
       b7 = b7 + data.MoliendaCanaNeta;
@@ -644,8 +635,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Corona" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a8 = a8 + data.MoliendaCanaBruta;
       b8 = b8 + data.MoliendaCanaNeta;
@@ -677,8 +667,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Providencia" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a9 = a9 + data.MoliendaCanaBruta;
       b9 = b9 + data.MoliendaCanaNeta;
@@ -716,8 +705,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Trinidad" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a10 = a10 + data.MoliendaCanaBruta;
       b10 = b10 + data.MoliendaCanaNeta;
@@ -749,8 +737,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Leales" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a11 = a11 + data.MoliendaCanaBruta;
       b11 = b11 + data.MoliendaCanaNeta;
@@ -784,8 +771,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Ñuñorco" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a12 = a12 + data?.MoliendaCanaBruta;
       b12 = b12 + data?.MoliendaCanaNeta;
@@ -817,8 +803,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Santa Barbara" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a13 = a13 + data.MoliendaCanaBruta;
       b13 = b13 + data.MoliendaCanaNeta;
@@ -850,8 +835,7 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Santa Rosa" &&
-      newDate <= fechaParametro &&
-      newDate.getFullYear() === fechaParametro.getFullYear()
+      newDate <= fechaParametro 
     ) {
       a14 = a14 + data.MoliendaCanaBruta;
       b14 = b14 + data.MoliendaCanaNeta;

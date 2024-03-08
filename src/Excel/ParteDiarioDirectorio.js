@@ -64,14 +64,17 @@ export const CreateExcelWorkbook = async (
     const workbook = new ExcelJS.Workbook();
     /** Fecha Hasta parte Dairio **/
     const date = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const anioData = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 1 : date.getFullYear() ;
     /** Anio Comparativo **/
-    const anioData = date.getFullYear() - 1;
+    const anioDataComparativo = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 2 : date.getFullYear() - 1;
+    console.log(anioData, anioDataComparativo)
     /** Fecha hasta comparativa **/
     const dateComparativa = new Date(date);
-    dateComparativa.setFullYear(anioData);
+    dateComparativa.setFullYear(anioDataComparativo);
     /** Formatos **/
     const dateFormat = moment(date).format("DD-MM-YYYY");
     const dateComparativaFormat = moment(dateComparativa).format("DD-MM-YYYY");
+    console.log(dateComparativaFormat)
     workbook.creator = `${dataUser?.name} ${dataUser?.surname}`;
     workbook.created = date;
     workbook.modified = date;
@@ -492,8 +495,8 @@ export const CreateExcelWorkbook = async (
     };
 
     page1.mergeCells("G1:W2");
-    page1.getCell("W2").value = `COMPARATIVO ZAFRA ${date.getFullYear()}/${
-      date.getFullYear() - 1
+    page1.getCell("W2").value = `COMPARATIVO ZAFRA ${anioData}/${
+      anioDataComparativo
     }`;
     page1.getCell("W2").alignment = { horizontal: "center" };
     page1.getCell("W2").font = { name: "Bodoni MT", bold: true, size: 24 };
@@ -530,11 +533,11 @@ export const CreateExcelWorkbook = async (
     page1.getCell("A9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("C6:O6");
-    page1.getCell("O6").value = `ZAFRA ${date.getFullYear()}`;
+    page1.getCell("O6").value = `ZAFRA ${anioData}`;
     page1.getCell("O6").font = { name: "Bodoni MT", bold: true, size: 18 };
 
     page1.mergeCells("P6:AB6");
-    page1.getCell("AB6").value = `ZAFRA ${date.getFullYear() - 1}`;
+    page1.getCell("AB6").value = `ZAFRA ${anioDataComparativo}`;
     page1.getCell("AB6").font = { name: "Bodoni MT", bold: true, size: 18 };
 
     /** Zafra 2023 **/
@@ -543,7 +546,7 @@ export const CreateExcelWorkbook = async (
     // page1.getCell('B9').font = { name: 'Calibri', bold: true, size: 11 }
 
     page1.mergeCells("C7:C9");
-    page1.getCell("C9").value = `Inicio de Zafra ${date.getFullYear()}`;
+    page1.getCell("C9").value = `Inicio de Zafra ${anioData}`;
     page1.getCell("C9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("D7:D9");
@@ -551,7 +554,7 @@ export const CreateExcelWorkbook = async (
     page1.getCell("D9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("E7:E9");
-    page1.getCell("E9").value = `fin de zafra ${date.getFullYear()}`;
+    page1.getCell("E9").value = `fin de zafra ${anioData}`;
     page1.getCell("E9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("F7:F8");
@@ -587,7 +590,7 @@ export const CreateExcelWorkbook = async (
 
     /** Zafra 2022 **/
     page1.mergeCells("P7:P9");
-    page1.getCell("P9").value = `Inicio de Zafra ${date.getFullYear() - 1}`;
+    page1.getCell("P9").value = `Inicio de Zafra ${anioDataComparativo}`;
     page1.getCell("P9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("Q7:Q9");
@@ -595,7 +598,7 @@ export const CreateExcelWorkbook = async (
     page1.getCell("Q9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("R7:R9");
-    page1.getCell("R9").value = `Fin de Zafra ${date.getFullYear() - 1}`;
+    page1.getCell("R9").value = `Fin de Zafra ${anioDataComparativo}`;
     page1.getCell("R9").font = { name: "Calibri", bold: true, size: 11 };
 
     page1.mergeCells("S7:S8");
@@ -1260,8 +1263,8 @@ export const CreateExcelWorkbook = async (
 
     /** COMPARATIVOS **/
     page1.mergeCells("A30:O30");
-    page1.getCell("A30").value = `COMPARATIVO ZAFRA ${date.getFullYear()}/${
-      date.getFullYear() - 1
+    page1.getCell("A30").value = `COMPARATIVO ZAFRA ${anioData}/${
+      anioDataComparativo
     } - VARIACIÓN %  HASTA EL ${dateFormat}`;
     page1.getCell("A30").alignment = alignCenter;
     page1.getCell("A30").font = functionFont("Calibri", true, 14);
@@ -1326,17 +1329,17 @@ export const CreateExcelWorkbook = async (
     };
 
     page1.mergeCells("P30:V31");
-    page1.getCell("P30").value = `Inicio de zafra ${date.getFullYear()}: ${
+    page1.getCell("P30").value = `Inicio de zafra ${anioData}: ${
       inicioZafra !== null ? moment(inicioZafra).format("DD/MM/YYYY") : ""
     }
-Inicio de zafra ${date.getFullYear() - 1}: ${moment(inicioZafraComparativa).format("DD/MM/YYYY")}`;
+Inicio de zafra ${anioDataComparativo}: ${moment(inicioZafraComparativa).format("DD/MM/YYYY")}`;
     page1.getCell("P30").alignment = alignStart;
 
     page1.mergeCells("W30:AB31");
-    page1.getCell("W30").value = `Fin de zafra ${date.getFullYear()}: ${
+    page1.getCell("W30").value = `Fin de zafra ${anioData}: ${
       finZafra !== "" ? moment(finZafra).format("DD/MM/YYYY") : ""
     }
-Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD/MM/YYYY")}`;
+Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM/YYYY")}`;
     page1.getCell("W30").alignment = alignStart;
 
     page1.mergeCells("P32:T32");
@@ -1355,10 +1358,10 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     const dataComparativa = dataConstante.dataComparativa;
     let estimacionEEAOC;
     let CMBporDDJJ;
-    let yearDateComparative = date.getFullYear() - 1;
+    let yearDateComparative = anioDataComparativo;
 
     dataComparativa.forEach((d) => {
-      if (d.anio === date.getFullYear().toString()) {
+      if (d.anio === anioData.toString()) {
         estimacionEEAOC = d.estimacionEEAOC;
       }
       if (d.anio === yearDateComparative.toString()) {
@@ -1385,7 +1388,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("H37").value = "%";
 
     page1.mergeCells("I34:J37");
-    page1.getCell("I34").value = `ZAFRA ${date.getFullYear()}`;
+    page1.getCell("I34").value = `ZAFRA ${anioData}`;
     page1.getCell("I34").font = functionFont("Calibri", true, 16);
     page1.getCell("I34").alignment = alignCenter;
     page1.getCell("I34").fill = bgVerde;
@@ -1423,7 +1426,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("X37").value = "%";
 
     page1.mergeCells("Y34:AB37");
-    page1.getCell("Y34").value = `ZAFRA ${date.getFullYear() - 1}`;
+    page1.getCell("Y34").value = `ZAFRA ${anioDataComparativo}`;
     page1.getCell("Y34").font = functionFont("Bodoni MT", true, 16);
     page1.getCell("Y34").alignment = alignCenter;
     page1.getCell("Y34").fill = bgAzul;
@@ -1432,7 +1435,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.mergeCells("A39:G40");
     page1.getCell(
       "A39"
-    ).value = `PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA ${date.getFullYear()}`;
+    ).value = `PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA ${anioData}`;
     page1.getCell("A39").font = functionFont("Bodoni MT", true, 16);
     page1.getCell("A39").alignment = alignCenter;
     page1.getCell("A39").fill = bgVerde;
@@ -1641,7 +1644,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.mergeCells("U39:Y40");
     page1.getCell(
       "U39"
-    ).value = `MERCADO EXTERNO DEL AZÚCAR - ZAFRA ${date.getFullYear()} Al ${dateFormat}`;
+    ).value = `MERCADO EXTERNO DEL AZÚCAR - ZAFRA ${anioData} Al ${dateFormat}`;
     page1.getCell("U39").alignment = alignCenter;
     page1.getCell("U39").font = functionFont("Bodoni MT", true, 12);
 
@@ -1826,7 +1829,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
       page1.getCell("H20").value = parseFloat(d9["G20"]);
       page1.getCell("K20").value = parseInt(d9["J20"]);
       page1.getCell("L20").value = parseInt(d9["K20"]);
-      // if(date.getFullYear() === 2023) page1.getCell('L20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
+      // if(anioData === 2023) page1.getCell('L20').note = 'FALTA AZ ORGANICO Y OTOS AZ'
       page1.getCell("N20").value = parseInt(d9["M20"]);
       page1.getCell("O20").value = parseInt(d9["N20"]);
 
@@ -1909,7 +1912,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("T14").value = parseInt(dc4["S14"]);
     page1.getCell("U14").value = parseFloat(dc4["T14"]);
     page1.getCell("X14").value = parseInt(dc4["W14"]);
-    if (date.getFullYear() - 1 === 2023)
+    if (anioDataComparativo === 2023)
       page1.getCell("X14").note = "FALTA AZ REFINADO";
     page1.getCell("Y14").value = parseInt(dc4["X14"]);
     page1.getCell("AA14").value = parseInt(dc4["Z14"]);
@@ -1938,7 +1941,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("T18").value = parseInt(dc7["S18"]);
     page1.getCell("U18").value = parseFloat(dc7["T18"]);
     page1.getCell("X18").value = parseInt(dc7["W18"]);
-    if (date.getFullYear() - 1 === 2023)
+    if (anioDataComparativo === 2023)
       page1.getCell("X18").note = "FALTA AZ REFINADO";
     page1.getCell("Y18").value = parseInt(dc7["X18"]);
     page1.getCell("AA18").value = parseInt(dc7["Z18"]);
@@ -1959,7 +1962,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("U20").value = parseFloat(dc9["T20"]);
     page1.getCell("X20").value = parseInt(dc9["W20"]);
     page1.getCell("Y20").value = parseInt(dc9["X20"]);
-    if (date.getFullYear() - 1 === 2023)
+    if (anioDataComparativo === 2023)
       page1.getCell("Y20").note = "FALTA AZ ORGANICO Y OTOS AZ";
     page1.getCell("AA20").value = parseInt(dc9["Z20"]);
     page1.getCell("AB20").value = parseInt(dc9["AA20"]);
@@ -1978,7 +1981,7 @@ Fin de zafra ${date.getFullYear() - 1}: ${moment(finZafraComparativa).format("DD
     page1.getCell("T22").value = parseInt(dc11["S22"]);
     page1.getCell("U22").value = parseFloat(dc11["T22"]);
     page1.getCell("X22").value = parseInt(dc11["W22"]);
-    if (date.getFullYear() - 1 === 2023)
+    if (anioDataComparativo === 2023)
       page1.getCell("X22").note = "FALTA AZ REFINADO";
     page1.getCell("Y22").value = parseInt(dc11["X22"]);
     page1.getCell("AA22").value = parseInt(dc11["Z22"]);

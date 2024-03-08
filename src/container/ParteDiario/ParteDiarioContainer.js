@@ -52,9 +52,9 @@ const ParteDiarioContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataEnd]);
-
   const getDataImport = async () => {
-    const anioDataEnd = dataEnd.getFullYear();
+    // const anioDataEnd = dataEnd.getFullYear();
+    const anioDataEnd = new Date(dataEnd) < new Date(`${dataEnd.getFullYear()}-04-25`) ? dataEnd.getFullYear() -1 : dataEnd.getFullYear()
 
     const params = {
       fechadesde: `25-04-${anioDataEnd}`,
@@ -105,11 +105,13 @@ const ParteDiarioContainer = () => {
   }, [dataEnd]);
 
   const getDataPeriodos = async () => {
-    const params = { limit: 10000, anio: dataEnd.getFullYear() };
+    const params = { limit: 10000, anio: dataEnd.getFullYear(), date: dataEnd };
     const data = await getPeriodoZafra(params);
     setDateInicioIngenios(data);
 
-    const params1 = { limit: 1000, anio: dataEnd.getFullYear() - 1 };
+    let dateEnd = new Date(dataEnd)
+
+    const params1 = { limit: 1000, anio: dataEnd.getFullYear() -1, date: new Date(dateEnd.setFullYear(dateEnd.getFullYear() - 1))};
     const data1 = await getPeriodoZafra(params1);
     setDateFinIngenios(data1);
   };
