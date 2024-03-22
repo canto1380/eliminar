@@ -3,6 +3,9 @@ import "./periodoZafra.css";
 import { useState } from "react";
 import { api } from "../../utils/api";
 import MsgError from "../Messages/MsgError";
+import moment from "moment";
+import dayjs from 'dayjs';
+
 const FormAddEditPeriodos = ({
   dataRegisterEdit,
   periodosZafra,
@@ -16,6 +19,8 @@ const FormAddEditPeriodos = ({
   const [errorPKDuplicate, setErrorPKDuplicate] = useState("");
   const [serverError, setServerError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [inicioZafra, setInicioZafra] = useState(dataRegisterEdit?.inicio_zafra)
+  const [finZafra, setFinZafra] = useState(dataRegisterEdit?.fin_zafra)
   let startDate, endDate;
 
   const [form] = Form.useForm();
@@ -23,22 +28,29 @@ const FormAddEditPeriodos = ({
   const handleReset = () => {
     form.resetFields();
   };
+  
+  const changeDataInicio =(e) => {
+    setInicioZafra(e.target.value)
+  }
+  const changeFinInicio =(e) => {
+    setFinZafra(e.target.value)
+  }
 
-  const changeData1 = (e) => {
-    const formatDate = new Date(e.$d);
-    const year = formatDate.toLocaleString("default", { year: "numeric" });
-    const month = formatDate.toLocaleString("default", { month: "2-digit" });
-    const day = formatDate.toLocaleString("default", { day: "2-digit" });
+  // const changeData1 = (e) => {
+  //   const formatDate = new Date(e.$d);
+  //   const year = formatDate.toLocaleString("default", { year: "numeric" });
+  //   const month = formatDate.toLocaleString("default", { month: "2-digit" });
+  //   const day = formatDate.toLocaleString("default", { day: "2-digit" });
 
-    startDate = year + "-" + month + "-" + day;
-  };
-  const changeData2 = (e) => {
-    const formatDate = new Date(e.$d);
-    const year = formatDate.toLocaleString("default", { year: "numeric" });
-    const month = formatDate.toLocaleString("default", { month: "2-digit" });
-    const day = formatDate.toLocaleString("default", { day: "2-digit" });
-    endDate = year + "-" + month + "-" + day;
-  };
+  //   startDate = year + "-" + month + "-" + day;
+  // };
+  // const changeData2 = (e) => {
+  //   const formatDate = new Date(e.$d);
+  //   const year = formatDate.toLocaleString("default", { year: "numeric" });
+  //   const month = formatDate.toLocaleString("default", { month: "2-digit" });
+  //   const day = formatDate.toLocaleString("default", { day: "2-digit" });
+  //   endDate = year + "-" + month + "-" + day;
+  // };
 
   const handleSubmit = async (values) => {
     if (!dataRegisterEdit) {
@@ -48,8 +60,8 @@ const FormAddEditPeriodos = ({
     }
   };
   const createPeriodo = async (values) => {
-    values.inicio_zafra = startDate;
-    values.fin_zafra = endDate;
+    values.inicio_zafra = inicioZafra;
+    values.fin_zafra = finZafra;
 
     try {
       const res = await api("POST", "periodoZafra", values);
@@ -88,12 +100,8 @@ const FormAddEditPeriodos = ({
   };
 
   const updatePeriodo = async (values) => {
-    values.inicio_zafra = startDate;
-    values.fin_zafra = endDate;
-    // values.inicio_zafra = startDate
-    // ? startDate
-    // : dataRegisterEdit.inicio_zafra;
-    // values.fin_zafra = endDate ? endDate : dataRegisterEdit.fin_zafra;
+    values.inicio_zafra = inicioZafra;
+    values.fin_zafra = finZafra;
     try {
       const res = await api(
         "PATCH",
@@ -144,7 +152,12 @@ const FormAddEditPeriodos = ({
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const dataEditInicio = new Date(dataRegisterEdit?.inicio_zafra)
+  const dataInicioConvertido =  moment(dataEditInicio).format('YYYY-MM-DD')
 
+  const dataEditFin = new Date(dataRegisterEdit?.fin_zafra)
+  const dataFinConvertido =  moment(dataEditFin).format('YYYY-MM-DD')
+  
   return (
     <div className="menuContainer">
       <Form
@@ -164,9 +177,6 @@ const FormAddEditPeriodos = ({
         initialValues={{
           id_anio_zafra: dataRegisterEdit?.anio_zafra,
           id_nombre_ingenio: dataRegisterEdit?.nombre_ingenio,
-          // inicio_zafra:
-          //   dataRegisterEdit && moment(dataRegisterEdit?.inicio_zafra),
-          // fin_zafra: dataRegisterEdit && moment(dataRegisterEdit?.fin_zafra),
         }}
       >
         <Row>
@@ -214,7 +224,7 @@ const FormAddEditPeriodos = ({
               />
             </Form.Item>
           </Col>
-          <Col xs={24} sm={11}>
+          {/* <Col xs={24} sm={11}>
             <Form.Item
               label="Fecha Inicio"
               name="inicio_zafra"
@@ -229,10 +239,16 @@ const FormAddEditPeriodos = ({
                 onChange={changeData1}
               />
             </Form.Item>
+          </Col> */}
+          <Col xs={24} sm={11}>
+            <input type="date" defaultValue={`${dataInicioConvertido}`} onChange={changeDataInicio}/>
           </Col>
           <Col xs={24} sm={11}>
+            <input type="date" defaultValue={`${dataFinConvertido}`} onChange={changeFinInicio}/>
+          </Col>
+          {/* <Col xs={24} sm={11}>
             <Form.Item
-              label="Fecha Fin"
+              label="Fecha Finw"
               name="fin_zafra"
               style={{ width: "100%" }}
               rules={[
@@ -242,11 +258,10 @@ const FormAddEditPeriodos = ({
               <DatePicker
                 style={{ width: "100%" }}
                 format={"DD/MM/YYYY"}
-                onChange={changeData2}
-                // defaultValue={moment(dataRegisterEdit?.inicio_zafra).format("DD/MM/YYYY")}
+                onChange={changeFinInicio}
               />
             </Form.Item>
-          </Col>
+          </Col> */}
         </Row>
         <Form.Item
           className="text-end"

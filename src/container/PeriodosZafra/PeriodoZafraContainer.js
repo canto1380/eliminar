@@ -49,14 +49,14 @@ const PeriodoZafraContainer = ({tokenAuth, routeAPI}) => {
       dataIndex: "inicio_zafra",
       defaultSortOrder: "descend",
       sorter: (a, b) => new Date(a.inicio_zafra) - new Date(b.inicio_zafra),
-      render: (date) => moment(date).format('DD-MM-YYYY'),
+      render: (date) => date? moment(date).format('DD-MM-YYYY') : null,
     },
     {
       key: "fin_zafra",
       title: "Final",
       dataIndex: "fin_zafra",
       sorter: (a, b) => new Date(a.inicio_zafra) - new Date(b.inicio_zafra),
-      render: (date) => moment(date).format('DD-MM-YYYY'),
+      render: (date) => date ? moment(date).format('DD-MM-YYYY') : null,
     },
     {
       key: "actions",

@@ -10,7 +10,6 @@ const PeriodosZafraHistorico = ({
   aniosData,
   ingeniosData
 }) => {
-
   return (
     <Container fluid>
       <TitlePage
