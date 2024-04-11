@@ -1,10 +1,9 @@
-import { Form, Select, Spin, Button, DatePicker, Row, Col } from "antd";
+import { Form, Select, Spin, Button, Row, Col } from "antd";
 import "./periodoZafra.css";
 import { useState } from "react";
 import { api } from "../../utils/api";
 import MsgError from "../Messages/MsgError";
 import moment from "moment";
-import dayjs from 'dayjs';
 
 const FormAddEditPeriodos = ({
   dataRegisterEdit,
@@ -21,7 +20,6 @@ const FormAddEditPeriodos = ({
   const [loading, setLoading] = useState(false);
   const [inicioZafra, setInicioZafra] = useState(dataRegisterEdit?.inicio_zafra)
   const [finZafra, setFinZafra] = useState(dataRegisterEdit?.fin_zafra)
-  let startDate, endDate;
 
   const [form] = Form.useForm();
 
