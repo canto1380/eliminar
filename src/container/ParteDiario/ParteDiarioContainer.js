@@ -34,8 +34,8 @@ const ParteDiarioContainer = () => {
   const getData = async () => {
     setDataParteDiariosHistoricos(null);
     const params = {
-      fechadesde: `25-04-${dataZafra}`,
-      fechahasta: `24-04-${dataZafra + 1}`,
+      fechadesde: `01-04-${dataZafra}`,
+      fechahasta: `31-03-${dataZafra + 1}`,
     };
     /***** DESDE FRONTEND *****/
     // const data = await getDataPartesDiarios(params) DESDE FRONTEND
@@ -57,12 +57,12 @@ const ParteDiarioContainer = () => {
     const anioDataEnd = new Date(dataEnd) < new Date(`${dataEnd.getFullYear()}-04-25`) ? dataEnd.getFullYear() -1 : dataEnd.getFullYear()
 
     const params = {
-      fechadesde: `25-04-${anioDataEnd}`,
-      fechahasta: `24-04-${anioDataEnd + 1}`,
+      fechadesde: `01-04-${anioDataEnd}`,
+      fechahasta: `31-03-${anioDataEnd + 1}`,
     };
     const params1 = {
-      fechadesde: `25-04-${anioDataEnd - 1}`,
-      fechahasta: `24-04-${anioDataEnd}`,
+      fechadesde: `01-04-${anioDataEnd - 1}`,
+      fechahasta: `31-03-${anioDataEnd}`,
     };
 
     /***** DESDE BACKEND *****/
@@ -142,7 +142,7 @@ const ParteDiarioContainer = () => {
           <div className="px-4">
             <span className="text-danger fw-bolder">*</span>
             <span className="text-legend">
-              Periodos desde 25/04 al 24/04 del siguiente año
+              Periodos desde 01/04 al 31/03 del siguiente año
             </span>
           </div>
           <Filtros

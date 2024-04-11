@@ -42,7 +42,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
     }
   };
 
-
+  const claveCookie =  process.env.REACT_APP_API ? process.env.REACT_APP_API : process.env.REACT_APP_PRODUCTION
   const login = async (values) => {
     try {
     
@@ -52,10 +52,10 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
           token,
           user: { id },
         } = res.data;
-        Cookies.set(COOKIES.authToken, token, process.env.REACT_APP_API, {
+        Cookies.set(COOKIES.authToken, token, claveCookie, {
           expires: 1,
         });
-        Cookies.set(COOKIES.authId, id, process.env.REACT_APP_API, {
+        Cookies.set(COOKIES.authId, id, claveCookie, {
           expires: 1,
         });
         setToken(res?.data?.token);
