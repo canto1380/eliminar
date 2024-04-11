@@ -142,7 +142,7 @@ export const CreateExcelWorkbook = async (
     const functionFont = (name, bold, size) => {
       return { name, bold, size };
     };
-    page1.getColumn(1).width = "15";
+    page1.getColumn(1).width = "16";
     for (let i = 2; i <= 27; i++) {
       page1.getColumn(i).width = "15";
     }
