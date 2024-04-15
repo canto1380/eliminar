@@ -74,7 +74,6 @@ export const CreateExcelWorkbook = async (
     /** Formatos **/
     const dateFormat = moment(date).format("DD-MM-YYYY");
     const dateComparativaFormat = moment(dateComparativa).format("DD-MM-YYYY");
-    console.log(dateComparativaFormat)
     workbook.creator = `${dataUser?.name} ${dataUser?.surname}`;
     workbook.created = date;
     workbook.modified = date;
@@ -91,16 +90,19 @@ export const CreateExcelWorkbook = async (
     ];
     const page1 = workbook.addWorksheet("Parte Diario Directorio", {
       pageSetup: {
-        paperSize: 9,
+        paperSize: 8,
         orientation: "landscape",
-        printArea: "A1:AB63",
         scale: 75,
-        fitToPage: true,
+        fitToPage: false,
         fitToWidth: 1,
+        // margins: {
+        //   left: 0.7, right: 0.7, top: 0.75, bottom: 0.75
+        // }
       },
       properties: { tabColor: { argb: "0000B2" } },
     });
     page1.headerFooter.differentFirst = true;
+    
 
     /***** FORMATO CONDICIONAL *****/
 
@@ -144,10 +146,29 @@ export const CreateExcelWorkbook = async (
     };
     page1.getColumn(1).width = "16";
     for (let i = 2; i <= 27; i++) {
-      page1.getColumn(i).width = "15";
+      page1.getColumn(i).width = "17";
     }
-    page1.getColumn(15).width = "18.5";
-    page1.getColumn(31).width = "18.5";
+    page1.getColumn(15).width = "19";
+    page1.getColumn(28).width = "19";
+
+    for(let i=1; i<=4; i++) {
+      page1.getRow(i).height = '27'
+    }
+    page1.getRow(8).height ="34";
+    for (let i = 10; i <= 26; i++) {
+      page1.getRow(i).height = "18.75";
+    }
+    page1.getRow(13).height = "19.5";
+    page1.getRow(17).height = "19.5";
+    page1.getRow(27).height = "21.75";
+    page1.getRow(28).height = "24.75";
+    page1.getRow(30).height = "19.5";
+    page1.getRow(31).height = "18.75";
+    page1.getRow(32).height = "34.5";
+
+    for (let i = 34; i <= 37; i++) {
+      page1.getRow(i).height = "21";
+    }
 
     page1.getRow(41).height = "38";
     for (let i = 44; i <= 57; i++) {
@@ -221,10 +242,7 @@ export const CreateExcelWorkbook = async (
       page1.getCell(51, i).fill = bgGris;
       page1.getCell(55, i).fill = bgGris;
     }
-    // page1.getRow(44).fill = bgGris
-    // page1.getRow(47).fill = bgGris
-    // page1.getRow(51).fill = bgGris
-    // page1.getRow(55).fill = bgGris
+
     page1.getRow(58).font = functionFont("Calibri", true, 22);
 
     /***** BORDES *****/
@@ -1455,27 +1473,27 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
 
     page1.mergeCells("C42:C43");
     page1.getCell("C42").value = `Común Tipo "A"`;
-    page1.getCell("C42").font = functionFont("Calibri", true, 12);
+    page1.getCell("C42").font = functionFont("Calibri", true, 14);
     page1.getCell("C42").alignment = alignCenter;
 
     page1.mergeCells("D42:D43");
     page1.getCell("D42").value = "Refinado";
-    page1.getCell("D42").font = functionFont("Calibri", true, 12);
+    page1.getCell("D42").font = functionFont("Calibri", true, 14);
     page1.getCell("D42").alignment = alignCenter;
 
     page1.mergeCells("E42:E43");
     page1.getCell("E42").value = "Crudo";
-    page1.getCell("E42").font = functionFont("Calibri", true, 12);
+    page1.getCell("E42").font = functionFont("Calibri", true, 14);
     page1.getCell("E42").alignment = alignCenter;
 
     page1.mergeCells("F42:F43");
     page1.getCell("F42").value = "Orgánico";
-    page1.getCell("F42").font = functionFont("Calibri", true, 12);
+    page1.getCell("F42").font = functionFont("Calibri", true, 14);
     page1.getCell("F42").alignment = alignCenter;
 
     page1.mergeCells("G42:G43");
     page1.getCell("G42").value = "Otros";
-    page1.getCell("G42").font = functionFont("Calibri", true, 12);
+    page1.getCell("G42").font = functionFont("Calibri", true, 14);
     page1.getCell("G42").alignment = alignCenter;
 
     for (let i = 44; i <= 58; i++) {
@@ -1506,7 +1524,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
 
     page1.mergeCells("H41:K42");
     page1.getCell("H41").value = "Proceso de Destilacion";
-    page1.getCell("H41").font = functionFont("Calibri", true, 14);
+    page1.getCell("H41").font = functionFont("Bodoni", true, 20);
     page1.getCell("H41").alignment = alignCenter;
 
     page1.mergeCells("L41:T41");
@@ -1524,9 +1542,9 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
       page1.getCell(`J${i}`).alignment = alignCenter;
     }
     page1.getCell("H43").value = "Destilería";
-    page1.getCell("H43").font = functionFont("Calibri", true, 14);
+    page1.getCell("H43").font = functionFont("Bodoni", true, 20);
     page1.getCell("J43").value = "Anhidradora";
-    page1.getCell("J43").font = functionFont("Calibri", true, 14);
+    page1.getCell("J43").font = functionFont("Bodoni", true, 20);
 
     page1.getCell("H44").value = "No posee";
     page1.getCell("H44").font = functionFont("Calibri", false, 14);
@@ -1609,17 +1627,17 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
 
     page1.mergeCells("L42:N43");
     page1.getCell("L42").value = "Alcohol Total";
-    page1.getCell("L42").font = functionFont("Calibri", true, 12);
+    page1.getCell("L42").font = functionFont("Calibri", true, 14);
     page1.getCell("L42").alignment = alignCenter;
 
     page1.mergeCells("O42:Q43");
     page1.getCell("O42").value = "Alcohol Hidratado";
-    page1.getCell("O42").font = functionFont("Calibri", true, 12);
+    page1.getCell("O42").font = functionFont("Calibri", true, 14);
     page1.getCell("O42").alignment = alignCenter;
 
     page1.mergeCells("R42:T43");
     page1.getCell("R42").value = "Alcohol Anhidro";
-    page1.getCell("R42").font = functionFont("Calibri", true, 12);
+    page1.getCell("R42").font = functionFont("Calibri", true, 14);
     page1.getCell("R42").alignment = alignCenter;
 
     for (let i = 44; i <= 58; i++) {
@@ -2180,7 +2198,13 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
         page1.getCell(i, 23).value = { formula: `=U${i}/T${i}*100`, result: 7 };
       }
     }
-
+    page1.pageSetup.printArea = 'A1:AB63';
+    page1.pageSetup.scale= 100
+    page1.pageSetup.margins = {
+      left: 0.1, right: 0.1,
+      top: 0.75, bottom: 0.2,
+      header: 0.2, footer: 0.1
+    };
     try {
       const buffer = await workbook.xlsx.writeBuffer();
       const fileType =
