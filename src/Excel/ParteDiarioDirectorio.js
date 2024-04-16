@@ -69,7 +69,6 @@ export const CreateExcelWorkbook = async (
     const anioData = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 1 : date.getFullYear() ;
     /** Anio Comparativo **/
     const anioDataComparativo = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 2 : date.getFullYear() - 1;
-    console.log(anioData, anioDataComparativo)
     /** Fecha hasta comparativa **/
     const dateComparativa = new Date(date);
     dateComparativa.setFullYear(anioDataComparativo);
