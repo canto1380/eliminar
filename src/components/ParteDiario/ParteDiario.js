@@ -6,6 +6,7 @@ import ItemCollpse from "./ItemsCollpase";
 import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
+import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
 
 const ParteDiario = ({
   dataEnd,
@@ -67,8 +68,21 @@ const ParteDiario = ({
     useState(null);
     useState(null);
   const [loadingDownload, setLoadingDownload] = useState(false);
+  const [dataComparativa, setDataComparativa] = useState(undefined);
 
   const { dataUser } = useContext(User);
+
+  useEffect(() => {
+    dataComparativaGet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const dataComparativaGet = async () => {
+    const params = {deleted: false };
+    const data = await getDataComparativa(params);
+    setDataComparativa(data);
+  };
+
   useEffect(() => {
     dataPorTipo(
       dataImport,
@@ -214,7 +228,10 @@ const ParteDiario = ({
       setDataDiasZafraComparativa(Math.ceil(diffTotal));
     }
   }
-  console.log(d15)
+
+
+  
+
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
@@ -278,7 +295,8 @@ const ParteDiario = ({
                 setDataImportComparativa,
                 dataIngenios,
                 finZafra,
-                finZafraComparativa
+                finZafraComparativa,
+                dataComparativa
               )
             }
           >

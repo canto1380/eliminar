@@ -50,7 +50,8 @@ export const CreateExcelWorkbook = async (
   setDataImportComparativa,
   dataIngenios,
   finZafra,
-  finZafraComparativa
+  finZafraComparativa,
+  dataComparativa
 ) => {
   setLoadingDownload(true);
   const parteDiarioData = dataImport ? dataImport : undefined;
@@ -1402,19 +1403,18 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
 
     /*** ESTIMACIONES ***/
 
-    const dataComparativa = dataConstante.dataComparativa;
+    // const dataComparativa = dataConstante.dataComparativa;
     let estimacionEEAOC;
     let CMBporDDJJ;
-    let yearDateComparative = anioDataComparativo;
-
     dataComparativa.forEach((d) => {
-      if (d.anio === anioData.toString()) {
-        estimacionEEAOC = d.estimacionEEAOC;
+      if (d.anio_zafra === anioData) {
+        estimacionEEAOC = d.estimacion_EEAOC;
       }
-      if (d.anio === yearDateComparative.toString()) {
-        CMBporDDJJ = d.CMBPorDDJJIPAAT;
+      if (d.anio_zafra === anioDataComparativo) {
+        CMBporDDJJ = d.CMB_DDJJ;
       }
     });
+
 
     for (let i = 34; i <= 37; i++) {
       page1.mergeCells(`A${i}:E${i}`);
