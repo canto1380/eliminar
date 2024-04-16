@@ -127,6 +127,15 @@ let dataAguilares = {
     Z25: 0,
     AA25: 0,
   },
+  dataSanJuan = {
+    R26: 0,
+    S26: 0,
+    T26: 0,
+    W26: 0,
+    X26: 0,
+    Z26: 0,
+    AA26: 0,
+  },
   dataInicioIngenios = {
     Cell10: 0,
     CellR10: 0,
@@ -156,6 +165,8 @@ let dataAguilares = {
     CellR24: 0,
     Cell25: 0,
     CellR25: 0,
+    Cell26: 0,
+    CellR26: 0,
   }
 
 export const dataComparativaPorTipo = (
@@ -176,6 +187,7 @@ export const dataComparativaPorTipo = (
   setDc12,
   setDc13,
   setDc14,
+  setDc15,
   setFechasInicioIngeniosComparativa,
 ) => {
   const date = dataEnd !== null ? new Date(dataEnd) : new Date();
@@ -190,7 +202,6 @@ export const dataComparativaPorTipo = (
   //     parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
   //     d.MoliendaCanaBruta !== 0
   // );
-
   const aguil = dateFinIngenios?.find(
     (d) =>
       d.nombre_ingenio === "Aguilares"
@@ -255,6 +266,9 @@ export const dataComparativaPorTipo = (
   const starosa = dateFinIngenios?.find(
     (d) => d.nombre_ingenio === "Santa Rosa"
   );
+  const sanjuan = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "San Juan"
+  );
 
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
@@ -284,11 +298,13 @@ export const dataComparativaPorTipo = (
     Cell24: stabarbara?.inicio_zafra,
     CellR24: stabarbara?.fin_zafra,
     Cell25: starosa?.inicio_zafra,
-    CellR25: starosa?.fin_zafra
+    CellR25: starosa?.fin_zafra,
+    Cell26: sanjuan?.inicio_zafra,
+    CellR26: sanjuan?.fin_zafra
   };
   setFechasInicioIngeniosComparativa(dataInicioIngenios);
 
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 1; i <= 15; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -306,7 +322,7 @@ export const dataComparativaPorTipo = (
     window[varName7] = 0;
   }
 
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 1; i <= 15; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -635,6 +651,29 @@ export const dataComparativaPorTipo = (
         AA25: g14,
       };
     }
+
+    if (
+      data.IngenioNombre === "San Juan" &&
+      newDate <= fechaParametro 
+    ) {
+      a15 = a15 + data.MoliendaCanaBruta;
+      b15 = b15 + data.MoliendaCanaNeta;
+      c15 = c15 + data.AzucarEquivalente;
+      z15 = z15 + data.AzucarBlancoProducido;
+      e15 = e15 + data.AzucarCrudoProducido;
+      f15 = f15 + data.MelazaProducida;
+      g15 = g15 + data.AlcoholProducido;
+      dataSanJuan = {
+        R26: a15,
+        S26: b15,
+        T26: c15,
+        W26: z15,
+        X26: e15,
+        Z26: f15,
+        AA26: g15,
+      };
+    }
+
   });
   setDc1(dataAguilares);
   setDc2(dataCruzAlta);
@@ -650,4 +689,5 @@ export const dataComparativaPorTipo = (
   setDc12(dataÑuñorco);
   setDc13(dataStaBarbara);
   setDc14(dataStaRosa);
+  setDc15(dataSanJuan)
 };

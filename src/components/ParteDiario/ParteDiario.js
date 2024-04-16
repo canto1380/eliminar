@@ -38,6 +38,7 @@ const ParteDiario = ({
   const [d12, setD12] = useState([]);
   const [d13, setD13] = useState([]);
   const [d14, setD14] = useState([]);
+  const [d15, setD15] = useState([]);
   /** DC - Data Comparativa **/
   const [dc1, setDc1] = useState([]);
   const [dc2, setDc2] = useState([]);
@@ -53,6 +54,7 @@ const ParteDiario = ({
   const [dc12, setDc12] = useState([]);
   const [dc13, setDc13] = useState([]);
   const [dc14, setDc14] = useState([]);
+  const [dc15, setDc15] = useState([]);
   const [inicioZafra, setInicioZafra] = useState(null);
   const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
   const [finZafra, setFinZafra] = useState("");
@@ -86,6 +88,7 @@ const ParteDiario = ({
       setD12,
       setD13,
       setD14,
+      setD15,
       setFechasInicioIngenios,
     );
     dataComparativaPorTipo(
@@ -106,6 +109,7 @@ const ParteDiario = ({
       setDc12,
       setDc13,
       setDc14,
+      setDc15,
       setFechasInicioIngeniosComparativa,
     );
     dataFinZafra();
@@ -113,7 +117,7 @@ const ParteDiario = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataImport, dataImportComparativa]);
-
+  
   let inicioZafraa = new Date('3/10/2100');
   let finZafraa = null;
 
@@ -210,6 +214,7 @@ const ParteDiario = ({
       setDataDiasZafraComparativa(Math.ceil(diffTotal));
     }
   }
+  console.log(d15)
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
@@ -243,6 +248,7 @@ const ParteDiario = ({
                 d12,
                 d13,
                 d14,
+                d15,
                 dc1,
                 dc2,
                 dc3,
@@ -257,6 +263,7 @@ const ParteDiario = ({
                 dc12,
                 dc13,
                 dc14,
+                dc15,
                 dataImport,
                 dataImportComparativa,
                 dataUser,

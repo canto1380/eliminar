@@ -215,6 +215,21 @@ let dataAguilares = {
     O57: 0,
     R57: 0,
   },
+  dataSanJuan = {
+    E26: 0,
+    F26: 0,
+    G26: 0,
+    J26: 0,
+    K26: 0,
+    M26: 0,
+    N26: 0,
+    D58: 0,
+    F58: 0,
+    G58: 0,
+    L58: 0,
+    O58: 0,
+    R58: 0,
+  },
   dataInicioIngenios = {
     Cell10: 0,
     CellE10: 0,
@@ -244,6 +259,8 @@ let dataAguilares = {
     CellE24: 0,
     Cell25: 0,
     CellE25: 0,
+    Cell26: 0,
+    CellE26: 0
   };
 
 export const dataPorTipo = (
@@ -264,6 +281,7 @@ export const dataPorTipo = (
   setD12,
   setD13,
   setD14,
+  setD15,
   setFechasInicioIngenios,
 ) => {
   /****  FECHAS INICIO  ****/
@@ -331,6 +349,7 @@ export const dataPorTipo = (
   const starosa = dateInicioIngenios?.find(
     (d) => d.nombre_ingenio === "Santa Rosa"
   );
+  const sanjuan = dateInicioIngenios?.find((d) => d.nombre_ingenio === "San Juan")
   // const starosa = dataImport?.find(
   //   (d) =>
   //     d.IngenioNombre === "Santa Rosa" &&
@@ -365,12 +384,14 @@ export const dataPorTipo = (
     Cell24: stabarbara?.inicio_zafra,
     CellE24: stabarbara?.fin_zafra,
     Cell25: starosa?.inicio_zafra,
-    CellE25: starosa?.fin_zafra
+    CellE25: starosa?.fin_zafra,
+    Cell26: sanjuan?.inicio_zafra,
+    CellE26: sanjuan?.fin_zafra,
   };
   setFechasInicioIngenios(dataInicioIngenios);
   /************/
 
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 1; i <= 15; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -864,6 +885,39 @@ export const dataPorTipo = (
         R57: r14,
       };
     }
+
+    if (
+      data.IngenioNombre === "San Juan" &&
+      newDate <= fechaParametro 
+    ) {
+      a15 = a15 + data.MoliendaCanaBruta;
+      b15 = b15 + data.MoliendaCanaNeta;
+      c15 = c15 + data.AzucarEquivalente;
+      z15 = z15 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      e15 = e15 + data.AzucarCrudoProducido;
+      f15 = f15 + data.MelazaProducida;
+      g15 = g15 + data.AlcoholProducido;
+      h15 = h15 + data.AzucarRefinado || 0;
+      i15 = i15 + data.AzucarOrganico || 0;
+      j15 = j15 + data.OtroAzucar || 0;
+      o15 = o15 + data.AlcoholHidratado || 0;
+      r15 = r15 + data.AlcoholAnhidro || 0;
+      dataSanJuan = {
+        E26: a15,
+        F26: b15,
+        G26: c15,
+        J26: z15,
+        K26: e15,
+        M26: f15,
+        N26: g15,
+        D58: h15,
+        F58: i15,
+        G58: j15,
+        O58: o15,
+        R58: r15,
+      };
+    }
+
   });
 
 
@@ -881,4 +935,5 @@ export const dataPorTipo = (
   setD12(dataÑuñorco);
   setD13(dataStaBarbara);
   setD14(dataStaRosa);
+  setD15(dataSanJuan)
 };

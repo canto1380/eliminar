@@ -105,17 +105,16 @@ const ParteDiarioContainer = () => {
   }, [dataEnd]);
 
   const getDataPeriodos = async () => {
-    const params = { limit: 10000, anio: dataEnd.getFullYear(), date: dataEnd };
+    const params = { limit: 10000000, anio: dataEnd.getFullYear(), date: dataEnd };
     const data = await getPeriodoZafra(params);
     setDateInicioIngenios(data);
 
     let dateEnd = new Date(dataEnd)
 
-    const params1 = { limit: 1000, anio: dataEnd.getFullYear() -1, date: new Date(dateEnd.setFullYear(dateEnd.getFullYear() - 1))};
+    const params1 = { limit: 10000000, anio: dataEnd.getFullYear() -1, date: new Date(dateEnd.setFullYear(dateEnd.getFullYear() - 1))};
     const data1 = await getPeriodoZafra(params1);
     setDateFinIngenios(data1);
   };
-
   useEffect(() => {
     getDataIngenios();
   }, []);

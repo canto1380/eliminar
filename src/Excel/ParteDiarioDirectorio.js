@@ -20,6 +20,7 @@ export const CreateExcelWorkbook = async (
   d12,
   d13,
   d14,
+  d15,
   dc1,
   dc2,
   dc3,
@@ -34,6 +35,7 @@ export const CreateExcelWorkbook = async (
   dc12,
   dc13,
   dc14,
+  dc15,
   dataImport,
   dataImportComparativa,
   dataUser,
@@ -762,6 +764,12 @@ export const CreateExcelWorkbook = async (
     );
     page1.getCell("C25").font = { name: "Calibri", bold: true, size: 11 };
 
+    page1.getCell("C26").value = moment(fechasInicioIngenios.Cell26).format(
+      "DD/MM/YYYY"
+    );
+    page1.getCell("C26").font = { name: "Calibri", bold: true, size: 11 };
+
+
     /** COLUMNA FIN DE ZAFRA 2023 **/
     page1.getCell("E10").value =
       fechasInicioIngenios?.CellE10 !== null
@@ -831,6 +839,10 @@ export const CreateExcelWorkbook = async (
       "DD/MM/YYYY"
     );
     page1.getCell("E25").font = { name: "Calibri", bold: true, size: 11 };
+    page1.getCell("E26").value = moment(fechasInicioIngenios?.CellE26).format(
+      "DD/MM/YYYY"
+    );
+    page1.getCell("E26").font = { name: "Calibri", bold: true, size: 11 };
 
     /** COLUMNA DIAS DE AVANCE 2023**/
     page1.getCell("D10").value = {
@@ -905,6 +917,11 @@ export const CreateExcelWorkbook = async (
       result: 7,
     };
     page1.getCell("D25").font = { name: "Calibri", bold: true, size: 11 };
+    page1.getCell("D26").value = {
+      formula: '=if(E26="",(C28-C26)+1,(E26-C26)+1)',
+      result: 7,
+    };
+    page1.getCell("D26").font = { name: "Calibri", bold: true, size: 11 };
 
     /** COLUMNA FECHA INICIO 2022 **/
 
@@ -950,6 +967,9 @@ export const CreateExcelWorkbook = async (
     page1.getCell("P25").value = moment(fechasInicioIngeniosComparativa.Cell25).format(
       "DD/MM/YYYY");
     page1.getCell("P25").font = { name: "Calibri", bold: true, size: 11 };
+    page1.getCell("P26").value = moment(fechasInicioIngeniosComparativa.Cell26).format(
+      "DD/MM/YYYY");
+    page1.getCell("P26").font = { name: "Calibri", bold: true, size: 11 };
 
     /** COLUMNA FIN DE ZAFRA 2022 **/
     page1.getCell("R10").value = moment(fechasInicioIngeniosComparativa?.CellR10).format("DD/MM/YYYY");
@@ -993,6 +1013,9 @@ export const CreateExcelWorkbook = async (
 
     page1.getCell("R25").value = moment(fechasInicioIngeniosComparativa?.CellR25).format("DD/MM/YYYY");
     page1.getCell("R25").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("R26").value = moment(fechasInicioIngeniosComparativa?.CellR26).format("DD/MM/YYYY");
+    page1.getCell("R26").font = { name: "Calibri", bold: true, size: 11 };
     /************/
 
     /** COLUMNA DIAS DE AVANCE 2022**/
@@ -1068,6 +1091,12 @@ export const CreateExcelWorkbook = async (
       result: 7,
     };
     page1.getCell("Q25").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("Q26").value = {
+      formula: '=if(R26="",R28-P26,R26-P26)',
+      result: 7,
+    };
+    page1.getCell("Q26").font = { name: "Calibri", bold: true, size: 11 };
     /*****************/
 
     /**TOTAL AZUCAR **/
@@ -1141,58 +1170,58 @@ export const CreateExcelWorkbook = async (
     page1.getCell("D27").font = { name: "Calibri", bold: true, size: 12 };
 
     page1.getCell("F27").value = {
-      formula: "=SUM(F10:F12,F14:F15,F17:F25)",
+      formula: "=SUM(F10:F12,F14:F15,F17:F26)",
       result: 7,
     };
     page1.getCell("G27").value = {
-      formula: "=SUM(G10:G12,G14:G15,G17:G25)",
+      formula: "=SUM(G10:G12,G14:G15,G17:G26)",
       result: 7,
     };
     page1.getCell("H27").value = {
-      formula: "=SUM(H10:H12,H14:H15,H17:H25)",
+      formula: "=SUM(H10:H12,H14:H15,H17:H26)",
       result: 7,
     };
     page1.getCell("I27").value = { formula: "=H27/F27*100", result: 7 };
     page1.getCell("J27").value = { formula: "=H27/G27*100", result: 7 };
     page1.getCell("K27").value = {
-      formula: "=SUM(K10:K12,K14:K15,K17:K25)",
+      formula: "=SUM(K10:K12,K14:K15,K17:K26)",
       result: 7,
     };
     page1.getCell("L27").value = {
-      formula: "=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10",
+      formula: "=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10+L26",
       result: 7,
     };
     page1.getCell("M27").value = {
-      formula: "=SUM(M10:M12,M14:M15,M17:M25)",
+      formula: "=SUM(M10:M12,M14:M15,M17:M26)",
       result: 7,
     };
     page1.getCell("N27").value = {
-      formula: "=SUM(N10:N12,N14:N15,N17:N25)",
+      formula: "=SUM(N10:N12,N14:N15,N17:N26)",
       result: 7,
     };
     page1.getCell("O27").value = {
-      formula: "=O24+O25+O22+O21+O19+O18+O17+O15+O14+O12",
+      formula: "=O24+O25+O22+O21+O19+O18+O17+O15+O14+O12+O26",
       result: 7,
     };
     /** FILAS TOTALES 2022 2*/
     page1.getCell("Q27").value = Math.ceil(dataDiasZafraComparativa);
     page1.getCell("Q27").font = { name: "Calibri", bold: true, size: 12 };
     page1.getCell("S27").value = {
-      formula: "=SUM(S10:S12,S14:S15,S17:S25)",
+      formula: "=SUM(S10:S12,S14:S15,S17:S26)",
       result: 7,
     };
     page1.getCell("T27").value = {
-      formula: "=SUM(T10:T12,T14:T15,T17:T25)",
+      formula: "=SUM(T10:T12,T14:T15,T17:T26)",
       result: 7,
     };
     page1.getCell("U27").value = {
-      formula: "=SUM(U10:U12,U14:U15,U17:U25)",
+      formula: "=SUM(U10:U12,U14:U15,U17:U26)",
       result: 7,
     };
     page1.getCell("V27").value = { formula: "=U27/S27*100", result: 7 };
     page1.getCell("W27").value = { formula: "=U27/T27*100", result: 7 };
     page1.getCell("X27").value = {
-      formula: "=SUM(X10:X12,X14:X15,X17:X25)",
+      formula: "=SUM(X10:X12,X14:X15,X17:X26)",
       result: 7,
     };
     page1.getCell("Y27").value = {
@@ -1200,15 +1229,15 @@ export const CreateExcelWorkbook = async (
       result: 7,
     };
     page1.getCell("Z27").value = {
-      formula: "=SUM(Z10:Z12,Z14:Z15,Z17:Z25)",
+      formula: "=SUM(Z10:Z12,Z14:Z15,Z17:Z26)",
       result: 7,
     };
     page1.getCell("AA27").value = {
-      formula: "=SUM(AA10:AA12,AA14:AA15,AA17:AA25)",
+      formula: "=SUM(AA10:AA12,AA14:AA15,AA17:AA26)",
       result: 7,
     };
     page1.getCell("AB27").value = {
-      formula: "=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12",
+      formula: "=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12+AB26",
       result: 7,
     };
     /***********/
@@ -1895,6 +1924,15 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
       page1.getCell("L25").value = parseInt(d14["K25"]);
       page1.getCell("N25").value = parseInt(d14["M25"]);
       page1.getCell("O25").value = parseInt(d14["N25"]);
+
+      /** San Juan */
+      page1.getCell("F26").value = parseInt(d15["E26"]);
+      page1.getCell("G26").value = parseInt(d15["F26"]);
+      page1.getCell("H26").value = parseFloat(d15["G26"]);
+      page1.getCell("K26").value = parseInt(d15["J26"]);
+      page1.getCell("L26").value = parseInt(d15["K26"]);
+      page1.getCell("N26").value = parseInt(d15["M26"]);
+      page1.getCell("O26").value = parseInt(d15["N26"]);
     }
 
     /** DATOS 2022 **/
@@ -2031,6 +2069,15 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
     page1.getCell("Y25").value = parseInt(dc14["X25"]);
     page1.getCell("AA25").value = parseInt(dc14["Z25"]);
     page1.getCell("AB25").value = parseInt(dc14["AA25"]);
+
+    /** San Juan **/
+    page1.getCell("S26").value = parseInt(dc15["R26"]);
+    page1.getCell("T26").value = parseInt(dc15["S26"]);
+    page1.getCell("U26").value = parseFloat(dc15["T26"]);
+    page1.getCell("X26").value = parseInt(dc15["W26"]);
+    page1.getCell("Y26").value = parseInt(dc15["X26"]);
+    page1.getCell("AA26").value = parseInt(dc15["Z26"]);
+    page1.getCell("AB26").value = parseInt(dc15["AA26"]);
 
     /*******************/
 
