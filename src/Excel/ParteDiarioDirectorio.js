@@ -1,6 +1,5 @@
 import ExcelJS from "exceljs";
 import moment from "moment";
-import dataConstante from "./dataConstanteParteDiario.json";
 
 export const CreateExcelWorkbook = async (
   setLoadingDownload,
