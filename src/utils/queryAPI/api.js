@@ -31,7 +31,7 @@ export const apiBEPATH = async (method, params, urlPath) => {
     username: 'externo',
     password: 'Externo@2022*',
   }
-  console.log(url)
+  console.log(`Path: ${url}`)
   try {
     const res = await axios({
       params,
