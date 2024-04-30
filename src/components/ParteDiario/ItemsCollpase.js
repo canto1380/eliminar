@@ -80,77 +80,78 @@ const ItemCollpse = ({
     {
       key: '1',
       label: 'Aguilares',
-      children: <ListadoDatos columns={columns} scroll={2000} data={aguilares} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={aguilares} />,
     },
     {
       key: '2',
       label: 'Bella Vista',
-      children: <ListadoDatos columns={columns} scroll={2000} data={bellaVista} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={bellaVista} />,
     },
     {
       key: '3',
       label: 'Concepción',
-      children: <ListadoDatos columns={columns} scroll={2000} data={concepcion} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={concepcion} />,
     },
     {
       key: '4',
       label: 'Cruz Alta',
-      children: <ListadoDatos columns={columns} scroll={2000} data={cruzAlta} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={cruzAlta} />,
     },
     {
       key: '5',
       label: 'Famaillá',
-      children: <ListadoDatos columns={columns} scroll={2000} data={famailla} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={famailla} />,
     },
     {
       key: '6',
       label: 'La Corona',
-      children: <ListadoDatos columns={columns} scroll={2000} data={laCorona} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={laCorona} />,
     },
     {
       key: '7',
       label: 'La Florida',
-      children: <ListadoDatos columns={columns} scroll={2000} data={laFlorida} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={laFlorida} />,
     },
     {
       key: '8',
       label: 'La Providencia',
-      children: <ListadoDatos columns={columns} scroll={2000} data={laProvidencia} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={laProvidencia} />,
     },
     {
       key: '9',
       label: 'La Trinidad',
-      children: <ListadoDatos columns={columns} scroll={2000} data={laTrinidad} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={laTrinidad} />,
     },
     {
       key: '10',
       label: 'Leales',
-      children: <ListadoDatos columns={columns} scroll={2000} data={leales} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={leales} />,
     },
     {
       key: '11',
       label: 'Marapa',
-      children: <ListadoDatos columns={columns} scroll={2000} data={marapa} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={marapa} />,
     },
     {
       key: '12',
       label: 'Santa Barbara',
-      children: <ListadoDatos columns={columns} scroll={2000} data={santaBarbara} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={santaBarbara} />,
     },
     {
       key: '13',
       label: 'Santa Rosa',
-      children: <ListadoDatos columns={columns} scroll={2000} data={santaRosa} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={santaRosa} />,
     },
     {
       key: '14',
       label: 'Ñuñorco',
-      children: <ListadoDatos columns={columns} scroll={2000} data={nunorco} />,
+      children: <ListadoDatos columns={columns} scroll={1600} data={nunorco} />,
     },
   ]
   return (
     <Collapse
       bordered={false}
+      size='small'
       expandIconPosition='end'
       defaultActiveKey={['0']}
       expandIcon={({ isActive }) => (
@@ -158,7 +159,7 @@ const ItemCollpse = ({
       )}
       style={{
         width: '100%',
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: 600,
       }}
       items={getItems(panelStyle)}

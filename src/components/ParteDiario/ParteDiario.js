@@ -7,6 +7,7 @@ import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
 import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
+import moment from "moment";
 
 const ParteDiario = ({
   dataEnd,
@@ -131,7 +132,6 @@ const ParteDiario = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataImport, dataImportComparativa]);
-  
   let inicioZafraa = new Date('3/10/2100');
   let finZafraa = null;
 
@@ -229,8 +229,7 @@ const ParteDiario = ({
     }
   }
 
-
-  
+  // console.log(fechasInicioIngenios)
 
   return (
     <>

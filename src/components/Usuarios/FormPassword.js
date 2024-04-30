@@ -50,12 +50,12 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
   return (
     <div className="menuContainer">
       <Row className={`d-flex justify-content-between align-items-center pb-2`}>
-        <Col xs={12} md={8} className={``}>
+        <Col xs={6} md={8} className={``}>
           <div className={`pb-1`}>
             <h3 className="mb-0">Clave</h3>
           </div>
         </Col>
-        <Col xs={12} md={4} className={`text-end`}>
+        <Col xs={6} md={4} className={`text-end`}>
           <div className={`pb-1`}>
             <Button
               type="primary"
@@ -85,7 +85,7 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
         disabled={!editBand && true}
       >
         <Row>
-          <Col xs={6}>
+          <Col xs={12} sm={6}>
             <Form.Item
               label="Ingrese clave actual"
               name="clave"

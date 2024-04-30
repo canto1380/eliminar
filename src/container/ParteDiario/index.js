@@ -11,7 +11,7 @@ import { User } from "../../context/UserProvider";
 import { inactivityTime } from "../../helpers/inactivityTime";
 
 const ContainerIndexParteDiario = () => {
-  const [inactivo, setInactivo] = useState(false);
+  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);

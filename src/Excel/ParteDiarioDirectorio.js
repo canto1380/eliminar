@@ -693,154 +693,206 @@ export const CreateExcelWorkbook = async (
 
     /** COLUMNA FECHA INICIO 2023**/
 
-    page1.getCell("C10").value = moment(fechasInicioIngenios.Cell10).format(
+    page1.getCell("C10").value = fechasInicioIngenios.Cell10 ? moment(fechasInicioIngenios.Cell10).format(
       "DD/MM/YYYY"
-    );
+    ) : null;
     page1.getCell("C10").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C11").value = moment(fechasInicioIngenios.Cell11).format(
+    page1.getCell("C11").value = fechasInicioIngenios.Cell11 ? moment(fechasInicioIngenios.Cell11).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C11").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C12").value = moment(fechasInicioIngenios.Cell12).format(
+    page1.getCell("C12").value = fechasInicioIngenios.Cell12 ? moment(fechasInicioIngenios.Cell12).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C12").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C14").value = moment(fechasInicioIngenios.Cell14).format(
+    page1.getCell("C14").value = fechasInicioIngenios.Cell14 ? moment(fechasInicioIngenios.Cell14).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C14").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C15").value = moment(fechasInicioIngenios.Cell15).format(
+    page1.getCell("C15").value = fechasInicioIngenios.Cell15 ? moment(fechasInicioIngenios.Cell15).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C15").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C17").value = moment(fechasInicioIngenios.Cell17).format(
+    page1.getCell("C17").value = fechasInicioIngenios.Cell17 ? moment(fechasInicioIngenios.Cell17).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C17").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C18").value = moment(fechasInicioIngenios.Cell18).format(
+    page1.getCell("C18").value = fechasInicioIngenios.Cell18 ? moment(fechasInicioIngenios.Cell18).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C18").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C19").value = moment(fechasInicioIngenios.Cell19).format(
+    page1.getCell("C19").value = fechasInicioIngenios.Cell19 ? moment(fechasInicioIngenios.Cell19).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C19").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C20").value = moment(fechasInicioIngenios.Cell20).format(
+    page1.getCell("C20").value = fechasInicioIngenios.Cell20 ? moment(fechasInicioIngenios.Cell20).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C20").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C21").value = moment(fechasInicioIngenios.Cell21).format(
+    page1.getCell("C21").value = fechasInicioIngenios.Cell21 ? moment(fechasInicioIngenios.Cell21).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C21").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C22").value = moment(fechasInicioIngenios.Cell22).format(
+    page1.getCell("C22").value = fechasInicioIngenios.Cell22 ? moment(fechasInicioIngenios.Cell22).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C22").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C23").value = moment(fechasInicioIngenios.Cell23).format(
+    page1.getCell("C23").value = fechasInicioIngenios.Cell23 ? moment(fechasInicioIngenios.Cell23).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C23").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C24").value = moment(fechasInicioIngenios.Cell24).format(
+    page1.getCell("C24").value = fechasInicioIngenios.Cell24 ? moment(fechasInicioIngenios.Cell24).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C24").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C25").value = moment(fechasInicioIngenios.Cell25).format(
+    page1.getCell("C25").value = fechasInicioIngenios.Cell25 ? moment(fechasInicioIngenios.Cell25).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C25").font = { name: "Calibri", bold: true, size: 11 };
 
-    page1.getCell("C26").value = moment(fechasInicioIngenios.Cell26).format(
+    page1.getCell("C26").value = fechasInicioIngenios.Cell26 ? moment(fechasInicioIngenios.Cell26).format(
       "DD/MM/YYYY"
-    );
+    ): null;
     page1.getCell("C26").font = { name: "Calibri", bold: true, size: 11 };
 
 
     /** COLUMNA FIN DE ZAFRA 2023 **/
-    page1.getCell("E10").value =
-      fechasInicioIngenios?.CellE10 !== null
-        ? moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY")
-        : "";
+    // page1.getCell("E10").value =
+    //     fechasInicioIngenios?.CellE10 !== undefined || fechasInicioIngenios?.CellE10 !== null
+    //     ? moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY")
+    //     : null;
+    page1.getCell("E10").value = 
+      fechasInicioIngenios?.Cell10 === undefined 
+      ?  null 
+      : (fechasInicioIngenios?.Cell10 && fechasInicioIngenios?.CellE10 === null) 
+        ? null 
+        : moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY")
+
     page1.getCell("E10").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E11").value =
-      fechasInicioIngenios?.CellE11 !== null
-        ? moment(fechasInicioIngenios?.CellE11).format("DD/MM/YYYY")
-        : "";
+
+    page1.getCell("E11").value = 
+    fechasInicioIngenios?.Cell11 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell11 && fechasInicioIngenios?.CellE11 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE11).format("DD/MM/YYYY")
     page1.getCell("E11").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E12").value =
-      fechasInicioIngenios?.CellE12 !== null
-        ? moment(fechasInicioIngenios?.CellE12).format("DD/MM/YYYY")
-        : "";
+
+    page1.getCell("E12").value = 
+    fechasInicioIngenios?.Cell12 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell12 && fechasInicioIngenios?.CellE12 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE12).format("DD/MM/YYYY")
     page1.getCell("E12").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E14").value =
-      fechasInicioIngenios?.CellE14 !== null
-        ? moment(fechasInicioIngenios?.CellE14).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E14").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E15").value =
-      fechasInicioIngenios?.CellE15 !== null
-        ? moment(fechasInicioIngenios?.CellE15).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E15").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E17").value =
-      fechasInicioIngenios?.CellE17 !== null
-        ? moment(fechasInicioIngenios?.CellE17).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E17").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E18").value =
-      fechasInicioIngenios?.CellE18 !== null
-        ? moment(fechasInicioIngenios?.CellE18).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E18").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E19").value =
-      fechasInicioIngenios?.CellE19 !== null
-        ? moment(fechasInicioIngenios?.CellE19).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E19").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E20").value =
-      fechasInicioIngenios?.CellE20 !== null
-        ? moment(fechasInicioIngenios?.CellE20).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E20").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E21").value =
-      fechasInicioIngenios?.CellE21 !== null
-        ? moment(fechasInicioIngenios?.CellE21).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E21").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E22").value =
-      fechasInicioIngenios?.CellE22 !== null
-        ? moment(fechasInicioIngenios?.CellE22).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E22").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E23").value =
-      fechasInicioIngenios?.CellE23 !== null
-        ? moment(fechasInicioIngenios?.CellE23).format("DD/MM/YYYY")
-        : "";
-    page1.getCell("E23").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E24").value = moment(fechasInicioIngenios?.CellE24).format(
-      "DD/MM/YYYY"
-    );
-    page1.getCell("E24").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E25").value = moment(fechasInicioIngenios?.CellE25).format(
-      "DD/MM/YYYY"
-    );
-    page1.getCell("E25").font = { name: "Calibri", bold: true, size: 11 };
-    page1.getCell("E26").value = moment(fechasInicioIngenios?.CellE26).format(
-      "DD/MM/YYYY"
-    );
+
+    page1.getCell("E14").value = 
+    fechasInicioIngenios?.Cell14 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell14 && fechasInicioIngenios?.CellE14 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE14).format("DD/MM/YYYY")    
+page1.getCell("E14").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E15").value = 
+    fechasInicioIngenios?.Cell15 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell15 && fechasInicioIngenios?.CellE15 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE15).format("DD/MM/YYYY")
+page1.getCell("E15").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E17").value = 
+    fechasInicioIngenios?.Cell17 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell17 && fechasInicioIngenios?.CellE17 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE17).format("DD/MM/YYYY")
+page1.getCell("E17").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E18").value = 
+    fechasInicioIngenios?.Cell18 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell18 && fechasInicioIngenios?.CellE18 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE18).format("DD/MM/YYYY")
+page1.getCell("E18").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E19").value = 
+    fechasInicioIngenios?.Cell19 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell19 && fechasInicioIngenios?.CellE19 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE19).format("DD/MM/YYYY")
+page1.getCell("E19").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E20").value = 
+    fechasInicioIngenios?.Cell20 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell20 && fechasInicioIngenios?.CellE20 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE20).format("DD/MM/YYYY")
+page1.getCell("E20").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E21").value = 
+    fechasInicioIngenios?.Cell21 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell21 && fechasInicioIngenios?.CellE21 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE21).format("DD/MM/YYYY")
+page1.getCell("E21").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E22").value = 
+    fechasInicioIngenios?.Cell22 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell22 && fechasInicioIngenios?.CellE22 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE22).format("DD/MM/YYYY")
+page1.getCell("E22").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E23").value = 
+    fechasInicioIngenios?.Cell23 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell23 && fechasInicioIngenios?.CellE23 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE23).format("DD/MM/YYYY")
+page1.getCell("E23").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E24").value = 
+    fechasInicioIngenios?.Cell24 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell24 && fechasInicioIngenios?.CellE24 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE24).format("DD/MM/YYYY")
+page1.getCell("E24").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E25").value = 
+    fechasInicioIngenios?.Cell25 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell25 && fechasInicioIngenios?.CellE25 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE25).format("DD/MM/YYYY")
+page1.getCell("E25").font = { name: "Calibri", bold: true, size: 11 };
+
+    page1.getCell("E26").value = 
+    fechasInicioIngenios?.Cell26 === undefined 
+    ?  null 
+    : (fechasInicioIngenios?.Cell26 && fechasInicioIngenios?.CellE26 === null) 
+      ? null 
+      : moment(fechasInicioIngenios?.CellE26).format("DD/MM/YYYY")
     page1.getCell("E26").font = { name: "Calibri", bold: true, size: 11 };
 
     /** COLUMNA DIAS DE AVANCE 2023**/
@@ -1105,7 +1157,7 @@ export const CreateExcelWorkbook = async (
     for (let i = 14; i <= 15; i++) {
       page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 };
     }
-    for (let i = 17; i <= 25; i++) {
+    for (let i = 17; i <= 26; i++) {
       page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 };
     }
 
@@ -1115,7 +1167,7 @@ export const CreateExcelWorkbook = async (
     for (let i = 14; i <= 15; i++) {
       page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 };
     }
-    for (let i = 17; i <= 25; i++) {
+    for (let i = 17; i <= 26; i++) {
       page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 };
     }
 
@@ -2225,7 +2277,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
     /************/
 
     /**COLUMNA RTO CMB */
-    for (let i = 10; i <= 25; i++) {
+    for (let i = 10; i <= 26; i++) {
       if (page1.getCell(i, 6).value === 0) {
         page1.getCell(i, 9).value = 0;
         page1.getCell(i, 10).value = 0;

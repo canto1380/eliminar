@@ -15,7 +15,7 @@ import { getIngenios } from "../../utils/queryAPI/ingenios";
 const AddEditPeriodoContainer = () => {
   const [periodosZafra, setPeriodosZafra] = useState(undefined);
   const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
-  const [inactivo, setInactivo] = useState(false);
+  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);

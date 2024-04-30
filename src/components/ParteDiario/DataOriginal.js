@@ -350,12 +350,7 @@ export const dataPorTipo = (
     (d) => d.nombre_ingenio === "Santa Rosa"
   );
   const sanjuan = dateInicioIngenios?.find((d) => d.nombre_ingenio === "San Juan")
-  // const starosa = dataImport?.find(
-  //   (d) =>
-  //     d.IngenioNombre === "Santa Rosa" &&
-  //     parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() &&
-  //     d.MoliendaCanaBruta !== 0
-  // );
+
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
     CellE10: aguil?.fin_zafra,
@@ -388,6 +383,7 @@ export const dataPorTipo = (
     Cell26: sanjuan?.inicio_zafra,
     CellE26: sanjuan?.fin_zafra,
   };
+  // console.log(dataInicioIngenios)
   setFechasInicioIngenios(dataInicioIngenios);
   /************/
 
@@ -530,7 +526,7 @@ export const dataPorTipo = (
       a4 = a4 + data.MoliendaCanaBruta;
       b4 = b4 + data.MoliendaCanaNeta;
       c4 = c4 + data.AzucarEquivalente;
-      z4 = z4 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      z4 = z4 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
       e4 = e4 + data.AzucarCrudoProducido;
       f4 = f4 + data.MelazaProducida;
       g4 = g4 + data.AlcoholProducido;
@@ -540,6 +536,7 @@ export const dataPorTipo = (
       k4 = k4 + data.AzucarBlancoProducido;
       o4 = o4 + data.AlcoholHidratado || 0;
       r4 = r4 + data.AlcoholAnhidro || 0;
+      
       dataConcepcion = {
         E14: a4,
         F14: b4,
@@ -627,7 +624,7 @@ export const dataPorTipo = (
       a7 = a7 + data.MoliendaCanaBruta;
       b7 = b7 + data.MoliendaCanaNeta;
       c7 = c7 + data.AzucarEquivalente;
-      z7 = z7 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      z7 = z7 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
       e7 = e7 + data.AzucarCrudoProducido;
       f7 = f7 + data.MelazaProducida;
       g7 = g7 + data.AlcoholProducido;
@@ -696,9 +693,9 @@ export const dataPorTipo = (
       z9 = z9 + data.AzucarBlancoProducido;
       e9 =
         e9 +
-        data.AzucarCrudoProducido +
-        data?.AzucarOrganico +
-        data?.OtroAzucar;
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
       f9 = f9 + data.MelazaProducida;
       g9 = g9 + data.AlcoholProducido;
       h9 = h9 + data.AzucarRefinado || 0;
@@ -763,7 +760,7 @@ export const dataPorTipo = (
       a11 = a11 + data.MoliendaCanaBruta;
       b11 = b11 + data.MoliendaCanaNeta;
       c11 = c11 + data.AzucarEquivalente;
-      z11 = z11 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      z11 = z11 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
       e11 = e11 + data.AzucarCrudoProducido;
       f11 = f11 + data.MelazaProducida;
       g11 = g11 + data.AlcoholProducido;

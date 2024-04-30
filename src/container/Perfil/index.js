@@ -13,7 +13,7 @@ import { getUsuariosById } from "../../utils/queryAPI/usuarios"
 
 const Perfil = () => {
   const [loading, setLoading] = useState(false)
-  const [inactivo, setInactivo] = useState(false)
+  const [inactivo, setInactivo] = useState(true)
   const [tokenAuth, setTokenAuth] = useState(null)
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
   const [userData, setUserData] = useState(null)

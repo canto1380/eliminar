@@ -12,7 +12,7 @@ import { inactivityTime } from "../../helpers/inactivityTime";
 
 const DataComparativa = () => {
   const [loading, setLoading] = useState(false);
-  const [inactivo, setInactivo] = useState(false);
+  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 

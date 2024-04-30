@@ -50,12 +50,12 @@ const FormAddEditUsuarios = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
   return (
     <div className="menuContainer">
       <Row className={`d-flex justify-content-between align-items-center pb-2`}>
-        <Col xs={12} md={8} className={``}>
+        <Col xs={6} className={``}>
           <div className={`pb-1`}>
             <h3 className="mb-0">Informacion Personal</h3>
           </div>
         </Col>
-        <Col xs={12} md={4} className={`text-end`}>
+        <Col xs={6} md={4} className={`text-end`}>
           <div className={`pb-1`}>
             <Button
               type="primary"

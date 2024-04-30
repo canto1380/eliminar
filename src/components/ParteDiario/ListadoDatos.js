@@ -6,10 +6,13 @@ const ListadoDatos = ({ columns, scroll, data, handleDelete }) => {
       <Table
         columns={columns}
         dataSource={data}
+        style={{
+          fontSize: 10,
+        }}
         key={data.id}
         rowKey={(record) => record.id}
         size="small"
-        scroll={{ x: scroll }}
+        scroll={{ x: scroll, y: 300 }}
         pagination={{ defaultPageSize: "1000", hideOnSinglePage: true }}
       />
     </>

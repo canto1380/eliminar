@@ -82,6 +82,9 @@ a {
   transform: translate(-50%, -50%);
   z-index: 1000;
 }
+.ant-table-cell {
+  font-size: 12px !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

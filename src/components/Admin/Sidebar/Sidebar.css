@@ -143,7 +143,7 @@
     /* position: fixed; */
   }
   .sidebarInactivo {
-    width: 13%;
+    width: 17%;
     height: 1025px;
   }
   .parte2Inactivo {
@@ -165,11 +165,11 @@
     /* position: fixed; */
   }
   .sidebar-inactivo {
-    width: 13%;
+    width: 17%;
     height: 1012px;
   }
   .parte2-inactivo {
-    width: 87%;
+    width: 83%;
     height: 100%;
   }
 }

@@ -122,6 +122,7 @@ const ParteDiarioContainer = () => {
     const data = await getIngenios();
     setDataIngenios(data);
   };
+
   return (
     <Container fluid>
       {banderaDataNull && (
