@@ -23,6 +23,12 @@ const ParteDiarioContainer = () => {
   const [dateInicioIngenios, setDateInicioIngenios] = useState(null);
   const [dateFinIngenios, setDateFinIngenios] = useState(null);
   const [dataIngenios, setDataIngenios] = useState(null);
+
+  const [inicioZafra, setInicioZafra] = useState(null);
+  const [finZafra, setFinZafra] = useState(null)
+  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
+  const [finZafraComparativa, setFinZafraComparativa] = useState(null)
+
   
   useEffect(() => {
     if (dataZafra !== null) {
@@ -51,10 +57,14 @@ const ParteDiarioContainer = () => {
       getDataImport();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataEnd]);
+  }, [dataEnd,inicioZafra, finZafra, inicioZafraComparativa, finZafraComparativa]);
   const getDataImport = async () => {
+    // console.log(inicioZafra, finZafra)
+    // console.log(inicioZafraComparativa, finZafraComparativa)
     // const anioDataEnd = dataEnd.getFullYear();
-    const anioDataEnd = new Date(dataEnd) < new Date(`${dataEnd.getFullYear()}-04-25`) ? dataEnd.getFullYear() -1 : dataEnd.getFullYear()
+    const anioDataEnd = new Date(dataEnd) < new Date(`${dataEnd.getFullYear()}-04-01`) ? dataEnd.getFullYear() -1 : dataEnd.getFullYear()
+    const inicioZafraDate = new Date(inicioZafra)
+    console.log(inicioZafraDate.getDay())
 
     const params = {
       fechadesde: `01-04-${anioDataEnd}`,
@@ -105,13 +115,12 @@ const ParteDiarioContainer = () => {
   }, [dataEnd]);
 
   const getDataPeriodos = async () => {
-    const params = { limit: 10000000, anio: dataEnd.getFullYear(), date: dataEnd };
+    const anioDataEnd = new Date(dataEnd) < new Date(`${dataEnd.getFullYear()}-04-01`) ? dataEnd.getFullYear() -1 : dataEnd.getFullYear()
+    const params = { limit: 10000000, anio: anioDataEnd };
     const data = await getPeriodoZafra(params);
     setDateInicioIngenios(data);
 
-    let dateEnd = new Date(dataEnd)
-
-    const params1 = { limit: 10000000, anio: dataEnd.getFullYear() -1, date: new Date(dateEnd.setFullYear(dateEnd.getFullYear() - 1))};
+    const params1 = { limit: 10000000, anio: anioDataEnd -1};
     const data1 = await getPeriodoZafra(params1);
     setDateFinIngenios(data1);
   };
@@ -122,6 +131,9 @@ const ParteDiarioContainer = () => {
     const data = await getIngenios();
     setDataIngenios(data);
   };
+
+  // console.log(dateInicioIngenios)
+  // console.log(dateFinIngenios)
 
   return (
     <Container fluid>
@@ -182,6 +194,10 @@ const ParteDiarioContainer = () => {
             dateInicioIngenios={dateInicioIngenios}
             dateFinIngenios={dateFinIngenios}
             dataIngenios={dataIngenios}
+            setInicioZafraContainer={setInicioZafra}
+            setFinZafraContainer={setFinZafra}
+            setInicioZafraComparativaContainer={setInicioZafraComparativa}
+            setFinZafraComparativaContainer={setFinZafraComparativa}
           />
         </>
       )}

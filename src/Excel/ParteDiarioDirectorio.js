@@ -4,7 +4,6 @@ import moment from "moment";
 export const CreateExcelWorkbook = async (
   setLoadingDownload,
   dataEnd,
-  setDataEnd,
   d1,
   d2,
   d3,
@@ -66,9 +65,9 @@ export const CreateExcelWorkbook = async (
     const workbook = new ExcelJS.Workbook();
     /** Fecha Hasta parte Dairio **/
     const date = dataEnd !== null ? new Date(dataEnd) : new Date();
-    const anioData = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 1 : date.getFullYear() ;
+    const anioData = new Date(date) < new Date(`${date.getFullYear()}-04-01`) ? date.getFullYear() - 1 : date.getFullYear() ;
     /** Anio Comparativo **/
-    const anioDataComparativo = new Date(date) < new Date(`${date.getFullYear()}-04-25`) ? date.getFullYear() - 2 : date.getFullYear() - 1;
+    const anioDataComparativo = new Date(date) < new Date(`${date.getFullYear()}-04-01`) ? date.getFullYear() - 2 : date.getFullYear() - 1;
     /** Fecha hasta comparativa **/
     const dateComparativa = new Date(date);
     dateComparativa.setFullYear(anioDataComparativo);
@@ -482,8 +481,8 @@ export const CreateExcelWorkbook = async (
     for (let i = 19; i <= 21; i++) {
       page1.getColumn(i).numFmt = "#,##0";
     }
-    page1.getColumn(22).numFmt = "#.##0";
-    page1.getColumn(23).numFmt = "#.##0";
+    page1.getColumn(22).numFmt = "0.##0";
+    page1.getColumn(23).numFmt = "0.##0";
     for (let i = 24; i <= 28; i++) {
       page1.getColumn(i).numFmt = "#,##0";
     }
@@ -492,7 +491,7 @@ export const CreateExcelWorkbook = async (
       page1.getCell(32, i).numFmt = "0.000%";
     }
 
-    page1.getCell("U32").numFmt = "#.##%";
+    page1.getCell("U32").numFmt = "0.##%";
     page1.getCell("F34").numFmt = "#,##0";
     page1.getCell("F35").numFmt = "#,##0";
     page1.getCell("F36").numFmt = "0.00";
@@ -1232,8 +1231,8 @@ page1.getCell("E25").font = { name: "Calibri", bold: true, size: 11 };
       formula: "=SUM(H10:H12,H14:H15,H17:H26)",
       result: 7,
     };
-    page1.getCell("I27").value = { formula: "=H27/F27*100", result: 7 };
-    page1.getCell("J27").value = { formula: "=H27/G27*100", result: 7 };
+    page1.getCell("I27").value = { formula: 'if(F27=0, 0,H27/F27*100)', result: 7 };
+    page1.getCell("J27").value = { formula: 'if(G27=0, 0,H27/G27*100)', result: 7 };
     page1.getCell("K27").value = {
       formula: "=SUM(K10:K12,K14:K15,K17:K26)",
       result: 7,
@@ -1269,8 +1268,8 @@ page1.getCell("E25").font = { name: "Calibri", bold: true, size: 11 };
       formula: "=SUM(U10:U12,U14:U15,U17:U26)",
       result: 7,
     };
-    page1.getCell("V27").value = { formula: "=U27/S27*100", result: 7 };
-    page1.getCell("W27").value = { formula: "=U27/T27*100", result: 7 };
+    page1.getCell("V27").value = { formula: 'if(S27=0,0,U27/S27*100)', result: 7 };
+    page1.getCell("W27").value = { formula: 'if(T27=0,0,U27/T27*100)', result: 7 };
     page1.getCell("X27").value = {
       formula: "=SUM(X10:X12,X14:X15,X17:X26)",
       result: 7,
@@ -1477,7 +1476,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
     page1.getCell("A37").value = "Diferencia";
     page1.getCell("F34").value = parseInt(estimacionEEAOC);
     page1.getCell("F35").value = { formula: "F27" };
-    page1.getCell("F36").value = { formula: "F35/F34*100" };
+    page1.getCell("F36").value = { formula: 'if(F34=0,0,F35/F34*100)' };
     page1.getCell("F37").value = { formula: "F36-100" };
     page1.getCell("H34").value = "Tn";
     page1.getCell("H35").value = "Tn";
@@ -1596,7 +1595,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
     /**** ALCOHOL ****/
     page1.mergeCells("H39:T40");
     page1.getCell("H39").value =
-      "PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO -  CAMPAÑA 2023 (INICIO: )";
+      `PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO -  CAMPAÑA ${anioData} (INICIO: )`;
     page1.getCell("H39").font = functionFont("Bodoni MT", true, 16);
     page1.getCell("H39").alignment = alignCenter;
     page1.getCell("H39").fill = bgAzul;
@@ -2283,7 +2282,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
         page1.getCell(i, 10).value = 0;
       } else {
         page1.getCell(i, 9).value = { formula: `=H${i}/F${i}*100`, result: 7 };
-        page1.getCell(i, 10).value = { formula: `=H${i}/G${i}*100`, result: 7 };
+        page1.getCell(i, 10).value = { formula: `=H${i}/G${i}*100`, result: 7 }; 
       }
     }
     for (let i = 10; i <= 25; i++) {
@@ -2295,6 +2294,40 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
         page1.getCell(i, 23).value = { formula: `=U${i}/T${i}*100`, result: 7 };
       }
     }
+
+    page1.getCell("I13").value= {
+      formula: 'if(F13=0, 0,H13/F13*100)', result: 14
+    }
+    page1.getCell("J13").value= {
+      formula: 'if(G13=0, 0,H13/G13*100)', result: 14
+    }
+
+    page1.getCell("I16").value= {
+      formula: 'if(F16=0, 0,H16/F16*100)', result: 14
+    }
+    page1.getCell("J16").value= {
+      formula: 'if(G16=0, 0,H16/G16*100)', result: 14
+    }
+
+
+    page1.getCell("V13").value= {
+      formula: 'if(S13=0, 0,U13/S13*100)', result: 14
+    }
+    page1.getCell("W13").value= {
+      formula: 'if(T13=0, 0,U13/T13*100)', result: 14
+    }
+
+    page1.getCell("V16").value= {
+      formula: 'if(S16=0, 0,U16/S16*100)', result: 14
+    }
+    page1.getCell("W16").value= {
+      formula: 'if(T16=0, 0,U16/T16*100)', result: 14
+    }
+
+
+
+    /**********/
+
     page1.pageSetup.printArea = 'A1:AB63';
     page1.pageSetup.scale= 100
     page1.pageSetup.margins = {
