@@ -230,6 +230,7 @@ const Filtros = ({
                   (option?.label ?? '').includes(input)
                 }
                 options={optionsAnios}
+                // defaultValue={zafraParteDiario}
               />
             </Col>
             <Col xs={12} lg={4} className='mb-1 mt-1'>

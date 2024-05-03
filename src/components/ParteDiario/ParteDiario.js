@@ -19,7 +19,6 @@ const ParteDiario = ({
   dataImport,
   dataImportComparativa,
   setBanderaDataNull,
-  setDataEnd,
   setDataImport,
   setDataImportComparativa,
   dateInicioIngenios,
@@ -82,6 +81,8 @@ const ParteDiario = ({
     const data = await getDataComparativa(params)
     setDataComparativa(data)
   }
+  console.log(dateInicioIngenios)
+  console.log(dateFinIngenios)
 
   useEffect(() => {
     dataPorTipo(

@@ -65,11 +65,10 @@ const ParteDiarioContainer = () => {
     finZafraComparativa,
   ])
   const getDataImport = async () => {
-    console.log(inicioZafra)
-    console.log(finZafra)
-    console.log(dataEnd)
     const inicio = new Date(inicioZafra)
     const fin = new Date(finZafra)
+    const inicioComparativa = new Date(inicioZafraComparativa)
+    const finComparativa = new Date(finZafraComparativa)
 
     const fechaInicio = `${inicio.getDate()}-${
       inicio.getMonth() + 1
@@ -80,19 +79,20 @@ const ParteDiarioContainer = () => {
             dataEnd.getMonth() + 1
           }-${dataEnd.getFullYear()}`
         : `${fin.getDate()}-${fin.getMonth() + 1}-${fin.getFullYear()}`
+    
+    const fechaInicioComparativo =`${inicioComparativa.getDate()}-${inicioComparativa.getMonth()+1}-${zafraParteDiario-1}`
+    const fechaFinComparativo = `${finComparativa.getDate()}-${finComparativa.getMonth()+1}-${zafraParteDiario-1}`
 
-    console.log(fechaFin)
-    // console.log(inicioZafra, inicioZafraComparativa)
-    // console.log(inicioZafraDate.getDay() - 1)
-    // console.log(inicioZafraDate.getMonth())
 
     const params = {
       fechadesde: fechaInicio,
-      fechahasta: `31-03-${zafraParteDiario + 1}`,
+      fechahasta: fechaFin
     }
     const params1 = {
-      fechadesde: `01-04-${zafraParteDiario - 1}`,
-      fechahasta: `31-03-${zafraParteDiario}`,
+      fechadesde: fechaInicioComparativo,
+      fechahasta: fechaFinComparativo
+      // fechadesde: `01-04-${zafraParteDiario - 1}`,
+      // fechahasta: `31-03-${zafraParteDiario}`,
     }
 
     /***** DESDE BACKEND *****/
@@ -127,6 +127,8 @@ const ParteDiarioContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  /*** PERIODOS INGENIOS - ACTUAL Y COMPARATIVO ***/
   useEffect(() => {
     if (dataEnd) {
       getDataPeriodos()
@@ -142,6 +144,9 @@ const ParteDiarioContainer = () => {
     const data1 = await getPeriodoZafra(params1)
     setDateFinIngenios(data1)
   }
+  /******/
+
+  /*** LISTADO INGENIOS ***/
   useEffect(() => {
     getDataIngenios()
   }, [])
@@ -149,7 +154,9 @@ const ParteDiarioContainer = () => {
     const data = await getIngenios()
     setDataIngenios(data)
   }
+   /******/
 
+   /*** INICIO Y FIN DE ZAFRA ACTUAL Y COMPARATIVA ***/
   useEffect(() => {
     inicioFinPeriodos()
     inicioFinPeriodosComparativos()
@@ -201,7 +208,11 @@ const ParteDiarioContainer = () => {
       }
     }
   }
+  /******/
 
+  // console.log(dataImport)
+  // console.log(dataImportComparativa)
+  // console.log(zafraParteDiario)
   return (
     <Container fluid>
       {banderaDataNull && (
@@ -257,7 +268,6 @@ const ParteDiarioContainer = () => {
             dataImport={dataImport}
             dataImportComparativa={dataImportComparativa}
             setBanderaDataNull={setBanderaDataNull}
-            setDataEnd={setDataEnd}
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}
             dateInicioIngenios={dateInicioIngenios}
