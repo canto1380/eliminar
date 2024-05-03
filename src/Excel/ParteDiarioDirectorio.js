@@ -1455,7 +1455,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format("DD/MM
     // const dataComparativa = dataConstante.dataComparativa;
     let estimacionEEAOC;
     let CMBporDDJJ;
-    dataComparativa.forEach((d) => {
+    dataComparativa?.forEach((d) => {
       if (d.anio_zafra === anioData) {
         estimacionEEAOC = d.estimacion_EEAOC;
       }

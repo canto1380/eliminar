@@ -1,13 +1,13 @@
-import "moment/locale/es";
-import { Row, Col, Button, Spinner } from "react-bootstrap";
-import { useEffect, useState, useContext } from "react";
-import { CreateExcelWorkbook } from "../../Excel/ParteDiarioDirectorio";
-import ItemCollpse from "./ItemsCollpase";
-import { User } from "../../context/UserProvider";
-import { dataComparativaPorTipo } from "./DataComparativa";
-import { dataPorTipo } from "./DataOriginal";
-import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
-import moment from "moment";
+import 'moment/locale/es'
+import { Row, Col, Button, Spinner } from 'react-bootstrap'
+import { useEffect, useState, useContext } from 'react'
+import { CreateExcelWorkbook } from '../../Excel/ParteDiarioDirectorio'
+import ItemCollpse from './ItemsCollpase'
+import { User } from '../../context/UserProvider'
+import { dataComparativaPorTipo } from './DataComparativa'
+import { dataPorTipo } from './DataOriginal'
+import { getDataComparativa } from '../../utils/queryAPI/dataComparativa'
+import moment from 'moment'
 
 const ParteDiario = ({
   dataEnd,
@@ -25,68 +25,63 @@ const ParteDiario = ({
   dateInicioIngenios,
   dateFinIngenios,
   dataIngenios,
-  setInicioZafraContainer,
-  setFinZafraContainer,
-  setInicioZafraComparativaContainer, 
-  setFinZafraComparativaContainer
 }) => {
-  const [d1, setD1] = useState([]);
-  const [d2, setD2] = useState([]);
-  const [d3, setD3] = useState([]);
-  const [d4, setD4] = useState([]);
-  const [d5, setD5] = useState([]);
-  const [d6, setD6] = useState([]);
-  const [d7, setD7] = useState([]);
-  const [d8, setD8] = useState([]);
-  const [d9, setD9] = useState([]);
-  const [d10, setD10] = useState([]);
-  const [d11, setD11] = useState([]);
-  const [d12, setD12] = useState([]);
-  const [d13, setD13] = useState([]);
-  const [d14, setD14] = useState([]);
-  const [d15, setD15] = useState([]);
+  const [d1, setD1] = useState([])
+  const [d2, setD2] = useState([])
+  const [d3, setD3] = useState([])
+  const [d4, setD4] = useState([])
+  const [d5, setD5] = useState([])
+  const [d6, setD6] = useState([])
+  const [d7, setD7] = useState([])
+  const [d8, setD8] = useState([])
+  const [d9, setD9] = useState([])
+  const [d10, setD10] = useState([])
+  const [d11, setD11] = useState([])
+  const [d12, setD12] = useState([])
+  const [d13, setD13] = useState([])
+  const [d14, setD14] = useState([])
+  const [d15, setD15] = useState([])
   /** DC - Data Comparativa **/
-  const [dc1, setDc1] = useState([]);
-  const [dc2, setDc2] = useState([]);
-  const [dc3, setDc3] = useState([]);
-  const [dc4, setDc4] = useState([]);
-  const [dc5, setDc5] = useState([]);
-  const [dc6, setDc6] = useState([]);
-  const [dc7, setDc7] = useState([]);
-  const [dc8, setDc8] = useState([]);
-  const [dc9, setDc9] = useState([]);
-  const [dc10, setDc10] = useState([]);
-  const [dc11, setDc11] = useState([]);
-  const [dc12, setDc12] = useState([]);
-  const [dc13, setDc13] = useState([]);
-  const [dc14, setDc14] = useState([]);
-  const [dc15, setDc15] = useState([]);
-  const [inicioZafra, setInicioZafra] = useState(null);
-  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
-  const [finZafra, setFinZafra] = useState("");
-  const [finZafraComparativa, setFinZafraComparativa] = useState("");
-  const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null);
+  const [dc1, setDc1] = useState([])
+  const [dc2, setDc2] = useState([])
+  const [dc3, setDc3] = useState([])
+  const [dc4, setDc4] = useState([])
+  const [dc5, setDc5] = useState([])
+  const [dc6, setDc6] = useState([])
+  const [dc7, setDc7] = useState([])
+  const [dc8, setDc8] = useState([])
+  const [dc9, setDc9] = useState([])
+  const [dc10, setDc10] = useState([])
+  const [dc11, setDc11] = useState([])
+  const [dc12, setDc12] = useState([])
+  const [dc13, setDc13] = useState([])
+  const [dc14, setDc14] = useState([])
+  const [dc15, setDc15] = useState([])
+  const [inicioZafra, setInicioZafra] = useState(null)
+  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null)
+  const [finZafra, setFinZafra] = useState('')
+  const [finZafraComparativa, setFinZafraComparativa] = useState('')
+  const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null)
   const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
-    useState(null);
-  const [dataDiasZafra, setDataDiasZafra] = useState(null);
-  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] =
-    useState(null);
-    useState(null);
-  const [loadingDownload, setLoadingDownload] = useState(false);
-  const [dataComparativa, setDataComparativa] = useState(undefined);
+    useState(null)
+  const [dataDiasZafra, setDataDiasZafra] = useState(null)
+  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] = useState(null)
+  useState(null)
+  const [loadingDownload, setLoadingDownload] = useState(false)
+  const [dataComparativa, setDataComparativa] = useState(undefined)
 
-  const { dataUser } = useContext(User);
+  const { dataUser } = useContext(User)
 
   useEffect(() => {
-    dataComparativaGet();
+    dataComparativaGet()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   const dataComparativaGet = async () => {
-    const params = {deleted: false };
-    const data = await getDataComparativa(params);
-    setDataComparativa(data);
-  };
+    const params = { deleted: false }
+    const data = await getDataComparativa(params)
+    setDataComparativa(data)
+  }
 
   useEffect(() => {
     dataPorTipo(
@@ -108,8 +103,8 @@ const ParteDiario = ({
       setD13,
       setD14,
       setD15,
-      setFechasInicioIngenios,
-    );
+      setFechasInicioIngenios
+    )
     dataComparativaPorTipo(
       dataImportComparativa,
       dataEnd,
@@ -129,140 +124,177 @@ const ParteDiario = ({
       setDc13,
       setDc14,
       setDc15,
-      setFechasInicioIngeniosComparativa,
-    );
-    dataFinZafra();
-    dataFinZafraComparativa();
+      setFechasInicioIngeniosComparativa
+    )
+    dataFinZafra()
+    dataFinZafraComparativa()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataImport, dataImportComparativa]);
-  let inicioZafraa = new Date('3/10/2100');
-  let finZafraa = null;
+  }, [dataImport, dataImportComparativa])
+  let inicioZafraa = new Date('3/10/2100')
+  let finZafraa = null
 
   const dataFinZafra = () => {
     for (let clave in fechasInicioIngenios) {
       if (fechasInicioIngenios[clave] === null) {
-        setFinZafra("");
-        setFinZafraContainer("")
-        return finZafraa;
+        setFinZafra('')
+        return finZafraa
       } else {
         finZafraa =
           new Date(fechasInicioIngenios[clave]) > finZafraa
             ? new Date(fechasInicioIngenios[clave])
-            : finZafraa;
-        setFinZafra(finZafraa);
-        setFinZafraContainer(finZafraa)
+            : finZafraa
+        setFinZafra(finZafraa)
 
         inicioZafraa =
           new Date(fechasInicioIngenios[clave]) < inicioZafraa
             ? new Date(fechasInicioIngenios[clave])
-            : inicioZafraa;
+            : inicioZafraa
         setInicioZafra(inicioZafraa)
-        setInicioZafraContainer(inicioZafraa)
       }
     }
-  };
-  let inicioZafraaComparativa = new Date('3/10/2100');
-  let finZafraaComparativa = null;
+    // setFinZafraContainer(finZafraa)
+    // setInicioZafraContainer(inicioZafraa)
+  }
+
+  let inicioZafraaComparativa = new Date('3/10/2100')
+  let finZafraaComparativa = null
   const dataFinZafraComparativa = () => {
     for (let clave in fechasInicioIngeniosComparativa) {
       if (fechasInicioIngeniosComparativa[clave] === null) {
-        setFinZafraComparativa("");
-        setFinZafraComparativaContainer("")
-        return finZafraaComparativa;
+        setFinZafraComparativa('')
+
+        return finZafraaComparativa
       } else {
         finZafraaComparativa =
-          new Date(fechasInicioIngeniosComparativa[clave]) > finZafraaComparativa
+          new Date(fechasInicioIngeniosComparativa[clave]) >
+          finZafraaComparativa
             ? new Date(fechasInicioIngeniosComparativa[clave])
-            : finZafraaComparativa;
-        setFinZafraComparativa(finZafraaComparativa);
-        setFinZafraComparativaContainer(finZafraaComparativa)
+            : finZafraaComparativa
+        setFinZafraComparativa(finZafraaComparativa)
 
         inicioZafraaComparativa =
-          new Date(fechasInicioIngeniosComparativa[clave]) < inicioZafraaComparativa
+          new Date(fechasInicioIngeniosComparativa[clave]) <
+          inicioZafraaComparativa
             ? new Date(fechasInicioIngeniosComparativa[clave])
-            : inicioZafraaComparativa;
+            : inicioZafraaComparativa
         setInicioZafraComparativa(inicioZafraaComparativa)
-        setInicioZafraComparativaContainer(inicioZafraaComparativa)
       }
     }
+    // setInicioZafraComparativaContainer(inicioZafraaComparativa)
+    // setFinZafraComparativaContainer(finZafraaComparativa)
   }
-  console.log(inicioZafra, inicioZafraComparativa)
+  // console.log(inicioZafra, inicioZafraComparativa)
 
   useEffect(() => {
-    cantDiasZafra();
+    cantDiasZafra()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafra, finZafra]);
+  }, [inicioZafra, finZafra])
   const cantDiasZafra = () => {
-    
-    if(inicioZafra === "") {
+    if (inicioZafra === '') {
       setDataDiasZafra(0)
     }
 
-    if (inicioZafra !== "" && dataEnd < inicioZafra) {
-      setDataDiasZafra(0);
-    }
-    
-    if(inicioZafra !== "" && finZafra === "" && dataEnd >= inicioZafra) {
-      const diffDates = new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafra(Math.ceil(diffTotal));
+    if (inicioZafra !== '' && dataEnd < inicioZafra) {
+      setDataDiasZafra(0)
     }
 
-    if(inicioZafra !== "" && finZafra !== "" && dataEnd >= inicioZafra && dataEnd > finZafra) {
-      const diffDates = new Date(finZafra).getTime() - new Date(inicioZafra).getTime();
+    if (inicioZafra !== '' && finZafra === '' && dataEnd >= inicioZafra) {
+      const diffDates =
+        new Date(dataEnd).getTime() - new Date(inicioZafra).getTime()
       const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafra(Math.ceil(diffTotal));
+      setDataDiasZafra(Math.ceil(diffTotal))
     }
 
-    if (inicioZafra !== "" && finZafra !== "" && dataEnd >= inicioZafra && dataEnd <= finZafra) {
-      const diffDates = new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
+    if (
+      inicioZafra !== '' &&
+      finZafra !== '' &&
+      dataEnd >= inicioZafra &&
+      dataEnd > finZafra
+    ) {
+      const diffDates =
+        new Date(finZafra).getTime() - new Date(inicioZafra).getTime()
       const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafra(Math.ceil(diffTotal));
+      setDataDiasZafra(Math.ceil(diffTotal))
     }
-  };
+
+    if (
+      inicioZafra !== '' &&
+      finZafra !== '' &&
+      dataEnd >= inicioZafra &&
+      dataEnd <= finZafra
+    ) {
+      const diffDates =
+        new Date(dataEnd).getTime() - new Date(inicioZafra).getTime()
+      const diffTotal = diffDates / (1000 * 60 * 60 * 24)
+      setDataDiasZafra(Math.ceil(diffTotal))
+    }
+  }
 
   useEffect(() => {
-    cantDiasZafraComparativa();
+    cantDiasZafraComparativa()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafraComparativa, finZafraComparativa]);
+  }, [inicioZafraComparativa, finZafraComparativa])
 
   const cantDiasZafraComparativa = () => {
     const date = new Date(dataEnd)
-    const anioDate = date.getFullYear() -1
+    const anioDate = date.getFullYear() - 1
     const dateComparativa = new Date(date)
     dateComparativa.setFullYear(anioDate)
-    
-    if(inicioZafraComparativa === "") {
+
+    if (inicioZafraComparativa === '') {
       setDataDiasZafraComparativa(0)
     }
 
-    if(inicioZafraComparativa !== "" && dateComparativa < inicioZafraComparativa) {
+    if (
+      inicioZafraComparativa !== '' &&
+      dateComparativa < inicioZafraComparativa
+    ) {
       setDataDiasZafraComparativa(0)
     }
-    if(inicioZafraComparativa !== "" && finZafraComparativa === "" && dateComparativa >= inicioZafraComparativa) {
-      const diffDates = new Date(dateComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+    if (
+      inicioZafraComparativa !== '' &&
+      finZafraComparativa === '' &&
+      dateComparativa >= inicioZafraComparativa
+    ) {
+      const diffDates =
+        new Date(dateComparativa).getTime() -
+        new Date(inicioZafraComparativa).getTime()
       const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+      setDataDiasZafraComparativa(Math.ceil(diffTotal))
     }
 
-    if(inicioZafraComparativa !== "" && finZafraComparativa !== "" && dateComparativa >= inicioZafraComparativa && dateComparativa > finZafraComparativa) {
-      const diffDates = new Date(finZafraComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+    if (
+      inicioZafraComparativa !== '' &&
+      finZafraComparativa !== '' &&
+      dateComparativa >= inicioZafraComparativa &&
+      dateComparativa > finZafraComparativa
+    ) {
+      const diffDates =
+        new Date(finZafraComparativa).getTime() -
+        new Date(inicioZafraComparativa).getTime()
       const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+      setDataDiasZafraComparativa(Math.ceil(diffTotal))
     }
 
-    if(inicioZafraComparativa !== "" && finZafraComparativa !== "" && dateComparativa >= inicioZafraComparativa && dateComparativa <= finZafraComparativa) {
-      const diffDates = new Date(dateComparativa).getTime() - new Date(inicioZafraComparativa).getTime();
+    if (
+      inicioZafraComparativa !== '' &&
+      finZafraComparativa !== '' &&
+      dateComparativa >= inicioZafraComparativa &&
+      dateComparativa <= finZafraComparativa
+    ) {
+      const diffDates =
+        new Date(dateComparativa).getTime() -
+        new Date(inicioZafraComparativa).getTime()
       const diffTotal = diffDates / (1000 * 60 * 60 * 24)
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+      setDataDiasZafraComparativa(Math.ceil(diffTotal))
     }
   }
 
   return (
     <>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
-        <Col xs={12} className="text-start mb-5 mt-4">
+      <Row className='d-flex justify-content-start align-items-center pb-1 px-4'>
+        <Col xs={12} className='text-start mb-5 mt-4'>
           <Button
             className={`${
               (dataEnd === null ||
@@ -271,13 +303,12 @@ const ParteDiario = ({
                 fechasInicioIngenios === null ||
                 // fechasFinIngeniosComparativa === null ||
                 fechasInicioIngeniosComparativa === null) &&
-              "disabled"
+              'disabled'
             }`}
             onClick={() =>
               CreateExcelWorkbook(
                 setLoadingDownload,
                 dataEnd,
-                setDataEnd,
                 d1,
                 d2,
                 d3,
@@ -330,37 +361,37 @@ const ParteDiario = ({
             {dataEnd === null &&
             dataImport === null &&
             dataImportComparativa === null ? (
-              "Elija Fecha"
+              'Elija Fecha'
             ) : dataEnd !== null &&
               (dataImport === null || dataImportComparativa === null) ? (
               <>
                 <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
+                  as='span'
+                  animation='border'
+                  size='sm'
+                  role='status'
+                  aria-hidden='true'
                 />
                 Procesando
               </>
             ) : loadingDownload ? (
               <>
                 <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
+                  as='span'
+                  animation='border'
+                  size='sm'
+                  role='status'
+                  aria-hidden='true'
                 />
                 Descargando
               </>
             ) : (
-              "Descargar"
+              'Descargar'
             )}
           </Button>
         </Col>
       </Row>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
+      <Row className='d-flex justify-content-start align-items-center pb-1 px-4'>
         <Col>
           <ItemCollpse
             dataAnio={dataAnio}
@@ -372,6 +403,6 @@ const ParteDiario = ({
         </Col>
       </Row>
     </>
-  );
-};
-export default ParteDiario;
+  )
+}
+export default ParteDiario

@@ -1,9 +1,9 @@
-import { Col, Row } from "react-bootstrap";
-import { Select, DatePicker, Input } from "antd";
-import { getAnios } from "../../utils/queryAPI/anios";
-import { getMeses } from "../../utils/queryAPI/meses";
+import { Col, Row } from 'react-bootstrap'
+import { Select, DatePicker, Input } from 'antd'
+import { getAnios } from '../../utils/queryAPI/anios'
+import { getMeses } from '../../utils/queryAPI/meses'
 import { getQuincenas } from '../../utils/queryAPI/quincenas'
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 const { Search } = Input
 
@@ -26,6 +26,8 @@ const Filtros = ({
   BandFilterDiaParteDirectorio,
   bandFilterSearch,
   placeHolderSearch,
+  zafraParteDiario,
+  setZafraParteDiario,
 }) => {
   const [dataAnios, setDataAnios] = useState(null)
   const [dataMeses, setDataMeses] = useState(null)
@@ -36,9 +38,9 @@ const Filtros = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const dataFecha = async() => {
+  const dataFecha = async () => {
     const aniosData = await getAnios()
-    const mesesData = await getMeses ()
+    const mesesData = await getMeses()
     const quincenasData = await getQuincenas()
 
     setDataAnios(aniosData)
@@ -48,148 +50,151 @@ const Filtros = ({
 
   const changeData = (e) => {
     if (e !== null) {
-      setDataEnd(e.$d);
+      setDataEnd(e.$d)
     } else {
-      setDataEnd(null);
+      setDataEnd(null)
     }
-  };
+  }
 
+  const handleZafraParteDiario = (e) => {
+    setZafraParteDiario(e)
+  }
   const handleZafra = (e) => {
-    setDataZafra(e);
-  };
+    setDataZafra(e)
+  }
 
   const handleAnio = (e) => {
-    setDataAnio(e);
-  };
+    setDataAnio(e)
+  }
   const handleMes = (e) => {
-    setDataMes(e);
-  };
+    setDataMes(e)
+  }
   const handleQuincena = (e) => {
-    setDataQuincena(e);
-  };
+    setDataQuincena(e)
+  }
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
-  let optionsMeses = [];
+  let optionsMeses = []
   dataMeses?.forEach((d) => {
     const option = {
       value: d.id,
       label: d.mes_zafra,
-    };
-    optionsMeses.push(option);
-  });
-  let optionsAnios = [{value: '', label: 'Todos'}];
+    }
+    optionsMeses.push(option)
+  })
+  let optionsAnios = [{ value: '', label: 'Todos' }]
   dataAnios?.forEach((d) => {
     const option = {
       value: d.anio_zafra,
       label: d.anio_zafra,
-    };
-    optionsAnios.push(option);
-  });
-  let optionsQuincena = [];
+    }
+    optionsAnios.push(option)
+  })
+  let optionsQuincena = []
   dataQuincenas?.forEach((d) => {
     const option = {
       value: d.id,
       label: d.quincena_zafra,
-    };
-    optionsQuincena.push(option);
-  });
+    }
+    optionsQuincena.push(option)
+  })
 
   return (
     <>
       <Row>
-        <Col className="mt-3">
+        <Col className='mt-3'>
           <div className={`pt-4 pb-0 px-4`}>
-            <p className="fw-bolder">Filtros información</p>
+            <p className='fw-bolder'>Filtros información</p>
           </div>
         </Col>
       </Row>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
+      <Row className='d-flex justify-content-start align-items-center pb-1 px-4'>
         {bandFilterZafraAnio && (
-        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-          <span className="me-4">Zafra:</span>
-          <Select
-            onChange={handleZafra}
-            showSearch
-            style={{
-              width: "100%",
-            }}
-            placeholder="Busque o seleccione"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
-            }
-            options={optionsAnios}
-            defaultValue={dataZafra}
-          />
-        </Col>
+          <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+            <span className='me-4'>Zafra:</span>
+            <Select
+              onChange={handleZafra}
+              showSearch
+              style={{
+                width: '100%',
+              }}
+              placeholder='Busque o seleccione'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option?.label ?? '').includes(input)
+              }
+              options={optionsAnios}
+              defaultValue={dataZafra}
+            />
+          </Col>
         )}
         {bandFilterAnio && (
-        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-          <span className="me-4">Año:</span>
-          <Select
-            onChange={handleAnio}
-            showSearch
-            style={{
-              width: "100%",
-            }}
-            placeholder="Busque o seleccione"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
-            }
-            options={optionsAnios}
-            defaultValue={dataAnio}
-          />
-        </Col>
+          <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+            <span className='me-4'>Año:</span>
+            <Select
+              onChange={handleAnio}
+              showSearch
+              style={{
+                width: '100%',
+              }}
+              placeholder='Busque o seleccione'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option?.label ?? '').includes(input)
+              }
+              options={optionsAnios}
+              defaultValue={dataAnio}
+            />
+          </Col>
         )}
         {bandFilterMes && (
-        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-          <span className="me-4">Mes:</span>
-          <Select
-            onChange={handleMes}
-            showSearch
-            style={{
-              width: "100%",
-            }}
-            placeholder="Busque o seleccione"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
-            }
-            options={optionsMeses}
-            defaultValue={dataMes}
-          />
-        </Col>
+          <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+            <span className='me-4'>Mes:</span>
+            <Select
+              onChange={handleMes}
+              showSearch
+              style={{
+                width: '100%',
+              }}
+              placeholder='Busque o seleccione'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option?.label ?? '').includes(input)
+              }
+              options={optionsMeses}
+              defaultValue={dataMes}
+            />
+          </Col>
         )}
         {bandFilterQuincena && (
-        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-          <span className="me-4">Quincena:</span>
-          <Select
-            onChange={handleQuincena}
-            showSearch
-            style={{
-              width: "100%",
-            }}
-            placeholder="Busque o seleccione"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              (option?.label ?? "").includes(input)
-            }
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? "")
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? "").toLowerCase())
-            }
-            options={optionsQuincena}
-            defaultValue={dataQuincena}
-          />
-        </Col>
+          <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+            <span className='me-4'>Quincena:</span>
+            <Select
+              onChange={handleQuincena}
+              showSearch
+              style={{
+                width: '100%',
+              }}
+              placeholder='Busque o seleccione'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option?.label ?? '').includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '')
+                  .toLowerCase()
+                  .localeCompare((optionB?.label ?? '').toLowerCase())
+              }
+              options={optionsQuincena}
+              defaultValue={dataQuincena}
+            />
+          </Col>
         )}
         {bandFilterSearch && (
-        <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-          <span className="me-4">Buscar:</span>
+          <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+            <span className='me-4'>Buscar:</span>
             <Search
               style={{ width: '100%' }}
               placeholder={placeHolderSearch}
@@ -198,28 +203,47 @@ const Filtros = ({
               width={100}
               onChange={(e) => handleChange(e)}
             />
-        </Col>
+          </Col>
         )}
       </Row>
       {BandFilterDiaParteDirectorio && (
         <>
-      <Row>
-        <Col className="mt-3">
-          <div className={`pt-4 pb-0 px-4`}>
-            <p className="fw-bolder">Filtros Parte Diario Directorio</p>
-          </div>
-        </Col>
-      </Row>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
-
-        <Col xs={12} lg={4} className="mb-1 mt-1">
-          <p className="me-4 mb-0">Dia del parte:</p>
-          <DatePicker format={"DD/MM/YYYY"} onChange={changeData}/>
-        </Col>
-      </Row>
-      </>
+          <Row>
+            <Col className='mt-3'>
+              <div className={`pt-4 pb-0 px-4`}>
+                <p className='fw-bolder'>Filtros Parte Diario Directorio</p>
+              </div>
+            </Col>
+          </Row>
+          <Row className='d-flex justify-content-start align-items-center pb-1 px-4'>
+            <Col xs={12} md={6} lg={3} className='mb-1 mt-1'>
+              <span className='me-4'>Zafra:</span>
+              <Select
+                onChange={handleZafraParteDiario}
+                showSearch
+                style={{
+                  width: '100%',
+                }}
+                placeholder='Busque o seleccione'
+                optionFilterProp='children'
+                filterOption={(input, option) =>
+                  (option?.label ?? '').includes(input)
+                }
+                options={optionsAnios}
+              />
+            </Col>
+            <Col xs={12} lg={4} className='mb-1 mt-1'>
+              <p className='me-4 mb-0'>Dia del parte:</p>
+              <DatePicker
+                format={'DD/MM/YYYY'}
+                onChange={changeData}
+                disabled={!zafraParteDiario ? true : false}
+              />
+            </Col>
+          </Row>
+        </>
       )}
     </>
-  );
-};
-export default Filtros;
+  )
+}
+export default Filtros
