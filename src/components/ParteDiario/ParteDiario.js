@@ -18,9 +18,13 @@ const ParteDiario = ({
   dataParteDiariosHistoricos,
   dataImport,
   dataImportComparativa,
+  dataImportDestileria,
+  dataImportDestileriaComparativa,
   setBanderaDataNull,
   setDataImport,
   setDataImportComparativa,
+  setDataImportDestileria,
+  setDataImportDestileriaComparativa,
   dateInicioIngenios,
   dateFinIngenios,
   dataIngenios,
@@ -81,12 +85,11 @@ const ParteDiario = ({
     const data = await getDataComparativa(params)
     setDataComparativa(data)
   }
-  console.log(dateInicioIngenios)
-  console.log(dateFinIngenios)
 
   useEffect(() => {
     dataPorTipo(
       dataImport,
+      dataImportDestileria,
       dataEnd,
       dateInicioIngenios,
       setD1,
@@ -108,6 +111,7 @@ const ParteDiario = ({
     )
     dataComparativaPorTipo(
       dataImportComparativa,
+      dataImportDestileriaComparativa,
       dataEnd,
       dateFinIngenios,
       setDc1,
@@ -352,6 +356,8 @@ const ParteDiario = ({
                 dataDiasZafraComparativa,
                 setDataImport,
                 setDataImportComparativa,
+                setDataImportDestileria,
+                setDataImportDestileriaComparativa,
                 dataIngenios,
                 finZafra,
                 finZafraComparativa,

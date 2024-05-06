@@ -265,6 +265,7 @@ let dataAguilares = {
 
 export const dataPorTipo = (
   dataImport,
+  dataImportDestileria,
   dataEnd,
   dateInicioIngenios,
   setD1,
