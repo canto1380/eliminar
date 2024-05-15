@@ -53,15 +53,11 @@ const ParteDiarioContainer = () => {
       fechadesde: `01-04-${dataZafra}`,
       fechahasta: `31-03-${dataZafra + 1}`,
     }
-    /***** DESDE FRONTEND *****/
-    // const data = await getDataPartesDiarios(params) DESDE FRONTEND
-    // setDataParteDiariosHistoricos(data?.ParteDiarios)
 
     /***** DESDE BACKEND *****/
     const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
     setDataParteDiariosHistoricos(data)
   }
-
   useEffect(() => {
     if (dataEnd !== null) {
       getDataImportZafra()
@@ -80,7 +76,6 @@ const ParteDiarioContainer = () => {
     const fin = new Date(finZafra)
     const inicioComparativa = new Date(inicioZafraComparativa)
     const finComparativa = new Date(finZafraComparativa)
-
     const fechaInicio =
       inicioZafra === null
         ? null
@@ -113,11 +108,7 @@ const ParteDiarioContainer = () => {
     const params1 = {
       fechadesde: fechaInicioComparativo,
       fechahasta: fechaFinComparativo,
-      // fechadesde: `01-04-${zafraParteDiario - 1}`,
-      // fechahasta: `31-03-${zafraParteDiario}`,
     }
-    // console.log(fechaInicio, fechaFin)
-    // console.log(fechaInicioComparativo, fechaFinComparativo)
 
     /***** DESDE BACKEND *****/
     if (fechaInicio !== null) {
@@ -161,7 +152,7 @@ const ParteDiarioContainer = () => {
             dataEnd.getMonth() + 1
           }-${dataEnd.getFullYear()}`
         : `${finComparativa.getDate()}-${finComparativa.getMonth() + 1}-${
-            zafraParteDiario - 1
+            finComparativa.getFullYear()
           }`
 
     const params = {
@@ -174,8 +165,6 @@ const ParteDiarioContainer = () => {
       // fechadesde: `01-04-${zafraParteDiario - 1}`,
       // fechahasta: `31-03-${zafraParteDiario}`,
     }
-    // console.log(fechaInicio, fechaFin)
-    // console.log(fechaInicioComparativo, fechaFinComparativo)
 
     /***** DESDE BACKEND *****/
     if (fechaInicio !== null) {
@@ -376,6 +365,7 @@ const ParteDiarioContainer = () => {
     }
   }
 
+
   return (
     <Container fluid>
       {banderaDataNull && (
@@ -436,6 +426,7 @@ const ParteDiarioContainer = () => {
             dateInicioIngenios={dateInicioIngenios}
             dateFinIngenios={dateFinIngenios}
             dataIngenios={dataIngenios}
+            zafraParteDiario={zafraParteDiario}
           />
         </>
       )}

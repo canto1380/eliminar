@@ -7,7 +7,6 @@ import { User } from '../../context/UserProvider'
 import { dataComparativaPorTipo } from './DataComparativa'
 import { dataPorTipo } from './DataOriginal'
 import { getDataComparativa } from '../../utils/queryAPI/dataComparativa'
-import moment from 'moment'
 
 const ParteDiario = ({
   dataEnd,
@@ -28,6 +27,7 @@ const ParteDiario = ({
   dateInicioIngenios,
   dateFinIngenios,
   dataIngenios,
+  zafraParteDiario,
 }) => {
   const [d1, setD1] = useState([])
   const [d2, setD2] = useState([])
@@ -65,6 +65,8 @@ const ParteDiario = ({
   const [finZafra, setFinZafra] = useState('')
   const [finZafraComparativa, setFinZafraComparativa] = useState('')
   const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null)
+  const [fechasInicioDestileriaIngenios, setFechasInicioDestileriaIngenios] = useState(null)
+  const [fechasInicioDestileriaIngeniosComparativa, setFechasInicioDestileriaIngeniosComparativa] = useState(null)
   const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
     useState(null)
   const [dataDiasZafra, setDataDiasZafra] = useState(null)
@@ -72,6 +74,7 @@ const ParteDiario = ({
   useState(null)
   const [loadingDownload, setLoadingDownload] = useState(false)
   const [dataComparativa, setDataComparativa] = useState(undefined)
+  const [fechaInicioDestileria, setFechaInicioDestileria] = useState(undefined)
 
   const { dataUser } = useContext(User)
 
@@ -85,7 +88,6 @@ const ParteDiario = ({
     const data = await getDataComparativa(params)
     setDataComparativa(data)
   }
-
   useEffect(() => {
     dataPorTipo(
       dataImport,
@@ -107,7 +109,8 @@ const ParteDiario = ({
       setD13,
       setD14,
       setD15,
-      setFechasInicioIngenios
+      setFechasInicioIngenios,
+      setFechasInicioDestileriaIngenios
     )
     dataComparativaPorTipo(
       dataImportComparativa,
@@ -129,16 +132,18 @@ const ParteDiario = ({
       setDc13,
       setDc14,
       setDc15,
-      setFechasInicioIngeniosComparativa
+      setFechasInicioIngeniosComparativa,
+      setFechasInicioDestileriaIngeniosComparativa
     )
     dataFinZafra()
     dataFinZafraComparativa()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataImport, dataImportComparativa])
+  }, [dataImport, dataImportComparativa, dataImportDestileria, dataImportDestileriaComparativa])
+
+
   let inicioZafraa = new Date('3/10/2100')
   let finZafraa = null
-
   const dataFinZafra = () => {
     for (let clave in fechasInicioIngenios) {
       if (fechasInicioIngenios[clave] === null) {
@@ -150,16 +155,17 @@ const ParteDiario = ({
             ? new Date(fechasInicioIngenios[clave])
             : finZafraa
         setFinZafra(finZafraa)
-
-        inicioZafraa =
-          new Date(fechasInicioIngenios[clave]) < inicioZafraa
-            ? new Date(fechasInicioIngenios[clave])
-            : inicioZafraa
-        setInicioZafra(inicioZafraa)
       }
-    }
-    // setFinZafraContainer(finZafraa)
-    // setInicioZafraContainer(inicioZafraa)
+      for (let clave in fechasInicioIngenios) {
+        if(fechasInicioIngenios[clave] && fechasInicioIngenios[clave] !== null ){
+          inicioZafraa =
+            new Date(fechasInicioIngenios[clave]) < inicioZafraa
+              ? new Date(fechasInicioIngenios[clave])
+              : inicioZafraa
+          setInicioZafra(inicioZafraa)
+
+        }
+    }}
   }
 
   let inicioZafraaComparativa = new Date('3/10/2100')
@@ -186,11 +192,7 @@ const ParteDiario = ({
         setInicioZafraComparativa(inicioZafraaComparativa)
       }
     }
-    // setInicioZafraComparativaContainer(inicioZafraaComparativa)
-    // setFinZafraComparativaContainer(finZafraaComparativa)
   }
-  // console.log(inicioZafra, inicioZafraComparativa)
-
   useEffect(() => {
     cantDiasZafra()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -240,7 +242,6 @@ const ParteDiario = ({
     cantDiasZafraComparativa()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inicioZafraComparativa, finZafraComparativa])
-
   const cantDiasZafraComparativa = () => {
     const date = new Date(dataEnd)
     const anioDate = date.getFullYear() - 1
@@ -296,6 +297,23 @@ const ParteDiario = ({
     }
   }
 
+  useEffect(() => {
+    fechaInicioDestilerias()
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateInicioIngenios])
+
+  let inicioDestileria = new Date('3/10/2100')
+  const fechaInicioDestilerias = () => {
+    dateInicioIngenios?.forEach((d) => {
+      if(d.inicio_destileria !== null) {
+        inicioDestileria = new Date(d.inicio_destileria) < inicioDestileria
+          ? new Date(d.inicio_destileria)
+          : inicioDestileria
+      }
+    })
+    setFechaInicioDestileria(inicioDestileria)
+  }
+
   return (
     <>
       <Row className='d-flex justify-content-start align-items-center pb-1 px-4'>
@@ -306,7 +324,7 @@ const ParteDiario = ({
                 dataImport === null ||
                 dataImportComparativa === null ||
                 fechasInicioIngenios === null ||
-                // fechasFinIngeniosComparativa === null ||
+                loadingDownload === true ||
                 fechasInicioIngeniosComparativa === null) &&
               'disabled'
             }`}
@@ -361,7 +379,9 @@ const ParteDiario = ({
                 dataIngenios,
                 finZafra,
                 finZafraComparativa,
-                dataComparativa
+                dataComparativa,
+                fechaInicioDestileria,
+                zafraParteDiario
               )
             }
           >
