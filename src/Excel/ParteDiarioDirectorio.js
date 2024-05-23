@@ -69,25 +69,20 @@ export const CreateExcelWorkbook = async (
     const workbook = new ExcelJS.Workbook()
     /** Fecha Hasta parte Dairio **/
     const date = dataEnd !== null ? new Date(dataEnd) : new Date()
-    // const anioData =
-    //   new Date(date) < new Date(`${date.getFullYear()}-04-01`)
-    //     ? date.getFullYear() - 1
-    //     : date.getFullYear()
     const anioData = zafraParteDiario
-
-    /** Anio Comparativo **/
-    // const anioDataComparativo =
-    //   new Date(date) < new Date(`${date.getFullYear()}-04-01`)
-    //     ? date.getFullYear() - 2
-    //     : date.getFullYear() - 1
-    const anioDataComparativo = zafraParteDiario - 1
-
-    /** Fecha hasta comparativa **/
-    const dateComparativa = new Date(date)
-    dateComparativa.setFullYear(anioData)
-    /** Formatos **/
     const dateFormat = moment(date).format('DD-MM-YYYY')
+  
+    
+    /** Fecha hasta comparativa **/
+    const anioDataComparativo = date.getFullYear()
+    let dateComparativa = new Date(date)
+    if(anioData === anioDataComparativo){
+      dateComparativa.setFullYear(anioData-1)
+    } else {
+      dateComparativa.setFullYear(anioData)
+    }
     const dateComparativaFormat = moment(dateComparativa).format('DD-MM-YYYY')
+    console.log(dateFormat, dateComparativaFormat)
     workbook.creator = `${dataUser?.name} ${dataUser?.surname}`
     workbook.created = date
     workbook.modified = date
@@ -116,6 +111,7 @@ export const CreateExcelWorkbook = async (
       properties: { tabColor: { argb: '0000B2' } },
     })
     page1.headerFooter.differentFirst = true
+    
 
     const page2 = workbook.addWorksheet('Azúcar y Alcohol discriminado', {
       pageSetup: {
@@ -133,7 +129,6 @@ export const CreateExcelWorkbook = async (
     page2.headerFooter.differentFirst = true
 
     /***** FORMATO CONDICIONAL *****/
-
     const rulesFgRed = [
       {
         type: 'cellIs',
@@ -172,41 +167,39 @@ export const CreateExcelWorkbook = async (
     const functionFont = (name, bold, size) => {
       return { name, bold, size }
     }
-    for (let i = 3; i <= 27; i++) {
-      page1.getColumn(i).width = '15'
+    for (let i = 6; i <= 28; i++) {
+      page1.getColumn(i).width = '17'
     }
-    page1.getColumn(1).width = '15'
-    page1.getColumn(2).width = '11'
-    page1.getColumn(3).width = '13'
+    page1.getColumn(1).width = '18'
+    page1.getColumn(2).width = '18'
+    page1.getColumn(3).width = '18'
     page1.getColumn(4).width = '13'
     page1.getColumn(5).width = '13'
-    page1.getColumn(9).width = '13'
-    page1.getColumn(10).width = '13'
-    page1.getColumn(14).width = '13'
-    page1.getColumn(15).width = '18'
-    page1.getColumn(16).width = '13'
-    page1.getColumn(17).width = '13'
-    page1.getColumn(18).width = '13'
-    page1.getColumn(28).width = '18'
-    page1.getColumn(22).width = '13'
-    page1.getColumn(23).width = '13'
 
     for (let i = 1; i <= 4; i++) {
       page1.getRow(i).height = '27'
     }
-    page1.getRow(5).height = '22'
-    page1.getRow(8).height = '34'
+    page1.getRow(5).height = '28'
+    page1.getRow(8).height = '36'
     for (let i = 10; i <= 26; i++) {
-      page1.getRow(i).height = '20'
+      page1.getRow(i).height = '28'
     }
-    page1.getRow(27).height = '21.75'
-    page1.getRow(28).height = '24.75'
-    page1.getRow(30).height = '34.5'
-    page1.getRow(31).height = '34.5'
-    page1.getRow(32).height = '34.5'
+    page1.getRow(27).height = '27'
+    page1.getRow(28).height = '30'
+    page1.getRow(30).height = '37'
+    page1.getRow(31).height = '37'
+    page1.getRow(32).height = '37'
 
     for (let i = 34; i <= 37; i++) {
-      page1.getRow(i).height = '22'
+      page1.getRow(i).height = '28'
+    }
+    for(let i=34;i<=37;i++) {
+      page1.getCell(`A${i}`).font = {size: 15}
+      page1.getCell(`F${i}`).font = {size: 15}
+      page1.getCell(`G${i}`).font = {size: 15}
+      page1.getCell(`O${i}`).font = {size: 15}
+      page1.getCell(`V${i}`).font = {size: 15}
+      page1.getCell(`X${i}`).font = {size: 15}
     }
 
 
@@ -250,7 +243,7 @@ export const CreateExcelWorkbook = async (
       page1.getCell(9, i).fill = bgAzul
     }
     for (let i = 1; i < 29; i++) {
-      page1.getCell(28, i).fill = bgAzul
+      page1.getCell(27, i).fill = bgAzul
     }
     for (let i = 1; i < 29; i++) {
       page1.getCell(7, i).fill = bgGris
@@ -262,13 +255,13 @@ export const CreateExcelWorkbook = async (
     page1.getRow(8).alignment = alignCenter
     page1.getRow(9).alignment = alignCenter
     for (let i = 10; i <= 26; i++) {
-      page1.getRow(i).font = functionFont('Calibri', true, 12)
+      page1.getRow(i).font = functionFont('Calibri', true, 15)
     }
-    page1.getRow(27).font = functionFont('Arial', true, 16)
-    page1.getRow(31).font = functionFont('Arial Narrow', true, 13)
+    page1.getRow(26).font = functionFont('Calibri', true, 18)
+    page1.getRow(31).font = functionFont('Calibri', true, 17)
     page1.getRow(31).alignment = alignCenter
     page1.getRow(32).alignment = alignCenter
-    page1.getRow(32).font = functionFont('Arial Narrow', true, 14)
+    page1.getRow(32).font = functionFont('Calibri', true, 17)
 
 
     /***** BORDES *****/
@@ -281,7 +274,7 @@ export const CreateExcelWorkbook = async (
       }
     }
 
-    for (let i = 1; i < 29; i++) {
+    for (let i = 1; i < 27; i++) {
       page1.getCell(1, i).border = borders(
         'medium',
         '000000',
@@ -364,7 +357,7 @@ export const CreateExcelWorkbook = async (
       'medium',
       '000000'
     )
-    page1.getRow(27).border = borders(
+    page1.getRow(26).border = borders(
       'medium',
       '000000',
       'medium',
@@ -374,7 +367,7 @@ export const CreateExcelWorkbook = async (
       'medium',
       '000000'
     )
-    page1.getRow(28).border = borders(
+    page1.getRow(27).border = borders(
       'medium',
       '000000',
       'medium',
@@ -519,15 +512,15 @@ export const CreateExcelWorkbook = async (
     page1.mergeCells('G1:W2')
     page1.getCell(
       'W2'
-    ).value = `COMPARATIVO ZAFRA ${anioData}/${anioDataComparativo}`
+    ).value = `COMPARATIVO ZAFRA ${anioData}/${anioDataComparativo-1}`
     page1.getCell('W2').alignment = { horizontal: 'center' }
-    page1.getCell('W2').font = { name: 'Bodoni MT', bold: true, size: 24 }
+    page1.getCell('W2').font = { name: 'Calibri', bold: true, size: 24 }
 
     page1.mergeCells('G3:W4')
     page1.getCell(
       'W4'
     ).value = `DATOS PRODUCTIVOS SEGÚN PARTE DIARIO ${Math.ceil(dataDiasZafra)}`
-    page1.getCell('W4').font = { name: 'Calibri', bold: true, size: 16 }
+    page1.getCell('W4').font = { name: 'Calibri', bold: true, size: 20 }
     page1.getCell('W4').alignment = {
       horizontal: 'center',
       vertical: 'middle',
@@ -536,39 +529,39 @@ export const CreateExcelWorkbook = async (
     page1.mergeCells('X1:AB4')
     page1.getCell('X1').value = 'Icono Tucuman'
 
-    page1.mergeCells('A5:E5')
+    page1.mergeCells('A5:F5')
     page1.getCell('E5').value = 'Fecha de Reunión de Directorio'
     page1.getCell('E5').alignment = { horizontal: 'start' }
-    page1.getCell('E5').font = { name: 'Calirbi', bold: true, size: 14 }
+    page1.getCell('E5').font = { name: 'Calirbi', bold: true, size: 18 }
 
     page1.mergeCells('G5:AB5')
 
     /** ENCABEZADOS Y COLUMNAS DE TABLA **/
     page1.mergeCells('A6:B9')
     page1.getCell('A9').value = 'INGENIOS DE LA PROVINCIA DE TUCUMÁN'
-    page1.getCell('A9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('A9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('C6:O6')
     page1.getCell('O6').value = `ZAFRA ${anioData}`
-    page1.getCell('O6').font = { name: 'Bodoni MT', bold: true, size: 18 }
+    page1.getCell('O6').font = { name: 'Calibri', bold: true, size: 18 }
 
     page1.mergeCells('P6:AB6')
-    page1.getCell('AB6').value = `ZAFRA ${anioDataComparativo}`
-    page1.getCell('AB6').font = { name: 'Bodoni MT', bold: true, size: 18 }
+    page1.getCell('AB6').value = `ZAFRA ${zafraParteDiario-1}`
+    page1.getCell('AB6').font = { name: 'Calibri', bold: true, size: 18 }
 
     /** Zafra 2023 **/
 
     page1.mergeCells('C7:C9')
     page1.getCell('C9').value = `Inicio de Zafra ${anioData}`
-    page1.getCell('C9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('D7:D9')
     page1.getCell('D9').value = 'N° Días de avance'
-    page1.getCell('D9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('E7:E9')
     page1.getCell('E9').value = `fin de zafra ${anioData}`
-    page1.getCell('E9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('F7:F8')
     page1.getCell('F8').value = 'Caña Molida Bruta (C.M.B.)'
@@ -603,16 +596,16 @@ export const CreateExcelWorkbook = async (
 
     /** Zafra 2022 **/
     page1.mergeCells('P7:P9')
-    page1.getCell('P9').value = `Inicio de Zafra ${anioDataComparativo}`
-    page1.getCell('P9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P9').value = `Inicio de Zafra ${zafraParteDiario-1}`
+    page1.getCell('P9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('Q7:Q9')
     page1.getCell('Q9').value = 'N° Días de Avance'
-    page1.getCell('Q9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('R7:R9')
-    page1.getCell('R9').value = `Fin de Zafra ${anioDataComparativo}`
-    page1.getCell('R9').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R9').value = `Fin de Zafra ${zafraParteDiario-1}`
+    page1.getCell('R9').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.mergeCells('S7:S8')
     page1.getCell('S8').value = 'Caña Molida Bruta (C.M.B.)'
@@ -646,46 +639,46 @@ export const CreateExcelWorkbook = async (
     page1.getCell('AB9').value = '[m3]'
 
     for(let i=7; i<=9;i++) {
-      page1.getRow(i).font = {name: 'Calibri', bold: true, size: 12}
+      page1.getRow(i).font = {name: 'Calibri', bold: true, size: 15}
     }
 
     /** COLUMNA TABLA - INGENIOS **/
-    for (let i = 10; i <= 26; i++) {
+    for (let i = 10; i <= 25; i++) {
       page1.mergeCells(`A${i}:B${i}`)
     }
     page1.getCell('A10').value = 'Aguilares'
-    page1.getCell('A10').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A10').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A11').value = 'Cruz Alta'
-    page1.getCell('A11').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A11').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A12').value = 'La Florida'
-    page1.getCell('A12').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A12').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A13').value = 'Gpo. Los Balcanes'
     page1.getCell('A14').value = 'Concepción'
-    page1.getCell('A14').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A14').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A15').value = 'Marapa'
-    page1.getCell('A15').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A15').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A16').value = 'Gpo. CASS(*)'
     page1.getCell('A17').value = 'Bella Vista'
-    page1.getCell('A17').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A17').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A18').value = 'Famaillá'
-    page1.getCell('A18').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A18').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A19').value = 'La Corona'
-    page1.getCell('A19').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A19').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A20').value = 'La Providencia'
-    page1.getCell('A20').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A20').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A21').value = 'La Trinidad'
-    page1.getCell('A21').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A21').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A22').value = 'Leales'
-    page1.getCell('A22').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A22').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A23').value = 'Ñuñorco'
-    page1.getCell('A23').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A23').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A24').value = 'Santa Bárbara'
-    page1.getCell('A24').font = { name: 'Calibri', bold: false, size: 12 }
+    page1.getCell('A24').font = { name: 'Calibri', bold: false, size: 15 }
     page1.getCell('A25').value = 'Santa Rosa'
-    page1.getCell('A25').font = { name: 'Calibri', bold: false, size: 12 }
-    page1.getCell('A26').value = 'San Juan'
-    page1.getCell('A26').font = { name: 'Calibri', bold: false, size: 12 }
-    page1.getCell('A27').value = 'TOTALES'
+    page1.getCell('A25').font = { name: 'Calibri', bold: false, size: 15 }
+    // page1.getCell('A26').value = 'San Juan'
+    // page1.getCell('A26').font = { name: 'Calibri', bold: false, size: 13 }
+    page1.getCell('A26').value = 'TOTALES'
 
     /** COLUMNAS FECHA PROBABLE INICIO - INGENIOS **/
 
@@ -694,83 +687,79 @@ export const CreateExcelWorkbook = async (
     page1.getCell('C10').value = fechasInicioIngenios.Cell10
       ? moment(fechasInicioIngenios.Cell10).format('DD/MM/YYYY')
       : null
-    page1.getCell('C10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C10').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C11').value = fechasInicioIngenios.Cell11
       ? moment(fechasInicioIngenios.Cell11).format('DD/MM/YYYY')
       : null
-    page1.getCell('C11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C11').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C12').value = fechasInicioIngenios.Cell12
       ? moment(fechasInicioIngenios.Cell12).format('DD/MM/YYYY')
       : null
-    page1.getCell('C12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C12').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C14').value = fechasInicioIngenios.Cell14
       ? moment(fechasInicioIngenios.Cell14).format('DD/MM/YYYY')
       : null
-    page1.getCell('C14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C14').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C15').value = fechasInicioIngenios.Cell15
       ? moment(fechasInicioIngenios.Cell15).format('DD/MM/YYYY')
       : null
-    page1.getCell('C15').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C15').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C17').value = fechasInicioIngenios.Cell17
       ? moment(fechasInicioIngenios.Cell17).format('DD/MM/YYYY')
       : null
-    page1.getCell('C17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C17').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C18').value = fechasInicioIngenios.Cell18
       ? moment(fechasInicioIngenios.Cell18).format('DD/MM/YYYY')
       : null
-    page1.getCell('C18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C18').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C19').value = fechasInicioIngenios.Cell19
       ? moment(fechasInicioIngenios.Cell19).format('DD/MM/YYYY')
       : null
-    page1.getCell('C19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C19').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C20').value = fechasInicioIngenios.Cell20
       ? moment(fechasInicioIngenios.Cell20).format('DD/MM/YYYY')
       : null
-    page1.getCell('C20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C20').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C21').value = fechasInicioIngenios.Cell21
       ? moment(fechasInicioIngenios.Cell21).format('DD/MM/YYYY')
       : null
-    page1.getCell('C21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C21').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C22').value = fechasInicioIngenios.Cell22
       ? moment(fechasInicioIngenios.Cell22).format('DD/MM/YYYY')
       : null
-    page1.getCell('C22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C22').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C23').value = fechasInicioIngenios.Cell23
       ? moment(fechasInicioIngenios.Cell23).format('DD/MM/YYYY')
       : null
-    page1.getCell('C23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C23').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C24').value = fechasInicioIngenios.Cell24
       ? moment(fechasInicioIngenios.Cell24).format('DD/MM/YYYY')
       : null
-    page1.getCell('C24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C24').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('C25').value = fechasInicioIngenios.Cell25
       ? moment(fechasInicioIngenios.Cell25).format('DD/MM/YYYY')
       : null
-    page1.getCell('C25').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('C25').font = { name: 'Calibri', bold: true, size: 15 }
 
-    page1.getCell('C26').value = fechasInicioIngenios.Cell26
-      ? moment(fechasInicioIngenios.Cell26).format('DD/MM/YYYY')
-      : null
-    page1.getCell('C26').font = { name: 'Calibri', bold: true, size: 12 }
+    // page1.getCell('C26').value = fechasInicioIngenios.Cell26
+    //   ? moment(fechasInicioIngenios.Cell26).format('DD/MM/YYYY')
+    //   : null
+    // page1.getCell('C26').font = { name: 'Calibri', bold: true, size: 13 }
 
     /** COLUMNA FIN DE ZAFRA 2023 **/
-    // page1.getCell("E10").value =
-    //     fechasInicioIngenios?.CellE10 !== undefined || fechasInicioIngenios?.CellE10 !== null
-    //     ? moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY")
-    //     : null;
     page1.getCell('E10').value =
       fechasInicioIngenios?.Cell10 === undefined
         ? null
@@ -778,7 +767,7 @@ export const CreateExcelWorkbook = async (
           ? null
           : moment(fechasInicioIngenios?.CellE10).format('DD/MM/YYYY')
 
-    page1.getCell('E10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E10').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E11').value =
       fechasInicioIngenios?.Cell11 === undefined
@@ -786,7 +775,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell11 && fechasInicioIngenios?.CellE11 === null
           ? null
           : moment(fechasInicioIngenios?.CellE11).format('DD/MM/YYYY')
-    page1.getCell('E11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E11').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E12').value =
       fechasInicioIngenios?.Cell12 === undefined
@@ -794,7 +783,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell12 && fechasInicioIngenios?.CellE12 === null
           ? null
           : moment(fechasInicioIngenios?.CellE12).format('DD/MM/YYYY')
-    page1.getCell('E12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E12').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E14').value =
       fechasInicioIngenios?.Cell14 === undefined
@@ -802,7 +791,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell14 && fechasInicioIngenios?.CellE14 === null
           ? null
           : moment(fechasInicioIngenios?.CellE14).format('DD/MM/YYYY')
-    page1.getCell('E14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E14').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E15').value =
       fechasInicioIngenios?.Cell15 === undefined
@@ -810,7 +799,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell15 && fechasInicioIngenios?.CellE15 === null
           ? null
           : moment(fechasInicioIngenios?.CellE15).format('DD/MM/YYYY')
-    page1.getCell('E15').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E15').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E17').value =
       fechasInicioIngenios?.Cell17 === undefined
@@ -818,7 +807,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell17 && fechasInicioIngenios?.CellE17 === null
           ? null
           : moment(fechasInicioIngenios?.CellE17).format('DD/MM/YYYY')
-    page1.getCell('E17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E17').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E18').value =
       fechasInicioIngenios?.Cell18 === undefined
@@ -826,7 +815,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell18 && fechasInicioIngenios?.CellE18 === null
           ? null
           : moment(fechasInicioIngenios?.CellE18).format('DD/MM/YYYY')
-    page1.getCell('E18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E18').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E19').value =
       fechasInicioIngenios?.Cell19 === undefined
@@ -834,7 +823,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell19 && fechasInicioIngenios?.CellE19 === null
           ? null
           : moment(fechasInicioIngenios?.CellE19).format('DD/MM/YYYY')
-    page1.getCell('E19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E19').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E20').value =
       fechasInicioIngenios?.Cell20 === undefined
@@ -842,7 +831,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell20 && fechasInicioIngenios?.CellE20 === null
           ? null
           : moment(fechasInicioIngenios?.CellE20).format('DD/MM/YYYY')
-    page1.getCell('E20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E20').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E21').value =
       fechasInicioIngenios?.Cell21 === undefined
@@ -850,7 +839,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell21 && fechasInicioIngenios?.CellE21 === null
           ? null
           : moment(fechasInicioIngenios?.CellE21).format('DD/MM/YYYY')
-    page1.getCell('E21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E21').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E22').value =
       fechasInicioIngenios?.Cell22 === undefined
@@ -858,7 +847,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell22 && fechasInicioIngenios?.CellE22 === null
           ? null
           : moment(fechasInicioIngenios?.CellE22).format('DD/MM/YYYY')
-    page1.getCell('E22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E22').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E23').value =
       fechasInicioIngenios?.Cell23 === undefined
@@ -866,7 +855,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell23 && fechasInicioIngenios?.CellE23 === null
           ? null
           : moment(fechasInicioIngenios?.CellE23).format('DD/MM/YYYY')
-    page1.getCell('E23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E23').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E24').value =
       fechasInicioIngenios?.Cell24 === undefined
@@ -874,7 +863,7 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell24 && fechasInicioIngenios?.CellE24 === null
           ? null
           : moment(fechasInicioIngenios?.CellE24).format('DD/MM/YYYY')
-    page1.getCell('E24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E24').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('E25').value =
       fechasInicioIngenios?.Cell25 === undefined
@@ -882,360 +871,360 @@ export const CreateExcelWorkbook = async (
         : fechasInicioIngenios?.Cell25 && fechasInicioIngenios?.CellE25 === null
           ? null
           : moment(fechasInicioIngenios?.CellE25).format('DD/MM/YYYY')
-    page1.getCell('E25').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('E25').font = { name: 'Calibri', bold: true, size: 15 }
 
-    page1.getCell('E26').value =
-      fechasInicioIngenios?.Cell26 === undefined
-        ? null
-        : fechasInicioIngenios?.Cell26 && fechasInicioIngenios?.CellE26 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE26).format('DD/MM/YYYY')
-    page1.getCell('E26').font = { name: 'Calibri', bold: true, size: 12 }
+    // page1.getCell('E26').value =
+    //   fechasInicioIngenios?.Cell26 === undefined
+    //     ? null
+    //     : fechasInicioIngenios?.Cell26 && fechasInicioIngenios?.CellE26 === null
+    //       ? null
+    //       : moment(fechasInicioIngenios?.CellE26).format('DD/MM/YYYY')
+    // page1.getCell('E26').font = { name: 'Calibri', bold: true, size: 13 }
 
     /** COLUMNA DIAS DE AVANCE 2023**/
     if (fechasInicioIngenios.Cell10) {
       page1.getCell('D10').value = {
-        formula: '=if(E10="",(C28-C10)+1,(E10-C10)+1)',
+        formula: '=if(E10="",(C27-C10)+1,(E10-C10)+1)',
         result: 7,
       }
     }
-    page1.getCell('D10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D10').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell11) {
       page1.getCell('D11').value = {
-        formula: '=if(E11="",(C28-C11)+1,(E11-C11)+1)',
+        formula: '=if(E11="",(C27-C11)+1,(E11-C11)+1)',
         result: 7,
       }
     }
-    page1.getCell('D11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D11').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell12) {
       page1.getCell('D12').value = {
-        formula: '=if(E12="",(C28-C12)+1,(E12-C12)+1)',
+        formula: '=if(E12="",(C27-C12)+1,(E12-C12)+1)',
         result: 7,
       }
     }
-    page1.getCell('D12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D12').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('D13').value = ''
 
     if (fechasInicioIngenios.Cell14) {
       page1.getCell('D14').value = {
-        formula: '=if(E14="",(C28-C14)+1,(E14-C14)+1)',
+        formula: '=if(E14="",(C27-C14)+1,(E14-C14)+1)',
         result: 7,
       }
     }
-    page1.getCell('D14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D14').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell15) {
       page1.getCell('D15').value = {
-        formula: '=if(E15="",(C28-C15)+1,(E15-C15)+1)',
+        formula: '=if(E15="",(C27-C15)+1,(E15-C15)+1)',
         result: 7,
       }
     }
-    page1.getCell('D15').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D15').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('D16').value = ''
 
     if (fechasInicioIngenios.Cell17) {
       page1.getCell('D17').value = {
-        formula: '=if(E17="",(C28-C17)+1,(E17-C17)+1)',
+        formula: '=if(E17="",(C27-C17)+1,(E17-C17)+1)',
         result: 7,
       }
     }
-    page1.getCell('D17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D17').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell18) {
       page1.getCell('D18').value = {
-        formula: '=if(E18="",(C28-C18)+1,(E18-C18)+1)',
+        formula: '=if(E18="",(C27-C18)+1,(E18-C18)+1)',
         result: 7,
       }
     }
-    page1.getCell('D18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D18').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell19) {
       page1.getCell('D19').value = {
-        formula: '=if(E19="",(C28-C19)+1,(E19-C19)+1)',
+        formula: '=if(E19="",(C27-C19)+1,(E19-C19)+1)',
         result: 7,
       }
     }
-    page1.getCell('D19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D19').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell20) {
       page1.getCell('D20').value = {
-        formula: '=if(E20="",(C28-C20)+1,(E20-C20)+1)',
+        formula: '=if(E20="",(C27-C20)+1,(E20-C20)+1)',
         result: 7,
       }
     }
-    page1.getCell('D20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D20').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell21) {
       page1.getCell('D21').value = {
-        formula: '=if(E21="",(C28-C21)+1,(E21-C21)+1)',
+        formula: '=if(E21="",(C27-C21)+1,(E21-C21)+1)',
         result: 7,
       }
     }
-    page1.getCell('D21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D21').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell22) {
       page1.getCell('D22').value = {
-        formula: '=if(E22="",(C28-C22)+1,(E22-C22)+1)',
+        formula: '=if(E22="",(C27-C22)+1,(E22-C22)+1)',
         result: 7,
       }
     }
-    page1.getCell('D22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D22').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell23) {
       page1.getCell('D23').value = {
-        formula: '=if(E23="",(C28-C23)+1,(E23-C23)+1)',
+        formula: '=if(E23="",(C27-C23)+1,(E23-C23)+1)',
         result: 7,
       }
     }
-    page1.getCell('D23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D23').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell24) {
       page1.getCell('D24').value = {
-        formula: '=if(E24="",(C28-C24)+1,(E24-C24)+1)',
+        formula: '=if(E24="",(C27-C24)+1,(E24-C24)+1)',
         result: 7,
       }
     }
-    page1.getCell('D24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D24').font = { name: 'Calibri', bold: true, size: 15 }
 
     if (fechasInicioIngenios.Cell25) {
       page1.getCell('D25').value = {
-        formula: '=if(E25="",(C28-C25)+1,(E25-C25)+1)',
+        formula: '=if(E25="",(C27-C25)+1,(E25-C25)+1)',
         result: 7,
       }
     }
-    page1.getCell('D25').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('D25').font = { name: 'Calibri', bold: true, size: 15 }
 
-    if (fechasInicioIngenios.Cell26) {
-      page1.getCell('D26').value = {
-        formula: '=if(E26="",(C28-C26)+1,(E26-C26)+1)',
-        result: 7,
-      }
-    }
-    page1.getCell('D26').font = { name: 'Calibri', bold: true, size: 12 }
+    // if (fechasInicioIngenios.Cell26) {
+    //   page1.getCell('D26').value = {
+    //     formula: '=if(E26="",(C28-C26)+1,(E26-C26)+1)',
+    //     result: 7,
+    //   }
+    // }
+    // page1.getCell('D26').font = { name: 'Calibri', bold: true, size: 13 }
 
     /** COLUMNA FECHA INICIO 2022 **/
 
     page1.getCell('P10').value = moment(
       fechasInicioIngeniosComparativa.Cell10
     ).format('DD/MM/YYYY')
-    page1.getCell('P10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P10').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P11').value = moment(
       fechasInicioIngeniosComparativa.Cell11
     ).format('DD/MM/YYYY')
-    page1.getCell('P11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P11').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P12').value = moment(
       fechasInicioIngeniosComparativa.Cell12
     ).format('DD/MM/YYYY')
-    page1.getCell('P12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P12').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P14').value = moment(
       fechasInicioIngeniosComparativa.Cell14
     ).format('DD/MM/YYYY')
-    page1.getCell('P14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P14').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P15').value = moment(
       fechasInicioIngeniosComparativa.Cell15
     ).format('DD/MM/YYYY')
-    page1.getCell('P16').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P15').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P17').value = moment(
       fechasInicioIngeniosComparativa.Cell17
     ).format('DD/MM/YYYY')
-    page1.getCell('P17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P17').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P18').value = moment(
       fechasInicioIngeniosComparativa.Cell18
     ).format('DD/MM/YYYY')
-    page1.getCell('P18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P18').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P19').value = moment(
       fechasInicioIngeniosComparativa.Cell19
     ).format('DD/MM/YYYY')
-    page1.getCell('P19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P19').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P20').value = moment(
       fechasInicioIngeniosComparativa.Cell20
     ).format('DD/MM/YYYY')
-    page1.getCell('P20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P20').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P21').value = moment(
       fechasInicioIngeniosComparativa.Cell21
     ).format('DD/MM/YYYY')
-    page1.getCell('P21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P21').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P22').value = moment(
       fechasInicioIngeniosComparativa.Cell22
     ).format('DD/MM/YYYY')
-    page1.getCell('P22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P22').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P23').value = moment(
       fechasInicioIngeniosComparativa.Cell23
     ).format('DD/MM/YYYY')
-    page1.getCell('P23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P23').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P24').value = moment(
       fechasInicioIngeniosComparativa.Cell24
     ).format('DD/MM/YYYY')
-    page1.getCell('P24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P24').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('P25').value = moment(
       fechasInicioIngeniosComparativa.Cell25
     ).format('DD/MM/YYYY')
-    page1.getCell('P25').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('P26').value = moment(
-      fechasInicioIngeniosComparativa.Cell26
-    ).format('DD/MM/YYYY')
-    page1.getCell('P26').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('P25').font = { name: 'Calibri', bold: true, size: 15 }
+    // page1.getCell('P26').value = moment(
+    //   fechasInicioIngeniosComparativa.Cell26
+    // ).format('DD/MM/YYYY')
+    // page1.getCell('P26').font = { name: 'Calibri', bold: true, size: 13 }
 
     /** COLUMNA FIN DE ZAFRA 2022 **/
     page1.getCell('R10').value = moment(
       fechasInicioIngeniosComparativa?.CellR10
     ).format('DD/MM/YYYY')
-    page1.getCell('R10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R10').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R11').value = moment(
       fechasInicioIngeniosComparativa?.CellR11
     ).format('DD/MM/YYYY')
-    page1.getCell('R11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R11').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R12').value = moment(
       fechasInicioIngeniosComparativa?.CellR12
     ).format('DD/MM/YYYY')
-    page1.getCell('R12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R12').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R14').value = moment(
       fechasInicioIngeniosComparativa?.CellR14
     ).format('DD/MM/YYYY')
-    page1.getCell('R14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R14').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R15').value = moment(
       fechasInicioIngeniosComparativa?.CellR15
     ).format('DD/MM/YYYY')
-    page1.getCell('R16').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R15').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R17').value = moment(
       fechasInicioIngeniosComparativa?.CellR17
     ).format('DD/MM/YYYY')
-    page1.getCell('R17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R17').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R18').value = moment(
       fechasInicioIngeniosComparativa?.CellR18
     ).format('DD/MM/YYYY')
-    page1.getCell('R18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R18').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R19').value = moment(
       fechasInicioIngeniosComparativa?.CellR19
     ).format('DD/MM/YYYY')
-    page1.getCell('R19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R19').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R20').value = moment(
       fechasInicioIngeniosComparativa?.CellR20
     ).format('DD/MM/YYYY')
-    page1.getCell('R20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R20').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R21').value = moment(
       fechasInicioIngeniosComparativa?.CellR21
     ).format('DD/MM/YYYY')
-    page1.getCell('R21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R21').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R22').value = moment(
       fechasInicioIngeniosComparativa?.CellR22
     ).format('DD/MM/YYYY')
-    page1.getCell('R22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R22').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R23').value = moment(
       fechasInicioIngeniosComparativa?.CellR23
     ).format('DD/MM/YYYY')
-    page1.getCell('R23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R23').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R24').value = moment(
       fechasInicioIngeniosComparativa?.CellR24
     ).format('DD/MM/YYYY')
-    page1.getCell('R24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R24').font = { name: 'Calibri', bold: true, size: 15 }
 
     page1.getCell('R25').value = moment(
       fechasInicioIngeniosComparativa?.CellR25
     ).format('DD/MM/YYYY')
-    page1.getCell('R25').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('R25').font = { name: 'Calibri', bold: true, size: 15 }
 
-    page1.getCell('R26').value = moment(
-      fechasInicioIngeniosComparativa?.CellR26
-    ).format('DD/MM/YYYY')
-    page1.getCell('R26').font = { name: 'Calibri', bold: true, size: 12 }
+    // page1.getCell('R26').value = moment(
+    //   fechasInicioIngeniosComparativa?.CellR26
+    // ).format('DD/MM/YYYY')
+    // page1.getCell('R26').font = { name: 'Calibri', bold: true, size: 13 }
     /************/
 
     /** COLUMNA DIAS DE AVANCE 2022**/
     page1.getCell('Q10').value = {
-      formula: '=if(R10="",R28-P10,R10-P10)',
+      formula: '=if(R10="",R27-P10,R10-P10)',
       result: 7,
     }
-    page1.getCell('Q10').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q10').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q11').value = {
-      formula: '=if(R11="",R28-P11,R11-P11)',
+      formula: '=if(R11="",R27-P11,R11-P11)',
       result: 7,
     }
-    page1.getCell('Q11').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q11').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q12').value = {
-      formula: '=if(R12="",R28-P12,R12-P12)',
+      formula: '=if(R12="",R27-P12,R12-P12)',
       result: 7,
     }
-    page1.getCell('Q12').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q12').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q13').value = ''
     page1.getCell('Q14').value = {
-      formula: '=if(R14="",R28-P14,R14-P14)',
+      formula: '=if(R14="",R27-P14,R14-P14)',
       result: 7,
     }
-    page1.getCell('Q14').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q14').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q15').value = {
-      formula: '=if(R15="",R28-P15,R15-P15)',
+      formula: '=if(R15="",R27-P15,R15-P15)',
       result: 7,
     }
-    page1.getCell('Q15').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q15').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q16').value = ''
     page1.getCell('Q17').value = {
-      formula: '=if(R17="",R28-P17,R17-P17)',
+      formula: '=if(R17="",R27-P17,R17-P17)',
       result: 7,
     }
-    page1.getCell('Q17').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q17').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q18').value = {
-      formula: '=if(R18="",R28-P18,R18-P18)',
+      formula: '=if(R18="",R27-P18,R18-P18)',
       result: 7,
     }
-    page1.getCell('Q18').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q18').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q19').value = {
-      formula: '=if(R19="",R28-P19,R19-P19)',
+      formula: '=if(R19="",R27-P19,R19-P19)',
       result: 7,
     }
-    page1.getCell('Q19').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q19').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q20').value = {
-      formula: '=if(R20="",R28-P20,R20-P20)',
+      formula: '=if(R20="",R27-P20,R20-P20)',
       result: 7,
     }
-    page1.getCell('Q20').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q20').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q21').value = {
-      formula: '=if(R21="",R28-P21,R21-P21)',
+      formula: '=if(R21="",R27-P21,R21-P21)',
       result: 7,
     }
-    page1.getCell('Q21').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q21').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q22').value = {
-      formula: '=if(R22="",R28-P22,R22-P22)',
+      formula: '=if(R22="",R27-P22,R22-P22)',
       result: 7,
     }
-    page1.getCell('Q22').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q22').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q23').value = {
-      formula: '=if(R23="",R28-P23,R23-P23)',
+      formula: '=if(R23="",R27-P23,R23-P23)',
       result: 7,
     }
-    page1.getCell('Q23').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q23').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q24').value = {
-      formula: '=if(R24="",R28-P24,R24-P24)',
+      formula: '=if(R24="",R27-P24,R24-P24)',
       result: 7,
     }
-    page1.getCell('Q24').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q24').font = { name: 'Calibri', bold: true, size: 15 }
     page1.getCell('Q25').value = {
-      formula: '=if(R25="",R28-P25,R25-P25)',
+      formula: '=if(R25="",R27-P25,R25-P25)',
       result: 7,
     }
-    page1.getCell('Q25').font = { name: 'Calibri', bold: true, size: 12 }
+    page1.getCell('Q25').font = { name: 'Calibri', bold: true, size: 15 }
 
-    page1.getCell('Q26').value = {
-      formula: '=if(R26="",R28-P26,R26-P26)',
-      result: 7,
-    }
-    page1.getCell('Q26').font = { name: 'Calibri', bold: true, size: 12 }
+    // page1.getCell('Q26').value = {
+    //   formula: '=if(R26="",R28-P26,R26-P26)',
+    //   result: 7,
+    // }
+    // page1.getCell('Q26').font = { name: 'Calibri', bold: true, size: 13 }
     /*****************/
 
     /**TOTAL AZUCAR **/
@@ -1298,163 +1287,163 @@ export const CreateExcelWorkbook = async (
     page1.getCell('AB16').value = { formula: '=SUM(AB14:AB15)', result: 7 }
 
     /** FILA TOTALES  2023**/
-    page1.mergeCells('B27:C27')
-    page1.getCell('C27').value = 'Inicio desde el 1° Ingenio'
-    page1.getCell('C27').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('C27').alignment = {
+    page1.mergeCells('B26:C26')
+    page1.getCell('C26').value = `Inicio desde el 1° Ingenio: ${Math.ceil(dataDiasZafra)}`
+    page1.getCell('C26').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('C26').alignment = {
       horizontal: 'start',
       vertical: 'middle',
     }
-    page1.getCell('D27').value = Math.ceil(dataDiasZafra)
-    page1.getCell('D27').font = { name: 'Calibri', bold: true, size: 12 }
+    // page1.getCell('D27').value = Math.ceil(dataDiasZafra)
+    // page1.getCell('D27').font = { name: 'Calibri', bold: true, size: 14 }
 
-    page1.getCell('F27').value = {
-      formula: '=SUM(F10:F12,F14:F15,F17:F26)',
+    page1.getCell('F26').value = {
+      formula: '=SUM(F10:F12,F14:F15,F17:F25)',
       result: 7,
     }
-    page1.getCell('G27').value = {
-      formula: '=SUM(G10:G12,G14:G15,G17:G26)',
+    page1.getCell('G26').value = {
+      formula: '=SUM(G10:G12,G14:G15,G17:G25)',
       result: 7,
     }
-    page1.getCell('H27').value = {
-      formula: '=SUM(H10:H12,H14:H15,H17:H26)',
+    page1.getCell('H26').value = {
+      formula: '=SUM(H10:H12,H14:H15,H17:H25)',
       result: 7,
     }
-    page1.getCell('I27').value = {
+    page1.getCell('I26').value = {
       formula: 'if(F27=0, 0,H27/F27*100)',
       result: 7,
     }
-    page1.getCell('J27').value = {
+    page1.getCell('J26').value = {
       formula: 'if(G27=0, 0,H27/G27*100)',
       result: 7,
     }
-    page1.getCell('K27').value = {
-      formula: '=SUM(K10:K12,K14:K15,K17:K26)',
+    page1.getCell('K26').value = {
+      formula: '=SUM(K10:K12,K14:K15,K17:K25)',
       result: 7,
     }
-    page1.getCell('L27').value = {
-      formula: '=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10+L26',
+    page1.getCell('L26').value = {
+      formula: '=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10+L25',
       result: 7,
     }
-    page1.getCell('M27').value = {
-      formula: '=SUM(M10:M12,M14:M15,M17:M26)',
+    page1.getCell('M26').value = {
+      formula: '=SUM(M10:M12,M14:M15,M17:M25)',
       result: 7,
     }
-    page1.getCell('N27').value = {
-      formula: '=SUM(N10:N12,N14:N15,N17:N26)',
+    page1.getCell('N26').value = {
+      formula: '=SUM(N10:N12,N14:N15,N17:N25)',
       result: 7,
     }
-    page1.getCell('O27').value = {
-      formula: '=O24+O25+O22+O21+O19+O18+O17+O15+O14+O12+O26',
+    page1.getCell('O26').value = {
+      formula: '=O24+O25+O22+O21+O19+O18+O17+O15+O14+O12+O25',
       result: 7,
     }
     /** FILAS TOTALES 2022 2*/
-    page1.getCell('Q27').value = Math.ceil(dataDiasZafraComparativa)
-    page1.getCell('Q27').font = { name: 'Calibri', bold: true, size: 12 }
-    page1.getCell('S27').value = {
-      formula: '=SUM(S10:S12,S14:S15,S17:S26)',
+    page1.getCell('Q26').value = Math.ceil(dataDiasZafraComparativa)
+    page1.getCell('Q26').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('S26').value = {
+      formula: '=SUM(S10:S12,S14:S15,S17:S25)',
       result: 7,
     }
-    page1.getCell('T27').value = {
-      formula: '=SUM(T10:T12,T14:T15,T17:T26)',
+    page1.getCell('T26').value = {
+      formula: '=SUM(T10:T12,T14:T15,T17:T25)',
       result: 7,
     }
-    page1.getCell('U27').value = {
-      formula: '=SUM(U10:U12,U14:U15,U17:U26)',
+    page1.getCell('U26').value = {
+      formula: '=SUM(U10:U12,U14:U15,U17:U25)',
       result: 7,
     }
-    page1.getCell('V27').value = {
-      formula: 'if(S27=0,0,U27/S27*100)',
+    page1.getCell('V26').value = {
+      formula: 'if(S26=0,0,U26/S26*100)',
       result: 7,
     }
-    page1.getCell('W27').value = {
-      formula: 'if(T27=0,0,U27/T27*100)',
+    page1.getCell('W26').value = {
+      formula: 'if(T26=0,0,U26/T26*100)',
       result: 7,
     }
-    page1.getCell('X27').value = {
-      formula: '=SUM(X10:X12,X14:X15,X17:X26)',
+    page1.getCell('X26').value = {
+      formula: '=SUM(X10:X12,X14:X15,X17:X25)',
       result: 7,
     }
-    page1.getCell('Y27').value = {
+    page1.getCell('Y26').value = {
       formula: '=Y24+Y22+Y21+Y20+Y19+Y18+Y17+Y15+Y14+Y12+Y11+Y10',
       result: 7,
     }
-    page1.getCell('Z27').value = {
-      formula: '=SUM(Z10:Z12,Z14:Z15,Z17:Z26)',
+    page1.getCell('Z26').value = {
+      formula: '=SUM(Z10:Z12,Z14:Z15,Z17:Z25)',
       result: 7,
     }
-    page1.getCell('AA27').value = {
-      formula: '=SUM(AA10:AA12,AA14:AA15,AA17:AA26)',
+    page1.getCell('AA26').value = {
+      formula: '=SUM(AA10:AA12,AA14:AA15,AA17:AA25)',
       result: 7,
     }
-    page1.getCell('AB27').value = {
-      formula: '=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12+AB26',
+    page1.getCell('AB26').value = {
+      formula: '=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12+AB25',
       result: 7,
     }
     /***********/
 
-    page1.mergeCells('A28:B28')
-    page1.getCell('A28').value = `Datos hasta la fecha: `
-    page1.getCell('A28').border = {
+    page1.mergeCells('A27:B27')
+    page1.getCell('A27').value = `Datos hasta la fecha: `
+    page1.getCell('A27').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.getCell('A28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('A28').alignment = {
+    page1.getCell('A27').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('A27').alignment = {
       horizontal: 'right',
       vertical: 'middle',
     }
-    page1.getCell('C28').value = dateFormat
-    page1.getCell('C28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('C28').alignment = {
+    page1.getCell('C27').value = dateFormat
+    page1.getCell('C27').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('C27').alignment = {
       horizontal: 'start',
       vertical: 'middle',
     }
-    page1.getCell('C28').border = {
+    page1.getCell('C27').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.mergeCells('F28:O28')
-    page1.getCell('F28').value = `ACUMULADO HASTA ${dateFormat}`
-    page1.getCell('F28').font = { name: 'Calibri', bold: true, size: 15 }
-    page1.getCell('F28').alignment = {
+    page1.mergeCells('F27:O27')
+    page1.getCell('F27').value = `ACUMULADO HASTA ${dateFormat}`
+    page1.getCell('F27').font = { name: 'Calibri', bold: true, size: 16 }
+    page1.getCell('F27').alignment = {
       horizontal: 'center',
       vertical: 'middle',
     }
 
-    page1.mergeCells('P28:Q28')
-    page1.getCell('P28').value = 'Datos hasta la fecha: '
-    page1.getCell('P28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('P28').alignment = {
+    page1.mergeCells('P27:Q27')
+    page1.getCell('P27').value = 'Datos hasta la fecha: '
+    page1.getCell('P27').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('P27').alignment = {
       horizontal: 'right',
       vertical: 'middle',
     }
-    page1.getCell('P28').border = {
+    page1.getCell('P27').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.getCell('R28').value = dateComparativaFormat
-    page1.getCell('R28').font = { name: 'Calibri', bold: true, size: 14 }
-    page1.getCell('R28').alignment = {
+    page1.getCell('R27').value = dateComparativaFormat
+    page1.getCell('R27').font = { name: 'Calibri', bold: true, size: 15 }
+    page1.getCell('R27').alignment = {
       horizontal: 'start',
       vertical: 'middle',
     }
-    page1.getCell('R28').border = {
+    page1.getCell('R27').border = {
       top: { style: 'medium', color: { argb: '000000' } },
       left: { style: 'thin', color: { argb: 'FFFFFF' } },
       bottom: { style: 'medium', color: { argb: '000000' } },
       right: { style: 'thin', color: { argb: 'FFFFFF' } },
     }
-    page1.mergeCells('S28:AB28')
-    page1.getCell('S28').value = `ACUMULADO HASTA ${dateComparativaFormat}`
-    page1.getCell('S28').font = { name: 'Calibri', bold: true, size: 15 }
-    page1.getCell('S28').alignment = {
+    page1.mergeCells('S27:AB27')
+    page1.getCell('S27').value = `ACUMULADO HASTA ${dateComparativaFormat}`
+    page1.getCell('S27').font = { name: 'Calibri', bold: true, size: 16 }
+    page1.getCell('S27').alignment = {
       horizontal: 'center',
       vertical: 'middle',
     }
@@ -1463,92 +1452,93 @@ export const CreateExcelWorkbook = async (
     page1.mergeCells('A30:O30')
     page1.getCell(
       'A30'
-    ).value = `COMPARATIVO ZAFRA ${anioData}/${anioDataComparativo} - VARIACIÓN %  HASTA EL ${dateFormat}`
+    ).value = `COMPARATIVO ZAFRA ${anioData}/${zafraParteDiario-1} - VARIACIÓN %  HASTA EL ${dateFormat}`
     page1.getCell('A30').alignment = alignCenter
-    page1.getCell('A30').font = functionFont('Calibri', true, 15)
+    page1.getCell('A30').font = functionFont('Calibri', true, 17)
 
     page1.mergeCells('A31:E31')
     page1.getCell('A31').value = 'DIFERENCIA'
 
-    page1.getCell('F31').value = { formula: 'F27-S27' }
-    page1.getCell('G31').value = { formula: 'G27-T27' }
-    page1.getCell('H31').value = { formula: 'H27-U27' }
-    page1.getCell('I31').value = { formula: 'I27-V27' }
-    page1.getCell('J31').value = { formula: 'J27-W27' }
-    page1.getCell('K31').value = { formula: 'K27-X27' }
-    page1.getCell('L31').value = { formula: 'L27-Y27' }
-    page1.getCell('M31').value = { formula: 'M27-Z27' }
-    page1.getCell('N31').value = { formula: 'N27-AA27' }
-    page1.getCell('O31').value = { formula: 'O27-AB27' }
+    page1.getCell('F31').value = { formula: 'F26-S26' }
+    page1.getCell('G31').value = { formula: 'G26-T26' }
+    page1.getCell('H31').value = { formula: 'H26-U26' }
+    page1.getCell('I31').value = { formula: 'I26-V26' }
+    page1.getCell('J31').value = { formula: 'J26-W26' }
+    page1.getCell('K31').value = { formula: 'K26-X26' }
+    page1.getCell('L31').value = { formula: 'L26-Y26' }
+    page1.getCell('M31').value = { formula: 'M26-Z26' }
+    page1.getCell('N31').value = { formula: 'N26-AA26' }
+    page1.getCell('O31').value = { formula: 'O26-AB26' }
 
     page1.mergeCells('A32:E32')
     page1.getCell('A32').value = '%'
     page1.getCell('A32').alignment = alignCenter
 
     page1.getCell('F32').value = {
-      formula: '=if(S27=0,"100%",F31/S27)',
+      formula: '=if(S26=0,"100%",F31/S26)',
       result: 7,
     }
     page1.getCell('G32').value = {
-      formula: '=if(T27=0,"100%",G31/T27)',
+      formula: '=if(T26=0,"100%",G31/T26)',
       result: 7,
     }
     page1.getCell('H32').value = {
-      formula: '=if(U27=0,"100%",H31/U27)',
+      formula: '=if(U26=0,"100%",H31/U26)',
       result: 7,
     }
     page1.getCell('I32').value = {
-      formula: '=if(V27=0,"100%",I31/V27)',
+      formula: '=if(V26=0,"100%",I31/V26)',
       result: 7,
     }
     page1.getCell('J32').value = {
-      formula: '=if(W27=0,"100%",J31/W27)',
+      formula: '=if(W26=0,"100%",J31/W26)',
       result: 7,
     }
     page1.getCell('K32').value = {
-      formula: '=if(X27=0,"100%",K31/X27)',
+      formula: '=if(X26=0,"100%",K31/X26)',
       result: 7,
     }
     page1.getCell('L32').value = {
-      formula: '=if(Y27=0,"100%",L31/Y27)',
+      formula: '=if(Y26=0,"100%",L31/Y26)',
       result: 7,
     }
     page1.getCell('M32').value = {
-      formula: '=if(Z27=0,"100%",M31/Z27)',
+      formula: '=if(Z26=0,"100%",M31/Z26)',
       result: 7,
     }
     page1.getCell('N32').value = {
-      formula: '=if(AA27=0,"100%",N31/AA27)',
+      formula: '=if(AA26=0,"100%",N31/AA26)',
       result: 7,
     }
     page1.getCell('O32').value = {
-      formula: '=if(AB27=0,"100%",O31/AB27)',
+      formula: '=if(AB26=0,"100%",O31/AB26)',
       result: 7,
     }
 
     page1.mergeCells('P30:V31')
     page1.getCell('P30').value = `Inicio de zafra ${anioData}: ${inicioZafra !== null ? moment(inicioZafra).format('DD/MM/YYYY') : ''
       }
-Inicio de zafra ${anioDataComparativo}: ${moment(inicioZafraComparativa).format(
+Inicio de zafra ${zafraParteDiario-1}: ${moment(inicioZafraComparativa).format(
         'DD/MM/YYYY'
       )}`
     page1.getCell('P30').alignment = alignStart
+    page1.getCell('P30').font ={name: 'Calibri', bold: true, size: 15}
 
     page1.mergeCells('W30:AB31')
     page1.getCell('W30').value = `Fin de zafra ${anioData}: ${finZafra !== '' ? moment(finZafra).format('DD/MM/YYYY') : ''
       }
-Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
+Fin de zafra ${zafraParteDiario-1}: ${moment(finZafraComparativa).format(
         'DD/MM/YYYY'
       )}`
-      page1.getCell('P30').font ={name: 'Calibri', bold: true, size: 13}
     page1.getCell('W30').alignment = alignStart
+    page1.getCell('W30').font ={name: 'Calibri', bold: true, size: 15}
 
     page1.mergeCells('P32:T32')
     page1.getCell('P32').value = 'Diferencia de Grado de avance'
-    page1.getCell('P32').font = functionFont('Bodoni MT', true, 18)
+    page1.getCell('P32').font = functionFont('Calibri', true, 17)
     page1.getCell('P32').alignment = alignStart
     page1.mergeCells('U32:V32')
-    page1.getCell('U32').font = functionFont('Bodoni MT', true, 18)
+    page1.getCell('U32').font = functionFont('Calibri', true, 17)
     page1.getCell('U32').value = { formula: '(V36-F36)/100' }
     page1.getCell('U32').alignment = alignStart
 
@@ -1563,7 +1553,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       if (d.anio_zafra === anioData) {
         estimacionEEAOC = d.estimacion_EEAOC
       }
-      if (d.anio_zafra === anioDataComparativo) {
+      if (d.anio_zafra === (zafraParteDiario-1)) {
         CMBporDDJJ = d.CMB_DDJJ
       }
     })
@@ -1578,7 +1568,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       'Grado de Avance con respecto a la previsión por E.E.A.O.C.'
     page1.getCell('A37').value = 'Diferencia'
     page1.getCell('F34').value = parseInt(estimacionEEAOC)
-    page1.getCell('F35').value = { formula: 'F27' }
+    page1.getCell('F35').value = { formula: 'F67' }
     page1.getCell('F36').value = { formula: 'if(F34=0,0,F35/F34*100)' }
     page1.getCell('F37').value = { formula: 'F36-100' }
     page1.getCell('H34').value = 'Tn'
@@ -1588,34 +1578,34 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
 
     page1.mergeCells('I34:J37')
     page1.getCell('I34').value = `ZAFRA ${anioData}`
-    page1.getCell('I34').font = functionFont('Calibri', true, 16)
+    page1.getCell('I34').font = functionFont('Calibri', true, 18)
     page1.getCell('I34').alignment = alignCenter
     page1.getCell('I34').fill = bgVerde
 
     page1.mergeCells('K34:K37')
     page1.getCell('K34').value = 'Producción Alcohol etílico anhidro [m3]'
-    page1.getCell('K34').font = functionFont('Calibri', true, 12)
+    page1.getCell('K34').font = functionFont('Calibri', true, 14)
     page1.getCell('K34').alignment = alignCenter
     page1.getCell('K34').fill = bgVerde
 
     page1.mergeCells('L34:N37')
-    const alcoholTotal = parseInt(d1['N10'])
-      + parseInt(d6['N17']
-        + parseInt(d4['N14'])
-        + parseInt(d2['N11'])
-        + parseInt(d7['N18'])
-        + parseInt(d8['N19'])
-        + parseInt(d3['N12'])
-        + parseInt(d9['N20'])
-        + parseInt(d10['N21'])
-        + parseInt(d11['N22'])
-        + parseInt(d5['N15'])
-        + parseInt(d12['N23'])
-        + parseInt(d13['N24'])
-        + parseInt(d14['N25'])
+    const alcoholTotal = parseInt(d1['R44'])
+      + parseInt(d6['R45']
+        + parseInt(d4['R46'])
+        + parseInt(d2['R47'])
+        + parseInt(d7['R48'])
+        + parseInt(d8['R49'])
+        + parseInt(d3['R50'])
+        + parseInt(d9['R51'])
+        + parseInt(d10['R52'])
+        + parseInt(d11['R53'])
+        + parseInt(d5['R54'])
+        + parseInt(d12['R55'])
+        + parseInt(d13['R56'])
+        + parseInt(d14['R57'])
       );
     page1.getCell('L34').value = alcoholTotal
-    page1.getCell('L34').font = functionFont('Bodoni MT', true, 26)
+    page1.getCell('L34').font = functionFont('Calibri', true, 24)
     page1.getCell('L34').alignment = alignCenter
     page1.getCell('L34').fill = bgVerde
 
@@ -1631,7 +1621,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       'Grado de Avance con respecto a lo declarado al IPAAT, por los ingenios de Tucumán'
     page1.getCell('O37').value = 'Diferencia'
     page1.getCell('V34').value = parseInt(CMBporDDJJ)
-    page1.getCell('V35').value = { formula: 'S27' }
+    page1.getCell('V35').value = { formula: 'S26' }
     page1.getCell('V36').value = { formula: 'V35/V34*100' }
     page1.getCell('V37').value = { formula: '100-V36' }
     page1.getCell('X34').value = 'Tn'
@@ -1640,8 +1630,8 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page1.getCell('X37').value = '%'
 
     page1.mergeCells('Y34:AB37')
-    page1.getCell('Y34').value = `ZAFRA ${anioDataComparativo}`
-    page1.getCell('Y34').font = functionFont('Calibri', true, 16)
+    page1.getCell('Y34').value = `ZAFRA ${anioDataComparativo-1}`
+    page1.getCell('Y34').font = functionFont('Calibri', true, 18)
     page1.getCell('Y34').alignment = alignCenter
     page1.getCell('Y34').fill = bgAzul
 
@@ -1863,13 +1853,13 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       page1.getCell('O25').value = parseInt(d14['N25'])
 
       /** San Juan */
-      page1.getCell('F26').value = parseInt(d15['E26'])
-      page1.getCell('G26').value = parseInt(d15['F26'])
-      page1.getCell('H26').value = parseFloat(d15['G26'])
-      page1.getCell('K26').value = parseInt(d15['J26'])
-      page1.getCell('L26').value = parseInt(d15['K26'])
-      page1.getCell('N26').value = parseInt(d15['M26'])
-      page1.getCell('O26').value = parseInt(d15['N26'])
+      // page1.getCell('F26').value = parseInt(d15['E26'])
+      // page1.getCell('G26').value = parseInt(d15['F26'])
+      // page1.getCell('H26').value = parseFloat(d15['G26'])
+      // page1.getCell('K26').value = parseInt(d15['J26'])
+      // page1.getCell('L26').value = parseInt(d15['K26'])
+      // page1.getCell('N26').value = parseInt(d15['M26'])
+      // page1.getCell('O26').value = parseInt(d15['N26'])
     }
 
     /** DATOS 2022 **/
@@ -2008,13 +1998,13 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page1.getCell('AB25').value = parseInt(dc14['AA25'])
 
     /** San Juan **/
-    page1.getCell('S26').value = parseInt(dc15['R26'])
-    page1.getCell('T26').value = parseInt(dc15['S26'])
-    page1.getCell('U26').value = parseFloat(dc15['T26'])
-    page1.getCell('X26').value = parseInt(dc15['W26'])
-    page1.getCell('Y26').value = parseInt(dc15['X26'])
-    page1.getCell('AA26').value = parseInt(dc15['Z26'])
-    page1.getCell('AB26').value = parseInt(dc15['AA26'])
+    // page1.getCell('S26').value = parseInt(dc15['R26'])
+    // page1.getCell('T26').value = parseInt(dc15['S26'])
+    // page1.getCell('U26').value = parseFloat(dc15['T26'])
+    // page1.getCell('X26').value = parseInt(dc15['W26'])
+    // page1.getCell('Y26').value = parseInt(dc15['X26'])
+    // page1.getCell('AA26').value = parseInt(dc15['Z26'])
+    // page1.getCell('AB26').value = parseInt(dc15['AA26'])
 
     /*******************/
 
@@ -2074,6 +2064,7 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       formula: 'if(T16=0, 0,U16/T16*100)',
       result: 14,
     }
+    page1.mergeCells('A28:AB29')
 
     page1.pageSetup.printArea = 'A1:AB37'
     page1.pageSetup.scale = 100
@@ -2085,7 +2076,11 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       header: 0.2,
       footer: 0.1,
     }
+    // page1.lastRow=37
+    // page1.lastColumn = 28
     /******************************** PAGINA 2 ********************************/
+
+    page2.getRow(20).font = functionFont('Calibri', true, 24)
 
     /** Tamanos filas y columnas **/
     page2.getColumn(1).width = '17'
@@ -2095,12 +2090,15 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page2.getColumn(15).width = '19'
     page2.getColumn(28).width = '19'
 
-    page2.getRow(3).height = '38'
+    page2.getRow(1).height = '24'
+    page2.getRow(2).height = '24'
+    page2.getRow(3).height = '42'
+    page2.getRow(5).height = '26'
     for (let i = 6; i <= 19; i++) {
-      page2.getRow(i).height = '50'
+      page2.getRow(i).height = '54'
     }
 
-    page2.getRow(4).font = functionFont('Calibri', true, 15)
+    page2.getRow(4).font = functionFont('Calibri', true, 16)
     page2.getRow(4).alignment = alignStart
     for (let i = 1; i <= 20; i++) {
       page2.getCell(6, i).fill = bgGris
@@ -2109,10 +2107,25 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       page2.getCell(17, i).fill = bgGris
     }
 
+    /*** Alineaciones ***/
+    for(let i =6; i<=19; i++) {
+      page2.getRow(i).alignment = alignCenter
+    }
+
+    /*** Formato de numeros ***/
+    for(let i=6;i<=19;i++){ 
+      for(let j=3;j<=7;j++) {
+        page2.getCell(i,j).numFmt = "#,##0"
+      }
+    }
+
+    for(let i=6;i<=19;i++){ 
+      for(let j=12;j<=20;j++) {
+        page2.getCell(i,j).numFmt = "#,##0"
+      }
+    }
+
     /** Bordes **/
-
-    page2.getRow(20).font = functionFont('Calibri', true, 24)
-
     page2.getRow(1).border = borders(
       'medium',
       '000000',
@@ -2153,6 +2166,8 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
         right: { style: 'thin', color: { argb: '000000' } },
       }
     }
+    page2.mergeCells('AC1:DD100')
+    page2.mergeCells('A21:AB100')
     for (let j = 1; j <= 1000; j++) {
       for (let i = 29; i <= 1000; i++) {
         page2.getCell(j, i).border = borders(
@@ -2187,64 +2202,65 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page2.getCell(
       'A1'
     ).value = `PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA ${anioData}`
-    page2.getCell('A1').font = functionFont('Bodoni MT', true, 16)
+    page2.getCell('A1').font = functionFont('Calibri', true, 18)
     page2.getCell('A1').alignment = alignCenter
     page2.getCell('A1').fill = bgVerde
 
     page2.mergeCells('A3:B5')
     page2.getCell('A3').value = 'Ingenios'
-    page2.getCell('A3').font = functionFont('Calibri', true, 14)
-    page2.getCell('A3').alignment = alignStart
+    page2.getCell('A3').font = functionFont('Calibri', true, 16)
+    page2.getCell('A3').alignment = alignCenter
 
     page2.mergeCells('C3:G3')
     page2.getCell(
       'C3'
     ).value = `TIPOS DE AZÚCARES Y SUS CANTIDADES EN TONELADAS HASTA ${dateFormat}`
-    page2.getCell('C3').font = functionFont('Calibri', true, 12)
+    page2.getCell('C3').font = functionFont('Calibri', true, 14)
     page2.getCell('C3').alignment = alignCenter
     page2.getCell('C3').fill = bgGris
 
     page2.mergeCells('C4:C5')
     page2.getCell('C4').value = `Común Tipo "A"`
-    page2.getCell('C4').font = functionFont('Calibri', true, 14)
+    page2.getCell('C4').font = functionFont('Calibri', true, 16)
     page2.getCell('C4').alignment = alignCenter
 
     page2.mergeCells('D4:D5')
     page2.getCell('D4').value = 'Refinado'
-    page2.getCell('D4').font = functionFont('Calibri', true, 14)
+    page2.getCell('D4').font = functionFont('Calibri', true, 16)
     page2.getCell('D4').alignment = alignCenter
 
     page2.mergeCells('E4:E5')
     page2.getCell('E4').value = 'Crudo'
-    page2.getCell('E4').font = functionFont('Calibri', true, 14)
+    page2.getCell('E4').font = functionFont('Calibri', true, 16)
     page2.getCell('E4').alignment = alignCenter
 
     page2.mergeCells('F4:F5')
     page2.getCell('F4').value = 'Orgánico'
-    page2.getCell('F4').font = functionFont('Calibri', true, 14)
+    page2.getCell('F4').font = functionFont('Calibri', true, 16)
     page2.getCell('F4').alignment = alignCenter
 
     page2.mergeCells('G4:G5')
     page2.getCell('G4').value = 'Otros'
-    page2.getCell('G4').font = functionFont('Calibri', true, 14)
+    page2.getCell('G4').font = functionFont('Calibri', true, 16)
     page2.getCell('G4').alignment = alignCenter
 
     for (let i = 6; i <= 20; i++) {
       page2.mergeCells(`A${i}:B${i}`)
     }
-    dataIngenios.forEach((d, i) => {
-      page2.getCell(`A${i + 6}`).value = d?.nombre_ingenio
-      page2.getCell(`A${i + 6}`).font = functionFont('Calibri', false, 11)
-      page2.getCell(`A${i + 6}`).alignment = alignStart
+    const ingenios = dataIngenios.filter((d) => d.nombre_ingenio !== 'San Juan')
+    ingenios.forEach((d, i) => {
+        page2.getCell(`A${i + 6}`).value = d?.nombre_ingenio
+        page2.getCell(`A${i + 6}`).font = functionFont('Calibri', false, 16)
+        page2.getCell(`A${i + 6}`).alignment = alignStart
     })
     page2.getCell('A20').value = 'Acumulado'
-    page2.getCell('A20').font = functionFont('Calibri', true, 14)
+    page2.getCell('A20').font = functionFont('Calibri', true, 24)
     page2.getCell('A20').alignment = alignStart
 
     for (let i = 3; i <= 7; i++) {
       const asd = ['n', 'A', 'B', 'C', 'D', 'E', 'F', 'G']
       page2.getCell(20, i).value = { formula: `SUM(${asd[i]}6:${asd[i]}19)` }
-      page2.getCell(20, i).numFmt = '0,000'
+      page2.getCell(20, i).numFmt = "#,##0"
     }
 
     /**** ALCOHOL ****/
@@ -2252,20 +2268,20 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page2.getCell(
       'H1'
     ).value = `PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO -  CAMPAÑA ${anioData} (INICIO: ${fechaInicioDestileria !== null ? moment(fechaInicioDestileria).format('DD/MM/YYYY') : ''})`
-    page2.getCell('H1').font = functionFont('Bodoni MT', true, 16)
+    page2.getCell('H1').font = functionFont('Calibri', true, 18)
     page2.getCell('H1').alignment = alignCenter
     page2.getCell('H1').fill = bgAzul
 
     page2.mergeCells('H3:K4')
     page2.getCell('H3').value = 'Proceso de Destilacion'
-    page2.getCell('H3').font = functionFont('Bodoni', true, 20)
+    page2.getCell('H3').font = functionFont('Calibri', true, 20)
     page2.getCell('H3').alignment = alignCenter
 
     page2.mergeCells('L3:T3')
     page2.getCell(
       'L3'
     ).value = `TIPOS DE ALCOHOLES Y SUS VOLÚMENES EN METROS CÚBICOS HASTA ${dateFormat}`
-    page2.getCell('L3').font = functionFont('Calibri', true, 12)
+    page2.getCell('L3').font = functionFont('Calibri', true, 14)
     page2.getCell('L3').alignment = alignCenter
     page2.getCell('L3').fill = bgGris
 
@@ -2276,102 +2292,102 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       page2.getCell(`J${i}`).alignment = alignCenter
     }
     page2.getCell('H5').value = 'Destilería'
-    page2.getCell('H5').font = functionFont('Bodoni', true, 20)
+    page2.getCell('H5').font = functionFont('Calibri', true, 20)
     page2.getCell('J5').value = 'Anhidradora'
-    page2.getCell('J5').font = functionFont('Bodoni', true, 20)
+    page2.getCell('J5').font = functionFont('Calibri', true, 20)
 
     page2.getCell('H6').value = 'No posee'
-    page2.getCell('H6').font = functionFont('Calibri', false, 14)
+    page2.getCell('H6').font = functionFont('Calibri', false,16)
     page2.getCell('J6').value = 'No posee'
-    page2.getCell('J6').font = functionFont('Calibri', false, 14)
+    page2.getCell('J6').font = functionFont('Calibri', false,16)
 
     page2.getCell('H7').value = 'José Minetti y Cía. Ltda. SACI'
-    page2.getCell('H7').font = functionFont('Calibri', false, 14)
+    page2.getCell('H7').font = functionFont('Calibri', false,16)
     page2.getCell('J7').value = 'Fronterita Energía S.A.'
-    page2.getCell('J7').font = functionFont('Calibri', false, 14)
+    page2.getCell('J7').font = functionFont('Calibri', false,16)
 
     page2.getCell('H8').value =
       'Complejo Alimenticio San Salvador S.A.-Banda de Río Salí'
-    page2.getCell('H8').font = functionFont('Calibri', false, 14)
+    page2.getCell('H8').font = functionFont('Calibri', false,16)
     page2.getCell('J8').value = 'Bio Atar  S.A.'
-    page2.getCell('J8').font = functionFont('Calibri', false, 14)
+    page2.getCell('J8').font = functionFont('Calibri', false,16)
 
     page2.getCell('H9').value = 'No posee'
-    page2.getCell('H9').font = functionFont('Calibri', false, 14)
+    page2.getCell('H9').font = functionFont('Calibri', false,16)
     page2.getCell('J9').value = 'No posee'
-    page2.getCell('J9').font = functionFont('Calibri', false, 14)
+    page2.getCell('J9').font = functionFont('Calibri', false,16)
 
     page2.getCell('H10').value = 'Destilería Salta Refrescos S.A.'
-    page2.getCell('H10').font = functionFont('Calibri', false, 14)
+    page2.getCell('H10').font = functionFont('Calibri', false,16)
     page2.getCell('J10').value = 'No posee'
-    page2.getCell('J10').font = functionFont('Calibri', false, 14)
+    page2.getCell('J10').font = functionFont('Calibri', false,16)
 
     page2.getCell('H11').value = 'Sucroalcoholera del Sur S.A.'
-    page2.getCell('H11').font = functionFont('Calibri', false, 14)
+    page2.getCell('H11').font = functionFont('Calibri', false,16)
     page2.getCell('J11').value = 'Bioenergía La Corona S.A.'
-    page2.getCell('J11').font = functionFont('Calibri', false, 14)
+    page2.getCell('J11').font = functionFont('Calibri', false,16)
 
     page2.getCell('H12').value = 'Compañía Azucarera Los Balcanes S.A.'
-    page2.getCell('H12').font = functionFont('Calibri', false, 14)
+    page2.getCell('H12').font = functionFont('Calibri', false,16)
     page2.getCell('J12').value = 'Compañía Azucarera Los Balcanes S.A.'
-    page2.getCell('J12').font = functionFont('Calibri', false, 14)
+    page2.getCell('J12').font = functionFont('Calibri', false,16)
 
     page2.getCell('H13').value = 'No posee'
-    page2.getCell('H13').font = functionFont('Calibri', false, 14)
+    page2.getCell('H13').font = functionFont('Calibri', false,16)
     page2.getCell('J13').value = 'No posee'
-    page2.getCell('J13').font = functionFont('Calibri', false, 14)
+    page2.getCell('J13').font = functionFont('Calibri', false,16)
 
     page2.getCell('H14').value = 'Ansonnaud, Ricardo Sixto'
-    page2.getCell('H14').font = functionFont('Calibri', false, 14)
+    page2.getCell('H14').font = functionFont('Calibri', false,16)
     page2.getCell('J14').value = 'Bio Trinidad S.A.'
-    page2.getCell('J14').font = functionFont('Calibri', false, 14)
+    page2.getCell('J14').font = functionFont('Calibri', false,16)
 
     page2.getCell('H15').value = 'Compañía Inversora Industrial S.A.'
-    page2.getCell('H15').font = functionFont('Calibri', false, 14)
+    page2.getCell('H15').font = functionFont('Calibri', false,16)
     page2.getCell('J15').value = 'Bioenergética Leales S.A.'
-    page2.getCell('J15').font = functionFont('Calibri', false, 14)
+    page2.getCell('J15').font = functionFont('Calibri', false,16)
 
     page2.getCell('H16').value =
       'Complejo Alimenticio San Salvador S.A. Juan Bautista Alberdi (Sin funcionar)'
-    page2.getCell('H16').font = functionFont('Calibri', false, 14)
+    page2.getCell('H16').font = functionFont('Calibri', false,16)
     page2.getCell('H16').alignment = alignCenter
     page2.getCell('J16').value = 'No posee'
-    page2.getCell('J16').font = functionFont('Calibri', false, 14)
+    page2.getCell('J16').font = functionFont('Calibri', false,16)
 
-    page2.getCell('H17').value = 'No posee'
-    page2.getCell('H17').font = functionFont('Calibri', false, 14)
-    page2.getCell('J17').value = 'No posee'
-    page2.getCell('J17').font = functionFont('Calibri', false, 14)
-
-    page2.getCell('H18').value = 'Industrias Santa Bárbara S.R.L.'
-    page2.getCell('H18').font = functionFont('Calibri', false, 14)
-    page2.getCell('J18').value =
+    page2.getCell('H17').value = 'Industrias Santa Bárbara S.R.L.'
+    page2.getCell('H17').font = functionFont('Calibri', false,16)
+    page2.getCell('J17').value =
       'Energías Ecológicas del Tucumán S.A. (Sin funcionar)'
-    page2.getCell('J18').font = functionFont('Calibri', false, 14)
+    page2.getCell('J17').font = functionFont('Calibri', false,16)
+
+    page2.getCell('H18').value = 'No posee'
+    page2.getCell('H18').font = functionFont('Calibri', false,16)
+    page2.getCell('J18').value = 'Anhidradora Bioenergía Santa Rosa S.A. (*)'
+    page2.getCell('J18').font = functionFont('Calibri', false,16)
 
     page2.getCell('H19').value = 'No posee'
-    page2.getCell('H19').font = functionFont('Calibri', false, 14)
-    page2.getCell('J19').value = 'Anhidradora Bioenergía Santa Rosa S.A. (*)'
-    page2.getCell('J19').font = functionFont('Calibri', false, 14)
+    page2.getCell('H19').font = functionFont('Calibri', false,16)
+    page2.getCell('J19').value = 'No posee'
+    page2.getCell('J19').font = functionFont('Calibri', false,16)
 
     page2.mergeCells('H20:K20')
     page2.getCell('H20').value = 'Acumulado'
-    page2.getCell('H20').font = functionFont('Calibri', true, 14)
+    page2.getCell('H20').font = functionFont('Calibri', true, 24)
     page2.getCell('H20').alignment = alignStart
 
     page2.mergeCells('L4:N5')
     page2.getCell('L4').value = 'Alcohol Total'
-    page2.getCell('L4').font = functionFont('Calibri', true, 14)
+    page2.getCell('L4').font = functionFont('Calibri', true, 16)
     page2.getCell('L4').alignment = alignCenter
 
     page2.mergeCells('O4:Q5')
     page2.getCell('O4').value = 'Alcohol Hidratado'
-    page2.getCell('O4').font = functionFont('Calibri', true, 14)
+    page2.getCell('O4').font = functionFont('Calibri', true, 16)
     page2.getCell('O4').alignment = alignCenter
 
     page2.mergeCells('R4:T5')
     page2.getCell('R4').value = 'Alcohol Anhidro'
-    page2.getCell('R4').font = functionFont('Calibri', true, 14)
+    page2.getCell('R4').font = functionFont('Calibri', true, 16)
     page2.getCell('R4').alignment = alignCenter
 
     for (let i = 6; i <= 20; i++) {
@@ -2384,13 +2400,13 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     }
 
     page2.getCell('L20').value = { formula: `=SUM(L6:N19)` }
-    page2.getCell('L20').numFmt = '0,000.000'
+    page2.getCell('L20').numFmt = "#,##0"
     page2.getCell('O20').value = {
       formula: `=O18+O16+O15+O14+O12+O11+O10+O8+O7`,
     }
-    page2.getCell('O20').numFmt = '0,000.000'
+    page2.getCell('O20').numFmt = "#,##0"
     page2.getCell('R20').value = { formula: `=R19+R15+R14+R12+R11+R8+R7` }
-    page2.getCell('R20').numFmt = '0,000.000'
+    page2.getCell('R20').numFmt = "#,##0"
 
     /**** EXPORTACIONES ****/
     page2.mergeCells('U1:Y2')
@@ -2398,16 +2414,21 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
       'U1'
     ).value = `MERCADO EXTERNO DEL AZÚCAR - ZAFRA ${anioData} Al ${dateFormat}`
     page2.getCell('U1').alignment = alignCenter
-    page2.getCell('U1').font = functionFont('Bodoni MT', true, 12)
+    page2.getCell('U1').font = functionFont('Calibri', true, 16)
 
     page2.mergeCells('Z1:AB2')
     page2.getCell('Z1').value = 'Acumulado: '
     page2.getCell('Z1').alignment = alignCenter
-    page2.getCell('Z1').font = functionFont('Bodoni MT', true, 12)
+    page2.getCell('Z1').font = functionFont('Calibri', true, 16)
 
     page2.mergeCells('U3:AB20')
 
     page2.getRow(1).alignment = { horizontal: 'center', vertical: 'middle' }
+
+    /*********  ********/
+    for(let i=6; i<=19;i++) {
+      page2.getRow(i).font = {size: 15}
+    }
 
     /**** PRODUCCION AZUCAR DISCRIMINADA ****/
     page2.getCell('C6').value = parseInt(d1['J10'])
@@ -2476,23 +2497,23 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page2.getCell('F16').value = parseInt(d5['F54'])
     page2.getCell('G16').value = parseInt(d5['G54'])
 
-    page2.getCell('C17').value = parseInt(d12['J23'])
-    page2.getCell('D17').value = parseInt(d12['D55'])
-    page2.getCell('E17').value = parseFloat(d12['K23'])
-    page2.getCell('F17').value = parseInt(d12['F55'])
-    page2.getCell('G17').value = parseInt(d12['G55'])
+    page2.getCell('C17').value = parseInt(d13['J24'])
+    page2.getCell('D17').value = parseInt(d13['D56'])
+    page2.getCell('E17').value = parseFloat(d13['K24'])
+    page2.getCell('F17').value = parseInt(d13['F56'])
+    page2.getCell('G17').value = parseInt(d13['G56'])
 
-    page2.getCell('C18').value = parseInt(d13['J24'])
-    page2.getCell('D18').value = parseInt(d13['D56'])
-    page2.getCell('E18').value = parseFloat(d13['K24'])
-    page2.getCell('F18').value = parseInt(d13['F56'])
-    page2.getCell('G18').value = parseInt(d13['G56'])
+    page2.getCell('C18').value = parseInt(d14['J25'])
+    page2.getCell('D18').value = parseInt(d14['D57'])
+    page2.getCell('E18').value = parseFloat(d14['K25'])
+    page2.getCell('F18').value = parseInt(d14['F57'])
+    page2.getCell('G18').value = parseInt(d14['G57'])
 
-    page2.getCell('C19').value = parseInt(d14['J25'])
-    page2.getCell('D19').value = parseInt(d14['D57'])
-    page2.getCell('E19').value = parseFloat(d14['K25'])
-    page2.getCell('F19').value = parseInt(d14['F57'])
-    page2.getCell('G19').value = parseInt(d14['G57'])
+    page2.getCell('C19').value = parseInt(d12['J23'])
+    page2.getCell('D19').value = parseInt(d12['D55'])
+    page2.getCell('E19').value = parseFloat(d12['K23'])
+    page2.getCell('F19').value = parseInt(d12['F55'])
+    page2.getCell('G19').value = parseInt(d12['G55'])
     /************/
 
     /****** PRODUCCION DE ALCOHOL ******/
@@ -2540,17 +2561,17 @@ Fin de zafra ${anioDataComparativo}: ${moment(finZafraComparativa).format(
     page2.getCell('O16').value = parseInt(d5['O54'])
     page2.getCell('R16').value = parseFloat(d5['R54'])
 
-    page2.getCell('L17').value = parseInt(d12['N23'])
-    page2.getCell('O17').value = parseInt(d12['O55'])
-    page2.getCell('R17').value = parseFloat(d12['R55'])
+    page2.getCell('L17').value = parseInt(d13['N24'])
+    page2.getCell('O17').value = parseInt(d13['O56'])
+    page2.getCell('R17').value = parseFloat(d13['R56'])
 
-    page2.getCell('L18').value = parseInt(d13['N24'])
-    page2.getCell('O18').value = parseInt(d13['O56'])
-    page2.getCell('R18').value = parseFloat(d13['R56'])
+    page2.getCell('L18').value = parseInt(d14['N25'])
+    page2.getCell('O18').value = parseInt(d14['O57'])
+    page2.getCell('R18').value = parseFloat(d14['R57'])
 
-    page2.getCell('L19').value = parseInt(d14['N25'])
-    page2.getCell('O19').value = parseInt(d14['O57'])
-    page2.getCell('R19').value = parseFloat(d14['R57'])
+    page2.getCell('L19').value = parseInt(d12['N23'])
+    page2.getCell('O19').value = parseInt(d12['O55'])
+    page2.getCell('R19').value = parseFloat(d12['R55'])
 
     /****************************************************************************************/
 

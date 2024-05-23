@@ -9,13 +9,15 @@ import Unauthorized from "../../components/Unauthorized";
 import Spinn from "../../components/Spinner";
 import { User } from "../../context/UserProvider";
 import { inactivityTime } from "../../helpers/inactivityTime";
+import { getDataPartesDiariosBE } from "../../utils/queryAPI/partesDiariosQuery";
 
 const ContainerIndexParteDiario = () => {
   const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [ dataBuscarDatos, setDataBuscarDatos] = useState([])
+  
   const { dataUser } = useContext(User);
   useEffect(() => {
     const token = getToken();
@@ -44,6 +46,21 @@ const ContainerIndexParteDiario = () => {
     inactivityTime(setModalUnauthorized)
   }, []);
 
+  // useEffect(() => {
+  //   buscarDatos()
+  // }, [])
+  // const buscarDatos = async() => {
+  //   const inicio = '30-06-2015';
+  //   const fin = '23-4-2024';
+
+  //   const params = { 
+  //     fechadesde: inicio, 
+  //     fechahasta: fin
+  //   }
+  //   const data = await getDataPartesDiariosBE(params, '/parteDiario')
+  //   setDataBuscarDatos(data)
+  // }
+
   return (
     <div>
       {loading ? (
@@ -64,7 +81,7 @@ const ContainerIndexParteDiario = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-              <ParteDiarioContainer tokenAuth={tokenAuth} />
+              <ParteDiarioContainer tokenAuth={tokenAuth} dataBuscarDatos={dataBuscarDatos}/>
             </div>
             {modalUnauthorized && (
               <div className="">

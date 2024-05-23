@@ -9,7 +9,7 @@ import MsgError from '../../components/Messages/MsgError'
 import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
 import { getIngenios } from '../../utils/queryAPI/ingenios'
 
-const ParteDiarioContainer = () => {
+const ParteDiarioContainer = ({dataBuscarDatos}) => {
   const [dataEnd, setDataEnd] = useState(null)
   const [dataZafra, setDataZafra] = useState(null)
   const [dataAnio, setDataAnio] = useState(null)
@@ -39,6 +39,25 @@ const ParteDiarioContainer = () => {
     useState(null)
   const [finDestileriaComparativa, setFinDestileriaComparativa] =
     useState(undefined)
+
+  // const [dataOrdenada, setDataOrdenada] = useState(undefined)
+
+  // useEffect(() => {
+  //   busqueda()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dataBuscarDatos])
+  // const busqueda = () => {
+  //   const data = dataBuscarDatos?.filter((d) => d.IngenioNombre !== 'San Juan')
+  //   console.log(data)
+  //   if(data !== null || data.length !== 0) {
+  //     data.sort((a,b) => b.MoliendaCanaBruta - a.MoliendaCanaBruta)
+  //     setDataOrdenada(data.slice(0,10))
+  //   }
+  // }
+  // console.log(dataOrdenada)
+   
+
+
 
   useEffect(() => {
     if (dataZafra !== null) {
