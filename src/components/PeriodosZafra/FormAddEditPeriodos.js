@@ -246,7 +246,7 @@ const FormAddEditPeriodos = ({
             />
           </Col>
           <Col xs={24} sm={11}>
-            <p className='mb-1'>Inicio zafra</p>
+            <p className='mb-1'>Fin zafra</p>
             <input
               className='p-1 bg-white text-dark border border-1 input-date '
               type='date'

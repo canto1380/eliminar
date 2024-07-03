@@ -53,6 +53,11 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
       name: 'Periodos Ingenios',
     },
     {
+      title: 'reportes',
+      iconName: <BsClipboardData className='sizeIcon' />,
+      name: 'Reportes',
+    },
+    {
       title: 'perfil',
       iconName: <BiUserCircle className='sizeIcon' />,
       name: 'Cuenta',

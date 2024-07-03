@@ -20,8 +20,8 @@ const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
   const [dataZafra, setDataZafra] = useState(null);
   const [search, setSearch] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [band, setBand] = useState(false);
+  const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   useEffect(() => {
     dataComparativaGet();

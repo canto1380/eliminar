@@ -260,7 +260,21 @@ let dataAguilares = {
     Cell25: 0,
     CellE25: 0,
     Cell26: 0,
-    CellE26: 0
+    CellE26: 0,
+    
+  },
+  /** NORTE **/
+  dataInicioIngeniosNorte = {
+    Cell44: 0,
+    CellE44: 0,
+    Cell45: 0,
+    CellE45: 0,
+    Cell46: 0,
+    CellE46: 0,
+    Cell47: 0,
+    CellE47: 0,
+    Cell48: 0,
+    CellE48: 0,
   },
   dataInicioDestileriaIngenios = {
     aguilInicio: null,
@@ -293,6 +307,18 @@ let dataAguilares = {
     staRosaFin: null,
     sanJuanInicio: null,
     sanJuanFin: null
+  },
+  dataInicioDestileriaIngeniosNorte = {
+    sanisidroInicio: null,
+    sanisidroFin: null,
+    seaboardInicio: null,
+    seaboardFin: null,
+    ledesmaInicio: null,
+    ledesmaFin: null,
+    riograndeInicio: null,
+    riograndeFin: null,
+    esperanzaInicio: null,
+    esperanzaFin: null
   };
 
 export const dataPorTipo = (
@@ -300,6 +326,7 @@ export const dataPorTipo = (
   dataImportDestileria,
   dataEnd,
   dateInicioIngenios,
+  zafraParteDiario,
   setD1,
   setD2,
   setD3,
@@ -316,7 +343,9 @@ export const dataPorTipo = (
   setD14,
   setD15,
   setFechasInicioIngenios,
-  setFechasInicioDestileriaIngenios
+  setFechasInicioDestileriaIngenios,
+  setFechasInicioIngeniosNorte,
+  setFechasInicioDestileriaIngeniosNorte
 ) => {
   /****  FECHAS INICIO  ****/
   const aguil = dateInicioIngenios?.find(
@@ -384,6 +413,23 @@ export const dataPorTipo = (
     (d) => d.nombre_ingenio === "Santa Rosa"
   );
   const sanjuan = dateInicioIngenios?.find((d) => d.nombre_ingenio === "San Juan")
+  
+  /** NORTE **/
+  const sanisidro = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "San Isidro"
+  )
+  const seaboard = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "Seaboard"
+  )
+  const ledesma = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "Ledesma"
+  )
+  const riogrande = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "Río Grande"
+  )
+  const laesperanza = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "La Esperanza"
+  )
 
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
@@ -416,7 +462,23 @@ export const dataPorTipo = (
     CellE25: starosa?.fin_zafra,
     Cell26: sanjuan?.inicio_zafra,
     CellE26: sanjuan?.fin_zafra,
+    
   };
+  /** NORTE **/
+  dataInicioIngeniosNorte = {
+    Cell44: laesperanza?.inicio_zafra,
+    CellE44: laesperanza?.fin_zafra,
+    Cell45: ledesma?.inicio_zafra,
+    CellE45: ledesma?.fin_zafra,
+    Cell46: riogrande?.inicio_zafra,
+    CellE46: riogrande?.fin_zafra,
+    Cell47: seaboard?.inicio_zafra,
+    CellE47: seaboard?.fin_zafra,
+    Cell48: sanisidro?.inicio_zafra,
+    CellE48: sanisidro?.fin_zafra,
+
+  }
+
   dataInicioDestileriaIngenios = {
     aguilInicio: aguil?.inicio_destileria,
     aguilFin: aguil?.fin_destileria,
@@ -449,8 +511,24 @@ export const dataPorTipo = (
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
   }
+
+  dataInicioDestileriaIngeniosNorte = {
+    esperanzaInicio: laesperanza?.inicio_destileria,
+    esperanzaFin: laesperanza?.fin_destileria,
+    ledesmaInicio: ledesma?.inicio_destileria,
+    ledesmaFin: ledesma?.fin_destileria,
+    riograndeInicio: riogrande?.inicio_destileria,
+    riograndeFin: riogrande?.fin_destileria,
+    seaboardInicio: seaboard?.inicio_destileria,
+    seaboardFin: seaboard?.fin_destileria,
+    sanisidroInicio: sanisidro?.inicio_destileria,
+    sanisidroFin: sanisidro?.fin_destileria,
+  };
+
   setFechasInicioIngenios(dataInicioIngenios);
   setFechasInicioDestileriaIngenios(dataInicioDestileriaIngenios)
+  setFechasInicioIngeniosNorte(dataInicioIngeniosNorte)
+  setFechasInicioDestileriaIngeniosNorte(dataInicioDestileriaIngeniosNorte)
   /************/
 
   for (let i = 1; i <= 15; i++) {
@@ -527,13 +605,14 @@ export const dataPorTipo = (
       g3 = g3 + data.AlcoholProducido;
       o3 = o3 + data.AlcoholHidratado || 0;
       r3 = r3 + data.AlcoholAnhidro || 0;
+      
       dataLaFlorida = {
         N12: g3,
         O50: o3,
         R50: r3,
       };
     }
-
+    
     if (
       data.IngenioNombre === 'Concepción'
       && newDate <= fechaParametro
@@ -721,9 +800,16 @@ export const dataPorTipo = (
 
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+
+    /*** Verifica
+     * cada ingenio
+     * fecha del parte diario del json sea menor o igual a la fecha elegida en el sistema
+     * y que el inicio de zafra del ingenio exista ***/
     if (
       data.IngenioNombre === "Aguilares" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell10 !== undefined &&
+      dataInicioIngenios.Cell10 !== null
     ) {
       a1 = a1 + data.MoliendaCanaBruta || 0;
       b1 = b1 + data.MoliendaCanaNeta || 0;
@@ -753,7 +839,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Cruz Alta" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell11 !== undefined &&
+      dataInicioIngenios.Cell11 !== null
     ) {
       a2 = a2 + data.MoliendaCanaBruta;
       b2 = b2 + data.MoliendaCanaNeta;
@@ -783,7 +871,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Florida" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell12 !== undefined &&
+      dataInicioIngenios.Cell12 !== null
     ) {
       a3 = a3 + data.MoliendaCanaBruta;
       b3 = b3 + data.MoliendaCanaNeta;
@@ -815,7 +905,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Concepción" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell14 !== undefined &&
+      dataInicioIngenios.Cell14 !== null
     ) {
       a4 = a4 + data.MoliendaCanaBruta;
       b4 = b4 + data.MoliendaCanaNeta;
@@ -847,7 +939,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Marapa" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell15 !== undefined &&
+      dataInicioIngenios.Cell15 !== null
     ) {
       a5 = a5 + data.MoliendaCanaBruta;
       b5 = b5 + data.MoliendaCanaNeta;
@@ -876,7 +970,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Bella Vista" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell17 !== undefined &&
+      dataInicioIngenios.Cell17 !== null
     ) {
       a6 = a6 + data.MoliendaCanaBruta;
       b6 = b6 + data.MoliendaCanaNeta;
@@ -904,7 +1000,9 @@ export const dataPorTipo = (
     }
     if (
       data.IngenioNombre === "Famaillá" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell18 !== undefined &&
+      dataInicioIngenios.Cell18 !== null
     ) {
       a7 = a7 + data.MoliendaCanaBruta;
       b7 = b7 + data.MoliendaCanaNeta;
@@ -935,7 +1033,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Corona" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell19 !== undefined &&
+      dataInicioIngenios.Cell19 !== null
     ) {
       a8 = a8 + data.MoliendaCanaBruta;
       b8 = b8 + data.MoliendaCanaNeta;
@@ -964,7 +1064,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Providencia" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell20 !== undefined &&
+      dataInicioIngenios.Cell20 !== null
     ) {
       a9 = a9 + data.MoliendaCanaBruta;
       b9 = b9 + data.MoliendaCanaNeta;
@@ -999,7 +1101,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "La Trinidad" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell21 !== undefined &&
+      dataInicioIngenios.Cell21 !== null
     ) {
       a10 = a10 + data.MoliendaCanaBruta;
       b10 = b10 + data.MoliendaCanaNeta;
@@ -1028,7 +1132,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Leales" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell22 !== undefined &&
+      dataInicioIngenios.Cell22 !== null
     ) {
       a11 = a11 + data.MoliendaCanaBruta;
       b11 = b11 + data.MoliendaCanaNeta;
@@ -1062,8 +1168,10 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Ñuñorco" &&
-      newDate <= fechaParametro
-    ) {
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell23 !== undefined &&
+      dataInicioIngenios.Cell23 !== null
+      ){
       a12 = a12 + data?.MoliendaCanaBruta;
       b12 = b12 + data?.MoliendaCanaNeta;
       c12 = c12 + data?.AzucarEquivalente;
@@ -1091,7 +1199,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "Santa Barbara" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell24 !== undefined &&
+      dataInicioIngenios.Cell24 !== null
     ) {
       a13 = a13 + data.MoliendaCanaBruta;
       b13 = b13 + data.MoliendaCanaNeta;
@@ -1116,11 +1226,13 @@ export const dataPorTipo = (
         O56: dataStaBarbara.O56,
         R56: dataStaBarbara.R56,
       };
-    }
+    } 
 
     if (
       data.IngenioNombre === "Santa Rosa" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell25 !== undefined &&
+      dataInicioIngenios.Cell25 !== null
     ) {
       a14 = a14 + data.MoliendaCanaBruta;
       b14 = b14 + data.MoliendaCanaNeta;
@@ -1149,7 +1261,9 @@ export const dataPorTipo = (
 
     if (
       data.IngenioNombre === "San Juan" &&
-      newDate <= fechaParametro
+      newDate <= fechaParametro &&
+      dataInicioIngenios.Cell26 !== undefined &&
+      dataInicioIngenios.Cell26 !== null
     ) {
       a15 = a15 + data.MoliendaCanaBruta;
       b15 = b15 + data.MoliendaCanaNeta;
@@ -1177,7 +1291,41 @@ export const dataPorTipo = (
     }
 
   });
+  
   /*********************************************************************************/
+  /*** ALCOHOL ANHIDRO QUE QUEDO DEFASADO ENTRE EL 5/05/2024 y 15/05/2024
+   * QUE PERTENECE A LA ZAFRA 2023 ***/
+  if(zafraParteDiario === 2024) {
+    dataLaFlorida.R50 = dataLaFlorida.R50 - 2526587
+  }
+  if(zafraParteDiario === 2023) {
+    dataLaFlorida.R50 = dataLaFlorida.R50 + 2526587
+  }
+  /****************/
+
+
+/*** ALCOHOL ANHIDRO ZAFRA 2024 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
+   * DECLARADO POR EMAIL
+   ***/
+
+if(zafraParteDiario === 2024) {
+  dataLeales.R53 = dataLeales.R53 + 2194476
+}
+/**********/
+
+  /*** ALCOHOL ANHIDRO ZAFRA 2023 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
+   * DECLARADO POR EMAIL
+   ***/
+  if(zafraParteDiario === 2023) {
+    dataBellaVista.R45 = dataBellaVista.R45 + 9669715
+  }
+  if(zafraParteDiario === 2023) {
+    dataConcepcion.R46 = dataConcepcion.R46 + 35668460
+  }
+  if(zafraParteDiario === 2023) {
+    dataLeales.R53 = dataLeales.R53 + 26464761
+  }
+  /**********/
 
   setD1(dataAguilares);
   setD2(dataCruzAlta);

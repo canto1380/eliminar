@@ -168,6 +168,20 @@ let dataAguilares = {
     Cell26: 0,
     CellR26: 0,
   },
+  /** NORTE **/
+  dataInicioIngeniosNorte = {
+    Cell44: 0,
+    CellR44: 0,
+    Cell45: 0,
+    CellR45: 0,
+    Cell46: 0,
+    CellR46: 0,
+    Cell47: 0,
+    CellR47: 0,
+    Cell48: 0,
+    CellR48: 0,
+  },
+
   dataInicioDestileriaIngenios = {
     aguilInicio: null,
     aguilFin: null,
@@ -199,6 +213,18 @@ let dataAguilares = {
     staRosaFin: null,
     sanJuanInicio: null,
     sanJuanFin: null
+  },
+  dataInicioDestileriaIngeniosNorte = {
+    sanisidroInicio: null,
+    sanisidroFin: null,
+    seaboardInicio: null,
+    seaboardFin: null,
+    ledesmaInicio: null,
+    ledesmaFin: null,
+    riograndeInicio: null,
+    riograndeFin: null,
+    esperanzaInicio: null,
+    esperanzaFin: null
   };
 
 export const dataComparativaPorTipo = (
@@ -222,7 +248,9 @@ export const dataComparativaPorTipo = (
   setDc14,
   setDc15,
   setFechasInicioIngeniosComparativa,
-  setFechasInicioDestileriaIngeniosComparativa
+  setFechasInicioDestileriaIngeniosComparativa,
+  setFechasInicioIngeniosNorteComparativa,
+  setFechasInicioDestileriaIngeniosNorteComparativa,
 ) => {
   const date = dataEnd !== null ? new Date(dataEnd) : new Date()
   const anioDataComparativa = date.getFullYear() - 1
@@ -275,6 +303,23 @@ export const dataComparativaPorTipo = (
   )
   const sanjuan = dateFinIngenios?.find((d) => d.nombre_ingenio === 'San Juan')
 
+/** NORTE **/
+const sanisidro = dateFinIngenios?.find(
+  (d) => d.nombre_ingenio === "San Isidro"
+)
+const seaboard = dateFinIngenios?.find(
+  (d) => d.nombre_ingenio === "Seaboard"
+)
+const ledesma = dateFinIngenios?.find(
+  (d) => d.nombre_ingenio === "Ledesma"
+)
+const riogrande = dateFinIngenios?.find(
+  (d) => d.nombre_ingenio === "Río Grande"
+)
+const laesperanza = dateFinIngenios?.find(
+  (d) => d.nombre_ingenio === "La Esperanza"
+)
+
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
     CellR10: aguil?.fin_zafra,
@@ -306,6 +351,20 @@ export const dataComparativaPorTipo = (
     CellR25: starosa?.fin_zafra,
     Cell26: sanjuan?.inicio_zafra,
     CellR26: sanjuan?.fin_zafra,
+  }
+
+  /** NORTE **/
+  dataInicioIngeniosNorte = {
+    Cell44: laesperanza?.inicio_zafra,
+    CellR44: laesperanza?.fin_zafra,
+    Cell45: ledesma?.inicio_zafra,
+    CellR45: ledesma?.fin_zafra,
+    Cell46: riogrande?.inicio_zafra,
+    CellR46: riogrande?.fin_zafra,
+    Cell47: seaboard?.inicio_zafra,
+    CellR47: seaboard?.fin_zafra,
+    Cell48: sanisidro?.inicio_zafra,
+    CellR48: sanisidro?.fin_zafra,
   }
 
   dataInicioDestileriaIngenios = {
@@ -340,8 +399,23 @@ export const dataComparativaPorTipo = (
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
   }
+  dataInicioDestileriaIngeniosNorte = {
+    esperanzaInicio: laesperanza?.inicio_destileria,
+    esperanzaFin: laesperanza?.fin_destileria,
+    ledesmaInicio: ledesma?.inicio_destileria,
+    ledesmaFin: ledesma?.fin_destileria,
+    riograndeInicio: riogrande?.inicio_destileria,
+    riograndeFin: riogrande?.fin_destileria,
+    seaboardInicio: seaboard?.inicio_destileria,
+    seaboardFin: seaboard?.fin_destileria,
+    sanisidroInicio: sanisidro?.inicio_destileria,
+    sanisidroFin: sanisidro?.fin_destileria,
+  };
+
   setFechasInicioIngeniosComparativa(dataInicioIngenios)
   setFechasInicioDestileriaIngeniosComparativa(dataInicioDestileriaIngenios)
+  setFechasInicioIngeniosNorteComparativa(dataInicioIngeniosNorte)
+  setFechasInicioDestileriaIngeniosNorteComparativa(dataInicioDestileriaIngeniosNorte)
 
   for (let i = 1; i <= 15; i++) {
     let varName1 = 'a' + i

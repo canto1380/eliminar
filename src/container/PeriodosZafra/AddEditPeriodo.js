@@ -86,7 +86,6 @@ const AddEditPeriodoContainer = () => {
     const data = await getIngenios()
     setIngeniosData(data)
   }
-
   return(
     <div>
       {loading ? (

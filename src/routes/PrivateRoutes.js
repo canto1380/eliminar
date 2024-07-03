@@ -6,6 +6,7 @@ import DataComparativa from '../container/DataComparativa'
 import NewData from '../container/DataComparativa/NewData'
 import PeriodosZafra from '../container/PeriodosZafra'
 import AddEditPeriodoContainer from '../container/PeriodosZafra/AddEditPeriodo'
+import ReportesContainer from '../container/Reportes'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -21,6 +22,7 @@ const PrivateRoutes = ({ token }) => {
       <Route exact path='/admin/periodos-zafra' element={<PeriodosZafra />} />
       <Route exact path='/admin/periodos-zafra/nuevo' element={<AddEditPeriodoContainer />} />
       <Route exact path='/admin/periodos-zafra/editar/:id' element={<AddEditPeriodoContainer />} />
+      <Route exact path='/admin/reportes' element={<ReportesContainer />} />
 
 
       <Route path='*' element={<Navigate to='/admin/parte-diario' replace />} />
