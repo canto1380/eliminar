@@ -1,13 +1,19 @@
 import "moment/locale/es";
 import { Row, Col, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
+import { DownOutlined } from "@ant-design/icons";
 import { CreateExcelWorkbook } from "../../Excel/ParteDiarioDirectorio";
 import ItemCollpse from "./ItemsCollpase";
 import { User } from "../../context/UserProvider";
 import { dataComparativaPorTipo } from "./DataComparativa";
 import { dataPorTipo } from "./DataOriginal";
 import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
-import { api } from "../../utils/api";
+import { getDataToken } from "../../helpers/helpers";
+import "./parteDiario.css";
+import moment from "moment";
+import { apiExportExcel } from "../../utils/apiExportExcel";
+import { Dropdown, message, Space } from "antd";
+import { getDiasParadas } from "../../utils/queryAPI/diaParadas";
 
 const ParteDiario = ({
   dataEnd,
@@ -61,7 +67,7 @@ const ParteDiario = ({
   const [dc13, setDc13] = useState([]);
   const [dc14, setDc14] = useState([]);
   const [dc15, setDc15] = useState([]);
-  
+
   /** Fecha de inicio y fin de zafras TUCUMAN **/
   const [inicioZafra, setInicioZafra] = useState(null);
   const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
@@ -70,7 +76,8 @@ const ParteDiario = ({
 
   /** Fecha de inicio y fin de zafras NORTE **/
   const [inicioZafraNorte, setInicioZafraNorte] = useState(null);
-  const [inicioZafraNorteComparativa, setInicioZafraNorteComparativa] = useState(null);
+  const [inicioZafraNorteComparativa, setInicioZafraNorteComparativa] =
+    useState(null);
   const [finZafraNorte, setFinZafraNorte] = useState("");
   const [finZafraNorteComparativa, setFinZafraNorteComparativa] = useState("");
 
@@ -86,38 +93,70 @@ const ParteDiario = ({
     useState(null);
 
   /** FECHAS DE TODOS LOS INGENIOS DE INICIO Y FIN NORTE **/
-  const [fechasInicioIngeniosNorte, setFechasInicioIngeniosNorte] = useState(null);
-  const [fechasInicioDestileriaIngeniosNorte, setFechasInicioDestileriaIngeniosNorte] =
+  const [fechasInicioIngeniosNorte, setFechasInicioIngeniosNorte] =
     useState(null);
-  
-  const [fechasInicioIngeniosNorteComparativa, setFechasInicioIngeniosNorteComparativa] = useState(null);
-  const [fechasInicioDestileriaIngeniosNorteComparativa, setFechasInicioDestileriaIngeniosNorteComparativa] = useState(null);
+  const [
+    fechasInicioDestileriaIngeniosNorte,
+    setFechasInicioDestileriaIngeniosNorte,
+  ] = useState(null);
+
+  const [
+    fechasInicioIngeniosNorteComparativa,
+    setFechasInicioIngeniosNorteComparativa,
+  ] = useState(null);
+  const [
+    fechasInicioDestileriaIngeniosNorteComparativa,
+    setFechasInicioDestileriaIngeniosNorteComparativa,
+  ] = useState(null);
 
   /** Cantidad de dias de zafra TUCUMAN **/
   const [dataDiasZafra, setDataDiasZafra] = useState(null);
-  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] = useState(null);
+  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] =
+    useState(null);
 
   /** Cantidad de dias de zafra NORTE **/
   const [dataDiasZafraNorte, setDataDiasZafraNorte] = useState(null);
-  const [dataDiasZafraNorteComparativa, setDataDiasZafraNorteComparativa] = useState(null);
+  const [dataDiasZafraNorteComparativa, setDataDiasZafraNorteComparativa] =
+    useState(null);
 
+  /** DATOS TOTALES AL DIA ELEGIDO **/
+  const [panelCMB, setPanelCMB] = useState(null);
+  const [panelAzucar, setPanelAzucar] = useState(null);
+  const [panelAzucarEquivalente, setPanelAzucarEquivalente] = useState(null);
+  const [panelAzucarCrudo, setPanelAzucarCrudo] = useState(null);
+  const [panelAzucarBlancoA, setPanelAzucarBlancoA] = useState(null);
+  const [panelAzucarRefinado, setPanelAzucarRefinado] = useState(null);
+  const [panelAzucarOrganico, setPanelAzucarOrganico] = useState(null);
+  const [panelAzucarOtros, setPanelAzucarOtros] = useState(null);
+  const [panelAlcohol, setPanelAlcohol] = useState(null);
+
+  /** DATOS DIAS PARADAS **/
+  const [diasParadaExport, setDiasParadaExport] = useState(null);
 
   const [loadingDownload, setLoadingDownload] = useState(false);
   const [dataComparativa, setDataComparativa] = useState(undefined);
   const [fechaInicioDestileria, setFechaInicioDestileria] = useState(undefined);
-
+  const [dataUserRegister, setDataUserRegister] = useState(undefined);
   const { dataUser } = useContext(User);
 
   useEffect(() => {
     dataComparativaGet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const dataComparativaGet = async () => {
     const params = { deleted: false };
     const data = await getDataComparativa(params);
     setDataComparativa(data);
   };
+
+  useEffect(() => {
+    getDataUserRegister();
+  }, [dataUser]);
+  const getDataUserRegister = () => {
+    const data = getDataToken();
+    setDataUserRegister(data);
+  };
+
   useEffect(() => {
     dataPorTipo(
       dataImport,
@@ -143,7 +182,16 @@ const ParteDiario = ({
       setFechasInicioIngenios,
       setFechasInicioDestileriaIngenios,
       setFechasInicioIngeniosNorte,
-      setFechasInicioDestileriaIngeniosNorte
+      setFechasInicioDestileriaIngeniosNorte,
+      setPanelCMB,
+      setPanelAzucar,
+      setPanelAzucarEquivalente,
+      setPanelAzucarCrudo,
+      setPanelAzucarBlancoA,
+      setPanelAzucarRefinado,
+      setPanelAzucarOrganico,
+      setPanelAzucarOtros,
+      setPanelAlcohol
     );
     dataComparativaPorTipo(
       dataImportComparativa,
@@ -168,7 +216,7 @@ const ParteDiario = ({
       setFechasInicioIngeniosComparativa,
       setFechasInicioDestileriaIngeniosComparativa,
       setFechasInicioIngeniosNorteComparativa,
-      setFechasInicioDestileriaIngeniosNorteComparativa,
+      setFechasInicioDestileriaIngeniosNorteComparativa
     );
     dataFinZafra();
     dataFinZafraComparativa();
@@ -183,21 +231,23 @@ const ParteDiario = ({
     dataImportDestileriaComparativa,
   ]);
 
-  console.log(fechasInicioIngenios)
-  console.log(fechasInicioDestileriaIngenios)
-  console.log(fechasInicioIngeniosNorte)
-  console.log(fechasInicioDestileriaIngeniosNorte)
-  console.log(fechasInicioIngeniosComparativa)
-  console.log(fechasInicioDestileriaIngeniosComparativa)
-  console.log(fechasInicioIngeniosNorteComparativa)
-  console.log(fechasInicioDestileriaIngeniosNorteComparativa)
-
+  /*** DATOS DIAS PARADAS ***/
+  useEffect(() => {
+    if (dataAnio !== null && dataEnd !== null) {
+      dataDiasParadaExport();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataAnio, dataEnd]);
+  const dataDiasParadaExport = async () => {
+    const params = { anio: dataAnio };
+    const data = await getDiasParadas(params);
+    setDiasParadaExport(data);
+  };
 
   /************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS TUCUMAN *************/
   let inicioZafraa = new Date("3/10/2100");
   let finZafraa = null;
   const dataFinZafra = () => {
-
     for (let clave in fechasInicioIngenios) {
       if (fechasInicioIngenios[clave] === null) {
         setFinZafra("");
@@ -249,16 +299,15 @@ const ParteDiario = ({
       }
     }
   };
-/***************************************************************************************/
+  /***************************************************************************************/
 
-/************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS NORTE *************/
+  /************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS NORTE *************/
   let inicioZafraaNorte = new Date("3/10/2100");
   let finZafraaNorte = null;
   const dataFinZafraNorte = () => {
-
     for (let clave in fechasInicioIngeniosNorte) {
       if (fechasInicioIngeniosNorte[clave] === null) {
-        setFinZafraNorte("");
+        setFinZafraNorte(null);
         return finZafraaNorte;
       } else {
         finZafraaNorte =
@@ -428,7 +477,11 @@ const ParteDiario = ({
       setDataDiasZafraNorte(0);
     }
 
-    if (inicioZafraNorte !== "" && finZafraNorte === "" && dataEnd >= inicioZafraNorte) {
+    if (
+      inicioZafraNorte !== "" &&
+      finZafraNorte === null &&
+      dataEnd >= inicioZafraNorte
+    ) {
       const diffDates =
         new Date(dataEnd).getTime() - new Date(inicioZafraNorte).getTime();
       const diffTotal = diffDates / (1000 * 60 * 60 * 24);
@@ -437,19 +490,20 @@ const ParteDiario = ({
 
     if (
       inicioZafraNorte !== "" &&
-      finZafraNorte !== "" &&
+      finZafraNorte !== null &&
       dataEnd >= inicioZafraNorte &&
       dataEnd > finZafraNorte
     ) {
       const diffDates =
-        new Date(finZafraNorte).getTime() - new Date(inicioZafraNorte).getTime();
+        new Date(finZafraNorte).getTime() -
+        new Date(inicioZafraNorte).getTime();
       const diffTotal = diffDates / (1000 * 60 * 60 * 24);
       setDataDiasZafraNorte(Math.ceil(diffTotal));
     }
 
     if (
       inicioZafraNorte !== "" &&
-      finZafraNorte !== "" &&
+      finZafraNorte !== null &&
       dataEnd >= inicioZafraNorte &&
       dataEnd <= finZafraNorte
     ) {
@@ -539,223 +593,513 @@ const ParteDiario = ({
     setFechaInicioDestileria(inicioDestileria);
   };
 
-  const prueba = async() => {
-    try {
-      const params = {loadingDownload}
-      const res = await api('GET', 'descargar')
-      console.log(res.data)
-      const url = window.URL.createObjectURL(new Blob([res.data]));
-        const a = document.createElement("a");
-        a.style.display = "none";
-        a.href = url;
-        a.download = "report.xlsx";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-
-    } catch (error) {
-      console.log(error)
+  /*** ESTIMACIONES ***/
+  let estimacionEEAOC;
+  dataComparativa?.forEach((d) => {
+    if (d.anio_zafra === zafraParteDiario) {
+      estimacionEEAOC = d.estimacion_EEAOC;
     }
-    
-    
-    // axios
-    //   .get("/descargar", { responseType: "blob" })
-    //   .then(response => {
-    //     const url = window.URL.createObjectURL(new Blob([response.data]));
-    //     const a = document.createElement("a");
-    //     a.style.display = "none";
-    //     a.href = url;
-    //     a.download = "eport.xlsx";
-    //     document.body.appendChild(a);
-    //     a.click();
-    //     window.URL.revokeObjectURL(url);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+  });
 
+  /** CANTIDAD DIAS DE DESTILERIA **/
+  const diasDestileria = dataEnd ? dataEnd - fechaInicioDestileria : "";
+  const diasDestileriaFormat = diasDestileria / (1000 * 60 * 60 * 24);
 
-    // fetch('http://192.168.10.139:4000/generate-excel')
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response.blob();
-    //     }
-    //     throw new Error('Network response was not ok.');
-    //   })
-    //   .then(blob => {
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.style.display = 'none';
-    //     a.href = url;
-    //     a.download = 'report.xlsx';
-    //     document.body.appendChild(a);
-    //     a.click();
-    //     window.URL.revokeObjectURL(url);
-    //   })
-    //   .catch(error => {
-    //     console.error('There has been a problem with your fetch operation:', error);
-    //   });
+  // const as = new Date(fechasInicioIngenios.Cell10)
+  // console.log(typeof as)
+  /** Exportacion **/
+  const exportarParteComparativo = async () => {
+    try {
+      setLoadingDownload(true);
+      const dateFormat = moment(dataEnd).format("DD-MM-YYYY");
+      const dataSend = [
+        {
+          dataEnd,
+          diasParadaExport,
+          d1,
+          d2,
+          d3,
+          d4,
+          d5,
+          d6,
+          d7,
+          d8,
+          d9,
+          d10,
+          d11,
+          d12,
+          d13,
+          d14,
+          d15,
+          dc1,
+          dc2,
+          dc3,
+          dc4,
+          dc5,
+          dc6,
+          dc7,
+          dc8,
+          dc9,
+          dc10,
+          dc11,
+          dc12,
+          dc13,
+          dc14,
+          dc15,
+          dataImport,
+          dataImportComparativa,
+          dataUser,
+          dataUserRegister,
+          setBanderaDataNull,
+          inicioZafra,
+          inicioZafraComparativa,
+          fechasInicioIngenios,
+          dataDiasZafra,
+          fechasInicioIngeniosComparativa,
+          dataDiasZafraComparativa,
+          setDataImport,
+          setDataImportComparativa,
+          setDataImportDestileria,
+          setDataImportDestileriaComparativa,
+          dataIngenios,
+          finZafra,
+          finZafraComparativa,
+          dataComparativa,
+          fechaInicioDestileria,
+          zafraParteDiario,
+          fechasInicioDestileriaIngenios,
+          fechasInicioDestileriaIngeniosComparativa,
+          /**NORTE **/
+          inicioZafraNorte,
+          inicioZafraNorteComparativa,
+          finZafraNorte,
+          finZafraNorteComparativa,
+          fechasInicioIngeniosNorte,
+          fechasInicioIngeniosNorteComparativa,
+          fechasInicioDestileriaIngeniosNorte,
+          fechasInicioDestileriaIngeniosNorteComparativa,
+          dataDiasZafraNorte,
+          dataDiasZafraNorteComparativa,
+        },
+      ];
+      const res = await apiExportExcel("POST", "descargar", dataSend);
+      if (res.status === 200) {
+        const blob = new Blob([res.data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `Parte diario directorio - ${dateFormat}`;
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(link);
+        setDataImport(null);
+        setDataImportComparativa(null);
+        setDataImportDestileria(null);
+        setDataImportDestileriaComparativa(null);
+        setLoadingDownload(false);
+        message.success("Descarga realizada correctamente", 5);
+        window.location.reload();
+      } else {
+        console.log("Error al generar el excel");
+      }
+    } catch (error) {
+      console.error("Error en el fetch:", error);
+    }
   };
+  /*** DIAS EFECTIVOS DE ZAFRA ***/
+  useEffect(() => {
+    if (dataAnio !== null && dataEnd !== null && diasParadaExport !== null) {
+      getCalculoDiasParada();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataAnio, dataEnd, diasParadaExport]);
+  /** DIAS PARADA **/
+  const [aguilDiasParada, setAguilDiasParada] = useState(0);
+  const [bellavistaDiasParada, setBellavistaDiasParada] = useState(0);
+  const [concepDiasParada, setConcepDiasParada] = useState(0);
+  const [cruzaltaDiasParada, setCruzaltaDiasParada] = useState(0);
+  const [famaillaDiasParada, setFamaillaDiasParada] = useState(0);
+  const [coronaDiasParada, setCoronaDiasParada] = useState(0);
+  const [floridaDiasParada, setFloridaDiasParada] = useState(0);
+  const [providDiasParada, setProvidDiasParada] = useState(0);
+  const [trinidadDiasParada, setTrinidadDiasParada] = useState(0);
+  const [lealesDiasParada, setLealesDiasParada] = useState(0);
+  const [marapaDiasParada, setMarapaDiasParada] = useState(0);
+  const [nunorcoDiasParada, setNunorcoDiasParada] = useState(0);
+  const [barbaraDiasParada, setBarbaraDiasParada] = useState(0);
+  const [rosaDiasParada, setRosaDiasParada] = useState(0);
+
+  const getCalculoDiasParada = () => {
+    let aguilDiasParada = 0,
+      bellavistaDiasParada = 0,
+      concepDiasParada = 0,
+      cruzaltaDiasParada = 0,
+      famaillaDiasParada = 0,
+      coronaDiasParada = 0,
+      floridaDiasParada = 0,
+      providDiasParada = 0,
+      trinidadDiasParada = 0,
+      lealesDiasParada = 0,
+      marapaDiasParada = 0,
+      nunorcoDiasParada = 0,
+      barbaraDiasParada = 0,
+      rosaDiasParada = 0;
+    const calculoDiasParada = diasParadaExport;
+    for (const p of calculoDiasParada) {
+      switch (p.nombre_ingenio) {
+        case "Aguilares":
+          aguilDiasParada = aguilDiasParada + p.horas_paradas;
+          break;
+        case "Bella Vista":
+          bellavistaDiasParada = bellavistaDiasParada + p.horas_paradas;
+          break;
+        case "Concepción":
+          concepDiasParada = concepDiasParada + p.horas_paradas;
+          break;
+        case "Cruz Alta":
+          cruzaltaDiasParada = cruzaltaDiasParada + p.horas_paradas;
+          break;
+        case "Famaillá":
+          famaillaDiasParada = famaillaDiasParada + p.horas_paradas;
+          break;
+        case "La Corona":
+          coronaDiasParada = coronaDiasParada + p.horas_paradas;
+          break;
+        case "La Florida":
+          floridaDiasParada = floridaDiasParada + p.horas_paradas;
+          break;
+        case "La Providencia":
+          providDiasParada = providDiasParada + p.horas_paradas;
+          break;
+        case "La Trinidad":
+          trinidadDiasParada = trinidadDiasParada + p.horas_paradas;
+          break;
+        case "Leales":
+          lealesDiasParada = lealesDiasParada + p.horas_paradas;
+          break;
+        case "Marapa":
+          marapaDiasParada = marapaDiasParada + p.horas_paradas;
+          break;
+        case "Ñuñorco":
+          nunorcoDiasParada = nunorcoDiasParada + p.horas_paradas;
+          break;
+        case "Santa Bárbara":
+          barbaraDiasParada = barbaraDiasParada + p.horas_paradas;
+          break;
+        case "Santa Rosa":
+          rosaDiasParada = rosaDiasParada + p.horas_paradas;
+          break;
+        default:
+          console.log(p.nombre_ingenio);
+          console.log("1");
+          break;
+      }
+    }
+    setAguilDiasParada(aguilDiasParada / 24);
+    setBellavistaDiasParada(bellavistaDiasParada / 24);
+    setConcepDiasParada(concepDiasParada / 24);
+    setCruzaltaDiasParada(cruzaltaDiasParada / 24);
+    setFamaillaDiasParada(famaillaDiasParada / 24);
+    setCoronaDiasParada(coronaDiasParada / 24);
+    setFloridaDiasParada(floridaDiasParada / 24);
+    setProvidDiasParada(providDiasParada / 24);
+    setTrinidadDiasParada(trinidadDiasParada / 24);
+    setLealesDiasParada(lealesDiasParada / 24);
+    setMarapaDiasParada(marapaDiasParada / 24);
+    setNunorcoDiasParada(nunorcoDiasParada / 24);
+    setBarbaraDiasParada(barbaraDiasParada / 24);
+    setRosaDiasParada(rosaDiasParada / 24);
+  };
+  /*********************/
+
+  /** Boton desplegable **/
+
+  const handleMenuClick = (e) => {
+    if (e.key === 1) {
+    }
+    if (e.key === 2) {
+      exportarParteComparativo();
+    }
+  };
+
+  const items = [
+    {
+      label: (
+        <button
+          style={{
+            backgroundColor: "transparent",
+            color: "black",
+            border: "0px solid white",
+          }}
+          onClick={() =>
+            CreateExcelWorkbook(
+              setLoadingDownload,
+              dataEnd,
+              d1,
+              d2,
+              d3,
+              d4,
+              d5,
+              d6,
+              d7,
+              d8,
+              d9,
+              d10,
+              d11,
+              d12,
+              d13,
+              d14,
+              d15,
+              dc1,
+              dc2,
+              dc3,
+              dc4,
+              dc5,
+              dc6,
+              dc7,
+              dc8,
+              dc9,
+              dc10,
+              dc11,
+              dc12,
+              dc13,
+              dc14,
+              dc15,
+              dataImport,
+              dataImportComparativa,
+              dataUser,
+              dataUserRegister,
+              setBanderaDataNull,
+              inicioZafra,
+              inicioZafraComparativa,
+              fechasInicioIngenios,
+              dataDiasZafra,
+              fechasInicioIngeniosComparativa,
+              dataDiasZafraComparativa,
+              setDataImport,
+              setDataImportComparativa,
+              setDataImportDestileria,
+              setDataImportDestileriaComparativa,
+              dataIngenios,
+              finZafra,
+              finZafraComparativa,
+              dataComparativa,
+              fechaInicioDestileria,
+              zafraParteDiario,
+              fechasInicioDestileriaIngenios,
+              fechasInicioDestileriaIngeniosComparativa,
+              /**NORTE **/
+              inicioZafraNorte,
+              inicioZafraNorteComparativa,
+              finZafraNorte,
+              finZafraNorteComparativa,
+              fechasInicioIngeniosNorte,
+              fechasInicioIngeniosNorteComparativa,
+              fechasInicioDestileriaIngeniosNorte,
+              fechasInicioDestileriaIngeniosNorteComparativa,
+              dataDiasZafraNorte,
+              dataDiasZafraNorteComparativa,
+              aguilDiasParada,
+              bellavistaDiasParada,
+              concepDiasParada,
+              cruzaltaDiasParada,
+              famaillaDiasParada,
+              coronaDiasParada,
+              floridaDiasParada,
+              providDiasParada,
+              trinidadDiasParada,
+              lealesDiasParada,
+              marapaDiasParada,
+              nunorcoDiasParada,
+              barbaraDiasParada,
+              rosaDiasParada
+            )
+          }
+        >
+          Zafra comparativa
+        </button>
+      ),
+      key: "1",
+      // icon: <UserOutlined />,
+    },
+    {
+      label: (
+        <button
+          style={{
+            backgroundColor: "transparent",
+            color: "black",
+            border: "0px solid white",
+          }}
+          onClick={() => exportarParteComparativo()}
+        >
+          Zafra actual
+        </button>
+      ),
+      key: "2",
+      // icon: <UserOutlined />,
+    },
+  ];
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
+
   return (
     <>
+      <Row className="d-flex justify-content-start align-items-center px-4 pb-0 pt-4">
+        <Col xs={12} className="mb-2">
+          <Row className="justify-content-start">
+            <Col className="mb-1 encabezados-panel fw-bolder">
+              Datos hasta: {dataEnd ? moment(dataEnd).format("DD-MM-YYYY") : ""}
+            </Col>
+            <Col className="mb-1 encabezados-panel fw-bolder">
+              Días de zafra: {dataDiasZafra}
+            </Col>
+            <Col className="mb-1 encabezados-panel fw-bolder">
+              Días de Destilería: {Math.ceil(diasDestileriaFormat)}
+            </Col>
+            <Col className="mb-1 encabezados-panel fw-bolder">
+              Rto CMB(%):{" "}
+              {panelCMB
+                ? ((panelAzucarEquivalente / panelCMB) * 100).toFixed(2)
+                : ""}
+            </Col>
+            <Col className="mb-1 encabezados-panel fw-bolder">
+              Avance de zafra(%):{" "}
+              {panelCMB ? ((panelCMB / estimacionEEAOC) * 100).toFixed(2) : ""}
+            </Col>
+          </Row>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">
+              Caña molida bruta
+            </p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelCMB?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">Azúcar Total</p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAzucar?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">Azúcar Crudo</p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAzucarCrudo?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">
+              Azúcar Blanco A
+            </p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAzucarBlancoA?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">
+              Azúcar Refinado
+            </p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAzucarRefinado?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">
+              Azúcar Orgánico
+            </p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAzucarOrganico?.toLocaleString("es-ES")} [Tn]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">Alcohol</p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAlcohol?.toLocaleString("es-ES")} [L]
+            </p>
+          </div>
+        </Col>
+      </Row>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
         <Col xs={12} className="text-start mb-5 mt-4">
-          {/* <Button
-            className={`${
-              (dataEnd === null ||
-                dataImport === null ||
-                dataImportComparativa === null ||
-                fechasInicioIngenios === null ||
-                loadingDownload === true ||
-                fechasInicioIngeniosComparativa === null) &&
-              "disabled"
-            }`}
-            onClick={
-              () => prueba()
-            }
-          >
-            {dataEnd === null &&
-            dataImport === null &&
-            dataImportComparativa === null ? (
-              "Elija Fecha"
-            ) : dataEnd !== null &&
-              (dataImport === null || dataImportComparativa === null) ? (
-              <>
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-                Procesando
-              </>
-            ) : loadingDownload ? (
-              <>
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-                Descargando
-              </>
-            ) : (
-              "Descargar"
-            )}
-          </Button> */}
-          <Button
-            className={`${
-              (dataEnd === null ||
-                dataImport === null ||
-                dataImportComparativa === null ||
-                fechasInicioIngenios === null ||
-                loadingDownload === true ||
-                fechasInicioIngeniosComparativa === null) &&
-              'disabled'
-            }`}
-            onClick={() =>
-              CreateExcelWorkbook(
-                setLoadingDownload,
-                dataEnd,
-                d1,
-                d2,
-                d3,
-                d4,
-                d5,
-                d6,
-                d7,
-                d8,
-                d9,
-                d10,
-                d11,
-                d12,
-                d13,
-                d14,
-                d15,
-                dc1,
-                dc2,
-                dc3,
-                dc4,
-                dc5,
-                dc6,
-                dc7,
-                dc8,
-                dc9,
-                dc10,
-                dc11,
-                dc12,
-                dc13,
-                dc14,
-                dc15,
-                dataImport,
-                dataImportComparativa,
-                dataUser,
-                setBanderaDataNull,
-                inicioZafra,
-                inicioZafraComparativa,
-                fechasInicioIngenios,
-                dataDiasZafra,
-                fechasInicioIngeniosComparativa,
-                dataDiasZafraComparativa,
-                setDataImport,
-                setDataImportComparativa,
-                setDataImportDestileria,
-                setDataImportDestileriaComparativa,
-                dataIngenios,
-                finZafra,
-                finZafraComparativa,
-                dataComparativa,
-                fechaInicioDestileria,
-                zafraParteDiario,
-                fechasInicioDestileriaIngenios,
-                fechasInicioDestileriaIngeniosComparativa,
-                /**NORTE **/
-                inicioZafraNorte,
-                inicioZafraNorteComparativa,
-                finZafraNorte,
-                finZafraNorteComparativa,
-                fechasInicioIngeniosNorte,
-                fechasInicioIngeniosNorteComparativa,
-                fechasInicioDestileriaIngeniosNorte,
-                fechasInicioDestileriaIngeniosNorteComparativa,
-                dataDiasZafraNorte,
-                dataDiasZafraNorteComparativa
-              )
-            }
-          >
-            {dataEnd === null &&
-            dataImport === null &&
-            dataImportComparativa === null ? (
-              'Elija Fecha'
-            ) : dataEnd !== null &&
-              (dataImport === null || dataImportComparativa === null) ? (
-              <>
-                <Spinner
-                  as='span'
-                  animation='border'
-                  size='sm'
-                  role='status'
-                  aria-hidden='true'
-                />
-                Procesando
-              </>
-            ) : loadingDownload ? (
-              <>
-                <Spinner
-                  as='span'
-                  animation='border'
-                  size='sm'
-                  role='status'
-                  aria-hidden='true'
-                />
-                Descargando
-              </>
-            ) : (
-              'Descargar'
-            )}
-          </Button>
+          <Dropdown menu={menuProps}>
+            <Button
+              className={`${
+                (dataEnd === null ||
+                  dataImport === null ||
+                  dataImportComparativa === null ||
+                  fechasInicioIngenios === null ||
+                  loadingDownload === true ||
+                  fechasInicioIngeniosComparativa === null) &&
+                "disabled"
+              }`}
+              onClick={(e) => console.log(e)}
+            >
+              <Space>
+                {dataEnd === null &&
+                dataImport === null &&
+                dataImportComparativa === null ? (
+                  "Elija Fecha"
+                ) : dataEnd !== null &&
+                  (dataImport === null || dataImportComparativa === null) ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Procesando
+                  </>
+                ) : loadingDownload ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    Descargando
+                  </>
+                ) : (
+                  "Descargar"
+                )}
+                <DownOutlined />
+              </Space>
+            </Button>
+          </Dropdown>
         </Col>
       </Row>
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">

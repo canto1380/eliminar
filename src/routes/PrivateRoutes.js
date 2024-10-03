@@ -7,6 +7,8 @@ import NewData from '../container/DataComparativa/NewData'
 import PeriodosZafra from '../container/PeriodosZafra'
 import AddEditPeriodoContainer from '../container/PeriodosZafra/AddEditPeriodo'
 import ReportesContainer from '../container/Reportes'
+import DiasParada from '../container/DiasParda'
+import AddEditDiasParada from '../container/DiasParda/AddEditDiasParada'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -23,7 +25,9 @@ const PrivateRoutes = ({ token }) => {
       <Route exact path='/admin/periodos-zafra/nuevo' element={<AddEditPeriodoContainer />} />
       <Route exact path='/admin/periodos-zafra/editar/:id' element={<AddEditPeriodoContainer />} />
       <Route exact path='/admin/reportes' element={<ReportesContainer />} />
-
+      <Route exact path='/admin/dias-parada' element={<DiasParada />} />
+      <Route exact path='/admin/dias-parada/nuevo' element={<AddEditDiasParada />} />
+      <Route exact path='/admin/dias-parada/editar/:id' element={<AddEditDiasParada />} />
 
       <Route path='*' element={<Navigate to='/admin/parte-diario' replace />} />
     </Routes>

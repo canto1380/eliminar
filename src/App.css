@@ -86,6 +86,9 @@ a {
 .ant-table-cell {
   font-size: 12px !important;
 }
+.alignSelf {
+  align-self: end !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

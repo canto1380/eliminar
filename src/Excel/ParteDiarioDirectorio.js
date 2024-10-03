@@ -37,6 +37,7 @@ export const CreateExcelWorkbook = async (
   dataImport,
   dataImportComparativa,
   dataUser,
+  dataUserRegister,
   setBanderaDataNull,
   inicioZafra,
   inicioZafraComparativa,
@@ -66,8 +67,21 @@ export const CreateExcelWorkbook = async (
   fechasInicioDestileriaIngeniosNorte,
   fechasInicioDestileriaIngeniosNorteComparativa,
   dataDiasZafraNorte,
-  dataDiasZafraNorteComparativa
-
+  dataDiasZafraNorteComparativa,
+  aguilDiasParada,
+  bellavistaDiasParada,
+  concepDiasParada,
+  cruzaltaDiasParada,
+  famaillaDiasParada,
+  coronaDiasParada,
+  floridaDiasParada,
+  providDiasParada,
+  trinidadDiasParada,
+  lealesDiasParada,
+  marapaDiasParada,
+  nunorcoDiasParada,
+  barbaraDiasParada,
+  rosaDiasParada 
 ) => {
   setLoadingDownload(true);
   const parteDiarioData = dataImport ? dataImport : undefined;
@@ -83,7 +97,11 @@ export const CreateExcelWorkbook = async (
     const workbook = new ExcelJS.Workbook();
     /** Fecha Hasta parte Dairio **/
     const date = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const date1 = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = zafraParteDiario;
+    const dateDatosProductivos = date1.setDate(date1.getDate() - 1);
+    let dateDatosProductivosFormato = new Date(dateDatosProductivos)
+    dateDatosProductivosFormato = moment(dateDatosProductivosFormato).format("DD-MM-YYYY")
     const dateFormat = moment(date).format("DD-MM-YYYY");
 
     /** Fecha hasta comparativa **/
@@ -95,7 +113,7 @@ export const CreateExcelWorkbook = async (
       dateComparativa.setFullYear(anioData);
     }
     const dateComparativaFormat = moment(dateComparativa).format("DD-MM-YYYY");
-    workbook.creator = `${dataUser?.name} ${dataUser?.surname}`;
+    workbook.creator = `${dataUserRegister?.nombre} ${dataUserRegister?.apellido}`;
     workbook.created = date;
     workbook.modified = date;
     workbook.views = [
@@ -116,11 +134,8 @@ export const CreateExcelWorkbook = async (
         scale: 75,
         fitToPage: false,
         fitToWidth: 1,
-        // margins: {
-        //   left: 0.7, right: 0.7, top: 0.75, bottom: 0.75
-        // }
+        
       },
-      // properties: { tabColor: { argb: '0000B2' } },
     });
     page1.headerFooter.differentFirst = true;
 
@@ -219,11 +234,16 @@ export const CreateExcelWorkbook = async (
       page1.getCell(`X${i}`).font = { size: 15 };
     }
 
+    page1.getCell("F34").font = { bold: false, name: "Barlow", size: 18 };
+    page1.getCell("F35").font = { bold: false, name: "Barlow", size: 18 };
+    page1.getCell("F36").font = { bold: true, name: "Barlow", size: 20 };
+    page1.getCell("F37").font = { bold: false, name: "Barlow", size: 18 };
+
     /***** RELLENO *****/
     const bgGris = {
       type: "pattern",
       pattern: "solid",
-      fgColor: { argb: "BFBFBF" },
+      fgColor: { argb: "D9D9D9" },
     };
     const bgNaranja = {
       type: "pattern",
@@ -234,6 +254,11 @@ export const CreateExcelWorkbook = async (
       type: "pattern",
       pattern: "solid",
       fgColor: { argb: "B8CCE4" },
+    };
+    const bgCeleste = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "DAEEF3" },
     };
 
     for (let i = 1; i <= 15; i++) {
@@ -252,7 +277,6 @@ export const CreateExcelWorkbook = async (
       page1.getCell(27, i).fill = bgAzul;
     }
 
-
     /***** FILAS *****/
     page1.getRow(6).alignment = alignCenter;
     page1.getRow(7).alignment = alignCenter;
@@ -262,10 +286,10 @@ export const CreateExcelWorkbook = async (
       page1.getRow(i).font = functionFont("Barlow", true, 15);
     }
     page1.getRow(26).font = functionFont("Barlow", true, 19);
-    page1.getRow(26).alignment = alignCenter
+    page1.getRow(26).alignment = alignCenter;
     page1.getRow(27).font = functionFont("Barlow", true, 18);
     page1.getRow(28).font = functionFont("Barlow", true, 18);
-    page1.getRow(28).alignment = alignCenter
+    page1.getRow(28).alignment = alignCenter;
     page1.getRow(31).font = functionFont("Barlow", true, 18);
     page1.getRow(31).alignment = alignCenter;
     page1.getRow(32).alignment = alignCenter;
@@ -273,13 +297,12 @@ export const CreateExcelWorkbook = async (
 
     for (let i = 10; i <= 25; i++) {
       for (let j = 6; j <= 28; j++) {
-        page1.getCell(i, j).font = functionFont("Barlow", false, 16)
-        page1.getCell(i, j).alignment = alignCenter
+        page1.getCell(i, j).font = functionFont("Barlow", false, 16);
+        page1.getCell(i, j).alignment = alignCenter;
       }
     }
     page1.getRow(13).font = functionFont("Barlow", true, 16);
     page1.getRow(16).font = functionFont("Barlow", true, 16);
-
 
     /*** MERGE FILAS 28-29, 33 ***/
     page1.mergeCells("A29:AB29");
@@ -656,7 +679,7 @@ export const CreateExcelWorkbook = async (
         "D9D9D9",
         "thin",
         "D9D9D9"
-      )
+      );
     }
 
     for (let i = 6; i <= 28; i++) {
@@ -668,8 +691,8 @@ export const CreateExcelWorkbook = async (
         "medium",
         "000000",
         "medium",
-        "000000",
-      )
+        "000000"
+      );
     }
 
     for (let i = 5; i <= 37; i++) {
@@ -681,19 +704,10 @@ export const CreateExcelWorkbook = async (
         "thin",
         "ffffff",
         "thin",
-        "ffffff"
-      )
+        "D9D9D9"
+      );
     }
-    page2.getCell("H3").border = borders(
-      "medium",
-      "000000",
-      "thick",
-      "00326C",
-      "medium",
-      "000000",
-      "thin",
-      "000000",
-    )
+
     /*******/
 
     /***** FORMATO DE NUMEROS *****/
@@ -742,7 +756,7 @@ export const CreateExcelWorkbook = async (
       page1.getCell(31, i).numFmt = "#,##0";
     }
     for (let i = 9; i <= 10; i++) {
-      page1.getCell(31, i).numFmt = "0.##0";
+      page1.getCell(31, i).numFmt = "0.#0";
     }
     /* FILA 32 */
     for (let i = 6; i <= 15; i++) {
@@ -765,15 +779,16 @@ export const CreateExcelWorkbook = async (
     page1.getCell("F4").value = "Icono IPAAT";
 
     page1.mergeCells("G1:W2");
-    page1.getCell("W2").value = `COMPARATIVO ZAFRA ${anioData}/${anioDataComparativo - 1
-      }`;
+    page1.getCell("W2").value = `COMPARATIVO ZAFRA ${anioData}/${
+      anioDataComparativo - 1
+    }`;
     page1.getCell("W2").alignment = { horizontal: "center" };
     page1.getCell("W2").font = { name: "Barlow", bold: true, size: 24 };
 
     page1.mergeCells("G3:W4");
     page1.getCell(
       "W4"
-    ).value = `DATOS PRODUCTIVOS SEGÚN PARTE DIARIO ${Math.ceil(
+    ).value = `INFORME PRODUCTIVO AL ${dateFormat} - PARTE DIARIO ${Math.ceil(
       dataDiasZafra
     )}`;
     page1.getCell("W4").font = { name: "Barlow", bold: true, size: 20 };
@@ -786,7 +801,8 @@ export const CreateExcelWorkbook = async (
     page1.getCell("X1").value = "Icono Tucuman";
 
     page1.mergeCells("A5:AB5");
-    page1.getCell("E5").value = "Fecha de Reunión de Directorio";
+    page1.getCell("E5").value = `Datos Productivos Hasta: ${dateDatosProductivosFormato}`;
+    page1.getCell("E5").font = { name: "Barlow", bold: true, size: 20 };
     page1.getCell("E5").alignment = {
       horizontal: "center",
       vertical: "center",
@@ -815,7 +831,9 @@ export const CreateExcelWorkbook = async (
     page1.getCell("D9").font = { name: "Barlow", bold: true, size: 15 };
 
     page1.mergeCells("E7:E9");
-    page1.getCell("E9").value = `fin de zafra ${anioData}`;
+    // page1.getCell("E9").value = `fin de zafra ${anioData}`;
+    page1.getCell("E9").value = `Días efectivos de molienda`;
+
     page1.getCell("E9").font = { name: "Barlow", bold: true, size: 15 };
 
     page1.mergeCells("F7:F9");
@@ -892,7 +910,7 @@ export const CreateExcelWorkbook = async (
     page1.getCell("A14").font = { name: "Barlow", bold: false, size: 16 };
     page1.getCell("A15").value = "Marapa";
     page1.getCell("A15").font = { name: "Barlow", bold: false, size: 16 };
-    page1.getCell("A16").value = "Gpo. CASS(*)";
+    page1.getCell("A16").value = "Gpo. CASS";
     page1.getCell("A17").value = "Bella Vista";
     page1.getCell("A17").font = { name: "Barlow", bold: false, size: 16 };
     page1.getCell("A18").value = "Famaillá";
@@ -984,129 +1002,193 @@ export const CreateExcelWorkbook = async (
       : null;
     page1.getCell("C25").font = { name: "Barlow", bold: false, size: 16 };
 
-    // page1.getCell('C26').value = fechasInicioIngenios.Cell26
-    //   ? moment(fechasInicioIngenios.Cell26).format('DD/MM/YYYY')
-    //   : null
-    // page1.getCell('C26').font = { name: 'Barlow', bold: true, size: 13 }
-
     /** COLUMNA FIN DE ZAFRA 2023 **/
-    page1.getCell("E10").value =
+    page1.getCell("AZ10").value =
       fechasInicioIngenios?.Cell10 === undefined
         ? null
         : fechasInicioIngenios?.Cell10 && fechasInicioIngenios?.CellE10 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY");
+        ? null
+        : moment(fechasInicioIngenios?.CellE10).format("DD/MM/YYYY");
 
-    page1.getCell("E10").font = { name: "Barlow", bold: false, size: 16 };
+    page1.getCell("AZ10").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E11").value =
+    page1.getCell("AZ11").value =
       fechasInicioIngenios?.Cell11 === undefined
         ? null
         : fechasInicioIngenios?.Cell11 && fechasInicioIngenios?.CellE11 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE11).format("DD/MM/YYYY");
-    page1.getCell("E11").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE11).format("DD/MM/YYYY");
+    page1.getCell("AZ11").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E12").value =
+    page1.getCell("AZ12").value =
       fechasInicioIngenios?.Cell12 === undefined
         ? null
         : fechasInicioIngenios?.Cell12 && fechasInicioIngenios?.CellE12 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE12).format("DD/MM/YYYY");
-    page1.getCell("E12").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE12).format("DD/MM/YYYY");
+    page1.getCell("AZ12").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E14").value =
+    page1.getCell("AZ14").value =
       fechasInicioIngenios?.Cell14 === undefined
         ? null
         : fechasInicioIngenios?.Cell14 && fechasInicioIngenios?.CellE14 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE14).format("DD/MM/YYYY");
-    page1.getCell("E14").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE14).format("DD/MM/YYYY");
+    page1.getCell("AZ14").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E15").value =
+    page1.getCell("AZ15").value =
       fechasInicioIngenios?.Cell15 === undefined
         ? null
         : fechasInicioIngenios?.Cell15 && fechasInicioIngenios?.CellE15 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE15).format("DD/MM/YYYY");
-    page1.getCell("E15").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE15).format("DD/MM/YYYY");
+    page1.getCell("AZ15").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E17").value =
+    page1.getCell("AZ17").value =
       fechasInicioIngenios?.Cell17 === undefined
         ? null
         : fechasInicioIngenios?.Cell17 && fechasInicioIngenios?.CellE17 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE17).format("DD/MM/YYYY");
-    page1.getCell("E17").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE17).format("DD/MM/YYYY");
+    page1.getCell("AZ17").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E18").value =
+    page1.getCell("AZ18").value =
       fechasInicioIngenios?.Cell18 === undefined
         ? null
         : fechasInicioIngenios?.Cell18 && fechasInicioIngenios?.CellE18 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE18).format("DD/MM/YYYY");
-    page1.getCell("E18").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE18).format("DD/MM/YYYY");
+    page1.getCell("AZ18").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E19").value =
+    page1.getCell("AZ19").value =
       fechasInicioIngenios?.Cell19 === undefined
         ? null
         : fechasInicioIngenios?.Cell19 && fechasInicioIngenios?.CellE19 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE19).format("DD/MM/YYYY");
-    page1.getCell("E19").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE19).format("DD/MM/YYYY");
+    page1.getCell("AZ19").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E20").value =
+    page1.getCell("AZ20").value =
       fechasInicioIngenios?.Cell20 === undefined
         ? null
         : fechasInicioIngenios?.Cell20 && fechasInicioIngenios?.CellE20 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE20).format("DD/MM/YYYY");
-    page1.getCell("E20").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE20).format("DD/MM/YYYY");
+    page1.getCell("AZ20").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E21").value =
+    page1.getCell("AZ21").value =
       fechasInicioIngenios?.Cell21 === undefined
         ? null
         : fechasInicioIngenios?.Cell21 && fechasInicioIngenios?.CellE21 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE21).format("DD/MM/YYYY");
-    page1.getCell("E21").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE21).format("DD/MM/YYYY");
+    page1.getCell("AZ21").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E22").value =
+    page1.getCell("AZ22").value =
       fechasInicioIngenios?.Cell22 === undefined
         ? null
         : fechasInicioIngenios?.Cell22 && fechasInicioIngenios?.CellE22 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE22).format("DD/MM/YYYY");
-    page1.getCell("E22").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE22).format("DD/MM/YYYY");
+    page1.getCell("AZ22").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E23").value =
+    page1.getCell("AZ23").value =
       fechasInicioIngenios?.Cell23 === undefined
         ? null
         : fechasInicioIngenios?.Cell23 && fechasInicioIngenios?.CellE23 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE23).format("DD/MM/YYYY");
-    page1.getCell("E23").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE23).format("DD/MM/YYYY");
+    page1.getCell("AZ23").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E24").value =
+    page1.getCell("AZ24").value =
       fechasInicioIngenios?.Cell24 === undefined
         ? null
         : fechasInicioIngenios?.Cell24 && fechasInicioIngenios?.CellE24 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE24).format("DD/MM/YYYY");
-    page1.getCell("E24").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE24).format("DD/MM/YYYY");
+    page1.getCell("AZ24").font = { name: "Barlow", bold: false, size: 16 };
 
-    page1.getCell("E25").value =
+    page1.getCell("AZ25").value =
       fechasInicioIngenios?.Cell25 === undefined
         ? null
         : fechasInicioIngenios?.Cell25 && fechasInicioIngenios?.CellE25 === null
-          ? null
-          : moment(fechasInicioIngenios?.CellE25).format("DD/MM/YYYY");
-    page1.getCell("E25").font = { name: "Barlow", bold: false, size: 16 };
+        ? null
+        : moment(fechasInicioIngenios?.CellE25).format("DD/MM/YYYY");
+    page1.getCell("AZ25").font = { name: "Barlow", bold: false, size: 16 };
+
+    page1.getCell("AZ26").value = dateFormat;
+
+    /** COLUMNA DIAS EFECTIVOS DE MOLIENDA **/
+    for (let i = 10; i <= 25; i++) {
+      page1.getCell(i, 5).font = { name: "Barlow", bold: false, size: 16 };
+      page1.getCell(i, 5).alignment = alignCenter;
+    }
+
+    page1.getCell("E10").value = {
+      formula: `=D10-${aguilDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E11").value = {
+      formula: `=D11-${cruzaltaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E12").value = {
+      formula: `=D12-${floridaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E14").value = {
+      formula: `=D14-${concepDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E15").value = {
+      formula: `=D15-${marapaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E17").value = {
+      formula: `=D17-${bellavistaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E18").value = {
+      formula: `=D18-${famaillaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E19").value = {
+      formula: `=D19-${coronaDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E20").value = {
+      formula: `=D20-${providDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E21").value = {
+      formula: `=D21-${trinidadDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E22").value = {
+      formula: `=D22-${lealesDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E23").value = {
+      formula: `=D23-${nunorcoDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E24").value = {
+      formula: `=D24-${barbaraDiasParada}`,
+      result: 0,
+    };
+    page1.getCell("E25").value = {
+      formula: `=D25-${rosaDiasParada}`,
+      result: 0,
+    };
 
     /** COLUMNA DIAS DE AVANCE 2023**/
+    for (let i = 10; i <= 25; i++) {
+      page1.getCell(i, 4).font = { name: "Barlow", bold: false, size: 16 };
+      page1.getCell(i, 4).alignment = alignCenter;
+    }
     if (fechasInicioIngenios.Cell10) {
       page1.getCell("D10").value = {
-        formula: `=if(E10="",(E26-C10)+1,(E10-C10)+1)`,
+        formula: `=if(AZ10="",(AZ26-C10)+1,(AZ10-C10)+1)`,
         result: 7,
       };
     }
@@ -1114,7 +1196,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell11) {
       page1.getCell("D11").value = {
-        formula: '=if(E11="",(E26-C11)+1,(E11-C11)+1)',
+        formula: '=if(AZ11="",(AZ26-C11)+1,(AZ11-C11)+1)',
         result: 7,
       };
     }
@@ -1122,7 +1204,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell12) {
       page1.getCell("D12").value = {
-        formula: '=if(E12="",(E26-C12)+1,(E12-C12)+1)',
+        formula: '=if(AZ12="",(AZ26-C12)+1,(AZ12-C12)+1)',
         result: 7,
       };
     }
@@ -1132,7 +1214,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell14) {
       page1.getCell("D14").value = {
-        formula: '=if(E14="",(E26-C14)+1,(E14-C14)+1)',
+        formula: '=if(AZ14="",(AZ26-C14)+1,(AZ14-C14)+1)',
         result: 7,
       };
     }
@@ -1140,7 +1222,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell15) {
       page1.getCell("D15").value = {
-        formula: '=if(E15="",(E26-C15)+1,(E15-C15)+1)',
+        formula: '=if(AZ15="",(AZ26-C15)+1,(AZ15-C15)+1)',
         result: 7,
       };
     }
@@ -1150,7 +1232,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell17) {
       page1.getCell("D17").value = {
-        formula: '=if(E17="",(E26-C17)+1,(E17-C17)+1)',
+        formula: '=if(AZ17="",(AZ26-C17)+1,(AZ17-C17)+1)',
         result: 7,
       };
     }
@@ -1158,7 +1240,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell18) {
       page1.getCell("D18").value = {
-        formula: '=if(E18="",(E26-C18)+1,(E18-C18)+1)',
+        formula: '=if(AZ18="",(AZ26-C18)+1,(AZ18-C18)+1)',
         result: 7,
       };
     }
@@ -1166,7 +1248,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell19) {
       page1.getCell("D19").value = {
-        formula: '=if(E19="",(E26-C19)+1,(E19-C19)+1)',
+        formula: '=if(AZ19="",(AZ26-C19)+1,(AZ19-C19)+1)',
         result: 7,
       };
     }
@@ -1174,7 +1256,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell20) {
       page1.getCell("D20").value = {
-        formula: '=if(E20="",(E26-C20)+1,(E20-C20)+1)',
+        formula: '=if(AZ20="",(AZ26-C20)+1,(AZ20-C20)+1)',
         result: 7,
       };
     }
@@ -1182,7 +1264,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell21) {
       page1.getCell("D21").value = {
-        formula: '=if(E21="",(E26-C21)+1,(E21-C21)+1)',
+        formula: '=if(AZ21="",(AZ26-C21)+1,(AZ21-C21)+1)',
         result: 7,
       };
     }
@@ -1190,7 +1272,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell22) {
       page1.getCell("D22").value = {
-        formula: '=if(E22="",(E26-C22)+1,(E22-C22)+1)',
+        formula: '=if(AZ22="",(AZ26-C22)+1,(AZ22-C22)+1)',
         result: 7,
       };
     }
@@ -1198,7 +1280,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell23) {
       page1.getCell("D23").value = {
-        formula: '=if(E23="",(E26-C23)+1,(E23-C23)+1)',
+        formula: '=if(AZ23="",(AZ26-C23)+1,(AZ23-C23)+1)',
         result: 7,
       };
     }
@@ -1206,7 +1288,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell24) {
       page1.getCell("D24").value = {
-        formula: '=if(E24="",(E26-C24)+1,(E24-C24)+1)',
+        formula: '=if(AZ24="",(AZ26-C24)+1,(AZ24-C24)+1)',
         result: 7,
       };
     }
@@ -1214,7 +1296,7 @@ export const CreateExcelWorkbook = async (
 
     if (fechasInicioIngenios.Cell25) {
       page1.getCell("D25").value = {
-        formula: '=if(E25="",(E26-C25)+1,(E25-C25)+1)',
+        formula: '=if(AZ25="",(AZ26-C25)+1,(AZ25-C25)+1)',
         result: 7,
       };
     }
@@ -1432,7 +1514,7 @@ export const CreateExcelWorkbook = async (
 
     /*****************/
 
-    /**TOTAL AZUCAR **/
+    /*** TOTAL AZUCAR ***/
     for (let i = 10; i <= 12; i++) {
       page1.getCell(i, 13).value = { formula: `SUM(K${i}:L${i})`, result: 7 };
     }
@@ -1492,7 +1574,7 @@ export const CreateExcelWorkbook = async (
     page1.getCell("AB16").value = { formula: "=SUM(AB14:AB15)", result: 7 };
 
     /** FILA TOTALES  2023**/
-    page1.mergeCells("A26:D26");
+    page1.mergeCells("A26:E26");
     page1.getCell("A26").value = "TOTALES";
     page1.getCell("F26").value = {
       formula: "=SUM(F10:F12,F14:F15,F17:F25)",
@@ -1506,8 +1588,8 @@ export const CreateExcelWorkbook = async (
       formula: "=SUM(H10:H12,H14:H15,H17:H25)",
       result: 7,
     };
-    page1.getCell("I26").value = {      /***REVEEEER ***/
-      formula: "if(F27=0, 0,H27/F27*100)",
+    page1.getCell("I26").value = {
+      /***REVEEEER ***/ formula: "if(F27=0, 0,H27/F27*100)",
       result: 7,
     };
     page1.getCell("J26").value = {
@@ -1519,7 +1601,7 @@ export const CreateExcelWorkbook = async (
       result: 7,
     };
     page1.getCell("L26").value = {
-      formula: "=L24+L22+L21+L20+L19+L18+L17+L15+L14+L12+L11+L10+L25",
+      formula: "=SUM(L10:L12,L14:L15,L17:L25)",
       result: 7,
     };
     page1.getCell("M26").value = {
@@ -1575,12 +1657,11 @@ export const CreateExcelWorkbook = async (
       result: 7,
     };
     page1.getCell("AB26").value = {
-      formula: "=AB24+AB25+AB22+AB21+AB19+AB18+AB17+AB15+AB14+AB12+AB25",
+      formula: "=AB25+AB24+AB23+AB22+AB21+AB20+AB19+AB18+AB17+AB16+AB13",
       result: 7,
     };
     /***********/
 
-    page1.getCell('E26').value = dateFormat
     /***** FILA 27 *****/
     page1.mergeCells("A27:O27");
     page1.getCell(
@@ -1589,8 +1670,9 @@ export const CreateExcelWorkbook = async (
     page1.getCell("A27").font = { name: "Barlow", bold: true, size: 15 };
     page1.getCell("A27").alignment = alignCenter;
     page1.mergeCells("P27:AB27");
-    page1.getCell("P27").value = `Valores zafra ${anioDataComparativo - 1
-      } hasta el ${dateComparativaFormat}`;
+    page1.getCell("P27").value = `Valores zafra ${
+      anioDataComparativo - 1
+    } hasta el ${dateComparativaFormat}`;
     page1.getCell("P27").font = { name: "Barlow", bold: true, size: 15 };
     page1.getCell("P27").alignment = alignCenter;
 
@@ -1611,11 +1693,12 @@ export const CreateExcelWorkbook = async (
 
     /** COMPARATIVOS **/
     page1.mergeCells("A30:O30");
-    page1.getCell("A30").value = `COMPARATIVO ZAFRA ${anioData}/${zafraParteDiario - 1
-      } - VARIACIÓN %  HASTA EL ${dateFormat}`;
+    page1.getCell("A30").value = `COMPARATIVO ZAFRA ${anioData}/${
+      zafraParteDiario - 1
+    } - VARIACIÓN %  HASTA EL ${dateDatosProductivosFormato}`;
     page1.getCell("A30").alignment = alignCenter;
     page1.getCell("A30").font = functionFont("Barlow", true, 18);
-    page1.getCell("A30").fill = bgGris
+    page1.getCell("A30").fill = bgGris;
 
     page1.mergeCells("A31:E31");
     page1.getCell("A31").value = "DIFERENCIA";
@@ -1677,20 +1760,22 @@ export const CreateExcelWorkbook = async (
     };
 
     page1.mergeCells("P30:V31");
-    page1.getCell("P30").value = `Inicio de zafra ${anioData}: ${inicioZafra !== null ? moment(inicioZafra).format("DD/MM/YYYY") : ""
-      }
+    page1.getCell("P30").value = `Inicio de zafra ${anioData}: ${
+      inicioZafra !== null ? moment(inicioZafra).format("DD/MM/YYYY") : ""
+    }
 Inicio de zafra ${zafraParteDiario - 1}: ${moment(
-        inicioZafraComparativa
-      ).format("DD/MM/YYYY")}`;
+      inicioZafraComparativa
+    ).format("DD/MM/YYYY")}`;
     page1.getCell("P30").alignment = alignStart;
     page1.getCell("P30").font = { name: "Barlow", bold: true, size: 16 };
 
     page1.mergeCells("W30:AB31");
-    page1.getCell("W30").value = `Fin de zafra ${anioData}: ${finZafra !== "" ? moment(finZafra).format("DD/MM/YYYY") : ""
-      }
+    page1.getCell("W30").value = `Fin de zafra ${anioData}: ${
+      finZafra !== "" ? moment(finZafra).format("DD/MM/YYYY") : ""
+    }
 Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
-        "DD/MM/YYYY"
-      )}`;
+      "DD/MM/YYYY"
+    )}`;
     page1.getCell("W30").alignment = alignStart;
     page1.getCell("W30").font = { name: "Barlow", bold: true, size: 16 };
 
@@ -1754,10 +1839,6 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
         page1.getCell(i, 23).font = functionFont("Barlow", false, 16);
       }
     }
-    // page1.getCell("H34").font = functionFont("Barlow", false, 16);
-    // page1.getCell("H35").font = functionFont("Barlow", false, 16);
-    // page1.getCell("H36").font = functionFont("Barlow", true, 16);
-    // page1.getCell("H37").font = functionFont("Barlow", false, 16);
 
     page1.mergeCells("I34:L37");
     page1.getCell("I34").value = `ZAFRA ${anioData}`;
@@ -1774,23 +1855,23 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       parseInt(d1["R44"]) +
       parseInt(
         d6["R45"] +
-        parseInt(d4["R46"]) +
-        parseInt(d2["R47"]) +
-        parseInt(d7["R48"]) +
-        parseInt(d8["R49"]) +
-        parseInt(d3["R50"]) +
-        parseInt(d9["R51"]) +
-        parseInt(d10["R52"]) +
-        parseInt(d11["R53"]) +
-        parseInt(d5["R54"]) +
-        parseInt(d12["R55"]) +
-        parseInt(d13["R56"]) +
-        parseInt(d14["R57"])
+          parseInt(d4["R46"]) +
+          parseInt(d2["R47"]) +
+          parseInt(d7["R48"]) +
+          parseInt(d8["R49"]) +
+          parseInt(d3["R50"]) +
+          parseInt(d9["R51"]) +
+          parseInt(d10["R52"]) +
+          parseInt(d11["R53"]) +
+          parseInt(d5["R54"]) +
+          parseInt(d12["R55"]) +
+          parseInt(d13["R56"]) +
+          parseInt(d14["R57"])
       );
     page1.getCell("O34").value = alcoholTotal / 1000;
     page1.getCell("O34").font = functionFont("Barlow", true, 24);
     page1.getCell("O34").fill = bgNaranja;
-    page1.getCell("O34").alignment = alignCenter
+    page1.getCell("O34").alignment = alignCenter;
 
     for (let i = 34; i <= 37; i++) {
       page1.mergeCells(`P${i}:U${i}`);
@@ -1802,7 +1883,8 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     ).value = `Caña molida bruta hasta el ${dateComparativaFormat} - Partes diarios`;
     page1.getCell(
       "P36"
-    ).value = `Grado de avance respecto a lo declarado al IPAAT - Zafra ${zafraParteDiario - 1
+    ).value = `Grado de avance respecto a lo declarado al IPAAT - Zafra ${
+      zafraParteDiario - 1
     }`;
     page1.getCell("P37").value = "Diferencia";
     page1.getCell("V34").value = parseInt(CMBporDDJJ);
@@ -1814,10 +1896,11 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.getCell("X36").value = "%";
     page1.getCell("X37").value = "%";
 
-    page1.getCell("P34").font = functionFont("Barlow", false, 15);
-    page1.getCell("P35").font = functionFont("Barlow", false, 15);
-    page1.getCell("P36").font = functionFont("Barlow", false, 15);
-    page1.getCell("P37").font = functionFont("Barlow", false, 15);
+    for (let i = 34; i <= 37; i++) {
+      page1.getCell(i, 16).font = functionFont("Barlow", false, 16);
+      page1.getCell(i, 22).font = functionFont("Barlow", false, 16);
+      page1.getCell(i, 24).font = functionFont("Barlow", false, 16);
+    }
 
     page1.mergeCells("Y34:AB37");
     page1.getCell("Y34").value = `ZAFRA ${anioDataComparativo - 1}`;
@@ -2111,16 +2194,6 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.getCell("Y25").value = parseInt(dc14["X25"]);
     page1.getCell("AA25").value = parseInt(dc14["Z25"]);
     page1.getCell("AB25").value = parseInt(dc14["AA25"] / 1000);
-
-    /** San Juan **/
-    // page1.getCell('S26').value = parseInt(dc15['R26'])
-    // page1.getCell('T26').value = parseInt(dc15['S26'])
-    // page1.getCell('U26').value = parseFloat(dc15['T26'])
-    // page1.getCell('X26').value = parseInt(dc15['W26'])
-    // page1.getCell('Y26').value = parseInt(dc15['X26'])
-    // page1.getCell('AA26').value = parseInt(dc15['Z26'])
-    // page1.getCell('AB26').value = parseInt(dc15['AA26'])
-
     /*******************/
 
     /**COLUMNA RTO CMB */
@@ -2179,37 +2252,31 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       result: 14,
     };
 
-    /*** BORDES ADICIONALES ***/
-    // page1.getColumn(28).border = {
-    //   right: { style: 'medium', color: { argb: '000000' } }
-    // }
-    // page1.getColumn(15).border={}
-
     /***** OCULTAR COLUMNAS *****/
-    page1.getColumn(5).hidden = true;
+    page1.getColumn(52).hidden = true;
     page1.getColumn(17).hidden = true;
     page1.getColumn(18).hidden = true;
 
-    page1.getCell("P32").alignment = alignStart
-    page1.getCell("A34").alignment = alignStart
-    page1.getCell("A35").alignment = alignStart
-    page1.getCell("A36").alignment = alignStart
-    page1.getCell("M34").alignment = alignCenter
-    page1.getCell("P34").alignment = alignStart
-    page1.getCell("P35").alignment = alignStart
-    page1.getCell("P36").alignment = alignStart
-      ;
+    page1.getCell("P32").alignment = alignStart;
+    page1.getCell("A34").alignment = alignStart;
+    page1.getCell("A35").alignment = alignStart;
+    page1.getCell("A36").alignment = alignStart;
+    page1.getCell("M34").alignment = alignCenter;
+    page1.getCell("P34").alignment = alignStart;
+    page1.getCell("P35").alignment = alignStart;
+    page1.getCell("P36").alignment = alignStart;
+
     /*** CONFIGURACION PAGINA ***/
     /* Fijar fila 1*/
     // page1.views = [
     //   { state: 'frozen', xSplit: 0, ySplit: 2, topLeftCell: 'A3', activeCell: 'A1' }
     // ];
-    page1.pageSetup.printArea = "A1:AB55";
+    page1.pageSetup.printArea = "A1:AB59";
     page1.pageSetup.scale = 100;
     page1.pageSetup.margins = {
-      left: 0.1,
+      left: 0.2,
       right: 0.1,
-      top: 0.75,
+      top: 0.2,
       bottom: 0.2,
       header: 0.2,
       footer: 0.1,
@@ -2256,11 +2323,11 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       page1.getRow(i).font = functionFont("Barlow", true, 15);
     }
     page1.getRow(49).font = functionFont("Barlow", true, 19);
-    page1.getRow(49).alignment = alignCenter
+    page1.getRow(49).alignment = alignCenter;
     page1.getRow(50).font = functionFont("Barlow", true, 18);
-    page1.getRow(50).alignment = alignCenter
+    page1.getRow(50).alignment = alignCenter;
     page1.getRow(51).font = functionFont("Barlow", true, 18);
-    page1.getRow(51).alignment = alignCenter
+    page1.getRow(51).alignment = alignCenter;
 
     page1.getRow(54).font = functionFont("Barlow", true, 18);
     page1.getRow(54).alignment = alignCenter;
@@ -2269,11 +2336,10 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
 
     for (let i = 44; i <= 48; i++) {
       for (let j = 3; j <= 28; j++) {
-        page1.getCell(i, j).font = functionFont("Barlow", false, 16)
-        page1.getCell(i, j).alignment = alignCenter
+        page1.getCell(i, j).font = functionFont("Barlow", false, 16);
+        page1.getCell(i, j).alignment = alignCenter;
       }
     }
-
 
     /** MERGE FILAS **/
     page1.mergeCells("A52:AB52");
@@ -2290,7 +2356,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
           "000000",
           "medium",
           "000000"
-        )
+        );
       }
     }
     for (let j = 45; j <= 47; j++) {
@@ -2314,7 +2380,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
           "000000",
           "medium",
           "000000"
-        )
+        );
       }
     }
     for (let i = 1; i <= 28; i++) {
@@ -2399,8 +2465,8 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
         "medium",
         "000000",
         "medium",
-        "000000",
-      )
+        "000000"
+      );
     }
     for (let i = 45; i <= 49; i++) {
       page1.getCell(i, 16).border = borders(
@@ -2411,8 +2477,8 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
         "thin",
         "000000",
         "medium",
-        "000000",
-      )
+        "000000"
+      );
     }
     for (let i = 50; i <= 53; i++) {
       page1.getCell(i, 16).border = borders(
@@ -2423,8 +2489,8 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
         "medium",
         "000000",
         "medium",
-        "000000",
-      )
+        "000000"
+      );
     }
 
     for (let i = 39; i <= 55; i++) {
@@ -2437,7 +2503,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
         "D9D9D9",
         "thin",
         "D9D9D9"
-      )
+      );
     }
     page1.getCell("P44").border = borders(
       "medium",
@@ -2448,7 +2514,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       "000000",
       "medium",
       "000000"
-    )
+    );
     page1.getCell("P49").border = borders(
       "medium",
       "000000",
@@ -2458,7 +2524,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       "000000",
       "medium",
       "000000"
-    )
+    );
 
     page1.getCell("P53").border = borders(
       "medium",
@@ -2469,7 +2535,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       "00326C",
       "thin",
       "D9D9D9"
-    )
+    );
     page1.getCell("W53").border = borders(
       "medium",
       "000000",
@@ -2478,31 +2544,34 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       "thick",
       "00326C",
       "thick",
-      "00326C",
-    )
-
+      "00326C"
+    );
 
     /** FORMATO NUMEROS **/
+    /*Col 5 - Dias efectivos de zafra */
+    for (let i = 10; i <= 25; i++) {
+        page1.getCell(i, 5).numFmt = "#,##0";
+    }
     /* Col 6 a 8*/
-    for (let i = 44; i <= 48; i++) {
+    for (let i = 44; i <= 49; i++) {
       for (let j = 6; j <= 8; j++) {
         page1.getCell(i, j).numFmt = "#,##0";
       }
     }
     /* Col 19 a 21*/
-    for (let i = 44; i <= 48; i++) {
+    for (let i = 44; i <= 49; i++) {
       for (let j = 19; j <= 21; j++) {
         page1.getCell(i, j).numFmt = "#,##0";
       }
     }
     /* Col 11 a 15*/
-    for (let i = 44; i <= 48; i++) {
+    for (let i = 44; i <= 49; i++) {
       for (let j = 11; j <= 15; j++) {
         page1.getCell(i, j).numFmt = "#,##0";
       }
     }
     /* Col 24 a 28*/
-    for (let i = 44; i <= 48; i++) {
+    for (let i = 44; i <= 49; i++) {
       for (let j = 24; j <= 28; j++) {
         page1.getCell(i, j).numFmt = "#,##0";
       }
@@ -2527,17 +2596,20 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       page1.getCell(54, i).numFmt = "#,##0";
     }
     for (let i = 9; i <= 10; i++) {
-      page1.getCell(54, i).numFmt = "0.##0";
+      page1.getCell(54, i).numFmt = "0.#0";
     }
     /* FILA 55 */
     for (let i = 6; i <= 15; i++) {
-      page1.getCell(55, i).numFmt = "0.##%";
+      page1.getCell(55, i).numFmt = "0.#0%";
     }
 
     /** ENCABEZADO **/
     page1.mergeCells("A39:AB39");
-    page1.getCell("E39").value = `Avance Parte Diario Norte Comparativo ${anioData}/${anioDataComparativo - 1
-      }`;
+    page1.getCell(
+      "E39"
+    ).value = `Avance Parte Diario Norte Comparativo ${anioData}/${
+      anioDataComparativo - 1
+    }`;
     page1.getCell("E39").alignment = {
       horizontal: "center",
       vertical: "center",
@@ -2557,7 +2629,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.getCell("AB40").value = `ZAFRA ${zafraParteDiario - 1}`;
     page1.getCell("AB40").font = { name: "Barlow", bold: true, size: 18 };
 
-    /** ZAFRA 2023 **/
+    /*** ZAFRA 2023 ***/
     page1.mergeCells("C41:C43");
     page1.getCell("C43").value = `Inicio de Zafra ${anioData}`;
     page1.getCell("C43").font = { name: "Barlow", bold: true, size: 15 };
@@ -2567,7 +2639,8 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.getCell("D43").font = { name: "Barlow", bold: true, size: 15 };
 
     page1.mergeCells("E41:E43");
-    page1.getCell("E43").value = `fin de zafra ${anioData}`;
+    // page1.getCell("E43").value = `fin de zafra ${anioData}`;
+    page1.getCell("E43").value = `Días efectivos de molienda`;
     page1.getCell("E43").font = { name: "Barlow", bold: true, size: 15 };
 
     page1.mergeCells("F41:F43");
@@ -2591,7 +2664,7 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.mergeCells("O41:O43");
     page1.getCell("O43").value = "Alcohol Total Hidratado [m3]";
 
-    /** Zafra 2022 **/
+    /*** Zafra 2022 ***/
     page1.mergeCells("P41:P43");
     page1.getCell("P43").value = `Inicio de Zafra ${zafraParteDiario - 1}`;
     page1.getCell("P43").font = { name: "Barlow", bold: true, size: 15 };
@@ -2633,16 +2706,23 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     for (let i = 44; i <= 48; i++) {
       page1.mergeCells(`A${i}:B${i}`);
     }
-    page1.getCell("A44").value = "La Esperanza";
-    page1.getCell("A44").font = { name: "Barlow", bold: false, size: 16 };
-    page1.getCell("A45").value = "Ledesma";
-    page1.getCell("A45").font = { name: "Barlow", bold: false, size: 16 };
-    page1.getCell("A46").value = "Río Grande";
-    page1.getCell("A46").font = { name: "Barlow", bold: false, size: 16 };
-    page1.getCell("A47").value = "Seaboard";
-    page1.getCell("A47").font = { name: "Barlow", bold: false, size: 16 };
-    page1.getCell("A48").value = "San Isidro";
-    page1.getCell("A48").font = { name: "Barlow", bold: false, size: 16 };
+    const ingeniosNorte = dataIngenios.filter(
+      (d) => d.id_region_ingenios === 2
+    );
+    ingeniosNorte.sort((a, b) => {
+      if (a.nombre_ingenio < b.nombre_ingenio) {
+        return -1;
+      }
+      if (a.nombre_ingenio > b.nombre_ingenio) {
+        return 1;
+      }
+      return 0;
+    });
+    ingeniosNorte.forEach((d, i) => {
+      page1.getCell(`A${i + 44}`).value = d?.nombre_ingenio;
+      page1.getCell(`A${i + 44}`).font = functionFont("Barlow", false, 18);
+      page1.getCell(`A${i + 44}`).alignment = alignStart;
+    });
 
     /** FECHA INICIO ZAFRA 2023 **/
     page1.getCell("C44").value = fechasInicioIngeniosNorte.Cell44
@@ -2671,91 +2751,96 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.getCell("C48").font = { name: "Barlow", bold: false, size: 16 };
 
     /** FIN DE ZAFRA 2023 **/
-    page1.getCell("E44").value =
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 5).font = { name: "Barlow", bold: false, size: 16 };
+      page1.getCell(i, 5).alignment = alignCenter;
+    }
+    page1.getCell("AZ44").value =
       fechasInicioIngeniosNorte?.Cell44 === undefined
         ? null
-        : fechasInicioIngeniosNorte?.Cell44 && fechasInicioIngeniosNorte?.CellE44 === null
-          ? null
-          : moment(fechasInicioIngeniosNorte?.CellE44).format("DD/MM/YYYY");
+        : fechasInicioIngeniosNorte?.Cell44 &&
+          fechasInicioIngeniosNorte?.CellE44 === null
+        ? null
+        : moment(fechasInicioIngeniosNorte?.CellE44).format("DD/MM/YYYY");
 
-    page1.getCell("E44").font = { name: "Barlow", bold: false, size: 16 };
-
-    page1.getCell("E45").value =
+    page1.getCell("AZ45").value =
       fechasInicioIngeniosNorte?.Cell45 === undefined
         ? null
-        : fechasInicioIngeniosNorte?.Cell45 && fechasInicioIngeniosNorte?.CellE45 === null
-          ? null
-          : moment(fechasInicioIngeniosNorte?.CellE45).format("DD/MM/YYYY");
+        : fechasInicioIngeniosNorte?.Cell45 &&
+          fechasInicioIngeniosNorte?.CellE45 === null
+        ? null
+        : moment(fechasInicioIngeniosNorte?.CellE45).format("DD/MM/YYYY");
 
-    page1.getCell("E45").font = { name: "Barlow", bold: false, size: 16 };
-
-    page1.getCell("E46").value =
+    page1.getCell("AZ46").value =
       fechasInicioIngeniosNorte?.Cell46 === undefined
         ? null
-        : fechasInicioIngeniosNorte?.Cell46 && fechasInicioIngeniosNorte?.CellE46 === null
-          ? null
-          : moment(fechasInicioIngeniosNorte?.CellE46).format("DD/MM/YYYY");
+        : fechasInicioIngeniosNorte?.Cell46 &&
+          fechasInicioIngeniosNorte?.CellE46 === null
+        ? null
+        : moment(fechasInicioIngeniosNorte?.CellE46).format("DD/MM/YYYY");
 
-    page1.getCell("E46").font = { name: "Barlow", bold: false, size: 16 };
-
-    page1.getCell("E47").value =
+    page1.getCell("AZ47").value =
       fechasInicioIngeniosNorte?.Cell47 === undefined
         ? null
-        : fechasInicioIngeniosNorte?.Cell47 && fechasInicioIngeniosNorte?.CellE47 === null
-          ? null
-          : moment(fechasInicioIngeniosNorte?.CellE47).format("DD/MM/YYYY");
+        : fechasInicioIngeniosNorte?.Cell47 &&
+          fechasInicioIngeniosNorte?.CellE47 === null
+        ? null
+        : moment(fechasInicioIngeniosNorte?.CellE47).format("DD/MM/YYYY");
 
-    page1.getCell("E47").font = { name: "Barlow", bold: false, size: 16 };
-
-    page1.getCell("E48").value =
+    page1.getCell("AZ48").value =
       fechasInicioIngeniosNorte?.Cell48 === undefined
         ? null
-        : fechasInicioIngeniosNorte?.Cell48 && fechasInicioIngeniosNorte?.CellE48 === null
-          ? null
-          : moment(fechasInicioIngeniosNorte?.CellE48).format("DD/MM/YYYY");
+        : fechasInicioIngeniosNorte?.Cell48 &&
+          fechasInicioIngeniosNorte?.CellE48 === null
+        ? null
+        : moment(fechasInicioIngeniosNorte?.CellE48).format("DD/MM/YYYY");
 
-    page1.getCell("E48").font = { name: "Barlow", bold: false, size: 16 };
+    /** COLUMNA DIAS EFECTIVOS DE AVANCE **/
+    page1.getCell("E44").value = 48;
+    page1.getCell("E45").value = 49;
+    page1.getCell("E46").value = 33;
+    page1.getCell("E47").value = 55;
+    page1.getCell("E48").value = 56;
 
     /** DIAS DE AVANCE 2023 **/
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 4).font = { name: "Barlow", bold: false, size: 16 };
+      page1.getCell(i, 4).alignment = alignCenter;
+    }
     if (fechasInicioIngeniosNorte.Cell44) {
       page1.getCell("D44").value = {
-        formula: `=if(E44="",(E26-C44)+1,(E44-C44)+1)`,
+        formula: `=if(AZ44="",(AZ26-C44)+1,(AZ44-C44)+1)`,
         result: 7,
       };
     }
-    page1.getCell("D44").font = { name: "Barlow", bold: false, size: 16 };
 
     if (fechasInicioIngeniosNorte.Cell45) {
       page1.getCell("D45").value = {
-        formula: `=if(E45="",(E26-C45)+1,(E45-C45)+1)`,
+        formula: `=if(AZ45="",(AZ26-C45)+1,(AZ45-C45)+1)`,
         result: 7,
       };
     }
-    page1.getCell("D45").font = { name: "Barlow", bold: false, size: 16 };
 
     if (fechasInicioIngeniosNorte.Cell46) {
       page1.getCell("D46").value = {
-        formula: `=if(E46="",(E26-C46)+1,(E46-C46)+1)`,
+        formula: `=if(AZ46="",(AZ26-C46)+1,(AZ46-C46)+1)`,
         result: 7,
       };
     }
-    page1.getCell("D46").font = { name: "Barlow", bold: false, size: 16 };
 
     if (fechasInicioIngeniosNorte.Cell47) {
       page1.getCell("D47").value = {
-        formula: `=if(E47="",(E26-C47)+1,(E47-C47)+1)`,
+        formula: `=if(AZ47="",(AZ26-C47)+1,(AZ47-C47)+1)`,
         result: 7,
       };
     }
-    page1.getCell("D47").font = { name: "Barlow", bold: false, size: 16 };
 
     if (fechasInicioIngeniosNorte.Cell48) {
       page1.getCell("D48").value = {
-        formula: `=if(E48="",(E26-C48)+1,(E48-C48)+1)`,
+        formula: `=if(AZ48="",(AZ26-C48)+1,(AZ48-C48)+1)`,
         result: 7,
       };
     }
-    page1.getCell("D48").font = { name: "Barlow", bold: false, size: 16 };
 
     /** FECHA INICIO ZAFRA 2022 **/
     page1.getCell("P44").value = moment(
@@ -2845,8 +2930,22 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       page1.getCell(i, 26).value = { formula: `SUM(X${i}:Y${i})`, result: 7 };
     }
 
+    /** Columna Rendimientos 2023 **/
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 9).value = {
+        formula: `=if(F${i}=0,0,H${i}/F${i}*100)`,
+        result: 7,
+      };
+    }
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 10).value = {
+        formula: `=if(G${i}=0,0,H${i}/G${i}*100)`,
+        result: 7,
+      };
+    }
+
     /** FILA TOTALES 2023 **/
-    page1.mergeCells("A49:D49");
+    page1.mergeCells("A49:E49");
     page1.getCell("A49").value = "TOTALES";
     page1.getCell("F49").value = {
       formula: "=SUM(F44:F48)",
@@ -2937,6 +3036,20 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
       result: 7,
     };
 
+    /** Columna Rendimientos 2022 **/
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 22).value = {
+        formula: `=if(S${i}=0,0,U${i}/S${i}*100)`,
+        result: 7,
+      };
+    }
+    for (let i = 44; i <= 48; i++) {
+      page1.getCell(i, 23).value = {
+        formula: `=if(T${i}=0,0,U${i}/T${i}*100)`,
+        result: 7,
+      };
+    }
+
     /** FILA 50 **/
     page1.mergeCells("A50:O50");
     page1.getCell(
@@ -2944,29 +3057,34 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     ).value = `Valores zafra ${anioData} hasta el ${dateFormat}`;
 
     page1.mergeCells("P50:AB50");
-    page1.getCell("P50").value = `Valores zafra ${anioDataComparativo - 1
-      } hasta el ${dateComparativaFormat}`;
-
+    page1.getCell("P50").value = `Valores zafra ${
+      anioDataComparativo - 1
+    } hasta el ${dateComparativaFormat}`;
 
     /** FILA 51 **/
     page1.mergeCells("A51:O51");
     page1.getCell(
       "O51"
-    ).value = `Días transcurridos desde inicio de zafra: ${Math.ceil(dataDiasZafraNorte)}`;
+    ).value = `Días transcurridos desde inicio de zafra: ${Math.ceil(
+      dataDiasZafraNorte
+    )}`;
 
     page1.mergeCells("P51:AB51");
     page1.getCell(
       "AB51"
-    ).value = `Días transcurridos desde inicio de zafra: ${Math.ceil(dataDiasZafraNorteComparativa)}`;
+    ).value = `Días transcurridos desde inicio de zafra: ${Math.ceil(
+      dataDiasZafraNorteComparativa
+    )}`;
 
     /** COMPARATIVOS **/
     page1.mergeCells("A53:O53");
-    page1.getCell("A53").value = `COMPARATIVO ZAFRA ${anioData}/${zafraParteDiario - 1
-      } - VARIACIÓN %  HASTA EL ${dateFormat}`;
+    page1.getCell("A53").value = `COMPARATIVO NORTE ZAFRA ${anioData}/${
+      zafraParteDiario - 1
+    } - VARIACIÓN %  HASTA EL ${dateDatosProductivosFormato}`;
 
-    page1.getCell("A53").fill = bgGris
-    page1.getCell("A53").font = functionFont("Barlow", true, 18)
-    page1.getCell("A53").alignment = alignCenter
+    page1.getCell("A53").fill = bgGris;
+    page1.getCell("A53").font = functionFont("Barlow", true, 18);
+    page1.getCell("A53").alignment = alignCenter;
     page1.mergeCells("A54:E54");
     page1.getCell("A54").value = "DIFERENCIA";
 
@@ -3027,66 +3145,331 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
 
     /** INICIO / FIN ZAFRA **/
     page1.mergeCells("P53:V55");
-    page1.getCell("P53").value = `Inicio de zafra ${anioData}: ${inicioZafraNorte !== null ? moment(inicioZafraNorte).format("DD/MM/YYYY") : ""
-      }
+    page1.getCell("P53").value = `Inicio de zafra ${anioData}: ${
+      inicioZafraNorte !== null
+        ? moment(inicioZafraNorte).format("DD/MM/YYYY")
+        : ""
+    }
 Inicio de zafra ${zafraParteDiario - 1}: ${moment(
       inicioZafraNorteComparativa
-      ).format("DD/MM/YYYY")}`;
+    ).format("DD/MM/YYYY")}`;
     page1.getCell("P53").alignment = {
       wrapText: true,
-      horizontal: 'start',
-      vertical: 'middle'
+      horizontal: "start",
+      vertical: "middle",
     };
     page1.getCell("P53").font = { name: "Barlow", bold: true, size: 16 };
 
     page1.mergeCells("W53:AB55");
-    page1.getCell("W53").value = `Inicio de zafra ${anioData}: ${finZafraNorte !== null ? moment(finZafraNorte).format("DD/MM/YYYY") : ""
-      }
-Inicio de zafra ${zafraParteDiario - 1}: ${moment(
-      finZafraNorteComparativa
-      ).format("DD/MM/YYYY")}`;
+    page1.getCell("W53").value = `Fin de zafra ${anioData}: ${
+      finZafraNorte !== null ? moment(finZafraNorte).format("DD/MM/YYYY") : ""
+    }
+Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraNorteComparativa).format(
+      "DD/MM/YYYY"
+    )}`;
     page1.getCell("W53").alignment = {
       wrapText: true,
-      horizontal: 'start',
-      vertical: 'middle'
+      horizontal: "start",
+      vertical: "middle",
     };
-    page1.getCell("W53").font = { name: "Barlow", bold: true, size: 15 };
+    page1.getCell("W53").font = { name: "Barlow", bold: true, size: 16 };
+/********************************************/
+
+/*** TOTAL ARGENTINA ***/
+page1.mergeCells("A57:O57");
+page1.mergeCells("A58:B60");
+page1.mergeCells("C58:C60");
+page1.mergeCells("D58:D60");
+page1.mergeCells("E58:E60");
+page1.mergeCells("F58:F60");
+page1.mergeCells("G58:G60");
+page1.mergeCells("H58:H60");
+page1.mergeCells("I58:I60");
+page1.mergeCells("J58:J60");
+page1.mergeCells("K58:K60");
+page1.mergeCells("L58:L60");
+page1.mergeCells("M58:M60");
+page1.mergeCells("N58:N60");
+page1.mergeCells("O58:O60");
+page1.mergeCells("A61:B61");
+page1.mergeCells("A62:O63");
+
+/** ALINEACION **/
+for(let i = 57;i <= 62;i++) {
+  page1.getRow(i).alignment = alignCenter
+}
+
+/** RELLENO **/
+for (let i = 1; i <= 15; i++) {
+  page1.getCell(58, i).fill = bgNaranja;
+}
+
+/** FORMATOS **/
+page1.getCell("A57").font = functionFont("Barlow", true, 20)
+for(let i=1; i<=15; i++) {
+  page1.getCell(58,i).font = functionFont("Barlow", true, 16)
+}
+page1.getCell("A61").font = functionFont("Barlow", true, 16)
+for(let i=1; i<=15; i++) {
+  page1.getCell(61,i).font = functionFont("Barlow", true, 16)
+}
+page1.getCell("A62").font = functionFont("Barlow", true, 18)
+
+/** TAMANO FILAS Y COLUMNAS **/
+page1.getRow(57).height = "28";
+page1.getRow(58).height = "35";
+page1.getRow(59).height = "35";
+page1.getRow(61).height = "30";
+page1.getRow(62).height = "10";
+page1.getRow(63).height = "10";
+
+/** BORDES **/
+for (let i = 57; i <= 62; i++) {
+  for (let j = 1; j <= 15; j++) {
+    page1.getCell(i, j).border = borders(
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "medium",
+      "000000"
+    );
+  }
+}
+page1.getCell("A57").border = borders(
+  "thick",
+  "00326c",
+  "thick",
+  "00326c",
+  "medium",
+  "000000",
+  "thick",
+  "00326c",
+);
+
+page1.getCell("A58").border = borders(
+  "medium",
+  "000000",
+  "thick",
+  "00326c",
+  "thin",
+  "000000",
+  "medium",
+  "000000",
+);
+for(let i=3;i<=14;i++) { 
+  page1.getCell(58, i).border = borders(
+    "medium",
+    "000000",
+    "medium",
+    "000000",
+    "thin",
+    "000000",
+    "medium",
+    "000000",
+  );
+}
+page1.getCell("O58").border = borders(
+  "medium",
+  "000000",
+  "medium",
+  "000000",
+  "thin",
+  "000000",
+  "thick",
+  "00326c",
+);
+
+page1.getCell("A61").border = borders(
+  "thin",
+  "000000",
+  "thick",
+  "00326c",
+  "thick",
+  "00326c",
+  "medium",
+  "000000",
+);
+for(let i=3;i<=14;i++) { 
+  page1.getCell(61, i).border = borders(
+    "thin",
+    "000000",
+    "medium",
+    "000000",
+    "thick",
+    "00326c",
+    "medium",
+    "000000",
+  );
+}
+page1.getCell("O61").border = borders(
+  "thin",
+  "000000",
+  "medium",
+  "000000",
+  "thick",
+  "00326c",
+  "thick",
+  "00326c",
+);
+
+page1.getCell("A62").border = borders(
+  "thick",
+  "00326c",
+  "thin",
+  "FFFFFF",
+  "thick",
+  "00326c",
+  "thin",
+  "FFFFFF",
+);
+
+/** FORMATO NUMEROS **/
+  for (let j = 5; j <= 7; j++) {
+    page1.getCell(61, j).numFmt = "#,##0";
+  }
+  for (let j = 10; j <= 15; j++) {
+    page1.getCell(61, j).numFmt = "#,##0";
+  }
+  for (let j = 8; j <= 9; j++) {
+    page1.getCell(61, j).numFmt = "#.#0";
+  }
+
+/** ENCABEZADOS **/
+page1.getCell(
+  "A57"
+).value = `Avance Total Argentina ${anioData}`;
+
+page1.getCell("A58").value = "";
+page1.getCell("C58").value = `Inicio de Zafra ${anioData}`;
+page1.getCell("D58").value = "Días de avance";
+page1.getCell("E58").value = "Días efectivos de molienda";
+page1.getCell("F58").value = "Caña Molida Bruta [Tn]";
+page1.getCell("G58").value = "Caña Molida Neta [Tn]";
+page1.getCell("H58").value = "Azúcar Equivalente [Tn]";
+page1.getCell("I58").value = `Rto CMB Total [%]`;
+page1.getCell("J58").value = `Rto CMN Total [%]`;
+page1.getCell("K58").value = "Total Azúcar Blanco [Tn]";
+page1.getCell("L58").value = "Total Azúcar Crudo [Tn]";
+page1.getCell("M58").value = "Total Azúcar Elaborada [Tn]";
+page1.getCell("N58").value = "Melaza [Tn]";
+page1.getCell("O58").value = "Alcohol Total Hidratado [m3]";
+
+page1.getCell("A61").value = "Totales"
+
+/** VALORES **/
+page1.getCell("F61").value = {
+  formula: `F26+F49`,
+  result: 7
+}
+page1.getCell("G61").value = {
+  formula: `G26+G49`,
+  result: 7
+}
+page1.getCell("H61").value = {
+  formula: `H26+H49`,
+  result: 7
+}
+
+page1.getCell("I61").value = {
+  formula: `=if(F61=0, 0,H61/F61*100)`,
+  result: 7
+}
+page1.getCell("J61").value = {
+  formula: `=if(G61=0, 0,H61/G61*100)`,
+  result: 7
+}
+
+page1.getCell("K61").value = {
+  formula: `K26+K49`,
+  result: 7
+}
+page1.getCell("L61").value = {
+  formula: `L26+L49`,
+  result: 7
+}
+page1.getCell("M61").value = {
+  formula: `M26+M49`,
+  result: 7
+}
+page1.getCell("N61").value = {
+  formula: `N26+N49`,
+  result: 7
+}
+page1.getCell("O61").value = {
+  formula: `O26+O49`,
+  result: 7
+}
+
+/***********************************************/
+
+    /*** OBSERVACIONES ***/
+    page1.mergeCells("A64:AB64");
+    page1.getCell("A64").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C"
+    );
+    page1.getRow(64).height ="80"
+    page1.getCell("A64").value ={
+      richText: [
+        { text: 'Observaciones:', font: { bold: true, name: "Barlow", size: 13 } },  // Parte en negrita
+        { text: '\nTotal Azúcar Blanco: Azúcar Tipo A + Azúcar Refinada\nTotal Azúcar Crudo: Azúcar Crudo + Azúcar Orgánico + Otros Azcúcares.', font: { bold: false, name: "Barlow", size: 13 } },
+        {text: '\nEn el reverso están las azúcares discriminada por tipo.', font: { bold: false, name: "Barlow", size: 13 }}
+      ]
+    }    
+    page1.getCell("A64").alignment = { wrapText: true };
 
     /******************************** PAGINA 2 ********************************/
 
-    page2.getRow(20).font = functionFont("Barlow", true, 24);
+    page2.getRow(20).font = functionFont("Barlow", true, 22);
 
     /** Tamanos filas y columnas **/
     page2.getColumn(1).width = "15";
     for (let i = 2; i <= 27; i++) {
       page2.getColumn(i).width = "19";
     }
-    page2.getColumn(15).width = "19";
-    page2.getColumn(28).width = "19";
-
-    for (let i = 12; i <= 20; i++) {
-      page2.getColumn(i).width = "13";
+    for (let i = 8; i <= 14; i++) {
+      page2.getColumn(i).width = "14";
+    }
+    for (let i = 15; i <= 24; i++) {
+      page2.getColumn(i).width = "18";
     }
 
     page2.getRow(1).height = "24";
-    page2.getRow(2).height = "24";
-    page2.getRow(3).height = "42";
+    page2.getRow(2).height = "57";
+    page2.getRow(3).height = "45";
     page2.getRow(5).height = "26";
     for (let i = 6; i <= 19; i++) {
-      page2.getRow(i).height = "54";
+      page2.getRow(i).height = "42";
+    }
+    page2.getRow(20).height = "70";
+
+    /** Fuente **/
+    page2.getRow(4).font = functionFont("Barlow", true, 16);
+    for (let i = 6; i <= 19; i++) {
+      page2.getRow(i).font = { name: "Barlow", size: 18 };
     }
 
-    page2.getRow(4).font = functionFont("Barlow", true, 16);
-    page2.getRow(4).alignment = alignStart;
-    // for (let i = 1; i <= 20; i++) {
-    //   page2.getCell(6, i).fill = bgGris;
-    //   page2.getCell(9, i).fill = bgGris;
-    //   page2.getCell(13, i).fill = bgGris;
-    //   page2.getCell(17, i).fill = bgGris;
-    // }
+    /** Fill **/
+    for (let i = 1; i <= 24; i++) {
+      page2.getCell(3, i).fill = bgGris;
+      page2.getCell(4, i).fill = bgGris;
+    }
+    for (let i = 6; i <= 9; i++) {
+      page2.getCell(i, 20).fill = bgGris;
+    }
 
     /*** Alineaciones ***/
-    for (let i = 6; i <= 19; i++) {
+    page2.getRow(4).alignment = alignStart;
+    for (let i = 6; i <= 20; i++) {
       page2.getRow(i).alignment = alignCenter;
     }
 
@@ -3102,9 +3485,85 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
         page2.getCell(i, j).numFmt = "#,##0";
       }
     }
+    /*** Merge ***/
+    page2.mergeCells("T10:X19");
 
     /** Bordes **/
-    for (let i = 1; i <= 28; i++) {
+
+    page2.getCell("H3").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thin",
+      "000000",
+      "thin",
+      "000000"
+    );
+    /*** Bordes datos de azucar ***/
+    for (let i = 6; i <= 20; i++) {
+      for (let j = 3; j <= 7; j++) {
+        page2.getCell(i, j).border = borders(
+          "thin",
+          "000000",
+          "medium",
+          "000000",
+          "thin",
+          "000000",
+          "medium",
+          "000000"
+        );
+      }
+    }
+
+    /*** Bordes datos de alochol ***/
+    for (let i = 6; i <= 20; i++) {
+      for (let j = 8; j <= 14; j++) {
+        page2.getCell(i, j).border = borders(
+          "thin",
+          "000000",
+          "medium",
+          "000000",
+          "thin",
+          "000000",
+          "medium",
+          "000000"
+        );
+      }
+    }
+    /*** Bordes datos de exportacion por tipo ***/
+    for (let i = 6; i <= 20; i++) {
+      for (let j = 15; j <= 19; j++) {
+        page2.getCell(i, j).border = borders(
+          "thin",
+          "000000",
+          "medium",
+          "000000",
+          "thin",
+          "000000",
+          "medium",
+          "000000"
+        );
+      }
+    }
+    /*** Bordes datos de destino de exportacion ***/
+    for (let i = 6; i <= 20; i++) {
+      for (let j = 20; j <= 24; j++) {
+        page2.getCell(i, j).border = borders(
+          "thin",
+          "000000",
+          "medium",
+          "000000",
+          "thin",
+          "000000",
+          "medium",
+          "000000"
+        );
+      }
+    }
+
+    /*** Encabezados ***/
+    for (let i = 1; i <= 24; i++) {
       page2.getCell(1, i).border = borders(
         "medium",
         "000000",
@@ -3115,18 +3574,6 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
         "medium",
         "000000"
       );
-      page2.getCell(4, i).border = borders(
-        "thin",
-        "000000",
-        "thin",
-        "000000",
-        "medium",
-        "000000",
-        "thin",
-        "000000"
-      );
-    }
-    for (let i = 1; i <= 28; i++) {
       page2.getCell(3, i).border = borders(
         "medium",
         "000000",
@@ -3137,7 +3584,7 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
         "medium",
         "000000"
       );
-      page2.getCell(5, i).border = borders(
+      page2.getCell(4, i).border = borders(
         "thin",
         "000000",
         "medium",
@@ -3148,6 +3595,7 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
         "000000"
       );
     }
+
     page2.getCell("A3").border = borders(
       "medium",
       "000000",
@@ -3158,48 +3606,6 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
       "medium",
       "000000"
     );
-    page2.getCell("H5").border = borders(
-      "thin",
-      "000000",
-      "medium",
-      "000000",
-      "medium",
-      "000000",
-      "thin",
-      "000000"
-    );
-
-    /*** Bordes datos de azucar ***/
-    for (let i = 6; i <= 19; i++) {
-      for (let j = 3; j <= 8; j++) {
-        page2.getCell(i, j).border = borders(
-          "medium",
-          "000000",
-          "thin",
-          "000000",
-          "medium",
-          "000000",
-          "thin",
-          "000000"
-        );
-      }
-    }
-
-    /*** Bordes datos de alochol ***/
-    for (let i = 6; i <= 19; i++) {
-      for (let j = 12; j <= 20; j++) {
-        page2.getCell(i, j).border = borders(
-          "medium",
-          "000000",
-          "thin",
-          "000000",
-          "medium",
-          "000000",
-          "thin",
-          "000000"
-        );
-      }
-    }
 
     /*** Columna 1**/
     for (let i = 1; i <= 20; i++) {
@@ -3214,113 +3620,178 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
         "000000"
       );
     }
-
-    /*** Bordes Destileria y Anhidradora ***/
     for (let i = 6; i <= 19; i++) {
-      for (let j = 8; j <= 10; j++) {
-        page2.getCell(i, j).border = borders(
-          "medium",
-          "000000",
-          "medium",
-          "000000",
-          "medium",
-          "000000",
-          "medium",
-          "000000"
-        );
-      }
-    }
-
-    /*** Bordes fila 20 ***/
-    for (let i = 1; i <= 28; i++) {
-      page2.getCell(20, i).border = borders(
-        "medium",
+      page2.getCell(i, 1).border = borders(
+        "thin",
         "000000",
+        "thick",
+        "00326C",
         "thin",
         "000000",
         "medium",
-        "000000",
-        "thin",
         "000000"
       );
     }
-    page2.getCell("A20").border = borders(
-      "medium",
-      "000000",
-      "medium",
-      "000000",
-      "medium",
-      "000000",
-      "medium",
-      "000000"
-    );
-    page2.getCell("H20").border = borders(
-      "medium",
-      "000000",
-      "medium",
-      "000000",
-      "medium",
-      "000000",
-      "medium",
-      "000000"
-    );
 
     /**** BORDES AZULES SEPARATIVOS ****/
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 6; i <= 20; i++) {
       page2.getCell(i, 8).border = borders(
-        "medium",
+        "thin",
         "000000",
         "thick",
         "00326C",
-        "medium",
+        "thin",
         "000000",
         "medium",
         "000000"
-      )
+      );
     }
-    for (let i = 1; i <= 20; i++) {
-      page2.getCell(i, 21).border = borders(
+    for (let i = 6; i <= 20; i++) {
+      page2.getCell(i, 15).border = borders(
+        "thin",
+        "000000",
+        "thick",
+        "00326C",
+        "thin",
+        "000000",
+        "medium",
+        "000000"
+      );
+    }
+    for (let i = 6; i <= 20; i++) {
+      page2.getCell(i, 24).border = borders(
+        "thin",
+        "000000",
+        "medium",
+        "000000",
+        "thin",
+        "000000",
+        "thick",
+        "00326C"
+      );
+    }
+    /*** Bordes fila 20 ***/
+    for (let i = 1; i <= 24; i++) {
+      page2.getCell(20, i).border = borders(
+        "medium",
+        "000000",
         "medium",
         "000000",
         "thick",
         "00326C",
         "medium",
-        "000000",
-        "medium",
         "000000"
-      )
+      );
     }
 
-    for (let i = 1; i <= 28; i++) {
-      page2.getCell(21, i).border = borders(
-        "thick",
-        "00326C",
-        "thin",
-        "D9D9D9",
-        "thin",
-        "D9D9D9",
-        "thin",
-        "D9D9D9"
-      )
-    }
-    for (let i = 1; i <= 20; i++) {
-      page2.getCell(i, 29).border = borders(
-        "thin",
-        "D9D9D9",
-        "thick",
-        "00326C",
-        "thin",
-        "D9D9D9",
-        "thin",
-        "D9D9D9"
-      )
-    }
+    page2.getCell("H1").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("H3").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thin",
+      "000000",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("H4").border = borders(
+      "thin",
+      "000000",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "medium",
+      "000000"
+    );
+    page2.getCell("G20").border = borders(
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C"
+    );
+
+    page2.getCell("O1").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("O4").border = borders(
+      "thin",
+      "000000",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "medium",
+      "000000"
+    );
+    page2.getCell("T3").border = borders(
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "thin",
+      "D9D9D9",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("O20").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000"
+    );
+
+    page2.getCell("V20").border = borders(
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("X4").border = borders(
+      "thin",
+      "000000",
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "thick",
+      "00326C"
+    );
 
     /**** AZUCARES ****/
     page2.mergeCells("A1:G2");
     page2.getCell(
       "A1"
-    ).value = `PRODUCCIÓN DE AZÚCAR DISCRIMINADA POR TIPOLOGÍA ZAFRA ${anioData}`;
+    ).value = `PRODUCCIÓN POR TIPO DE AZÚCARES  |  HASTA  ${dateFormat}`;
     page2.getCell("A1").font = functionFont("Barlow", true, 18);
     page2.getCell("A1").alignment = alignCenter;
     page2.getCell("A1").fill = bgNaranja;
@@ -3329,12 +3800,11 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
     page2.getCell("A3").value = "Ingenios";
     page2.getCell("A3").font = functionFont("Barlow", true, 18);
     page2.getCell("A3").alignment = alignCenter;
+    page2.getCell("A3").fill = bgGris;
 
     page2.mergeCells("C3:G3");
-    page2.getCell(
-      "C3"
-    ).value = `TIPOS DE AZÚCARES Y SUS CANTIDADES EN TONELADAS HASTA ${dateFormat}`;
-    page2.getCell("C3").font = functionFont("Barlow", true, 14);
+    page2.getCell("C3").value = `TIPOS DE AZÚCARES (Tn)`;
+    page2.getCell("C3").font = functionFont("Barlow", true, 16);
     page2.getCell("C3").alignment = alignCenter;
     page2.getCell("C3").fill = bgGris;
 
@@ -3367,17 +3837,17 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
       page2.mergeCells(`A${i}:B${i}`);
     }
     const ingenios = dataIngenios.filter(
-      (d) => d.nombre_ingenio !== "San Juan"
+      (d) => d.nombre_ingenio !== "San Juan" && d.id_region_ingenios === 1
     );
     ingenios.forEach((d, i) => {
       page2.getCell(`A${i + 6}`).value = d?.nombre_ingenio;
-      page2.getCell(`A${i + 6}`).font = functionFont("Barlow", false, 16);
+      page2.getCell(`A${i + 6}`).font = functionFont("Barlow", false, 18);
       page2.getCell(`A${i + 6}`).alignment = alignStart;
     });
-    page2.getCell("A20").value = "Acumulado";
-    page2.getCell("A20").font = functionFont("Barlow", true, 24);
+    page2.getCell("A20").value = "Valores Acumulados";
+    page2.getCell("A20").font = functionFont("Barlow", true, 20);
     page2.getCell("A20").alignment = alignCenter;
-    page2.getCell('A20').fill = bgNaranja
+    page2.getCell("A20").fill = bgNaranja;
 
     for (let i = 3; i <= 7; i++) {
       const asd = ["n", "A", "B", "C", "D", "E", "F", "G"];
@@ -3386,177 +3856,261 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
     }
 
     /**** ALCOHOL ****/
-    page2.mergeCells("H1:T2");
+    page2.mergeCells("H1:N2");
     page2.getCell(
       "H1"
-    ).value = `PRODUCCIÓN DE ALCOHOL ETÍLICO DISCRIMINADO POR TIPO - CAMPAÑA ${anioData} (INICIO: ${fechaInicioDestileria !== null
-      ? moment(fechaInicioDestileria).format("DD/MM/YYYY")
-      : ""
-    })`;
+    ).value = `PRODUCCIÓN DE ALCOHOL ETÍLICO  |  HASTA ${dateFormat}`;
     page2.getCell("H1").font = functionFont("Barlow", true, 18);
     page2.getCell("H1").alignment = alignCenter;
     page2.getCell("H1").fill = bgAzul;
 
-    page2.mergeCells("H3:K4");
-    page2.getCell("H3").value = "Proceso de Destilación";
-    page2.getCell("H3").font = functionFont("Barlow", true, 20);
+    page2.mergeCells("H3:N3");
+    page2.getCell("H3").value = `TIPOS DE ALCOHOLES (M3) | INICIO: ${
+      fechaInicioDestileria !== null
+        ? moment(fechaInicioDestileria).format("DD/MM/YYYY")
+        : ""
+    }`;
+    page2.getCell("H3").font = functionFont("Barlow", true, 16);
     page2.getCell("H3").alignment = alignCenter;
+    page2.getCell("H3").fill = bgGris;
 
-    page2.mergeCells("L3:T3");
-    page2.getCell(
-      "L3"
-    ).value = `TIPOS DE ALCOHOLES Y SUS VOLÚMENES EN METROS CUBICOS HASTA ${dateFormat}`;
-    page2.getCell("L3").font = functionFont("Barlow", true, 14);
-    page2.getCell("L3").alignment = alignCenter;
-    page2.getCell("L3").fill = bgGris;
-
-    for (let i = 5; i <= 19; i++) {
+    page2.mergeCells("H4:I5");
+    page2.getCell("H4").alignment = alignCenter;
+    page2.mergeCells("J4:L5");
+    page2.getCell("J4").alignment = alignCenter;
+    page2.mergeCells("M4:N5");
+    page2.getCell("M4").alignment = alignCenter;
+    for (let i = 6; i <= 20; i++) {
       page2.mergeCells(`H${i}:I${i}`);
       page2.getCell(`H${i}`).alignment = alignCenter;
-      page2.mergeCells(`J${i}:K${i}`);
+      page2.mergeCells(`J${i}:L${i}`);
+      page2.getCell(`J${i}`).alignment = alignCenter;
+      page2.mergeCells(`M${i}:N${i}`);
       page2.getCell(`J${i}`).alignment = alignCenter;
     }
-    page2.getCell("H5").value = "Destilería";
-    page2.getCell("H5").font = functionFont("Barlow", true, 20);
-    page2.getCell("J5").value = "Anhidradora";
-    page2.getCell("J5").font = functionFont("Barlow", true, 20);
+    // page2.getCell("H5").value = "Destilería";
+    // page2.getCell("H5").font = functionFont("Barlow", true, 20);
+    // page2.getCell("J5").value = "Anhidradora";
+    // page2.getCell("J5").font = functionFont("Barlow", true, 20);
 
-    page2.getCell("H6").value = "No posee";
-    page2.getCell("H6").font = functionFont("Barlow", false, 16);
-    page2.getCell("J6").value = "No posee";
-    page2.getCell("J6").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H6").value = "No posee";
+    // page2.getCell("H6").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J6").value = "No posee";
+    // page2.getCell("J6").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H7").value = "José Minetti y Cía. Ltda. SACI";
-    page2.getCell("H7").font = functionFont("Barlow", false, 16);
-    page2.getCell("J7").value = "Fronterita Energía S.A.";
-    page2.getCell("J7").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H7").value = "José Minetti y Cía. Ltda. SACI";
+    // page2.getCell("H7").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J7").value = "Fronterita Energía S.A.";
+    // page2.getCell("J7").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H8").value =
-      "Complejo Alimenticio San Salvador S.A.-Banda de Río Salí";
-    page2.getCell("H8").font = functionFont("Barlow", false, 16);
-    page2.getCell("J8").value = "Bio Atar  S.A.";
-    page2.getCell("J8").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H8").value =
+    //   "Complejo Alimenticio San Salvador S.A.-Banda de Río Salí";
+    // page2.getCell("H8").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J8").value = "Bio Atar  S.A.";
+    // page2.getCell("J8").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H9").value = "No posee";
-    page2.getCell("H9").font = functionFont("Barlow", false, 16);
-    page2.getCell("J9").value = "No posee";
-    page2.getCell("J9").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H9").value = "No posee";
+    // page2.getCell("H9").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J9").value = "No posee";
+    // page2.getCell("J9").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H10").value = "Destilería Salta Refrescos S.A.";
-    page2.getCell("H10").font = functionFont("Barlow", false, 16);
-    page2.getCell("J10").value = "No posee";
-    page2.getCell("J10").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H10").value = "Destilería Salta Refrescos S.A.";
+    // page2.getCell("H10").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J10").value = "No posee";
+    // page2.getCell("J10").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H11").value = "Sucroalcoholera del Sur S.A.";
-    page2.getCell("H11").font = functionFont("Barlow", false, 16);
-    page2.getCell("J11").value = "Bioenergía La Corona S.A.";
-    page2.getCell("J11").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H11").value = "Sucroalcoholera del Sur S.A.";
+    // page2.getCell("H11").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J11").value = "Bioenergía La Corona S.A.";
+    // page2.getCell("J11").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H12").value = "Compañía Azucarera Los Balcanes S.A.";
-    page2.getCell("H12").font = functionFont("Barlow", false, 16);
-    page2.getCell("J12").value = "Compañía Azucarera Los Balcanes S.A.";
-    page2.getCell("J12").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H12").value = "Compañía Azucarera Los Balcanes S.A.";
+    // page2.getCell("H12").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J12").value = "Compañía Azucarera Los Balcanes S.A.";
+    // page2.getCell("J12").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H13").value = "No posee";
-    page2.getCell("H13").font = functionFont("Barlow", false, 16);
-    page2.getCell("J13").value = "No posee";
-    page2.getCell("J13").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H13").value = "No posee";
+    // page2.getCell("H13").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J13").value = "No posee";
+    // page2.getCell("J13").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H14").value = "Ansonnaud, Ricardo Sixto";
-    page2.getCell("H14").font = functionFont("Barlow", false, 16);
-    page2.getCell("J14").value = "Bio Trinidad S.A.";
-    page2.getCell("J14").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H14").value = "Ansonnaud, Ricardo Sixto";
+    // page2.getCell("H14").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J14").value = "Bio Trinidad S.A.";
+    // page2.getCell("J14").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H15").value = "Compañía Inversora Industrial S.A.";
-    page2.getCell("H15").font = functionFont("Barlow", false, 16);
-    page2.getCell("J15").value = "Bioenergética Leales S.A.";
-    page2.getCell("J15").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H15").value = "Compañía Inversora Industrial S.A.";
+    // page2.getCell("H15").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J15").value = "Bioenergética Leales S.A.";
+    // page2.getCell("J15").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H16").value =
-      "Complejo Alimenticio San Salvador S.A. Juan Bautista Alberdi (Sin funcionar)";
-    page2.getCell("H16").font = functionFont("Barlow", false, 16);
-    page2.getCell("H16").alignment = alignCenter;
-    page2.getCell("J16").value = "No posee";
-    page2.getCell("J16").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H16").value =
+    //   "Complejo Alimenticio San Salvador S.A. Juan Bautista Alberdi (Sin funcionar)";
+    // page2.getCell("H16").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H16").alignment = alignCenter;
+    // page2.getCell("J16").value = "No posee";
+    // page2.getCell("J16").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H17").value = "Industrias Santa Bárbara S.R.L.";
-    page2.getCell("H17").font = functionFont("Barlow", false, 16);
-    page2.getCell("J17").value =
-      "Energías Ecológicas del Tucumán S.A. (Sin funcionar)";
-    page2.getCell("J17").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H17").value = "Industrias Santa Bárbara S.R.L.";
+    // page2.getCell("H17").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J17").value =
+    //   "Energías Ecológicas del Tucumán S.A. (Sin funcionar)";
+    // page2.getCell("J17").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H18").value = "No posee";
-    page2.getCell("H18").font = functionFont("Barlow", false, 16);
-    page2.getCell("J18").value = "Anhidradora Bioenergía Santa Rosa S.A. (*)";
-    page2.getCell("J18").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H18").value = "No posee";
+    // page2.getCell("H18").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J18").value = "Anhidradora Bioenergía Santa Rosa S.A. (*)";
+    // page2.getCell("J18").font = functionFont("Barlow", false, 16);
 
-    page2.getCell("H19").value = "No posee";
-    page2.getCell("H19").font = functionFont("Barlow", false, 16);
-    page2.getCell("J19").value = "No posee";
-    page2.getCell("J19").font = functionFont("Barlow", false, 16);
+    // page2.getCell("H19").value = "No posee";
+    // page2.getCell("H19").font = functionFont("Barlow", false, 16);
+    // page2.getCell("J19").value = "No posee";
+    // page2.getCell("J19").font = functionFont("Barlow", false, 16);
 
-    page2.mergeCells("H20:K20");
-    page2.getCell("H20").value = "Acumulado";
-    page2.getCell("H20").font = functionFont("Barlow", true, 24);
-    page2.getCell("H20").alignment = alignCenter;
-    page2.getCell('H20').fill = bgAzul
+    // page2.mergeCells("H20:K20");
+    // page2.getCell("H20").value = "Acumulado";
+    // page2.getCell("H20").font = functionFont("Barlow", true, 24);
+    // page2.getCell("H20").alignment = alignCenter;
+    // page2.getCell('H20').fill = bgAzul
 
-    page2.mergeCells("L4:N5");
-    page2.getCell("L4").value = "Alcohol Total";
-    page2.getCell("L4").font = functionFont("Barlow", true, 16);
-    page2.getCell("L4").alignment = alignCenter;
+    page2.getCell("H4").value = "Alcohol Total";
+    page2.getCell("H4").font = functionFont("Barlow", true, 16);
+    page2.getCell("H4").alignment = alignCenter;
 
-    page2.mergeCells("O4:Q5");
-    page2.getCell("O4").value = "Alcohol Hidratado";
+    page2.getCell("J4").value = "Alcohol Hidratado";
+    page2.getCell("J4").font = functionFont("Barlow", true, 16);
+    page2.getCell("J4").alignment = alignCenter;
+
+    page2.getCell("M4").value = "Alcohol Anhidro";
+    page2.getCell("M4").font = functionFont("Barlow", true, 16);
+    page2.getCell("M4").alignment = alignCenter;
+
+    page2.getCell("H20").value = { formula: `=SUM(H6:H19)` };
+    page2.getCell("H20").numFmt = "#,##0";
+    page2.getCell("J20").value = {
+      formula: `=J19+J18+J16+J15+J14+J12+J11+J10+J8+J7`,
+    };
+    page2.getCell("J20").numFmt = "#,##0";
+    page2.getCell("M20").value = {
+      formula: `=M19+M18+M16+M15+M14+M12+M11+M10+M8+M7`,
+    };
+    page2.getCell("M20").numFmt = "#,##0";
+
+    /**** EXPORTACIONES ****/
+    page2.mergeCells("O1:X2");
+    page2.getCell("O1").value = `MERCADO EXTERNO  |  HASTA ${dateFormat}`;
+    page2.getCell("O1").font = functionFont("Barlow", true, 18);
+    page2.getCell("O1").alignment = alignCenter;
+    page2.getCell("O1").fill = bgCeleste;
+
+    /*** Exportacion por tipo de azucares ***/
+    page2.mergeCells("O3:S3");
+    page2.getCell("O3").value = `EXPORTACIÓN TIPO DE AZÚCARES (Tn)`;
+    page2.getCell("O3").font = functionFont("Barlow", true, 16);
+    page2.getCell("O3").alignment = alignCenter;
+    page2.getCell("O3").fill = bgGris;
+
+    page2.mergeCells("O4:O5");
+    page2.getCell("O4").value = `Crudo`;
     page2.getCell("O4").font = functionFont("Barlow", true, 16);
     page2.getCell("O4").alignment = alignCenter;
 
-    page2.mergeCells("R4:T5");
-    page2.getCell("R4").value = "Alcohol Anhidro";
+    page2.mergeCells("P4:P5");
+    page2.getCell("P4").value = `Orgánico`;
+    page2.getCell("P4").font = functionFont("Barlow", true, 16);
+    page2.getCell("P4").alignment = alignCenter;
+
+    page2.mergeCells("Q4:Q5");
+    page2.getCell("Q4").value = `Rubio`;
+    page2.getCell("Q4").font = functionFont("Barlow", true, 16);
+    page2.getCell("Q4").alignment = alignCenter;
+
+    page2.mergeCells("R4:R5");
+    page2.getCell("R4").value = `Blanco`;
     page2.getCell("R4").font = functionFont("Barlow", true, 16);
     page2.getCell("R4").alignment = alignCenter;
 
-    for (let i = 6; i <= 20; i++) {
-      page2.mergeCells(`L${i}:N${i}`);
-      page2.getCell(`L${i}`).alignment = alignCenter;
-      page2.mergeCells(`O${i}:Q${i}`);
-      page2.getCell(`O${i}`).alignment = alignCenter;
-      page2.mergeCells(`R${i}:T${i}`);
-      page2.getCell(`R${i}`).alignment = alignCenter;
-    }
+    page2.mergeCells("S4:S5");
+    page2.getCell("S4").value = `Otros`;
+    page2.getCell("S4").font = functionFont("Barlow", true, 16);
+    page2.getCell("S4").alignment = alignCenter;
 
-    page2.getCell("L20").value = { formula: `=SUM(L6:N19)` };
-    page2.getCell("L20").numFmt = "#,##0";
-    page2.getCell("O20").value = {
-      formula: `=O19+O18+O16+O15+O14+O12+O11+O10+O8+O7`,
-    };
+    /** Formulas totales **/
+    page2.getCell("O20").value = { formula: `=SUM(O6:O19)` };
     page2.getCell("O20").numFmt = "#,##0";
-    page2.getCell("R20").value = {
-      formula: `=R19+R18+R16+R15+R14+R12+R11+R10+R8+R7`,
-    };
+
+    page2.getCell("P20").value = { formula: `=SUM(P6:P19)` };
+    page2.getCell("P20").numFmt = "#,##0";
+
+    page2.getCell("Q20").value = { formula: `=SUM(Q6:Q19)` };
+    page2.getCell("Q20").numFmt = "#,##0";
+
+    page2.getCell("R20").value = { formula: `=SUM(R6:R19)` };
     page2.getCell("R20").numFmt = "#,##0";
 
-    /**** EXPORTACIONES ****/
-    page2.mergeCells("U1:Y2");
-    page2.getCell(
-      "U1"
-    ).value = `MERCADO EXTERNO DEL AZUCAR - ZAFRA ${anioData} Al ${dateFormat}`;
-    page2.getCell("U1").alignment = alignCenter;
-    page2.getCell("U1").font = functionFont("Barlow", true, 16);
+    page2.getCell("S20").value = { formula: `=SUM(S6:S19)` };
+    page2.getCell("S20").numFmt = "#,##0";
 
-    page2.mergeCells("Z1:AB2");
-    page2.getCell("Z1").value = "Acumulado: ";
-    page2.getCell("Z1").alignment = alignCenter;
-    page2.getCell("Z1").font = functionFont("Barlow", true, 16);
+    /*** Destino de las exportaciones ***/
+    page2.mergeCells("T3:X3");
+    page2.getCell("T3").value = `DESTINO DE LAS EXPORTACIONES (Tn)`;
+    page2.getCell("T3").font = functionFont("Barlow", true, 16);
+    page2.getCell("T3").alignment = alignCenter;
+    page2.getCell("T3").fill = bgGris;
 
-    page2.mergeCells("U3:AB20");
+    page2.mergeCells("T4:T5");
+    page2.getCell("T4").value = `Países`;
+    page2.getCell("T4").font = functionFont("Barlow", true, 16);
+    page2.getCell("T4").alignment = alignCenter;
 
-    page2.getRow(1).alignment = { horizontal: "center", vertical: "middle" };
-    /*****************/
+    page2.mergeCells("U4:U5");
+    page2.getCell("U4").value = `Uruguay`;
+    page2.getCell("U4").font = functionFont("Barlow", true, 16);
+    page2.getCell("U4").alignment = alignCenter;
 
-    for (let i = 6; i <= 19; i++) {
-      page2.getRow(i).font = { size: 15 };
-    }
+    page2.mergeCells("V4:V5");
+    page2.getCell("V4").value = `Chile`;
+    page2.getCell("V4").font = functionFont("Barlow", true, 16);
+    page2.getCell("V4").alignment = alignCenter;
+
+    page2.mergeCells("W4:W5");
+    page2.getCell("W4").value = `EE.UU`;
+    page2.getCell("W4").font = functionFont("Barlow", true, 16);
+    page2.getCell("W4").alignment = alignCenter;
+
+    page2.mergeCells("X4:X5");
+    page2.getCell("X4").value = `Nueva Zelanda`;
+    page2.getCell("X4").font = functionFont("Barlow", true, 16);
+    page2.getCell("X4").alignment = alignCenter;
+
+    page2.getCell("T6").value = `Crudo`;
+    page2.getCell("T6").font = functionFont("Barlow", true, 16);
+    page2.getCell("T6").alignment = alignCenter;
+
+    page2.getCell("T7").value = `Orgánico`;
+    page2.getCell("T7").font = functionFont("Barlow", true, 16);
+    page2.getCell("T7").alignment = alignCenter;
+
+    page2.getCell("T8").value = `Rubio`;
+    page2.getCell("T8").font = functionFont("Barlow", true, 16);
+    page2.getCell("T8").alignment = alignCenter;
+
+    page2.getCell("T9").value = `Blanco`;
+    page2.getCell("T9").font = functionFont("Barlow", true, 16);
+    page2.getCell("T9").alignment = alignCenter;
+
+    page2.mergeCells("T20:U20");
+    page2.getCell("T20").value = "Total Exportado";
+    page2.getCell("T20").font = functionFont("Barlow", true, 20);
+    page2.getCell("T20").alignment = alignCenter;
+    page2.getCell("T20").fill = bgNaranja;
+
+    page2.mergeCells("V20:X20");
+    page2.getCell("V20").value = { formula: `=SUM(U6:X9)` };
+    page2.getCell("V20").font = functionFont("Barlow", true, 22);
+    page2.getCell("V20").alignment = alignCenter;
+
+    /*******************************/
 
     /**** PRODUCCION AZUCAR DISCRIMINADA ****/
     page2.getCell("C6").value = parseInt(d1["J10"]);
@@ -3645,74 +4199,77 @@ Inicio de zafra ${zafraParteDiario - 1}: ${moment(
     /************/
 
     /****** PRODUCCION DE ALCOHOL ******/
-    page2.getCell("L6").value = parseInt(d1["N10"] / 1000);
-    page2.getCell("O6").value = parseInt(d1["O44"] / 1000);
-    page2.getCell("R6").value = parseFloat(d1["R44"] / 1000);
+    page2.getCell("H6").value = parseInt(d1["N10"] / 1000);
+    page2.getCell("J6").value = parseInt(d1["O44"] / 1000);
+    page2.getCell("M6").value = parseFloat(d1["R44"] / 1000);
 
-    page2.getCell("L7").value = parseInt(d6["N17"] / 1000);
-    page2.getCell("O7").value = parseInt(d6["O45"] / 1000);
-    page2.getCell("R7").value = parseFloat(d6["R45"] / 1000);
+    page2.getCell("H7").value = parseInt(d6["N17"] / 1000);
+    page2.getCell("J7").value = parseInt(d6["O45"] / 1000);
+    page2.getCell("M7").value = parseFloat(d6["R45"] / 1000);
 
-    page2.getCell("L8").value = parseInt(d4["N14"] / 1000);
-    page2.getCell("O8").value = parseInt(d4["O46"] / 1000);
-    page2.getCell("R8").value = parseFloat(d4["R46"] / 1000);
+    page2.getCell("H8").value = parseInt(d4["N14"] / 1000);
+    page2.getCell("J8").value = parseInt(d4["O46"] / 1000);
+    page2.getCell("M8").value = parseFloat(d4["R46"] / 1000);
 
-    page2.getCell("L9").value = parseInt(d2["N11"] / 1000);
-    page2.getCell("O9").value = parseInt(d2["O47"] / 1000);
-    page2.getCell("R9").value = parseFloat(d2["R47"] / 1000);
+    page2.getCell("H9").value = parseInt(d2["N11"] / 1000);
+    page2.getCell("J9").value = parseInt(d2["O47"] / 1000);
+    page2.getCell("M9").value = parseFloat(d2["R47"] / 1000);
 
-    page2.getCell("L10").value = parseInt(d7["N18"] / 1000);
-    page2.getCell("O10").value = parseInt(d7["O48"] / 1000);
-    page2.getCell("R10").value = parseFloat(d7["R48"] / 1000);
+    page2.getCell("H10").value = parseInt(d7["N18"] / 1000);
+    page2.getCell("J10").value = parseInt(d7["O48"] / 1000);
+    page2.getCell("M10").value = parseFloat(d7["R48"] / 1000);
 
-    page2.getCell("L11").value = parseInt(d8["N19"] / 1000);
-    page2.getCell("O11").value = parseInt(d8["O49"] / 1000);
-    page2.getCell("R11").value = parseFloat(d8["R49"] / 1000);
+    page2.getCell("H11").value = parseInt(d8["N19"] / 1000);
+    page2.getCell("J11").value = parseInt(d8["O49"] / 1000);
+    page2.getCell("M11").value = parseFloat(d8["R49"] / 1000);
 
-    page2.getCell("L12").value = parseInt(d3["N12"] / 1000);
-    page2.getCell("O12").value = parseInt(d3["O50"] / 1000);
-    page2.getCell("R12").value = parseFloat(d3["R50"] / 1000);
+    page2.getCell("H12").value = parseInt(d3["N12"] / 1000);
+    page2.getCell("J12").value = parseInt(d3["O50"] / 1000);
+    page2.getCell("M12").value = parseFloat(d3["R50"] / 1000);
 
-    page2.getCell("L13").value = parseInt(d9["N20"] / 1000);
-    page2.getCell("O13").value = parseInt(d9["O51"] / 1000);
-    page2.getCell("R13").value = parseFloat(d9["R51"] / 1000);
+    page2.getCell("H13").value = parseInt(d9["N20"] / 1000);
+    page2.getCell("J13").value = parseInt(d9["O51"] / 1000);
+    page2.getCell("M13").value = parseFloat(d9["R51"] / 1000);
 
-    page2.getCell("L14").value = parseInt(d10["N21"] / 1000);
-    page2.getCell("O14").value = parseInt(d10["O52"] / 1000);
-    page2.getCell("R14").value = parseFloat(d10["R52"] / 1000);
+    page2.getCell("H14").value = parseInt(d10["N21"] / 1000);
+    page2.getCell("J14").value = parseInt(d10["O52"] / 1000);
+    page2.getCell("M14").value = parseFloat(d10["R52"] / 1000);
 
-    page2.getCell("L15").value = parseInt(d11["N22"] / 1000);
-    page2.getCell("O15").value = parseInt(d11["O53"] / 1000);
-    page2.getCell("R15").value = parseFloat(d11["R53"] / 1000);
+    page2.getCell("H15").value = parseInt(d11["N22"] / 1000);
+    page2.getCell("J15").value = parseInt(d11["O53"] / 1000);
+    page2.getCell("M15").value = parseFloat(d11["R53"] / 1000);
 
-    page2.getCell("L16").value = parseInt(d5["N15"] / 1000);
-    page2.getCell("O16").value = parseInt(d5["O54"] / 1000);
-    page2.getCell("R16").value = parseFloat(d5["R54"] / 1000);
+    page2.getCell("H16").value = parseInt(d5["N15"] / 1000);
+    page2.getCell("J16").value = parseInt(d5["O54"] / 1000);
+    page2.getCell("M16").value = parseFloat(d5["R54"] / 1000);
 
-    page2.getCell("L17").value = parseInt(d13["N24"] / 1000);
-    page2.getCell("O17").value = parseInt(d13["O56"] / 1000);
-    page2.getCell("R17").value = parseFloat(d13["R56"] / 1000);
+    page2.getCell("H17").value = parseInt(d12["N23"] / 1000);
+    page2.getCell("J17").value = parseInt(d12["O55"] / 1000);
+    page2.getCell("M17").value = parseFloat(d12["R55"] / 1000);
 
-    page2.getCell("L18").value = parseInt(d14["N25"] / 1000);
-    page2.getCell("O18").value = parseInt(d14["O57"] / 1000);
-    page2.getCell("R18").value = parseFloat(d14["R57"] / 1000);
+    page2.getCell("H18").value = parseInt(d13["N24"] / 1000);
+    page2.getCell("J18").value = parseInt(d13["O56"] / 1000);
+    page2.getCell("M18").value = parseFloat(d13["R56"] / 1000);
 
-    page2.getCell("L19").value = parseInt(d12["N23"] / 1000);
-    page2.getCell("O19").value = parseInt(d12["O55"] / 1000);
-    page2.getCell("R19").value = parseFloat(d12["R55"] / 1000);
+    page2.getCell("H19").value = parseInt(d14["N25"] / 1000);
+    page2.getCell("J19").value = parseInt(d14["O57"] / 1000);
+    page2.getCell("M19").value = parseFloat(d14["R57"] / 1000);
     /****************************************************************************************/
 
+    /****** EXPORTACIONES ******/
+
     /*** CONFIGURACION PAGINA ***/
-    page2.pageSetup.printArea = "A1:AB20";
+    page2.pageSetup.printArea = "A1:X30";
     page2.pageSetup.scale = 100;
     page2.pageSetup.margins = {
-      left: 0.1,
+      left: 0.3,
       right: 0.1,
-      top: 0.75,
+      top: 0.2,
       bottom: 0.2,
       header: 0.2,
       footer: 0.1,
     };
+
     try {
       const buffer = await workbook.xlsx.writeBuffer();
       const fileType =

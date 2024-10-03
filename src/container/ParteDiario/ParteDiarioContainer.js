@@ -161,8 +161,6 @@ const ParteDiarioContainer = () => {
     const params1 = {
       fechadesde: fechaInicioComparativo,
       fechahasta: fechaFinComparativo,
-      // fechadesde: `01-04-${zafraParteDiario - 1}`,
-      // fechahasta: `31-03-${zafraParteDiario}`,
     }
 
     /***** DESDE BACKEND *****/

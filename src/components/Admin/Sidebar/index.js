@@ -6,6 +6,7 @@ import {
   BsNewspaper,
   BsClipboardData
 } from 'react-icons/bs'
+import { FaRegCalendarDays } from "react-icons/fa6";
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
 import { RiDatabaseLine } from "react-icons/ri"
 import './Sidebar.css'
@@ -51,6 +52,11 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
       title: 'periodos-zafra',
       iconName: <BsClipboardData className='sizeIcon' />,
       name: 'Periodos Ingenios',
+    },
+    {
+      title: 'dias-parada',
+      iconName: <FaRegCalendarDays className='sizeIcon' />,
+      name: 'Días Parada',
     },
     {
       title: 'reportes',

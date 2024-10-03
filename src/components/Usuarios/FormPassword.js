@@ -1,4 +1,4 @@
-import { Form, Input, Spin, Button } from "antd";
+import { Form, Input, Spin, Button, message } from "antd";
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import MsgError from "../Messages/MsgError";
@@ -24,7 +24,7 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
   const updatePass = async (values) => {
     const res = await api(
       "PATCH",
-      `${routerAPI}/${dataRegisterEdit[0]?.id}`,
+      `${routerAPI}/updatePass/${dataRegisterEdit[0]?.id}`,
       values,
       tokenAuth
     );
@@ -34,10 +34,11 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
         setLoading(false);
         window.location.href = "/admin/perfil";
       }, 2500);
+      message.success("Clave actualizada con éxito", 4)
     }
     if (res?.response?.status === 400) {
-      const arraysError = res?.response?.data?.errors;
-      setMessageError(arraysError);
+      const msgError = res?.response?.data?.message;
+      setMessageError(msgError);
       setDataError(true);
       setTimeout(() => {
         setDataError(false);
@@ -88,7 +89,7 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
           <Col xs={12} sm={6}>
             <Form.Item
               label="Ingrese clave actual"
-              name="clave"
+              name="claveActual"
               className="mb-3 w-100"
               rules={[{ required: true, message: "Debe ingresar un clave" }]}
             >
@@ -143,10 +144,10 @@ const FormPass = ({ tokenAuth, routerAPI, dataRegisterEdit }) => {
         </Form.Item>
 
         {dataError
-          ? messageError.map((e, i) => (
-              <MsgError key={i} text1={""} text2={e.msg} />
-            ))
-          : null}
+          && (
+            <MsgError text1={"Error"} text2={messageError} />
+          )
+        }
         {serverError ? <MsgError text2="Server internal Error" /> : null}
       </Form>
     </div>

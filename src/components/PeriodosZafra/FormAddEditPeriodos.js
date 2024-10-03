@@ -7,8 +7,6 @@ import './periodoZafra.css'
 
 const FormAddEditPeriodos = ({
   dataRegisterEdit,
-  periodosZafra,
-  id,
   aniosData,
   ingeniosData,
 }) => {

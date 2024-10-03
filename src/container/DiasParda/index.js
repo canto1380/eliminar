@@ -6,10 +6,10 @@ import { useEffect, useState, useContext } from "react";
 import { User } from "../../context/UserProvider";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
-import Title from '../../components/Title'
-import PeriodoZafraContainer from "./PeriodoZafraContainer";
+import Title from "antd/es/skeleton/Title";
+import DiasParadaContainer from "./DiasParadaContainer";
 
-const PeriodosZafra = () => {
+const DiasParada = () => {
   const [loading, setLoading] = useState(false);
   const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
@@ -28,20 +28,18 @@ const PeriodosZafra = () => {
   }, []);
   useEffect(() => {
     if (tokenAuth === null && dataUser) {
-      setTokenAuth(dataUser)
-      setModalUnauthorized(false);
-    } 
-    if(tokenAuth === null && !dataUser) {
+      setTokenAuth(dataUser);
+    }
+    if (tokenAuth === null && !dataUser) {
       setModalUnauthorized(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
 
   useEffect(() => {
-    inactivityTime(setModalUnauthorized)
+    inactivityTime(setModalUnauthorized);
   }, []);
-
-  return(
+  return (
     <div>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center text-center divCenter">
@@ -49,11 +47,11 @@ const PeriodosZafra = () => {
         </div>
       ) : (
         <>
-          <Title title={"Zafra Ingenios"} />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
+          <Title Title={"Días de parada"} />
             <Sidebar
               inactivo={inactivo}
               setInactivo={setInactivo}
@@ -61,17 +59,21 @@ const PeriodosZafra = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-              <PeriodoZafraContainer tokenAuth={tokenAuth} routeAPI={'periodoZafra'}/>
+              <DiasParadaContainer
+                tokenAuth={tokenAuth}
+                routeAPI={"diaParada"}
+              />
             </div>
-          {modalUnauthorized && (
-            <div>
-              <Unauthorized />
-            </div>
-          )}
+            {modalUnauthorized && (
+              <div>
+                <Unauthorized />
+              </div>
+            )}
           </Container>
         </>
       )}
+      paradas
     </div>
-  )
-}
-export default PeriodosZafra
+  );
+};
+export default DiasParada;

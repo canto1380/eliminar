@@ -1,9 +1,9 @@
 export const columns = [
   {
-    key: 'Id',
+    key: 'fecha',
     title: 'Fecha',
     dataIndex: 'FechaParte',
-    defaultSortOrder: 'descend',
+    defaultSortOrder: 'ascend',
     sorter: (a, b) => a.FechaParte > b.FechaParte,
   },
   {
@@ -40,6 +40,7 @@ export const columns = [
     dataIndex: 'AzucarEquivalente',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarEquivalente > b.AzucarEquivalente,
+    render: (value) => value?.toFixed(3),
   },
   {
     key: 'Id',

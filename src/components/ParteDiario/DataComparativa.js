@@ -458,6 +458,7 @@ const laesperanza = dateFinIngenios?.find(
     const newDate = dateConverted(data?.FechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date()
     const anioData = fechaParametro.getFullYear() - 1
+    
     fechaParametro.setFullYear(anioData)
     if (
       data.IngenioNombre === 'Aguilares'
@@ -497,6 +498,7 @@ const laesperanza = dateFinIngenios?.find(
       && newDate <= fechaParametro
       && newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
+      // console.log(data.AlcoholProducido)
       g3 = g3 + data.AlcoholProducido;
       dataLaFlorida = {
         R12: 0,
@@ -508,7 +510,6 @@ const laesperanza = dateFinIngenios?.find(
         AA12: g3,
       };
     }
-
     if (
       data.IngenioNombre === 'Concepción'
       && newDate <= fechaParametro
@@ -1008,6 +1009,7 @@ const laesperanza = dateFinIngenios?.find(
       }
     }
   })
+  // console.log(dataLaFlorida)
   setDc1(dataAguilares)
   setDc2(dataCruzAlta)
   setDc3(dataLaFlorida)

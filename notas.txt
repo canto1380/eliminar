@@ -525,3 +525,20 @@ let aguilFinal = dataImport?.filter(
   };
 
   /***** *****/
+
+
+  /******************************** PARTE DIARIO DIRECTORIO ********************************/
+  Fecha: 16/07/24
+  La Columna E estaba destinada al final de zafra de los ingenios. La columna estaba oculta
+  ya que no era pedida por el directorio. Codigo linea 815 y desde linea 986 hasta 1098
+  - La formaula original de los días de avance (columna D) hacia referencia a la columna E
+        =if(E10="",(E26-C10)+1,(E10-C10)+1)
+
+  - Se modifica parcialmente la columna E para mostrar los días efectivos de Molienda. Se
+  agrega codigo desde linea 1100 hasta linea 1118
+  
+  - Pasamos los finales de zafra a la columna AZ para usarla para el cálculo de los días de
+  avance. Ocultamos la oculma AZ
+
+  - Modificación en las fórmulas de Días de Avance (Código desde linea 1121 hasta linea 1239)
+        =if(AZ10="",(E26-C10)+1,(AZ10-C10)+1)
