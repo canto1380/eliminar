@@ -72,7 +72,6 @@ const ItemCollpse = ({
 
     dataParteDiariosHistoricos?.forEach((data) => {
       const newDate = dateConverted(data.FechaParte);
-
       function getLastDayOfMonth(month) {
         const date = new Date();
         date.setMonth(month);
@@ -92,11 +91,18 @@ const ItemCollpse = ({
         arrQuincenal.push(data);
       }
       if (newDate.getMonth() + 1 === dataMes) {
-        arrMensual.push(data);
+        if (dataQuincena === 1) {
+          if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
+            arrMensual.push(data);
+          }
+        }
+        if (dataQuincena === 2) {
+          arrMensual.push(data);
+        }
       }
-
       arrZafra.push(data);
     });
+
     setAguilares(arrQuincenal.filter((d) => d.IngenioNombre === "Aguilares"));
     setAguilaresMensual(
       arrMensual.filter((d) => d.IngenioNombre === "Aguilares")
@@ -109,13 +115,17 @@ const ItemCollpse = ({
     setBellaVistaMensual(
       arrMensual.filter((d) => d.IngenioNombre === "Bella Vista")
     );
-    setBellaVistaZafra(arrZafra.filter((d) => d.IngenioNombre === "Bella Vista"));
+    setBellaVistaZafra(
+      arrZafra.filter((d) => d.IngenioNombre === "Bella Vista")
+    );
 
     setConcepcion(arrQuincenal.filter((d) => d.IngenioNombre === "Concepción"));
     setConcepcionMensual(
       arrMensual.filter((d) => d.IngenioNombre === "Concepción")
     );
-    setConcepcionZafra(arrZafra.filter((d) => d.IngenioNombre === "Concepción"));
+    setConcepcionZafra(
+      arrZafra.filter((d) => d.IngenioNombre === "Concepción")
+    );
 
     setCruzAlta(arrQuincenal.filter((d) => d.IngenioNombre === "Cruz Alta"));
     setCruzAltaMensual(
@@ -147,7 +157,9 @@ const ItemCollpse = ({
     setLaProvidenciaMensual(
       arrMensual.filter((d) => d.IngenioNombre === "La Providencia")
     );
-    setLaProvidenciaZafra(arrZafra.filter((d) => d.IngenioNombre === "La Providencia"));
+    setLaProvidenciaZafra(
+      arrZafra.filter((d) => d.IngenioNombre === "La Providencia")
+    );
 
     setLaTrinidad(
       arrQuincenal.filter((d) => d.IngenioNombre === "La Trinidad")
@@ -155,18 +167,16 @@ const ItemCollpse = ({
     setLaTrinidadMensual(
       arrMensual.filter((d) => d.IngenioNombre === "La Trinidad")
     );
-    setLaTrinidadZafra(arrZafra.filter((d) => d.IngenioNombre === "La Trinidad"));
+    setLaTrinidadZafra(
+      arrZafra.filter((d) => d.IngenioNombre === "La Trinidad")
+    );
 
     setLeales(arrQuincenal.filter((d) => d.IngenioNombre === "Leales"));
-    setLealesMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Leales")
-    );
+    setLealesMensual(arrMensual.filter((d) => d.IngenioNombre === "Leales"));
     setLealesZafra(arrZafra.filter((d) => d.IngenioNombre === "Leales"));
 
     setMarapa(arrQuincenal.filter((d) => d.IngenioNombre === "Marapa"));
-    setMarapaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Marapa")
-    );
+    setMarapaMensual(arrMensual.filter((d) => d.IngenioNombre === "Marapa"));
     setMarapaZafra(arrZafra.filter((d) => d.IngenioNombre === "Marapa"));
 
     setSantaBarbara(
@@ -175,7 +185,9 @@ const ItemCollpse = ({
     setSantaBarbaraMensual(
       arrMensual.filter((d) => d.IngenioNombre === "Santa Barbara")
     );
-    setSantaBarbaraZafra(arrZafra.filter((d) => d.IngenioNombre === "Santa Barbara"));
+    setSantaBarbaraZafra(
+      arrZafra.filter((d) => d.IngenioNombre === "Santa Barbara")
+    );
 
     setSantaRosa(arrQuincenal.filter((d) => d.IngenioNombre === "Santa Rosa"));
     setSantaRosaMensual(
@@ -184,9 +196,7 @@ const ItemCollpse = ({
     setSantaRosaZafra(arrZafra.filter((d) => d.IngenioNombre === "Santa Rosa"));
 
     setNunorco(arrQuincenal.filter((d) => d.IngenioNombre === "Ñuñorco"));
-    setNunorcoMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Ñuñorco")
-    );
+    setNunorcoMensual(arrMensual.filter((d) => d.IngenioNombre === "Ñuñorco"));
     setNunorcoZafra(arrZafra.filter((d) => d.IngenioNombre === "Ñuñorco"));
   };
 
@@ -199,6 +209,7 @@ const ItemCollpse = ({
     });
     return acc;
   }, {});
+
   const totalMesAguilares = aguilaresMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
       if (typeof item[key] === "number") {
@@ -224,6 +235,7 @@ const ItemCollpse = ({
     });
     return acc;
   }, {});
+
   const totalMesBellaVista = bellaVistaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
       if (typeof item[key] === "number") {
@@ -232,6 +244,7 @@ const ItemCollpse = ({
     });
     return acc;
   }, {});
+
   const totalZafraBellaVista = bellaVistaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
       if (typeof item[key] === "number") {
@@ -640,12 +653,11 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (aguilaresConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
+      
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (aguilaresConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   concepcionConTotales.forEach((d) => {
@@ -656,14 +668,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (concepcionConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (concepcionConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   cruzAltaConTotales.forEach((d) => {
@@ -674,10 +682,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (cruzAltaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (cruzAltaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   famaillaConTotales.forEach((d) => {
@@ -688,10 +696,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (famaillaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (famaillaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laCoronaConTotales.forEach((d) => {
@@ -702,10 +710,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (laCoronaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (laCoronaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laFloridaConTotales.forEach((d) => {
@@ -716,12 +724,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (laFloridaConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (laFloridaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laProvidenciaConTotales.forEach((d) => {
@@ -732,16 +738,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (
-            d.RendimientoCanaBruta /
-            (laProvidenciaConTotales.length - 1)
-          ).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (
-            d.RendimientoCanaNeta /
-            (laProvidenciaConTotales.length - 1)
-          ).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laTrinidadConTotales.forEach((d) => {
@@ -752,14 +752,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (laTrinidadConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (laTrinidadConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   lealesConTotales.forEach((d) => {
@@ -770,10 +766,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (lealesConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (lealesConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   marapaConTotales.forEach((d) => {
@@ -784,10 +780,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (marapaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (marapaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   bellaVistaConTotales.forEach((d) => {
@@ -798,14 +794,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (bellaVistaConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (bellaVistaConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   nunorcoConTotales.forEach((d) => {
@@ -816,10 +808,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (nunorcoConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (nunorcoConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   santaBarbaraConTotales.forEach((d) => {
@@ -830,15 +822,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (
-            d.RendimientoCanaBruta /
-            (santaBarbaraConTotales.length - 1)
-          ).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (santaBarbaraConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
   santaRosaConTotales.forEach((d) => {
@@ -849,12 +836,10 @@ const ItemCollpse = ({
     ) {
       d.RendimientoCanaBruta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaBruta / (santaRosaConTotales.length - 1)).toFixed(
-            3
-          );
+        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
       d.RendimientoCanaNeta = !d.RendimientoCanaBruta
         ? 0
-        : (d.RendimientoCanaNeta / (santaRosaConTotales.length - 1)).toFixed(3);
+        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
     }
   });
 
@@ -1006,7 +991,6 @@ const ItemCollpse = ({
       ),
     },
   ];
-  // console.log(nunorco)
   return (
     <Collapse
       bordered={false}

@@ -16,13 +16,11 @@ const FiltrosReportes = ({
         dataFecha()
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
-    
       const dataFecha = async () => {
         const aniosData = await getAnios()
-    
-        setDataAnios(aniosData)
+        const dataFilterAnios = aniosData.filter((d) => d.anio_zafra !== 2013)
+        setDataAnios(dataFilterAnios)
       }
-
     const handleZafraInicio = (e) => {
         setDataZafraInicio(e)
       }
@@ -37,12 +35,11 @@ const FiltrosReportes = ({
           }
           optionsAnios.push(option)
     })
-
     return (
         <>
         <Row>
         <Col className=''>
-          <div className={`pt-2 pb-0 px-4`}>
+          <div className={`pt-2 pb-0 px-3`}>
             <p className='fw-bolder'>{title}</p>
           </div>
         </Col>
@@ -54,18 +51,18 @@ const FiltrosReportes = ({
                 onChange={handleZafraInicio}
                 showSearch style={{width: '100%'}}
                 placeholder='Zafra desde'
-                optionsFilterProp='children'
+                optionsFilterProp='label'
                 options={optionsAnios}
                 defaultValue={dataZafraInicio}
             />
         </Col>
         <Col xs={12} md={6} className="mb-1 mt-1">
-            <span className="me-4">Zafra inicio:</span>
+            <span className="me-4">Zafra final:</span>
             <Select
                 onChange={handleZafraFin}
                 showSearch style={{width: '100%'}}
-                placeholder='Zafra desde'
-                optionsFilterProp='children'
+                placeholder='Zafra hasta'
+                optionsFilterProp='label'
                 options={optionsAnios}
                 defaultValue={dataZafraFin}
             />

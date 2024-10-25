@@ -3486,7 +3486,7 @@ page1.getCell("O61").value = {
       }
     }
     /*** Merge ***/
-    page2.mergeCells("T10:X19");
+    page2.mergeCells("T10:Y19");
 
     /** Bordes **/
 
@@ -3548,7 +3548,7 @@ page1.getCell("O61").value = {
     }
     /*** Bordes datos de destino de exportacion ***/
     for (let i = 6; i <= 20; i++) {
-      for (let j = 20; j <= 24; j++) {
+      for (let j = 20; j <= 25; j++) {
         page2.getCell(i, j).border = borders(
           "thin",
           "000000",
@@ -3563,7 +3563,7 @@ page1.getCell("O61").value = {
     }
 
     /*** Encabezados ***/
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 1; i <= 25; i++) {
       page2.getCell(1, i).border = borders(
         "medium",
         "000000",
@@ -3659,7 +3659,7 @@ page1.getCell("O61").value = {
       );
     }
     for (let i = 6; i <= 20; i++) {
-      page2.getCell(i, 24).border = borders(
+      page2.getCell(i, 25).border = borders(
         "thin",
         "000000",
         "medium",
@@ -3671,7 +3671,7 @@ page1.getCell("O61").value = {
       );
     }
     /*** Bordes fila 20 ***/
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 1; i <= 25; i++) {
       page2.getCell(20, i).border = borders(
         "medium",
         "000000",
@@ -3783,15 +3783,56 @@ page1.getCell("O61").value = {
       "000000",
       "medium",
       "000000",
+      "medium",
+      "000000",
+    );
+    page2.getCell("Y4").border = borders(
+      "thin",
+      "000000",
+      "medium",
+      "000000",
+      "medium",
+      "000000",
       "thick",
-      "00326C"
+      "003026C",
+    );
+
+    page2.getCell("A1").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "thick",
+      "00326c"
+    );
+    page2.getCell("A3").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "medium",
+      "000000"
+    );
+    page2.getCell("A20").border = borders(
+      "thin",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "thin",
+      "000000",
     );
 
     /**** AZUCARES ****/
     page2.mergeCells("A1:G2");
     page2.getCell(
       "A1"
-    ).value = `PRODUCCIÓN POR TIPO DE AZÚCARES  |  HASTA  ${dateFormat}`;
+    ).value = `PRODUCCIÓN POR TIPO DE AZÚCARES  |  HASTA  ${dateDatosProductivosFormato}`;
     page2.getCell("A1").font = functionFont("Barlow", true, 18);
     page2.getCell("A1").alignment = alignCenter;
     page2.getCell("A1").fill = bgNaranja;
@@ -3859,7 +3900,7 @@ page1.getCell("O61").value = {
     page2.mergeCells("H1:N2");
     page2.getCell(
       "H1"
-    ).value = `PRODUCCIÓN DE ALCOHOL ETÍLICO  |  HASTA ${dateFormat}`;
+    ).value = `PRODUCCIÓN DE ALCOHOL ETÍLICO  |  HASTA ${dateDatosProductivosFormato}`;
     page2.getCell("H1").font = functionFont("Barlow", true, 18);
     page2.getCell("H1").alignment = alignCenter;
     page2.getCell("H1").fill = bgAzul;
@@ -3997,7 +4038,7 @@ page1.getCell("O61").value = {
     page2.getCell("M20").numFmt = "#,##0";
 
     /**** EXPORTACIONES ****/
-    page2.mergeCells("O1:X2");
+    page2.mergeCells("O1:Y2");
     page2.getCell("O1").value = `MERCADO EXTERNO  |  HASTA ${dateFormat}`;
     page2.getCell("O1").font = functionFont("Barlow", true, 18);
     page2.getCell("O1").alignment = alignCenter;
@@ -4052,7 +4093,7 @@ page1.getCell("O61").value = {
     page2.getCell("S20").numFmt = "#,##0";
 
     /*** Destino de las exportaciones ***/
-    page2.mergeCells("T3:X3");
+    page2.mergeCells("T3:Y3");
     page2.getCell("T3").value = `DESTINO DE LAS EXPORTACIONES (Tn)`;
     page2.getCell("T3").font = functionFont("Barlow", true, 16);
     page2.getCell("T3").alignment = alignCenter;
@@ -4083,6 +4124,11 @@ page1.getCell("O61").value = {
     page2.getCell("X4").font = functionFont("Barlow", true, 16);
     page2.getCell("X4").alignment = alignCenter;
 
+    page2.mergeCells("Y4:Y5");
+    page2.getCell("Y4").value = `Canadá`;
+    page2.getCell("Y4").font = functionFont("Barlow", true, 16);
+    page2.getCell("Y4").alignment = alignCenter;
+
     page2.getCell("T6").value = `Crudo`;
     page2.getCell("T6").font = functionFont("Barlow", true, 16);
     page2.getCell("T6").alignment = alignCenter;
@@ -4105,8 +4151,8 @@ page1.getCell("O61").value = {
     page2.getCell("T20").alignment = alignCenter;
     page2.getCell("T20").fill = bgNaranja;
 
-    page2.mergeCells("V20:X20");
-    page2.getCell("V20").value = { formula: `=SUM(U6:X9)` };
+    page2.mergeCells("V20:Y20");
+    page2.getCell("V20").value = { formula: `=SUM(U6:Y9)` };
     page2.getCell("V20").font = functionFont("Barlow", true, 22);
     page2.getCell("V20").alignment = alignCenter;
 

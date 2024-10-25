@@ -498,7 +498,6 @@ const laesperanza = dateFinIngenios?.find(
       && newDate <= fechaParametro
       && newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
-      // console.log(data.AlcoholProducido)
       g3 = g3 + data.AlcoholProducido;
       dataLaFlorida = {
         R12: 0,
@@ -728,8 +727,11 @@ const laesperanza = dateFinIngenios?.find(
       a1 = a1 + data.MoliendaCanaBruta || 0
       b1 = b1 + data.MoliendaCanaNeta || 0
       c1 = c1 + data.AzucarEquivalente || 0
-      z1 = z1 + data.AzucarBlancoProducido || 0
-      e1 = e1 + data.AzucarCrudoProducido || 0
+      z1 = z1 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e1 = e1 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f1 = f1 + data.MelazaProducida || 0
       // g1 = g1 + data.AlcoholProducido || 0
       dataAguilares = {
@@ -742,13 +744,17 @@ const laesperanza = dateFinIngenios?.find(
         AA10: dataAguilares.AA10,
       }
     }
+    
 
     if (data.IngenioNombre === 'Cruz Alta' && newDate <= fechaParametro) {
       a2 = a2 + data.MoliendaCanaBruta
       b2 = b2 + data.MoliendaCanaNeta
       c2 = c2 + data.AzucarEquivalente
-      z2 = z2 + data.AzucarBlancoProducido
-      e2 = e2 + data.AzucarCrudoProducido
+      z2 = z2 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e2 = e2 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f2 = f2 + data.MelazaProducida
       // g2 = g2 + data.AlcoholProducido
       dataCruzAlta = {
@@ -766,8 +772,11 @@ const laesperanza = dateFinIngenios?.find(
       a3 = a3 + data.MoliendaCanaBruta
       b3 = b3 + data.MoliendaCanaNeta
       c3 = c3 + data.AzucarEquivalente
-      z3 = z3 + data.AzucarBlancoProducido
-      e3 = e3 + data.AzucarCrudoProducido
+      z3 = z3 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e3 = e3 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f3 = f3 + data.MelazaProducida
       // g3 = g3 + data.AlcoholProducido
       dataLaFlorida = {
@@ -785,8 +794,11 @@ const laesperanza = dateFinIngenios?.find(
       a4 = a4 + data.MoliendaCanaBruta
       b4 = b4 + data.MoliendaCanaNeta
       c4 = c4 + data.AzucarEquivalente
-      z4 = z4 + data.AzucarBlancoProducido
-      e4 = e4 + data.AzucarCrudoProducido
+      z4 = z4 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e4 = e4 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f4 = f4 + data.MelazaProducida
       // g4 = g4 + data.AlcoholProducido
       dataConcepcion = {
@@ -804,8 +816,11 @@ const laesperanza = dateFinIngenios?.find(
       a5 = a5 + data.MoliendaCanaBruta
       b5 = b5 + data.MoliendaCanaNeta
       c5 = c5 + data.AzucarEquivalente
-      z5 = z5 + data.AzucarBlancoProducido
-      e5 = e5 + data.AzucarCrudoProducido
+      z5 = z5 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e5 = e5 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f5 = f5 + data.MelazaProducida
       // g5 = g5 + data.AlcoholProducido
       dataMarapa = {
@@ -823,8 +838,11 @@ const laesperanza = dateFinIngenios?.find(
       a6 = a6 + data.MoliendaCanaBruta
       b6 = b6 + data.MoliendaCanaNeta
       c6 = c6 + data.AzucarEquivalente
-      z6 = z6 + data.AzucarBlancoProducido
-      e6 = e6 + data.AzucarCrudoProducido
+      z6 = z6 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e6 = e6 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f6 = f6 + data.MelazaProducida
       // g6 = g6 + data.AlcoholProducido
       dataBellaVista = {
@@ -842,8 +860,11 @@ const laesperanza = dateFinIngenios?.find(
       a7 = a7 + data.MoliendaCanaBruta
       b7 = b7 + data.MoliendaCanaNeta
       c7 = c7 + data.AzucarEquivalente
-      z7 = z7 + data.AzucarBlancoProducido
-      e7 = e7 + data.AzucarCrudoProducido
+      z7 = z7 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e7 = e7 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f7 = f7 + data.MelazaProducida
       // g7 = g7 + data.AlcoholProducido
       dataFamailla = {
@@ -861,8 +882,11 @@ const laesperanza = dateFinIngenios?.find(
       a8 = a8 + data.MoliendaCanaBruta
       b8 = b8 + data.MoliendaCanaNeta
       c8 = c8 + data.AzucarEquivalente
-      z8 = z8 + data.AzucarBlancoProducido
-      e8 = e8 + data.AzucarCrudoProducido
+      z8 = z8 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e8 = e8 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f8 = f8 + data.MelazaProducida
       // g8 = g8 + data.AlcoholProducido
       dataLaCorona = {
@@ -880,8 +904,11 @@ const laesperanza = dateFinIngenios?.find(
       a9 = a9 + data.MoliendaCanaBruta
       b9 = b9 + data.MoliendaCanaNeta
       c9 = c9 + data.AzucarEquivalente
-      z9 = z9 + data.AzucarBlancoProducido
-      e9 = e9 + data.AzucarCrudoProducido
+      z9 = z9 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e9 = e9 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f9 = f9 + data.MelazaProducida
       // g9 = g9 + data.AlcoholProducido
       dataLaProvidencia = {
@@ -899,8 +926,11 @@ const laesperanza = dateFinIngenios?.find(
       a10 = a10 + data.MoliendaCanaBruta
       b10 = b10 + data.MoliendaCanaNeta
       c10 = c10 + data.AzucarEquivalente
-      z10 = z10 + data.AzucarBlancoProducido
-      e10 = e10 + data.AzucarCrudoProducido
+      z10 = z10 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e10 = e10 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f10 = f10 + data.MelazaProducida
       // g10 = g10 + data.AlcoholProducido
       dataLaTrinidad = {
@@ -918,8 +948,11 @@ const laesperanza = dateFinIngenios?.find(
       a11 = a11 + data.MoliendaCanaBruta
       b11 = b11 + data.MoliendaCanaNeta
       c11 = c11 + data.AzucarEquivalente
-      z11 = z11 + data.AzucarBlancoProducido
-      e11 = e11 + data.AzucarCrudoProducido
+      z11 = z11 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e11 = e11 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f11 = f11 + data.MelazaProducida
       // g11 = g11 + data.AlcoholProducido
       dataLeales = {
@@ -937,8 +970,11 @@ const laesperanza = dateFinIngenios?.find(
       a12 = a12 + data?.MoliendaCanaBruta
       b12 = b12 + data?.MoliendaCanaNeta
       c12 = c12 + data?.AzucarEquivalente
-      z12 = z12 + data?.AzucarBlancoProducido
-      e12 = e12 + data?.AzucarCrudoProducido
+      z12 = z12 + data?.AzucarBlancoProducido + data?.AzucarRefinado
+      e12 = e12 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f12 = f12 + data?.MelazaProducida
       // g12 = g12 + data?.AlcoholProducido
       dataÑuñorco = {
@@ -956,8 +992,11 @@ const laesperanza = dateFinIngenios?.find(
       a13 = a13 + data.MoliendaCanaBruta
       b13 = b13 + data.MoliendaCanaNeta
       c13 = c13 + data.AzucarEquivalente
-      z13 = z13 + data.AzucarBlancoProducido
-      e13 = e13 + data.AzucarCrudoProducido
+      z13 = z13 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e13 = e13 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f13 = f13 + data.MelazaProducida
       // g13 = g13 + data.AlcoholProducido
       dataStaBarbara = {
@@ -975,8 +1014,11 @@ const laesperanza = dateFinIngenios?.find(
       a14 = a14 + data.MoliendaCanaBruta
       b14 = b14 + data.MoliendaCanaNeta
       c14 = c14 + data.AzucarEquivalente
-      z14 = z14 + data.AzucarBlancoProducido
-      e14 = e14 + data.AzucarCrudoProducido
+      z14 = z14 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e14 = e14 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f14 = f14 + data.MelazaProducida
       // g14 = g14 + data.AlcoholProducido
       dataStaRosa = {
@@ -994,8 +1036,11 @@ const laesperanza = dateFinIngenios?.find(
       a15 = a15 + data.MoliendaCanaBruta
       b15 = b15 + data.MoliendaCanaNeta
       c15 = c15 + data.AzucarEquivalente
-      z15 = z15 + data.AzucarBlancoProducido
-      e15 = e15 + data.AzucarCrudoProducido
+      z15 = z15 + data.AzucarBlancoProducido + data?.AzucarRefinado
+      e15 = e15 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f15 = f15 + data.MelazaProducida
       // g15 = g15 + data.AlcoholProducido
       dataSanJuan = {
@@ -1009,7 +1054,6 @@ const laesperanza = dateFinIngenios?.find(
       }
     }
   })
-  // console.log(dataLaFlorida)
   setDc1(dataAguilares)
   setDc2(dataCruzAlta)
   setDc3(dataLaFlorida)

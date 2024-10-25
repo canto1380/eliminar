@@ -843,8 +843,11 @@ export const dataPorTipo = (
       a1 = a1 + data.MoliendaCanaBruta || 0;
       b1 = b1 + data.MoliendaCanaNeta || 0;
       c1 = c1 + data.AzucarEquivalente || 0;
-      z1 = z1 + data.AzucarBlancoProducido;
-      e1 = e1 + data.AzucarCrudoProducido || 0;
+      z1 = z1 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e1 = e1 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f1 = f1 + data.MelazaProducida || 0;
       h1 = h1 + data.AzucarRefinado || 0;
       i1 = i1 + data.AzucarOrganico || 0;
@@ -875,8 +878,11 @@ export const dataPorTipo = (
       a2 = a2 + data.MoliendaCanaBruta;
       b2 = b2 + data.MoliendaCanaNeta;
       c2 = c2 + data.AzucarEquivalente;
-      z2 = z2 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e2 = e2 + data.AzucarCrudoProducido;
+      z2 = z2 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e2 = e2 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
       f2 = f2 + data.MelazaProducida;
       h2 = h2 + data.AzucarRefinado || 0;
       i2 = i2 + data.AzucarOrganico || 0;
@@ -907,8 +913,11 @@ export const dataPorTipo = (
       a3 = a3 + data.MoliendaCanaBruta;
       b3 = b3 + data.MoliendaCanaNeta;
       c3 = c3 + data.AzucarEquivalente;
-      z3 = z3 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e3 = e3 + data.AzucarCrudoProducido;
+      z3 = z3 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e3 = e3 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f3 = f3 + data.MelazaProducida;
       // g3 = g3 + data.AlcoholProducido;
       h3 = h3 + data.AzucarRefinado || 0;
@@ -942,7 +951,10 @@ export const dataPorTipo = (
       b4 = b4 + data.MoliendaCanaNeta;
       c4 = c4 + data.AzucarEquivalente;
       z4 = z4 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
-      e4 = e4 + data.AzucarCrudoProducido;
+      e4 = e4 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f4 = f4 + data.MelazaProducida;
       h4 = h4 + data.AzucarRefinado || 0;
       i4 = i4 + data.AzucarOrganico || 0;
@@ -975,8 +987,11 @@ export const dataPorTipo = (
       a5 = a5 + data.MoliendaCanaBruta;
       b5 = b5 + data.MoliendaCanaNeta;
       c5 = c5 + data.AzucarEquivalente;
-      z5 = z5 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e5 = e5 + data.AzucarCrudoProducido;
+      z5 = z5 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e5 = e5 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f5 = f5 + data.MelazaProducida;
       h5 = h5 + data.AzucarRefinado || 0;
       i5 = i5 + data.AzucarOrganico || 0;
@@ -1006,8 +1021,11 @@ export const dataPorTipo = (
       a6 = a6 + data.MoliendaCanaBruta;
       b6 = b6 + data.MoliendaCanaNeta;
       c6 = c6 + data.AzucarEquivalente;
-      z6 = z6 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e6 = e6 + data.AzucarCrudoProducido;
+      z6 = z6 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e6 = e6 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f6 = f6 + data.MelazaProducida;
       h6 = h6 + data.AzucarRefinado || 0;
       i6 = i6 + data.AzucarOrganico || 0;
@@ -1037,7 +1055,10 @@ export const dataPorTipo = (
       b7 = b7 + data.MoliendaCanaNeta;
       c7 = c7 + data.AzucarEquivalente;
       z7 = z7 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
-      e7 = e7 + data.AzucarCrudoProducido;
+      e7 = e7 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f7 = f7 + data.MelazaProducida;
       h7 = h7 + data.AzucarRefinado || 0;
       i7 = i7 + data.AzucarOrganico || 0;
@@ -1069,8 +1090,11 @@ export const dataPorTipo = (
       a8 = a8 + data.MoliendaCanaBruta;
       b8 = b8 + data.MoliendaCanaNeta;
       c8 = c8 + data.AzucarEquivalente;
-      z8 = z8 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e8 = e8 + data.AzucarCrudoProducido;
+      z8 = z8 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e8 = e8 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f8 = f8 + data.MelazaProducida;
       h8 = h8 + data.AzucarRefinado || 0;
       i8 = i8 + data.AzucarOrganico || 0;
@@ -1100,7 +1124,7 @@ export const dataPorTipo = (
       a9 = a9 + data.MoliendaCanaBruta;
       b9 = b9 + data.MoliendaCanaNeta;
       c9 = c9 + data.AzucarEquivalente;
-      z9 = z9 + data.AzucarBlancoProducido;
+      z9 = z9 + data.AzucarBlancoProducido + data?.AzucarRefinado;
       e9 =
         e9 +
         (data.AzucarCrudoProducido || 0) +
@@ -1137,8 +1161,11 @@ export const dataPorTipo = (
       a10 = a10 + data.MoliendaCanaBruta;
       b10 = b10 + data.MoliendaCanaNeta;
       c10 = c10 + data.AzucarEquivalente;
-      z10 = z10 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e10 = e10 + data.AzucarCrudoProducido;
+      z10 = z10 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e10 = e10 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f10 = f10 + data.MelazaProducida;
       h10 = h10 + data.AzucarRefinado || 0;
       i10 = i10 + data.AzucarOrganico || 0;
@@ -1169,7 +1196,10 @@ export const dataPorTipo = (
       b11 = b11 + data.MoliendaCanaNeta;
       c11 = c11 + data.AzucarEquivalente;
       z11 = z11 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
-      e11 = e11 + data.AzucarCrudoProducido;
+      e11 = e11 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f11 = f11 + data.MelazaProducida;
       // g11 = g11 + data.AlcoholProducido;
       h11 = h11 + data.AzucarRefinado || 0;
@@ -1204,8 +1234,11 @@ export const dataPorTipo = (
       a12 = a12 + data?.MoliendaCanaBruta;
       b12 = b12 + data?.MoliendaCanaNeta;
       c12 = c12 + data?.AzucarEquivalente;
-      z12 = z12 + data?.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e12 = e12 + data?.AzucarCrudoProducido;
+      z12 = z12 + data?.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e12 = e12 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f12 = f12 + data?.MelazaProducida;
       h12 = h12 + data.AzucarRefinado || 0;
       i12 = i12 + data.AzucarOrganico || 0;
@@ -1235,8 +1268,11 @@ export const dataPorTipo = (
       a13 = a13 + data.MoliendaCanaBruta;
       b13 = b13 + data.MoliendaCanaNeta;
       c13 = c13 + data.AzucarEquivalente;
-      z13 = z13 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e13 = e13 + data.AzucarCrudoProducido;
+      z13 = z13 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e13 = e13 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f13 = f13 + data.MelazaProducida;
       h13 = h13 + data.AzucarRefinado || 0;
       i13 = i13 + data.AzucarOrganico || 0;
@@ -1266,8 +1302,11 @@ export const dataPorTipo = (
       a14 = a14 + data.MoliendaCanaBruta;
       b14 = b14 + data.MoliendaCanaNeta;
       c14 = c14 + data.AzucarEquivalente;
-      z14 = z14 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e14 = e14 + data.AzucarCrudoProducido;
+      z14 = z14 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      e14 = e14 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f14 = f14 + data.MelazaProducida;
       h14 = h14 + data.AzucarRefinado || 0;
       i14 = i14 + data.AzucarOrganico || 0;
@@ -1298,7 +1337,10 @@ export const dataPorTipo = (
       b15 = b15 + data.MoliendaCanaNeta;
       c15 = c15 + data.AzucarEquivalente;
       z15 = z15 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
-      e15 = e15 + data.AzucarCrudoProducido;
+      e15 = e15 +
+      (data.AzucarCrudoProducido || 0) +
+      (data?.AzucarOrganico || 0) +
+      (data?.OtroAzucar || 0);
       f15 = f15 + data.MelazaProducida;
       h15 = h15 + data.AzucarRefinado || 0;
       i15 = i15 + data.AzucarOrganico || 0;
@@ -1346,13 +1388,14 @@ export const dataPorTipo = (
    ***/
 
   /*LEALES
-  Junio: 2194476
-  Julio: 2052522
+  Junio: 2.194.476
+  Julio: 2.052.522
   Agosto: 4.971.944
-  Acumulado: 13352732
+  Septiembre: 2.963.470
+  Acumulado: 16.316.202
   */
   if (zafraParteDiario === 2024) {
-    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944;
+    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470;
   }
 
   /* CONCEPCION 
@@ -1368,10 +1411,11 @@ export const dataPorTipo = (
   Junio: 880968
   Julio: 2.099.136
   Agosto:3135585
-  Acumulado: 6.115.689
+  Septiembre: 253.748
+  Acumulado: 6.369.437
   */
   if (zafraParteDiario === 2024) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585;
+    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748;
   }
   /**********/
 

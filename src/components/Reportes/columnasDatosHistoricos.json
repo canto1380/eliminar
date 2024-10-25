@@ -1,0 +1,40 @@
+{
+    "columns": [
+        {
+            "title": "Zafra",
+            "dataIndex": "anio",
+            "key": "anio",
+            "width": 100
+        },
+        {
+            "title": "CMB [Tn]",
+            "dataIndex": "CMB",
+            "key": "CMB",
+            "width": 100
+        },
+        {
+            "title": "Az. Equiv. [Tn]",
+            "dataIndex": "azEquiv",
+            "key": "azEquiv",
+            "width": 100
+        },
+        {
+            "title": "Rendimiento CMB [Tn]",
+            "dataIndex": "rtoCMB",
+            "key": "rtoCMB",
+            "width": 100
+        },
+        {
+            "title": "Alcohol (m3)",
+            "dataIndex": "alcohol",
+            "key": "alcohol",
+            "width": 100
+        },
+        {
+            "title": "Melaza [Tn]",
+            "dataIndex": "melaza",
+            "key": "melaza",
+            "width": 100
+        }
+    ]
+}

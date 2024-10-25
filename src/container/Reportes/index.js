@@ -8,7 +8,7 @@ import { User } from "../../context/UserProvider";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
 import { getDataPartesDiariosBE } from "../../utils/queryAPI/partesDiariosQuery";
-import Reportes from "../../components/Reportes";
+import ReportesDataContainer from "./ReportesContainer";
 
 const ReportesContainer = () => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const ReportesContainer = () => {
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [dataZafraInicio, setDataZafraInicio] = useState(undefined);
   const [dataZafraFin, setDataZafraFin] = useState(undefined);
-
+  const [dateNow, setDateNow] = useState(undefined);
   const { dataUser } = useContext(User);
   useEffect(() => {
     const token = getToken();
@@ -42,32 +42,35 @@ const ReportesContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenAuth]);
+  useEffect(() => {
+    getDateNow()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  const getDateNow = () => {
+    const date1 = new Date()
+    setDateNow(date1.getDate() + '-' + (date1.getMonth()  +1)+ '-' + date1.getFullYear())
+  }
 
   useEffect(() => {
     inactivityTime(setModalUnauthorized);
   }, []);
-
+  
   useEffect(() => {
     buscarDatos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafraInicio, dataZafraFin]);
-  
-  const buscarDatos = async () => {
-    if (dataZafraInicio && dataZafraFin) {
-      console.log('SI')
-      const inicio = `25-04-${dataZafraInicio}`;
-      const fin = `18-12-${dataZafraFin}`;
+  }, [dateNow]);
 
+  const buscarDatos = async () => {
+      const inicio = `01-08-2013`;
+      const fin = `${dateNow}`;
       const params = {
         fechadesde: inicio,
         fechahasta: fin,
       };
       const data = await getDataPartesDiariosBE(params, "/parteDiario");
-      console.log(data)
-      setDataReportes(data);
-    }
+      const dataSinSanJuan = data.filter((d) => d.IngenioNombre !== 'San Juan')
+      setDataReportes(dataSinSanJuan);
   };
-
   return (
     <div>
       {loading ? (
@@ -76,7 +79,7 @@ const ReportesContainer = () => {
         </div>
       ) : (
         <>
-          <Title title={`Parte Diario`} />
+          <Title title={`Reportes`} />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}
@@ -88,8 +91,7 @@ const ReportesContainer = () => {
               dataUser={dataUser}
             />
             <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-              <Reportes
-                tokenAuth={tokenAuth}
+              <ReportesDataContainer
                 dataReportes={dataReportes}
                 dataZafraInicio={dataZafraInicio}
                 dataZafraFin={dataZafraFin}

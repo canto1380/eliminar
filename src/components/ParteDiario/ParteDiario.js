@@ -606,7 +606,6 @@ const ParteDiario = ({
   const diasDestileriaFormat = diasDestileria / (1000 * 60 * 60 * 24);
 
   // const as = new Date(fechasInicioIngenios.Cell10)
-  // console.log(typeof as)
   /** Exportacion **/
   const exportarParteComparativo = async () => {
     try {
@@ -792,7 +791,6 @@ const ParteDiario = ({
           break;
         default:
           console.log(p.nombre_ingenio);
-          console.log("1");
           break;
       }
     }

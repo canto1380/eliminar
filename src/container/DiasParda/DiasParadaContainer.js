@@ -131,7 +131,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       key: "dia",
       title: "Fecha",
       dataIndex: "dia",
-      // defaultSortOrder: "descend",
+      defaultSortOrder: "descend",
       sorter: (a, b) => new Date(a.dia) - new Date(b.dia),
       render: (date) => (date ? moment(date).format("DD-MM-YYYY") : null),
     },
@@ -252,7 +252,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
           <div className="pb-1 pt-3 px-4">
             <ListadoDatos
               columns={columnsData}
-              scroll={30}
+              scroll={100}
               data={diasParadas}
             />
           </div>

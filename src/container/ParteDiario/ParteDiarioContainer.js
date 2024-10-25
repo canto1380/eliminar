@@ -112,7 +112,8 @@ const ParteDiarioContainer = () => {
     /***** DESDE BACKEND *****/
     if (fechaInicio !== null) {
       const data = await getDataPartesDiariosBE(params, '/parteDiario')
-      setDataImport(data)
+      const dataSinSanJuan = data.filter((d) => d.IngenioNombre !== 'San Juan')
+      setDataImport(dataSinSanJuan)
     } else {
       setDataImport([])
     }
@@ -121,7 +122,8 @@ const ParteDiarioContainer = () => {
       params1,
       '/parteDiario'
     )
-    setDataImportComparativa(dataComparativa)
+    const dataSinSanJuanComparativo = dataComparativa.filter((d) => d.IngenioNombre !== 'San Juan')
+    setDataImportComparativa(dataSinSanJuanComparativo)
   }
   const getDataImportDestileria = async () => {
     const inicio = new Date(inicioDestileria)
