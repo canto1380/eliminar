@@ -1392,19 +1392,21 @@ export const dataPorTipo = (
   Julio: 2.052.522
   Agosto: 4.971.944
   Septiembre: 2.963.470
-  Acumulado: 16.316.202
+  Octubre: 1.460.000
+  Acumulado: 17.776.202
   */
   if (zafraParteDiario === 2024) {
-    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470;
+    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000;
   }
 
   /* CONCEPCION 
-  Agosto: 6068118
-  Septiembre: 6163307
-  Acumulado: 23283073
+  Agosto: 6.068.118
+  Septiembre: 6.163.307
+  Octubre: 5.436.241
+  Acumulado: 28.719.314
   */
   if (zafraParteDiario === 2024) {
-    dataConcepcion.R46 = dataConcepcion.R46 + 23283073;
+    dataConcepcion.R46 = dataConcepcion.R46 + 28719314;
   }
 
   /* BELLA VISTA 

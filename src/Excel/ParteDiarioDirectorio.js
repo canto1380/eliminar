@@ -184,6 +184,11 @@ export const CreateExcelWorkbook = async (
       horizontal: "center",
       vertical: "middle",
     };
+    const alignEnd = {
+      wrapText: true,
+      horizontal: "right",
+      vertical: "middle",
+    };
 
     /***** ESTILOS GENERALES *****/
     const functionFont = (name, bold, size) => {
@@ -843,19 +848,19 @@ export const CreateExcelWorkbook = async (
     page1.mergeCells("H7:H9");
     page1.getCell("H8").value = "Azúcar Equivalente [Tn]";
     page1.mergeCells("I7:I9");
-    page1.getCell("I8").value = `Rto CMB Total [%]`;
+    page1.getCell("I8").value = `Rto CMB [%]`;
     page1.mergeCells("J7:J9");
-    page1.getCell("J8").value = `Rto CMN Total [%]`;
+    page1.getCell("J8").value = `Rto CMN [%]`;
     page1.mergeCells("K7:K9");
-    page1.getCell("K8").value = "Total Azúcar Blanco [Tn]";
+    page1.getCell("K8").value = "Azúcar Blanco [Tn]";
     page1.mergeCells("L7:L9");
-    page1.getCell("L8").value = "Total Azúcar Crudo [Tn]";
+    page1.getCell("L8").value = "Azúcar Crudo [Tn]";
     page1.mergeCells("M7:M9");
-    page1.getCell("M8").value = "Total Azúcar Elaborada [Tn]";
+    page1.getCell("M8").value = "Azúcar Físico [Tn]";
     page1.mergeCells("N7:N9");
     page1.getCell("N8").value = "Melaza [Tn]";
     page1.mergeCells("O7:O9");
-    page1.getCell("O8").value = "Alcohol Total Hidratado [m3]";
+    page1.getCell("O8").value = "Alcohol Hidratado [m3]";
 
     /** Zafra 2022 **/
     page1.mergeCells("P7:P9");
@@ -877,19 +882,19 @@ export const CreateExcelWorkbook = async (
     page1.mergeCells("U7:U9");
     page1.getCell("U9").value = "Azúcar Equivalente [Tn]";
     page1.mergeCells("V7:V9");
-    page1.getCell("V9").value = `Rto CMB Total %`;
+    page1.getCell("V9").value = `Rto CMB %`;
     page1.mergeCells("W7:W9");
-    page1.getCell("W9").value = `Rto CMN Total %`;
+    page1.getCell("W9").value = `Rto CMN %`;
     page1.mergeCells("X7:X9");
-    page1.getCell("X9").value = "Total Azúcar Blanco [Tn]";
+    page1.getCell("X9").value = "Azúcar Blanco [Tn]";
     page1.mergeCells("Y7:Y9");
-    page1.getCell("Y9").value = "Total Azúcar Crudo [Tn]";
+    page1.getCell("Y9").value = "Azúcar Crudo [Tn]";
     page1.mergeCells("Z7:Z9");
-    page1.getCell("Z9").value = "Total Azúcar Elaborada [Tn]";
+    page1.getCell("Z9").value = "Azúcar Físico [Tn]";
     page1.mergeCells("AA7:AA9");
     page1.getCell("AA9").value = "Melaza [Tn]";
     page1.mergeCells("AB7:AB9");
-    page1.getCell("AB9").value = "Alcohol Total Hidratado [m3]";
+    page1.getCell("AB9").value = "Alcohol Hidratado [m3]";
 
     for (let i = 7; i <= 9; i++) {
       page1.getRow(i).font = { name: "Barlow", bold: true, size: 15 };
@@ -2650,19 +2655,19 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.mergeCells("H41:H43");
     page1.getCell("H43").value = "Azúcar Equivalente [Tn]";
     page1.mergeCells("I41:I43");
-    page1.getCell("I43").value = `Rto CMB Total [%]`;
+    page1.getCell("I43").value = `Rto CMB [%]`;
     page1.mergeCells("J41:J43");
-    page1.getCell("J43").value = `Rto CMN Total [%]`;
+    page1.getCell("J43").value = `Rto CMN [%]`;
     page1.mergeCells("K41:K43");
-    page1.getCell("K43").value = "Total Azúcar Blanco [Tn]";
+    page1.getCell("K43").value = "Azúcar Blanco [Tn]";
     page1.mergeCells("L41:L43");
-    page1.getCell("L43").value = "Total Azúcar Crudo [Tn]";
+    page1.getCell("L43").value = "Azúcar Crudo [Tn]";
     page1.mergeCells("M41:M43");
-    page1.getCell("M43").value = "Total Azúcar Elaborada [Tn]";
+    page1.getCell("M43").value = "Azúcar Físico [Tn]";
     page1.mergeCells("N41:N43");
     page1.getCell("N43").value = "Melaza [Tn]";
     page1.mergeCells("O41:O43");
-    page1.getCell("O43").value = "Alcohol Total Hidratado [m3]";
+    page1.getCell("O43").value = "Alcohol Hidratado [m3]";
 
     /*** Zafra 2022 ***/
     page1.mergeCells("P41:P43");
@@ -2684,19 +2689,19 @@ Fin de zafra ${zafraParteDiario - 1}: ${moment(finZafraComparativa).format(
     page1.mergeCells("U41:U43");
     page1.getCell("U43").value = "Azúcar Equivalente [Tn]";
     page1.mergeCells("V41:V43");
-    page1.getCell("V43").value = `Rto CMB Total %`;
+    page1.getCell("V43").value = `Rto CMB Total [%]`;
     page1.mergeCells("W41:W43");
-    page1.getCell("W43").value = `Rto CMN Total %`;
+    page1.getCell("W43").value = `Rto CMN Total [%]`;
     page1.mergeCells("X41:X43");
-    page1.getCell("X43").value = "Total Azúcar Blanco [Tn]";
+    page1.getCell("X43").value = "Azúcar Blanco [Tn]";
     page1.mergeCells("Y41:Y43");
-    page1.getCell("Y43").value = "Total Azúcar Crudo [Tn]";
+    page1.getCell("Y43").value = "Azúcar Crudo [Tn]";
     page1.mergeCells("Z41:Z43");
-    page1.getCell("Z43").value = "Total Azúcar Elaborada [Tn]";
+    page1.getCell("Z43").value = "Azúcar Físico [Tn]";
     page1.mergeCells("AA41:AA43");
     page1.getCell("AA43").value = "Melaza [Tn]";
     page1.mergeCells("AB41:AB43");
-    page1.getCell("AB43").value = "Alcohol Total Hidratado [m3]";
+    page1.getCell("AB43").value = "Alcohol Hidratado [m3]";
 
     for (let i = 41; i <= 43; i++) {
       page1.getRow(i).font = { name: "Barlow", bold: true, size: 15 };
@@ -3349,13 +3354,13 @@ page1.getCell("E58").value = "Días efectivos de molienda";
 page1.getCell("F58").value = "Caña Molida Bruta [Tn]";
 page1.getCell("G58").value = "Caña Molida Neta [Tn]";
 page1.getCell("H58").value = "Azúcar Equivalente [Tn]";
-page1.getCell("I58").value = `Rto CMB Total [%]`;
-page1.getCell("J58").value = `Rto CMN Total [%]`;
-page1.getCell("K58").value = "Total Azúcar Blanco [Tn]";
-page1.getCell("L58").value = "Total Azúcar Crudo [Tn]";
-page1.getCell("M58").value = "Total Azúcar Elaborada [Tn]";
+page1.getCell("I58").value = `Rto CMB [%]`;
+page1.getCell("J58").value = `Rto CMN [%]`;
+page1.getCell("K58").value = "Azúcar Blanco [Tn]";
+page1.getCell("L58").value = "Azúcar Crudo [Tn]";
+page1.getCell("M58").value = "Azúcar Fisico [Tn]";
 page1.getCell("N58").value = "Melaza [Tn]";
-page1.getCell("O58").value = "Alcohol Total Hidratado [m3]";
+page1.getCell("O58").value = "Alcohol Hidratado [m3]";
 
 page1.getCell("A61").value = "Totales"
 
@@ -3459,7 +3464,7 @@ page1.getCell("O61").value = {
     }
 
     /** Fill **/
-    for (let i = 1; i <= 24; i++) {
+    for (let i = 1; i <= 25; i++) {
       page2.getCell(3, i).fill = bgGris;
       page2.getCell(4, i).fill = bgGris;
     }
@@ -3480,11 +3485,17 @@ page1.getCell("O61").value = {
       }
     }
 
-    for (let i = 6; i <= 19; i++) {
-      for (let j = 12; j <= 20; j++) {
+    for (let i = 6; i <= 20; i++) {
+      for (let j = 8; j <= 20; j++) {
         page2.getCell(i, j).numFmt = "#,##0";
       }
     }
+    for (let i = 6; i <= 9; i++) {
+      for (let j = 21; j <= 25; j++) {
+        page2.getCell(i, j).numFmt = "#,##0";
+      }
+    }
+    page2.getCell("V20").numFmt = "#,##0";
     /*** Merge ***/
     page2.mergeCells("T10:Y19");
 
@@ -4157,6 +4168,193 @@ page1.getCell("O61").value = {
     page2.getCell("V20").alignment = alignCenter;
 
     /*******************************/
+    /*** Exportaciones Jujuy y Salta ***/
+    /* Merge cell */
+    page2.mergeCells("R23:Y24");
+    page2.mergeCells("R25:Y25");
+    page2.mergeCells("R26:S27");
+    page2.mergeCells("T26:T27");
+    page2.mergeCells("U26:U27");
+    page2.mergeCells("V26:V27");
+    page2.mergeCells("W26:W27");
+    page2.mergeCells("X26:X27");
+    page2.mergeCells("Y26:Y27");
+    page2.mergeCells("R28:S28");
+    page2.mergeCells("R30:X30");
+
+    /* Tamano filas y columas */
+    page2.getRow(28).height = "32";
+    page2.getRow(30).height = "32";
+
+    /*Fuente*/
+    page2.getCell("R23").font = functionFont("Barlow", true, 18);
+    page2.getCell("R25").font = functionFont("Barlow", true, 16);
+    for (let i = 20; i <= 25; i++) {
+      page2.getCell(26, i).font = functionFont("Barlow", true, 18);
+    }
+    for (let i = 19; i <= 25; i++) {
+      page2.getCell(28, i).font = functionFont("Barlow", false, 18);
+    }
+    page2.getCell("R30").font = functionFont("Barlow", true, 20);
+    page2.getCell("Y30").font = functionFont("Barlow", true, 20);
+
+    /*Fill*/
+    page2.getCell("R23").fill = bgCeleste;
+    page2.getCell("R25").fill = bgGris;
+    for (let i = 20; i <= 25; i++) {
+      page2.getCell(26, i).fill = bgGris;
+    }
+    page2.getCell("R30").fill = bgNaranja;
+    page2.getCell("Y30").fill = bgNaranja;
+
+    /*Alineaciones*/
+    page2.getCell("R23").alignment = alignCenter;
+    page2.getCell("R25").alignment = alignCenter;
+    page2.getCell("R28").alignment = alignStart;
+    for (let i = 20; i <= 25; i++) {
+      page2.getCell(26, i).alignment = alignCenter;
+      page2.getCell(28, i).alignment = alignCenter;
+    }
+    page2.getCell("R30").alignment = alignEnd;
+    page2.getCell("Y30").alignment = alignStart;
+
+    /*Formato de numeros*/
+    for (let i = 20; i <= 25; i++) {
+      page2.getCell(28, i).numFmt = "#,##0";
+    }
+    page2.getCell("Y30").numFmt = "#,##0";
+
+    /*Bordes*/
+    page2.getCell("R23").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("R25").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+    );
+    page2.getCell("R26").border = borders(
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thin",
+      "000000",
+      "medium",
+      "000000"
+    );
+    for (let i = 20; i <= 24; i++) {
+      page2.getCell(26, i).border = borders(
+        "medium",
+        "000000",
+        "medium",
+        "000000",
+        "thin",
+        "000000",
+        "medium",
+        "000000"
+      );
+    }
+    page2.getCell("Y26").border = borders(
+      "medium",
+      "000000",
+      "medium",
+      "000000",
+      "thin",
+      "000000",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("R28").border = borders(
+      "thin",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "medium",
+      "000000"
+    );
+    for (let i = 20; i <= 24; i++) {
+      page2.getCell(28, i).border = borders(
+        "thin",
+        "000000",
+        "medium",
+        "000000",
+        "thick",
+        "00326C",
+        "medium",
+        "000000"
+      );
+    }
+    page2.getCell("Y28").border = borders(
+      "thin",
+      "000000",
+      "medium",
+      "000000",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C"
+    );
+    page2.getCell("R30").border = borders(
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C",
+      "thin",
+      "FABF8F"
+    );
+    page2.getCell("Y30").border = borders(
+      "thick",
+      "00326C",
+      "thin",
+      "FABF8F",
+      "thick",
+      "00326C",
+      "thick",
+      "00326C"
+    );
+
+    /* Encabezados */
+    page2.getCell("R23").value = `NORTE | MERCADO EXTERNO HASTA `;
+    page2.getCell("R25").value = `EXPORTACIÓN DE AZÚCARES (Tn)`;
+
+    /*Ingenios*/
+    page2.getCell("T26").value = `La Esperanza`;
+    page2.getCell("T26").value = `Ledesma`;
+    page2.getCell("T26").value = `Río Grande`;
+    page2.getCell("T26").value = `Seaboard`;
+    page2.getCell("T26").value = `San Isidro`;
+    page2.getCell("T26").value = `Total`;
+
+    /*Valores*/
+    page2.getCell("R28").value = `Azúcar exportada`;
+
+    /*Calculo Total*/
+    page2.getCell("Y28").value = {
+      formula: `=T28+U28+V28+W28+X28`
+    }
+
+    /*Total Argentina*/
+    page2.getCell("R30").value = `TOTAL EXPORTACIÓN TUCUMÁN, SALTA Y JUJUY`;
+    page2.getCell("Y30").value = { formula: `=Y28+V20`}
+
+    /*******************************/
 
     /**** PRODUCCION AZUCAR DISCRIMINADA ****/
     page2.getCell("C6").value = parseInt(d1["J10"]);
@@ -4300,12 +4498,15 @@ page1.getCell("O61").value = {
     page2.getCell("H19").value = parseInt(d14["N25"] / 1000);
     page2.getCell("J19").value = parseInt(d14["O57"] / 1000);
     page2.getCell("M19").value = parseFloat(d14["R57"] / 1000);
+
+
+    page2.getCell("Y4").fill = bgGris;
     /****************************************************************************************/
 
     /****** EXPORTACIONES ******/
 
     /*** CONFIGURACION PAGINA ***/
-    page2.pageSetup.printArea = "A1:X30";
+    page2.pageSetup.printArea = "A1:Y30";
     page2.pageSetup.scale = 100;
     page2.pageSetup.margins = {
       left: 0.3,

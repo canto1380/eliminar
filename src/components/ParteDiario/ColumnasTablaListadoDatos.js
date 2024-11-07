@@ -12,7 +12,7 @@ export const columns = [
     dataIndex: 'MoliendaCanaBruta',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.MoliendaCanaBruta > b.MoliendaCanaBruta,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -28,7 +28,7 @@ export const columns = [
     dataIndex: 'MoliendaCanaNeta',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.MoliendaCanaNeta > b.MoliendaCanaNeta,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) :0,
   },
   {
     key: 'Id',
@@ -44,7 +44,7 @@ export const columns = [
     dataIndex: 'AzucarEquivalente',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarEquivalente > b.AzucarEquivalente,
-    render: (value) => value?.toLocaleString('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }),
+    render: (value) => value !== undefined ? value?.toLocaleString('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }) :0 ,
     
   },
   {
@@ -53,7 +53,7 @@ export const columns = [
     dataIndex: 'AzucarBlancoProducido',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarBlancoProducido > b.AzucarBlancoProducido,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -61,7 +61,7 @@ export const columns = [
     dataIndex: 'AzucarCrudoProducido',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarCrudoProducido > b.AzucarCrudoProducido,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -69,7 +69,7 @@ export const columns = [
     dataIndex: 'AzucarRefinado',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarRefinado > b.AzucarRefinado,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -77,7 +77,7 @@ export const columns = [
     dataIndex: 'AzucarOrganico',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AzucarOrganico > b.AzucarOrganico,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -85,7 +85,7 @@ export const columns = [
     dataIndex: 'OtroAzucar',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.OtroAzucar > b.OtroAzucar,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -93,7 +93,7 @@ export const columns = [
     dataIndex: 'MelazaProducida',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.MelazaProducida > b.MelazaProducida,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -101,7 +101,7 @@ export const columns = [
     dataIndex: 'AlcoholProducido',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.AlcoholProducido > b.AlcoholProducido,
-    render: (text) => new Intl.NumberFormat('es-AR').format(text),
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   
 
