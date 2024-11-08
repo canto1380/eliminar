@@ -1481,10 +1481,11 @@ export const dataPorTipo = (
   Julio: 2.099.136
   Agosto:3135585
   Septiembre: 253.748
+  Octubre: 2.483.843
   Acumulado: 6.369.437
   */
   if (zafraParteDiario === 2024) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748;
+    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843;
   }
   /**********/
 
