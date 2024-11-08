@@ -9,6 +9,7 @@ let dataAguilares = {
     K10: 0,
     M10: 0,
     N10: 0,
+    C43: 0,
     D43: 0,
     F43: 0,
     G43: 0,
@@ -24,6 +25,7 @@ let dataAguilares = {
     K11: 0,
     M11: 0,
     N11: 0,
+    C47: 0,
     D47: 0,
     F47: 0,
     G47: 0,
@@ -39,6 +41,7 @@ let dataAguilares = {
     K12: 0,
     M12: 0,
     N12: 0,
+    C50: 0,
     D50: 0,
     F50: 0,
     G50: 0,
@@ -70,6 +73,7 @@ let dataAguilares = {
     K15: 0,
     M15: 0,
     N15: 0,
+    C54: 0,
     D54: 0,
     F54: 0,
     G54: 0,
@@ -85,6 +89,7 @@ let dataAguilares = {
     K17: 0,
     M17: 0,
     N17: 0,
+    C45: 0,
     D45: 0,
     F45: 0,
     G45: 0,
@@ -116,6 +121,7 @@ let dataAguilares = {
     K19: 0,
     M19: 0,
     N19: 0,
+    C49: 0,
     D49: 0,
     F49: 0,
     G49: 0,
@@ -131,6 +137,7 @@ let dataAguilares = {
     K20: 0,
     M20: 0,
     N20: 0,
+    C51: 0,
     D51: 0,
     E51: 0,
     F51: 0,
@@ -147,6 +154,7 @@ let dataAguilares = {
     K21: 0,
     M21: 0,
     N21: 0,
+    C52: 0,
     D52: 0,
     F52: 0,
     G52: 0,
@@ -178,6 +186,7 @@ let dataAguilares = {
     K23: 0,
     M23: 0,
     N23: 0,
+    C55: 0,
     D55: 0,
     F55: 0,
     G55: 0,
@@ -193,6 +202,7 @@ let dataAguilares = {
     K24: 0,
     M24: 0,
     N24: 0,
+    C56: 0,
     D56: 0,
     F56: 0,
     G56: 0,
@@ -208,6 +218,7 @@ let dataAguilares = {
     K25: 0,
     M25: 0,
     N25: 0,
+    C57: 0,
     D57: 0,
     F57: 0,
     G57: 0,
@@ -223,6 +234,7 @@ let dataAguilares = {
     K26: 0,
     M26: 0,
     N26: 0,
+    C58: 0,
     D58: 0,
     F58: 0,
     G58: 0,
@@ -852,6 +864,8 @@ export const dataPorTipo = (
       h1 = h1 + data.AzucarRefinado || 0;
       i1 = i1 + data.AzucarOrganico || 0;
       j1 = j1 + data.OtroAzucar || 0;
+      k1 = k1 + data.AzucarBlancoProducido;
+      l1 = l1 + data.AzucarCrudoProducido;
 
       dataAguilares = {
         E10: a1,
@@ -859,8 +873,10 @@ export const dataPorTipo = (
         G10: c1,
         J10: z1,
         K10: e1,
+        L10: l1,
         M10: f1,
         N10: dataAguilares.N10,
+        C43: k1,
         D43: h1,
         F43: i1,
         G43: j1,
@@ -887,15 +903,18 @@ export const dataPorTipo = (
       h2 = h2 + data.AzucarRefinado || 0;
       i2 = i2 + data.AzucarOrganico || 0;
       j2 = j2 + data.OtroAzucar || 0;
-
+      k2 = k2 + data.AzucarBlancoProducido;
+      l2 = l2 + data.AzucarCrudoProducido;
       dataCruzAlta = {
         E11: a2,
         F11: b2,
         G11: c2,
         J11: z2,
         K11: e2,
+        L11: l2,
         M11: f2,
         N11: dataCruzAlta.N11,
+        C47: k2,
         D47: h2,
         F47: i2,
         G47: j2,
@@ -919,20 +938,21 @@ export const dataPorTipo = (
       (data?.AzucarOrganico || 0) +
       (data?.OtroAzucar || 0);
       f3 = f3 + data.MelazaProducida;
-      // g3 = g3 + data.AlcoholProducido;
       h3 = h3 + data.AzucarRefinado || 0;
       i3 = i3 + data.AzucarOrganico || 0;
       j3 = j3 + data.OtroAzucar || 0;
-      // o3 = o3 + data.AlcoholHidratado || 0;
-      // r3 = r3 + data.AlcoholAnhidro || 0;
+      k3 = k3 + data.AzucarBlancoProducido;
+      l3 = l3 + data.AzucarCrudoProducido;
       dataLaFlorida = {
         E12: a3,
         F12: b3,
         G12: c3,
         J12: z3,
         K12: e3,
+        L12: l3,
         M12: f3,
         N12: dataLaFlorida.N12,
+        C50: k3,
         D50: h3,
         F50: i3,
         G50: j3,
@@ -960,6 +980,7 @@ export const dataPorTipo = (
       i4 = i4 + data.AzucarOrganico || 0;
       j4 = j4 + data.OtroAzucar || 0;
       k4 = k4 + data.AzucarBlancoProducido;
+      l4 = l4 + data.AzucarCrudoProducido;
 
       dataConcepcion = {
         E14: a4,
@@ -967,6 +988,7 @@ export const dataPorTipo = (
         G14: c4,
         J14: z4,
         K14: e4,
+        L14: l4,
         M14: f4,
         N14: dataConcepcion.N14,
         C46: k4,
@@ -996,14 +1018,18 @@ export const dataPorTipo = (
       h5 = h5 + data.AzucarRefinado || 0;
       i5 = i5 + data.AzucarOrganico || 0;
       j5 = j5 + data.OtroAzucar || 0;
+      k5 = k5 + data.AzucarBlancoProducido;
+      l5 = l5 + data.AzucarCrudoProducido;
       dataMarapa = {
         E15: a5,
         F15: b5,
         G15: c5,
         J15: z5,
         K15: e5,
+        L15: l5,
         M15: f5,
         N15: dataMarapa.N15,
+        C54: k5,
         D54: h5,
         F54: i5,
         G54: j5,
@@ -1030,14 +1056,19 @@ export const dataPorTipo = (
       h6 = h6 + data.AzucarRefinado || 0;
       i6 = i6 + data.AzucarOrganico || 0;
       j6 = j6 + data.OtroAzucar || 0;
+      k6 = k6 + data.AzucarBlancoProducido;
+      l6 = l6 + data.AzucarCrudoProducido;
+
       dataBellaVista = {
         E17: a6,
         F17: b6,
         G17: c6,
         J17: z6,
         K17: e6,
+        L17: l6,
         M17: f6,
         N17: dataBellaVista.N17,
+        C45: k6,
         D45: h6,
         F45: i6,
         G45: j6,
@@ -1064,12 +1095,15 @@ export const dataPorTipo = (
       i7 = i7 + data.AzucarOrganico || 0;
       j7 = j7 + data.OtroAzucar || 0;
       k7 = k7 + data.AzucarBlancoProducido;
+      l7 = l7 + data.AzucarCrudoProducido;
+
       dataFamailla = {
         E18: a7,
         F18: b7,
         G18: c7,
         J18: z7,
         K18: e7,
+        L18: l7,
         M18: f7,
         N18: dataFamailla.N18,
         C48: k7,
@@ -1099,14 +1133,19 @@ export const dataPorTipo = (
       h8 = h8 + data.AzucarRefinado || 0;
       i8 = i8 + data.AzucarOrganico || 0;
       j8 = j8 + data.OtroAzucar || 0;
+      k8 = k8 + data.AzucarBlancoProducido;
+      l8 = l8 + data.AzucarBlancoProducido;
+      
       dataLaCorona = {
         E19: a8,
         F19: b8,
         G19: c8,
         J19: z8,
         K19: e8,
+        L19: l8,
         M19: f8,
         N19: dataLaCorona.N19,
+        C49: k8,
         D49: h8,
         F49: i8,
         G49: j8,
@@ -1134,17 +1173,21 @@ export const dataPorTipo = (
       h9 = h9 + data.AzucarRefinado || 0;
       i9 = i9 + data.AzucarOrganico || 0;
       j9 = j9 + data.OtroAzucar || 0;
-      k9 = k9 + data.AzucarCrudoProducido;
+      k9 = k9 + data.AzucarBlancoProducido;
+      l9 = l9 + data.AzucarCrudoProducido;
+
+
       dataLaProvidencia = {
         E20: a9,
         F20: b9,
         G20: c9,
         J20: z9,
         K20: e9,
+        L20: l9,
         M20: f9,
         N20: dataLaProvidencia.N20,
+        C51: k9,
         D51: h9,
-        E51: k9,
         F51: i9,
         G51: j9,
         O51: dataLaProvidencia.O51,
@@ -1170,14 +1213,18 @@ export const dataPorTipo = (
       h10 = h10 + data.AzucarRefinado || 0;
       i10 = i10 + data.AzucarOrganico || 0;
       j10 = j10 + data.OtroAzucar || 0;
+      k10 = k10 + data.AzucarBlancoProducido;
+      l10 = l10 + data.AzucarCrudoProducido;
       dataLaTrinidad = {
         E21: a10,
         F21: b10,
         G21: c10,
         J21: z10,
         K21: e10,
+        L21: l10,
         M21: f10,
         N21: dataLaTrinidad.N21,
+        C52: k10,
         D52: h10,
         F52: i10,
         G52: j10,
@@ -1201,19 +1248,19 @@ export const dataPorTipo = (
       (data?.AzucarOrganico || 0) +
       (data?.OtroAzucar || 0);
       f11 = f11 + data.MelazaProducida;
-      // g11 = g11 + data.AlcoholProducido;
       h11 = h11 + data.AzucarRefinado || 0;
       i11 = i11 + data.AzucarOrganico || 0;
       j11 = j11 + data.OtroAzucar || 0;
       k11 = k11 + data.AzucarBlancoProducido;
-      // o11 = o11 + data.AlcoholHidratado || 0;
-      // r11 = r11 + data.AlcoholAnhidro || 0;
+      l11 = l11 + data.AzucarCrudoProducido;
+
       dataLeales = {
         E22: a11,
         F22: b11,
         G22: c11,
         J22: z11,
         K22: e11,
+        L22: l11,
         M22: f11,
         N22: dataLeales.N22,
         C53: k11,
@@ -1243,14 +1290,19 @@ export const dataPorTipo = (
       h12 = h12 + data.AzucarRefinado || 0;
       i12 = i12 + data.AzucarOrganico || 0;
       j12 = j12 + data.OtroAzucar || 0;
+      k12 = k12 + data.AzucarBlancoProducido;
+      l12 = l12 + data.AzucarCrudoProducido;
+
       dataÑuñorco = {
         E23: a12,
         F23: b12,
         G23: c12,
         J23: z12,
         K23: e12,
+        L23: l12,
         M23: f12,
         N23: dataÑuñorco.N23,
+        C55: k12,
         D55: h12,
         F55: i12,
         G55: j12,
@@ -1277,14 +1329,19 @@ export const dataPorTipo = (
       h13 = h13 + data.AzucarRefinado || 0;
       i13 = i13 + data.AzucarOrganico || 0;
       j13 = j13 + data.OtroAzucar || 0;
+      k13 = k13 + data.AzucarBlancoProducido;
+      l13 = l13 + data.AzucarCrudoProducido;
+
       dataStaBarbara = {
         E24: a13,
         F24: b13,
         G24: c13,
         J24: z13,
         K24: e13,
+        L25: l13,
         M24: f13,
         N24: dataStaBarbara.N24,
+        C56: k13,
         D56: h13,
         F56: i13,
         G56: j13,
@@ -1311,14 +1368,19 @@ export const dataPorTipo = (
       h14 = h14 + data.AzucarRefinado || 0;
       i14 = i14 + data.AzucarOrganico || 0;
       j14 = j14 + data.OtroAzucar || 0;
+      k14 = k14 + data.AzucarBlancoProducido;
+      l14 = l14 + data.AzucarCrudoProducido;
+
       dataStaRosa = {
         E25: a14,
         F25: b14,
         G25: c14,
         J25: z14,
         K25: e14,
+        L25: l14,
         M25: f14,
         N25: dataStaRosa.N25,
+        C57: k14,
         D57: h14,
         F57: i14,
         G57: j14,
@@ -1345,14 +1407,19 @@ export const dataPorTipo = (
       h15 = h15 + data.AzucarRefinado || 0;
       i15 = i15 + data.AzucarOrganico || 0;
       j15 = j15 + data.OtroAzucar || 0;
+      k15 = k15 + data.AzucarBlancoProducido;
+      l15 = l15 + data.AzucarCrudoProducido;
+
       dataSanJuan = {
         E26: a15,
         F26: b15,
         G26: c15,
         J26: z15,
         K26: e15,
+        L26: l15,
         M26: f15,
         N26: dataSanJuan.N26,
+        C58: k15,
         D58: h15,
         F58: i15,
         G58: j15,

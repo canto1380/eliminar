@@ -1,15 +1,15 @@
 /* eslint-disable no-undef */
-import { dateConverted } from '../../helpers/helpers'
+import { dateConverted } from "../../helpers/helpers";
 
 let dataAguilares = {
-  R10: 0,
-  S10: 0,
-  T10: 0,
-  W10: 0,
-  X10: 0,
-  Z10: 0,
-  AA10: 0,
-},
+    R10: 0,
+    S10: 0,
+    T10: 0,
+    W10: 0,
+    X10: 0,
+    Z10: 0,
+    AA10: 0,
+  },
   dataCruzAlta = {
     R11: 0,
     S11: 0,
@@ -181,7 +181,6 @@ let dataAguilares = {
     Cell48: 0,
     CellR48: 0,
   },
-
   dataInicioDestileriaIngenios = {
     aguilInicio: null,
     aguilFin: null,
@@ -212,7 +211,7 @@ let dataAguilares = {
     staRosaInicio: null,
     staRosaFin: null,
     sanJuanInicio: null,
-    sanJuanFin: null
+    sanJuanFin: null,
   },
   dataInicioDestileriaIngeniosNorte = {
     sanisidroInicio: null,
@@ -224,7 +223,7 @@ let dataAguilares = {
     riograndeInicio: null,
     riograndeFin: null,
     esperanzaInicio: null,
-    esperanzaFin: null
+    esperanzaFin: null,
   };
 
 export const dataComparativaPorTipo = (
@@ -250,12 +249,12 @@ export const dataComparativaPorTipo = (
   setFechasInicioIngeniosComparativa,
   setFechasInicioDestileriaIngeniosComparativa,
   setFechasInicioIngeniosNorteComparativa,
-  setFechasInicioDestileriaIngeniosNorteComparativa,
+  setFechasInicioDestileriaIngeniosNorteComparativa
 ) => {
-  const date = dataEnd !== null ? new Date(dataEnd) : new Date()
-  const anioDataComparativa = date.getFullYear() - 1
-  const dateComparativa = new Date(date)
-  dateComparativa.setFullYear(anioDataComparativa)
+  const date = dataEnd !== null ? new Date(dataEnd) : new Date();
+  const anioDataComparativa = date.getFullYear() - 1;
+  const dateComparativa = new Date(date);
+  dateComparativa.setFullYear(anioDataComparativa);
 
   /** FECHAS INICIOS DE ZAFRA **/
   // const aguil = dataImportComparativa?.find(
@@ -264,61 +263,61 @@ export const dataComparativaPorTipo = (
   //     parseInt(d.FechaParte.split("/")[2]) === dataEnd.getFullYear() - 1 &&
   //     d.MoliendaCanaBruta !== 0
   // );
-  const aguil = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Aguilares')
+  const aguil = dateFinIngenios?.find((d) => d.nombre_ingenio === "Aguilares");
 
-  const cruz = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Cruz Alta')
+  const cruz = dateFinIngenios?.find((d) => d.nombre_ingenio === "Cruz Alta");
 
   const florida = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'La Florida'
-  )
+    (d) => d.nombre_ingenio === "La Florida"
+  );
 
-  const concep = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Concepción')
+  const concep = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Concepción"
+  );
 
-  const marapa = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Marapa')
+  const marapa = dateFinIngenios?.find((d) => d.nombre_ingenio === "Marapa");
 
   const bellaVista = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'Bella Vista'
-  )
+    (d) => d.nombre_ingenio === "Bella Vista"
+  );
 
-  const famail = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Famaillá')
+  const famail = dateFinIngenios?.find((d) => d.nombre_ingenio === "Famaillá");
 
-  const corona = dateFinIngenios?.find((d) => d.nombre_ingenio === 'La Corona')
+  const corona = dateFinIngenios?.find((d) => d.nombre_ingenio === "La Corona");
 
   const providencia = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'La Providencia'
-  )
+    (d) => d.nombre_ingenio === "La Providencia"
+  );
 
   const trinidad = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'La Trinidad'
-  )
+    (d) => d.nombre_ingenio === "La Trinidad"
+  );
 
-  const leales = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Leales')
+  const leales = dateFinIngenios?.find((d) => d.nombre_ingenio === "Leales");
 
-  const nunorco = dateFinIngenios?.find((d) => d.nombre_ingenio === 'Ñuñorco')
+  const nunorco = dateFinIngenios?.find((d) => d.nombre_ingenio === "Ñuñorco");
   const stabarbara = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'Santa Bárbara'
-  )
+    (d) => d.nombre_ingenio === "Santa Bárbara"
+  );
   const starosa = dateFinIngenios?.find(
-    (d) => d.nombre_ingenio === 'Santa Rosa'
-  )
-  const sanjuan = dateFinIngenios?.find((d) => d.nombre_ingenio === 'San Juan')
+    (d) => d.nombre_ingenio === "Santa Rosa"
+  );
+  const sanjuan = dateFinIngenios?.find((d) => d.nombre_ingenio === "San Juan");
 
-/** NORTE **/
-const sanisidro = dateFinIngenios?.find(
-  (d) => d.nombre_ingenio === "San Isidro"
-)
-const seaboard = dateFinIngenios?.find(
-  (d) => d.nombre_ingenio === "Seaboard"
-)
-const ledesma = dateFinIngenios?.find(
-  (d) => d.nombre_ingenio === "Ledesma"
-)
-const riogrande = dateFinIngenios?.find(
-  (d) => d.nombre_ingenio === "Río Grande"
-)
-const laesperanza = dateFinIngenios?.find(
-  (d) => d.nombre_ingenio === "La Esperanza"
-)
+  /** NORTE **/
+  const sanisidro = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "San Isidro"
+  );
+  const seaboard = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Seaboard"
+  );
+  const ledesma = dateFinIngenios?.find((d) => d.nombre_ingenio === "Ledesma");
+  const riogrande = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Río Grande"
+  );
+  const laesperanza = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "La Esperanza"
+  );
 
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
@@ -351,7 +350,7 @@ const laesperanza = dateFinIngenios?.find(
     CellR25: starosa?.fin_zafra,
     Cell26: sanjuan?.inicio_zafra,
     CellR26: sanjuan?.fin_zafra,
-  }
+  };
 
   /** NORTE **/
   dataInicioIngeniosNorte = {
@@ -365,7 +364,7 @@ const laesperanza = dateFinIngenios?.find(
     CellR47: seaboard?.fin_zafra,
     Cell48: sanisidro?.inicio_zafra,
     CellR48: sanisidro?.fin_zafra,
-  }
+  };
 
   dataInicioDestileriaIngenios = {
     aguilInicio: aguil?.inicio_destileria,
@@ -398,7 +397,7 @@ const laesperanza = dateFinIngenios?.find(
     staRosaFin: starosa?.fin_destileria,
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
-  }
+  };
   dataInicioDestileriaIngeniosNorte = {
     esperanzaInicio: laesperanza?.inicio_destileria,
     esperanzaFin: laesperanza?.fin_destileria,
@@ -412,60 +411,63 @@ const laesperanza = dateFinIngenios?.find(
     sanisidroFin: sanisidro?.fin_destileria,
   };
 
-  setFechasInicioIngeniosComparativa(dataInicioIngenios)
-  setFechasInicioDestileriaIngeniosComparativa(dataInicioDestileriaIngenios)
-  setFechasInicioIngeniosNorteComparativa(dataInicioIngeniosNorte)
-  setFechasInicioDestileriaIngeniosNorteComparativa(dataInicioDestileriaIngeniosNorte)
+  setFechasInicioIngeniosComparativa(dataInicioIngenios);
+  setFechasInicioDestileriaIngeniosComparativa(dataInicioDestileriaIngenios);
+  setFechasInicioIngeniosNorteComparativa(dataInicioIngeniosNorte);
+  setFechasInicioDestileriaIngeniosNorteComparativa(
+    dataInicioDestileriaIngeniosNorte
+  );
 
   for (let i = 1; i <= 15; i++) {
-    let varName1 = 'a' + i
-    let varName2 = 'b' + i
-    let varName3 = 'c' + i
-    let varName4 = 'z' + i
-    let varName5 = 'e' + i
-    let varName6 = 'f' + i
-    let varName7 = 'g' + i
+    let varName1 = "a" + i;
+    let varName2 = "b" + i;
+    let varName3 = "c" + i;
+    let varName4 = "z" + i;
+    let varName5 = "e" + i;
+    let varName6 = "f" + i;
+    let varName7 = "g" + i;
 
-    window[varName1] = 0
-    window[varName2] = 0
-    window[varName3] = 0
-    window[varName4] = 0
-    window[varName5] = 0
-    window[varName6] = 0
-    window[varName7] = 0
+    window[varName1] = 0;
+    window[varName2] = 0;
+    window[varName3] = 0;
+    window[varName4] = 0;
+    window[varName5] = 0;
+    window[varName6] = 0;
+    window[varName7] = 0;
   }
 
   for (let i = 1; i <= 15; i++) {
-    let varName1 = 'a' + i
-    let varName2 = 'b' + i
-    let varName3 = 'c' + i
-    let varName4 = 'z' + i
-    let varName5 = 'e' + i
-    let varName6 = 'f' + i
-    let varName7 = 'g' + i
+    let varName1 = "a" + i;
+    let varName2 = "b" + i;
+    let varName3 = "c" + i;
+    let varName4 = "z" + i;
+    let varName5 = "e" + i;
+    let varName6 = "f" + i;
+    let varName7 = "g" + i;
 
-    window[varName1] = 0
-    window[varName2] = 0
-    window[varName3] = 0
-    window[varName4] = 0
-    window[varName5] = 0
-    window[varName6] = 0
-    window[varName7] = 0
+    window[varName1] = 0;
+    window[varName2] = 0;
+    window[varName3] = 0;
+    window[varName4] = 0;
+    window[varName5] = 0;
+    window[varName6] = 0;
+    window[varName7] = 0;
   }
 
   /****************************** DATOS DESTILERIA ALCOHOL ******************************/
   dataImportDestileriaComparativa?.forEach((data) => {
-    const newDate = dateConverted(data?.FechaParte)
-    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date()
-    const anioData = fechaParametro.getFullYear() - 1
-    
-    fechaParametro.setFullYear(anioData)
+    const newDate = dateConverted(data?.FechaParte);
+    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const anioData = fechaParametro.getFullYear() - 1;
+
+    fechaParametro.setFullYear(anioData);
     if (
-      data.IngenioNombre === 'Aguilares'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.aguilInicio)
+      data.IngenioNombre === "Aguilares" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.aguilInicio)
     ) {
       g1 = g1 + data.AlcoholProducido;
+      r1 = r1 + data.AlcoholAnhidro || 0;
       dataAguilares = {
         R10: 0,
         S10: 0,
@@ -478,9 +480,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Cruz Alta'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
+      data.IngenioNombre === "Cruz Alta" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
     ) {
       g2 = g2 + data.AlcoholProducido;
       dataCruzAlta = {
@@ -494,9 +496,9 @@ const laesperanza = dateFinIngenios?.find(
       };
     }
     if (
-      data.IngenioNombre === 'La Florida'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
+      data.IngenioNombre === "La Florida" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
       g3 = g3 + data.AlcoholProducido;
       dataLaFlorida = {
@@ -510,9 +512,9 @@ const laesperanza = dateFinIngenios?.find(
       };
     }
     if (
-      data.IngenioNombre === 'Concepción'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
+      data.IngenioNombre === "Concepción" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
     ) {
       g4 = g4 + data.AlcoholProducido;
       dataConcepcion = {
@@ -527,9 +529,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Marapa'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
+      data.IngenioNombre === "Marapa" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
     ) {
       g5 = g5 + data.AlcoholProducido;
       dataMarapa = {
@@ -544,9 +546,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Bella Vista'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.bellaInicio)
+      data.IngenioNombre === "Bella Vista" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.bellaInicio)
     ) {
       g6 = g6 + data.AlcoholProducido;
       dataBellaVista = {
@@ -561,9 +563,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Famaillá'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.famaillaInicio)
+      data.IngenioNombre === "Famaillá" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.famaillaInicio)
     ) {
       g7 = g7 + data.AlcoholProducido;
       dataFamailla = {
@@ -578,9 +580,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'La Corona'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.coronaInicio)
+      data.IngenioNombre === "La Corona" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.coronaInicio)
     ) {
       g8 = g8 + data.AlcoholProducido;
       dataLaCorona = {
@@ -595,9 +597,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'La Providencia'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.provInicio)
+      data.IngenioNombre === "La Providencia" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.provInicio)
     ) {
       g9 = g9 + data.AlcoholProducido;
       dataLaProvidencia = {
@@ -612,9 +614,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'La Trinidad'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.trinInicio)
+      data.IngenioNombre === "La Trinidad" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.trinInicio)
     ) {
       g10 = g10 + data.AlcoholProducido;
       dataLaTrinidad = {
@@ -629,9 +631,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Leales'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.lealesInicio)
+      data.IngenioNombre === "Leales" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.lealesInicio)
     ) {
       g11 = g11 + data.AlcoholProducido;
       dataLeales = {
@@ -646,9 +648,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Ñuñorco'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.nunorcoInicio)
+      data.IngenioNombre === "Ñuñorco" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.nunorcoInicio)
     ) {
       g12 = g12 + data.AlcoholProducido;
       dataÑuñorco = {
@@ -663,9 +665,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Santa Barbara'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.staBarInicio)
+      data.IngenioNombre === "Santa Barbara" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.staBarInicio)
     ) {
       g13 = g13 + data.AlcoholProducido;
       dataStaBarbara = {
@@ -680,9 +682,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'Santa Rosa'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.staRosaInicio)
+      data.IngenioNombre === "Santa Rosa" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.staRosaInicio)
     ) {
       g14 = g14 + data.AlcoholProducido;
       dataStaRosa = {
@@ -697,9 +699,9 @@ const laesperanza = dateFinIngenios?.find(
     }
 
     if (
-      data.IngenioNombre === 'San Juan'
-      && newDate <= fechaParametro
-      && newDate >= new Date(dataInicioDestileriaIngenios.sanJuanInicio)
+      data.IngenioNombre === "San Juan" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.sanJuanInicio)
     ) {
       g15 = g15 + data.AlcoholProducido;
       dataSanJuan = {
@@ -712,27 +714,25 @@ const laesperanza = dateFinIngenios?.find(
         AA26: g15,
       };
     }
-
-
-
-  })
+  });
   /**************************************************************************************/
 
   dataImportComparativa?.forEach((data) => {
-    const newDate = dateConverted(data?.FechaParte)
-    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date()
-    const anioData = fechaParametro.getFullYear() - 1
-    fechaParametro.setFullYear(anioData)
-    if (data.IngenioNombre === 'Aguilares' && newDate <= fechaParametro) {
-      a1 = a1 + data.MoliendaCanaBruta || 0
-      b1 = b1 + data.MoliendaCanaNeta || 0
-      c1 = c1 + data.AzucarEquivalente || 0
-      z1 = z1 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e1 = e1 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f1 = f1 + data.MelazaProducida || 0
+    const newDate = dateConverted(data?.FechaParte);
+    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const anioData = fechaParametro.getFullYear() - 1;
+    fechaParametro.setFullYear(anioData);
+    if (data.IngenioNombre === "Aguilares" && newDate <= fechaParametro) {
+      a1 = a1 + data.MoliendaCanaBruta || 0;
+      b1 = b1 + data.MoliendaCanaNeta || 0;
+      c1 = c1 + data.AzucarEquivalente || 0;
+      z1 = z1 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e1 =
+        e1 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f1 = f1 + data.MelazaProducida || 0;
       // g1 = g1 + data.AlcoholProducido || 0
       dataAguilares = {
         R10: a1,
@@ -742,20 +742,20 @@ const laesperanza = dateFinIngenios?.find(
         X10: e1,
         Z10: f1,
         AA10: dataAguilares.AA10,
-      }
+      };
     }
-    
 
-    if (data.IngenioNombre === 'Cruz Alta' && newDate <= fechaParametro) {
-      a2 = a2 + data.MoliendaCanaBruta
-      b2 = b2 + data.MoliendaCanaNeta
-      c2 = c2 + data.AzucarEquivalente
-      z2 = z2 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e2 = e2 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f2 = f2 + data.MelazaProducida
+    if (data.IngenioNombre === "Cruz Alta" && newDate <= fechaParametro) {
+      a2 = a2 + data.MoliendaCanaBruta;
+      b2 = b2 + data.MoliendaCanaNeta;
+      c2 = c2 + data.AzucarEquivalente;
+      z2 = z2 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e2 =
+        e2 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f2 = f2 + data.MelazaProducida;
       // g2 = g2 + data.AlcoholProducido
       dataCruzAlta = {
         R11: a2,
@@ -765,19 +765,20 @@ const laesperanza = dateFinIngenios?.find(
         X11: e2,
         Z11: f2,
         AA11: dataCruzAlta.AA11,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'La Florida' && newDate <= fechaParametro) {
-      a3 = a3 + data.MoliendaCanaBruta
-      b3 = b3 + data.MoliendaCanaNeta
-      c3 = c3 + data.AzucarEquivalente
-      z3 = z3 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e3 = e3 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f3 = f3 + data.MelazaProducida
+    if (data.IngenioNombre === "La Florida" && newDate <= fechaParametro) {
+      a3 = a3 + data.MoliendaCanaBruta;
+      b3 = b3 + data.MoliendaCanaNeta;
+      c3 = c3 + data.AzucarEquivalente;
+      z3 = z3 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e3 =
+        e3 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f3 = f3 + data.MelazaProducida;
       // g3 = g3 + data.AlcoholProducido
       dataLaFlorida = {
         R12: a3,
@@ -787,19 +788,20 @@ const laesperanza = dateFinIngenios?.find(
         X12: e3,
         Z12: f3,
         AA12: dataLaFlorida.AA12,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Concepción' && newDate <= fechaParametro) {
-      a4 = a4 + data.MoliendaCanaBruta
-      b4 = b4 + data.MoliendaCanaNeta
-      c4 = c4 + data.AzucarEquivalente
-      z4 = z4 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e4 = e4 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f4 = f4 + data.MelazaProducida
+    if (data.IngenioNombre === "Concepción" && newDate <= fechaParametro) {
+      a4 = a4 + data.MoliendaCanaBruta;
+      b4 = b4 + data.MoliendaCanaNeta;
+      c4 = c4 + data.AzucarEquivalente;
+      z4 = z4 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e4 =
+        e4 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f4 = f4 + data.MelazaProducida;
       // g4 = g4 + data.AlcoholProducido
       dataConcepcion = {
         R14: a4,
@@ -809,19 +811,20 @@ const laesperanza = dateFinIngenios?.find(
         X14: e4,
         Z14: f4,
         AA14: dataConcepcion.AA14,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Marapa' && newDate <= fechaParametro) {
-      a5 = a5 + data.MoliendaCanaBruta
-      b5 = b5 + data.MoliendaCanaNeta
-      c5 = c5 + data.AzucarEquivalente
-      z5 = z5 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e5 = e5 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f5 = f5 + data.MelazaProducida
+    if (data.IngenioNombre === "Marapa" && newDate <= fechaParametro) {
+      a5 = a5 + data.MoliendaCanaBruta;
+      b5 = b5 + data.MoliendaCanaNeta;
+      c5 = c5 + data.AzucarEquivalente;
+      z5 = z5 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e5 =
+        e5 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f5 = f5 + data.MelazaProducida;
       // g5 = g5 + data.AlcoholProducido
       dataMarapa = {
         R15: a5,
@@ -831,19 +834,20 @@ const laesperanza = dateFinIngenios?.find(
         X15: e5,
         Z15: f5,
         AA15: dataMarapa.AA15,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Bella Vista' && newDate <= fechaParametro) {
-      a6 = a6 + data.MoliendaCanaBruta
-      b6 = b6 + data.MoliendaCanaNeta
-      c6 = c6 + data.AzucarEquivalente
-      z6 = z6 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e6 = e6 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f6 = f6 + data.MelazaProducida
+    if (data.IngenioNombre === "Bella Vista" && newDate <= fechaParametro) {
+      a6 = a6 + data.MoliendaCanaBruta;
+      b6 = b6 + data.MoliendaCanaNeta;
+      c6 = c6 + data.AzucarEquivalente;
+      z6 = z6 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e6 =
+        e6 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f6 = f6 + data.MelazaProducida;
       // g6 = g6 + data.AlcoholProducido
       dataBellaVista = {
         R17: a6,
@@ -853,19 +857,20 @@ const laesperanza = dateFinIngenios?.find(
         X17: e6,
         Z17: f6,
         AA17: dataBellaVista.AA17,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Famaillá' && newDate <= fechaParametro) {
-      a7 = a7 + data.MoliendaCanaBruta
-      b7 = b7 + data.MoliendaCanaNeta
-      c7 = c7 + data.AzucarEquivalente
-      z7 = z7 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e7 = e7 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f7 = f7 + data.MelazaProducida
+    if (data.IngenioNombre === "Famaillá" && newDate <= fechaParametro) {
+      a7 = a7 + data.MoliendaCanaBruta;
+      b7 = b7 + data.MoliendaCanaNeta;
+      c7 = c7 + data.AzucarEquivalente;
+      z7 = z7 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e7 =
+        e7 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f7 = f7 + data.MelazaProducida;
       // g7 = g7 + data.AlcoholProducido
       dataFamailla = {
         R18: a7,
@@ -875,19 +880,20 @@ const laesperanza = dateFinIngenios?.find(
         X18: e7,
         Z18: f7,
         AA18: dataFamailla.AA18,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'La Corona' && newDate <= fechaParametro) {
-      a8 = a8 + data.MoliendaCanaBruta
-      b8 = b8 + data.MoliendaCanaNeta
-      c8 = c8 + data.AzucarEquivalente
-      z8 = z8 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e8 = e8 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f8 = f8 + data.MelazaProducida
+    if (data.IngenioNombre === "La Corona" && newDate <= fechaParametro) {
+      a8 = a8 + data.MoliendaCanaBruta;
+      b8 = b8 + data.MoliendaCanaNeta;
+      c8 = c8 + data.AzucarEquivalente;
+      z8 = z8 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e8 =
+        e8 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f8 = f8 + data.MelazaProducida;
       // g8 = g8 + data.AlcoholProducido
       dataLaCorona = {
         R19: a8,
@@ -897,19 +903,20 @@ const laesperanza = dateFinIngenios?.find(
         X19: e8,
         Z19: f8,
         AA19: dataLaCorona.AA19,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'La Providencia' && newDate <= fechaParametro) {
-      a9 = a9 + data.MoliendaCanaBruta
-      b9 = b9 + data.MoliendaCanaNeta
-      c9 = c9 + data.AzucarEquivalente
-      z9 = z9 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e9 = e9 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f9 = f9 + data.MelazaProducida
+    if (data.IngenioNombre === "La Providencia" && newDate <= fechaParametro) {
+      a9 = a9 + data.MoliendaCanaBruta;
+      b9 = b9 + data.MoliendaCanaNeta;
+      c9 = c9 + data.AzucarEquivalente;
+      z9 = z9 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e9 =
+        e9 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f9 = f9 + data.MelazaProducida;
       // g9 = g9 + data.AlcoholProducido
       dataLaProvidencia = {
         R20: a9,
@@ -919,19 +926,20 @@ const laesperanza = dateFinIngenios?.find(
         X20: e9,
         Z20: f9,
         AA20: dataLaProvidencia.AA20,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'La Trinidad' && newDate <= fechaParametro) {
-      a10 = a10 + data.MoliendaCanaBruta
-      b10 = b10 + data.MoliendaCanaNeta
-      c10 = c10 + data.AzucarEquivalente
-      z10 = z10 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e10 = e10 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f10 = f10 + data.MelazaProducida
+    if (data.IngenioNombre === "La Trinidad" && newDate <= fechaParametro) {
+      a10 = a10 + data.MoliendaCanaBruta;
+      b10 = b10 + data.MoliendaCanaNeta;
+      c10 = c10 + data.AzucarEquivalente;
+      z10 = z10 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e10 =
+        e10 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f10 = f10 + data.MelazaProducida;
       // g10 = g10 + data.AlcoholProducido
       dataLaTrinidad = {
         R21: a10,
@@ -941,19 +949,20 @@ const laesperanza = dateFinIngenios?.find(
         X21: e10,
         Z21: f10,
         AA21: dataLaTrinidad.AA21,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Leales' && newDate <= fechaParametro) {
-      a11 = a11 + data.MoliendaCanaBruta
-      b11 = b11 + data.MoliendaCanaNeta
-      c11 = c11 + data.AzucarEquivalente
-      z11 = z11 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e11 = e11 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f11 = f11 + data.MelazaProducida
+    if (data.IngenioNombre === "Leales" && newDate <= fechaParametro) {
+      a11 = a11 + data.MoliendaCanaBruta;
+      b11 = b11 + data.MoliendaCanaNeta;
+      c11 = c11 + data.AzucarEquivalente;
+      z11 = z11 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e11 =
+        e11 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f11 = f11 + data.MelazaProducida;
       // g11 = g11 + data.AlcoholProducido
       dataLeales = {
         R22: a11,
@@ -963,19 +972,20 @@ const laesperanza = dateFinIngenios?.find(
         X22: e11,
         Z22: f11,
         AA22: dataLeales.AA22,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Ñuñorco' && newDate <= fechaParametro) {
-      a12 = a12 + data?.MoliendaCanaBruta
-      b12 = b12 + data?.MoliendaCanaNeta
-      c12 = c12 + data?.AzucarEquivalente
-      z12 = z12 + data?.AzucarBlancoProducido + data?.AzucarRefinado
-      e12 = e12 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f12 = f12 + data?.MelazaProducida
+    if (data.IngenioNombre === "Ñuñorco" && newDate <= fechaParametro) {
+      a12 = a12 + data?.MoliendaCanaBruta;
+      b12 = b12 + data?.MoliendaCanaNeta;
+      c12 = c12 + data?.AzucarEquivalente;
+      z12 = z12 + data?.AzucarBlancoProducido + data?.AzucarRefinado;
+      e12 =
+        e12 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f12 = f12 + data?.MelazaProducida;
       // g12 = g12 + data?.AlcoholProducido
       dataÑuñorco = {
         R23: a12,
@@ -985,19 +995,20 @@ const laesperanza = dateFinIngenios?.find(
         X23: e12,
         Z23: f12,
         AA23: dataÑuñorco.AA23,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Santa Barbara' && newDate <= fechaParametro) {
-      a13 = a13 + data.MoliendaCanaBruta
-      b13 = b13 + data.MoliendaCanaNeta
-      c13 = c13 + data.AzucarEquivalente
-      z13 = z13 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e13 = e13 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f13 = f13 + data.MelazaProducida
+    if (data.IngenioNombre === "Santa Barbara" && newDate <= fechaParametro) {
+      a13 = a13 + data.MoliendaCanaBruta;
+      b13 = b13 + data.MoliendaCanaNeta;
+      c13 = c13 + data.AzucarEquivalente;
+      z13 = z13 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e13 =
+        e13 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f13 = f13 + data.MelazaProducida;
       // g13 = g13 + data.AlcoholProducido
       dataStaBarbara = {
         R24: a13,
@@ -1007,19 +1018,20 @@ const laesperanza = dateFinIngenios?.find(
         X24: e13,
         Z24: f13,
         AA24: dataStaBarbara.AA24,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'Santa Rosa' && newDate <= fechaParametro) {
-      a14 = a14 + data.MoliendaCanaBruta
-      b14 = b14 + data.MoliendaCanaNeta
-      c14 = c14 + data.AzucarEquivalente
-      z14 = z14 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e14 = e14 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f14 = f14 + data.MelazaProducida
+    if (data.IngenioNombre === "Santa Rosa" && newDate <= fechaParametro) {
+      a14 = a14 + data.MoliendaCanaBruta;
+      b14 = b14 + data.MoliendaCanaNeta;
+      c14 = c14 + data.AzucarEquivalente;
+      z14 = z14 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e14 =
+        e14 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f14 = f14 + data.MelazaProducida;
       // g14 = g14 + data.AlcoholProducido
       dataStaRosa = {
         R25: a14,
@@ -1029,19 +1041,20 @@ const laesperanza = dateFinIngenios?.find(
         X25: e14,
         Z25: f14,
         AA25: dataStaRosa.AA25,
-      }
+      };
     }
 
-    if (data.IngenioNombre === 'San Juan' && newDate <= fechaParametro) {
-      a15 = a15 + data.MoliendaCanaBruta
-      b15 = b15 + data.MoliendaCanaNeta
-      c15 = c15 + data.AzucarEquivalente
-      z15 = z15 + data.AzucarBlancoProducido + data?.AzucarRefinado
-      e15 = e15 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f15 = f15 + data.MelazaProducida
+    if (data.IngenioNombre === "San Juan" && newDate <= fechaParametro) {
+      a15 = a15 + data.MoliendaCanaBruta;
+      b15 = b15 + data.MoliendaCanaNeta;
+      c15 = c15 + data.AzucarEquivalente;
+      z15 = z15 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      e15 =
+        e15 +
+        (data.AzucarCrudoProducido || 0) +
+        (data?.AzucarOrganico || 0) +
+        (data?.OtroAzucar || 0);
+      f15 = f15 + data.MelazaProducida;
       // g15 = g15 + data.AlcoholProducido
       dataSanJuan = {
         R26: a15,
@@ -1051,22 +1064,22 @@ const laesperanza = dateFinIngenios?.find(
         X26: e15,
         Z26: f15,
         AA26: dataSanJuan.AA26,
-      }
+      };
     }
-  })
-  setDc1(dataAguilares)
-  setDc2(dataCruzAlta)
-  setDc3(dataLaFlorida)
-  setDc4(dataConcepcion)
-  setDc5(dataMarapa)
-  setDc6(dataBellaVista)
-  setDc7(dataFamailla)
-  setDc8(dataLaCorona)
-  setDc9(dataLaProvidencia)
-  setDc10(dataLaTrinidad)
-  setDc11(dataLeales)
-  setDc12(dataÑuñorco)
-  setDc13(dataStaBarbara)
-  setDc14(dataStaRosa)
-  setDc15(dataSanJuan)
-}
+  });
+  setDc1(dataAguilares);
+  setDc2(dataCruzAlta);
+  setDc3(dataLaFlorida);
+  setDc4(dataConcepcion);
+  setDc5(dataMarapa);
+  setDc6(dataBellaVista);
+  setDc7(dataFamailla);
+  setDc8(dataLaCorona);
+  setDc9(dataLaProvidencia);
+  setDc10(dataLaTrinidad);
+  setDc11(dataLeales);
+  setDc12(dataÑuñorco);
+  setDc13(dataStaBarbara);
+  setDc14(dataStaRosa);
+  setDc15(dataSanJuan);
+};
