@@ -70,6 +70,7 @@ const ParteDiarioContainer = () => {
     inicioZafraComparativa,
     finZafraComparativa,
   ])
+  // console.log(inicioZafra, finZafra, inicioZafraComparativa, finZafraComparativa)
   const getDataImportZafra = async () => {
     const inicio = new Date(inicioZafra)
     const fin = new Date(finZafra)

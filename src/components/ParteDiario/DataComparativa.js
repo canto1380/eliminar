@@ -9,6 +9,13 @@ let dataAguilares = {
     X10: 0,
     Z10: 0,
     AA10: 0,
+    AB10: 0,
+    AC10: 0,
+    AD10: 0,
+    AE10: 0,
+    AF10: 0,
+    AG10: 0,
+    AH10: 0,
   },
   dataCruzAlta = {
     R11: 0,
@@ -18,6 +25,13 @@ let dataAguilares = {
     X11: 0,
     Z11: 0,
     AA11: 0,
+    AB11: 0,
+    AC11: 0,
+    AD11: 0,
+    AE11: 0,
+    AF11: 0,
+    AG11: 0,
+    AH11: 0,
   },
   dataLaFlorida = {
     R12: 0,
@@ -27,6 +41,13 @@ let dataAguilares = {
     X12: 0,
     Z12: 0,
     AA12: 0,
+    AB12: 0,
+    AC12: 0,
+    AD12: 0,
+    AE12: 0,
+    AF12: 0,
+    AG12: 0,
+    AH12: 0,
   },
   dataConcepcion = {
     R14: 0,
@@ -36,6 +57,13 @@ let dataAguilares = {
     X14: 0,
     Z14: 0,
     AA14: 0,
+    AB14: 0,
+    AC14: 0,
+    AD14: 0,
+    AE14: 0,
+    AF14: 0,
+    AG14: 0,
+    AH14: 0,
   },
   dataMarapa = {
     R15: 0,
@@ -45,6 +73,13 @@ let dataAguilares = {
     X15: 0,
     Z15: 0,
     AA15: 0,
+    AB15: 0,
+    AC15: 0,
+    AD15: 0,
+    AE15: 0,
+    AF15: 0,
+    AG15: 0,
+    AH15: 0,
   },
   dataBellaVista = {
     R17: 0,
@@ -54,6 +89,13 @@ let dataAguilares = {
     X17: 0,
     Z17: 0,
     AA17: 0,
+    AB17: 0,
+    AC17: 0,
+    AD17: 0,
+    AE17: 0,
+    AF17: 0,
+    AG17: 0,
+    AH17: 0,
   },
   dataFamailla = {
     R18: 0,
@@ -63,6 +105,13 @@ let dataAguilares = {
     X18: 0,
     Z18: 0,
     AA18: 0,
+    AB18: 0,
+    AC18: 0,
+    AD18: 0,
+    AE18: 0,
+    AF18: 0,
+    AG18: 0,
+    AH18: 0,
   },
   dataLaCorona = {
     R19: 0,
@@ -72,6 +121,13 @@ let dataAguilares = {
     X19: 0,
     Z19: 0,
     AA19: 0,
+    AB19: 0,
+    AC19: 0,
+    AD19: 0,
+    AE19: 0,
+    AF19: 0,
+    AG19: 0,
+    AH19: 0,
   },
   dataLaProvidencia = {
     R20: 0,
@@ -81,6 +137,13 @@ let dataAguilares = {
     X20: 0,
     Z20: 0,
     AA20: 0,
+    AB20: 0,
+    AC20: 0,
+    AD20: 0,
+    AE20: 0,
+    AF20: 0,
+    AG20: 0,
+    AH20: 0,
   },
   dataLaTrinidad = {
     R21: 0,
@@ -90,6 +153,13 @@ let dataAguilares = {
     X21: 0,
     Z21: 0,
     AA21: 0,
+    AB21: 0,
+    AC21: 0,
+    AD21: 0,
+    AE21: 0,
+    AF21: 0,
+    AG21: 0,
+    AH21: 0,
   },
   dataLeales = {
     R22: 0,
@@ -99,6 +169,13 @@ let dataAguilares = {
     X22: 0,
     Z22: 0,
     AA22: 0,
+    AB22: 0,
+    AC22: 0,
+    AD22: 0,
+    AE22: 0,
+    AF22: 0,
+    AG22: 0,
+    AH22: 0,
   },
   dataÑuñorco = {
     R23: 0,
@@ -108,6 +185,13 @@ let dataAguilares = {
     X23: 0,
     Z23: 0,
     AA23: 0,
+    AB23: 0,
+    AC23: 0,
+    AD23: 0,
+    AE23: 0,
+    AF23: 0,
+    AG23: 0,
+    AH23: 0,
   },
   dataStaBarbara = {
     R24: 0,
@@ -117,6 +201,13 @@ let dataAguilares = {
     X24: 0,
     Z24: 0,
     AA24: 0,
+    AB24: 0,
+    AC24: 0,
+    AD24: 0,
+    AE24: 0,
+    AF24: 0,
+    AG24: 0,
+    AH24: 0,
   },
   dataStaRosa = {
     R25: 0,
@@ -126,6 +217,13 @@ let dataAguilares = {
     X25: 0,
     Z25: 0,
     AA25: 0,
+    AB25: 0,
+    AC25: 0,
+    AD25: 0,
+    AE25: 0,
+    AF25: 0,
+    AG25: 0,
+    AH25: 0,
   },
   dataSanJuan = {
     R26: 0,
@@ -135,6 +233,13 @@ let dataAguilares = {
     X26: 0,
     Z26: 0,
     AA26: 0,
+    AB26: 0,
+    AC26: 0,
+    AD26: 0,
+    AE26: 0,
+    AF26: 0,
+    AG26: 0,
+    AH26: 0,
   },
   dataInicioIngenios = {
     Cell10: 0,
@@ -426,6 +531,13 @@ export const dataComparativaPorTipo = (
     let varName5 = "e" + i;
     let varName6 = "f" + i;
     let varName7 = "g" + i;
+    let varName8 = "h" + i;
+    let varName9 = "i" + i;
+    let varName10 = "j" + i;
+    let varName11 = "k" + i;
+    let varName12 = "l" + i;
+    let varName13 = "m" + i;
+    let varName14 = "n" + i;
 
     window[varName1] = 0;
     window[varName2] = 0;
@@ -434,25 +546,33 @@ export const dataComparativaPorTipo = (
     window[varName5] = 0;
     window[varName6] = 0;
     window[varName7] = 0;
+    window[varName8] = 0;
+    window[varName9] = 0;
+    window[varName10] = 0;
+    window[varName11] = 0;
+    window[varName12] = 0;
+    window[varName13] = 0;
+    window[varName14] = 0;
+    
   }
 
-  for (let i = 1; i <= 15; i++) {
-    let varName1 = "a" + i;
-    let varName2 = "b" + i;
-    let varName3 = "c" + i;
-    let varName4 = "z" + i;
-    let varName5 = "e" + i;
-    let varName6 = "f" + i;
-    let varName7 = "g" + i;
+  // for (let i = 1; i <= 15; i++) {
+  //   let varName1 = "a" + i;
+  //   let varName2 = "b" + i;
+  //   let varName3 = "c" + i;
+  //   let varName4 = "z" + i;
+  //   let varName5 = "e" + i;
+  //   let varName6 = "f" + i;
+  //   let varName7 = "g" + i;
 
-    window[varName1] = 0;
-    window[varName2] = 0;
-    window[varName3] = 0;
-    window[varName4] = 0;
-    window[varName5] = 0;
-    window[varName6] = 0;
-    window[varName7] = 0;
-  }
+  //   window[varName1] = 0;
+  //   window[varName2] = 0;
+  //   window[varName3] = 0;
+  //   window[varName4] = 0;
+  //   window[varName5] = 0;
+  //   window[varName6] = 0;
+  //   window[varName7] = 0;
+  // }
 
   /****************************** DATOS DESTILERIA ALCOHOL ******************************/
   dataImportDestileriaComparativa?.forEach((data) => {
@@ -467,7 +587,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.aguilInicio)
     ) {
       g1 = g1 + data.AlcoholProducido;
-      r1 = r1 + data.AlcoholAnhidro || 0;
+      i1 = i1 + data.AlcoholHidratado;
+      h1 = h1 + data.AlcoholAnhidro || 0;
       dataAguilares = {
         R10: 0,
         S10: 0,
@@ -476,6 +597,8 @@ export const dataComparativaPorTipo = (
         X10: 0,
         Z10: 0,
         AA10: g1,
+        AB10: h1,
+        AC10: i1,
       };
     }
 
@@ -485,6 +608,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
     ) {
       g2 = g2 + data.AlcoholProducido;
+      i2 = i2 + data.AlcoholHidratado;
+      h2 = h2 + data.AlcoholAnhidro || 0;
       dataCruzAlta = {
         R11: 0,
         S11: 0,
@@ -493,6 +618,8 @@ export const dataComparativaPorTipo = (
         X11: 0,
         Z11: 0,
         AA11: g2,
+        AB11: h2,
+        AC11: i2,
       };
     }
     if (
@@ -501,6 +628,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
       g3 = g3 + data.AlcoholProducido;
+      i3 = i3 + data.AlcoholHidratado;
+      h3 = h3 + data.AlcoholAnhidro || 0;
       dataLaFlorida = {
         R12: 0,
         S12: 0,
@@ -509,6 +638,8 @@ export const dataComparativaPorTipo = (
         X12: 0,
         Z12: 0,
         AA12: g3,
+        AB12: h3,
+        AC12: i3,
       };
     }
     if (
@@ -517,6 +648,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
     ) {
       g4 = g4 + data.AlcoholProducido;
+      i4 = i4 + data.AlcoholHidratado;
+      h4 = h4 + data.AlcoholAnhidro || 0;
       dataConcepcion = {
         R14: 0,
         S14: 0,
@@ -525,6 +658,8 @@ export const dataComparativaPorTipo = (
         X14: 0,
         Z14: 0,
         AA14: g4,
+        AB14: h4,
+        AC14: i4,
       };
     }
 
@@ -534,6 +669,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
     ) {
       g5 = g5 + data.AlcoholProducido;
+      i5 = i5 + data.AlcoholHidratado;
+      h5 = h5 + data.AlcoholAnhidro || 0;
       dataMarapa = {
         R15: 0,
         S15: 0,
@@ -542,6 +679,8 @@ export const dataComparativaPorTipo = (
         X15: 0,
         Z15: 0,
         AA15: g5,
+        AB15: h5,
+        AC15: i5,
       };
     }
 
@@ -551,6 +690,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.bellaInicio)
     ) {
       g6 = g6 + data.AlcoholProducido;
+      i6 = i6 + data.AlcoholHidratado;
+      h6 = h6 + data.AlcoholAnhidro || 0;
       dataBellaVista = {
         R17: 0,
         S17: 0,
@@ -559,6 +700,8 @@ export const dataComparativaPorTipo = (
         X17: 0,
         Z17: 0,
         AA17: g6,
+        AB17: h6,
+        AC17: i6,
       };
     }
 
@@ -568,6 +711,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.famaillaInicio)
     ) {
       g7 = g7 + data.AlcoholProducido;
+      i7 = i7 + data.AlcoholHidratado;
+      h7 = h7 + data.AlcoholAnhidro || 0;
       dataFamailla = {
         R18: 0,
         S18: 0,
@@ -576,6 +721,8 @@ export const dataComparativaPorTipo = (
         X18: 0,
         Z18: 0,
         AA18: g7,
+        AB18: h7,
+        AC18: i7,
       };
     }
 
@@ -585,6 +732,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.coronaInicio)
     ) {
       g8 = g8 + data.AlcoholProducido;
+      i8 = i8 + data.AlcoholHidratado;
+      h8 = h8 + data.AlcoholAnhidro || 0;
       dataLaCorona = {
         R19: 0,
         S19: 0,
@@ -593,6 +742,8 @@ export const dataComparativaPorTipo = (
         X19: 0,
         Z19: 0,
         AA19: g8,
+        AB19: h8,
+        AC19: i8,
       };
     }
 
@@ -602,6 +753,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.provInicio)
     ) {
       g9 = g9 + data.AlcoholProducido;
+      i9 = i9 + data.AlcoholHidratado;
+      h9 = h9 + data.AlcoholAnhidro || 0;
       dataLaProvidencia = {
         R20: 0,
         S20: 0,
@@ -610,6 +763,8 @@ export const dataComparativaPorTipo = (
         X20: 0,
         Z20: 0,
         AA20: g9,
+        AB20: h9,
+        AC20: i9,
       };
     }
 
@@ -619,6 +774,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.trinInicio)
     ) {
       g10 = g10 + data.AlcoholProducido;
+      i10 = i10 + data.AlcoholHidratado;
+      h10 = h10 + data.AlcoholAnhidro || 0;
       dataLaTrinidad = {
         R21: 0,
         S21: 0,
@@ -627,6 +784,8 @@ export const dataComparativaPorTipo = (
         X21: 0,
         Z21: 0,
         AA21: g10,
+        AB21: h10,
+        AC21: i10,
       };
     }
 
@@ -636,6 +795,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.lealesInicio)
     ) {
       g11 = g11 + data.AlcoholProducido;
+      i11 = i11 + data.AlcoholHidratado;
+      h11 = h11 + data.AlcoholAnhidro || 0;
       dataLeales = {
         R22: 0,
         S22: 0,
@@ -644,6 +805,8 @@ export const dataComparativaPorTipo = (
         X22: 0,
         Z22: 0,
         AA22: g11,
+        AB22: h11,
+        AC22: i11,
       };
     }
 
@@ -653,6 +816,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.nunorcoInicio)
     ) {
       g12 = g12 + data.AlcoholProducido;
+      i12 = i12 + data.AlcoholHidratado;
+      h12 = h12 + data.AlcoholAnhidro || 0;
       dataÑuñorco = {
         R23: 0,
         S23: 0,
@@ -661,6 +826,8 @@ export const dataComparativaPorTipo = (
         X23: 0,
         Z23: 0,
         AA23: g12,
+        AB23: h12,
+        AC23: i12,
       };
     }
 
@@ -670,6 +837,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.staBarInicio)
     ) {
       g13 = g13 + data.AlcoholProducido;
+      i13 = i13 + data.AlcoholHidratado;
+      h13 = h13 + data.AlcoholAnhidro || 0;
       dataStaBarbara = {
         R24: 0,
         S24: 0,
@@ -678,6 +847,8 @@ export const dataComparativaPorTipo = (
         X24: 0,
         Z24: 0,
         AA24: g13,
+        AB24: h13,
+        AC24: i13,
       };
     }
 
@@ -687,6 +858,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.staRosaInicio)
     ) {
       g14 = g14 + data.AlcoholProducido;
+      i14 = i14 + data.AlcoholHidratado;
+      h14 = h14 + data.AlcoholAnhidro || 0;
       dataStaRosa = {
         R25: 0,
         S25: 0,
@@ -695,6 +868,8 @@ export const dataComparativaPorTipo = (
         X25: 0,
         Z25: 0,
         AA25: g14,
+        AB25: h14,
+        AC25: i14,
       };
     }
 
@@ -704,6 +879,8 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngenios.sanJuanInicio)
     ) {
       g15 = g15 + data.AlcoholProducido;
+      i15 = i15 + data.AlcoholHidratado;
+      h15 = h15 + data.AlcoholAnhidro || 0;
       dataSanJuan = {
         R26: 0,
         S26: 0,
@@ -712,6 +889,8 @@ export const dataComparativaPorTipo = (
         X26: 0,
         Z26: 0,
         AA26: g15,
+        AB26: h15,
+        AC26: i15,
       };
     }
   });
@@ -734,6 +913,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f1 = f1 + data.MelazaProducida || 0;
       // g1 = g1 + data.AlcoholProducido || 0
+      j1 = j1 + data.AzucarBlancoProducido;
+      k1 = k1 + data.AzucarRefinado;
+      l1 = l1 + data.AzucarCrudoProducido;
+      m1 = m1 + data.AzucarOrganico;
+      n1 = n1 + data.OtroAzucar
       dataAguilares = {
         R10: a1,
         S10: b1,
@@ -742,6 +926,13 @@ export const dataComparativaPorTipo = (
         X10: e1,
         Z10: f1,
         AA10: dataAguilares.AA10,
+        AB10: dataAguilares.AB10,
+        AC10: dataAguilares.AC10,
+        AD10: j1,
+        AE10: k1,
+        AF10: l1,
+        AG10: m1,
+        AH10: n1,
       };
     }
 
@@ -757,6 +948,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f2 = f2 + data.MelazaProducida;
       // g2 = g2 + data.AlcoholProducido
+      j2 = j2 + data.AzucarBlancoProducido;
+      k2 = k2 + data.AzucarRefinado;
+      l2 = l2 + data.AzucarCrudoProducido;
+      m2 = m2 + data.AzucarOrganico;
+      n2 = n2 + data.OtroAzucar
       dataCruzAlta = {
         R11: a2,
         S11: b2,
@@ -765,6 +961,13 @@ export const dataComparativaPorTipo = (
         X11: e2,
         Z11: f2,
         AA11: dataCruzAlta.AA11,
+        AB11: dataCruzAlta.AB11,
+        AC11: dataCruzAlta.AC11,
+        AD11: j2,
+        AE11: k2,
+        AF11: l2,
+        AG11: m2,
+        AH11: n2,
       };
     }
 
@@ -780,6 +983,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f3 = f3 + data.MelazaProducida;
       // g3 = g3 + data.AlcoholProducido
+      j3 = j3 + data.AzucarBlancoProducido;
+      k3 = k3 + data.AzucarRefinado;
+      l3 = l3 + data.AzucarCrudoProducido;
+      m3 = m3 + data.AzucarOrganico;
+      n3 = n3 + data.OtroAzucar
       dataLaFlorida = {
         R12: a3,
         S12: b3,
@@ -788,6 +996,13 @@ export const dataComparativaPorTipo = (
         X12: e3,
         Z12: f3,
         AA12: dataLaFlorida.AA12,
+        AB12: dataLaFlorida.AB12,
+        AC12: dataLaFlorida.AC12,
+        AD12: j3,
+        AE12: k3,
+        AF12: l3,
+        AG12: m3,
+        AH12: n3,
       };
     }
 
@@ -803,6 +1018,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f4 = f4 + data.MelazaProducida;
       // g4 = g4 + data.AlcoholProducido
+      j4 = j4 + data.AzucarBlancoProducido;
+      k4 = k4 + data.AzucarRefinado;
+      l4 = l4 + data.AzucarCrudoProducido;
+      m4 = m4 + data.AzucarOrganico;
+      n4 = n4 + data.OtroAzucar
       dataConcepcion = {
         R14: a4,
         S14: b4,
@@ -811,6 +1031,13 @@ export const dataComparativaPorTipo = (
         X14: e4,
         Z14: f4,
         AA14: dataConcepcion.AA14,
+        AB14: dataConcepcion.AB14,
+        AC14: dataConcepcion.AC14,
+        AD14: j4,
+        AE14: k4,
+        AF14: l4,
+        AG14: m4,
+        AH14: n4,
       };
     }
 
@@ -826,6 +1053,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f5 = f5 + data.MelazaProducida;
       // g5 = g5 + data.AlcoholProducido
+      j5 = j5 + data.AzucarBlancoProducido;
+      k5 = k5 + data.AzucarRefinado;
+      l5 = l5 + data.AzucarCrudoProducido;
+      m5 = m5 + data.AzucarOrganico;
+      n5 = n5 + data.OtroAzucar
       dataMarapa = {
         R15: a5,
         S15: b5,
@@ -834,6 +1066,13 @@ export const dataComparativaPorTipo = (
         X15: e5,
         Z15: f5,
         AA15: dataMarapa.AA15,
+        AB15: dataMarapa.AB15,
+        AC15: dataMarapa.AC15,
+        AD15: j5,
+        AE15: k5,
+        AF15: l5,
+        AG15: m5,
+        AH15: n5,
       };
     }
 
@@ -849,6 +1088,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f6 = f6 + data.MelazaProducida;
       // g6 = g6 + data.AlcoholProducido
+      j6 = j6 + data.AzucarBlancoProducido;
+      k6 = k6 + data.AzucarRefinado;
+      l6 = l6 + data.AzucarCrudoProducido;
+      m6 = m6 + data.AzucarOrganico;
+      n6 = n6 + data.OtroAzucar
       dataBellaVista = {
         R17: a6,
         S17: b6,
@@ -857,6 +1101,13 @@ export const dataComparativaPorTipo = (
         X17: e6,
         Z17: f6,
         AA17: dataBellaVista.AA17,
+        AB17: dataBellaVista.AB17,
+        AC17: dataBellaVista.AC17,
+        AD17: j6,
+        AE17: k6,
+        AF17: l6,
+        AG17: m6,
+        AH17: n6,
       };
     }
 
@@ -872,6 +1123,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f7 = f7 + data.MelazaProducida;
       // g7 = g7 + data.AlcoholProducido
+      j7 = j7 + data.AzucarBlancoProducido;
+      k7 = k7 + data.AzucarRefinado;
+      l7 = l7 + data.AzucarCrudoProducido;
+      m7 = m7 + data.AzucarOrganico;
+      n7 = n7 + data.OtroAzucar
       dataFamailla = {
         R18: a7,
         S18: b7,
@@ -880,6 +1136,13 @@ export const dataComparativaPorTipo = (
         X18: e7,
         Z18: f7,
         AA18: dataFamailla.AA18,
+        AB18: dataFamailla.AB18,
+        AC18: dataFamailla.AC18,
+        AD18: j7,
+        AE18: k7,
+        AF18: l7,
+        AG18: m7,
+        AH18: n7,
       };
     }
 
@@ -895,6 +1158,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f8 = f8 + data.MelazaProducida;
       // g8 = g8 + data.AlcoholProducido
+      j8 = j8 + data.AzucarBlancoProducido;
+      k8 = k8 + data.AzucarRefinado;
+      l8 = l8 + data.AzucarCrudoProducido;
+      m8 = m8 + data.AzucarOrganico;
+      n8 = n8 + data.OtroAzucar
       dataLaCorona = {
         R19: a8,
         S19: b8,
@@ -903,6 +1171,13 @@ export const dataComparativaPorTipo = (
         X19: e8,
         Z19: f8,
         AA19: dataLaCorona.AA19,
+        AB19: dataLaCorona.AB19,
+        AC19: dataLaCorona.AC19,
+        AD19: j8,
+        AE19: k8,
+        AF19: l8,
+        AG19: m8,
+        AH19: n8,
       };
     }
 
@@ -918,6 +1193,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f9 = f9 + data.MelazaProducida;
       // g9 = g9 + data.AlcoholProducido
+      j9 = j9 + data.AzucarBlancoProducido;
+      k9 = k9 + data.AzucarRefinado;
+      l9 = l9 + data.AzucarCrudoProducido;
+      m9 = m9 + data.AzucarOrganico;
+      n9 = n9 + data.OtroAzucar
       dataLaProvidencia = {
         R20: a9,
         S20: b9,
@@ -926,6 +1206,14 @@ export const dataComparativaPorTipo = (
         X20: e9,
         Z20: f9,
         AA20: dataLaProvidencia.AA20,
+        AB20: dataLaProvidencia.AB20,
+        AC20: dataLaProvidencia.AC20,
+
+        AD20: j9,
+        AE20: k9,
+        AF20: l9,
+        AG20: m9,
+        AH20: n9,
       };
     }
 
@@ -941,6 +1229,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f10 = f10 + data.MelazaProducida;
       // g10 = g10 + data.AlcoholProducido
+      j10 = j10 + data.AzucarBlancoProducido;
+      k10 = k10 + data.AzucarRefinado;
+      l10 = l10 + data.AzucarCrudoProducido;
+      m10 = m10 + data.AzucarOrganico;
+      n10 = n10 + data.OtroAzucar
       dataLaTrinidad = {
         R21: a10,
         S21: b10,
@@ -949,6 +1242,13 @@ export const dataComparativaPorTipo = (
         X21: e10,
         Z21: f10,
         AA21: dataLaTrinidad.AA21,
+        AB21: dataLaTrinidad.AB21,
+        AC21: dataLaTrinidad.AC21,
+        AD21: j10,
+        AE21: k10,
+        AF21: l10,
+        AG21: m10,
+        AH21: n10,
       };
     }
 
@@ -964,6 +1264,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f11 = f11 + data.MelazaProducida;
       // g11 = g11 + data.AlcoholProducido
+      j11 = j11 + data.AzucarBlancoProducido;
+      k11 = k11 + data.AzucarRefinado;
+      l11 = l11 + data.AzucarCrudoProducido;
+      m11 = m11 + data.AzucarOrganico;
+      n11 = n11 + data.OtroAzucar
       dataLeales = {
         R22: a11,
         S22: b11,
@@ -972,6 +1277,13 @@ export const dataComparativaPorTipo = (
         X22: e11,
         Z22: f11,
         AA22: dataLeales.AA22,
+        AB22: dataLeales.AB22,
+        AC22: dataLeales.AC22,
+        AD22: j11,
+        AE22: k11,
+        AF22: l11,
+        AG22: m11,
+        AH22: n11,
       };
     }
 
@@ -987,6 +1299,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f12 = f12 + data?.MelazaProducida;
       // g12 = g12 + data?.AlcoholProducido
+      j12 = j12 + data.AzucarBlancoProducido;
+      k12 = k12 + data.AzucarRefinado;
+      l12 = l12 + data.AzucarCrudoProducido;
+      m12 = m12 + data.AzucarOrganico;
+      n12 = n12 + data.OtroAzucar
       dataÑuñorco = {
         R23: a12,
         S23: b12,
@@ -995,6 +1312,13 @@ export const dataComparativaPorTipo = (
         X23: e12,
         Z23: f12,
         AA23: dataÑuñorco.AA23,
+        AB23: dataÑuñorco.AB23,
+        AC23: dataÑuñorco.AC23,
+        AD23: j12,
+        AE23: k12,
+        AF23: l12,
+        AG23: m12,
+        AH23: n12,
       };
     }
 
@@ -1010,6 +1334,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f13 = f13 + data.MelazaProducida;
       // g13 = g13 + data.AlcoholProducido
+      j13 = j13 + data.AzucarBlancoProducido;
+      k13 = k13 + data.AzucarRefinado;
+      l13 = l13 + data.AzucarCrudoProducido;
+      m13 = m13 + data.AzucarOrganico;
+      n13 = n13 + data.OtroAzucar
       dataStaBarbara = {
         R24: a13,
         S24: b13,
@@ -1018,6 +1347,13 @@ export const dataComparativaPorTipo = (
         X24: e13,
         Z24: f13,
         AA24: dataStaBarbara.AA24,
+        AB24: dataStaBarbara.AB24,
+        AC24: dataStaBarbara.AC24,
+        AD24: j13,
+        AE24: k13,
+        AF24: l13,
+        AG24: m13,
+        AH24: n13,
       };
     }
 
@@ -1033,6 +1369,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f14 = f14 + data.MelazaProducida;
       // g14 = g14 + data.AlcoholProducido
+      j14 = j14 + data.AzucarBlancoProducido;
+      k14 = k14 + data.AzucarRefinado;
+      l14 = l14 + data.AzucarCrudoProducido;
+      m14 = m14 + data.AzucarOrganico;
+      n14 = n14 + data.OtroAzucar
       dataStaRosa = {
         R25: a14,
         S25: b14,
@@ -1041,6 +1382,13 @@ export const dataComparativaPorTipo = (
         X25: e14,
         Z25: f14,
         AA25: dataStaRosa.AA25,
+        AB25: dataStaRosa.AB25,
+        AC25: dataStaRosa.AC25,
+        AD25: j14,
+        AE25: k14,
+        AF25: l14,
+        AG25: m14,
+        AH25: n14,
       };
     }
 
@@ -1056,6 +1404,11 @@ export const dataComparativaPorTipo = (
         (data?.OtroAzucar || 0);
       f15 = f15 + data.MelazaProducida;
       // g15 = g15 + data.AlcoholProducido
+      j15 = j15 + data.AzucarBlancoProducido;
+      k15 = k15 + data.AzucarRefinado;
+      l15 = l15 + data.AzucarCrudoProducido;
+      m15 = m15 + data.AzucarOrganico;
+      n15 = n15 + data.OtroAzucar
       dataSanJuan = {
         R26: a15,
         S26: b15,
@@ -1064,6 +1417,13 @@ export const dataComparativaPorTipo = (
         X26: e15,
         Z26: f15,
         AA26: dataSanJuan.AA26,
+        AB26: dataSanJuan.AB26,
+        AC26: dataSanJuan.AC26,
+        AD26: j15,
+        AE26: k15,
+        AF26: l15,
+        AG26: m15,
+        AH26: n15,
       };
     }
   });
