@@ -10,8 +10,9 @@ export const getDataPartesDiarios = async (params) => {
 /** API SI CONSULTAMOS DESDE EL BACKEND **/
 export const getDataPartesDiariosBE = async (params, urlPath) => {
   const res = await apiBEPATH('GET', params, urlPath, '')
-  if (res.status === 200) {
-    const data = res?.data?.data?.ParteDiarios
-    return data
-  }
+  return res
+  // if (res.status === 200) {
+  //   const data = res?.data?.data?.ParteDiarios
+  //   return data
+  // }
 }

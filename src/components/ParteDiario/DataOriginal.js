@@ -577,6 +577,7 @@ export const dataPorTipo = (
     window[varName14] = 0;
   }
   /****************************** DATOS DESTILERIA ALCOHOL ******************************/
+  
   dataImportDestileria?.forEach((data) => {
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
@@ -618,11 +619,11 @@ export const dataPorTipo = (
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
+      
       g3 = g3 + data.AlcoholProducido;
       o3 = o3 + data.AlcoholHidratado || 0;
       r3 = r3 + data.AlcoholAnhidro || 0;
       alcoholPanel = alcoholPanel + data.AlcoholProducido;
-
       dataLaFlorida = {
         N12: g3,
         O50: o3,
@@ -701,11 +702,13 @@ export const dataPorTipo = (
       g8 = g8 + data.AlcoholProducido;
       o8 = o8 + data.AlcoholHidratado || 0;
       r8 = r8 + data.AlcoholAnhidro || 0;
+      // f8 = f8 + data.MelazaProducida;
       alcoholPanel = alcoholPanel + data.AlcoholProducido;
       dataLaCorona = {
         N19: g8,
         O49: o8,
         R49: r8,
+        // M19: f8,
       };
     }
 
@@ -826,21 +829,23 @@ export const dataPorTipo = (
   dataImport?.forEach((data) => {
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    if(newDate <= fechaParametro) {
+      cmbPanel = cmbPanel + data.MoliendaCanaBruta;
+      azucarPanel =
+        azucarPanel +
+        data.AzucarBlancoProducido +
+        data.AzucarCrudoProducido +
+        data.AzucarRefinado +
+        data.AzucarOrganico +
+        data.OtroAzucar;
+      azucarPanelEquivalente = azucarPanelEquivalente + data?.AzucarEquivalente
+      azucarPanelCrudo = azucarPanelCrudo + data?.AzucarCrudoProducido
+      azucarPanelBlancoA = azucarPanelBlancoA + data?.AzucarBlancoProducido
+      azucarPanelRefinado = azucarPanelRefinado + data?.AzucarRefinado
+      azucarPanelOrganico = azucarPanelOrganico + data?.AzucarOrganico
+      azucarPanelOtros = azucarPanelOtros + data?.OtroAzucar
 
-    cmbPanel = cmbPanel + data.MoliendaCanaBruta;
-    azucarPanel =
-      azucarPanel +
-      data.AzucarBlancoProducido +
-      data.AzucarCrudoProducido +
-      data.AzucarRefinado +
-      data.AzucarOrganico +
-      data.OtroAzucar;
-    azucarPanelEquivalente = azucarPanelEquivalente + data?.AzucarEquivalente
-    azucarPanelCrudo = azucarPanelCrudo + data?.AzucarCrudoProducido
-    azucarPanelBlancoA = azucarPanelBlancoA + data?.AzucarBlancoProducido
-    azucarPanelRefinado = azucarPanelRefinado + data?.AzucarRefinado
-    azucarPanelOrganico = azucarPanelOrganico + data?.AzucarOrganico
-    azucarPanelOtros = azucarPanelOtros + data?.OtroAzucar
+    }
     /*** Verifica
      * cada ingenio
      * fecha del parte diario del json sea menor o igual a la fecha elegida en el sistema
@@ -1449,6 +1454,8 @@ export const dataPorTipo = (
   }
   /****************/
 
+  
+
   /*** ALCOHOL ANHIDRO ZAFRA 2024 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
    * DECLARADO POR EMAIL
    ***/
@@ -1459,32 +1466,46 @@ export const dataPorTipo = (
   Agosto: 4.971.944
   Septiembre: 2.963.470
   Octubre: 1.460.000
-  Acumulado: 17.776.202
+  Noviembre: 5.347.000
+  Diciembre: 235.750
+  Enero: 4.770.000
+  Febrero: 3.412.785
+  Acumulado: 31.541.737
   */
   if (zafraParteDiario === 2024) {
-    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000;
+    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
   }
 
   /* CONCEPCION 
-  Agosto: 6.068.118
+  Junio:2.986.603
+  Julio: 8.049.602
+  Agosto: 6.083.561
   Septiembre: 6.163.307
   Octubre: 5.436.241
-  Acumulado: 28.719.314
+  Noviembre:5.290.243
+  Diciembre: 5.819.557
+  Enero 2025: 6.522.224
+  EFebrero: 5.677.674
+  Acumulado: 52.029.419
   */
   if (zafraParteDiario === 2024) {
-    dataConcepcion.R46 = dataConcepcion.R46 + 28719314;
+    dataConcepcion.R46 = dataConcepcion.R46 + 52029419;
   }
 
   /* BELLA VISTA 
-  Junio: 880968
+  Junio: 880.968
   Julio: 2.099.136
-  Agosto:3135585
+  Agosto:3.135.585
   Septiembre: 253.748
   Octubre: 2.483.843
-  Acumulado: 8.853.280
+  Noviembre: 1.098.950
+  Diciembre: 2.031.615
+  Enero:
+  Febrero: 
+  Acumulado: 11.983.845
   */
   if (zafraParteDiario === 2024) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843;
+    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615;
   }
   /**********/
 
@@ -1518,3 +1539,133 @@ export const dataPorTipo = (
   setD14(dataStaRosa);
   setD15(dataSanJuan);
 };
+
+// /***************** MEJORAS REGISTROS GLOBALES *********************/
+// SELECT Ingenio, Fecha, Origen, Valor
+// FROM (
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z15' AS Origen, [Mol CB Z15] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z16' AS Origen, [Mol CB Z16] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z17' AS Origen, [Mol CB Z17] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z18' AS Origen, [Mol CB Z18] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z19' AS Origen, [Mol CB Z19] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z20' AS Origen, [Mol CB Z20] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z21' AS Origen, [Mol CB Z21] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z22' AS Origen, [Mol CB Z22] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z23' AS Origen, [Mol CB Z23] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z24' AS Origen, [Mol CB Z24] AS Valor FROM [DB original]
+// ) AS Datos
+// WHERE Valor IS NOT NULL
+// ORDER BY Valor DESC;
+
+
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z15' AS Origen, [DB original].[Mol CB Z15] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z16' AS Origen, [DB original].[Mol CB Z16] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z17' AS Origen, [DB original].[Mol CB Z17] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z18' AS Origen, [DB original].[Mol CB Z18] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z19' AS Origen, [DB original].[Mol CB Z19] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z20' AS Origen, [DB original].[Mol CB Z20] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z21' AS Origen, [DB original].[Mol CB Z21] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z22' AS Origen, [DB original].[Mol CB Z22] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z23' AS Origen, [DB original].[Mol CB Z23] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z24' AS Origen, [DB original].[Mol CB Z24] AS Valor FROM [DB original]
+// order by Valor desc;
+
+
+
+
+// /********************* 10 mejores registros por CMB ingresando nombre ingenio *****************************/
+// SELECT top 10 Ingenio, Fecha, Zafra, CMB, [Az Equivalente]
+// FROM (
+//     SELECT [Ingenio], [Fecha], 'Zafra 15' AS Zafra, [Mol CB Z15] AS CMB, [Az Eq Z15] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 16' AS Zafra, [Mol CB Z16] AS CMB, [Az Eq Z16] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 17' AS Zafra, [Mol CB Z17] AS CMB, [Az Eq Z17] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 18' AS Zafra, [Mol CB Z18] AS CMB, [Az Eq Z18] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 19' AS Zafra, [Mol CB Z19] AS CMB, [Az Eq Z19] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 20' AS Zafra, [Mol CB Z20] AS CMB, [Az Eq Z20] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 21' AS Zafra, [Mol CB Z21] AS CMB, [Az Eq Z21] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 22' AS Zafra, [Mol CB Z22] AS CMB, [Az Eq Z22] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 23' AS Zafra, [Mol CB Z23] AS CMB, [Az Eq Z23] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 24' AS Zafra, [Mol CB Z24] AS CMB, [Az Eq Z24] AS [Az Equivalente] FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL and Ingenio = nombreIngenio
+// ORDER BY CMB DESC;
+
+
+
+// /******************* ZAFRA HISTORICOS ****************************/
+// SELECT TOP 10 * FROM (
+//   SELECT  'Zafra 15' AS Origen, [DB original].[Mol CB Z15] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 16' AS Origen, [DB original].[Mol CB Z16] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 17' AS Origen, [DB original].[Mol CB Z17] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 18' AS Origen, [DB original].[Mol CB Z18] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 19' AS Origen, [DB original].[Mol CB Z19] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 20' AS Origen, [DB original].[Mol CB Z20] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 21' AS Origen, [DB original].[Mol CB Z21] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 22' AS Origen, [DB original].[Mol CB Z22] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 23' AS Origen, [DB original].[Mol CB Z23] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 24' AS Origen, [DB original].[Mol CB Z24] AS CMB FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL AND CMB > 0
+// ORDER BY Origen DESC;
+
+
+// SELECT TOP 10  Zafra, CMB
+// FROM (
+//     SELECT 'Zafra 2015' AS Zafra, [Mol CB Z15] AS CMB FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2016', [Mol CB Z16] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2017', [Mol CB Z17] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2018', [Mol CB Z18] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2019', [Mol CB Z19] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2020', [Mol CB Z20] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2021', [Mol CB Z21] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2022', [Mol CB Z22] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2023', [Mol CB Z23] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2024', [Mol CB Z24] FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL
+// ORDER BY CMB DESC;

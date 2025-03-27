@@ -336,6 +336,7 @@ export const dataComparativaPorTipo = (
   dataImportDestileriaComparativa,
   dataEnd,
   dateFinIngenios,
+  zafraParteDiario,
   setDc1,
   setDc2,
   setDc3,
@@ -1427,6 +1428,83 @@ export const dataComparativaPorTipo = (
       };
     }
   });
+
+/*********************************************************************************/
+  /*** ALCOHOL ANHIDRO QUE QUEDO DEFASADO ENTRE EL 5/05/2024 y 15/05/2024
+   * QUE PERTENECE A LA ZAFRA 2023 ***/
+  if ((zafraParteDiario -1) === 2024) {
+    dataLaFlorida.AB12 = dataLaFlorida.AB12 - 2526587;
+  }
+  if ((zafraParteDiario -1) === 2023) {
+    dataLaFlorida.AB12 = dataLaFlorida.AB12 + 2526587;
+  }
+  /****************/
+
+  /*** ALCOHOL ANHIDRO ZAFRA 2024 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
+   * DECLARADO POR EMAIL
+   ***/
+
+  /*LEALES
+  Junio: 2.194.476
+  Julio: 2.052.522
+  Agosto: 4.971.944
+  Septiembre: 2.963.470
+  Octubre: 1.460.000
+  Noviembre: 5.347.000
+  Diciembre: 235.750
+  Enero: 4.770.000
+  Acumulado: 28.128.952
+
+  */
+  if ((zafraParteDiario -1) === 2024) {
+    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000;
+  }
+
+  /* CONCEPCION 
+  Junio:2.986.603
+  Julio: 8.049.602
+  Agosto: 6.083.561
+  Septiembre: 6.163.307
+  Octubre: 5.436.241
+  Noviembre:5.290.243
+  Diciembre: 5.819.557
+  Enero 2025: 6.522.224
+  Acumulado: 46.351.745
+  */
+  if ((zafraParteDiario -1) === 2024) {
+    dataConcepcion.R46 = dataConcepcion.R46 + 46351745;
+  }
+
+  /* BELLA VISTA 
+  Junio: 880.968
+  Julio: 2.099.136
+  Agosto:3.135.585
+  Septiembre: 253.748
+  Octubre: 2.483.843
+  Noviembre: 1.098.950
+  Diciembre: 2.031.615
+  Acumulado: 11.983.845
+  */
+  if ((zafraParteDiario -1) === 2024) {
+    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615;
+  }
+  /**********/
+
+  /*** ALCOHOL ANHIDRO ZAFRA 2023 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
+   * DECLARADO POR EMAIL
+   ***/
+  if ((zafraParteDiario -1) === 2023) {
+    dataBellaVista.AB17 = dataBellaVista.AB17 + 9669715;
+  }
+  if ((zafraParteDiario -1) === 2023) {
+    dataConcepcion.AB14 = dataConcepcion.AB14 + 35668460;
+  }
+  if ((zafraParteDiario -1) === 2023) {
+    dataLeales.AB22 = dataLeales.AB22 + 26464761;
+  }
+  /**********/
+
+
   setDc1(dataAguilares);
   setDc2(dataCruzAlta);
   setDc3(dataLaFlorida);

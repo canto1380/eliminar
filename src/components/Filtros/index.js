@@ -257,7 +257,7 @@ const Filtros = ({
           <Row>
             <Col className="mt-3">
               <div className={`pt-4 pb-0 px-4`}>
-                <p className="fw-bolder">Filtros Parte Diario Directorio</p>
+                <p className="fw-bolder mb-1">Filtros Parte Diario Directorio</p>
               </div>
             </Col>
           </Row>
@@ -287,6 +287,7 @@ const Filtros = ({
                 disabled={!zafraParteDiario ? true : false}
               />
             </Col>
+
           </Row>
         </>
       )}
