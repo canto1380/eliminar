@@ -27,11 +27,15 @@ const ParteDiario = ({
   dataImportComparativa,
   dataImportDestileria,
   dataImportDestileriaComparativa,
+  dataImportAnhidro,
+  dataImportAnhidroComparativa,
   setBanderaDataNull,
   setDataImport,
   setDataImportComparativa,
   setDataImportDestileria,
   setDataImportDestileriaComparativa,
+  setDataImportAnhidro,
+  setDataImportAnhidroComparativa,
   dateInicioIngenios,
   dateFinIngenios,
   dataIngenios,
@@ -71,6 +75,22 @@ const ParteDiario = ({
   const [dc14, setDc14] = useState([]);
   const [dc15, setDc15] = useState([]);
   const [observaciones, setObservaciones] = useState('')
+  // console.log(d3)
+  // console.log(dc1)
+  // console.log(dc2)
+  // console.log(dc3)
+  // console.log(d3)
+  // console.log(dc5)
+  // console.log(dc6)
+  // console.log(dc7)
+  // console.log(dc8)
+  // console.log(dc9)
+  // console.log(dc10)
+  // console.log(dc11)
+  // console.log(dc12)
+  // console.log(dc13)
+  // console.log(dc14)
+
 
   /** Fecha de inicio y fin de zafras TUCUMAN **/
   const [inicioZafra, setInicioZafra] = useState(null);
@@ -89,12 +109,20 @@ const ParteDiario = ({
   const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null);
   const [fechasInicioDestileriaIngenios, setFechasInicioDestileriaIngenios] =
     useState(null);
+  const [fechasInicioAnhidroIngenios, setFechasInicioAnhidroIngenios] = useState(null)
+  
+  const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
+    useState(null);
   const [
     fechasInicioDestileriaIngeniosComparativa,
     setFechasInicioDestileriaIngeniosComparativa,
   ] = useState(null);
-  const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
-    useState(null);
+  const [
+    fechasInicioAnhidroIngeniosComparativa,
+    setFechasInicioAnhidroIngeniosComparativa,
+  ] = useState(null);
+
+
 
   /** FECHAS DE TODOS LOS INGENIOS DE INICIO Y FIN NORTE **/
   const [fechasInicioIngeniosNorte, setFechasInicioIngeniosNorte] =
@@ -102,6 +130,10 @@ const ParteDiario = ({
   const [
     fechasInicioDestileriaIngeniosNorte,
     setFechasInicioDestileriaIngeniosNorte,
+  ] = useState(null);
+  const [
+    fechasInicioAnhidroIngeniosNorte,
+    setFechasInicioAnhidroIngeniosNorte,
   ] = useState(null);
 
   const [
@@ -111,6 +143,10 @@ const ParteDiario = ({
   const [
     fechasInicioDestileriaIngeniosNorteComparativa,
     setFechasInicioDestileriaIngeniosNorteComparativa,
+  ] = useState(null);
+  const [
+    fechasInicioAnhidroIngeniosNorteComparativa,
+    setFechasInicioAnhidroIngeniosNorteComparativa,
   ] = useState(null);
 
   /** Cantidad de dias de zafra TUCUMAN **/
@@ -164,6 +200,7 @@ const ParteDiario = ({
     dataPorTipo(
       dataImport,
       dataImportDestileria,
+      dataImportAnhidro,
       dataEnd,
       dateInicioIngenios,
       zafraParteDiario,
@@ -184,8 +221,10 @@ const ParteDiario = ({
       setD15,
       setFechasInicioIngenios,
       setFechasInicioDestileriaIngenios,
+      setFechasInicioAnhidroIngenios,
       setFechasInicioIngeniosNorte,
       setFechasInicioDestileriaIngeniosNorte,
+      setFechasInicioAnhidroIngeniosNorte,
       setPanelCMB,
       setPanelAzucar,
       setPanelAzucarEquivalente,
@@ -199,6 +238,7 @@ const ParteDiario = ({
     dataComparativaPorTipo(
       dataImportComparativa,
       dataImportDestileriaComparativa,
+      dataImportAnhidroComparativa,
       dataEnd,
       dateFinIngenios,
       zafraParteDiario,
@@ -219,8 +259,10 @@ const ParteDiario = ({
       setDc15,
       setFechasInicioIngeniosComparativa,
       setFechasInicioDestileriaIngeniosComparativa,
+      setFechasInicioAnhidroIngeniosComparativa,
       setFechasInicioIngeniosNorteComparativa,
-      setFechasInicioDestileriaIngeniosNorteComparativa
+      setFechasInicioDestileriaIngeniosNorteComparativa,
+      setFechasInicioAnhidroIngeniosNorteComparativa
     );
     dataFinZafra();
     dataFinZafraComparativa();
@@ -233,6 +275,9 @@ const ParteDiario = ({
     dataImportComparativa,
     dataImportDestileria,
     dataImportDestileriaComparativa,
+    dataImportAnhidro,
+    dataImportAnhidroComparativa,
+    zafraParteDiario
   ]);
 
   /*** DATOS DIAS PARADAS ***/
@@ -366,7 +411,7 @@ const ParteDiario = ({
   useEffect(() => {
     cantDiasZafra();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafra, finZafra]);
+  }, [inicioZafra, finZafra, zafraParteDiario, dataEnd]);
   const cantDiasZafra = () => {
     if (inicioZafra === "") {
       setDataDiasZafra(0);
@@ -602,11 +647,13 @@ const ParteDiario = ({
   dataComparativa?.forEach((d) => {
     if (d.anio_zafra === zafraParteDiario) {
       estimacionEEAOC = d.estimacion_EEAOC;
+    } else{
+      estimacionEEAOC = 0
     }
   });
 
   /** CANTIDAD DIAS DE DESTILERIA **/
-  const diasDestileria = dataEnd ? dataEnd - fechaInicioDestileria : "";
+  const diasDestileria = (dataEnd && new Date(fechaInicioDestileria).getTime() !== new Date("3/10/2100").getTime()) ? dataEnd - fechaInicioDestileria : "";
   const diasDestileriaFormat = diasDestileria / (1000 * 60 * 60 * 24);
   /** Exportacion ZAFRA ACTUAL **/
   const exportarParteComparativo = async () => {
@@ -699,6 +746,8 @@ const ParteDiario = ({
         setDataImportComparativa(null);
         setDataImportDestileria(null);
         setDataImportDestileriaComparativa(null);
+        setDataImportAnhidro(null)
+        setDataImportAnhidroComparativa(null)
         setLoadingDownload(false);
         message.success("Descarga realizada correctamente", 5);
         window.location.reload();
@@ -966,12 +1015,12 @@ const ParteDiario = ({
             <Col className="mb-1 encabezados-panel fw-bolder">
               Rto CMB(%):{" "}
               {panelCMB
-                ? ((panelAzucarEquivalente / panelCMB) * 100).toFixed(2)
+                ? ((panelAzucarEquivalente / panelCMB)/10).toFixed(2)
                 : ""}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
               Avance de zafra(%):{" "}
-              {panelCMB ? ((panelCMB / estimacionEEAOC) * 100).toFixed(2) : ""}
+              {(panelCMB && estimacionEEAOC !==0) ? ((panelCMB / estimacionEEAOC) * 100).toFixed(2) : 0}
             </Col>
           </Row>
         </Col>

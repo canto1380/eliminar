@@ -26,6 +26,7 @@ const AddEditDiasParada = () => {
 
   const { id } = useParams();
   const { dataUser } = useContext(User);
+  console.log(dataUser)
   let navigate = useNavigate();
 
   useEffect(() => {

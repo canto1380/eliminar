@@ -120,6 +120,22 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
       render: (date) => (date ? moment(date).format("DD-MM-YYYY") : null),
     },
     {
+      key: "inicio_anhidro",
+      title: "Inicio Anhidro",
+      dataIndex: "inicio_anhidro",
+      defaultSortOrder: "descend",
+      sorter: (a, b) =>
+        new Date(a.inicio_anhidro) - new Date(b.inicio_anhidro),
+      render: (date) => (date ? moment(date).format("DD-MM-YYYY") : null),
+    },
+    {
+      key: "fin_anhidro",
+      title: "Fin Anhidro",
+      dataIndex: "fin_anhidro",
+      sorter: (a, b) => new Date(a.fin_anhidro) - new Date(b.fin_anhidro),
+      render: (date) => (date ? moment(date).format("DD-MM-YYYY") : null),
+    },
+    {
       key: "actions",
       title: "Acciones",
 
@@ -176,7 +192,7 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
           <div className="pb-1 pt-3 px-4">
             <ListadoDatos
               columns={columnsData}
-              scroll={30}
+              scroll={100}
               data={periodosZafra}
             />
           </div>

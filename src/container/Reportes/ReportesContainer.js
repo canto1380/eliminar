@@ -8,6 +8,7 @@ import DatosHistoricosZafra from "../../components/Reportes/DatosHistoricosZafra
 import FiltrosReportes from "../../components/Reportes/FiltrosReportes";
 import DatosMejoresRegistros from "../../components/Reportes/DatosMejoresRegistros";
 import ZafraUnificadaPorDias from "../../components/Reportes/ZafraUnificadaPorDias";
+import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
 
 const ReportesDataContainer = ({
   dataReportes,
@@ -20,54 +21,112 @@ const ReportesDataContainer = ({
   const [banderaDataNull, setBanderaDataNull] = useState(false);
   const [fechasInformeInicio, setFechasInformeInicio] = useState(undefined);
   const [fechasInformeFin, setFechasInformeFin] = useState(undefined);
+  const [periodosZafra, setPeriodosZafra] = useState(undefined)
+
+  // console.log(dataReportes)
+  console.log(dataZafraInicio, dataZafraFin)
+  console.log(fechasInformeInicio, fechasInformeFin)
+  
+  useEffect(() => {
+    const fetchPeriodosZafra = async() => {
+      const data = await getPeriodoZafra({limit: 100000})
+      setPeriodosZafra(data)
+    }
+    fetchPeriodosZafra()
+  },[])
+  console.log(periodosZafra)
 
   useEffect(() => {
     if (dataReportes) {
       busqueda();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fechasInformeInicio, fechasInformeFin, dataReportes]);
-  // console.log(fechasInformeInicio, fechasInformeFin)
-  useEffect(() => {
-    if (dataZafraInicio && dataZafraFin) {
-      fechasFiltros();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafraFin, dataZafraInicio]);
+  }, [dataZafraFin, dataZafraInicio, dataReportes]);
 
-  const fechasFiltros = () => {
-    const date1 = DatosInicioZafraHistoricos?.data.filter(
-      (d) => d?.anio === dataZafraInicio
-    );
-    setFechasInformeInicio(date1[0]?.inicio);
+  
+  // useEffect(() => {
+  //   if (dataZafraInicio && dataZafraFin) {
+  //     fechasFiltros();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dataZafraFin, dataZafraInicio]);
+  // const fechasFiltros = () => {
+  //   const date1 = DatosInicioZafraHistoricos?.data.filter(
+  //     (d) => d?.anio === dataZafraInicio
+  //   );
+  //   setFechasInformeInicio(date1[0]?.inicio);
 
-    const date2 = DatosInicioZafraHistoricos?.data.filter(
-      (d) => d?.anio === dataZafraFin
-    );
-    setFechasInformeFin(date2[0]?.fin);
-  };
+  //   const date2 = DatosInicioZafraHistoricos?.data.filter(
+  //     (d) => d?.anio === dataZafraFin
+  //   );
+  //   setFechasInformeFin(date2[0]?.fin);
+  // };
 
+  // const busqueda = () => {
+  //   if (fechasInformeInicio && fechasInformeFin) {
+  //     const data = dataReportes?.filter((d) => {
+  //       const dataConverted = convertirStringAFecha(d.fechaParte);
+  //       const dataConvertedInicio = convertirStringAFecha(fechasInformeInicio);
+  //       const dataConvertedFin = convertirStringAFecha(fechasInformeFin);
+  //       return (
+  //         dataConverted >= dataConvertedInicio &&
+  //         dataConverted <= dataConvertedFin &&
+  //         (d.MoliendaCanaBruta !== 0 || d.AzucarEquivalente !== 0)
+  //       );
+  //     });
+  //     setDataImport(data);
+  //   }
+  // };
   const busqueda = () => {
-    if (fechasInformeInicio && fechasInformeFin) {
-      const data = dataReportes?.filter((d) => {
-        const dataConverted = convertirStringAFecha(d.FechaParte);
-        const dataConvertedInicio = convertirStringAFecha(fechasInformeInicio);
-        const dataConvertedFin = convertirStringAFecha(fechasInformeFin);
-        return (
-          dataConverted >= dataConvertedInicio &&
-          dataConverted <= dataConvertedFin &&
-          (d.MoliendaCanaBruta !== 0 || d.AzucarEquivalente !== 0)
-        );
-      });
-      setDataImport(data);
+    if(dataZafraInicio && dataZafraFin) {
+      const periodoInicio = periodosZafra.filter((d) => d.anio_zafra === dataZafraInicio)
+      const periodoInicioFechaInicioCMB = periodoInicio.reduce((min, actual) => {
+        return new Date(actual.inicio_zafra) < new Date(min.inicio_zafra) ? actual : min;
+      })
+      const periodoInicioFechaFinalCMB = periodoInicio.reduce((min, actual) => {
+        return new Date(actual.fin_zafra) > new Date(min.fin_zafra) ? actual : min;
+      })
+      const periodoInicioFechaInicioALCOHOL = periodoInicio.reduce((min, actual) => {
+        return new Date(actual.inicio_anhidro) < new Date(min.inicio_anhidro) ? actual : min;
+      })
+      const periodoInicioFechaFinalALCOHOL = periodoInicio.reduce((min, actual) => {
+        return new Date(actual.fin_anhidro) > new Date(min.fin_anhidro) ? actual : min;
+      })
+
+      
+      const periodoFin = periodosZafra.filter((d) => d.anio_zafra === dataZafraFin)
+      const periodoFinalFechaInicioCMB = periodoFin.reduce((min, actual) => {
+        return new Date(actual.inicio_zafra) < new Date(min.inicio_zafra) ? actual : min;
+      })
+      const PeriodoFinalFechaFinalCMB = periodoFin.reduce((min, actual) => {
+        return new Date(actual.fin_zafra) > new Date(min.fin_zafra) ? actual : min;
+      })
+      const periodoFinalFechaInicioALCOHOL = periodoFin.reduce((min, actual) => {
+        return new Date(actual.inicio_zafra) < new Date(min.inicio_zafra) ? actual : min;
+      })
+      const PeriodoFinalFechaFinalALCOHOL = periodoFin.reduce((min, actual) => {
+        return new Date(actual.fin_zafra) > new Date(min.fin_zafra) ? actual : min;
+      })
+
+
+      console.log(periodoInicio)
+      console.log(periodoInicioFechaInicioCMB)
+      console.log(periodoInicioFechaFinalCMB)
+      console.log(periodoInicioFechaInicioALCOHOL)
+      console.log(periodoInicioFechaFinalALCOHOL)
+      console.log(periodoFin)
+      console.log(periodoFinalFechaInicioCMB)
+      console.log(PeriodoFinalFechaFinalCMB)
+      console.log(periodoFinalFechaInicioALCOHOL)
+      console.log(PeriodoFinalFechaFinalALCOHOL)
+
     }
-  };
+  }
 
   function convertirStringAFecha(fechaStr) {
     const [dia, mes, año] = fechaStr.split("/");
     return new Date(año, mes - 1, dia);
   }
-  console.log(dataImport)
   return (
     <Container fluid>
       {banderaDataNull && (
