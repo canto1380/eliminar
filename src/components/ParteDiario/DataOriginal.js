@@ -9,6 +9,7 @@ let dataAguilares = {
     K10: 0,
     M10: 0,
     N10: 0,
+    C43: 0,
     D43: 0,
     F43: 0,
     G43: 0,
@@ -24,6 +25,7 @@ let dataAguilares = {
     K11: 0,
     M11: 0,
     N11: 0,
+    C47: 0,
     D47: 0,
     F47: 0,
     G47: 0,
@@ -39,6 +41,7 @@ let dataAguilares = {
     K12: 0,
     M12: 0,
     N12: 0,
+    C50: 0,
     D50: 0,
     F50: 0,
     G50: 0,
@@ -70,6 +73,7 @@ let dataAguilares = {
     K15: 0,
     M15: 0,
     N15: 0,
+    C54: 0,
     D54: 0,
     F54: 0,
     G54: 0,
@@ -85,6 +89,7 @@ let dataAguilares = {
     K17: 0,
     M17: 0,
     N17: 0,
+    C45: 0,
     D45: 0,
     F45: 0,
     G45: 0,
@@ -116,6 +121,7 @@ let dataAguilares = {
     K19: 0,
     M19: 0,
     N19: 0,
+    C49: 0,
     D49: 0,
     F49: 0,
     G49: 0,
@@ -131,8 +137,8 @@ let dataAguilares = {
     K20: 0,
     M20: 0,
     N20: 0,
+    C51: 0,
     D51: 0,
-    E51: 0,
     F51: 0,
     G51: 0,
     L51: 0,
@@ -147,6 +153,7 @@ let dataAguilares = {
     K21: 0,
     M21: 0,
     N21: 0,
+    C52: 0,
     D52: 0,
     F52: 0,
     G52: 0,
@@ -178,6 +185,7 @@ let dataAguilares = {
     K23: 0,
     M23: 0,
     N23: 0,
+    C55: 0,
     D55: 0,
     F55: 0,
     G55: 0,
@@ -193,6 +201,7 @@ let dataAguilares = {
     K24: 0,
     M24: 0,
     N24: 0,
+    C56: 0,
     D56: 0,
     F56: 0,
     G56: 0,
@@ -208,6 +217,7 @@ let dataAguilares = {
     K25: 0,
     M25: 0,
     N25: 0,
+    C57: 0,
     D57: 0,
     F57: 0,
     G57: 0,
@@ -223,6 +233,7 @@ let dataAguilares = {
     K26: 0,
     M26: 0,
     N26: 0,
+    C58: 0,
     D58: 0,
     F58: 0,
     G58: 0,
@@ -566,6 +577,7 @@ export const dataPorTipo = (
     window[varName14] = 0;
   }
   /****************************** DATOS DESTILERIA ALCOHOL ******************************/
+  
   dataImportDestileria?.forEach((data) => {
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
@@ -607,11 +619,11 @@ export const dataPorTipo = (
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
+      
       g3 = g3 + data.AlcoholProducido;
       o3 = o3 + data.AlcoholHidratado || 0;
       r3 = r3 + data.AlcoholAnhidro || 0;
       alcoholPanel = alcoholPanel + data.AlcoholProducido;
-
       dataLaFlorida = {
         N12: g3,
         O50: o3,
@@ -690,11 +702,13 @@ export const dataPorTipo = (
       g8 = g8 + data.AlcoholProducido;
       o8 = o8 + data.AlcoholHidratado || 0;
       r8 = r8 + data.AlcoholAnhidro || 0;
+      // f8 = f8 + data.MelazaProducida;
       alcoholPanel = alcoholPanel + data.AlcoholProducido;
       dataLaCorona = {
         N19: g8,
         O49: o8,
         R49: r8,
+        // M19: f8,
       };
     }
 
@@ -815,21 +829,23 @@ export const dataPorTipo = (
   dataImport?.forEach((data) => {
     const newDate = dateConverted(data?.FechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    if(newDate <= fechaParametro) {
+      cmbPanel = cmbPanel + data.MoliendaCanaBruta;
+      azucarPanel =
+        azucarPanel +
+        data.AzucarBlancoProducido +
+        data.AzucarCrudoProducido +
+        data.AzucarRefinado +
+        data.AzucarOrganico +
+        data.OtroAzucar;
+      azucarPanelEquivalente = azucarPanelEquivalente + data?.AzucarEquivalente
+      azucarPanelCrudo = azucarPanelCrudo + data?.AzucarCrudoProducido
+      azucarPanelBlancoA = azucarPanelBlancoA + data?.AzucarBlancoProducido
+      azucarPanelRefinado = azucarPanelRefinado + data?.AzucarRefinado
+      azucarPanelOrganico = azucarPanelOrganico + data?.AzucarOrganico
+      azucarPanelOtros = azucarPanelOtros + data?.OtroAzucar
 
-    cmbPanel = cmbPanel + data.MoliendaCanaBruta;
-    azucarPanel =
-      azucarPanel +
-      data.AzucarBlancoProducido +
-      data.AzucarCrudoProducido +
-      data.AzucarRefinado +
-      data.AzucarOrganico +
-      data.OtroAzucar;
-    azucarPanelEquivalente = azucarPanelEquivalente + data?.AzucarEquivalente
-    azucarPanelCrudo = azucarPanelCrudo + data?.AzucarCrudoProducido
-    azucarPanelBlancoA = azucarPanelBlancoA + data?.AzucarBlancoProducido
-    azucarPanelRefinado = azucarPanelRefinado + data?.AzucarRefinado
-    azucarPanelOrganico = azucarPanelOrganico + data?.AzucarOrganico
-    azucarPanelOtros = azucarPanelOtros + data?.OtroAzucar
+    }
     /*** Verifica
      * cada ingenio
      * fecha del parte diario del json sea menor o igual a la fecha elegida en el sistema
@@ -852,6 +868,8 @@ export const dataPorTipo = (
       h1 = h1 + data.AzucarRefinado || 0;
       i1 = i1 + data.AzucarOrganico || 0;
       j1 = j1 + data.OtroAzucar || 0;
+      k1 = k1 + data.AzucarBlancoProducido;
+      l1 = l1 + data.AzucarCrudoProducido;
 
       dataAguilares = {
         E10: a1,
@@ -861,9 +879,11 @@ export const dataPorTipo = (
         K10: e1,
         M10: f1,
         N10: dataAguilares.N10,
+        C43: k1,
         D43: h1,
         F43: i1,
         G43: j1,
+        L44: l1,
         O44: dataAguilares.O44,
         R44: dataAguilares.R44,
       };
@@ -887,7 +907,8 @@ export const dataPorTipo = (
       h2 = h2 + data.AzucarRefinado || 0;
       i2 = i2 + data.AzucarOrganico || 0;
       j2 = j2 + data.OtroAzucar || 0;
-
+      k2 = k2 + data.AzucarBlancoProducido;
+      l2 = l2 + data.AzucarCrudoProducido;
       dataCruzAlta = {
         E11: a2,
         F11: b2,
@@ -896,9 +917,11 @@ export const dataPorTipo = (
         K11: e2,
         M11: f2,
         N11: dataCruzAlta.N11,
+        C47: k2,
         D47: h2,
         F47: i2,
         G47: j2,
+        L47: l2,
         O47: dataCruzAlta.O47,
         R47: dataCruzAlta.R47,
       };
@@ -919,12 +942,11 @@ export const dataPorTipo = (
       (data?.AzucarOrganico || 0) +
       (data?.OtroAzucar || 0);
       f3 = f3 + data.MelazaProducida;
-      // g3 = g3 + data.AlcoholProducido;
       h3 = h3 + data.AzucarRefinado || 0;
       i3 = i3 + data.AzucarOrganico || 0;
       j3 = j3 + data.OtroAzucar || 0;
-      // o3 = o3 + data.AlcoholHidratado || 0;
-      // r3 = r3 + data.AlcoholAnhidro || 0;
+      k3 = k3 + data.AzucarBlancoProducido;
+      l3 = l3 + data.AzucarCrudoProducido;
       dataLaFlorida = {
         E12: a3,
         F12: b3,
@@ -933,9 +955,11 @@ export const dataPorTipo = (
         K12: e3,
         M12: f3,
         N12: dataLaFlorida.N12,
+        C50: k3,
         D50: h3,
         F50: i3,
         G50: j3,
+        L50: l3,
         O50: dataLaFlorida.O50,
         R50: dataLaFlorida.R50,
       };
@@ -960,6 +984,7 @@ export const dataPorTipo = (
       i4 = i4 + data.AzucarOrganico || 0;
       j4 = j4 + data.OtroAzucar || 0;
       k4 = k4 + data.AzucarBlancoProducido;
+      l4 = l4 + data.AzucarCrudoProducido;
 
       dataConcepcion = {
         E14: a4,
@@ -973,6 +998,7 @@ export const dataPorTipo = (
         D46: h4,
         F46: i4,
         G46: j4,
+        L46: l4,
         O46: dataConcepcion.O46,
         R46: dataConcepcion.R46,
       };
@@ -996,6 +1022,8 @@ export const dataPorTipo = (
       h5 = h5 + data.AzucarRefinado || 0;
       i5 = i5 + data.AzucarOrganico || 0;
       j5 = j5 + data.OtroAzucar || 0;
+      k5 = k5 + data.AzucarBlancoProducido;
+      l5 = l5 + data.AzucarCrudoProducido;
       dataMarapa = {
         E15: a5,
         F15: b5,
@@ -1004,9 +1032,11 @@ export const dataPorTipo = (
         K15: e5,
         M15: f5,
         N15: dataMarapa.N15,
+        C54: k5,
         D54: h5,
         F54: i5,
         G54: j5,
+        L54: l5,
         O54: dataMarapa.O54,
         R54: dataMarapa.R54,
       };
@@ -1030,6 +1060,9 @@ export const dataPorTipo = (
       h6 = h6 + data.AzucarRefinado || 0;
       i6 = i6 + data.AzucarOrganico || 0;
       j6 = j6 + data.OtroAzucar || 0;
+      k6 = k6 + data.AzucarBlancoProducido;
+      l6 = l6 + data.AzucarCrudoProducido;
+
       dataBellaVista = {
         E17: a6,
         F17: b6,
@@ -1038,9 +1071,11 @@ export const dataPorTipo = (
         K17: e6,
         M17: f6,
         N17: dataBellaVista.N17,
+        C45: k6,
         D45: h6,
         F45: i6,
         G45: j6,
+        L45: l6,
         O45: dataBellaVista.O45,
         R45: dataBellaVista.R45,
       };
@@ -1064,6 +1099,8 @@ export const dataPorTipo = (
       i7 = i7 + data.AzucarOrganico || 0;
       j7 = j7 + data.OtroAzucar || 0;
       k7 = k7 + data.AzucarBlancoProducido;
+      l7 = l7 + data.AzucarCrudoProducido;
+
       dataFamailla = {
         E18: a7,
         F18: b7,
@@ -1076,6 +1113,7 @@ export const dataPorTipo = (
         D48: h7,
         F48: i7,
         G48: j7,
+        L48: l7,
         O48: dataFamailla.O48,
         R48: dataFamailla.R48,
       };
@@ -1099,6 +1137,9 @@ export const dataPorTipo = (
       h8 = h8 + data.AzucarRefinado || 0;
       i8 = i8 + data.AzucarOrganico || 0;
       j8 = j8 + data.OtroAzucar || 0;
+      k8 = k8 + data.AzucarBlancoProducido;
+      l8 = l8 + data.AzucarCrudoProducido;
+      
       dataLaCorona = {
         E19: a8,
         F19: b8,
@@ -1107,9 +1148,11 @@ export const dataPorTipo = (
         K19: e8,
         M19: f8,
         N19: dataLaCorona.N19,
+        C49: k8,
         D49: h8,
         F49: i8,
         G49: j8,
+        L49: l8,
         O49: dataLaCorona.O49,
         R49: dataLaCorona.R49,
       };
@@ -1134,7 +1177,10 @@ export const dataPorTipo = (
       h9 = h9 + data.AzucarRefinado || 0;
       i9 = i9 + data.AzucarOrganico || 0;
       j9 = j9 + data.OtroAzucar || 0;
-      k9 = k9 + data.AzucarCrudoProducido;
+      k9 = k9 + data.AzucarBlancoProducido;
+      l9 = l9 + data.AzucarCrudoProducido;
+
+
       dataLaProvidencia = {
         E20: a9,
         F20: b9,
@@ -1143,10 +1189,11 @@ export const dataPorTipo = (
         K20: e9,
         M20: f9,
         N20: dataLaProvidencia.N20,
+        C51: k9,
         D51: h9,
-        E51: k9,
         F51: i9,
         G51: j9,
+        L51: l9,
         O51: dataLaProvidencia.O51,
         R51: dataLaProvidencia.R51,
       };
@@ -1170,6 +1217,8 @@ export const dataPorTipo = (
       h10 = h10 + data.AzucarRefinado || 0;
       i10 = i10 + data.AzucarOrganico || 0;
       j10 = j10 + data.OtroAzucar || 0;
+      k10 = k10 + data.AzucarBlancoProducido;
+      l10 = l10 + data.AzucarCrudoProducido;
       dataLaTrinidad = {
         E21: a10,
         F21: b10,
@@ -1178,9 +1227,11 @@ export const dataPorTipo = (
         K21: e10,
         M21: f10,
         N21: dataLaTrinidad.N21,
+        C52: k10,
         D52: h10,
         F52: i10,
         G52: j10,
+        L52: l10,
         O52: dataLaTrinidad.O52,
         R52: dataLaTrinidad.R52,
       };
@@ -1201,13 +1252,12 @@ export const dataPorTipo = (
       (data?.AzucarOrganico || 0) +
       (data?.OtroAzucar || 0);
       f11 = f11 + data.MelazaProducida;
-      // g11 = g11 + data.AlcoholProducido;
       h11 = h11 + data.AzucarRefinado || 0;
       i11 = i11 + data.AzucarOrganico || 0;
       j11 = j11 + data.OtroAzucar || 0;
       k11 = k11 + data.AzucarBlancoProducido;
-      // o11 = o11 + data.AlcoholHidratado || 0;
-      // r11 = r11 + data.AlcoholAnhidro || 0;
+      l11 = l11 + data.AzucarCrudoProducido;
+
       dataLeales = {
         E22: a11,
         F22: b11,
@@ -1220,6 +1270,7 @@ export const dataPorTipo = (
         D53: h11,
         F53: i11,
         G53: j11,
+        L53: l11,
         O53: dataLeales.O53,
         R53: dataLeales.R53,
       };
@@ -1243,6 +1294,9 @@ export const dataPorTipo = (
       h12 = h12 + data.AzucarRefinado || 0;
       i12 = i12 + data.AzucarOrganico || 0;
       j12 = j12 + data.OtroAzucar || 0;
+      k12 = k12 + data.AzucarBlancoProducido;
+      l12 = l12 + data.AzucarCrudoProducido;
+
       dataÑuñorco = {
         E23: a12,
         F23: b12,
@@ -1251,9 +1305,11 @@ export const dataPorTipo = (
         K23: e12,
         M23: f12,
         N23: dataÑuñorco.N23,
+        C55: k12,
         D55: h12,
         F55: i12,
         G55: j12,
+        L55: l12,
         O55: dataÑuñorco.O55,
         R55: dataÑuñorco.R55,
       };
@@ -1277,6 +1333,9 @@ export const dataPorTipo = (
       h13 = h13 + data.AzucarRefinado || 0;
       i13 = i13 + data.AzucarOrganico || 0;
       j13 = j13 + data.OtroAzucar || 0;
+      k13 = k13 + data.AzucarBlancoProducido;
+      l13 = l13 + data.AzucarCrudoProducido;
+
       dataStaBarbara = {
         E24: a13,
         F24: b13,
@@ -1285,9 +1344,11 @@ export const dataPorTipo = (
         K24: e13,
         M24: f13,
         N24: dataStaBarbara.N24,
+        C56: k13,
         D56: h13,
         F56: i13,
         G56: j13,
+        L56: l13,
         O56: dataStaBarbara.O56,
         R56: dataStaBarbara.R56,
       };
@@ -1311,6 +1372,9 @@ export const dataPorTipo = (
       h14 = h14 + data.AzucarRefinado || 0;
       i14 = i14 + data.AzucarOrganico || 0;
       j14 = j14 + data.OtroAzucar || 0;
+      k14 = k14 + data.AzucarBlancoProducido;
+      l14 = l14 + data.AzucarCrudoProducido;
+
       dataStaRosa = {
         E25: a14,
         F25: b14,
@@ -1319,9 +1383,11 @@ export const dataPorTipo = (
         K25: e14,
         M25: f14,
         N25: dataStaRosa.N25,
+        C57: k14,
         D57: h14,
         F57: i14,
         G57: j14,
+        L57: l14,
         O57: dataStaRosa.O57,
         R57: dataStaRosa.R57,
       };
@@ -1345,14 +1411,19 @@ export const dataPorTipo = (
       h15 = h15 + data.AzucarRefinado || 0;
       i15 = i15 + data.AzucarOrganico || 0;
       j15 = j15 + data.OtroAzucar || 0;
+      k15 = k15 + data.AzucarBlancoProducido;
+      l15 = l15 + data.AzucarCrudoProducido;
+
       dataSanJuan = {
         E26: a15,
         F26: b15,
         G26: c15,
         J26: z15,
         K26: e15,
+        L26: l15,
         M26: f15,
         N26: dataSanJuan.N26,
+        C58: k15,
         D58: h15,
         F58: i15,
         G58: j15,
@@ -1383,6 +1454,8 @@ export const dataPorTipo = (
   }
   /****************/
 
+  
+
   /*** ALCOHOL ANHIDRO ZAFRA 2024 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
    * DECLARADO POR EMAIL
    ***/
@@ -1393,32 +1466,47 @@ export const dataPorTipo = (
   Agosto: 4.971.944
   Septiembre: 2.963.470
   Octubre: 1.460.000
-  Acumulado: 17.776.202
+  Noviembre: 5.347.000
+  Diciembre: 235.750
+  Enero: 4.770.000
+  Febrero: 3.412.785
+  Acumulado: 31.541.737
   */
   if (zafraParteDiario === 2024) {
-    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000;
+    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
   }
 
   /* CONCEPCION 
-  Agosto: 6.068.118
+  Junio:2.986.603
+  Julio: 8.049.602
+  Agosto: 6.083.561
   Septiembre: 6.163.307
   Octubre: 5.436.241
-  Acumulado: 28.719.314
+  Noviembre:5.290.243
+  Diciembre: 5.819.557
+  Enero 2025: 6.522.224
+  EFebrero: 5.677.674
+  Acumulado: 52.029.419
   */
   if (zafraParteDiario === 2024) {
-    dataConcepcion.R46 = dataConcepcion.R46 + 28719314;
+    dataConcepcion.R46 = dataConcepcion.R46 + 52029419;
   }
 
   /* BELLA VISTA 
-  Junio: 880968
+  Junio: 880.968
   Julio: 2.099.136
-  Agosto:3135585
+  Agosto:3.135.585
   Septiembre: 253.748
-  octubre: 2.483.843
-  Acumulado: 8.853.280
+  Octubre: 2.483.843
+  Noviembre: 1.098.950
+  Diciembre: 2.031.615
+  Enero:
+  Febrero: 
+  Acumulado: 11.983.845
   */
   if (zafraParteDiario === 2024) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843;
+    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615;
+
   }
   /**********/
 
@@ -1452,3 +1540,133 @@ export const dataPorTipo = (
   setD14(dataStaRosa);
   setD15(dataSanJuan);
 };
+
+// /***************** MEJORAS REGISTROS GLOBALES *********************/
+// SELECT Ingenio, Fecha, Origen, Valor
+// FROM (
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z15' AS Origen, [Mol CB Z15] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z16' AS Origen, [Mol CB Z16] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z17' AS Origen, [Mol CB Z17] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z18' AS Origen, [Mol CB Z18] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z19' AS Origen, [Mol CB Z19] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z20' AS Origen, [Mol CB Z20] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z21' AS Origen, [Mol CB Z21] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z22' AS Origen, [Mol CB Z22] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z23' AS Origen, [Mol CB Z23] AS Valor FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'MOL CB Z24' AS Origen, [Mol CB Z24] AS Valor FROM [DB original]
+// ) AS Datos
+// WHERE Valor IS NOT NULL
+// ORDER BY Valor DESC;
+
+
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z15' AS Origen, [DB original].[Mol CB Z15] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z16' AS Origen, [DB original].[Mol CB Z16] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z17' AS Origen, [DB original].[Mol CB Z17] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z18' AS Origen, [DB original].[Mol CB Z18] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z19' AS Origen, [DB original].[Mol CB Z19] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z20' AS Origen, [DB original].[Mol CB Z20] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z21' AS Origen, [DB original].[Mol CB Z21] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z22' AS Origen, [DB original].[Mol CB Z22] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z23' AS Origen, [DB original].[Mol CB Z23] AS Valor FROM [DB original]
+// UNION ALL
+// SELECT top 10 [DB original].[Ingenio], [DB original].[Fecha], 'MOL CB Z24' AS Origen, [DB original].[Mol CB Z24] AS Valor FROM [DB original]
+// order by Valor desc;
+
+
+
+
+// /********************* 10 mejores registros por CMB ingresando nombre ingenio *****************************/
+// SELECT top 10 Ingenio, Fecha, Zafra, CMB, [Az Equivalente]
+// FROM (
+//     SELECT [Ingenio], [Fecha], 'Zafra 15' AS Zafra, [Mol CB Z15] AS CMB, [Az Eq Z15] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 16' AS Zafra, [Mol CB Z16] AS CMB, [Az Eq Z16] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 17' AS Zafra, [Mol CB Z17] AS CMB, [Az Eq Z17] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 18' AS Zafra, [Mol CB Z18] AS CMB, [Az Eq Z18] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 19' AS Zafra, [Mol CB Z19] AS CMB, [Az Eq Z19] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 20' AS Zafra, [Mol CB Z20] AS CMB, [Az Eq Z20] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 21' AS Zafra, [Mol CB Z21] AS CMB, [Az Eq Z21] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 22' AS Zafra, [Mol CB Z22] AS CMB, [Az Eq Z22] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 23' AS Zafra, [Mol CB Z23] AS CMB, [Az Eq Z23] AS [Az Equivalente] FROM [DB original]
+//     UNION ALL
+//     SELECT [Ingenio], [Fecha], 'Zafra 24' AS Zafra, [Mol CB Z24] AS CMB, [Az Eq Z24] AS [Az Equivalente] FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL and Ingenio = nombreIngenio
+// ORDER BY CMB DESC;
+
+
+
+// /******************* ZAFRA HISTORICOS ****************************/
+// SELECT TOP 10 * FROM (
+//   SELECT  'Zafra 15' AS Origen, [DB original].[Mol CB Z15] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 16' AS Origen, [DB original].[Mol CB Z16] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 17' AS Origen, [DB original].[Mol CB Z17] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 18' AS Origen, [DB original].[Mol CB Z18] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 19' AS Origen, [DB original].[Mol CB Z19] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 20' AS Origen, [DB original].[Mol CB Z20] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 21' AS Origen, [DB original].[Mol CB Z21] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 22' AS Origen, [DB original].[Mol CB Z22] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 23' AS Origen, [DB original].[Mol CB Z23] AS CMB FROM [DB original]
+//   UNION ALL
+//   SELECT  'Zafra 24' AS Origen, [DB original].[Mol CB Z24] AS CMB FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL AND CMB > 0
+// ORDER BY Origen DESC;
+
+
+// SELECT TOP 10  Zafra, CMB
+// FROM (
+//     SELECT 'Zafra 2015' AS Zafra, [Mol CB Z15] AS CMB FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2016', [Mol CB Z16] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2017', [Mol CB Z17] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2018', [Mol CB Z18] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2019', [Mol CB Z19] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2020', [Mol CB Z20] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2021', [Mol CB Z21] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2022', [Mol CB Z22] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2023', [Mol CB Z23] FROM [DB original]
+//     UNION ALL
+//     SELECT 'Zafra 2024', [Mol CB Z24] FROM [DB original]
+// ) AS Datos
+// WHERE CMB IS NOT NULL
+// ORDER BY CMB DESC;

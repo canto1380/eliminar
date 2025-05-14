@@ -31,6 +31,8 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   const [dataUserRegister, setDataUserRegister] = useState(undefined);
   const [ingeniosData, setIngeniosData] = useState(undefined);
   const [fechaInicioIngenios, setFechaInicioIngenios] = useState(undefined);
+  const [observacionesExcel, setObservacionesExcel] = useState('');
+
   const { dataUser } = useContext(User);
 
   useEffect(() => {
@@ -196,7 +198,6 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
         },
       ];
       const res = await apiExportExcel("POST", "diaParada/descargar", dataSend);
-      console.log(res)
       if (res.status === 200) {
         const blob = new Blob([res.data], {
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

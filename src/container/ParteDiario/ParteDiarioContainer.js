@@ -8,8 +8,13 @@ import Spinn from '../../components/Spinner'
 import MsgError from '../../components/Messages/MsgError'
 import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
 import { getIngenios } from '../../utils/queryAPI/ingenios'
+import MsgErrorServerJSON from '../../components/Messages/MsgErrorServerJSON'
 
 const ParteDiarioContainer = () => {
+  const [errorServer, setErrorServer] = useState(false);
+  const [msgErrorServer, setMsgErrorServer] = useState('')
+  const [errorInterno, setErrorInterno] = useState(false)
+  const [msgErrorInterno, setMsgErrorInterno] = useState('')
   const [dataEnd, setDataEnd] = useState(null)
   const [dataZafra, setDataZafra] = useState(null)
   const [dataAnio, setDataAnio] = useState(null)
@@ -47,15 +52,30 @@ const ParteDiarioContainer = () => {
   }, [dataZafra])
 
   const getData = async () => {
-    setDataParteDiariosHistoricos(null)
-    const params = {
-      fechadesde: `01-04-${dataZafra}`,
-      fechahasta: `31-03-${dataZafra + 1}`,
-    }
+    try {
+      setDataParteDiariosHistoricos(null)
+      const params = {
+        fechadesde: `01-04-${dataZafra}`,
+        fechahasta: `31-03-${dataZafra + 1}`,
+      }
 
-    /***** DESDE BACKEND *****/
-    const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
-    setDataParteDiariosHistoricos(data)
+      /***** DESDE BACKEND *****/
+      const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
+      if(data.status === 200){
+        setDataParteDiariosHistoricos(data?.data?.data?.ParteDiarios)
+      }
+      if(data.response.status === 503) {
+        setErrorServer(true)
+        setMsgErrorServer(data.response.data.error)
+      }
+      // setDataParteDiariosHistoricos(data)
+    } catch (error) {
+      setErrorInterno(true)
+      setMsgErrorInterno('Hubo un problema interno del servidor. Recargue la página.')
+      setTimeout(() => {
+        setErrorInterno(false)
+      }, 3000);
+    }
   }
   useEffect(() => {
     if (dataEnd !== null) {
@@ -112,8 +132,16 @@ const ParteDiarioContainer = () => {
     /***** DESDE BACKEND *****/
     if (fechaInicio !== null) {
       const data = await getDataPartesDiariosBE(params, '/parteDiario')
-      const dataSinSanJuan = data.filter((d) => d.IngenioNombre !== 'San Juan')
-      setDataImport(dataSinSanJuan)
+      if(data?.status === 200){
+        const dataSinSanJuan = data.data.data.ParteDiarios.filter((d) => d.IngenioNombre !== 'San Juan')
+        setDataImport(dataSinSanJuan)
+      }
+      if(data?.response?.status === 503) {
+        setErrorServer(true)
+        setMsgErrorServer(data.response.data.error)
+      }
+      // const dataSinSanJuan = data.filter((d) => d.IngenioNombre !== 'San Juan')
+      // setDataImport(dataSinSanJuan)
     } else {
       setDataImport([])
     }
@@ -122,8 +150,16 @@ const ParteDiarioContainer = () => {
       params1,
       '/parteDiario'
     )
-    const dataSinSanJuanComparativo = dataComparativa.filter((d) => d.IngenioNombre !== 'San Juan')
-    setDataImportComparativa(dataSinSanJuanComparativo)
+    if(dataComparativa?.status === 200){
+      const dataSinSanJuanComparativo = dataComparativa.data.data.ParteDiarios.filter((d) => d.IngenioNombre !== 'San Juan')
+      setDataImportComparativa(dataSinSanJuanComparativo)
+    }
+    if(dataComparativa?.response?.status === 503) {
+      setErrorServer(true)
+      setMsgErrorServer(dataComparativa.response.data.error)
+    }
+    // const dataSinSanJuanComparativo = dataComparativa.filter((d) => d.IngenioNombre !== 'San Juan')
+    // setDataImportComparativa(dataSinSanJuanComparativo)
   }
   const getDataImportDestileria = async () => {
     const inicio = new Date(inicioDestileria)
@@ -168,7 +204,14 @@ const ParteDiarioContainer = () => {
     /***** DESDE BACKEND *****/
     if (fechaInicio !== null) {
       const data = await getDataPartesDiariosBE(params, '/parteDiario')
-      setDataImportDestileria(data)
+      if(data?.status === 200){
+        setDataImportDestileria(data?.data?.data?.ParteDiarios)
+      }
+      if(data?.response?.status === 503) {
+        setErrorServer(true)
+        setMsgErrorServer(data.response.data.error)
+      }
+      // setDataImportDestileria(data)
     } else {
       setDataImportDestileria([])
     }
@@ -177,13 +220,21 @@ const ParteDiarioContainer = () => {
       params1,
       '/parteDiario'
     )
-    setDataImportDestileriaComparativa(dataComparativa)
+    if(dataComparativa?.status === 200) {
+      setDataImportDestileriaComparativa(dataComparativa?.data?.data?.ParteDiarios)
+    }
+    if(dataComparativa?.response?.status === 503) {
+      setErrorServer(true)
+      setMsgErrorServer(dataComparativa.response.data.error)
+    }
+      
+    // setDataImportDestileriaComparativa(dataComparativa)
   }
 
   useEffect(() => {
     const dataNow = new Date()
     if (dataZafra === null) {
-      setDataZafra(dataNow.getFullYear())
+    setDataZafra(dataNow.getFullYear())
     }
 
     if (dataAnio === null) {
@@ -371,12 +422,17 @@ const ParteDiarioContainer = () => {
           text2='Intente de nuevo.'
         />
       )}
+
       <TitlePage titlePage='Parte Diario Directorio' />
       <hr className='mx-3 mt-1' />
-      {dataParteDiariosHistoricos === null ? (
+      {dataParteDiariosHistoricos === null || !dataParteDiariosHistoricos? (
+        errorServer ? (
+          <MsgErrorServerJSON msg1={msgErrorServer} btnLink='/admin/parte-diario' />
+        ) : (
         <div className='d-flex justify-content-center align-items-center text-center'>
           <Spinn type='data' />
         </div>
+        )
       ) : (
         <>
           <div className='px-4'>
@@ -427,6 +483,7 @@ const ParteDiarioContainer = () => {
           />
         </>
       )}
+
     </Container>
   )
 }
