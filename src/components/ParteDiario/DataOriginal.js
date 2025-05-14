@@ -1506,6 +1506,7 @@ export const dataPorTipo = (
   */
   if (zafraParteDiario === 2024) {
     dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615;
+
   }
   /**********/
 
