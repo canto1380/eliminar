@@ -15,6 +15,7 @@ import { apiExportExcel } from "../../utils/apiExportExcel";
 import { Dropdown, message, Space } from "antd";
 import { getDiasParadas } from "../../utils/queryAPI/diaParadas";
 import TextArea from "antd/es/input/TextArea";
+import { toast } from "react-toastify";
 
 const ParteDiario = ({
   dataEnd,
@@ -30,19 +31,32 @@ const ParteDiario = ({
   dataImportAnhidro,
   dataImportAnhidroComparativa,
   setBanderaDataNull,
+  dataImportNorte,
+  dataImportComparativaNorte,
+  dataImportDestileriaNorte,
+  dataImportDestileriaComparativaNorte,
+  dataImportAnhidroNorte,
+  dataImportAnhidroComparativaNorte,
   setDataImport,
   setDataImportComparativa,
   setDataImportDestileria,
   setDataImportDestileriaComparativa,
   setDataImportAnhidro,
   setDataImportAnhidroComparativa,
+  setDataImportNorte,
+  setDataImportComparativaNorte,
+  setDataImportDestileriaNorte,
+  setDataImportDestileriaComparativaNorte,
+  setDataImportAnhidroNorte,
+  setDataImportAnhidroComparativaNorte,
   dateInicioIngenios,
   dateFinIngenios,
   dataIngenios,
   zafraParteDiario,
 
 }) => {
-
+/***** TUCUMAN *****/
+/** D - Data Periodo actual **/
   const [d1, setD1] = useState([]);
   const [d2, setD2] = useState([]);
   const [d3, setD3] = useState([]);
@@ -74,23 +88,23 @@ const ParteDiario = ({
   const [dc13, setDc13] = useState([]);
   const [dc14, setDc14] = useState([]);
   const [dc15, setDc15] = useState([]);
-  const [observaciones, setObservaciones] = useState('')
-  // console.log(d3)
-  // console.log(dc1)
-  // console.log(dc2)
-  // console.log(dc3)
-  // console.log(d3)
-  // console.log(dc5)
-  // console.log(dc6)
-  // console.log(dc7)
-  // console.log(dc8)
-  // console.log(dc9)
-  // console.log(dc10)
-  // console.log(dc11)
-  // console.log(dc12)
-  // console.log(dc13)
-  // console.log(dc14)
+  
+  /***** NORTE *****/
+  /** N - Data Periodo actual **/
+  const [n1, setN1] = useState([]);
+  const [n2, setN2] = useState([]);
+  const [n3, setN3] = useState([]);
+  const [n4, setN4] = useState([]);
+  const [n5, setN5] = useState([]);
 
+  /** NC - Data Comparativa **/
+  const [nc1, setNc1] = useState([]);
+  const [nc2, setNc2] = useState([]);
+  const [nc3, setNc3] = useState([]);
+  const [nc4, setNc4] = useState([]);
+  const [nc5, setNc5] = useState([]);
+
+  const [observaciones, setObservaciones] = useState('')
 
   /** Fecha de inicio y fin de zafras TUCUMAN **/
   const [inicioZafra, setInicioZafra] = useState(null);
@@ -110,7 +124,7 @@ const ParteDiario = ({
   const [fechasInicioDestileriaIngenios, setFechasInicioDestileriaIngenios] =
     useState(null);
   const [fechasInicioAnhidroIngenios, setFechasInicioAnhidroIngenios] = useState(null)
-  
+
   const [fechasInicioIngeniosComparativa, setFechasInicioIngeniosComparativa] =
     useState(null);
   const [
@@ -201,6 +215,9 @@ const ParteDiario = ({
       dataImport,
       dataImportDestileria,
       dataImportAnhidro,
+      dataImportNorte,
+      dataImportDestileriaNorte,
+      dataImportAnhidroNorte,
       dataEnd,
       dateInicioIngenios,
       zafraParteDiario,
@@ -219,6 +236,11 @@ const ParteDiario = ({
       setD13,
       setD14,
       setD15,
+      setN1,
+      setN2,
+      setN3,
+      setN4,
+      setN5,
       setFechasInicioIngenios,
       setFechasInicioDestileriaIngenios,
       setFechasInicioAnhidroIngenios,
@@ -239,6 +261,9 @@ const ParteDiario = ({
       dataImportComparativa,
       dataImportDestileriaComparativa,
       dataImportAnhidroComparativa,
+      dataImportComparativaNorte,
+      dataImportDestileriaComparativaNorte,
+      dataImportAnhidroComparativaNorte,
       dataEnd,
       dateFinIngenios,
       zafraParteDiario,
@@ -257,6 +282,11 @@ const ParteDiario = ({
       setDc13,
       setDc14,
       setDc15,
+      setNc1,
+      setNc2,
+      setNc3,
+      setNc4,
+      setNc5,
       setFechasInicioIngeniosComparativa,
       setFechasInicioDestileriaIngeniosComparativa,
       setFechasInicioAnhidroIngeniosComparativa,
@@ -277,6 +307,12 @@ const ParteDiario = ({
     dataImportDestileriaComparativa,
     dataImportAnhidro,
     dataImportAnhidroComparativa,
+    dataImportNorte,
+    dataImportComparativaNorte,
+    dataImportDestileriaNorte,
+    dataImportDestileriaComparativaNorte,
+    dataImportAnhidroNorte,
+    dataImportAnhidroComparativaNorte,
     zafraParteDiario
   ]);
 
@@ -292,6 +328,13 @@ const ParteDiario = ({
     const data = await getDiasParadas(params);
     setDiasParadaExport(data);
   };
+
+  useEffect(() => {
+    dataFinZafra();
+    dataFinZafraComparativa();
+    dataFinZafraNorte();
+    dataFinZafraComparativaNorte();
+  }, [fechasInicioIngenios, fechasInicioIngeniosNorte])
 
   /************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS TUCUMAN *************/
   let inicioZafraa = new Date("3/10/2100");
@@ -334,14 +377,14 @@ const ParteDiario = ({
       } else {
         finZafraaComparativa =
           new Date(fechasInicioIngeniosComparativa[clave]) >
-          finZafraaComparativa
+            finZafraaComparativa
             ? new Date(fechasInicioIngeniosComparativa[clave])
             : finZafraaComparativa;
         setFinZafraComparativa(finZafraaComparativa);
 
         inicioZafraaComparativa =
           new Date(fechasInicioIngeniosComparativa[clave]) <
-          inicioZafraaComparativa
+            inicioZafraaComparativa
             ? new Date(fechasInicioIngeniosComparativa[clave])
             : inicioZafraaComparativa;
         setInicioZafraComparativa(inicioZafraaComparativa);
@@ -390,14 +433,14 @@ const ParteDiario = ({
       } else {
         finZafraaComparativaNorte =
           new Date(fechasInicioIngeniosNorteComparativa[clave]) >
-          finZafraaComparativaNorte
+            finZafraaComparativaNorte
             ? new Date(fechasInicioIngeniosNorteComparativa[clave])
             : finZafraaComparativaNorte;
         setFinZafraNorteComparativa(finZafraaComparativaNorte);
 
         inicioZafraaComparativaNorte =
           new Date(fechasInicioIngeniosNorteComparativa[clave]) <
-          inicioZafraaComparativaNorte
+            inicioZafraaComparativaNorte
             ? new Date(fechasInicioIngeniosNorteComparativa[clave])
             : inicioZafraaComparativaNorte;
         setInicioZafraNorteComparativa(inicioZafraaComparativaNorte);
@@ -408,51 +451,11 @@ const ParteDiario = ({
 
   /************************** CANTIDAD DIAS DE ZAFRA **************************/
   /***** TUCUMAN *****/
-  useEffect(() => {
-    cantDiasZafra();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafra, finZafra, zafraParteDiario, dataEnd]);
-  const cantDiasZafra = () => {
-    if (inicioZafra === "") {
-      setDataDiasZafra(0);
-    }
-
-    if (inicioZafra !== "" && dataEnd < inicioZafra) {
-      setDataDiasZafra(0);
-    }
-
-    if (inicioZafra !== "" && finZafra === "" && dataEnd >= inicioZafra) {
-      const diffDates =
-        new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafra(Math.ceil(diffTotal));
-    }
-
-    if (
-      inicioZafra !== "" &&
-      finZafra !== "" &&
-      dataEnd >= inicioZafra &&
-      dataEnd > finZafra
-    ) {
-      const diffDates =
-        new Date(finZafra).getTime() - new Date(inicioZafra).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafra(Math.ceil(diffTotal));
-    }
-
-    if (
-      inicioZafra !== "" &&
-      finZafra !== "" &&
-      dataEnd >= inicioZafra &&
-      dataEnd <= finZafra
-    ) {
-      const diffDates =
-        new Date(dataEnd).getTime() - new Date(inicioZafra).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafra(Math.ceil(diffTotal));
-    }
-  };
-
+  const diasZafra = (dataEnd &&
+    new Date(inicioZafra).getTime() !== new Date('3/10/2100').getTime())
+    ? dataEnd - inicioZafra
+    : 0
+  const diasZafraFormat = diasZafra / (1000 * 60 * 60 * 24);
   useEffect(() => {
     cantDiasZafraComparativa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -647,13 +650,42 @@ const ParteDiario = ({
   dataComparativa?.forEach((d) => {
     if (d.anio_zafra === zafraParteDiario) {
       estimacionEEAOC = d.estimacion_EEAOC;
-    } else{
+    } else {
       estimacionEEAOC = 0
     }
   });
 
+  // console.log('dc1', dc1)
+  // console.log('dc2', dc2)
+  // console.log('dc3', dc3)
+  // console.log('dc4', dc4)
+  // console.log('dc5', dc5)
+  // console.log('dc6', dc6)
+  // console.log('dc7', dc7)
+  // console.log('dc8', dc8)
+  // console.log('dc9', dc9)
+  // console.log('dc10', dc10)
+  // console.log('dc11', dc11)
+  // console.log('dc12', dc12)
+  // console.log('dc13', dc13)
+  // console.log('dc14', dc14)
+  // console.log('dc15', dc15)
+  // console.log('n1', n1)
+  // console.log('n2', n2)
+  // console.log('n3', n3)
+  // console.log('n4', n4)
+  // console.log('n5', n5)
+  console.log('nc1', nc1)
+  console.log('nc2', nc2)
+  console.log('nc3', nc3)
+  console.log('nc4', nc4)
+  console.log('nc5', nc5)
+
   /** CANTIDAD DIAS DE DESTILERIA **/
-  const diasDestileria = (dataEnd && new Date(fechaInicioDestileria).getTime() !== new Date("3/10/2100").getTime()) ? dataEnd - fechaInicioDestileria : "";
+  const diasDestileria = (dataEnd &&
+    new Date(fechaInicioDestileria).getTime() !== new Date("3/10/2100").getTime())
+    ? dataEnd - fechaInicioDestileria
+    : "";
   const diasDestileriaFormat = diasDestileria / (1000 * 60 * 60 * 24);
   /** Exportacion ZAFRA ACTUAL **/
   const exportarParteComparativo = async () => {
@@ -664,6 +696,7 @@ const ParteDiario = ({
         {
           dataEnd,
           diasParadaExport,
+          /** TUCUMAN **/
           d1,
           d2,
           d3,
@@ -679,6 +712,13 @@ const ParteDiario = ({
           d13,
           d14,
           d15,
+          /** NORTE **/
+          n1,
+          n2,
+          n3,
+          n4,
+          n5,
+          /** TUCUMAN - COMPARATIVA **/
           dc1,
           dc2,
           dc3,
@@ -694,15 +734,22 @@ const ParteDiario = ({
           dc13,
           dc14,
           dc15,
+          /** NORTE - COMPARATIVA **/
+          nc1,
+          nc2,
+          nc3,
+          nc4,
+          nc5,
           dataImport,
           dataImportComparativa,
+          dataImportNorte,
           dataUser,
           dataUserRegister,
           setBanderaDataNull,
           inicioZafra,
           inicioZafraComparativa,
           fechasInicioIngenios,
-          dataDiasZafra,
+          diasZafraFormat,
           fechasInicioIngeniosComparativa,
           dataDiasZafraComparativa,
           setDataImport,
@@ -738,7 +785,7 @@ const ParteDiario = ({
         });
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `Parte diario directorio - ${dateFormat}`;
+        link.download = `Zafra ${zafraParteDiario} - Parte diario directorio - ${dateFormat}`;
         link.click();
         link.remove();
         window.URL.revokeObjectURL(link);
@@ -752,10 +799,10 @@ const ParteDiario = ({
         message.success("Descarga realizada correctamente", 5);
         window.location.reload();
       } else {
-        console.log("Error al generar el excel");
+        toast.error("Error al generar el excel");
       }
     } catch (error) {
-      console.error("Error en el fetch:", error);
+      toast.error("Error en el servidor:", error);
     }
   };
   /*** DIAS EFECTIVOS DE ZAFRA ***/
@@ -765,6 +812,7 @@ const ParteDiario = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataAnio, dataEnd, diasParadaExport]);
+
   /** DIAS PARADA **/
   const [aguilDiasParada, setAguilDiasParada] = useState(0);
   const [bellavistaDiasParada, setBellavistaDiasParada] = useState(0);
@@ -842,7 +890,6 @@ const ParteDiario = ({
           rosaDiasParada = rosaDiasParada + p.horas_paradas;
           break;
         default:
-          console.log(p.nombre_ingenio);
           break;
       }
     }
@@ -864,7 +911,6 @@ const ParteDiario = ({
   /*********************/
 
   /** Boton desplegable **/
-
   const handleMenuClick = (e) => {
     if (e.key === 1) {
     }
@@ -877,10 +923,12 @@ const ParteDiario = ({
     {
       label: (
         <button
+          disabled
           style={{
             backgroundColor: "transparent",
             color: "black",
             border: "0px solid white",
+            cursor: "not-allowed",
           }}
           onClick={() =>
             CreateExcelWorkbook(
@@ -999,7 +1047,7 @@ const ParteDiario = ({
       <Row className="d-flex justify-content-start align-items-center px-4 pb-0 pt-2">
         <Col xs={12} className="mb-3 mt-0">
           <p className="me-4 mb-0">Observaciones:</p>
-          <TextArea row={3} disabled={!zafraParteDiario ? true : false}  onChange={(e)=> setObservaciones(e.target.value)}/>
+          <TextArea row={3} disabled={!zafraParteDiario ? true : false} onChange={(e) => setObservaciones(e.target.value)} />
         </Col>
         <Col xs={12} className="mb-2">
           <Row className="justify-content-start">
@@ -1007,7 +1055,7 @@ const ParteDiario = ({
               Datos hasta: {dataEnd ? moment(dataEnd).format("DD-MM-YYYY") : ""}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
-              Días de zafra: {dataDiasZafra}
+              Días de zafra: {Math.ceil(diasZafraFormat)}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
               Días de Destilería: {Math.ceil(diasDestileriaFormat)}
@@ -1015,12 +1063,12 @@ const ParteDiario = ({
             <Col className="mb-1 encabezados-panel fw-bolder">
               Rto CMB(%):{" "}
               {panelCMB
-                ? ((panelAzucarEquivalente / panelCMB)/10).toFixed(2)
+                ? ((panelAzucarEquivalente / panelCMB) / 10).toFixed(2)
                 : ""}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
               Avance de zafra(%):{" "}
-              {(panelCMB && estimacionEEAOC !==0) ? ((panelCMB / estimacionEEAOC) * 100).toFixed(2) : 0}
+              {(panelCMB && estimacionEEAOC !== 0) ? ((panelCMB / estimacionEEAOC) * 100).toFixed(2) : 0}
             </Col>
           </Row>
         </Col>
@@ -1107,21 +1155,19 @@ const ParteDiario = ({
         <Col xs={12} className="text-start mb-5 mt-4">
           <Dropdown menu={menuProps}>
             <Button
-              className={`${
-                (dataEnd === null ||
+              className={`${(dataEnd === null ||
                   dataImport === null ||
                   dataImportComparativa === null ||
                   fechasInicioIngenios === null ||
                   loadingDownload === true ||
                   fechasInicioIngeniosComparativa === null) &&
                 "disabled"
-              }`}
-              onClick={(e) => console.log(e)}
+                }`}
             >
               <Space>
                 {dataEnd === null &&
-                dataImport === null &&
-                dataImportComparativa === null ? (
+                  dataImport === null &&
+                  dataImportComparativa === null ? (
                   "Elija Fecha"
                 ) : dataEnd !== null &&
                   (dataImport === null || dataImportComparativa === null) ? (

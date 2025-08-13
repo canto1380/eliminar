@@ -12,15 +12,16 @@ import MsgErrorServerJSON from "../../components/Messages/MsgErrorServerJSON";
 import { getParteDiarios } from "../../utils/queryAPI/parteDiarios";
 import "./ParteDiarioContainer.css";
 import { getActualizarPartesDiarios } from "../../utils/queryAPI/actualizarPartesDiarios";
+import { getActualizarPartesDiariosNorte } from "../../utils/queryAPI/actualizarPartesDiarios";
 import { getLastUpdated } from "../../utils/queryAPI/lastUpdated";
-import { notification } from "antd";
 import { toast } from "react-toastify";
+import { obtenerPeriodos } from "./hooks/ObtenerPeriodos";
+import { filtrarRegistrosPorPeriodos } from "./hooks/RegistrosPorPeriodo";
+import { getParteDiariosNorte } from "../../utils/queryAPI/ParteDiariosNorte";
 
 const ParteDiarioContainer = () => {
   const [errorServer, setErrorServer] = useState(false);
   const [msgErrorServer, setMsgErrorServer] = useState("");
-  const [errorInterno, setErrorInterno] = useState(false);
-  const [msgErrorInterno, setMsgErrorInterno] = useState("");
   const [dataEnd, setDataEnd] = useState(null);
   const [dataZafra, setDataZafra] = useState(null);
   const [dataAnio, setDataAnio] = useState(null);
@@ -37,6 +38,14 @@ const ParteDiarioContainer = () => {
   const [dataImportAnhidro, setDataImportAnhidro] = useState(null);
   const [dataImportAnhidroComparativa, setDataImportAnhidroComparativa] =
     useState(null);
+  const [dataImportNorte, setDataImportNorte] = useState(null);
+  const [dataImportComparativaNorte, setDataImportComparativaNorte] = useState(null);
+  const [dataImportDestileriaNorte, setDataImportDestileriaNorte] = useState(null);
+  const [dataImportDestileriaComparativaNorte, setDataImportDestileriaComparativaNorte] =
+    useState(null);
+  const [dataImportAnhidroNorte, setDataImportAnhidroNorte] = useState(null);
+  const [dataImportAnhidroComparativaNorte, setDataImportAnhidroComparativaNorte] =
+    useState(null);
 
   const [banderaDataNull, setBanderaDataNull] = useState(false);
   const [dateInicioIngenios, setDateInicioIngenios] = useState(null);
@@ -44,36 +53,10 @@ const ParteDiarioContainer = () => {
   const [dataIngenios, setDataIngenios] = useState(null);
   const [zafraParteDiario, setZafraParteDiario] = useState(null);
 
-  const [inicioZafra, setInicioZafra] = useState(null);
-  const [finZafra, setFinZafra] = useState(null);
-  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
-  const [finZafraComparativa, setFinZafraComparativa] = useState(undefined);
-
-  const [inicioDestileria, setInicioDestileria] = useState(null);
-  const [finDestileria, setFinDestileria] = useState(null);
-  const [inicioDestileriaComparativa, setInicioDestileriaComparativa] =
-    useState(null);
-  const [finDestileriaComparativa, setFinDestileriaComparativa] =
-    useState(undefined);
-
-  const [inicioAnhidro, setInicioAnhidro] = useState(null);
-  const [finAnhidro, setFinAnhidro] = useState(null);
-  const [inicioAnhidroComparativo, setInicioAnhidroComparativo] =
-    useState(null);
-  const [finAnhidroComparativo, setFinAnhidroComparativo] = useState(null);
-
   const [loading, setLoading] = useState(false);
   const [dataParteDiarios, setDataParteDiarios] = useState([]);
+  const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
-  console.log('Periodos:: ', dateInicioIngenios)
-  console.log('Zafra: ',inicioZafra, finZafra)
-  console.log('Destileria: ',inicioDestileria, finDestileria)
-  console.log('Anhidro: ',inicioAnhidro, finAnhidro)
-  console.log('Comparativo::', dateFinIngenios)
-  console.log('Zafra Comparativo: ',inicioZafraComparativa, finZafraComparativa)
-  console.log('Destileria Comparativo: ',inicioDestileriaComparativa, finDestileriaComparativa)
-  console.log('Anhidro Comparativo: ',inicioAnhidroComparativo, finAnhidroComparativo)
-
 
   useEffect(() => {
     if (dataZafra !== null) {
@@ -82,15 +65,21 @@ const ParteDiarioContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataZafra]);
 
-
   useEffect(() => {
     getDataParteDiarios();
+    getDataParteDiariosNorte();
   }, []);
   const getDataParteDiarios = async () => {
     const data = await getParteDiarios();
     setDataParteDiarios(data);
-    aa(data);
+    aa(data); // REVEER PARA ESTADISTICAS
   };
+
+  const getDataParteDiariosNorte = async () => {
+    const data = await getParteDiariosNorte();
+    setDataParteDiariosNorte(data);
+  };
+  // console.log('dataParteDiariosNorte', dataParteDiariosNorte)
 
   const aa = (data) => {
     const maxByIngenio = Object.values(
@@ -124,7 +113,6 @@ const ParteDiarioContainer = () => {
     });
     setLastUpdated(fecha);
   };
-
   const getData = async () => {
     try {
       setDataParteDiariosHistoricos(null);
@@ -138,241 +126,70 @@ const ParteDiarioContainer = () => {
       if (data.status === 200) {
         setDataParteDiariosHistoricos(data?.data?.data?.ParteDiarios);
       }
-      if (data.response.status === 503) {
-        setErrorServer(true);
-        setMsgErrorServer(data.response.data.error);
-      }
-      // setDataParteDiariosHistoricos(data)
     } catch (error) {
-      setErrorInterno(true);
-      setMsgErrorInterno(
-        "Hubo un problema interno del servidor. Recargue la página."
-      );
-      setTimeout(() => {
-        setErrorInterno(false);
-      }, 3000);
+      if (error.response?.status === 503) {
+        setErrorServer(true);
+        setMsgErrorServer(error.response.data?.error || "Error desconocido");
+      } else {
+        toast.error(
+          "Hubo un problema interno del servidor. Recargue la página."
+        );
+      }
     }
   };
   useEffect(() => {
-    if (dataEnd !== null) {
-      getDataImportZafra();
-      getDataImportDestileria();
-      getDataImportAnhidro();
+    if (dataEnd && dataParteDiarios && dataParteDiariosNorte && dateInicioIngenios && dateFinIngenios) {
+
+      /** TUCUMAN **/
+      const periodosActual = obtenerPeriodos(dateInicioIngenios,1);
+      const periodoComparativo = obtenerPeriodos(dateFinIngenios,1);
+
+      const { dataZafra1, dataDestileria1, dataAnhidro1 } =
+        filtrarRegistrosPorPeriodos(periodosActual, dataParteDiarios, dataEnd);
+      const {
+        dataZafra1: dataZafraComparativa,
+        dataDestileria1: dataDestileriaComparativa,
+        dataAnhidro1: dataZafraAnhidroComparativa,
+      } = filtrarRegistrosPorPeriodos(
+        periodoComparativo,
+        dataParteDiarios,
+        dataEnd
+      );
+
+      setDataImport(dataZafra1);
+      setDataImportComparativa(dataZafraComparativa);
+      setDataImportDestileria(dataDestileria1);
+      setDataImportDestileriaComparativa(dataDestileriaComparativa);
+      setDataImportAnhidro(dataAnhidro1);
+      setDataImportAnhidroComparativa(dataZafraAnhidroComparativa);
+
+
+      /**NORTE **/
+      const periodosActualNorte = obtenerPeriodos(dateInicioIngenios, 2);
+      const periodoComparativoNorte = obtenerPeriodos(dateFinIngenios, 2);
+
+
+      const { dataZafra1: dataZafraNorte, dataDestileria1: dataDestileriaNorte, dataAnhidro1: dataAnhidroNorte } =
+        filtrarRegistrosPorPeriodos(periodosActualNorte, dataParteDiariosNorte, dataEnd);
+      const {
+        dataZafra1: dataZafraComparativaNorte,
+        dataDestileria1: dataDestileriaComparativaNorte,
+        dataAnhidro1: dataZafraAnhidroComparativaNorte,
+      } = filtrarRegistrosPorPeriodos(
+        periodoComparativoNorte,
+        dataParteDiariosNorte,
+        dataEnd
+      );
+
+      setDataImportNorte(dataZafraNorte);
+      setDataImportComparativaNorte(dataZafraComparativaNorte);
+      setDataImportDestileriaNorte(dataDestileriaNorte);
+      setDataImportDestileriaComparativaNorte(dataDestileriaComparativaNorte);
+      setDataImportAnhidroNorte(dataAnhidroNorte);
+      setDataImportAnhidroComparativaNorte(dataZafraAnhidroComparativaNorte);
+
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    zafraParteDiario,
-    dataEnd,
-    inicioZafra,
-    finZafra,
-    inicioZafraComparativa,
-    finZafraComparativa,
-    dateInicioIngenios,
-  ]);
-  const getDataImportZafra = async () => {
-    const inicioComparativa = new Date(inicioZafraComparativa);
-    const aa = new Date(periodosComparativo.inicio_zafra)
-    console.log(aa)
-    /**FECHA FIN INGRESADA AL ELEGIR FECHA DE PARTE **/
-    const verificarFechaFin =
-      finZafra !== null ? (dataEnd > finZafra ? finZafra : dataEnd) : dataEnd;
-    /************************************************/
-
-    const fechaInicioComparativo = `${inicioComparativa.getDate()}-${
-      inicioComparativa.getMonth() + 1
-    }-${zafraParteDiario - 1}`;
-
-    const [day1, month1, year1] = fechaInicioComparativo.split("-");
-    const fechaInicioComparativoProcesada = new Date(
-      `${year1}-${month1.padStart(2, "0")}-${day1.padStart(2, "0")}T00:00:00`
-    );
-    const fechaFinComparativoAUsar =
-      new Date(dataEnd) < new Date(finZafraComparativa)
-        ? dataEnd
-        : new Date(finZafraComparativa);
-    const fechaFinComparativo = `${fechaFinComparativoAUsar.getDate()}-${
-      fechaFinComparativoAUsar.getMonth() + 1
-    }-${zafraParteDiario - 1}`;
-
-    const [day, month, year] = fechaFinComparativo.split("-");
-    const fechaFinComparativoProcesada = new Date(
-      `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T00:00:00`
-    );
-    /************************************************/
-    console.log(dataParteDiarios)
-    try {
-      setLoading(true);
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const dataAImportar = dataParteDiarios.filter((item) => {
-          const fecha = new Date(item.fechaParte);
-          return fecha >= inicioZafra && fecha <= verificarFechaFin;
-        });
-        setDataImport(dataAImportar);
-      } else {
-        setDataImport([]);
-      }
-
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const fechaInicioComparativo1 = new Date(
-          fechaInicioComparativoProcesada
-        );
-        const fechaFinComparativo1 = new Date(fechaFinComparativoProcesada);
-        const dataAImportarComparativa = dataParteDiarios.filter((item) => {
-          const fecha = new Date(item.fechaParte);
-          return (
-            fecha >= fechaInicioComparativo1 && fecha <= fechaFinComparativo1
-          );
-        });
-        setDataImportComparativa(dataAImportarComparativa);
-      } else {
-        setDataImportComparativa([]);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const getDataImportDestileria = async () => {
-    const inicioComparativa = new Date(inicioDestileriaComparativa);
-    const finComparativa = new Date(finDestileriaComparativa);
-    let verificarFechaFin =
-      finDestileria !== null && finDestileria !== ''
-        ? dataEnd > finDestileria
-          ? finDestileria
-          : dataEnd
-        : dataEnd;
-    const fechaInicioComparativo = `${inicioComparativa.getDate()}-${
-      inicioComparativa.getMonth() + 1
-    }-${zafraParteDiario - 1}`;
-
-    const fechaFinComparativo =
-      finDestileriaComparativa === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${finComparativa.getDate()}-${
-            finComparativa.getMonth() + 1
-          }-${finComparativa.getFullYear()}`;
-
-    const [day1, month1, year1] = fechaInicioComparativo.split("-");
-    const [day2, month2, year2] = fechaFinComparativo.split("-");
-    const fechaInicioComparativoProcesada = new Date(
-      `${year1}-${month1.padStart(2, "0")}-${day1.padStart(2, "0")}T00:00:00`
-    );
-    const fechaFinComparativoProcesada = new Date(
-      `${year2}-${month2.padStart(2, "0")}-${day2.padStart(2, "0")}T00:00:00`
-    );
-
-    try {
-      setLoading(true);
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const dataDestileriaAImportar = dataParteDiarios.filter((item) => {
-          const fecha = new Date(item.fechaParte);
-          return fecha >= inicioDestileria && fecha <= verificarFechaFin;
-        });
-        setDataImportDestileria(dataDestileriaAImportar);
-      } else {
-        setDataImportDestileria([]);
-      }
-
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const fechaInicioDestileriaComparativo = new Date(
-          fechaInicioComparativoProcesada
-        );
-        const fechaFinDestileriaComparativo = new Date(
-          fechaFinComparativoProcesada
-        );
-        const dataDestileriaComparativoAImportar = dataParteDiarios.filter(
-          (item) => {
-            const fecha = new Date(item.fechaParte);
-            return (
-              fecha >= fechaInicioDestileriaComparativo &&
-              fecha <= fechaFinDestileriaComparativo
-            );
-          }
-        );
-        setDataImportDestileriaComparativa(dataDestileriaComparativoAImportar);
-      } else {
-        setDataImportDestileriaComparativa([]);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getDataImportAnhidro = async () => {
-    const inicioComparativa = new Date(inicioAnhidroComparativo);
-    const finComparativa = new Date(finAnhidroComparativo);
-    let verificarFechaFinAnhidro =
-      finAnhidro !== null && finAnhidro !== ''
-        ? dataEnd > finAnhidro
-          ? finAnhidro
-          : dataEnd
-        : dataEnd;
-    // verificarFechaFinAnhidro = verificarFechaFinAnhidro === "" && dataEnd;
-
-    const fechaInicioComparativo = `${inicioComparativa.getDate()}-${
-      inicioComparativa.getMonth() + 1
-    }-${zafraParteDiario - 1}`;
-
-    const fechaFinComparativo =
-      finAnhidroComparativo === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${finComparativa.getDate()}-${
-            finComparativa.getMonth() + 1
-          }-${finComparativa.getFullYear()}`;
-
-    const [day1, month1, year1] = fechaInicioComparativo.split("-");
-    const [day2, month2, year2] = fechaFinComparativo.split("-");
-
-    const fechaInicioComparativoProcesada = new Date(
-      `${year1}-${month1.padStart(2, "0")}-${day1.padStart(2, "0")}T00:00:00`
-    );
-    const fechaFinComparativoProcesada = new Date(
-      `${year2}-${month2.padStart(2, "0")}-${day2.padStart(2, "0")}T00:00:00`
-    );
-    try {
-      setLoading(true);
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const dataAnhidroAImportar = dataParteDiarios.filter((item) => {
-          const fecha = new Date(item.fechaParte);
-          return fecha >= inicioAnhidro && fecha <= verificarFechaFinAnhidro;
-        });
-        setDataImportAnhidro(dataAnhidroAImportar);
-      } else {
-        setDataImportAnhidro([]);
-      }
-      if (inicioZafra !== null && dataParteDiarios.length > 0) {
-        const fechaInicioAnhidroComparativo = new Date(
-          fechaInicioComparativoProcesada
-        );
-        const fechaFinAnhidroComparativo = new Date(
-          fechaFinComparativoProcesada
-        );
-        const dataAnhidroComparativoAImportar = dataParteDiarios.filter(
-          (item) => {
-            const fecha = new Date(item.fechaParte);
-            return (
-              fecha >= fechaInicioAnhidroComparativo &&
-              fecha <= fechaFinAnhidroComparativo
-            );
-          }
-        );
-        setDataImportAnhidroComparativa(dataAnhidroComparativoAImportar);
-      } else {
-        setDataImportAnhidroComparativa([]);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [dataEnd, dataParteDiarios, dateInicioIngenios, dateFinIngenios]);
 
   useEffect(() => {
     const dataNow = new Date();
@@ -418,294 +235,42 @@ const ParteDiarioContainer = () => {
       limit: 10000000,
       anio: zafraParteDiario,
       deleted: 0,
-      region: 1,
     };
     const data = await getPeriodoZafra(params);
     setDateInicioIngenios(data);
-    const params1 = { limit: 10000000, anio: zafraParteDiario - 1, region: 1 };
+    const params1 = { limit: 10000000, anio: zafraParteDiario - 1 };
     const data1 = await getPeriodoZafra(params1);
     setDateFinIngenios(data1);
   };
   /******/
 
-  /*** INICIO Y FIN DE ZAFRA ACTUAL Y COMPARATIVA ***/
-  useEffect(() => {
-    inicioPeriodoZafra();
-    finPeriodoZafra();
-    inicioPeriodoDestileria();
-    finPeriodoDestileria();
-    inicioPeriodoAnhidro();
-    finPeriodoAnhidro();
-    inicioPeriodoZafraComparativa();
-    finPeriodoZafraComparativa();
-    inicioPeriodoDestileriaComparativa();
-    finPeriodoDestileriaComparativa();
-    inicioPeriodoAnhidroComparativa();
-    finPeriodoAnhidroComparativa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateInicioIngenios, dateFinIngenios, zafraParteDiario, dataEnd]);
-
-  let inicioZafra1 = new Date("3/10/2100");
-  let finZafra1 = new Date("1/1/1910");
-
-  const inicioPeriodoZafra = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      inicioZafra1 =
-        new Date(dateInicioIngenios[i].inicio_zafra) < inicioZafra1
-          ? new Date(dateInicioIngenios[i].inicio_zafra)
-          : inicioZafra1;
-      setInicioZafra(inicioZafra1);
-    }
-  };
-  const finPeriodoZafra = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (dateInicioIngenios[i].fin_zafra === null) {
-        setFinZafra(null);
-        return;
-      } else {
-        finZafra1 =
-          new Date(dateInicioIngenios[i].fin_zafra) > finZafra1
-            ? new Date(dateInicioIngenios[i].fin_zafra)
-            : finZafra1;
-        setFinZafra(finZafra1);
-      }
-    }
-  };
-  let inicioDestileria1 = new Date("3/10/2100");
-  let finDestileria1 = new Date("1/1/1910");
-  const inicioPeriodoDestileria = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (dateInicioIngenios[i].inicio_destileria !== null) {
-        inicioDestileria1 =
-          new Date(dateInicioIngenios[i].inicio_destileria) < inicioDestileria1
-            ? new Date(dateInicioIngenios[i].inicio_destileria)
-            : inicioDestileria1;
-        setInicioDestileria(inicioDestileria1);
-      } else {
-        setInicioDestileria(undefined);
-      }
-    }
-  };
-  const finPeriodoDestileria = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (
-        dateInicioIngenios[i].inicio_destileria !== null &&
-        dateInicioIngenios[i].fin_destileria === null
-      ) {
-        setFinDestileria("");
-      }
-      if (
-        dateInicioIngenios[i].inicio_destileria !== null &&
-        dateInicioIngenios[i].fin_destileria !== null
-      ) {
-        finDestileria1 =
-          new Date(dateInicioIngenios[i].fin_destileria) > finDestileria1
-            ? new Date(dateInicioIngenios[i].fin_destileria)
-            : finDestileria1;
-        setFinDestileria(finDestileria1);
-      }
-    }
-  };
-
-  /** INICIO|FIN Anhidro **/
-  let inicioAnhidro1 = new Date("3/10/2100");
-  const inicioPeriodoAnhidro = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (dateInicioIngenios[i].inicio_anhidro !== null) {
-        inicioAnhidro1 =
-          new Date(dateInicioIngenios[i].inicio_anhidro) < inicioAnhidro1
-            ? new Date(dateInicioIngenios[i].inicio_anhidro)
-            : inicioAnhidro1;
-        setInicioAnhidro(inicioAnhidro1);
-      } else {
-        setInicioAnhidro(undefined);
-      }
-    }
-  };
-  const finPeriodoAnhidro = () => {
-    if (dateInicioIngenios && dateInicioIngenios.length > 0) {
-      if (dateInicioIngenios.some((reg) => reg.fin_anhidro === null)) {
-        setFinAnhidro(null);
-        return;
-      }
-      const fechaCierre = dateInicioIngenios.reduce(
-        (max, reg) =>
-          new Date(reg.fin_anhidro) > new Date(max) ? reg.fin_anhidro : max,
-        dateInicioIngenios[0].fin_anhidro
-      );
-      setFinAnhidro(fechaCierre);
-      return;
-    }
-  };
-  /**************************/
-
-  let inicioZafra2 = new Date("3/10/2100");
-  let finZafra2 = new Date("1/1/1910");
-  const inicioPeriodoZafraComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      inicioZafra2 =
-        new Date(dateFinIngenios[i].inicio_zafra) < inicioZafra2
-          ? new Date(dateFinIngenios[i].inicio_zafra)
-          : inicioZafra2;
-      setInicioZafraComparativa(inicioZafra2);
-    }
-  };
-  const finPeriodoZafraComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (dateFinIngenios[i].fin_zafra === null) {
-        setFinZafraComparativa("");
-        return;
-      } else {
-        finZafra2 =
-          new Date(dateFinIngenios[i].fin_zafra) > finZafra2
-            ? new Date(dateFinIngenios[i].fin_zafra)
-            : finZafra2;
-        setFinZafraComparativa(finZafra2);
-      }
-    }
-  };
-  let inicioDestileria2 = new Date("3/10/2100");
-  let finDestileria2 = new Date("1/1/1910");
-  const inicioPeriodoDestileriaComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (dateFinIngenios[i].inicio_destileria !== null) {
-        inicioDestileria2 =
-          new Date(dateFinIngenios[i].inicio_destileria) < inicioDestileria2
-            ? new Date(dateFinIngenios[i].inicio_destileria)
-            : inicioDestileria2;
-        setInicioDestileriaComparativa(inicioDestileria2);
-      }
-    }
-  };
-  const finPeriodoDestileriaComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (
-        dateFinIngenios[i].inicio_destileria !== null &&
-        dateFinIngenios[i].fin_destileria === null
-      ) {
-        setFinDestileriaComparativa(null);
-        return;
-      }
-      if (
-        dateFinIngenios[i].inicio_destileria !== null &&
-        dateFinIngenios[i].fin_destileria !== null
-      ) {
-        finDestileria2 =
-          new Date(dateFinIngenios[i].fin_destileria) > finDestileria2
-            ? new Date(dateFinIngenios[i].fin_destileria)
-            : finDestileria2;
-        setFinDestileriaComparativa(finDestileria2);
-      }
-    }
-  };
-
-  /*** INICIO|FIN Anhidro comparativo ***/
-  let inicioAnhidro2 = new Date("3/10/2100");
-  let finAnhidro2 = new Date("1/1/1910");
-  const inicioPeriodoAnhidroComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (dateFinIngenios[i].inicio_anhidro !== null) {
-        inicioAnhidro2 =
-          new Date(dateFinIngenios[i].inicio_anhidro) < inicioAnhidro2
-            ? new Date(dateFinIngenios[i].inicio_anhidro)
-            : inicioAnhidro2;
-        setInicioAnhidroComparativo(inicioAnhidro2);
-      }
-    }
-  };
-  const finPeriodoAnhidroComparativa = () => {
-    if (dateFinIngenios && dateFinIngenios.length > 0) {
-      if (dateFinIngenios.some((reg) => reg.fin_anhidro === null)) {
-        setFinAnhidroComparativo(null);
-        return;
-      }
-      const fechaCierre = dateFinIngenios.reduce(
-        (max, reg) =>
-          new Date(reg.fin_anhidro) > new Date(max) ? reg.fin_anhidro : max,
-        dateFinIngenios[0].fin_anhidro
-      );
-      setFinAnhidroComparativo(fechaCierre);
-      return;
-    }
-  };
-  /*************************************/
-  function obtenerPeriodos(data) {
-  const periodos = {
-    inicio_zafra: null,
-    fin_zafra: null,
-    inicio_destileria: null,
-    fin_destileria: null,
-    inicio_anhidro: null,
-    fin_anhidro: null
-  };
-
-  data?.forEach(item => {
-    // Zafra
-    if (item.inicio_zafra) {
-      const inicio = new Date(item.inicio_zafra);
-      periodos.inicio_zafra = !periodos.inicio_zafra || inicio < new Date(periodos.inicio_zafra)
-        ? inicio.toString()
-        : periodos.inicio_zafra;
-    }
-    if (item.fin_zafra) {
-      const fin = new Date(item.fin_zafra);
-      periodos.fin_zafra = !periodos.fin_zafra || fin > new Date(periodos.fin_zafra)
-        ? fin.toString()
-        : periodos.fin_zafra;
-    }
-
-    // Destilería
-    if (item.inicio_destileria) {
-      const inicio = new Date(item.inicio_destileria);
-      periodos.inicio_destileria = !periodos.inicio_destileria || inicio < new Date(periodos.inicio_destileria)
-        ? inicio.toString()
-        : periodos.inicio_destileria;
-    }
-    if (item.fin_destileria) {
-      const fin = new Date(item.fin_destileria);
-      periodos.fin_destileria = !periodos.fin_destileria || fin > new Date(periodos.fin_destileria)
-        ? fin.toString()
-        : periodos.fin_destileria;
-    }
-
-    // Anhidro
-    if (item.inicio_anhidro) {
-      const inicio = new Date(item.inicio_anhidro);
-      periodos.inicio_anhidro = !periodos.inicio_anhidro || inicio < new Date(periodos.inicio_anhidro)
-        ? inicio.toString()
-        : periodos.inicio_anhidro;
-    }
-    if (item.fin_anhidro) {
-      const fin = new Date(item.fin_anhidro);
-      periodos.fin_anhidro = !periodos.fin_anhidro || fin > new Date(periodos.fin_anhidro)
-        ? fin.toString()
-        : periodos.fin_anhidro;
-    }
-  });
-
-  return periodos;
-}
-
-// Ejemplo de uso:
-const periodosActual = obtenerPeriodos(dateInicioIngenios);
-const periodosComparativo = obtenerPeriodos(dateFinIngenios);
-
-console.log('Periodo Año Actual:', periodosActual);
-console.log('Periodo Año Comparativo:', periodosComparativo);
-
-  /***************************************/
-  
   const actualizarPartesDiarios = async () => {
     try {
       setLoading(true);
+      
+      // Primero actualizar partes diarios de Tucumán
       const data = await getActualizarPartesDiarios();
-      if(data.status === 200) {
-        toast.success(data?.data?.message)
-      }
-      if(data.response.status === 500 ){
-        toast.error(`Error: ${data?.response?.data?.error}`);
+      
+      if (data.status === 200) {
+        toast.success(data?.data?.message);
+        
+        // Si es exitoso, actualizar partes diarios del Norte
+        try {
+          const dataNorte = await getActualizarPartesDiariosNorte();
+          
+          if (dataNorte.status === 200) {
+            toast.success("Partes diarios del Norte actualizados correctamente");
+          } else {
+            toast.error(`Error al actualizar partes diarios del Norte: ${dataNorte?.response?.data?.error || 'Error desconocido'}`);
+          }
+        } catch (errorNorte) {
+          toast.error(`Error al actualizar partes diarios del Norte: ${errorNorte?.response?.data?.error || 'Error desconocido'}`);
+        }
+      } else {
+        toast.error(`Error al actualizar partes diarios: ${data?.response?.data?.error || 'Error desconocido'}`);
       }
     } catch (error) {
+      toast.error(`Error al actualizar partes diarios: ${error?.response?.data?.error || 'Error desconocido'}`);
     } finally {
       setLoading(false);
     }
@@ -778,6 +343,12 @@ console.log('Periodo Año Comparativo:', periodosComparativo);
             dataImportDestileriaComparativa={dataImportDestileriaComparativa}
             dataImportAnhidro={dataImportAnhidro}
             dataImportAnhidroComparativa={dataImportAnhidroComparativa}
+            dataImportNorte={dataImportNorte}
+            dataImportComparativaNorte={dataImportComparativaNorte}
+            dataImportDestileriaNorte={dataImportDestileriaNorte}
+            dataImportDestileriaComparativaNorte={dataImportDestileriaComparativaNorte}
+            dataImportAnhidroNorte={dataImportAnhidroNorte}
+            dataImportAnhidroComparativaNorte={dataImportAnhidroComparativaNorte}
             setBanderaDataNull={setBanderaDataNull}
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}
@@ -787,6 +358,12 @@ console.log('Periodo Año Comparativo:', periodosComparativo);
             }
             setDataImportAnhidro={setDataImportAnhidro}
             setDataImportAnhidroComparativa={setDataImportAnhidroComparativa}
+            setDataImportNorte={setDataImportNorte}
+            setDataImportComparativaNorte={setDataImportComparativaNorte}
+            setDataImportDestileriaNorte={setDataImportDestileriaNorte}
+            setDataImportDestileriaComparativaNorte={setDataImportDestileriaComparativaNorte}
+            setDataImportAnhidroNorte={setDataImportAnhidroNorte}
+            setDataImportAnhidroComparativaNorte={setDataImportAnhidroComparativaNorte}
             dateInicioIngenios={dateInicioIngenios}
             dateFinIngenios={dateFinIngenios}
             dataIngenios={dataIngenios}

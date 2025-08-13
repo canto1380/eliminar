@@ -8,3 +8,8 @@ export const getActualizarPartesDiarios = async (params) => {
   //   return data;
   // }
 };
+
+export const getActualizarPartesDiariosNorte = async (params) => {
+    const res = await apiParams("GET", params, `parteDiarioNorteDB/`, "");
+    return res
+};
