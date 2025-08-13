@@ -105,13 +105,12 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   };
 
   const updatePeriodo = async (values) => {
-    values.inicio_zafra = inicioZafra;
-    values.fin_zafra = finZafra;
-    values.inicio_destileria = inicioDestileria;
-    values.fin_destileria = finDestileria;
-    values.inicio_anhidro = inicioAnhidro
-    values.fin_anhidro = finAnhidro
-
+    values.inicio_zafra = inicioZafra === null ? inicioZafra : moment(inicioZafra).format("YYYY-MM-DD");
+    values.fin_zafra = finZafra === null ? finZafra : moment(finZafra).format("YYYY-MM-DD");
+    values.inicio_destileria = inicioDestileria === null ? inicioDestileria : moment(inicioDestileria).format("YYYY-MM-DD");
+    values.fin_destileria = finDestileria === null ? finDestileria : moment(finDestileria).format("YYYY-MM-DD");
+    values.inicio_anhidro = inicioAnhidro === null ? inicioAnhidro : moment(inicioAnhidro).format("YYYY-MM-DD");
+    values.fin_anhidro = finAnhidro === null ? finAnhidro : moment(finAnhidro).format("YYYY-MM-DD");
     try {
       const res = await api(
         "PATCH",
@@ -159,12 +158,9 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
     optionsIngenios.push(option);
   });
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
   const dataEditInicio = new Date(dataRegisterEdit?.inicio_zafra);
   const dataInicioConvertido = moment(dataEditInicio).format("YYYY-MM-DD");
-
   const dataEditFin = new Date(dataRegisterEdit?.fin_zafra);
   const dataFinConvertido = moment(dataEditFin).format("YYYY-MM-DD");
 
@@ -206,7 +202,6 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
           marginLeft: "2vh",
         }}
         onFinish={handleSubmit}
-        onFinishFailed={onFinishFailed}
         initialValues={{
           id_anio_zafra: dataRegisterEdit?.anio_zafra,
           id_nombre_ingenio: dataRegisterEdit?.nombre_ingenio,

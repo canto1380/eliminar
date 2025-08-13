@@ -20,8 +20,7 @@ const Filtros = ({
   dataMes,
   dataQuincena,
   dataZafra,
-  anioExportDiaParada,
-  diasParadaExport,
+  diasParadas,
   setSearch,
   bandFilterZafraAnio,
   bandFilterAnio,
@@ -34,9 +33,7 @@ const Filtros = ({
   placeHolderSearch,
   zafraParteDiario,
   setZafraParteDiario,
-  setAnioExportDiaParada,
   loadingDownloadReport,
-  setLoadingDownloadReport,
   exportarDiasParadas,
 }) => {
   const [dataAnios, setDataAnios] = useState(null);
@@ -75,9 +72,7 @@ const Filtros = ({
   const handleZafra = (e) => {
     setDataZafra(e);
   };
-  const handleZafraReporteDiasParada = (e) => {
-    setAnioExportDiaParada(e);
-  };
+
 
   const handleAnio = (e) => {
     setDataAnio(e);
@@ -158,24 +153,7 @@ const Filtros = ({
             />
           </Col>
         )}
-        {bandFilterIngenio && (
-          <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-            <span className="me-4">Ingenio:</span>
-            <Select
-              onChange={(e) => handleIngenio(e)}
-              showSearch
-              style={{
-                width: "100%",
-              }}
-              placeholder="Busque o seleccione"
-              optionFilterProp="label"
-              // filterOption={(input, option) =>
-              //   (option?.label ?? "").includes(input)
-              // }
-              options={optionsIngenios}
-            />
-          </Col>
-        )}
+        
         {bandFilterAnio && (
           <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
             <span className="me-4">Año:</span>
@@ -238,6 +216,24 @@ const Filtros = ({
             />
           </Col>
         )}
+        {bandFilterIngenio && (
+          <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
+            <span className="me-4">Ingenio:</span>
+            <Select
+              onChange={(e) => handleIngenio(e)}
+              showSearch
+              style={{
+                width: "100%",
+              }}
+              placeholder="Busque o seleccione"
+              optionFilterProp="label"
+              // filterOption={(input, option) =>
+              //   (option?.label ?? "").includes(input)
+              // }
+              options={optionsIngenios}
+            />
+          </Col>
+        )}
         {bandFilterSearch && (
           <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
             <span className="me-4">Buscar:</span>
@@ -257,7 +253,9 @@ const Filtros = ({
           <Row>
             <Col className="mt-3">
               <div className={`pt-4 pb-0 px-4`}>
-                <p className="fw-bolder mb-1">Filtros Parte Diario Directorio</p>
+                <p className="fw-bolder mb-1">
+                  Filtros Parte Diario Directorio
+                </p>
               </div>
             </Col>
           </Row>
@@ -276,7 +274,7 @@ const Filtros = ({
                 //   (option?.label ?? "").includes(input)
                 // }
                 options={optionsAnios}
-              // defaultValue={zafraParteDiario}
+                // defaultValue={zafraParteDiario}
               />
             </Col>
             <Col xs={12} lg={4} className="mb-1 mt-1">
@@ -287,53 +285,31 @@ const Filtros = ({
                 disabled={!zafraParteDiario ? true : false}
               />
             </Col>
-
           </Row>
         </>
       )}
       {bandFilterDiasParadaAnioZafra && (
         <>
-          <Row>
-            <Col className="mt-3">
-              <div className={`pt-4 pb-0 px-4`}>
-                <p className="fw-bolder">
-                  Filtros para exportar reporte días de parada
-                </p>
-              </div>
-            </Col>
-          </Row>
+
           <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
-            <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-              <span className="me-4">Zafra:</span>
-              <Select
-                onChange={handleZafraReporteDiasParada}
-                showSearch
-                style={{
-                  width: "100%",
-                }}
-                placeholder="Busque o seleccione"
-                optionFilterProp="label"
-                // filterOption={(input, option) =>
-                //   (option?.label ?? "").includes(input)
-                // }
-                options={optionsAnios}
-              />
-            </Col>
+
             <Col xs={12} md={6} lg={3} className="mb-1 mt-1 alignSelf">
               <Button
-                className={`${(anioExportDiaParada === null ||
-                    anioExportDiaParada === "" ||
-                    diasParadaExport === null) &&
+                className={`${
+                  (dataZafra === null ||
+                    dataZafra === undefined||
+                    diasParadas === null ||
+                    !diasParadas) &&
                   "disabled"
-                  }`}
+                }`}
+
                 onClick={() => exportarDiasParadas()}
               >
-
-                {(anioExportDiaParada === null || anioExportDiaParada === "") ? (
+                {dataZafra === null || !dataZafra ? (
                   "Elija año"
-                ) : anioExportDiaParada !== null &&
-                  anioExportDiaParada !== "" &&
-                  diasParadaExport === null ? (
+                ) : dataZafra !== null &&
+                  dataZafra &&
+                  diasParadas === null ? (
                   <>
                     <Spinner
                       as="span"
@@ -356,7 +332,7 @@ const Filtros = ({
                     Descargando
                   </>
                 ) : (
-                  "Descargar"
+                  "Descargar informe"
                 )}
               </Button>
             </Col>
