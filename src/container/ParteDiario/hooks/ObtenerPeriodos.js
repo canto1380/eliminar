@@ -10,7 +10,6 @@ export function obtenerPeriodos(data, regionId) {
 
   // Filtrar los datos por regionId antes del forEach
   const datosFiltrados = data?.filter(item => item.id_region_ingenios === regionId) || [];
-
   datosFiltrados.forEach(item => {
     // Zafra
     if (item.inicio_zafra) {

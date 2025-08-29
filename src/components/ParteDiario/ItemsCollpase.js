@@ -59,19 +59,85 @@ const ItemCollpse = ({
     marginBottom: 24,
     border: "none",
   };
-
   useEffect(() => {
+    // Limpiar todos los estados antes de procesar nuevos datos
+    setAguilares([]);
+    setAguilaresMensual([]);
+    setAguilaresZafra([]);
+    setBellaVista([]);
+    setBellaVistaMensual([]);
+    setBellaVistaZafra([]);
+    setConcepcion([]);
+    setConcepcionMensual([]);
+    setConcepcionZafra([]);
+    setCruzAlta([]);
+    setCruzAltaMensual([]);
+    setCruzAltaZafra([]);
+    setFamailla([]);
+    setFamaillaMensual([]);
+    setFamaillaZafra([]);
+    setLaCorona([]);
+    setLaCoronaMensual([]);
+    setLaCoronaZafra([]);
+    setLaFlorida([]);
+    setLaFloridaMensual([]);
+    setLaFloridaZafra([]);
+    setLaProvidencia([]);
+    setLaProvidenciaMensual([]);
+    setLaProvidenciaZafra([]);
+    setLaTrinidad([]);
+    setLaTrinidadMensual([]);
+    setLaTrinidadZafra([]);
+    setLeales([]);
+    setLealesMensual([]);
+    setLealesZafra([]);
+    setMarapa([]);
+    setMarapaMensual([]);
+    setMarapaZafra([]);
+    setSantaBarbara([]);
+    setSantaBarbaraMensual([]);
+    setSantaBarbaraZafra([]);
+    setSantaRosa([]);
+    setSantaRosaMensual([]);
+    setSantaRosaZafra([]);
+    setNunorco([]);
+    setNunorcoMensual([]);
+    setNunorcoZafra([]);
+    
+    // Procesar los nuevos datos
     dataPorQuincena();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra, dataAnio, dataMes, dataQuincena]);
+  }, [dataZafra, dataAnio, dataMes, dataQuincena, dataParteDiariosHistoricos]);
 
   const dataPorQuincena = () => {
-    let arrQuincenal = [],
-      arrMensual = [],
-      arrZafra = [];
-
+    // Limpiar arrays antes de procesar nuevos datos
+    let arrQuincenal = [];
+    let arrMensual = [];
+    let arrZafra = [];
+    
+    // Función para eliminar duplicados por fecha e ingenio
+    const eliminarDuplicados = (array) => {
+      if (!Array.isArray(array) || array.length === 0) {
+        return [];
+      }
+      
+      const seen = new Map();
+      return array.filter(item => {
+        if (!item || !item.fechaParte || !item.ingenioNombre) {
+          return false; // Excluir elementos inválidos
+        }
+        
+        const key = `${item.fechaParte}_${item.ingenioNombre}`;
+        if (seen.has(key)) {
+          return false;
+        }
+        seen.set(key, true);
+        return true;
+      });
+    };
+    
     dataParteDiariosHistoricos?.forEach((data) => {
-      const newDate = dateConverted(data.FechaParte);
+      const newDate = new Date(data.fechaParte);
       function getLastDayOfMonth(month) {
         const date = new Date();
         date.setMonth(month);
@@ -100,104 +166,77 @@ const ItemCollpse = ({
           arrMensual.push(data);
         }
       }
-      arrZafra.push(data);
+      if(newDate <= fechaParametro2){
+        arrZafra.push(data);
+      }
     });
+    
+    // Eliminar duplicados de cada array
+    arrQuincenal = eliminarDuplicados(arrQuincenal);
+    arrMensual = eliminarDuplicados(arrMensual);
+    arrZafra = eliminarDuplicados(arrZafra);
+    
 
-    setAguilares(arrQuincenal.filter((d) => d.IngenioNombre === "Aguilares"));
-    setAguilaresMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Aguilares")
-    );
-    setAguilaresZafra(arrZafra.filter((d) => d.IngenioNombre === "Aguilares"));
+    // Función helper para filtrar por ingenio y eliminar duplicados
+    const filtrarPorIngenio = (array, nombreIngenio) => {
+      return eliminarDuplicados(array.filter((d) => d.ingenioNombre === nombreIngenio));
+    };
+    
+    setAguilares(filtrarPorIngenio(arrQuincenal, "Aguilares"));
+    setAguilaresMensual(filtrarPorIngenio(arrMensual, "Aguilares"));
+    setAguilaresZafra(filtrarPorIngenio(arrZafra, "Aguilares"));
 
-    setBellaVista(
-      arrQuincenal.filter((d) => d.IngenioNombre === "Bella Vista")
-    );
-    setBellaVistaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Bella Vista")
-    );
-    setBellaVistaZafra(
-      arrZafra.filter((d) => d.IngenioNombre === "Bella Vista")
-    );
+    setBellaVista(filtrarPorIngenio(arrQuincenal, "Bella Vista"));
+    setBellaVistaMensual(filtrarPorIngenio(arrMensual, "Bella Vista"));
+    setBellaVistaZafra(filtrarPorIngenio(arrZafra, "Bella Vista"));
 
-    setConcepcion(arrQuincenal.filter((d) => d.IngenioNombre === "Concepción"));
-    setConcepcionMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Concepción")
-    );
-    setConcepcionZafra(
-      arrZafra.filter((d) => d.IngenioNombre === "Concepción")
-    );
+    setConcepcion(filtrarPorIngenio(arrQuincenal, "Concepción"));
+    setConcepcionMensual(filtrarPorIngenio(arrMensual, "Concepción"));
+    setConcepcionZafra(filtrarPorIngenio(arrZafra, "Concepción"));
 
-    setCruzAlta(arrQuincenal.filter((d) => d.IngenioNombre === "Cruz Alta"));
-    setCruzAltaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Cruz Alta")
-    );
-    setCruzAltaZafra(arrZafra.filter((d) => d.IngenioNombre === "Cruz Alta"));
+    setCruzAlta(filtrarPorIngenio(arrQuincenal, "Cruz Alta"));
+    setCruzAltaMensual(filtrarPorIngenio(arrMensual, "Cruz Alta"));
+    setCruzAltaZafra(filtrarPorIngenio(arrZafra, "Cruz Alta"));
 
-    setFamailla(arrQuincenal.filter((d) => d.IngenioNombre === "Famaillá"));
-    setFamaillaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Famaillá")
-    );
-    setFamaillaZafra(arrZafra.filter((d) => d.IngenioNombre === "Famaillá"));
+    setFamailla(filtrarPorIngenio(arrQuincenal, "Famaillá"));
+    setFamaillaMensual(filtrarPorIngenio(arrMensual, "Famaillá"));
+    setFamaillaZafra(filtrarPorIngenio(arrZafra, "Famaillá"));
 
-    setLaCorona(arrQuincenal.filter((d) => d.IngenioNombre === "La Corona"));
-    setLaCoronaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "La Corona")
-    );
-    setLaCoronaZafra(arrZafra.filter((d) => d.IngenioNombre === "La Corona"));
+    setLaCorona(filtrarPorIngenio(arrQuincenal, "La Corona"));
+    setLaCoronaMensual(filtrarPorIngenio(arrMensual, "La Corona"));
+    setLaCoronaZafra(filtrarPorIngenio(arrZafra, "La Corona"));
 
-    setLaFlorida(arrQuincenal.filter((d) => d.IngenioNombre === "La Florida"));
-    setLaFloridaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "La Florida")
-    );
-    setLaFloridaZafra(arrZafra.filter((d) => d.IngenioNombre === "La Florida"));
+    setLaFlorida(filtrarPorIngenio(arrQuincenal, "La Florida"));
+    setLaFloridaMensual(filtrarPorIngenio(arrMensual, "La Florida"));
+    setLaFloridaZafra(filtrarPorIngenio(arrZafra, "La Florida"));
 
-    setLaProvidencia(
-      arrQuincenal.filter((d) => d.IngenioNombre === "La Providencia")
-    );
-    setLaProvidenciaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "La Providencia")
-    );
-    setLaProvidenciaZafra(
-      arrZafra.filter((d) => d.IngenioNombre === "La Providencia")
-    );
+    setLaProvidencia(filtrarPorIngenio(arrQuincenal, "La Providencia"));
+    setLaProvidenciaMensual(filtrarPorIngenio(arrMensual, "La Providencia"));
+    setLaProvidenciaZafra(filtrarPorIngenio(arrZafra, "La Providencia"));
 
-    setLaTrinidad(
-      arrQuincenal.filter((d) => d.IngenioNombre === "La Trinidad")
-    );
-    setLaTrinidadMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "La Trinidad")
-    );
-    setLaTrinidadZafra(
-      arrZafra.filter((d) => d.IngenioNombre === "La Trinidad")
-    );
+    setLaTrinidad(filtrarPorIngenio(arrQuincenal, "La Trinidad"));
+    setLaTrinidadMensual(filtrarPorIngenio(arrMensual, "La Trinidad"));
+    setLaTrinidadZafra(filtrarPorIngenio(arrZafra, "La Trinidad"));
 
-    setLeales(arrQuincenal.filter((d) => d.IngenioNombre === "Leales"));
-    setLealesMensual(arrMensual.filter((d) => d.IngenioNombre === "Leales"));
-    setLealesZafra(arrZafra.filter((d) => d.IngenioNombre === "Leales"));
+    setLeales(filtrarPorIngenio(arrQuincenal, "Leales"));
+    setLealesMensual(filtrarPorIngenio(arrMensual, "Leales"));
+    setLealesZafra(filtrarPorIngenio(arrZafra, "Leales"));
 
-    setMarapa(arrQuincenal.filter((d) => d.IngenioNombre === "Marapa"));
-    setMarapaMensual(arrMensual.filter((d) => d.IngenioNombre === "Marapa"));
-    setMarapaZafra(arrZafra.filter((d) => d.IngenioNombre === "Marapa"));
+    setMarapa(filtrarPorIngenio(arrQuincenal, "Marapa"));
+    setMarapaMensual(filtrarPorIngenio(arrMensual, "Marapa"));
+    setMarapaZafra(filtrarPorIngenio(arrZafra, "Marapa"));
 
-    setSantaBarbara(
-      arrQuincenal.filter((d) => d.IngenioNombre === "Santa Barbara")
-    );
-    setSantaBarbaraMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Santa Barbara")
-    );
-    setSantaBarbaraZafra(
-      arrZafra.filter((d) => d.IngenioNombre === "Santa Barbara")
-    );
+    setSantaBarbara(filtrarPorIngenio(arrQuincenal, "Santa Barbara"));
+    setSantaBarbaraMensual(filtrarPorIngenio(arrMensual, "Santa Barbara"));
+    setSantaBarbaraZafra(filtrarPorIngenio(arrZafra, "Santa Barbara"));
 
-    setSantaRosa(arrQuincenal.filter((d) => d.IngenioNombre === "Santa Rosa"));
-    setSantaRosaMensual(
-      arrMensual.filter((d) => d.IngenioNombre === "Santa Rosa")
-    );
-    setSantaRosaZafra(arrZafra.filter((d) => d.IngenioNombre === "Santa Rosa"));
+    setSantaRosa(filtrarPorIngenio(arrQuincenal, "Santa Rosa"));
+    setSantaRosaMensual(filtrarPorIngenio(arrMensual, "Santa Rosa"));
+    setSantaRosaZafra(filtrarPorIngenio(arrZafra, "Santa Rosa"));
 
-    setNunorco(arrQuincenal.filter((d) => d.IngenioNombre === "Ñuñorco"));
-    setNunorcoMensual(arrMensual.filter((d) => d.IngenioNombre === "Ñuñorco"));
-    setNunorcoZafra(arrZafra.filter((d) => d.IngenioNombre === "Ñuñorco"));
+    setNunorco(filtrarPorIngenio(arrQuincenal, "Ñuñorco"));
+    setNunorcoMensual(filtrarPorIngenio(arrMensual, "Ñuñorco"));
+    setNunorcoZafra(filtrarPorIngenio(arrZafra, "Ñuñorco"));
   };
 
   /********** CALCULO TOTALES **********/
@@ -557,289 +596,289 @@ const ItemCollpse = ({
   /********** FILA TOTALES **********/
   const aguilaresConTotales = [
     ...aguilares,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaAguilares },
-    { key: "total", FechaParte: "Total mes", ...totalMesAguilares },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraAguilares },
+    { key: "total-quincena-aguilares", fechaParte: "Total quincena", ...totalQuincenaAguilares },
+    { key: "total-mes-aguilares", fechaParte: "Total mes", ...totalMesAguilares },
+    { key: "total-zafra-aguilares", fechaParte: "Total zafra", ...totalZafraAguilares },
   ];
   const bellaVistaConTotales = [
     ...bellaVista,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaBellaVista },
-    { key: "total", FechaParte: "Total mes", ...totalMesBellaVista },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraBellaVista },
+    { key: "total-quincena-bellavista", fechaParte: "Total quincena", ...totalQuincenaBellaVista },
+    { key: "total-mes-bellavista", fechaParte: "Total mes", ...totalMesBellaVista },
+    { key: "total-zafra-bellavista", fechaParte: "Total zafra", ...totalZafraBellaVista },
   ];
   const concepcionConTotales = [
     ...concepcion,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaConcepcion },
-    { key: "total", FechaParte: "Total mes", ...totalMesConcepcion },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraConcepcion },
+    { key: "total-quincena-concepcion", fechaParte: "Total quincena", ...totalQuincenaConcepcion },
+    { key: "total-mes-concepcion", fechaParte: "Total mes", ...totalMesConcepcion },
+    { key: "total-zafra-concepcion", fechaParte: "Total zafra", ...totalZafraConcepcion },
   ];
   const cruzAltaConTotales = [
     ...cruzAlta,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaCruzAlta },
-    { key: "total", FechaParte: "Total mes", ...totalMesCruzAlta },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraCruzAlta },
+    { key: "total-quincena-cruzalta", fechaParte: "Total quincena", ...totalQuincenaCruzAlta },
+    { key: "total-mes-cruzalta", fechaParte: "Total mes", ...totalMesCruzAlta },
+    { key: "total-zafra-cruzalta", fechaParte: "Total zafra", ...totalZafraCruzAlta },
   ];
   const famaillaConTotales = [
     ...famailla,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaFamailla },
-    { key: "total", FechaParte: "Total mes", ...totalMesFamailla },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraFamailla },
+    { key: "total-quincena-famailla", fechaParte: "Total quincena", ...totalQuincenaFamailla },
+    { key: "total-mes-famailla", fechaParte: "Total mes", ...totalMesFamailla },
+    { key: "total-zafra-famailla", fechaParte: "Total zafra", ...totalZafraFamailla },
   ];
   const laCoronaConTotales = [
     ...laCorona,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaLaCorona },
-    { key: "total", FechaParte: "Total mes", ...totalMesLaCorona },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraLaCorona },
+    { key: "total-quincena-lacorona", fechaParte: "Total quincena", ...totalQuincenaLaCorona },
+    { key: "total-mes-lacorona", fechaParte: "Total mes", ...totalMesLaCorona },
+    { key: "total-zafra-lacorona", fechaParte: "Total zafra", ...totalZafraLaCorona },
   ];
   const laFloridaConTotales = [
     ...laFlorida,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaLaFlorida },
-    { key: "total", FechaParte: "Total mes", ...totalMesLaFlorida },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraLaFlorida },
+    { key: "total-quincena-laflorida", fechaParte: "Total quincena", ...totalQuincenaLaFlorida },
+    { key: "total-mes-laflorida", fechaParte: "Total mes", ...totalMesLaFlorida },
+    { key: "total-zafra-laflorida", fechaParte: "Total zafra", ...totalZafraLaFlorida },
   ];
   const laProvidenciaConTotales = [
     ...laProvidencia,
     {
-      key: "total",
-      FechaParte: "Total quincena",
+      key: "total-quincena-laprovidencia",
+      fechaParte: "Total quincena",
       ...totalQuincenaLaProvidencia,
     },
-    { key: "total", FechaParte: "Total mes", ...totalMesLaProvidencia },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraLaProvidencia },
+    { key: "total-mes-laprovidencia", fechaParte: "Total mes", ...totalMesLaProvidencia },
+    { key: "total-zafra-laprovidencia", fechaParte: "Total zafra", ...totalZafraLaProvidencia },
   ];
   const laTrinidadConTotales = [
     ...laTrinidad,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaLaTrinidad },
-    { key: "total", FechaParte: "Total mes", ...totalMesLaTrinidad },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraLaTrinidad },
+    { key: "total-quincena-latrinidad", fechaParte: "Total quincena", ...totalQuincenaLaTrinidad },
+    { key: "total-mes-latrinidad", fechaParte: "Total mes", ...totalMesLaTrinidad },
+    { key: "total-zafra-latrinidad", fechaParte: "Total zafra", ...totalZafraLaTrinidad },
   ];
   const lealesConTotales = [
     ...leales,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaLeales },
-    { key: "total", FechaParte: "Total mes", ...totalMesLeales },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraLeales },
+    { key: "total-quincena-leales", fechaParte: "Total quincena", ...totalQuincenaLeales },
+    { key: "total-mes-leales", fechaParte: "Total mes", ...totalMesLeales },
+    { key: "total-zafra-leales", fechaParte: "Total zafra", ...totalZafraLeales },
   ];
   const marapaConTotales = [
     ...marapa,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaMarapa },
-    { key: "total", FechaParte: "Total mes", ...totalMesMarapa },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraMarapa },
+    { key: "total-quincena-marapa", fechaParte: "Total quincena", ...totalQuincenaMarapa },
+    { key: "total-mes-marapa", fechaParte: "Total mes", ...totalMesMarapa },
+    { key: "total-zafra-marapa", fechaParte: "Total zafra", ...totalZafraMarapa },
   ];
   const nunorcoConTotales = [
     ...nunorco,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaNunorco },
-    { key: "total", FechaParte: "Total mes", ...totalMesNunorco },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraNunorco },
+    { key: "total-quincena-nunorco", fechaParte: "Total quincena", ...totalQuincenaNunorco },
+    { key: "total-mes-nunorco", fechaParte: "Total mes", ...totalMesNunorco },
+    { key: "total-zafra-nunorco", fechaParte: "Total zafra", ...totalZafraNunorco },
   ];
   const santaBarbaraConTotales = [
     ...santaBarbara,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaStaBarbara },
-    { key: "total", FechaParte: "Total mes", ...totalMesStaBarbara },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraStaBarbara },
+    { key: "total-quincena-santabarbara", fechaParte: "Total quincena", ...totalQuincenaStaBarbara },
+    { key: "total-mes-santabarbara", fechaParte: "Total mes", ...totalMesStaBarbara },
+    { key: "total-zafra-santabarbara", fechaParte: "Total zafra", ...totalZafraStaBarbara },
   ];
   const santaRosaConTotales = [
     ...santaRosa,
-    { key: "total", FechaParte: "Total quincena", ...totalQuincenaStaRosa },
-    { key: "total", FechaParte: "Total mes", ...totalMesStaRosa },
-    { key: "total", FechaParte: "Total zafra", ...totalZafraStaRosa },
+    { key: "total-quincena-santarosa", fechaParte: "Total quincena", ...totalQuincenaStaRosa },
+    { key: "total-mes-santarosa", fechaParte: "Total mes", ...totalMesStaRosa },
+    { key: "total-zafra-santarosa", fechaParte: "Total zafra", ...totalZafraStaRosa },
   ];
 
   /********** CALCULO DE RENDIMIENTO **********/
   aguilaresConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
       
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   concepcionConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   cruzAltaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   famaillaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laCoronaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laFloridaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laProvidenciaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   laTrinidadConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   lealesConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   marapaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   bellaVistaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   nunorcoConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   santaBarbaraConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
   santaRosaConTotales.forEach((d) => {
     if (
-      d.FechaParte === "Total quincena" ||
-      d.FechaParte === "Total mes" ||
-      d.FechaParte === "Total zafra"
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
     ) {
-      d.RendimientoCanaBruta = !d.RendimientoCanaBruta
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.RendimientoCanaBruta
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
-        : ((d.AzucarEquivalente / d.MoliendaCanaNeta) * 100).toFixed(3);
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
 

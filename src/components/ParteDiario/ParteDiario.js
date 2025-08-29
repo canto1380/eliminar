@@ -655,31 +655,21 @@ const ParteDiario = ({
     }
   });
 
-  // console.log('dc1', dc1)
-  // console.log('dc2', dc2)
-  // console.log('dc3', dc3)
-  // console.log('dc4', dc4)
-  // console.log('dc5', dc5)
-  // console.log('dc6', dc6)
-  // console.log('dc7', dc7)
-  // console.log('dc8', dc8)
-  // console.log('dc9', dc9)
-  // console.log('dc10', dc10)
-  // console.log('dc11', dc11)
-  // console.log('dc12', dc12)
-  // console.log('dc13', dc13)
-  // console.log('dc14', dc14)
-  // console.log('dc15', dc15)
-  // console.log('n1', n1)
-  // console.log('n2', n2)
-  // console.log('n3', n3)
-  // console.log('n4', n4)
-  // console.log('n5', n5)
-  console.log('nc1', nc1)
-  console.log('nc2', nc2)
-  console.log('nc3', nc3)
-  console.log('nc4', nc4)
-  console.log('nc5', nc5)
+  console.log('dc1', dc1)
+  console.log('dc2', dc2)
+  console.log('dc3', dc3)
+  console.log('dc4', dc4)
+  console.log('dc5', dc5)
+  console.log('dc6', dc6)
+  console.log('dc7', dc7)
+  console.log('dc8', dc8)
+  console.log('dc9', dc9)
+  console.log('dc10', dc10)
+  console.log('dc11', dc11)
+  console.log('dc12', dc12)
+  console.log('dc13', dc13)
+  console.log('dc14', dc14)
+  console.log('dc15', dc15)
 
   /** CANTIDAD DIAS DE DESTILERIA **/
   const diasDestileria = (dataEnd &&
@@ -1201,7 +1191,7 @@ const ParteDiario = ({
           </Dropdown>
         </Col>
       </Row>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
+      <Row className="d-flex justify-content-start align-items-center pb-1 px-4"> 
         <Col>
           <ItemCollpse
             dataAnio={dataAnio}
