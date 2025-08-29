@@ -52,18 +52,20 @@ const ParteDiarioContainer = () => {
   const [dateFinIngenios, setDateFinIngenios] = useState(null);
   const [dataIngenios, setDataIngenios] = useState(null);
   const [zafraParteDiario, setZafraParteDiario] = useState(null);
-
+  const [dateInicioIngeniosItemCollapse, setDateInicioIngeniosItemCollapse] = useState(null);
+  
   const [loading, setLoading] = useState(false);
   const [dataParteDiarios, setDataParteDiarios] = useState([]);
   const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
+
 
   useEffect(() => {
     if (dataZafra !== null) {
       getData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra]);
+  }, [dataZafra, dateInicioIngeniosItemCollapse, dataParteDiarios]);
 
   useEffect(() => {
     getDataParteDiarios();
@@ -74,7 +76,6 @@ const ParteDiarioContainer = () => {
     setDataParteDiarios(data);
     aa(data); // REVEER PARA ESTADISTICAS
   };
-
   const getDataParteDiariosNorte = async () => {
     const data = await getParteDiariosNorte();
     setDataParteDiariosNorte(data);
@@ -113,30 +114,14 @@ const ParteDiarioContainer = () => {
     });
     setLastUpdated(fecha);
   };
-  const getData = async () => {
-    try {
-      setDataParteDiariosHistoricos(null);
-      const params = {
-        fechadesde: `01-04-${dataZafra}`,
-        fechahasta: `31-03-${dataZafra + 1}`,
-      };
 
-      /***** DESDE BACKEND *****/
-      const data = await getDataPartesDiariosBE(params, "/dataQuincenal"); // DESDE BACKEND
-      if (data.status === 200) {
-        setDataParteDiariosHistoricos(data?.data?.data?.ParteDiarios);
-      }
-    } catch (error) {
-      if (error.response?.status === 503) {
-        setErrorServer(true);
-        setMsgErrorServer(error.response.data?.error || "Error desconocido");
-      } else {
-        toast.error(
-          "Hubo un problema interno del servidor. Recargue la página."
-        );
-      }
-    }
+  const getData = async () => {
+      const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse,1);
+      const { dataZafra1, dataDestileria1, dataAnhidro1 } =filtrarRegistrosPorPeriodos(periodoActual, dataParteDiarios, new Date());
+      const datosProductivos = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
+      setDataParteDiariosHistoricos(datosProductivos)
   };
+
   useEffect(() => {
     if (dataEnd && dataParteDiarios && dataParteDiariosNorte && dateInicioIngenios && dateFinIngenios) {
 
@@ -241,6 +226,25 @@ const ParteDiarioContainer = () => {
     const params1 = { limit: 10000000, anio: zafraParteDiario - 1 };
     const data1 = await getPeriodoZafra(params1);
     setDateFinIngenios(data1);
+  };
+  /******/
+
+  /*** PERIODOS INGENIOS - ITEM COLLAPSE ***/
+  useEffect(() => {
+    if (dataZafra) {
+      getDataPeriodosItemCollapse();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataZafra]);
+  const getDataPeriodosItemCollapse = async () => {
+    const params = {
+      limit: 10000000,
+      anio: dataZafra,
+      deleted: 0,
+    };
+    const data = await getPeriodoZafra(params);
+    setDateInicioIngeniosItemCollapse(data);
+
   };
   /******/
 

@@ -743,7 +743,7 @@ export const dataComparativaPorTipo = (
     const newDate = new Date(data.fechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1;
+    const diaData = fechaParametro.getDate() ;
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
     if (
@@ -945,7 +945,7 @@ export const dataComparativaPorTipo = (
     const newDate = new Date(data.fechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1;
+    const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
 
@@ -955,10 +955,10 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.esperanzaInicio)
     ) {
       g16 = g16 + data.alcoholProducido;
-      o16 = o16 + data.alcoholHidratado || 0;
+      i16 = i16 + data.alcoholHidratado || 0;
       dataLaEsperanza = {
         N44: g16,
-        O44: o16,
+        O44: i16,
       };
     }
     if (
@@ -967,10 +967,10 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.ledesmaInicio)
     ) {
       g17 = g17 + data.alcoholProducido;
-      o17 = o17 + data.alcoholHidratado || 0;
+      i17 = i17 + data.alcoholHidratado || 0;
       dataLedesma = {
         N45: g17,
-        O45: o17,
+        O45: i17,
       };
     }
     if (
@@ -979,10 +979,10 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.riograndeInicio)
     ) {
       g18 = g18 + data.alcoholProducido;
-      o18 = o18 + data.alcoholHidratado || 0;
+      i18 = i18 + data.alcoholHidratado || 0;
       dataRioGrande = {
         N46: g18,
-        O46: o18,
+        O46: i18,
       };
     }
     if (
@@ -991,10 +991,10 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.sanisidroInicio)
     ) {
       g19 = g19 + data.alcoholProducido;
-      o19 = o19 + data.alcoholHidratado || 0;
+      i19 = i19 + data.alcoholHidratado || 0;
       dataSanIsidro = {
         N47: g19,
-        O47: o19,
+        O47: i19,
       };
     }
     if (
@@ -1003,21 +1003,66 @@ export const dataComparativaPorTipo = (
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.seaboardInicio)
     ) {
       g20 = g20 + data.alcoholProducido;
-      o20 = o20 + data.alcoholHidratado || 0;
+      i20 = i20 + data.alcoholHidratado || 0;
       dataSeaboard = {
         N48: g20,
-        O48: o20,
+        O48: i20,
       };
     }
   });
   /**************************************************************************************/
   /****************************** DATOS ANHIDRO ALCOHOL ******************************/
   /** TUCUMAN **/
+  
+  // Datos de anhidro por documento para años 2024 y 2023
+  const anhidroLeales = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2194476 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2052522 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 4971944 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 2963470 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 1460000 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5347000 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 235750 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 4770000 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 3412785 },
+  ];
+
+  const anhidroConcepcion = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2986603 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 8049602 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 6083561 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 6163307 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 5436241 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5290243 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 5819557 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 6522224 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 5677674 },
+    { zafra: 2024, anio: 2025, mesNumero: 3, mesNombre: 'marzo', valor: 5928463 },
+    { zafra: 2024, anio: 2025, mesNumero: 4, mesNombre: 'abril', valor: 5551377 },
+  ];
+
+  const anhidroBellaVista = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 880968 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2099136 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 3135585 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 253748 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 2483843 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 1098950 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 2031615 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 2269182 },
+    { zafra: 2024, mesNumero: 3, mesNombre: 'marzo', valor: 543734 },
+  ];
+
+  // Datos de anhidro 2023 (valores acumulados)
+  const anhidroLeales2023 = 26464761;
+  const anhidroConcepcion2023 = 35668460;
+  const anhidroBellaVista2023 = 9669715;
+
   dataImportAnhidroComparativa?.forEach((data) => {
     const newDate = new Date(data.fechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1;
+    const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
     if (
@@ -1213,23 +1258,208 @@ export const dataComparativaPorTipo = (
       };
     }
   });
+
+  // Agregar anhidro por documento para años 2024 y 2023
+  if (zafraParteDiario - 1 === 2024 && dataEnd !== null) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();  // Muestra fecha actual
+    const anioData = currentDate.getFullYear() - 1;             // Muestra el año comparativo
+    const diaData = currentDate.getDate();
+    currentDate.setDate(diaData);
+    currentDate.setFullYear(anioData);                // Muestra la fecha completa de comparativa
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11 ----- Mes de comparativa
+    const currentDay = currentDate.getDate();
+    
+
+
+    // Leales - Zafra 2024
+    anhidroLeales.forEach((mes) => {
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h11 = h11 + valorPorDia
+        dataLeales = {
+          AB22: h11,
+          AA22: dataLeales.AA22,
+          AC22: dataLeales.AC22
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        let valorPorDia
+        valorPorDia = (mes.valor / 30) * currentDay;
+        h11 = h11 + valorPorDia;
+        dataLeales = {
+          AB22: h11,
+          AA22: dataLeales.AA22,
+          AC22: dataLeales.AC22
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h11 = h11 + valorPorDia
+        dataLeales = {
+          AB22: h11,
+          AA22: dataLeales.AA22,
+          AC22: dataLeales.AC22
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
+        h11 = h11 + valorPorDia;
+        dataLeales = {
+          AB22: h11,
+          AA22: dataLeales.AA22,
+          AC22: dataLeales.AC22
+        };
+      }
+    });
+
+
+     // Concepción - Zafra 2024
+     anhidroConcepcion.forEach((mes) => {
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h4 = h4 + valorPorDia
+        dataConcepcion = {
+          AB14: h4,
+          AA14: dataConcepcion.AA14,
+          AC14: dataConcepcion.AC14
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        let valorPorDia
+        valorPorDia = (mes.valor / 30) * currentDay;
+        h4 = h4 + valorPorDia;
+        dataConcepcion = {
+          AB14: h4,
+          AA14: dataConcepcion.AA14,
+          AC14: dataConcepcion.AC14
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h4 = h4 + valorPorDia
+        dataConcepcion = {
+          AB14: h4,
+          AA14: dataConcepcion.AA14,
+          AC14: dataConcepcion.AC14
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
+        h4 = h4 + valorPorDia;
+        dataConcepcion = {
+          AB14: h4,
+          AA14: dataConcepcion.AA14,
+          AC14: dataConcepcion.AC14
+        };
+      }
+    });
+
+     // Bella Vista - Zafra 2024
+     anhidroBellaVista.forEach((mes) => {
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h6 = h6 + valorPorDia
+        dataBellaVista = {
+          AB17: h6,
+          AA17: dataBellaVista.AA17,
+          AC17: dataBellaVista.AC17
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        let valorPorDia
+        valorPorDia = (mes.valor / 30) * currentDay;
+        h6 = h6 + valorPorDia;
+        dataBellaVista = {
+          AB17: h6,
+          AA17: dataBellaVista.AA17,
+          AC17: dataBellaVista.AC17
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+        let valorPorDia = mes.valor
+        h6 = h6 + valorPorDia
+        dataBellaVista = {
+          AB17: h6,
+          AA17: dataBellaVista.AA17,
+          AC17: dataBellaVista.AC17
+        };
+      }
+      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+        // Si es el mes actual, solo hasta el día actual
+        valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
+        h6 = h6 + valorPorDia;
+        dataBellaVista = {
+          AB17: h6,
+          AA17: dataBellaVista.AA17,
+          AC17: dataBellaVista.AC17
+        };
+      }
+    });
+
+  }
+  if (zafraParteDiario - 1 === 2023) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const anioData = currentDate.getFullYear() - 1;
+    const diaData = currentDate.getDate();
+    currentDate.setDate(diaData);
+    currentDate.setFullYear(anioData);
+    
+    // Para 2023 usamos valores acumulados distribuidos proporcionalmente
+    const diasEnAno = 365;
+    const diasTranscurridos = Math.min(
+      (currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (1000 * 60 * 60 * 24),
+      diasEnAno
+    );
+    
+    // Leales - Zafra 2023
+    const valorLeales2023 = (anhidroLeales2023 / diasEnAno) * diasTranscurridos;
+    h11 = h11 + valorLeales2023;
+    dataLeales = {
+      AB22: h11,
+      AA22: dataLeales.AA22,
+      AC22: dataLeales.AC22
+    };
+
+    // Concepción - Zafra 2023
+    const valorConcepcion2023 = (anhidroConcepcion2023 / diasEnAno) * diasTranscurridos;
+    h4 = h4 + valorConcepcion2023;
+    dataConcepcion = {
+      AB14: h4,
+      AA14: dataConcepcion.AA14,
+      AC14: dataConcepcion.AC14
+    };
+
+    // Bella Vista - Zafra 2023
+    const valorBellaVista2023 = (anhidroBellaVista2023 / diasEnAno) * diasTranscurridos;
+    h6 = h6 + valorBellaVista2023;
+    dataBellaVista = {
+      AB17: h6,
+      AA17: dataBellaVista.AA17,
+      AC17: dataBellaVista.AC17
+    };
+  }
+
   /** NORTE **/
   dataImportAnhidroComparativaNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1
+    const diaData = fechaParametro.getDate()
     fechaParametro.setDate(diaData)
     fechaParametro.setFullYear(anioData)
-
     if (
       data.ingenioNombre === "La Esperanza" &&
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.esperanzaInicioAnhidro)
     ) {
-      r16 = r16 + data.alcoholAnhidro || 0;
+      h16 = h16 + data.alcoholAnhidro || 0;
       dataLaEsperanza = {
-        P44: r16,
+        P44: h16,
         N44: dataLaEsperanza.N44,
         O44: dataLaEsperanza.O44,
       };
@@ -1240,9 +1470,10 @@ export const dataComparativaPorTipo = (
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.ledesmaInicioAnhidro)
     ) {
-      r17 = r17 + data.alcoholAnhidro || 0;
+      
+      h17 = h17 + data.alcoholAnhidro || 0;
       dataLedesma = {
-        P45: r17,
+        P45: h17,
         N45: dataLedesma.N45,
         O45: dataLedesma.O45,
       };
@@ -1252,9 +1483,9 @@ export const dataComparativaPorTipo = (
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.riograndeInicioAnhidro)
     ) {
-      r18 = r18 + data.alcoholAnhidro || 0;
+      h18 = h18 + data.alcoholAnhidro || 0;
       dataRioGrande = {
-        P46: r18,
+        P46: h18,
         N46: dataRioGrande.N46,
         O46: dataRioGrande.O46,
       };
@@ -1264,28 +1495,25 @@ export const dataComparativaPorTipo = (
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.sanisidroInicioAnhidro)
     ) {
-      r19 = r19 + data.alcoholAnhidro || 0;
+      h19 = h19 + data.alcoholAnhidro || 0;
       dataSanIsidro = {
-        P47: r19,
+        P47: h19,
         N47: dataSanIsidro.N47,
         O47: dataSanIsidro.O47,
       };
     }
-    // console.log('inicio seaboard: ', dataInicioAnhidroIngeniosNorte.seaboardInicioAnhidro)
     if (
       data.ingenioNombre === "Seaboard" &&
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.seaboardInicioAnhidro)
     ) {
-      r20 = r20 + data.alcoholAnhidro || 0;
-      // console.log(r20)
+      h20 = h20 + data.alcoholAnhidro || 0;
       dataSeaboard = {
-        P48: r20,
+        P48: h20,
         N48: dataSeaboard.N48,
         O48: dataSeaboard.O48,
       };
     }
-    // console.log('data seaboard::: ', dataSeaboard)
   });
   /**************************************************************************************/
 
@@ -1295,7 +1523,7 @@ export const dataComparativaPorTipo = (
     const newDate = new Date(data.fechaParte);
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1;
+    const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
     if (data.ingenioNombre === "Aguilares" && newDate <= fechaParametro) {
@@ -1815,7 +2043,7 @@ export const dataComparativaPorTipo = (
     const newDate = new Date(data.fechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() - 1
+    const diaData = fechaParametro.getDate()
     fechaParametro.setDate(diaData)
     fechaParametro.setFullYear(anioData)
 
@@ -1832,11 +2060,11 @@ export const dataComparativaPorTipo = (
         (data?.azucarOrganico || 0) +
         (data?.otroAzucar || 0);
       f16 = f16 + data.melazaProducida || 0;
-      h16 = h16 + data.azucarRefinado || 0;
-      i16 = i16 + data.azucarOrganico || 0;
-      j16 = j16 + data.otroAzucar || 0;
-      k16 = k16 + data.azucarBlancoProducido;
+      j16 = j16 + data.azucarBlancoProducido;
+      k16 = k16 + data.azucarRefinado || 0;
       l16 = l16 + data.azucarCrudoProducido;
+      m16 = m16 + data.azucarOrganico || 0;
+      n16 = n16 + data.otroAzucar || 0;
       dataLaEsperanza = {
         E44: a16,
         F44: b16,
@@ -1847,11 +2075,11 @@ export const dataComparativaPorTipo = (
         N44: dataLaEsperanza.N44,
         O44: dataLaEsperanza.O44,
         P44: dataLaEsperanza.P44,
-        V44: k16,
-        W44: h16,
-        X44: i16,
-        Y44: j16,
-        Z44: l16,
+        V44: j16,
+        W44: k16,
+        X44: l16,
+        Y44: m16,
+        Z44: n16,
       };
     }
     if (
@@ -1867,11 +2095,11 @@ export const dataComparativaPorTipo = (
         (data?.azucarOrganico || 0) +
         (data?.otroAzucar || 0);
       f17 = f17 + data.melazaProducida || 0;
-      h17 = h17 + data.azucarRefinado || 0;
-      i17 = i17 + data.azucarOrganico || 0;
-      j17 = j17 + data.otroAzucar || 0;
-      k17 = k17 + data.azucarBlancoProducido;
+      j17 = j17 + data.azucarBlancoProducido;
+      k17 = k17 + data.azucarRefinado || 0;
       l17 = l17 + data.azucarCrudoProducido;
+      m17 = m17 + data.azucarOrganico || 0;
+      n17 = n17 + data.otroAzucar || 0;
 
       dataLedesma = {
         E45: a17,
@@ -1883,11 +2111,11 @@ export const dataComparativaPorTipo = (
         N45: dataLedesma.N45,
         O45: dataLedesma.O45,
         P45: dataLedesma.P45,
-        V45: k17,
-        W45: h17,
-        X45: i17,
-        Y45: j17,
-        Z45: l17,
+        V45: j17,
+        W45: k17,
+        X45: l17,
+        Y45: m17,
+        Z45: n17,
       };
     }
     if (
@@ -1903,11 +2131,11 @@ export const dataComparativaPorTipo = (
         (data?.azucarOrganico || 0) +
         (data?.otroAzucar || 0);
       f18 = f18 + data.melazaProducida || 0;
-      h18 = h18 + data.azucarRefinado || 0;
-      i18 = i18 + data.azucarOrganico || 0;
-      j18 = j18 + data.otroAzucar || 0;
-      k18 = k18 + data.azucarBlancoProducido;
+      j18 = j18 + data.azucarBlancoProducido;
+      k18 = k18 + data.azucarRefinado || 0;
       l18 = l18 + data.azucarCrudoProducido;
+      m18 = m18 + data.azucarOrganico || 0;
+      n18 = n18 + data.otroAzucar || 0;
 
       dataRioGrande = {
         E46: a18,
@@ -1919,11 +2147,11 @@ export const dataComparativaPorTipo = (
         N46: dataRioGrande.N46,
         O46: dataRioGrande.O46,
         P46: dataRioGrande.P46,
-        V46: k18,
-        W46: h18,
-        X46: i18,
-        Y46: j18,
-        Z46: l18,
+        V46: j18,
+        W46: k18,
+        X46: l18,
+        Y46: m18,
+        Z46: n18,
       };
     }
     if (
@@ -1939,11 +2167,11 @@ export const dataComparativaPorTipo = (
         (data?.azucarOrganico || 0) +
         (data?.otroAzucar || 0);
       f19 = f19 + data.melazaProducida || 0;
-      h19 = h19 + data.azucarRefinado || 0;
-      i19 = i19 + data.azucarOrganico || 0;
-      j19 = j19 + data.otroAzucar || 0;
-      k19 = k19 + data.azucarBlancoProducido;
+      j19 = j19 + data.azucarBlancoProducido;
+      k19 = k19 + data.azucarRefinado || 0;
       l19 = l19 + data.azucarCrudoProducido;
+      m19 = m19 + data.azucarOrganico || 0;
+      n19 = n19 + data.otroAzucar || 0;
 
       dataSanIsidro = {
         E47: a19,
@@ -1955,11 +2183,11 @@ export const dataComparativaPorTipo = (
         N47: dataSanIsidro.N47,
         O47: dataSanIsidro.O47,
         P47: dataSanIsidro.P47,
-        V47: k19,
-        W47: h19,
-        X47: i19,
-        Y47: j19,
-        Z47: l19,
+        V47: j19,
+        W47: k19,
+        X47: l19,
+        Y47: m19,
+        Z47: n19,
       };
     }
     if (
@@ -1975,11 +2203,11 @@ export const dataComparativaPorTipo = (
         (data?.azucarOrganico || 0) +
         (data?.otroAzucar || 0);
       f20 = f20 + data.melazaProducida || 0;
-      h20 = h20 + data.azucarRefinado || 0;
-      i20 = i20 + data.azucarOrganico || 0;
-      j20 = j20 + data.otroAzucar || 0;
-      k20 = k20 + data.azucarBlancoProducido;
+      j20 = j20 + data.azucarBlancoProducido;
+      k20 = k20 + data.azucarRefinado || 0;
       l20 = l20 + data.azucarCrudoProducido;
+      m20 = m20 + data.azucarOrganico || 0;
+      n20 = n20 + data.otroAzucar || 0;
 
       dataSeaboard = {
         E48: a20,
@@ -1991,11 +2219,11 @@ export const dataComparativaPorTipo = (
         N48: dataSeaboard.N48,
         O48: dataSeaboard.O48,
         P48: dataSeaboard.P48,
-        V48: k20,
-        W48: h20,
-        X48: i20,
-        Y48: j20,
-        Z48: l20,
+        V48: j20,
+        W48: k20,
+        X48: l20,
+        Y48: m20,
+        Z48: n20,
       };
     }
   })
@@ -2015,31 +2243,8 @@ export const dataComparativaPorTipo = (
    * DECLARADO POR EMAIL
    ***/
 
-  // Obtener número del mes (0 = enero, 11 = diciembre)
-  const numeroMes = dataEnd && dataEnd.getMonth() + 1; // Sumamos 1 para que sea de 1 a 12
-  const nombreMes =
-    dataEnd && dataEnd.toLocaleString("es-AR", { month: "long" });
 
-  const anhidroLeales = [
-    { zafra: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2194476 },
-    { zafra: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2052522 },
-    { zafra: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 4971944 },
-    { zafra: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 2963470 },
-    { zafra: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 1460000 },
-    { zafra: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5347000 },
-    { zafra: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 235750 },
-    { zafra: 2024, mesNumero: 1, mesNombre: 'enero', valor: 4770000 },
-    { zafra: 2024, mesNumero: 2, mesNombre: 'febrero', valor: 3412785 },
-    { zafra: 2025, mesNumero: 6, mesNombre: 'junio', valor: 0 },
-    { zafra: 2025, mesNumero: 7, mesNombre: 'julio', valor: 0 },
-    { zafra: 2025, mesNumero: 8, mesNombre: 'agosto', valor: 0 },
-    { zafra: 2025, mesNumero: 9, mesNombre: 'septiembre', valor: 0 },
-    { zafra: 2025, mesNumero: 10, mesNombre: 'octubre', valor: 0 },
-    { zafra: 2025, mesNumero: 11, mesNombre: 'noviembre', valor: 0 },
-    { zafra: 2025, mesNumero: 12, mesNombre: 'diciembre', valor: 0 },
-    { zafra: 2025, mesNumero: 1, mesNombre: 'enero', valor: 0 },
-    { zafra: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 0 },
-  ];
+
 
   /****************************** ANHIDRO 2025 ******************************/
   /****** CONCEPCION *****/
@@ -2068,13 +2273,13 @@ export const dataComparativaPorTipo = (
   Acumulado: 31.541.737
 
   */
-  if (zafraParteDiario - 1 === 2024) {
+  // if (zafraParteDiario - 1 === 2024) {
     // dataLeales.AB22 = dataLeales.AB22 + 31541737
-    dataLeales.AB22 =
-      dataLeales.AB22 +
-      2194476 +
-      2052522 + 
-      1657315
+    // dataLeales.AB22 =
+    //   dataLeales.AB22 +
+    //   2194476 +
+    //   2052522 + 
+    //   1657315
     //   4133790 +
     //   4971944 +
     //   2963470 +
@@ -2083,7 +2288,7 @@ export const dataComparativaPorTipo = (
     //   235750 +
     //   4770000 +
     //   3412785;
-  }
+  // }
 
   /* CONCEPCION 2024
   Junio:2.986.603
@@ -2100,10 +2305,10 @@ export const dataComparativaPorTipo = (
   Acumulado: 63.509.259
   */
 
-  if (zafraParteDiario - 1 === 2024) {
-    // dataConcepcion.AB14 = dataConcepcion.AB14 + 63509259;
-    dataConcepcion.AB14 = dataConcepcion.AB14 + 2986603 + 8049602 + 2000000;
-  }
+  // if (zafraParteDiario - 1 === 2024) {
+  //   // dataConcepcion.AB14 = dataConcepcion.AB14 + 63509259;
+  //   dataConcepcion.AB14 = dataConcepcion.AB14 + 2986603 + 8049602 + 2000000;
+  // }
 
   /* BELLA VISTA 2024
   Junio: 880.968
@@ -2118,35 +2323,35 @@ export const dataComparativaPorTipo = (
   Marzo: 543.734 
   Acumulado: 14.796.761
   */
-  if (zafraParteDiario - 1 === 2024) {
-    // dataBellaVista.AB17 = dataBellaVista.AB17 + 14796761
-    dataBellaVista.AB17 =
-      dataBellaVista.AB17 +
-      880968 +
-      2099136 +
-      1035120
-    //   3135585 +
-    //   253748 +
-    //   2483843 +
-    //   1098950 +
-    //   2031615 +
-    //   2269182 +
-    //   543734;
-  }
+  // if (zafraParteDiario - 1 === 2024) {
+  //   // dataBellaVista.AB17 = dataBellaVista.AB17 + 14796761
+  //   dataBellaVista.AB17 =
+  //     dataBellaVista.AB17 +
+  //     880968 +
+  //     2099136 +
+  //     1035120
+  //   //   3135585 +
+  //   //   253748 +
+  //   //   2483843 +
+  //   //   1098950 +
+  //   //   2031615 +
+  //   //   2269182 +
+  //   //   543734;
+  // }
   /*********************************************************************/
 
   /*** ALCOHOL ANHIDRO ZAFRA 2023 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
    * DECLARADO POR EMAIL
    ***/
-  if (zafraParteDiario - 1 === 2023) {
-    dataBellaVista.AB17 = dataBellaVista.AB17 + 9669715;
-  }
-  if (zafraParteDiario - 1 === 2023) {
-    dataConcepcion.AB14 = dataConcepcion.AB14 + 35668460;
-  }
-  if (zafraParteDiario - 1 === 2023) {
-    dataLeales.AB22 = dataLeales.AB22 + 26464761;
-  }
+  // if (zafraParteDiario - 1 === 2023) {
+  //   dataBellaVista.AB17 = dataBellaVista.AB17 + 9669715;
+  // }
+  // if (zafraParteDiario - 1 === 2023) {
+  //   dataConcepcion.AB14 = dataConcepcion.AB14 + 35668460;
+  // }
+  // if (zafraParteDiario - 1 === 2023) {
+  //   dataLeales.AB22 = dataLeales.AB22 + 26464761;
+  // }
   /**********/
 
   setDc1(dataAguilares);
@@ -2169,4 +2374,4 @@ export const dataComparativaPorTipo = (
   setNc3(dataRioGrande);
   setNc4(dataSanIsidro);
   setNc5(dataSeaboard);
-};
+}

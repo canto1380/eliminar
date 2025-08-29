@@ -982,7 +982,7 @@ export const dataPorTipo = (
   dataImportDestileriaNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
     // const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-    const fechaParametroEsperanza = dataInicioDestileriaIngeniosNorte.esperanzaFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) ? new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) : new Date(dataEnd))   : new Date(dataEnd);
+    const fechaParametroEsperanza = dataInicioDestileriaIngeniosNorte.esperanzaFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) ? new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) : new Date(dataEnd)) : new Date(dataEnd);
     const fechaParametroLedesma = dataInicioDestileriaIngeniosNorte.ledesmaFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) ? new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) : new Date(dataEnd)) : new Date(dataEnd);
     const fechaParametroRioGrande = dataInicioDestileriaIngeniosNorte.riograndeFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) ? new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) : new Date(dataEnd)) : new Date(dataEnd);
     const fechaParametroSanIsidro = dataInicioDestileriaIngeniosNorte.sanisidroFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) ? new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) : new Date(dataEnd)) : new Date(dataEnd);
@@ -1040,22 +1040,66 @@ export const dataPorTipo = (
       newDate <= fechaParametroSeaboard &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.seaboardInicio)
     ) {
-      
+
       g20 = g20 + data.alcoholProducido;
       o20 = o20 + data.alcoholHidratado || 0;
       dataSeaboard = {
         N48: g20,
         O48: o20,
       };
-    } 
+    }
   });
   /*********************************************************************************/
   /****************************** DATOS ANHIDRO ALCOHOL ******************************/
   /** TUCUMAN **/
+
+  // Datos de anhidro por documento para años 2024 y 2023
+  const anhidroLeales = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2194476 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2052522 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 4971944 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 2963470 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 1460000 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5347000 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 235750 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 4770000 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 3412785 },
+  ];
+
+  const anhidroConcepcion = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2986603 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 8049602 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 6083561 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 6163307 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 5436241 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5290243 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 5819557 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 6522224 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 5677674 },
+    { zafra: 2024, anio: 2025, mesNumero: 3, mesNombre: 'marzo', valor: 5928463 },
+    { zafra: 2024, anio: 2025, mesNumero: 4, mesNombre: 'abril', valor: 5551377 },
+  ];
+
+  const anhidroBellaVista = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 880968 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2099136 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 3135585 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 253748 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 2483843 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 1098950 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 2031615 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 2269182 },
+    { zafra: 2024, anio: 2025, mesNumero: 3, mesNombre: 'marzo', valor: 543734 },
+  ];
+
+  // Datos de anhidro 2023 (valores acumulados)
+  const anhidroLeales2023 = 26464761;
+  const anhidroConcepcion2023 = 35668460;
+  const anhidroBellaVista2023 = 9669715;
+
   dataImportAnhidro?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-
     if (
       data.ingenioNombre === "Aguilares" &&
       newDate <= fechaParametro &&
@@ -1252,6 +1296,251 @@ export const dataPorTipo = (
       };
     }
   });
+
+  // AGREGAR ANHIDRO POR DOCUMENTO PARA AÑOS 2024 Y 2023
+  if (zafraParteDiario === 2024 && dataEnd !== null) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11
+    const currentDay = currentDate.getDate();
+
+    if (dataEnd.getFullYear() === 2024) {
+      // Leales - Zafra 2024
+      anhidroLeales.forEach((anhidro) => {
+        if (anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r11 = r11 + anhidro.valor;
+
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r11 = r11 + valorPorcentualPorDia;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+      });
+
+      // Concepción - Zafra 2024
+      anhidroConcepcion.forEach((anhidro) => {
+        if (anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r4 = r4 + valorPorcentualPorDia;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+      })
+
+      // Bella Vista - Zafra 2024
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r6 = r6 + valorPorcentualPorDia;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+      })
+    }
+    if (dataEnd.getFullYear() === 2025) {
+      // Leales - Zafra 2024 Anio 2025
+      anhidroLeales.forEach((anhidro) => {
+        if (anhidro.anio === 2024) {
+          r11 = r11 + anhidro.valor;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r11 = r11 + anhidro.valor;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r11 = r11 + valorPorcentualPorDia;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+      });
+      
+
+      // Concepción - Zafra 2024 Anio 2025
+      anhidroConcepcion.forEach((anhidro) => {
+        if (anhidro.anio === 2024) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r4 = r4 + valorPorcentualPorDia;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+      })
+
+      // Bella Vista - Zafra 2024 Anio 2025
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.anio === 2024) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r6 = r6 + valorPorcentualPorDia;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+      })
+    }
+
+  }
+
+  // // Concepción - Zafra 2024
+  // anhidroConcepcion.forEach((mes) => {
+  //   if (mes.mesNumero <= currentMonth) {
+  //     const diasEnMes = new Date(currentDate.getFullYear(), mes.mesNumero, 0).getDate();
+  //     let valorPorDia = mes.valor / 30; // Dividir por 30 días
+
+  //     if (mes.mesNumero === currentMonth) {
+  //       // Si es el mes actual, solo hasta el día actual
+  //       valorPorDia = (mes.valor / 30) * currentDay;
+  //     }
+
+  //     r4 = r4 + valorPorDia;
+  //     dataConcepcion = {
+  //       R46: r4,
+  //       N14: dataConcepcion.N14,
+  //       O46: dataConcepcion.O46
+  //     };
+  //   }
+  // });
+
+  // // Bella Vista - Zafra 2024
+  // anhidroBellaVista.forEach((mes) => {
+  //   if (mes.mesNumero <= currentMonth) {
+  //     const diasEnMes = new Date(currentDate.getFullYear(), mes.mesNumero, 0).getDate();
+  //     let valorPorDia = mes.valor / 30; // Dividir por 30 días
+
+  //     if (mes.mesNumero === currentMonth) {
+  //       // Si es el mes actual, solo hasta el día actual
+  //       valorPorDia = (mes.valor / 30) * currentDay;
+  //     }
+
+  //     r6 = r6 + valorPorDia;
+  //     dataBellaVista = {
+  //       R45: r6,
+  //       N17: dataBellaVista.N17,
+  //       O45: dataBellaVista.O45
+  //     };
+  //   }
+  // });
+
+
+  if (zafraParteDiario === 2023) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentDay = currentDate.getDate();
+
+    // Para 2023 usamos valores acumulados distribuidos proporcionalmente
+    const diasEnAno = 365;
+    const diasTranscurridos = Math.min(
+      (currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (1000 * 60 * 60 * 24),
+      diasEnAno
+    );
+
+    // Leales - Zafra 2023
+    const valorLeales2023 = (anhidroLeales2023 / diasEnAno) * diasTranscurridos;
+    r11 = r11 + valorLeales2023;
+    dataLeales = {
+      R53: r11,
+      N22: dataLeales.N22,
+      O53: dataLeales.O53
+    };
+
+    // Concepción - Zafra 2023
+    const valorConcepcion2023 = (anhidroConcepcion2023 / diasEnAno) * diasTranscurridos;
+    r4 = r4 + valorConcepcion2023;
+    dataConcepcion = {
+      R46: r4,
+      N14: dataConcepcion.N14,
+      O46: dataConcepcion.O46
+    };
+
+    // Bella Vista - Zafra 2023
+    const valorBellaVista2023 = (anhidroBellaVista2023 / diasEnAno) * diasTranscurridos;
+    r6 = r6 + valorBellaVista2023;
+    dataBellaVista = {
+      R45: r6,
+      N17: dataBellaVista.N17,
+      O45: dataBellaVista.O45
+    };
+  }
+
   /** NORTE **/
   dataImportAnhidroNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
@@ -1273,7 +1562,7 @@ export const dataPorTipo = (
         O44: dataLaEsperanza.O44,
       };
     }
-    
+
     if (
       data.ingenioNombre === "Ledesma" &&
       newDate <= fechaParametroLedesma &&
@@ -1982,7 +2271,7 @@ export const dataPorTipo = (
     if (
       data.ingenioNombre === "Ledesma" &&
       newDate >= new Date(dataInicioIngeniosNorte.Cell45) &&
-      newDate <= fechaParametroLedesma 
+      newDate <= fechaParametroLedesma
     ) {
       a17 = a17 + data.moliendaCanaBruta || 0;
       b17 = b17 + data.moliendaCanaNeta || 0;
@@ -2060,7 +2349,7 @@ export const dataPorTipo = (
     ) {
       a19 = a19 + data.moliendaCanaBruta || 0;
       b19 = b19 + data.moliendaCanaNeta || 0;
-      c19 = c19 + Number(data.azucarEquivalente|| 0);
+      c19 = c19 + Number(data.azucarEquivalente || 0);
       z19 = z19 + data.azucarBlancoProducido + data?.azucarRefinado;
       e19 = e19 +
         (data.azucarCrudoProducido || 0) +
@@ -2180,12 +2469,12 @@ export const dataPorTipo = (
   Diciembre: 235.750
   Enero: 4.770.000
   Febrero: 3.412.785
-  Acumulado: 31.541.737
+  Acumulado: 27.407.947
   */
-  if (zafraParteDiario === 2024) {
-    // dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
-    // dataLeales.R53 = dataLeales.R53 + 31541737
-  }
+  // if (zafraParteDiario === 2024) {
+  //   // dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
+  //   // dataLeales.R53 = dataLeales.R53 + 31541737
+  // }
 
   /* CONCEPCION 
   Junio:2.986.603
@@ -2199,12 +2488,12 @@ export const dataPorTipo = (
   Febrero: 5.677.674
   Marzo: 5.928.463
   abril: 5.551.377
-  Acumulado: 63.509.259
+  Acumulado: 63.508.852
   */
-  if (zafraParteDiario === 2024) {
-    // dataConcepcion.R46 = dataConcepcion.R46 + 2986603;
-    dataConcepcion.R46 = dataConcepcion.R46 + 63509259;
-  }
+  // if (zafraParteDiario === 2024) {
+  //   // dataConcepcion.R46 = dataConcepcion.R46 + 2986603;
+  //   dataConcepcion.R46 = dataConcepcion.R46 + 63509259;
+  // }
 
   /* BELLA VISTA 
   Junio: 880.968
@@ -2219,10 +2508,10 @@ export const dataPorTipo = (
   Marzo: 543.734 
   Acumulado: 14.796.761
   */
-  if (zafraParteDiario === 2024) {
-    // dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615 + 2269182 + 543734;
-    dataBellaVista.R45 = dataBellaVista.R45 + 14796761
-  }
+  // if (zafraParteDiario === 2024) {
+  //   // dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615 + 2269182 + 543734;
+  //   dataBellaVista.R45 = dataBellaVista.R45 + 14796761
+  // }
   /************************************************************************/
 
   /*** ALCOHOL ANHIDRO ZAFRA 2023 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
