@@ -10,6 +10,7 @@ import { inactivityTime } from "../../helpers/inactivityTime";
 import DataComparativaHistorica from "../../components/DataComparativa";
 import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
 import { getAnios } from "../../utils/queryAPI/anios";
+import { getRegion } from "../../utils/queryAPI/region";
 
 const NewData = () => {
   const [dataComparativaData, setDataComparativaData] = useState(undefined);
@@ -19,6 +20,7 @@ const NewData = () => {
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
   const [aniosData, setAniosData] = useState(undefined);
+  const [regionData, setRegionData] = useState(undefined)
   
 
   const { anio } = useParams();
@@ -71,11 +73,16 @@ const NewData = () => {
 
   useEffect(() => {
     dataAnios();
+    dataRegion()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const dataAnios = async () => {
     const data = await getAnios();
     setAniosData(data);
+  };
+  const dataRegion = async () => {
+    const data = await getRegion();
+    setRegionData(data);
   };
 
   return (
@@ -102,6 +109,7 @@ const NewData = () => {
                 dataComparativaData={dataComparativaData}
                 anio={anio}
                 aniosData={aniosData}
+                regionData={regionData}
               />
             </div>
             {modalUnauthorized && (

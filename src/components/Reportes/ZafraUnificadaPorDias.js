@@ -14,7 +14,7 @@ const ZafraUnificadaPorDias = ({
   const { dataUser } = useContext(User);
 
   return (
-    <Container fluid lcassName="p3">
+    <Container fluid className="p3">
       <p className="fw-bolder">Resumen Histórico diario.</p>
       <span className="text-danger fw-bolder">*</span>
       <span className="text-legend">

@@ -6,9 +6,11 @@ import {
   BsNewspaper,
   BsClipboardData
 } from 'react-icons/bs'
+import { FaChartBar } from "react-icons/fa";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
-import { RiDatabaseLine } from "react-icons/ri"
+import { RiDatabaseLine, RiOpenaiFill  } from "react-icons/ri"
+
 import './Sidebar.css'
 import {
   deleteCookies,
@@ -62,6 +64,16 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
       title: 'reportes',
       iconName: <BsClipboardData className='sizeIcon' />,
       name: 'Reportes',
+    },
+    {
+      title: 'graficos',
+      iconName: <FaChartBar className='sizeIcon' />,
+      name: 'Gráficos',
+    },
+    {
+      title: 'IA',
+      iconName: <RiOpenaiFill className='sizeIcon' />,
+      name: 'IA',
     },
     {
       title: 'perfil',

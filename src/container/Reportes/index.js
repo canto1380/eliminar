@@ -75,7 +75,6 @@ const ReportesContainer = () => {
     // setDataReportes(dataSinSanJuan);
 
     const data = await getParteDiarios();
-    console.log(data)
 
     setDataReportes(data);
   };

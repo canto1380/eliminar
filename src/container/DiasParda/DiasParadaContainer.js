@@ -68,6 +68,8 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       toast.error(`Error: ${error}`);
     }
   };
+
+  const dataIngenios = ingenio ? ingeniosData?.filter((d) => d.nombre_ingenio === ingenio) : ingeniosData
   /** LISTADO INGENIOS TUCUMAN**/
   useEffect(() => {
     getIngeniosData();
@@ -75,7 +77,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   const getIngeniosData = async () => {
     const params = { region: 1 };
     const data = await getIngenios(params);
-    const res = data.filter((d) => d.nombre_ingenio !== "San Juan");
+    const res = data.filter((d) => d.nombre_ingenio !== "San Juan" && d.nombre_ingenio != 'Destilería Bella Vista');
     setIngeniosData(res);
   };
 
@@ -196,6 +198,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
           ingenios: ingeniosData,
           fechaInicioFin: fechaInicioIngenios,
           anioZafra: anioZafra,
+          ingenio: dataIngenios,
         },
       ];
       const res = await apiExportExcel("POST", "diaParada/descargar", dataSend);

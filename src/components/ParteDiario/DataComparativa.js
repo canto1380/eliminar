@@ -241,6 +241,22 @@ let dataAguilares = {
     AG26: 0,
     AH26: 0,
   },
+  dataDestBellaVista = {
+    R27: 0,
+    S27: 0,
+    T27: 0,
+    W27: 0,
+    X27: 0,
+    Z27: 0,
+    AA27: 0,
+    AB27: 0,
+    AC27: 0,
+    AD27: 0,
+    AE27: 0,
+    AF27: 0,
+    AG27: 0,
+    AH27: 0,
+  },
 
   /** NORTE **/
   dataLaEsperanza = {
@@ -400,6 +416,8 @@ let dataAguilares = {
     staRosaFin: null,
     sanJuanInicio: null,
     sanJuanFin: null,
+    bellaVistaDestInicio: null,
+    bellaVistaDestFin: null,
   },
   dataInicioDestileriaIngeniosNorte = {
     sanisidroInicio: null,
@@ -483,6 +501,7 @@ export const dataComparativaPorTipo = (
   setDc13,
   setDc14,
   setDc15,
+  setDataDestBellaVistaComparativa,
   setNc1,
   setNc2,
   setNc3,
@@ -541,6 +560,10 @@ export const dataComparativaPorTipo = (
     (d) => d.nombre_ingenio === "Santa Rosa"
   );
   const sanjuan = dateFinIngenios?.find((d) => d.nombre_ingenio === "San Juan");
+
+  const destBellaVista = dateFinIngenios?.find(
+    (d) => d.nombre_ingenio === "Destilería Bella Vista"
+  );
 
   /** NORTE **/
   const sanisidro = dateFinIngenios?.find(
@@ -635,6 +658,8 @@ export const dataComparativaPorTipo = (
     staRosaFin: starosa?.fin_destileria,
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
+    bellaVistaDestInicio: destBellaVista?.inicio_destileria,
+    bellaVistaDestFin: destBellaVista?.fin_destileria,
   };
   dataInicioDestileriaIngeniosNorte = {
     esperanzaInicio: laesperanza?.inicio_destileria,
@@ -755,7 +780,7 @@ export const dataComparativaPorTipo = (
       i1 = i1 + data.alcoholHidratado;
       dataAguilares = {
         AA10: g1,
-        AC10: i1,
+        AG10: i1,
       };
     }
 
@@ -768,7 +793,7 @@ export const dataComparativaPorTipo = (
       i2 = i2 + data.alcoholHidratado;
       dataCruzAlta = {
         AA11: g2,
-        AC11: i2,
+        AG11: i2,
       };
     }
     if (
@@ -780,7 +805,7 @@ export const dataComparativaPorTipo = (
       i3 = i3 + data.alcoholHidratado;
       dataLaFlorida = {
         AA12: g3,
-        AC12: i3,
+        AG12: i3,
       };
     }
     if (
@@ -792,7 +817,7 @@ export const dataComparativaPorTipo = (
       i4 = i4 + data.alcoholHidratado;
       dataConcepcion = {
         AA14: g4,
-        AC14: i4,
+        AG14: i4,
       };
     }
 
@@ -805,7 +830,7 @@ export const dataComparativaPorTipo = (
       i5 = i5 + data.alcoholHidratado;
       dataMarapa = {
         AA15: g5,
-        AC15: i5,
+        AG15: i5,
       };
     }
 
@@ -818,7 +843,7 @@ export const dataComparativaPorTipo = (
       i6 = i6 + data.alcoholHidratado;
       dataBellaVista = {
         AA17: g6,
-        AC17: i6,
+        AG17: i6,
       };
     }
 
@@ -831,7 +856,7 @@ export const dataComparativaPorTipo = (
       i7 = i7 + data.alcoholHidratado;
       dataFamailla = {
         AA18: g7,
-        AC18: i7,
+        AG18: i7,
       };
     }
 
@@ -844,7 +869,7 @@ export const dataComparativaPorTipo = (
       i8 = i8 + data.alcoholHidratado;
       dataLaCorona = {
         AA19: g8,
-        AC19: i8,
+        AG19: i8,
       };
     }
 
@@ -857,7 +882,7 @@ export const dataComparativaPorTipo = (
       i9 = i9 + data.alcoholHidratado;
       dataLaProvidencia = {
         AA20: g9,
-        AC20: i9,
+        AG20: i9,
       };
     }
 
@@ -870,7 +895,7 @@ export const dataComparativaPorTipo = (
       i10 = i10 + data.alcoholHidratado;
       dataLaTrinidad = {
         AA21: g10,
-        AC21: i10,
+        AG21: i10,
       };
     }
 
@@ -883,7 +908,7 @@ export const dataComparativaPorTipo = (
       i11 = i11 + data.alcoholHidratado;
       dataLeales = {
         AA22: g11,
-        AC22: i11,
+        AG22: i11,
       };
     }
 
@@ -896,7 +921,7 @@ export const dataComparativaPorTipo = (
       i12 = i12 + data.alcoholHidratado;
       dataÑuñorco = {
         AA23: g12,
-        AC23: i12,
+        AG23: i12,
       };
     }
 
@@ -909,7 +934,7 @@ export const dataComparativaPorTipo = (
       i13 = i13 + data.alcoholHidratado;
       dataStaBarbara = {
         AA24: g13,
-        AC24: i13,
+        AG24: i13,
       };
     }
 
@@ -922,7 +947,7 @@ export const dataComparativaPorTipo = (
       i14 = i14 + data.alcoholHidratado;
       dataStaRosa = {
         AA25: g14,
-        AC25: i14,
+        AG25: i14,
       };
     }
 
@@ -935,7 +960,7 @@ export const dataComparativaPorTipo = (
       i15 = i15 + data.alcoholHidratado;
       dataSanJuan = {
         AA26: g15,
-        AC26: i15,
+        AG26: i15,
       };
     }
   });
@@ -1072,9 +1097,9 @@ export const dataComparativaPorTipo = (
     ) {
       h1 = h1 + data.alcoholAnhidro || 0;
       dataAguilares = {
-        AB10: h1,
+        AH10: h1,
         AA10: dataAguilares.AA10,
-        AC10: dataAguilares.AC10,
+        AG10: dataAguilares.AG10,
       };
     }
 
@@ -1085,9 +1110,9 @@ export const dataComparativaPorTipo = (
     ) {
       h2 = h2 + data.alcoholAnhidro || 0;
       dataCruzAlta = {
-        AB11: h2,
+        AH11: h2,
         AA11: dataCruzAlta.AA11,
-        AC11: dataCruzAlta.AC11,
+        AG11: dataCruzAlta.AG11,
       };
     }
     if (
@@ -1097,9 +1122,9 @@ export const dataComparativaPorTipo = (
     ) {
       h3 = h3 + data.alcoholAnhidro || 0;
       dataLaFlorida = {
-        AB12: h3,
+        AH12: h3,
         AA12: dataLaFlorida.AA12,
-        AC12: dataLaFlorida.AC12,
+        AG12: dataLaFlorida.AG12,
       };
     }
     if (
@@ -1109,9 +1134,9 @@ export const dataComparativaPorTipo = (
     ) {
       h4 = h4 + data.alcoholAnhidro || 0;
       dataConcepcion = {
-        AB14: h4,
+        AH14: h4,
         AA14: dataConcepcion.AA14,
-        AC14: dataConcepcion.AC14,
+        AG14: dataConcepcion.AG14,
       };
     }
 
@@ -1122,9 +1147,9 @@ export const dataComparativaPorTipo = (
     ) {
       h5 = h5 + data.alcoholAnhidro || 0;
       dataMarapa = {
-        AB15: h5,
+        AH15: h5,
         AA15: dataMarapa.AA15,
-        AC15: dataMarapa.AC15,
+        AG15: dataMarapa.AG15,
       };
     }
 
@@ -1135,9 +1160,9 @@ export const dataComparativaPorTipo = (
     ) {
       h6 = h6 + data.alcoholAnhidro || 0;
       dataBellaVista = {
-        AB17: h6,
+        AH17: h6,
         AA17: dataBellaVista.AA17,
-        AC17: dataBellaVista.AC17,
+        AG17: dataBellaVista.AG17,
       };
     }
 
@@ -1148,9 +1173,9 @@ export const dataComparativaPorTipo = (
     ) {
       h7 = h7 + data.alcoholAnhidro || 0;
       dataFamailla = {
-        AB18: h7,
+        AH18: h7,
         AA18: dataFamailla.AA18,
-        AC18: dataFamailla.AC18,
+        AG18: dataFamailla.AG18,
       };
     }
 
@@ -1161,9 +1186,9 @@ export const dataComparativaPorTipo = (
     ) {
       h8 = h8 + data.alcoholAnhidro || 0;
       dataLaCorona = {
-        AB19: h8,
+        AH19: h8,
         AA19: dataLaCorona.AA19,
-        AC19: dataLaCorona.AC19,
+        AG19: dataLaCorona.AG19,
       };
     }
 
@@ -1174,9 +1199,9 @@ export const dataComparativaPorTipo = (
     ) {
       h9 = h9 + data.alcoholAnhidro || 0;
       dataLaProvidencia = {
-        AB20: h9,
+        AH20: h9,
         AA20: dataLaProvidencia.AA20,
-        AC20: dataLaProvidencia.AC20,
+        AG20: dataLaProvidencia.AG20,
       };
     }
 
@@ -1187,9 +1212,9 @@ export const dataComparativaPorTipo = (
     ) {
       h10 = h10 + data.alcoholAnhidro || 0;
       dataLaTrinidad = {
-        AB21: h10,
+        AH21: h10,
         AA21: dataLaTrinidad.AA21,
-        AC21: dataLaTrinidad.AC21,
+        AG21: dataLaTrinidad.AG21,
       };
     }
 
@@ -1200,9 +1225,9 @@ export const dataComparativaPorTipo = (
     ) {
       h11 = h11 + data.alcoholAnhidro || 0;
       dataLeales = {
-        AB22: h11,
+        AH22: h11,
         AA22: dataLeales.AA22,
-        AC22: dataLeales.AC22,
+        AG22: dataLeales.AG22,
       };
     }
 
@@ -1213,9 +1238,9 @@ export const dataComparativaPorTipo = (
     ) {
       h12 = h12 + data.alcoholAnhidro || 0;
       dataÑuñorco = {
-        AB23: h12,
+        AH23: h12,
         AA23: dataÑuñorco.AA23,
-        AC23: dataÑuñorco.AC23,
+        AG23: dataÑuñorco.AG23,
       };
     }
 
@@ -1226,9 +1251,9 @@ export const dataComparativaPorTipo = (
     ) {
       h13 = h13 + data.alcoholAnhidro || 0;
       dataStaBarbara = {
-        AB24: h13,
+        AH24: h13,
         AA24: dataStaBarbara.AA24,
-        AC24: dataStaBarbara.AC24,
+        AG24: dataStaBarbara.AG24,
       };
     }
 
@@ -1239,9 +1264,9 @@ export const dataComparativaPorTipo = (
     ) {
       h14 = h14 + data.alcoholAnhidro || 0;
       dataStaRosa = {
-        AB25: h14,
+        AH25: h14,
         AA25: dataStaRosa.AA25,
-        AC25: dataStaRosa.AC25,
+        AG25: dataStaRosa.AG25,
       };
     }
 
@@ -1252,9 +1277,9 @@ export const dataComparativaPorTipo = (
     ) {
       h15 = h15 + data.alcoholAnhidro || 0;
       dataSanJuan = {
-        AB26: h15,
+        AH26: h15,
         AA26: dataSanJuan.AA26,
-        AC26: dataSanJuan.AC26,
+        AG26: dataSanJuan.AG26,
       };
     }
   });
@@ -1277,9 +1302,9 @@ export const dataComparativaPorTipo = (
         let valorPorDia = mes.valor
         h11 = h11 + valorPorDia
         dataLeales = {
-          AB22: h11,
+          AH22: h11,
           AA22: dataLeales.AA22,
-          AC22: dataLeales.AC22
+          AG22: dataLeales.AG22
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
@@ -1288,18 +1313,18 @@ export const dataComparativaPorTipo = (
         valorPorDia = (mes.valor / 30) * currentDay;
         h11 = h11 + valorPorDia;
         dataLeales = {
-          AB22: h11,
+          AH22: h11,
           AA22: dataLeales.AA22,
-          AC22: dataLeales.AC22
+          AG22: dataLeales.AG22
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h11 = h11 + valorPorDia
         dataLeales = {
-          AB22: h11,
+          AH22: h11,
           AA22: dataLeales.AA22,
-          AC22: dataLeales.AC22
+          AG22: dataLeales.AG22
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
@@ -1307,9 +1332,9 @@ export const dataComparativaPorTipo = (
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h11 = h11 + valorPorDia;
         dataLeales = {
-          AB22: h11,
+          AH22: h11,
           AA22: dataLeales.AA22,
-          AC22: dataLeales.AC22
+          AG22: dataLeales.AG22
         };
       }
     });
@@ -1321,9 +1346,9 @@ export const dataComparativaPorTipo = (
         let valorPorDia = mes.valor
         h4 = h4 + valorPorDia
         dataConcepcion = {
-          AB14: h4,
+          AH14: h4,
           AA14: dataConcepcion.AA14,
-          AC14: dataConcepcion.AC14
+          AG14: dataConcepcion.AG14
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
@@ -1332,18 +1357,18 @@ export const dataComparativaPorTipo = (
         valorPorDia = (mes.valor / 30) * currentDay;
         h4 = h4 + valorPorDia;
         dataConcepcion = {
-          AB14: h4,
+          AH14: h4,
           AA14: dataConcepcion.AA14,
-          AC14: dataConcepcion.AC14
+          AG14: dataConcepcion.AG14
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h4 = h4 + valorPorDia
         dataConcepcion = {
-          AB14: h4,
+          AH14: h4,
           AA14: dataConcepcion.AA14,
-          AC14: dataConcepcion.AC14
+          AG14: dataConcepcion.AG14
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
@@ -1351,9 +1376,9 @@ export const dataComparativaPorTipo = (
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h4 = h4 + valorPorDia;
         dataConcepcion = {
-          AB14: h4,
+          AH14: h4,
           AA14: dataConcepcion.AA14,
-          AC14: dataConcepcion.AC14
+          AG14: dataConcepcion.AG14
         };
       }
     });
@@ -1364,9 +1389,9 @@ export const dataComparativaPorTipo = (
         let valorPorDia = mes.valor
         h6 = h6 + valorPorDia
         dataBellaVista = {
-          AB17: h6,
+          AH17: h6,
           AA17: dataBellaVista.AA17,
-          AC17: dataBellaVista.AC17
+          AG17: dataBellaVista.AG17
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
@@ -1375,18 +1400,18 @@ export const dataComparativaPorTipo = (
         valorPorDia = (mes.valor / 30) * currentDay;
         h6 = h6 + valorPorDia;
         dataBellaVista = {
-          AB17: h6,
+          AH17: h6,
           AA17: dataBellaVista.AA17,
-          AC17: dataBellaVista.AC17
+          AG17: dataBellaVista.AG17
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h6 = h6 + valorPorDia
         dataBellaVista = {
-          AB17: h6,
+          AH17: h6,
           AA17: dataBellaVista.AA17,
-          AC17: dataBellaVista.AC17
+          AG17: dataBellaVista.AG17
         };
       }
       if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
@@ -1394,9 +1419,9 @@ export const dataComparativaPorTipo = (
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h6 = h6 + valorPorDia;
         dataBellaVista = {
-          AB17: h6,
+          AH17: h6,
           AA17: dataBellaVista.AA17,
-          AC17: dataBellaVista.AC17
+          AG17: dataBellaVista.AG17
         };
       }
     });
@@ -1420,27 +1445,27 @@ export const dataComparativaPorTipo = (
     const valorLeales2023 = (anhidroLeales2023 / diasEnAno) * diasTranscurridos;
     h11 = h11 + valorLeales2023;
     dataLeales = {
-      AB22: h11,
+      AH22: h11,
       AA22: dataLeales.AA22,
-      AC22: dataLeales.AC22
+      AG22: dataLeales.AG22
     };
 
     // Concepción - Zafra 2023
     const valorConcepcion2023 = (anhidroConcepcion2023 / diasEnAno) * diasTranscurridos;
     h4 = h4 + valorConcepcion2023;
     dataConcepcion = {
-      AB14: h4,
+      AH14: h4,
       AA14: dataConcepcion.AA14,
-      AC14: dataConcepcion.AC14
+      AG14: dataConcepcion.AG14
     };
 
     // Bella Vista - Zafra 2023
     const valorBellaVista2023 = (anhidroBellaVista2023 / diasEnAno) * diasTranscurridos;
     h6 = h6 + valorBellaVista2023;
     dataBellaVista = {
-      AB17: h6,
+      AH17: h6,
       AA17: dataBellaVista.AA17,
-      AC17: dataBellaVista.AC17
+      AG17: dataBellaVista.AG17
     };
   }
 
@@ -1550,13 +1575,13 @@ export const dataComparativaPorTipo = (
         X10: e1,
         Z10: f1,
         AA10: dataAguilares.AA10,
-        AB10: dataAguilares.AB10,
-        AC10: dataAguilares.AC10,
-        AD10: j1,
-        AE10: k1,
+        AB10: j1,
+        AC10: k1,
+        AD10: m1,
+        AE10: n1,
         AF10: l1,
-        AG10: m1,
-        AH10: n1,
+        AG10: dataAguilares.AG10,
+        AH10: dataAguilares.AH10,
       };
     }
 
@@ -1584,13 +1609,13 @@ export const dataComparativaPorTipo = (
         X11: e2,
         Z11: f2,
         AA11: dataCruzAlta.AA11,
-        AB11: dataCruzAlta.AB11,
-        AC11: dataCruzAlta.AC11,
-        AD11: j2,
-        AE11: k2,
+        AB11: j2,
+        AC11: k2,
+        AD11: m2,
+        AE11: n2,
         AF11: l2,
-        AG11: m2,
-        AH11: n2,
+        AG11: dataCruzAlta.AG11,
+        AH11: dataCruzAlta.AH11,
       };
     }
 
@@ -1618,13 +1643,13 @@ export const dataComparativaPorTipo = (
         X12: e3,
         Z12: f3,
         AA12: dataLaFlorida.AA12,
-        AB12: dataLaFlorida.AB12,
-        AC12: dataLaFlorida.AC12,
-        AD12: j3,
-        AE12: k3,
+        AB12: j3,
+        AC12: k3,
+        AD12: m3,
+        AE12: n3,
         AF12: l3,
-        AG12: m3,
-        AH12: n3,
+        AG12: dataLaFlorida.AG12,
+        AH12: dataLaFlorida.AH12,
       };
     }
 
@@ -1652,13 +1677,13 @@ export const dataComparativaPorTipo = (
         X14: e4,
         Z14: f4,
         AA14: dataConcepcion.AA14,
-        AB14: dataConcepcion.AB14,
-        AC14: dataConcepcion.AC14,
-        AD14: j4,
-        AE14: k4,
+        AB14: j4,
+        AC14: k4,
+        AD14: m4,
+        AE14: n4,
         AF14: l4,
-        AG14: m4,
-        AH14: n4,
+        AG14: dataConcepcion.AG14,
+        AH14: dataConcepcion.AH14,
       };
     }
 
@@ -1686,13 +1711,13 @@ export const dataComparativaPorTipo = (
         X15: e5,
         Z15: f5,
         AA15: dataMarapa.AA15,
-        AB15: dataMarapa.AB15,
-        AC15: dataMarapa.AC15,
-        AD15: j5,
-        AE15: k5,
+        AB15: j5,
+        AC15: k5,
+        AD15: m5,
+        AE15: n5,
         AF15: l5,
-        AG15: m5,
-        AH15: n5,
+        AG15: dataMarapa.AG15,
+        AH15: dataMarapa.AH15,
       };
     }
 
@@ -1720,13 +1745,13 @@ export const dataComparativaPorTipo = (
         X17: e6,
         Z17: f6,
         AA17: dataBellaVista.AA17,
-        AB17: dataBellaVista.AB17,
-        AC17: dataBellaVista.AC17,
-        AD17: j6,
-        AE17: k6,
+        AB17: j6,
+        AC17: k6,
+        AD17: m6,
+        AE17: n6,
         AF17: l6,
-        AG17: m6,
-        AH17: n6,
+        AG17: dataBellaVista.AG17,
+        AH17: dataBellaVista.AH17,
       };
     }
 
@@ -1754,13 +1779,13 @@ export const dataComparativaPorTipo = (
         X18: e7,
         Z18: f7,
         AA18: dataFamailla.AA18,
-        AB18: dataFamailla.AB18,
-        AC18: dataFamailla.AC18,
-        AD18: j7,
-        AE18: k7,
+        AB18: j7,
+        AC18: k7,
+        AD18: m7,
+        AE18: n7,
         AF18: l7,
-        AG18: m7,
-        AH18: n7,
+        AG18: dataFamailla.AG18,
+        AH18: dataFamailla.AH18,
       };
     }
 
@@ -1788,13 +1813,13 @@ export const dataComparativaPorTipo = (
         X19: e8,
         Z19: f8,
         AA19: dataLaCorona.AA19,
-        AB19: dataLaCorona.AB19,
-        AC19: dataLaCorona.AC19,
-        AD19: j8,
-        AE19: k8,
+        AB19: j8,
+        AC19: k8,
+        AD19: m8,
+        AE19: n8,
         AF19: l8,
-        AG19: m8,
-        AH19: n8,
+        AG19: dataLaCorona.AG19,
+        AH19: dataLaCorona.AH19,
       };
     }
 
@@ -1822,14 +1847,13 @@ export const dataComparativaPorTipo = (
         X20: e9,
         Z20: f9,
         AA20: dataLaProvidencia.AA20,
-        AB20: dataLaProvidencia.AB20,
-        AC20: dataLaProvidencia.AC20,
-
-        AD20: j9,
-        AE20: k9,
+        AB20: j9,
+        AC20: k9,
+        AD20: m9,
+        AE20: n9,
         AF20: l9,
-        AG20: m9,
-        AH20: n9,
+        AG20: dataLaProvidencia.AG20,
+        AH20: dataLaProvidencia.AH20,
       };
     }
 
@@ -1857,13 +1881,13 @@ export const dataComparativaPorTipo = (
         X21: e10,
         Z21: f10,
         AA21: dataLaTrinidad.AA21,
-        AB21: dataLaTrinidad.AB21,
-        AC21: dataLaTrinidad.AC21,
-        AD21: j10,
-        AE21: k10,
+        AB21: j10,
+        AC21: k10,
+        AD21: m10,
+        AE21: n10,
         AF21: l10,
-        AG21: m10,
-        AH21: n10,
+        AG21: dataLaTrinidad.AG21,
+        AH21: dataLaTrinidad.AH21,
       };
     }
 
@@ -1891,13 +1915,13 @@ export const dataComparativaPorTipo = (
         X22: e11,
         Z22: f11,
         AA22: dataLeales.AA22,
-        AB22: dataLeales.AB22,
-        AC22: dataLeales.AC22,
-        AD22: j11,
-        AE22: k11,
+        AB22: j11,
+        AC22: k11,
+        AD22: m11,
+        AE22: n11,
         AF22: l11,
-        AG22: m11,
-        AH22: n11,
+        AG22: dataLeales.AG22,
+        AH22: dataLeales.AH22,
       };
     }
 
@@ -1925,13 +1949,13 @@ export const dataComparativaPorTipo = (
         X23: e12,
         Z23: f12,
         AA23: dataÑuñorco.AA23,
-        AB23: dataÑuñorco.AB23,
-        AC23: dataÑuñorco.AC23,
-        AD23: j12,
-        AE23: k12,
+        AB23: j12,
+        AC23: k12,
+        AD23: m12,
+        AE23: n12,
         AF23: l12,
-        AG23: m12,
-        AH23: n12,
+        AG23: dataÑuñorco.AG23,
+        AH23: dataÑuñorco.AH23,
       };
     }
 
@@ -1959,13 +1983,13 @@ export const dataComparativaPorTipo = (
         X24: e13,
         Z24: f13,
         AA24: dataStaBarbara.AA24,
-        AB24: dataStaBarbara.AB24,
-        AC24: dataStaBarbara.AC24,
-        AD24: j13,
-        AE24: k13,
+        AB24: j13,
+        AC24: k13,
+        AD24: m13,
+        AE24: n13,
         AF24: l13,
-        AG24: m13,
-        AH24: n13,
+        AG24: dataStaBarbara.AG24,
+        AH24: dataStaBarbara.AH24,
       };
     }
 
@@ -1993,13 +2017,13 @@ export const dataComparativaPorTipo = (
         X25: e14,
         Z25: f14,
         AA25: dataStaRosa.AA25,
-        AB25: dataStaRosa.AB25,
-        AC25: dataStaRosa.AC25,
-        AD25: j14,
-        AE25: k14,
+        AB25: j14,
+        AC25: k14,
+        AD25: m14,
+        AE25: n14,
         AF25: l14,
-        AG25: m14,
-        AH25: n14,
+        AG25: dataStaRosa.AG25,
+        AH25: dataStaRosa.AH25,
       };
     }
 
@@ -2027,13 +2051,13 @@ export const dataComparativaPorTipo = (
         X26: e15,
         Z26: f15,
         AA26: dataSanJuan.AA26,
-        AB26: dataSanJuan.AB26,
-        AC26: dataSanJuan.AC26,
-        AD26: j15,
-        AE26: k15,
+        AB26: j15,
+        AC26: k15,
+        AD26: m15,
+        AE26: n15,
         AF26: l15,
-        AG26: m15,
-        AH26: n15,
+        AG26: dataSanJuan.AG26,
+        AH26: dataSanJuan.AH26,
       };
     }
   });
@@ -2077,9 +2101,9 @@ export const dataComparativaPorTipo = (
         P44: dataLaEsperanza.P44,
         V44: j16,
         W44: k16,
-        X44: l16,
-        Y44: m16,
-        Z44: n16,
+        X44: m16,
+        Y44: n16,
+        Z44: l16,
       };
     }
     if (
@@ -2097,7 +2121,7 @@ export const dataComparativaPorTipo = (
       f17 = f17 + data.melazaProducida || 0;
       j17 = j17 + data.azucarBlancoProducido;
       k17 = k17 + data.azucarRefinado || 0;
-      l17 = l17 + data.azucarCrudoProducido;
+      l17 = l17 + data.azucarCrudoProducido - data.azucarRefinado - data.otroAzucar;
       m17 = m17 + data.azucarOrganico || 0;
       n17 = n17 + data.otroAzucar || 0;
 
@@ -2113,9 +2137,9 @@ export const dataComparativaPorTipo = (
         P45: dataLedesma.P45,
         V45: j17,
         W45: k17,
-        X45: l17,
-        Y45: m17,
-        Z45: n17,
+        X45: m17,
+        Y45: n17,
+        Z45: l17,
       };
     }
     if (
@@ -2149,9 +2173,9 @@ export const dataComparativaPorTipo = (
         P46: dataRioGrande.P46,
         V46: j18,
         W46: k18,
-        X46: l18,
-        Y46: m18,
-        Z46: n18,
+        X46: m18,
+        Y46: n18,
+        Z46: l18,
       };
     }
     if (
@@ -2185,9 +2209,9 @@ export const dataComparativaPorTipo = (
         P47: dataSanIsidro.P47,
         V47: j19,
         W47: k19,
-        X47: l19,
-        Y47: m19,
-        Z47: n19,
+        X47: m19,
+        Y47: n19,
+        Z47: l19,
       };
     }
     if (
@@ -2221,9 +2245,9 @@ export const dataComparativaPorTipo = (
         P48: dataSeaboard.P48,
         V48: j20,
         W48: k20,
-        X48: l20,
-        Y48: m20,
-        Z48: n20,
+        X48: m20,
+        Y48: n20,
+        Z48: l20,
       };
     }
   })

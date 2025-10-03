@@ -6,6 +6,7 @@ import { getIngenios } from "../../utils/queryAPI/ingenios";
 import { getQuincenas } from "../../utils/queryAPI/quincenas";
 import { useEffect, useState } from "react";
 
+const { RangePicker } = DatePicker;
 const { Search } = Input;
 
 const Filtros = ({
@@ -15,6 +16,8 @@ const Filtros = ({
   setDataQuincena,
   setDataZafra,
   setIngenio,
+  setDatePeriodoStart,
+  setDatePeriodoEnd,
   dataEnd,
   dataAnio,
   dataMes,
@@ -30,6 +33,8 @@ const Filtros = ({
   bandFilterSearch,
   bandFilterIngenio,
   bandFilterDiasParadaAnioZafra,
+  bandFilterPeriodo,
+  bandFilterIngenioRegion,
   placeHolderSearch,
   zafraParteDiario,
   setZafraParteDiario,
@@ -50,7 +55,8 @@ const Filtros = ({
     const aniosData = await getAnios();
     const mesesData = await getMeses();
     const quincenasData = await getQuincenas();
-    const ingeniosData = await getIngenios();
+    const paramsIngenios = {region: bandFilterIngenioRegion}
+    const ingeniosData = await getIngenios(bandFilterIngenioRegion && paramsIngenios);
 
     setDataAnios(aniosData);
     setDataMeses(mesesData);
@@ -65,6 +71,17 @@ const Filtros = ({
       setDataEnd(null);
     }
   };
+
+  const changePeriodo = (e) => {
+    if(e !== null) {
+      setDatePeriodoStart(e[0].$d)
+      setDatePeriodoEnd(e[1].$d)
+    } else {
+      setDatePeriodoStart(undefined)
+      setDatePeriodoEnd(undefined)
+    }
+  }
+
 
   const handleZafraParteDiario = (e) => {
     setZafraParteDiario(e);
@@ -149,11 +166,11 @@ const Filtros = ({
               //   (option?.label ?? "").includes(input)
               // }
               options={optionsAnios}
-              defaultValue={dataZafra}
+              value={dataZafra}
             />
           </Col>
         )}
-        
+
         {bandFilterAnio && (
           <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
             <span className="me-4">Año:</span>
@@ -169,7 +186,18 @@ const Filtros = ({
               //   (option?.label ?? "").includes(input)
               // }
               options={optionsAnios}
-              defaultValue={dataAnio}
+              value={dataAnio}
+            />
+          </Col>
+        )}
+
+        {bandFilterPeriodo && (
+          <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
+            <span className="me-4">Periodo:</span>
+            <RangePicker
+              format={"DD/MM/YYYY"}
+              onChange={changePeriodo}
+              disabled={!dataZafra ? true : false}
             />
           </Col>
         )}
@@ -188,7 +216,7 @@ const Filtros = ({
               //   (option?.label ?? "").includes(input)
               // }
               options={optionsMeses}
-              defaultValue={dataMes}
+              value={dataMes}
             />
           </Col>
         )}
@@ -212,7 +240,7 @@ const Filtros = ({
                   .localeCompare((optionB?.label ?? "").toLowerCase())
               }
               options={optionsQuincena}
-              defaultValue={dataQuincena}
+              value={dataQuincena}
             />
           </Col>
         )}
@@ -274,7 +302,7 @@ const Filtros = ({
                 //   (option?.label ?? "").includes(input)
                 // }
                 options={optionsAnios}
-                // defaultValue={zafraParteDiario}
+              // defaultValue={zafraParteDiario}
               />
             </Col>
             <Col xs={12} lg={4} className="mb-1 mt-1">
@@ -295,13 +323,12 @@ const Filtros = ({
 
             <Col xs={12} md={6} lg={3} className="mb-1 mt-1 alignSelf">
               <Button
-                className={`${
-                  (dataZafra === null ||
-                    dataZafra === undefined||
-                    diasParadas === null ||
-                    !diasParadas) &&
+                className={`${(dataZafra === null ||
+                  dataZafra === undefined ||
+                  diasParadas === null ||
+                  !diasParadas) &&
                   "disabled"
-                }`}
+                  }`}
 
                 onClick={() => exportarDiasParadas()}
               >

@@ -23,7 +23,6 @@ const ReportesDataContainer = ({
   const [fechasInformeFin, setFechasInformeFin] = useState(undefined);
   const [periodosZafra, setPeriodosZafra] = useState(undefined)
 
-  // console.log(dataReportes)
   console.log(dataZafraInicio, dataZafraFin)
   console.log(fechasInformeInicio, fechasInformeFin)
   
@@ -34,7 +33,6 @@ const ReportesDataContainer = ({
     }
     fetchPeriodosZafra()
   },[])
-  console.log(periodosZafra)
 
   useEffect(() => {
     if (dataReportes) {
@@ -62,21 +60,6 @@ const ReportesDataContainer = ({
   //   setFechasInformeFin(date2[0]?.fin);
   // };
 
-  // const busqueda = () => {
-  //   if (fechasInformeInicio && fechasInformeFin) {
-  //     const data = dataReportes?.filter((d) => {
-  //       const dataConverted = convertirStringAFecha(d.fechaParte);
-  //       const dataConvertedInicio = convertirStringAFecha(fechasInformeInicio);
-  //       const dataConvertedFin = convertirStringAFecha(fechasInformeFin);
-  //       return (
-  //         dataConverted >= dataConvertedInicio &&
-  //         dataConverted <= dataConvertedFin &&
-  //         (d.MoliendaCanaBruta !== 0 || d.AzucarEquivalente !== 0)
-  //       );
-  //     });
-  //     setDataImport(data);
-  //   }
-  // };
   const busqueda = () => {
     if(dataZafraInicio && dataZafraFin) {
       const periodoInicio = periodosZafra.filter((d) => d.anio_zafra === dataZafraInicio)
@@ -119,7 +102,6 @@ const ReportesDataContainer = ({
       console.log(PeriodoFinalFechaFinalCMB)
       console.log(periodoFinalFechaInicioALCOHOL)
       console.log(PeriodoFinalFechaFinalALCOHOL)
-
     }
   }
 

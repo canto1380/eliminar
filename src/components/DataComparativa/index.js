@@ -8,6 +8,7 @@ const DataComparativaHistorica = ({
   dataComparativaData,
   anio,
   aniosData,
+  regionData
 }) => {
   return (
     <Container fluid>
@@ -33,6 +34,7 @@ const DataComparativaHistorica = ({
             dataComparativaData={dataComparativaData}
             anio={anio}
             aniosData={aniosData}
+            regionData={regionData}
           />
         )
       }

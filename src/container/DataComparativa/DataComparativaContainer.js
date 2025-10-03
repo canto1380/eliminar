@@ -83,6 +83,13 @@ const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
       sorter: (a, b) => a.anio_zafra > b.anio_zafra,
     },
     {
+      key: "region",
+      title: "Región",
+      dataIndex: "nombre_region",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.nombre_region > b.nombre_region,
+    },
+    {
       key: "CMBPorDDJJIPAAT",
       title: "CMB por DDJJ",
       dataIndex: "CMB_DDJJ",

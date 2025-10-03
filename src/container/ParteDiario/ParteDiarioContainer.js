@@ -80,7 +80,6 @@ const ParteDiarioContainer = () => {
     const data = await getParteDiariosNorte();
     setDataParteDiariosNorte(data);
   };
-  // console.log('dataParteDiariosNorte', dataParteDiariosNorte)
 
   const aa = (data) => {
     const maxByIngenio = Object.values(
@@ -121,13 +120,13 @@ const ParteDiarioContainer = () => {
       const datosProductivos = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
       setDataParteDiariosHistoricos(datosProductivos)
   };
-
   useEffect(() => {
     if (dataEnd && dataParteDiarios && dataParteDiariosNorte && dateInicioIngenios && dateFinIngenios) {
 
       /** TUCUMAN **/
       const periodosActual = obtenerPeriodos(dateInicioIngenios,1);
       const periodoComparativo = obtenerPeriodos(dateFinIngenios,1);
+
 
       const { dataZafra1, dataDestileria1, dataAnhidro1 } =
         filtrarRegistrosPorPeriodos(periodosActual, dataParteDiarios, dataEnd);
@@ -175,7 +174,6 @@ const ParteDiarioContainer = () => {
 
     }
   }, [dataEnd, dataParteDiarios, dateInicioIngenios, dateFinIngenios]);
-
   useEffect(() => {
     const dataNow = new Date();
     if (dataZafra === null) {
@@ -279,6 +277,7 @@ const ParteDiarioContainer = () => {
       setLoading(false);
     }
   };
+
   return (
     <Container fluid>
       {banderaDataNull && (

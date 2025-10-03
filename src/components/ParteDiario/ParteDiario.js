@@ -72,6 +72,7 @@ const ParteDiario = ({
   const [d13, setD13] = useState([]);
   const [d14, setD14] = useState([]);
   const [d15, setD15] = useState([]);
+  const [dataDestBellaVista, setDataDestBellaVista] = useState([]);
   /** DC - Data Comparativa **/
   const [dc1, setDc1] = useState([]);
   const [dc2, setDc2] = useState([]);
@@ -88,6 +89,7 @@ const ParteDiario = ({
   const [dc13, setDc13] = useState([]);
   const [dc14, setDc14] = useState([]);
   const [dc15, setDc15] = useState([]);
+  const [dataDestBellaVistaComparativa, setDataDestBellaVistaComparativa] = useState([]);
   
   /***** NORTE *****/
   /** N - Data Periodo actual **/
@@ -236,6 +238,7 @@ const ParteDiario = ({
       setD13,
       setD14,
       setD15,
+      setDataDestBellaVista,
       setN1,
       setN2,
       setN3,
@@ -282,6 +285,7 @@ const ParteDiario = ({
       setDc13,
       setDc14,
       setDc15,
+      setDataDestBellaVistaComparativa,
       setNc1,
       setNc2,
       setNc3,
@@ -315,7 +319,6 @@ const ParteDiario = ({
     dataImportAnhidroComparativaNorte,
     zafraParteDiario
   ]);
-
   /*** DATOS DIAS PARADAS ***/
   useEffect(() => {
     if (dataAnio !== null && dataEnd !== null) {
@@ -655,22 +658,6 @@ const ParteDiario = ({
     }
   });
 
-  console.log('dc1', dc1)
-  console.log('dc2', dc2)
-  console.log('dc3', dc3)
-  console.log('dc4', dc4)
-  console.log('dc5', dc5)
-  console.log('dc6', dc6)
-  console.log('dc7', dc7)
-  console.log('dc8', dc8)
-  console.log('dc9', dc9)
-  console.log('dc10', dc10)
-  console.log('dc11', dc11)
-  console.log('dc12', dc12)
-  console.log('dc13', dc13)
-  console.log('dc14', dc14)
-  console.log('dc15', dc15)
-
   /** CANTIDAD DIAS DE DESTILERIA **/
   const diasDestileria = (dataEnd &&
     new Date(fechaInicioDestileria).getTime() !== new Date("3/10/2100").getTime())
@@ -702,6 +689,7 @@ const ParteDiario = ({
           d13,
           d14,
           d15,
+          dataDestBellaVista,
           /** NORTE **/
           n1,
           n2,
@@ -724,6 +712,7 @@ const ParteDiario = ({
           dc13,
           dc14,
           dc15,
+          dataDestBellaVistaComparativa,
           /** NORTE - COMPARATIVA **/
           nc1,
           nc2,
@@ -768,6 +757,7 @@ const ParteDiario = ({
           dataDiasZafraNorteComparativa,
         },
       ];
+      
       const res = await apiExportExcel("POST", "descargar", dataSend);
       if (res.status === 200) {
         const blob = new Blob([res.data], {

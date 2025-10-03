@@ -241,6 +241,22 @@ let dataAguilares = {
     O58: 0,
     R58: 0,
   },
+  dataDestBellaVista = {
+    E27: 0,
+    F27: 0,
+    G27: 0,
+    J27: 0,
+    K27: 0,
+    M27: 0,
+    N27: 0,
+    C59: 0,
+    D59: 0,
+    F59: 0,
+    G59: 0,
+    L59: 0,
+    O59: 0,
+    R59: 0,
+  },
 
   /** Norte **/
   dataLaEsperanza = {
@@ -357,6 +373,8 @@ let dataAguilares = {
     CellE25: 0,
     Cell26: 0,
     CellE26: 0,
+    bellaVistaInicio: 0,
+    bellaVistaFin: 0
   },
   /** ZAFRA - NORTE **/
   dataInicioIngeniosNorte = {
@@ -404,6 +422,8 @@ let dataAguilares = {
     staRosaFin: null,
     sanJuanInicio: null,
     sanJuanFin: null,
+    bellaVistaDestInicio: null,
+    bellaVistaDestFin: null,
   },
   /** DESTILERIA - NORTE **/
   dataInicioDestileriaIngeniosNorte = {
@@ -450,6 +470,8 @@ let dataAguilares = {
     staRosaFinAnhidro: null,
     sanJuanInicioAnhidro: null,
     sanJuanFinAnhidro: null,
+    bellaVistaAnhidroInicio: null,
+    bellaVistaAnhidroFin: null
   },
 
   /** ANHIDRO - NORTE **/
@@ -491,6 +513,7 @@ export const dataPorTipo = (
   setD13,
   setD14,
   setD15,
+  setDataDestBellaVista,
   setN1,
   setN2,
   setN3,
@@ -575,6 +598,9 @@ export const dataPorTipo = (
   const sanjuan = dateInicioIngenios?.find(
     (d) => d.nombre_ingenio === "San Juan"
   );
+  const destBellaVista = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "Destilería Bella Vista"
+  );
 
   /** NORTE **/
   const sanisidro = dateInicioIngenios?.find(
@@ -625,6 +651,8 @@ export const dataPorTipo = (
     CellE25: starosa?.fin_zafra,
     Cell26: sanjuan?.inicio_zafra,
     CellE26: sanjuan?.fin_zafra,
+    bellaVistaInicio: destBellaVista?.inicio_zafra,
+    bellaVistaFin: destBellaVista?.fin_zafra,
   };
   /** NORTE **/
   dataInicioIngeniosNorte = {
@@ -672,6 +700,8 @@ export const dataPorTipo = (
     staRosaFin: starosa?.fin_destileria,
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
+    bellaVistaDestInicio: destBellaVista?.inicio_destileria,
+    bellaVistaDestFin: destBellaVista?.fin_destileria,
   };
 
   /** DESTILERIA - NORTE **/
@@ -720,6 +750,8 @@ export const dataPorTipo = (
     staRosaFinAnhidro: starosa?.fin_anhidro,
     sanJuanInicioAnhidro: sanjuan?.inicio_anhidro,
     sanJuanFinAnhidro: sanjuan?.fin_anhidro,
+    bellaVistaAnhidroInicio: destBellaVista?.inicio_anhidro,
+    bellaVistaAnhidroFin: destBellaVista?.fin_anhidro,
   };
 
   /** ANHIDRO - NORTE **/
@@ -745,7 +777,7 @@ export const dataPorTipo = (
   /************/
 
   /** VARIABLES TUCUMAN (1-15) NORTE (16-20) **/
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 21; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -799,11 +831,25 @@ export const dataPorTipo = (
     }
 
     if (
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioDestileriaIngenios.bellaVistaDestInicio)
+    ) {
+      g21 = g21 + data.alcoholProducido;
+      o21 = o21 + data.alcoholHidratado || 0;
+      dataDestBellaVista = {
+        N27: g21,
+        O59: o21,
+      };
+    }
+
+
+    if (
       data.ingenioNombre === "Cruz Alta" &&
       newDate <= fechaParametro &&
       newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
     ) {
-      g2 = g2 + data.alcoholProducido;
+      g2 = g2 + data.alcoholProducido || 0;
       o2 = o2 + data.alcoholHidratado || 0;
       dataCruzAlta = {
         N11: g2,
@@ -1113,6 +1159,19 @@ export const dataPorTipo = (
       };
     }
 
+    if (
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametro &&
+      newDate >= new Date(dataInicioAnhidroIngenios.bellaVistaAnhidroInicio)
+    ) {
+      r21 = r21 + data.alcoholAnhidro || 0;
+      dataCruzAlta = {
+        R59: r21,
+        N27: dataCruzAlta.N27,
+        O59: dataCruzAlta.O59
+      };
+    }
+    
     if (
       data.ingenioNombre === "Cruz Alta" &&
       newDate <= fechaParametro &&
@@ -1460,46 +1519,6 @@ export const dataPorTipo = (
 
   }
 
-  // // Concepción - Zafra 2024
-  // anhidroConcepcion.forEach((mes) => {
-  //   if (mes.mesNumero <= currentMonth) {
-  //     const diasEnMes = new Date(currentDate.getFullYear(), mes.mesNumero, 0).getDate();
-  //     let valorPorDia = mes.valor / 30; // Dividir por 30 días
-
-  //     if (mes.mesNumero === currentMonth) {
-  //       // Si es el mes actual, solo hasta el día actual
-  //       valorPorDia = (mes.valor / 30) * currentDay;
-  //     }
-
-  //     r4 = r4 + valorPorDia;
-  //     dataConcepcion = {
-  //       R46: r4,
-  //       N14: dataConcepcion.N14,
-  //       O46: dataConcepcion.O46
-  //     };
-  //   }
-  // });
-
-  // // Bella Vista - Zafra 2024
-  // anhidroBellaVista.forEach((mes) => {
-  //   if (mes.mesNumero <= currentMonth) {
-  //     const diasEnMes = new Date(currentDate.getFullYear(), mes.mesNumero, 0).getDate();
-  //     let valorPorDia = mes.valor / 30; // Dividir por 30 días
-
-  //     if (mes.mesNumero === currentMonth) {
-  //       // Si es el mes actual, solo hasta el día actual
-  //       valorPorDia = (mes.valor / 30) * currentDay;
-  //     }
-
-  //     r6 = r6 + valorPorDia;
-  //     dataBellaVista = {
-  //       R45: r6,
-  //       N17: dataBellaVista.N17,
-  //       O45: dataBellaVista.O45
-  //     };
-  //   }
-  // });
-
 
   if (zafraParteDiario === 2023) {
     const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
@@ -1675,6 +1694,44 @@ export const dataPorTipo = (
         L44: l1,
         O44: dataAguilares.O44,
         R44: dataAguilares.R44,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametro &&
+      dataInicioIngenios.bellaVistaInicio !== undefined &&
+      dataInicioIngenios.bellaVistaInicio !== null
+    ) {
+      a21 = a21 + data?.moliendaCanaBruta;
+      b21 = b21 + data?.moliendaCanaNeta;
+      c21 = c21 + Number(data?.azucarEquivalente.replace(/\./g, '')) || 0;
+      z21 = z21 + data?.azucarBlancoProducido + data?.azucarRefinado;
+      e21 = e21 +
+        (data?.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f21 = f21 + data?.melazaProducida;
+      h21 = h21 + data?.azucarRefinado || 0;
+      i21 = i21 + data?.azucarOrganico || 0;
+      j21 = j21 + data?.otroAzucar || 0;
+      k21 = k21 + data?.azucarBlancoProducido;
+      l21 = l21 + data?.azucarCrudoProducido;
+      dataDestBellaVista = {
+        E27: a21,
+        F27: b21,
+        G27: c21 / 1000,
+        J27: z21,
+        K27: e21,
+        M27: f21,
+        N27: dataCruzAlta.N27,
+        C59: k21,
+        D59: h21,
+        F59: i21,
+        G59: j21,
+        L59: l21,
+        O59: dataCruzAlta.O59,
+        R59: dataCruzAlta.R59,
       };
     }
 
@@ -2286,7 +2343,7 @@ export const dataPorTipo = (
       i17 = i17 + data.azucarOrganico || 0;
       j17 = j17 + data.otroAzucar || 0;
       k17 = k17 + data.azucarBlancoProducido;
-      l17 = l17 + data.azucarCrudoProducido;
+      l17 = l17 + (data.azucarCrudoProducido <= 0 ? - data.azucarRefinado - data.otroAzucar : data.azucarCrudoProducido - data.azucarRefinado - data.otroAzucar);
 
       dataLedesma = {
         E45: a17,
@@ -2542,6 +2599,7 @@ export const dataPorTipo = (
   setD13(dataStaBarbara);
   setD14(dataStaRosa);
   setD15(dataSanJuan);
+  setDataDestBellaVista(dataDestBellaVista);
   setN1(dataLaEsperanza);
   setN2(dataLedesma);
   setN3(dataRioGrande);

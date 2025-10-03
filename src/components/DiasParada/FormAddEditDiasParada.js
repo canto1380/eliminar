@@ -61,7 +61,7 @@ const FormAddEditDiasParada = ({
       }, 3000);
     }
   };
-
+  console.log(diaParada)
   const createDiaParada = async (values) => {
     const idPeriodo = periodosData.filter(
       (d) =>
@@ -71,7 +71,6 @@ const FormAddEditDiasParada = ({
     values.id_periodo_zafra = idPeriodo[0].id;
     values.dia = diaParada;
     values.porcentaje_parada = porcentaje;
-
     const res = await api("POST", "diaParada", values);
     if (res.status === 201) {
       setLoading(true);
@@ -100,8 +99,10 @@ const FormAddEditDiasParada = ({
     }
   };
   const updateDiaParada = async (values) => {
+    const dateConverted = moment(diaParada).format("YYYY-MM-DD")
+
     values.id_periodo_zafra = dataRegisterEdit.id_periodo_zafra;
-    values.dia = diaParada;
+    values.dia = dateConverted;
     values.porcentaje_parada = porcentaje;
     const res = await api("PATCH", `diaParada/${dataRegisterEdit?.id}`, values);
     if (res.status === 200) {
@@ -144,7 +145,6 @@ const FormAddEditDiasParada = ({
 
   const dataEditInicio = new Date(dataRegisterEdit?.dia);
   const dataInicioConvertido = moment(dataEditInicio).format("YYYY-MM-DD");
-
   return (
     <div className="menuContainer">
       <Form
