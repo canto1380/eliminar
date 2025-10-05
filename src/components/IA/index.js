@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { api } from "../../utils/api";
 
 const IAComponent = () => {
 
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
-    const [threadId, setThreadId] = useState(null);
 
     const sendMessage = async () => {
         if (!input.trim()) return;
@@ -13,18 +13,14 @@ const IAComponent = () => {
         setMessages([...messages, { role: "user", text: input }]);
         const userMessage = input;
         setInput("");
+        console.log(messages)
 
         try {
             const values = {
                 message: userMessage,
-                threadId,
             }
-            const res = await api("POST", "diaParada", values);
-            setThreadId(res.data.threadId);
-            setMessages((prev) => [
-                ...prev,
-                { role: "assistant", text: res.data.reply },
-            ]);
+            const res = await api("POST", "chatbot", values);
+            console.log(res)
         } catch (err) {
             console.error(err);
         }

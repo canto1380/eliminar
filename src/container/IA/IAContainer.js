@@ -19,22 +19,22 @@ const IADataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
         <Container fluid>
             <TitlePage titlePage="Bot" />
             <hr className="mx-3 mt-1" />
-            {1 = 2 ? (
+            {1 === 2 ? (
                 <div className="d-flex justify-content-center align-items-center text-center">
                     <Spinn type="data" />
                 </div>
             ) : (
                 <>
                     <Filtros
-                        dataZafra={anioZafra}
-                        setDataZafra={setAnioZafra}
-                        setDatePeriodoStart={setDatePeriodoStart}
-                        setDatePeriodoEnd={setDatePeriodoEnd}
-                        setIngenio={setIngenio}
-                        bandFilterZafraAnio={true}
-                        bandFilterPeriodo={true}
-                        bandFilterIngenio={true}
-                        bandFilterIngenioRegion={1}
+                        // dataZafra={anioZafra}
+                        // setDataZafra={setAnioZafra}
+                        // setDatePeriodoStart={setDatePeriodoStart}
+                        // setDatePeriodoEnd={setDatePeriodoEnd}
+                        // setIngenio={setIngenio}
+                        // bandFilterZafraAnio={true}
+                        // bandFilterPeriodo={true}
+                        // bandFilterIngenio={true}
+                        // bandFilterIngenioRegion={1}
                     />
                     <IAComponent
                         dataUserRegister={dataUserRegister}

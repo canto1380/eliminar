@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+0f6c16bb6ae609dc944008f2f1d5ba92fe11b8fb refs/heads/14-05.refactorizacion.periodos.y.fechas
+dc5cb4ef14c98b14e055088f2d257a233376db43 refs/heads/dev
+cfa5b5fac5de426758267583a3066fe60123d206 refs/heads/main
+268dc316dc8ea4d28d4ff7be573da2f5813443f9 refs/pull/1/head
+ca31fe375aa2702dfaf65024781124dd0d93aa79 refs/pull/2/head
+0f6c16bb6ae609dc944008f2f1d5ba92fe11b8fb refs/pull/3/head
+7251adf9eace13b7bf9029bbf15030c72af30ad0 refs/pull/4/head
