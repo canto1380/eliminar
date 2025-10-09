@@ -1,30 +1,13 @@
 import React, { useState } from "react";
-import { api } from "../../utils/api";
+import ChatInput from "./ChatInput";
 
-const IAComponent = () => {
-
-    const [input, setInput] = useState("");
+const IAComponent = ({ dataUserRegister }) => {
     const [messages, setMessages] = useState([]);
 
-    const sendMessage = async () => {
-        if (!input.trim()) return;
-
-        // Agregar mensaje del usuario al estado
-        setMessages([...messages, { role: "user", text: input }]);
-        const userMessage = input;
-        setInput("");
-        console.log(messages)
-
-        try {
-            const values = {
-                message: userMessage,
-            }
-            const res = await api("POST", "chatbot", values);
-            console.log(res)
-        } catch (err) {
-            console.error(err);
-        }
+    const handleNewMessage = (msg) => {
+        setMessages((prev) => [...prev, msg]);
     };
+
     return (
         <div className="chat-container">
             <div className="messages">
@@ -34,15 +17,10 @@ const IAComponent = () => {
                     </div>
                 ))}
             </div>
-            <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                placeholder="Escribe un mensaje..."
-            />
-            <button onClick={sendMessage}>Enviar</button>
-        </div>
-    )
-}
 
-export default IAComponent
+            <ChatInput onSend={handleNewMessage} dataUserRegister={dataUserRegister} />
+        </div>
+    );
+};
+
+export default IAComponent;

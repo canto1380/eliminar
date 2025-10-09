@@ -5,7 +5,7 @@ import '../../components/Admin/Sidebar//Sidebar.css'
 import { useContext, useEffect, useState } from "react"
 import { User } from "../../context/UserProvider"
 import Unauthorized from "../../components/Unauthorized"
-import GraficasDataContainer from "./IAContainer"
+import IADataContainer from "./IAContainer.js"
 import { getToken, getTokenLS, getDataToken } from "../../helpers/helpers"
 import Spinn from "../../components/Spinner"
 
@@ -67,7 +67,7 @@ const IAContainer = () => {
                             dataUser={dataUser}
                         />
                         <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
-                            <GraficasDataContainer
+                            <IADataContainer
                                 tokenAuth={tokenAuth}
                                 dataUserRegister={dataUserRegister}
                                 routeAPI={'ia'}
