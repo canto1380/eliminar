@@ -730,7 +730,7 @@ export const dataComparativaPorTipo = (
     dataInicioAnhidroIngeniosNorte
   );
 
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 21; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -766,14 +766,121 @@ export const dataComparativaPorTipo = (
   /** TUCUMAN **/
   dataImportDestileriaComparativa?.forEach((data) => {
     const newDate = new Date(data.fechaParte);
+
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+
+
     const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate() ;
+    const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
+
+    const anioComparativo = dataEnd.getFullYear() - 1;
+    const newDateComparativo = new Date(dataEnd);
+    newDateComparativo.setFullYear(anioComparativo);
+
+    const fechaParametroAguilares = dataInicioDestileriaIngenios.aguilFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.aguilFin)
+        ? new Date(dataInicioDestileriaIngenios.aguilFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroBellaVista = dataInicioDestileriaIngenios.bellaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.bellaFin)
+        ? new Date(dataInicioDestileriaIngenios.bellaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroConcepcion = dataInicioDestileriaIngenios.concepFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.concepFin)
+        ? new Date(dataInicioDestileriaIngenios.concepFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroCruzAlta = dataInicioDestileriaIngenios.cruzFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.cruzFin)
+        ? new Date(dataInicioDestileriaIngenios.cruzFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroDestileriaBellaVista = dataInicioDestileriaIngenios.bellaVistaDestFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.bellaVistaDestFin)
+        ? new Date(dataInicioDestileriaIngenios.bellaVistaDestFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroFamailla = dataInicioDestileriaIngenios.famaillaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.famaillaFin)
+        ? new Date(dataInicioDestileriaIngenios.famaillaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaCorona = dataInicioDestileriaIngenios.coronaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.coronaFin)
+        ? new Date(dataInicioDestileriaIngenios.coronaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaFlorida = dataInicioDestileriaIngenios.floridaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.floridaFin)
+        ? new Date(dataInicioDestileriaIngenios.floridaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaProvidencia = dataInicioDestileriaIngenios.provFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.provFin)
+        ? new Date(dataInicioDestileriaIngenios.provFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaTrinidad = dataInicioDestileriaIngenios.trinFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.trinFin)
+        ? new Date(dataInicioDestileriaIngenios.trinFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLeales = dataInicioDestileriaIngenios.lealesFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.lealesFin)
+        ? new Date(dataInicioDestileriaIngenios.lealesFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroMarapa = dataInicioDestileriaIngenios.marapaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.marapaFin)
+        ? new Date(dataInicioDestileriaIngenios.marapaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroNunorco = dataInicioDestileriaIngenios.nunorcoFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.nunorcoFin)
+        ? new Date(dataInicioDestileriaIngenios.nunorcoFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSantaBarbara = dataInicioDestileriaIngenios.staBarFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.staBarFin)
+        ? new Date(dataInicioDestileriaIngenios.staBarFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSantaRosa = dataInicioDestileriaIngenios.staRosaFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.staRosaFin)
+        ? new Date(dataInicioDestileriaIngenios.staRosaFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSanJuan = dataInicioDestileriaIngenios.sanJuanFin
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngenios.sanJuanFin)
+        ? new Date(dataInicioDestileriaIngenios.sanJuanFin)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    // console.log('dataInicioDestileriaIngenios.bellaFin ', dataInicioDestileriaIngenios.bellaFin);
+    // console.log('fechaParametroBellaVista ', fechaParametroBellaVista);
+
     if (
       data.ingenioNombre === "Aguilares" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroAguilares &&
       newDate >= new Date(dataInicioDestileriaIngenios.aguilInicio)
     ) {
       g1 = g1 + data.alcoholProducido;
@@ -785,58 +892,8 @@ export const dataComparativaPorTipo = (
     }
 
     if (
-      data.ingenioNombre === "Cruz Alta" &&
-      newDate <= fechaParametro &&
-      newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
-    ) {
-      g2 = g2 + data.alcoholProducido;
-      i2 = i2 + data.alcoholHidratado;
-      dataCruzAlta = {
-        AA11: g2,
-        AG11: i2,
-      };
-    }
-    if (
-      data.ingenioNombre === "La Florida" &&
-      newDate <= fechaParametro &&
-      newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
-    ) {
-      g3 = g3 + data.alcoholProducido;
-      i3 = i3 + data.alcoholHidratado;
-      dataLaFlorida = {
-        AA12: g3,
-        AG12: i3,
-      };
-    }
-    if (
-      data.ingenioNombre === "Concepción" &&
-      newDate <= fechaParametro &&
-      newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
-    ) {
-      g4 = g4 + data.alcoholProducido;
-      i4 = i4 + data.alcoholHidratado;
-      dataConcepcion = {
-        AA14: g4,
-        AG14: i4,
-      };
-    }
-
-    if (
-      data.ingenioNombre === "Marapa" &&
-      newDate <= fechaParametro &&
-      newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
-    ) {
-      g5 = g5 + data.alcoholProducido;
-      i5 = i5 + data.alcoholHidratado;
-      dataMarapa = {
-        AA15: g5,
-        AG15: i5,
-      };
-    }
-
-    if (
       data.ingenioNombre === "Bella Vista" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroBellaVista &&
       newDate >= new Date(dataInicioDestileriaIngenios.bellaInicio)
     ) {
       g6 = g6 + data.alcoholProducido;
@@ -848,8 +905,47 @@ export const dataComparativaPorTipo = (
     }
 
     if (
+      data.ingenioNombre === "Concepción" &&
+      newDate <= fechaParametroConcepcion &&
+      newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
+    ) {
+      g4 = g4 + data.alcoholProducido;
+      i4 = i4 + data.alcoholHidratado;
+      dataConcepcion = {
+        AA14: g4,
+        AG14: i4,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Cruz Alta" &&
+      newDate <= fechaParametroCruzAlta &&
+      newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
+    ) {
+      g2 = g2 + data.alcoholProducido;
+      i2 = i2 + data.alcoholHidratado;
+      dataCruzAlta = {
+        AA11: g2,
+        AG11: i2,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametroDestileriaBellaVista &&
+      newDate >= new Date(dataInicioDestileriaIngenios.bellaVistaDestInicio)
+    ) {
+      g21 = g21 + data.alcoholProducido;
+      o21 = o21 + data.alcoholHidratado || 0;
+      dataDestBellaVista = {
+        AA27: g21,
+        AG27: o21,
+      };
+    }
+
+    if (
       data.ingenioNombre === "Famaillá" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroFamailla &&
       newDate >= new Date(dataInicioDestileriaIngenios.famaillaInicio)
     ) {
       g7 = g7 + data.alcoholProducido;
@@ -862,7 +958,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "La Corona" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaCorona &&
       newDate >= new Date(dataInicioDestileriaIngenios.coronaInicio)
     ) {
       g8 = g8 + data.alcoholProducido;
@@ -874,8 +970,21 @@ export const dataComparativaPorTipo = (
     }
 
     if (
+      data.ingenioNombre === "La Florida" &&
+      newDate <= fechaParametroLaFlorida &&
+      newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
+    ) {
+      g3 = g3 + data.alcoholProducido;
+      i3 = i3 + data.alcoholHidratado;
+      dataLaFlorida = {
+        AA12: g3,
+        AG12: i3,
+      };
+    }
+
+    if (
       data.ingenioNombre === "La Providencia" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaProvidencia &&
       newDate >= new Date(dataInicioDestileriaIngenios.provInicio)
     ) {
       g9 = g9 + data.alcoholProducido;
@@ -888,7 +997,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "La Trinidad" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaTrinidad &&
       newDate >= new Date(dataInicioDestileriaIngenios.trinInicio)
     ) {
       g10 = g10 + data.alcoholProducido;
@@ -901,7 +1010,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Leales" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLeales &&
       newDate >= new Date(dataInicioDestileriaIngenios.lealesInicio)
     ) {
       g11 = g11 + data.alcoholProducido;
@@ -913,8 +1022,21 @@ export const dataComparativaPorTipo = (
     }
 
     if (
+      data.ingenioNombre === "Marapa" &&
+      newDate <= fechaParametroMarapa &&
+      newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
+    ) {
+      g5 = g5 + data.alcoholProducido;
+      i5 = i5 + data.alcoholHidratado;
+      dataMarapa = {
+        AA15: g5,
+        AG15: i5,
+      };
+    }
+
+    if (
       data.ingenioNombre === "Ñuñorco" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroNunorco &&
       newDate >= new Date(dataInicioDestileriaIngenios.nunorcoInicio)
     ) {
       g12 = g12 + data.alcoholProducido;
@@ -927,7 +1049,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Santa Barbara" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSantaBarbara &&
       newDate >= new Date(dataInicioDestileriaIngenios.staBarInicio)
     ) {
       g13 = g13 + data.alcoholProducido;
@@ -940,7 +1062,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Santa Rosa" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSantaRosa &&
       newDate >= new Date(dataInicioDestileriaIngenios.staRosaInicio)
     ) {
       g14 = g14 + data.alcoholProducido;
@@ -953,7 +1075,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "San Juan" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSanJuan &&
       newDate >= new Date(dataInicioDestileriaIngenios.sanJuanInicio)
     ) {
       g15 = g15 + data.alcoholProducido;
@@ -969,14 +1091,45 @@ export const dataComparativaPorTipo = (
   dataImportDestileriaComparativaNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+
     const anioData = fechaParametro.getFullYear() - 1;
     const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
 
+    const anioComparativo = dataEnd.getFullYear() - 1;
+    const newDateComparativo = new Date(dataEnd);
+    newDateComparativo.setFullYear(anioComparativo);
+
+    const fechaParametroEsperanza = dataInicioDestileriaIngeniosNorte.esperanzaFin 
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) 
+        ? new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroLedesma = dataInicioDestileriaIngeniosNorte.ledesmaFin 
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) 
+        ? new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroRioGrande = dataInicioDestileriaIngeniosNorte.riograndeFin 
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) 
+        ? new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroSanIsidro = dataInicioDestileriaIngeniosNorte.sanisidroFin 
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) 
+        ? new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroSeaboard = dataInicioDestileriaIngeniosNorte.seaboardFin 
+      ? (newDateComparativo > new Date(dataInicioDestileriaIngeniosNorte.seaboardFin) 
+        ? new Date(dataInicioDestileriaIngeniosNorte.seaboardFin) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+
     if (
       data.ingenioNombre === "La Esperanza" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroEsperanza &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.esperanzaInicio)
     ) {
       g16 = g16 + data.alcoholProducido;
@@ -988,7 +1141,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Ledesma" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLedesma &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.ledesmaInicio)
     ) {
       g17 = g17 + data.alcoholProducido;
@@ -1000,7 +1153,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Río Grande" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroRioGrande &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.riograndeInicio)
     ) {
       g18 = g18 + data.alcoholProducido;
@@ -1012,7 +1165,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "San Isidro" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSanIsidro &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.sanisidroInicio)
     ) {
       g19 = g19 + data.alcoholProducido;
@@ -1024,7 +1177,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Seaboard" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSeaboard &&
       newDate >= new Date(dataInicioDestileriaIngeniosNorte.seaboardInicio)
     ) {
       g20 = g20 + data.alcoholProducido;
@@ -1038,7 +1191,7 @@ export const dataComparativaPorTipo = (
   /**************************************************************************************/
   /****************************** DATOS ANHIDRO ALCOHOL ******************************/
   /** TUCUMAN **/
-  
+
   // Datos de anhidro por documento para años 2024 y 2023
   const anhidroLeales = [
     { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2194476 },
@@ -1090,9 +1243,110 @@ export const dataComparativaPorTipo = (
     const diaData = fechaParametro.getDate();
     fechaParametro.setDate(diaData);
     fechaParametro.setFullYear(anioData);
+
+
+    const anioComparativo = dataEnd.getFullYear() - 1;
+    const newDateComparativo = new Date(dataEnd);
+    newDateComparativo.setFullYear(anioComparativo);
+
+    const fechaParametroAguilares = dataInicioAnhidroIngenios.aguilFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.aguilFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.aguilFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroBellaVista = dataInicioAnhidroIngenios.bellaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroConcepcion = dataInicioAnhidroIngenios.concepFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.concepFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.concepFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroCruzAlta = dataInicioAnhidroIngenios.cruzFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.cruzFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.cruzFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroDestileriaBellaVista = dataInicioAnhidroIngenios.bellaVistaDestFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.bellaVistaDestFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.bellaVistaDestFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroFamailla = dataInicioAnhidroIngenios.famaillaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.famaillaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.famaillaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaCorona = dataInicioAnhidroIngenios.coronaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.coronaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.coronaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaFlorida = dataInicioAnhidroIngenios.floridaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.floridaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.floridaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaProvidencia = dataInicioAnhidroIngenios.provFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.provFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.provFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLaTrinidad = dataInicioAnhidroIngenios.trinFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.trinFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.trinFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroLeales = dataInicioAnhidroIngenios.lealesFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.lealesFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.lealesFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroMarapa = dataInicioAnhidroIngenios.marapaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.marapaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.marapaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroNunorco = dataInicioAnhidroIngenios.nunorcoFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.nunorcoFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.nunorcoFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSantaBarbara = dataInicioAnhidroIngenios.staBarFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.staBarFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.staBarFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSantaRosa = dataInicioAnhidroIngenios.staRosaFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.staRosaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.staRosaFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
+
+    const fechaParametroSanJuan = dataInicioAnhidroIngenios.sanJuanFinAnhidro
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngenios.sanJuanFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.sanJuanFinAnhidro)
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo)
     if (
       data.ingenioNombre === "Aguilares" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroAguilares &&
       newDate >= new Date(dataInicioAnhidroIngenios.aguilInicioAnhidro)
     ) {
       h1 = h1 + data.alcoholAnhidro || 0;
@@ -1105,7 +1359,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Cruz Alta" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroCruzAlta &&
       newDate >= new Date(dataInicioAnhidroIngenios.cruzInicioAnhidro)
     ) {
       h2 = h2 + data.alcoholAnhidro || 0;
@@ -1115,9 +1369,23 @@ export const dataComparativaPorTipo = (
         AG11: dataCruzAlta.AG11,
       };
     }
+
+    if(
+      data.ingenioNombre === 'Destilería Bella Vista' &&
+    newDate <= fechaParametroDestileriaBellaVista &&
+    newDate >= new Date(dataInicioAnhidroIngenios.bellaVistaDestFinAnhidroInicio)
+    ) {
+      h21 = h21 + data.alcoholAnhidro || 0;
+      dataDestBellaVista = {
+        AH27: h21,
+        AA27: dataDestBellaVista.AA27,
+        AG27: dataDestBellaVista.AG27,
+      };
+    }
+
     if (
       data.ingenioNombre === "La Florida" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaFlorida &&
       newDate >= new Date(dataInicioAnhidroIngenios.floridaInicioAnhidro)
     ) {
       h3 = h3 + data.alcoholAnhidro || 0;
@@ -1129,7 +1397,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Concepción" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroConcepcion &&
       newDate >= new Date(dataInicioAnhidroIngenios.concepInicioAnhidro)
     ) {
       h4 = h4 + data.alcoholAnhidro || 0;
@@ -1142,7 +1410,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Marapa" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroMarapa &&
       newDate >= new Date(dataInicioAnhidroIngenios.marapaInicioAnhidro)
     ) {
       h5 = h5 + data.alcoholAnhidro || 0;
@@ -1155,7 +1423,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Bella Vista" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroBellaVista &&
       newDate >= new Date(dataInicioAnhidroIngenios.bellaInicioAnhidro)
     ) {
       h6 = h6 + data.alcoholAnhidro || 0;
@@ -1168,7 +1436,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Famaillá" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroFamailla &&
       newDate >= new Date(dataInicioAnhidroIngenios.famaillaInicioAnhidro)
     ) {
       h7 = h7 + data.alcoholAnhidro || 0;
@@ -1181,7 +1449,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "La Corona" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaCorona &&
       newDate >= new Date(dataInicioAnhidroIngenios.coronaInicioAnhidro)
     ) {
       h8 = h8 + data.alcoholAnhidro || 0;
@@ -1194,7 +1462,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "La Providencia" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaProvidencia &&
       newDate >= new Date(dataInicioAnhidroIngenios.provInicioAnhidro)
     ) {
       h9 = h9 + data.alcoholAnhidro || 0;
@@ -1207,7 +1475,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "La Trinidad" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLaTrinidad &&
       newDate >= new Date(dataInicioAnhidroIngenios.trinInicioAnhidro)
     ) {
       h10 = h10 + data.alcoholAnhidro || 0;
@@ -1220,7 +1488,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Leales" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLeales &&
       newDate >= new Date(dataInicioAnhidroIngenios.lealesInicioAnhidro)
     ) {
       h11 = h11 + data.alcoholAnhidro || 0;
@@ -1233,7 +1501,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Ñuñorco" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroNunorco &&
       newDate >= new Date(dataInicioAnhidroIngenios.nunorcoInicioAnhidro)
     ) {
       h12 = h12 + data.alcoholAnhidro || 0;
@@ -1246,7 +1514,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Santa Barbara" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSantaBarbara &&
       newDate >= new Date(dataInicioAnhidroIngenios.staBarInicioAnhidro)
     ) {
       h13 = h13 + data.alcoholAnhidro || 0;
@@ -1259,7 +1527,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Santa Rosa" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSantaRosa &&
       newDate >= new Date(dataInicioAnhidroIngenios.staRosaInicioAnhidro)
     ) {
       h14 = h14 + data.alcoholAnhidro || 0;
@@ -1272,7 +1540,7 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "San Juan" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSanJuan &&
       newDate >= new Date(dataInicioAnhidroIngenios.sanJuanInicioAnhidro)
     ) {
       h15 = h15 + data.alcoholAnhidro || 0;
@@ -1293,12 +1561,12 @@ export const dataComparativaPorTipo = (
     currentDate.setFullYear(anioData);                // Muestra la fecha completa de comparativa
     const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11 ----- Mes de comparativa
     const currentDay = currentDate.getDate();
-    
+
 
 
     // Leales - Zafra 2024
     anhidroLeales.forEach((mes) => {
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h11 = h11 + valorPorDia
         dataLeales = {
@@ -1307,7 +1575,7 @@ export const dataComparativaPorTipo = (
           AG22: dataLeales.AG22
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         let valorPorDia
         valorPorDia = (mes.valor / 30) * currentDay;
@@ -1318,7 +1586,7 @@ export const dataComparativaPorTipo = (
           AG22: dataLeales.AG22
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h11 = h11 + valorPorDia
         dataLeales = {
@@ -1327,7 +1595,7 @@ export const dataComparativaPorTipo = (
           AG22: dataLeales.AG22
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h11 = h11 + valorPorDia;
@@ -1340,9 +1608,9 @@ export const dataComparativaPorTipo = (
     });
 
 
-     // Concepción - Zafra 2024
-     anhidroConcepcion.forEach((mes) => {
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+    // Concepción - Zafra 2024
+    anhidroConcepcion.forEach((mes) => {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h4 = h4 + valorPorDia
         dataConcepcion = {
@@ -1351,7 +1619,7 @@ export const dataComparativaPorTipo = (
           AG14: dataConcepcion.AG14
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         let valorPorDia
         valorPorDia = (mes.valor / 30) * currentDay;
@@ -1362,7 +1630,7 @@ export const dataComparativaPorTipo = (
           AG14: dataConcepcion.AG14
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h4 = h4 + valorPorDia
         dataConcepcion = {
@@ -1371,7 +1639,7 @@ export const dataComparativaPorTipo = (
           AG14: dataConcepcion.AG14
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h4 = h4 + valorPorDia;
@@ -1383,9 +1651,9 @@ export const dataComparativaPorTipo = (
       }
     });
 
-     // Bella Vista - Zafra 2024
-     anhidroBellaVista.forEach((mes) => {
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
+    // Bella Vista - Zafra 2024
+    anhidroBellaVista.forEach((mes) => {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h6 = h6 + valorPorDia
         dataBellaVista = {
@@ -1394,7 +1662,7 @@ export const dataComparativaPorTipo = (
           AG17: dataBellaVista.AG17
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2024 ) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2024) && mes.anio === 2024 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         let valorPorDia
         valorPorDia = (mes.valor / 30) * currentDay;
@@ -1405,7 +1673,7 @@ export const dataComparativaPorTipo = (
           AG17: dataBellaVista.AG17
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero < currentMonth) {
         let valorPorDia = mes.valor
         h6 = h6 + valorPorDia
         dataBellaVista = {
@@ -1414,7 +1682,7 @@ export const dataComparativaPorTipo = (
           AG17: dataBellaVista.AG17
         };
       }
-      if ((dataEnd.getFullYear() - 1 === 2025 ) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
+      if ((dataEnd.getFullYear() - 1 === 2025) && mes.anio === 2025 && mes.mesNumero === currentMonth) {
         // Si es el mes actual, solo hasta el día actual
         valorPorDia = valorPorDia + (mes.valor / 30) * currentDay;
         h6 = h6 + valorPorDia;
@@ -1433,14 +1701,14 @@ export const dataComparativaPorTipo = (
     const diaData = currentDate.getDate();
     currentDate.setDate(diaData);
     currentDate.setFullYear(anioData);
-    
+
     // Para 2023 usamos valores acumulados distribuidos proporcionalmente
     const diasEnAno = 365;
     const diasTranscurridos = Math.min(
       (currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (1000 * 60 * 60 * 24),
       diasEnAno
     );
-    
+
     // Leales - Zafra 2023
     const valorLeales2023 = (anhidroLeales2023 / diasEnAno) * diasTranscurridos;
     h11 = h11 + valorLeales2023;
@@ -1472,14 +1740,45 @@ export const dataComparativaPorTipo = (
   /** NORTE **/
   dataImportAnhidroComparativaNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
-    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-    const anioData = fechaParametro.getFullYear() - 1;
-    const diaData = fechaParametro.getDate()
-    fechaParametro.setDate(diaData)
-    fechaParametro.setFullYear(anioData)
+    // const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    // const anioData = fechaParametro.getFullYear() - 1;
+    // const diaData = fechaParametro.getDate()
+    // fechaParametro.setDate(diaData)
+    // fechaParametro.setFullYear(anioData
+
+    const anioComparativo = dataEnd.getFullYear() - 1;
+    const newDateComparativo = new Date(dataEnd);
+    newDateComparativo.setFullYear(anioComparativo);
+
+    const fechaParametroEsperanza = dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro 
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro) 
+        ? new Date(dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro) 
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo);
+    const fechaParametroLedesma = dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro 
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro) 
+        ? new Date(dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroRioGrande = dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro 
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro) 
+        ? new Date(dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+    const fechaParametroSanIsidro = dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro 
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro) 
+        ? new Date(dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro) 
+        : new Date(newDateComparativo))
+      : new Date(newDateComparativo);
+    const fechaParametroSeaboard = dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro 
+      ? (newDateComparativo > new Date(dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro) 
+        ? new Date(dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro) 
+        : new Date(newDateComparativo)) 
+      : new Date(newDateComparativo);
+
     if (
       data.ingenioNombre === "La Esperanza" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroEsperanza &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.esperanzaInicioAnhidro)
     ) {
       h16 = h16 + data.alcoholAnhidro || 0;
@@ -1492,10 +1791,10 @@ export const dataComparativaPorTipo = (
 
     if (
       data.ingenioNombre === "Ledesma" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroLedesma &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.ledesmaInicioAnhidro)
     ) {
-      
+
       h17 = h17 + data.alcoholAnhidro || 0;
       dataLedesma = {
         P45: h17,
@@ -1505,7 +1804,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Río Grande" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroRioGrande &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.riograndeInicioAnhidro)
     ) {
       h18 = h18 + data.alcoholAnhidro || 0;
@@ -1517,7 +1816,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "San Isidro" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSanIsidro &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.sanisidroInicioAnhidro)
     ) {
       h19 = h19 + data.alcoholAnhidro || 0;
@@ -1529,7 +1828,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Seaboard" &&
-      newDate <= fechaParametro &&
+      newDate <= fechaParametroSeaboard &&
       newDate >= new Date(dataInicioAnhidroIngeniosNorte.seaboardInicioAnhidro)
     ) {
       h20 = h20 + data.alcoholAnhidro || 0;
@@ -2144,7 +2443,7 @@ export const dataComparativaPorTipo = (
     }
     if (
       data.ingenioNombre === "Río Grande" &&
-      newDate <= fechaParametro 
+      newDate <= fechaParametro
     ) {
       a18 = a18 + data.moliendaCanaBruta || 0;
       b18 = b18 + data.moliendaCanaNeta || 0;
@@ -2298,20 +2597,20 @@ export const dataComparativaPorTipo = (
 
   */
   // if (zafraParteDiario - 1 === 2024) {
-    // dataLeales.AB22 = dataLeales.AB22 + 31541737
-    // dataLeales.AB22 =
-    //   dataLeales.AB22 +
-    //   2194476 +
-    //   2052522 + 
-    //   1657315
-    //   4133790 +
-    //   4971944 +
-    //   2963470 +
-    //   1460000 +
-    //   5347000 +
-    //   235750 +
-    //   4770000 +
-    //   3412785;
+  // dataLeales.AB22 = dataLeales.AB22 + 31541737
+  // dataLeales.AB22 =
+  //   dataLeales.AB22 +
+  //   2194476 +
+  //   2052522 + 
+  //   1657315
+  //   4133790 +
+  //   4971944 +
+  //   2963470 +
+  //   1460000 +
+  //   5347000 +
+  //   235750 +
+  //   4770000 +
+  //   3412785;
   // }
 
   /* CONCEPCION 2024

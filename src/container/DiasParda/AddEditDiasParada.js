@@ -12,6 +12,7 @@ import Unauthorized from "../../components/Unauthorized";
 import DiasParadas from "../../components/DiasParada";
 import { getDiasParadas } from "../../utils/queryAPI/diaParadas";
 import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const AddEditDiasParada = () => {
   const [diasParadasData, setDiasParadasData] = useState(undefined);
@@ -19,14 +20,17 @@ const AddEditDiasParada = () => {
   const [aniosData, setAniosData] = useState(undefined);
   const [periodosData, setPeriodosData] = useState(undefined);
   const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
-  const [inactivo, setInactivo] = useState(false);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   const { dataUser } = useContext(User);
-  console.log(dataUser)
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -105,12 +109,11 @@ const AddEditDiasParada = () => {
             className="containerAdmin p-0 d-flex justify-content-start"
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`}`}>
               <DiasParadas
                 dataRegisterEdit={dataRegisterEdit}
                 id={id}

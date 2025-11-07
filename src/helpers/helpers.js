@@ -26,18 +26,7 @@ export const getToken = (ctx) => {
   token = Cookies.get('token-ipaat-v2')
   return token || undefined
 }
-// export const getIdUser = (ctx) => {
-//   let idUser
-//   if (ctx) {
-//     const { req, res } = ctx
-//     const cookies = new serverCookies(req, res)
-//     idUser = cookies.get('idUser')
-//   } else {
-//     idUser = clientCookies.get('idUser')
-//   }
 
-//   return idUser || null
-// }
 export const deleteToken = () => {
   localStorage.removeItem('data-security-ipaat-2.0')
   return localStorage.removeItem('jwt-security-ipaat-2.0')
@@ -46,6 +35,15 @@ export const deleteToken = () => {
 export const deleteCookies = () => {
   Cookies.remove('token-ipaat-v2')
   Cookies.remove('idUser')
+}
+
+export const setStateSidebar = (state) => {
+  return localStorage.setItem('state-menu', state)
+}
+export const getStateSidebar = () => {
+  if (typeof window !== 'undefined') {
+    return JSON.parse(localStorage.getItem('state-menu'))
+  }
 }
 
 /**

@@ -6,16 +6,21 @@ import { useEffect, useState, useContext } from "react";
 import { User } from "../../context/UserProvider";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
-import Title from "antd/es/skeleton/Title";
 import DiasParadaContainer from "./DiasParadaContainer";
+import { SidebarContext } from "../../context/SidebarProvider";
+import Title from "../../components/Title";
 
 const DiasParada = () => {
   const [loading, setLoading] = useState(false);
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   const { dataUser } = useContext(User);
+  const { sidebarStatus } = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -47,18 +52,17 @@ const DiasParada = () => {
         </div>
       ) : (
         <>
+          <Title title={"Días de paradas"} />
           <Container
             fluid
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
-          <Title Title={"Días de parada"} />
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`}`}>
               <DiasParadaContainer
                 tokenAuth={tokenAuth}
                 routeAPI={"diaParada"}

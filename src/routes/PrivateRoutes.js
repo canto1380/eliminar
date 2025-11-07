@@ -9,7 +9,7 @@ import AddEditPeriodoContainer from '../container/PeriodosZafra/AddEditPeriodo'
 import ReportesContainer from '../container/Reportes'
 import DiasParada from '../container/DiasParda'
 import AddEditDiasParada from '../container/DiasParda/AddEditDiasParada'
-import GraficasContainer from '../container/Graficas'
+import GraficasContainer from '../container/GraficasYReportes'
 import IAContainer from '../container/IA'
 
 const PrivateRoutes = ({ token }) => {

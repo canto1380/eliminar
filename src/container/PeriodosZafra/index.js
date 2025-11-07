@@ -8,14 +8,19 @@ import { getToken, getTokenLS } from "../../helpers/helpers";
 import { inactivityTime } from "../../helpers/inactivityTime";
 import Title from '../../components/Title'
 import PeriodoZafraContainer from "./PeriodoZafraContainer";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const PeriodosZafra = () => {
   const [loading, setLoading] = useState(false);
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   const { dataUser } = useContext(User);
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -55,12 +60,11 @@ const PeriodosZafra = () => {
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`}`}>
               <PeriodoZafraContainer tokenAuth={tokenAuth} routeAPI={'periodoZafra'}/>
             </div>
           {modalUnauthorized && (

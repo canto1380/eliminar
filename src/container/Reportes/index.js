@@ -10,10 +10,10 @@ import { inactivityTime } from "../../helpers/inactivityTime";
 import { getDataPartesDiariosBE } from "../../utils/queryAPI/partesDiariosQuery";
 import ReportesDataContainer from "./ReportesContainer";
 import { getParteDiarios } from "../../utils/queryAPI/parteDiarios";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const ReportesContainer = () => {
   const [loading, setLoading] = useState(false);
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [dataReportes, setDataReportes] = useState(undefined);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
@@ -21,6 +21,11 @@ const ReportesContainer = () => {
   const [dataZafraFin, setDataZafraFin] = useState(undefined);
   const [dateNow, setDateNow] = useState(undefined);
   const { dataUser } = useContext(User);
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -92,12 +97,11 @@ const ReportesContainer = () => {
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`} `}>
               <ReportesDataContainer
                 dataReportes={dataReportes}
                 dataZafraInicio={dataZafraInicio}

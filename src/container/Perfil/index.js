@@ -10,16 +10,22 @@ import { inactivityTime } from "../../helpers/inactivityTime"
 import PerfilContainer from "./PerfilContainer"
 import Cookies from "js-cookie"
 import { getUsuariosById } from "../../utils/queryAPI/usuarios"
+import { SidebarContext } from "../../context/SidebarProvider"
 
 const Perfil = () => {
   const [loading, setLoading] = useState(false)
-  const [inactivo, setInactivo] = useState(true)
   const [tokenAuth, setTokenAuth] = useState(null)
   const [modalUnauthorized, setModalUnauthorized] = useState(false)
   const [userData, setUserData] = useState(null)
 
   const {dataUser} = useContext(User)
   const id = Cookies.get('idUser')
+
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -65,12 +71,11 @@ const Perfil = () => {
         <Title title={"Perfil"}/>
         <Container fluid className={`containerAdmin p-0 d-flex justify-content-end`}>
           <Sidebar 
-          inactivo={inactivo}
-          setInactivo={setInactivo}
+          inactivo={sidebarStatus}
           tokenAuth={tokenAuth}
           dataUser={dataUser}
           />
-          <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
+          <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`}`}>
           <PerfilContainer tokenAuth={tokenAuth} routerAPI={'usuarios'} userData={userData}/>
           </div>
           {modalUnauthorized && (

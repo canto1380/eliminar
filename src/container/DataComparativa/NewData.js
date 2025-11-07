@@ -11,11 +11,11 @@ import DataComparativaHistorica from "../../components/DataComparativa";
 import { getDataComparativa } from "../../utils/queryAPI/dataComparativa";
 import { getAnios } from "../../utils/queryAPI/anios";
 import { getRegion } from "../../utils/queryAPI/region";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const NewData = () => {
   const [dataComparativaData, setDataComparativaData] = useState(undefined);
   const [dataRegisterEdit, setDataRegisterEdit] = useState(undefined);
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,6 +25,12 @@ const NewData = () => {
 
   const { anio } = useParams();
   const { dataUser } = useContext(User);
+
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -98,12 +104,11 @@ const NewData = () => {
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`} `}>
               <DataComparativaHistorica
                 dataRegisterEdit={dataRegisterEdit}
                 dataComparativaData={dataComparativaData}

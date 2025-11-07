@@ -308,12 +308,12 @@ const ParteDiarioContainer = () => {
         )
       ) : (
         <>
-          <div className="px-4">
+          {/* <div className="px-4">
             <span className="text-danger fw-bolder">*</span>
             <span className="text-legend">
               Periodos desde 01/04 al 31/03 del siguiente año
             </span>
-          </div>
+          </div> */}
           <Filtros
             setDataEnd={setDataEnd}
             setDataAnio={setDataAnio}

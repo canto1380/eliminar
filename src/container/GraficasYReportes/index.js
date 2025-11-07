@@ -8,15 +8,19 @@ import Unauthorized from "../../components/Unauthorized"
 import GraficasDataContainer from "./GraficasContainer"
 import { getToken, getTokenLS, getDataToken } from "../../helpers/helpers"
 import Spinn from "../../components/Spinner"
+import { SidebarContext } from "../../context/SidebarProvider"
 
 const GraficasContainer = () => {
     const [loading, setLoading] = useState(false)
-    const [inactivo, setInactivo] = useState(true)
     const [tokenAuth, setTokenAuth] = useState(null)
     const [dataUserRegister, setDataUserRegister] = useState(null)
     const [modalUnauthorized, setModalUnauthorized] = useState(false)
 
     const { dataUser } = useContext(User)
+    const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
 
     useEffect(() => {
         const token = getToken();
@@ -61,12 +65,11 @@ const GraficasContainer = () => {
                     <Title title={'Gráficos'} />
                     <Container fluid className={`containerAdmin p-0 d-flex justify-content-end`}>
                         <Sidebar
-                            inactivo={inactivo}
-                            setInactivo={setInactivo}
+                            inactivo={sidebarStatus}
                             tokenAuth={tokenAuth}
                             dataUser={dataUser}
                         />
-                        <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+                        <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`} `}>
                             <GraficasDataContainer
                                 tokenAuth={tokenAuth}
                                 dataUserRegister={dataUserRegister}

@@ -185,6 +185,7 @@ const ParteDiario = ({
   const [panelAzucarOrganico, setPanelAzucarOrganico] = useState(null);
   const [panelAzucarOtros, setPanelAzucarOtros] = useState(null);
   const [panelAlcohol, setPanelAlcohol] = useState(null);
+  const [panelAlcoholAnhidro, setPanelAlcoholAnhidro] = useState(null);
 
   /** DATOS DIAS PARADAS **/
   const [diasParadaExport, setDiasParadaExport] = useState(null);
@@ -258,7 +259,8 @@ const ParteDiario = ({
       setPanelAzucarRefinado,
       setPanelAzucarOrganico,
       setPanelAzucarOtros,
-      setPanelAlcohol
+      setPanelAlcohol,
+      setPanelAlcoholAnhidro
     );
     dataComparativaPorTipo(
       dataImportComparativa,
@@ -1022,6 +1024,7 @@ const ParteDiario = ({
     items,
     onClick: handleMenuClick,
   };
+
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center px-4 pb-0 pt-2">
@@ -1127,6 +1130,16 @@ const ParteDiario = ({
           <div>
             <p className="text-center mb-1 dato-panel">
               {panelAlcohol?.toLocaleString("es-ES")} [L]
+            </p>
+          </div>
+        </Col>
+        <Col className="align-items-center col-valores p-2 mx-2">
+          <div>
+            <p className="text-center fw-bolder mb-1 t-panel">Alcohol Anhidro</p>
+          </div>
+          <div>
+            <p className="text-center mb-1 dato-panel">
+              {panelAlcoholAnhidro?.toLocaleString("es-ES")} [L]
             </p>
           </div>
         </Col>

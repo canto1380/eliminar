@@ -64,7 +64,7 @@ export const optionsGraphic = (title) => {
             y: {
                 title: {
                     display: true,
-                    text: "Toneladas",
+                    text: title.slice(0,3) === 'Alc' ? 'Litros [L]': title.slice(0,3) === 'Rto' ? 'Porcentaje (%)' : "Toneladas [T]",
                     color: colores.tituloEjes,
                     font: {
                       size: 14,      // 🔹 tamaño del título del eje Y

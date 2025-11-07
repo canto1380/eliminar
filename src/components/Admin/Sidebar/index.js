@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import {
   BsFillCaretRightFill,
@@ -18,11 +18,20 @@ import {
   getDataToken,
 } from '../../../helpers/helpers'
 import { Link } from 'react-router-dom'
+import { SidebarContext } from '../../../context/SidebarProvider';
 
-const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
+const Sidebar = ({ inactivo, tokenAuth, dataUser }) => {
   const [initial, setInitial] = useState('')
   const [initialSurname, setInitialSurname] = useState('')
   const [nick, setNick] = useState('')
+
+  const {changeStatus} = useContext(SidebarContext)
+
+  const changeOnSubmit = (e) => {
+    console.log(e)
+    changeStatus(e)
+    
+  }
 
   useEffect(() => {
     const data = getDataToken()
@@ -120,7 +129,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
           <Col
             xs={12}
             className={`text-light mt-3 text-center px-0`}
-            onClick={() => setInactivo(!inactivo)}
+            onClick={() => changeOnSubmit(!inactivo)}
           >
             {
               <BsFillCaretRightFill
@@ -133,7 +142,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
           <Col
             xs={2}
             className={`p-0 text-light`}
-            onClick={() => setInactivo(!inactivo)}
+            onClick={() => changeOnSubmit(!inactivo)}
           >
             {
               <BsFillCaretLeftFill

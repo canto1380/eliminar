@@ -91,7 +91,7 @@ const ChatInput = ({ onSend, dataUserRegister }) => {
             formData.append('id_usuario',dataUserRegister?.id)
             formData.append('id_assistant',1)
             formData.append('id_chat',1)
-            formData.append('status', active)
+            formData.append('status', 'active')
         }
         if (file) {
             formData.append("file", file)
@@ -99,7 +99,7 @@ const ChatInput = ({ onSend, dataUserRegister }) => {
             formData.append('id_usuario', dataUserRegister?.id)
             formData.append('id_assistant', 1)
             formData.append('id_chat', 1)
-            formData.append('status', active)
+            formData.append('status', 'active')
         };
 
         try {

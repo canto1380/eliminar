@@ -103,7 +103,7 @@ const ItemCollpse = ({
     setNunorco([]);
     setNunorcoMensual([]);
     setNunorcoZafra([]);
-    
+
     // Procesar los nuevos datos
     dataPorQuincena();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,19 +114,19 @@ const ItemCollpse = ({
     let arrQuincenal = [];
     let arrMensual = [];
     let arrZafra = [];
-    
+
     // Función para eliminar duplicados por fecha e ingenio
     const eliminarDuplicados = (array) => {
       if (!Array.isArray(array) || array.length === 0) {
         return [];
       }
-      
+
       const seen = new Map();
       return array.filter(item => {
         if (!item || !item.fechaParte || !item.ingenioNombre) {
           return false; // Excluir elementos inválidos
         }
-        
+
         const key = `${item.fechaParte}_${item.ingenioNombre}`;
         if (seen.has(key)) {
           return false;
@@ -135,7 +135,7 @@ const ItemCollpse = ({
         return true;
       });
     };
-    
+
     dataParteDiariosHistoricos?.forEach((data) => {
       const newDate = new Date(data.fechaParte);
       function getLastDayOfMonth(month) {
@@ -149,8 +149,7 @@ const ItemCollpse = ({
         `${dataMes}/${dataQuincena === 1 ? 1 : 16}/${dataAnio}`
       );
       const fechaParametro2 = new Date(
-        `${dataMes}/${
-          dataQuincena === 1 ? 15 : getLastDayOfMonth(dataMes)
+        `${dataMes}/${dataQuincena === 1 ? 15 : getLastDayOfMonth(dataMes)
         }/${dataAnio}`
       );
       if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
@@ -166,22 +165,22 @@ const ItemCollpse = ({
           arrMensual.push(data);
         }
       }
-      if(newDate <= fechaParametro2){
+      if (newDate <= fechaParametro2) {
         arrZafra.push(data);
       }
     });
-    
+
     // Eliminar duplicados de cada array
     arrQuincenal = eliminarDuplicados(arrQuincenal);
     arrMensual = eliminarDuplicados(arrMensual);
     arrZafra = eliminarDuplicados(arrZafra);
-    
+
 
     // Función helper para filtrar por ingenio y eliminar duplicados
     const filtrarPorIngenio = (array, nombreIngenio) => {
       return eliminarDuplicados(array.filter((d) => d.ingenioNombre === nombreIngenio));
     };
-    
+
     setAguilares(filtrarPorIngenio(arrQuincenal, "Aguilares"));
     setAguilaresMensual(filtrarPorIngenio(arrMensual, "Aguilares"));
     setAguilaresZafra(filtrarPorIngenio(arrZafra, "Aguilares"));
@@ -242,8 +241,9 @@ const ItemCollpse = ({
   /********** CALCULO TOTALES **********/
   const totalQuincenaAguilares = aguilares.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -251,16 +251,18 @@ const ItemCollpse = ({
 
   const totalMesAguilares = aguilaresMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraAguilares = aguilaresZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -268,8 +270,9 @@ const ItemCollpse = ({
 
   const totalQuincenaBellaVista = bellaVista.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -277,8 +280,9 @@ const ItemCollpse = ({
 
   const totalMesBellaVista = bellaVistaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -286,8 +290,9 @@ const ItemCollpse = ({
 
   const totalZafraBellaVista = bellaVistaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -295,24 +300,27 @@ const ItemCollpse = ({
 
   const totalQuincenaConcepcion = concepcion.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesConcepcion = concepcionMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraConcepcion = concepcionZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -320,24 +328,27 @@ const ItemCollpse = ({
 
   const totalQuincenaCruzAlta = cruzAlta.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesCruzAlta = cruzAltaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraCruzAlta = cruzAltaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -345,24 +356,27 @@ const ItemCollpse = ({
 
   const totalQuincenaFamailla = famailla.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesFamailla = famaillaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraFamailla = famaillaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -370,24 +384,27 @@ const ItemCollpse = ({
 
   const totalQuincenaLaCorona = laCorona.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesLaCorona = laCoronaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraLaCorona = laCoronaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -395,24 +412,27 @@ const ItemCollpse = ({
 
   const totalQuincenaLaFlorida = laFlorida.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesLaFlorida = laFloridaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraLaFlorida = laFloridaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -420,24 +440,27 @@ const ItemCollpse = ({
 
   const totalQuincenaLaProvidencia = laProvidencia.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesLaProvidencia = laProvidenciaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraLaProvidencia = laProvidenciaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -445,24 +468,27 @@ const ItemCollpse = ({
 
   const totalQuincenaLaTrinidad = laTrinidad.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesLaTrinidad = laTrinidadMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraLaTrinidad = laTrinidadZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -470,24 +496,27 @@ const ItemCollpse = ({
 
   const totalQuincenaLeales = leales.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesLeales = lealesMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraLeales = lealesZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -495,24 +524,27 @@ const ItemCollpse = ({
 
   const totalQuincenaMarapa = marapa.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesMarapa = marapaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraMarapa = marapaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -520,24 +552,27 @@ const ItemCollpse = ({
 
   const totalQuincenaStaBarbara = santaBarbara.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesStaBarbara = santaBarbaraMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraStaBarbara = santaBarbaraZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -545,24 +580,27 @@ const ItemCollpse = ({
 
   const totalQuincenaStaRosa = santaRosa.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesStaRosa = santaRosaMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraStaRosa = santaRosaZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -570,24 +608,27 @@ const ItemCollpse = ({
 
   const totalQuincenaNunorco = nunorco.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalMesNunorco = nunorcoMensual.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
   }, {});
   const totalZafraNunorco = nunorcoZafra.reduce((acc, item) => {
     Object.keys(item).forEach((key) => {
-      if (typeof item[key] === "number") {
-        acc[key] = (acc[key] || 0) + item[key];
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
       }
     });
     return acc;
@@ -693,8 +734,8 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -708,7 +749,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -722,7 +763,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -736,7 +777,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -750,7 +791,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -764,7 +805,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -778,7 +819,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -792,7 +833,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -806,7 +847,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -820,7 +861,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -834,7 +875,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -848,7 +889,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -862,7 +903,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
@@ -876,7 +917,7 @@ const ItemCollpse = ({
       d.rendimientoCanaBruta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.RendimientoCanaNeta = !d.rendimientoCanaBruta
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
         ? 0
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }

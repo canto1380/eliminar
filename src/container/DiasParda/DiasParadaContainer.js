@@ -17,6 +17,7 @@ import { getDataToken } from "../../helpers/helpers";
 import { getIngenios } from "../../utils/queryAPI/ingenios";
 import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
 import { toast } from "react-toastify";
+import BtnDescargar from "../../components/Botones/BtnDescargar";
 
 const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   const [diasParadas, setDiasParadas] = useState(null);
@@ -188,7 +189,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   ];
   const exportarDiasParadas = async () => {
     try {
-      setLoading(true);
+      setLoadingDownloadReport(true);
       const date = new Date();
       const dateFormat = moment(date).format("DD-MM-YYYY");
       const dataSend = [
@@ -218,14 +219,15 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
         message.success("Descarga realizada correctamente", 5);
         window.location.reload();
       } else {
-        console.error("Error al generar");
+        toast.error(`Error al descargar el archivo: ${res?.data?.response?.data?.error || 'Error desconocido'}`)
       }
     } catch (error) {
-      console.error("Error en el fetch:", error);
+      toast.error(`Error al descargar el archivo: ${error?.data?.response?.data?.error || 'Error desconocido'}`)
     } finally {
-      setLoading(false);
+      setLoadingDownloadReport(false);
     }
   };
+  console.log(diasParadas)
   return (
     <Container fluid>
       <TitlePage titlePage={"Días Parada"} />
@@ -250,9 +252,16 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
             bandFilterQuincena={true}
             placeHolderSearch="Valor"
             diasParadas={diasParadas}
-            bandFilterDiasParadaAnioZafra={true}
+            // bandFilterDiasParadaAnioZafra={true}
+            // loadingDownloadReport={loadingDownloadReport}
+            // exportarDiasParadas={exportarDiasParadas}
+          />
+          <BtnDescargar
             loadingDownloadReport={loadingDownloadReport}
-            exportarDiasParadas={exportarDiasParadas}
+            dataZafra={anioZafra}
+            data={diasParadas}
+            funcionExportar={exportarDiasParadas}
+            bandExportDiasParadas={true}
           />
           <ListHeader
             title={"Paradas de los ingenios"}

@@ -1,0 +1,20 @@
+@media (max-width: 767px) {
+    .container-button-update {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .button-update {
+        text-align: start;
+        padding-top: 10px !important;
+    }
+    .info-update{
+        text-align: start !important;
+        align-content: center;
+    }
+    .info-update p {
+        margin-bottom: 0 !important;
+    }
+}
+@media (max-width: 730px) {
+
+}

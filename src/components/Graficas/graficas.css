@@ -1,15 +1,33 @@
-.containerGrafica{
+.containerGrafica {
     box-shadow: 1em;
     height: 420px;
     padding: 20px;
-    background: #ffffff;               /* fondo blanco */
-    border-radius: 12px;               /* esquinas redondeadas */
-    padding: 20px;                     /* espacio interno */
-    border: 1px solid rgba(0, 0, 0, 0.08);  /* borde sutil */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* sombra elegante */
-    transition: all 0.3s ease;  
+    background: #ffffff;
+    /* fondo blanco */
+    border-radius: 12px;
+    /* esquinas redondeadas */
+    padding: 20px;
+    /* espacio interno */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* borde sutil */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    /* sombra elegante */
+    transition: all 0.3s ease;
 }
+
 .containerGrafica:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* más sombra al hover */
-    transform: translateY(-2px);                /* efecto flotante */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    /* más sombra al hover */
+    transform: translateY(-2px);
+    /* efecto flotante */
+}
+
+.dropdown-export {
+    z-index: 9999 !important;
+    position: absolute !important;
+    border-radius: 50%;
+  }
+  .dropdown-item{
+    position: relative;
+    z-index: 9999 !important;
   }

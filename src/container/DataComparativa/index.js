@@ -9,14 +9,20 @@ import Unauthorized from "../../components/Unauthorized";
 import { getToken, getTokenLS } from "../../helpers/helpers";
 import { User } from "../../context/UserProvider";
 import { inactivityTime } from "../../helpers/inactivityTime";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const DataComparativa = () => {
   const [loading, setLoading] = useState(false);
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
 
   const { dataUser } = useContext(User);
+
+  const { sidebarStatus } = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -31,8 +37,8 @@ const DataComparativa = () => {
     if (tokenAuth === null && dataUser) {
       setTokenAuth(dataUser)
       setModalUnauthorized(false);
-    } 
-    if(tokenAuth === null && !dataUser) {
+    }
+    if (tokenAuth === null && !dataUser) {
       setModalUnauthorized(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,19 +61,18 @@ const DataComparativa = () => {
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`}`}>
-              <DataComparativaContainer tokenAuth={tokenAuth} routeAPI={'dataComparativa'}/>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`}`}>
+              <DataComparativaContainer tokenAuth={tokenAuth} routeAPI={'dataComparativa'} />
             </div>
-          {modalUnauthorized && (
-            <div>
-              <Unauthorized />
-            </div>
-          )}
+            {modalUnauthorized && (
+              <div>
+                <Unauthorized />
+              </div>
+            )}
           </Container>
         </>
       )}
