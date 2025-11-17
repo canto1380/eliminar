@@ -27,8 +27,8 @@ const ParteDiarioContainer = () => {
   const [dataAnio, setDataAnio] = useState(null);
   const [dataMes, setDataMes] = useState(null);
   const [dataQuincena, setDataQuincena] = useState(null);
-  const [dataParteDiariosHistoricos, setDataParteDiariosHistoricos] =
-    useState(null);
+  const [dataParteDiariosHistoricos, setDataParteDiariosHistoricos] = useState(null);
+  const [dataParteDiariosHistoricosNorte, setDataParteDiariosHistoricosNorte] = useState(null);
 
   const [dataImport, setDataImport] = useState(null);
   const [dataImportComparativa, setDataImportComparativa] = useState(null);
@@ -63,9 +63,10 @@ const ParteDiarioContainer = () => {
   useEffect(() => {
     if (dataZafra !== null) {
       getData();
+      getDataNorte()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra, dateInicioIngeniosItemCollapse, dataParteDiarios]);
+  }, [dataZafra, dateInicioIngeniosItemCollapse, dataParteDiarios, dataParteDiariosNorte]);
 
   useEffect(() => {
     getDataParteDiarios();
@@ -74,30 +75,10 @@ const ParteDiarioContainer = () => {
   const getDataParteDiarios = async () => {
     const data = await getParteDiarios();
     setDataParteDiarios(data);
-    aa(data); // REVEER PARA ESTADISTICAS
   };
   const getDataParteDiariosNorte = async () => {
     const data = await getParteDiariosNorte();
     setDataParteDiariosNorte(data);
-  };
-
-  const aa = (data) => {
-    const maxByIngenio = Object.values(
-      data.reduce((acc, curr) => {
-        const fecha = new Date(curr.fechaParte);
-        const fechaLimite = new Date("2015-01-01");
-
-        if (fecha < fechaLimite) return acc;
-        const nombre = curr.ingenioNombre;
-        if (
-          !acc[nombre] ||
-          curr.moliendaCanaBruta > acc[nombre].moliendaCanaBruta
-        ) {
-          acc[nombre] = curr;
-        }
-        return acc;
-      }, {})
-    );
   };
 
   useEffect(() => {
@@ -113,6 +94,13 @@ const ParteDiarioContainer = () => {
     });
     setLastUpdated(fecha);
   };
+
+  const getDataNorte = async() => {
+    const periodoActualNorte = obtenerPeriodos(dateInicioIngeniosItemCollapse, 2)
+    const {dataZafra1, dataDestileria1, dataAnhidro1} = filtrarRegistrosPorPeriodos(periodoActualNorte, dataParteDiariosNorte, new Date())
+    const datosProductivosNorte = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
+    setDataParteDiariosHistoricosNorte(datosProductivosNorte)
+  }
 
   const getData = async () => {
       const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse,1);
@@ -174,6 +162,7 @@ const ParteDiarioContainer = () => {
 
     }
   }, [dataEnd, dataParteDiarios, dateInicioIngenios, dateFinIngenios]);
+
   useEffect(() => {
     const dataNow = new Date();
     if (dataZafra === null) {
@@ -340,6 +329,8 @@ const ParteDiarioContainer = () => {
             dataQuincena={dataQuincena}
             dataZafra={dataZafra}
             dataParteDiariosHistoricos={dataParteDiariosHistoricos}
+            dataParteDiariosHistoricosNorte={dataParteDiariosHistoricosNorte}
+            dateInicioIngeniosItemCollapse={dateInicioIngeniosItemCollapse}
             dataImport={dataImport}
             dataImportComparativa={dataImportComparativa}
             dataImportDestileria={dataImportDestileria}

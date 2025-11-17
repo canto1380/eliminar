@@ -23,6 +23,7 @@ const TitlePage = ({
             <Button
               type="secondary"
               style={{ background: "rgb(64, 64, 64)", color: "white" }}
+              
               href={`${btnLink}`}
             >
               Volver
@@ -35,13 +36,14 @@ const TitlePage = ({
           <div className={`pt-4 pb-1 px-2 text-end button-update`}>
             <Button
               type="secondary"
-              style={{ background: "rgb(64, 64, 64)", color: "white" }}
+              // style={{ background: "rgb(64, 64, 64)", color: "white" }}
+              className="btn-actualizar"
               onClick={functionOnClick}
             >
               {titleBtnOnClick}
             </Button>
           </div>
-          <div className={`px-4 text-end info-update`}>
+          <div className={`ps-4 pe-3 text-end info-update`}>
             <p className={`mb-1`}>última actualización: {lastUpdated}</p>
           </div>
         </Col>

@@ -295,9 +295,9 @@ const ReportesComparativoZafras = ({
         anioStart &&
         anioEnd &&
         itemsComaprativosZafra?.length > 0 &&
-        ((ingeniosFinalizados?.length > 0) || (ingeniosFinalizadosNorte?.length > 0) || 
-         (ingeniosDestileriaFinalizados?.length > 0) || (ingeniosDestileriaFinalizadosNorte?.length > 0) ||
-         (ingeniosAnhidroFinalizados?.length > 0) || (ingeniosAnhidroFinalizadosNorte?.length > 0));
+        ((ingeniosFinalizados?.length > 0) || (ingeniosFinalizadosNorte?.length > 0) ||
+            (ingeniosDestileriaFinalizados?.length > 0) || (ingeniosDestileriaFinalizadosNorte?.length > 0) ||
+            (ingeniosAnhidroFinalizados?.length > 0) || (ingeniosAnhidroFinalizadosNorte?.length > 0));
 
 
 
@@ -315,6 +315,7 @@ const ReportesComparativoZafras = ({
     };
 
     // 👇 Mapeo de ingenios a regiones (1 = Tucumán, 2 = Norte)
+
     const ingeniosPorRegion = {
         1: ['aguilares', 'bellaVista', 'concepcion', 'cruzAlta', 'destBellaVista', 'famailla', 'laCorona', 'laFlorida', 'laProvidencia', 'laTrinidad', 'leales', 'marapa', 'nunorco', 'staBarbara', 'staRosa', 'sanJuan'],
         2: ['laEsperanza', 'ledesma', 'rioGrande', 'sanIsidro', 'seaboard']
@@ -326,7 +327,6 @@ const ReportesComparativoZafras = ({
         const regionNum = typeof regionId === 'string' ? parseInt(regionId) : regionId;
         return ingeniosPorRegion[regionNum]?.includes(nombreIngenio) || false;
     };
-
     // 👇 Mapeo especial por cambios estructurales entre campañas
     const aliasIngenios = anioEnd === 2025 ? {
         destBellaVista: "bellaVista", // comparar con Bella Vista anterior
@@ -349,13 +349,13 @@ const ReportesComparativoZafras = ({
         const ingenios = ingeniosCombinados.map((nombre) => {
             const itemsData = {};
             const dataIngenio = dataPorIngenio[nombre];
+            console.log(dataIngenio)
             if (!dataIngenio) return null;
 
             // 👇 Determinar qué items mostrar según el tipo de finalización
             if (ingeniosFinalizados.includes(nombre) || ingeniosFinalizadosNorte?.includes(nombre)) itemsMostrar.push(...itemsZafra);
             if (ingeniosDestileriaFinalizados.includes(nombre) || ingeniosDestileriaFinalizadosNorte?.includes(nombre)) itemsMostrar.push(...itemsDestileria);
             if (ingeniosAnhidroFinalizados.includes(nombre) || ingeniosAnhidroFinalizadosNorte?.includes(nombre)) itemsMostrar.push(...itemsAnhidro);
-
             // Eliminar duplicados si coincide en varios
             itemsMostrar = [...new Set(itemsMostrar)];
             // 📦 Armar los datos
@@ -398,7 +398,7 @@ const ReportesComparativoZafras = ({
                 items: itemsData,
             };
         }).filter(Boolean);
-
+        console.log(ingenios)
         // 🧮 Preparar los datos de la tabla
         data = ingenios.map((ing) => {
             if (anioStart && anioEnd) {
@@ -407,9 +407,7 @@ const ReportesComparativoZafras = ({
                 Object.keys(ing.items).forEach((item) => {
                     const valorStart = ing.items[item][anioStart];
                     const valorEnd = ing.items[item][anioEnd];
-
                     const { diff, percent } = calcDiff(valorStart, valorEnd);
-
                     // 📊 Lógica personalizada para mostrar 100% si desapareció el dato
                     let percentDisplay;
                     if (
@@ -442,7 +440,6 @@ const ReportesComparativoZafras = ({
             }
         });
     }
-
     useEffect(() => {
         setTableDataView(data || [])
         // eslint-disable-next-line react-hooks/exhaustive-deps

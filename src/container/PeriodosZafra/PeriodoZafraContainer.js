@@ -191,7 +191,6 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
       },
     },
   ];
-
   const exportarPeriodos = async () => {
     try {
       setLoading(true);
@@ -201,7 +200,9 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
         {
           periodosZafra: periodosZafra,
           usuario: dataUserRegister,
-          anioZafra: yearZafra
+          anioZafra: yearZafra,
+          titulo: `Periodos`,
+          dateFormat
         },
       ];
       const res = await apiExportExcel("POST", "periodoZafra/descargar", dataSend);
@@ -212,7 +213,7 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
 
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `Periodos ${dateFormat} - Zafra ${yearZafra || 'históricas'}`; // Nombre del archivo
+        link.download = `${dateFormat} - Periodo Zafra ${yearZafra || ''}`; // Nombre del archivo
         link.click();
         link.remove();
         window.URL.revokeObjectURL(link);

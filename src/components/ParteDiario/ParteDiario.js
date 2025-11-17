@@ -16,6 +16,7 @@ import { Dropdown, message, Space } from "antd";
 import { getDiasParadas } from "../../utils/queryAPI/diaParadas";
 import TextArea from "antd/es/input/TextArea";
 import { toast } from "react-toastify";
+import '../Botones/botones.css'
 
 const ParteDiario = ({
   dataEnd,
@@ -24,6 +25,8 @@ const ParteDiario = ({
   dataQuincena,
   dataZafra,
   dataParteDiariosHistoricos,
+  dataParteDiariosHistoricosNorte,
+  dateInicioIngeniosItemCollapse,
   dataImport,
   dataImportComparativa,
   dataImportDestileria,
@@ -787,6 +790,7 @@ const ParteDiario = ({
       toast.error("Error en el servidor:", error);
     }
   };
+
   /*** DIAS EFECTIVOS DE ZAFRA ***/
   useEffect(() => {
     if (dataAnio !== null && dataEnd !== null && diasParadaExport !== null) {
@@ -1148,7 +1152,7 @@ const ParteDiario = ({
         <Col xs={12} className="text-start mb-5 mt-4">
           <Dropdown menu={menuProps}>
             <Button
-              className={`${(dataEnd === null ||
+              className={`btn-descargar ${(dataEnd === null ||
                   dataImport === null ||
                   dataImportComparativa === null ||
                   fechasInicioIngenios === null ||
@@ -1202,6 +1206,8 @@ const ParteDiario = ({
             dataQuincena={dataQuincena}
             dataZafra={dataZafra}
             dataParteDiariosHistoricos={dataParteDiariosHistoricos}
+            dataParteDiariosHistoricosNorte={dataParteDiariosHistoricosNorte}
+            dateInicioIngeniosItemCollapse={dateInicioIngeniosItemCollapse}
           />
         </Col>
       </Row>

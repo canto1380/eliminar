@@ -1138,7 +1138,6 @@ export const dataPorTipo = (
     dataStaRosa.N25 +
     dataSanJuan.N26
 
-
   /** NORTE **/
   dataImportDestileriaNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
@@ -1926,6 +1925,7 @@ export const dataPorTipo = (
       };
     }
   });
+
   /*********************************************************************************/
   /*********************************** DATOS ZAFRA ***********************************/
   /** TUCUMAN **/
@@ -2019,14 +2019,14 @@ export const dataPorTipo = (
         J27: z21,
         K27: e21,
         M27: f21,
-        N27: dataCruzAlta.N27,
+        N27: dataDestBellaVista.N27,
         C59: k21,
         D59: h21,
         F59: i21,
         G59: j21,
         L59: l21,
-        O59: dataCruzAlta.O59,
-        R59: dataCruzAlta.R59,
+        O59: dataDestBellaVista.O59,
+        R59: dataDestBellaVista.R59,
       };
     }
 
@@ -2574,6 +2574,7 @@ export const dataPorTipo = (
     }
   });
   /** NORTE **/
+  
   dataImportNorte?.forEach((data) => {
     const newDate = new Date(data.fechaParte)
     // const fechaParametroEsperanza = dataInicioIngeniosNorte.esperanzaFin ? (dataEnd > new Date(dataInicioIngeniosNorte.esperanzaFin) ? new Date(dataInicioIngeniosNorte.esperanzaFin) : new Date(dataEnd)) : new Date(dataEnd);
@@ -2622,9 +2623,10 @@ export const dataPorTipo = (
     }
     if (
       data.ingenioNombre === "Ledesma" &&
-      newDate >= new Date(dataInicioIngeniosNorte.Cell45)
-      // && newDate <= fechaParametro
+      newDate >= new Date(dataInicioIngeniosNorte.Cell45) &&
+      newDate <= fechaParametro
     ) {
+      console.log(data.ingenioNombre, ' fecha:: ', data.fechaParte, 'refinado: ', data.azucarRefinado)
       a17 = a17 + data.moliendaCanaBruta || 0;
       b17 = b17 + data.moliendaCanaNeta || 0;
       c17 = c17 + Number(data.azucarEquivalente || 0);
@@ -2779,7 +2781,6 @@ export const dataPorTipo = (
   setPanelAzucarRefinado(azucarPanelRefinado);
   setPanelAzucarOrganico(azucarPanelOrganico);
   setPanelAzucarOtros(azucarPanelOtros);
-
 
   /*********************************************************************************/
   /*** ALCOHOL ANHIDRO QUE QUEDO DEFASADO ENTRE EL 5/05/2024 y 15/05/2024

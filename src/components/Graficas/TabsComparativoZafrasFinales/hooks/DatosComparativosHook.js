@@ -458,6 +458,7 @@ export const datosComparativosHook = (
         seaboardEnd
     } = dataEnd
 
+
     /*** FECHA DE INICIO Y FIN DE CADA INGENIOS ***/
     const aguilaresPeriodo = periodosAnioStart?.find(
         (d) => d.nombre_ingenio === "Aguilares"
@@ -1856,7 +1857,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Aguilares" &&
             dataZafraTucumanEnd.aguilaresInicioZafraEnd &&
-            dataZafraTucumanEnd.aguilaresFinZafraEnd
+            dataZafraTucumanEnd.aguilaresFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.aguilaresInicioZafraEnd)
         ) {
             variablesEnd.cmb1 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn1 += d.moliendaCanaNeta || 0;
@@ -1888,7 +1890,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Bella Vista" &&
             dataZafraTucumanEnd.bellaVistaInicioZafraEnd &&
-            dataZafraTucumanEnd.bellaVistaFinZafraEnd
+            dataZafraTucumanEnd.bellaVistaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.bellaVistaInicioZafraEnd)
         ) {
             variablesEnd.cmb2 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn2 += d.moliendaCanaNeta || 0;
@@ -1920,7 +1923,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Concepción" &&
             dataZafraTucumanEnd.concepcionInicioZafraEnd &&
-            dataZafraTucumanEnd.concepcionFinZafraEnd
+            dataZafraTucumanEnd.concepcionFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.concepcionInicioZafraEnd)
         ) {
 
             variablesEnd.cmb3 += d.moliendaCanaBruta || 0;
@@ -1954,7 +1958,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Cruz Alta" &&
             dataZafraTucumanEnd.cruzAltaInicioZafraEnd &&
-            dataZafraTucumanEnd.cruzAltaFinZafraEnd
+            dataZafraTucumanEnd.cruzAltaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.cruzAltaInicioZafraEnd)
         ) {
             variablesEnd.cmb4 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn4 += d.moliendaCanaNeta || 0;
@@ -1987,7 +1992,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Famaillá" &&
             dataZafraTucumanEnd.famaillaInicioZafraEnd &&
-            dataZafraTucumanEnd.famaillaFinZafraEnd
+            dataZafraTucumanEnd.famaillaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.famaillaInicioZafraEnd)
         ) {
             variablesEnd.cmb6 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn6 += d.moliendaCanaNeta || 0;
@@ -2019,7 +2025,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "La Corona" &&
             dataZafraTucumanEnd.laCoronaInicioZafraEnd &&
-            dataZafraTucumanEnd.laCoronaFinZafraEnd
+            dataZafraTucumanEnd.laCoronaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laCoronaInicioZafraEnd)
         ) {
             variablesEnd.cmb7 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn7 += d.moliendaCanaNeta || 0;
@@ -2052,7 +2059,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "La Florida" &&
             dataZafraTucumanEnd.laFloridaInicioZafraEnd &&
-            dataZafraTucumanEnd.laFloridaFinZafraEnd
+            dataZafraTucumanEnd.laFloridaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laFloridaInicioZafraEnd)
         ) {
             variablesEnd.cmb8 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn8 += d.moliendaCanaNeta || 0;
@@ -2085,7 +2093,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "La Providencia" &&
             dataZafraTucumanEnd.laProvidenciaInicioZafraEnd &&
-            dataZafraTucumanEnd.laProvidenciaFinZafraEnd
+            dataZafraTucumanEnd.laProvidenciaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laProvidenciaInicioZafraEnd)
         ) {
             variablesEnd.cmb9 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn9 += d.moliendaCanaNeta || 0;
@@ -2117,7 +2126,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "La Trinidad" &&
             dataZafraTucumanEnd.laTrinidadInicioZafraEnd &&
-            dataZafraTucumanEnd.laTrinidadFinZafraEnd
+            dataZafraTucumanEnd.laTrinidadFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laTrinidadInicioZafraEnd)
         ) {
             variablesEnd.cmb10 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn10 += d.moliendaCanaNeta || 0;
@@ -2149,7 +2159,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Leales" &&
             dataZafraTucumanEnd.lealesInicioZafraEnd &&
-            dataZafraTucumanEnd.lealesFinZafraEnd
+            dataZafraTucumanEnd.lealesFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.lealesInicioZafraEnd)
         ) {
             variablesEnd.cmb11 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn11 += d.moliendaCanaNeta || 0;
@@ -2181,7 +2192,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Marapa" &&
             dataZafraTucumanEnd.marapaInicioZafraEnd &&
-            dataZafraTucumanEnd.marapaFinZafraEnd
+            dataZafraTucumanEnd.marapaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.marapaInicioZafraEnd)
         ) {
             variablesEnd.cmb12 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn12 += d.moliendaCanaNeta || 0;
@@ -2213,7 +2225,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Ñuñorco" &&
             dataZafraTucumanEnd.nunorcoInicioZafraEnd &&
-            dataZafraTucumanEnd.nunorcoFinZafraEnd
+            dataZafraTucumanEnd.nunorcoFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.nunorcoInicioZafraEnd)
         ) {
             variablesEnd.cmb13 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn13 += d.moliendaCanaNeta || 0;
@@ -2245,7 +2258,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Santa Barbara" &&
             dataZafraTucumanEnd.staBarbaraInicioZafraEnd &&
-            dataZafraTucumanEnd.staBarbaraFinZafraEnd
+            dataZafraTucumanEnd.staBarbaraFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staBarbaraInicioZafraEnd)
         ) {
             variablesEnd.cmb14 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn14 += d.moliendaCanaNeta || 0;
@@ -2277,7 +2291,8 @@ export const datosComparativosHook = (
         if (
             d.ingenioNombre === "Santa Rosa" &&
             dataZafraTucumanEnd.staRosaInicioZafraEnd &&
-            dataZafraTucumanEnd.staRosaFinZafraEnd
+            dataZafraTucumanEnd.staRosaFinZafraEnd &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staRosaInicioZafraEnd)
         ) {
             variablesEnd.cmb15 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn15 += d.moliendaCanaNeta || 0;
@@ -2312,10 +2327,10 @@ export const datosComparativosHook = (
     /********* TUCUMAN ANIO COMPARATIVO *********/
     dataAnioStartZafraTucuman?.forEach((d) => {
         if (
-            d.ingenioNombre === "Aguilares"
-            // &&
-            // dataZafraTucuman.aguilaresInicioZafra &&
-            // dataZafraTucuman.aguilaresFinZafra
+            d.ingenioNombre === "Aguilares" &&
+            dataZafraTucuman.aguilaresInicioZafra &&
+            dataZafraTucuman.aguilaresFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.aguilaresInicioZafra)
         ) {
             variables.cmb1 += d.moliendaCanaBruta || 0;
             variables.cmn1 += d.moliendaCanaNeta || 0;
@@ -2345,10 +2360,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Bella Vista"
-            // &&
-            // dataZafraTucuman.bellaVistaInicioZafra &&
-            // dataZafraTucuman.bellaVistaFinZafra
+            d.ingenioNombre === "Bella Vista" &&
+            dataZafraTucuman.bellaVistaInicioZafra &&
+            dataZafraTucuman.bellaVistaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.bellaVistaInicioZafra)
         ) {
             variables.cmb2 += d.moliendaCanaBruta || 0;
             variables.cmn2 += d.moliendaCanaNeta || 0;
@@ -2378,10 +2393,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Concepción"
-            // &&
-            // dataZafraTucuman.concepcionInicioZafra &&
-            // dataZafraTucuman.concepcionFinZafra
+            d.ingenioNombre === "Concepción" &&
+            dataZafraTucuman.concepcionInicioZafra &&
+            dataZafraTucuman.concepcionFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.concepcionInicioZafra)
         ) {
 
             variables.cmb3 += d.moliendaCanaBruta || 0;
@@ -2412,10 +2427,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Cruz Alta"
-            // &&
-            // dataZafraTucuman.cruzAltaInicioZafra &&
-            // dataZafraTucuman.cruzAltaFinZafra
+            d.ingenioNombre === "Cruz Alta" &&
+            dataZafraTucuman.cruzAltaInicioZafra &&
+            dataZafraTucuman.cruzAltaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.cruzAltaInicioZafra)
         ) {
             variables.cmb4 += d.moliendaCanaBruta || 0;
             variables.cmn4 += d.moliendaCanaNeta || 0;
@@ -2446,10 +2461,10 @@ export const datosComparativosHook = (
         }
 
         if (
-            d.ingenioNombre === "Famaillá"
-            // &&
-            // dataZafraTucuman.famaillaInicioZafra &&
-            // dataZafraTucuman.famaillaFinZafra
+            d.ingenioNombre === "Famaillá" &&
+            dataZafraTucuman.famaillaInicioZafra &&
+            dataZafraTucuman.famaillaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.famaillaInicioZafra)
         ) {
             variables.cmb6 += d.moliendaCanaBruta || 0;
             variables.cmn6 += d.moliendaCanaNeta || 0;
@@ -2479,10 +2494,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "La Corona"
-            // &&
-            // dataZafraTucuman.laCoronaInicioZafra &&
-            // dataZafraTucuman.laCoronaFinZafra
+            d.ingenioNombre === "La Corona" &&
+            dataZafraTucuman.laCoronaInicioZafra &&
+            dataZafraTucuman.laCoronaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laCoronaInicioZafra)
         ) {
             variables.cmb7 += d.moliendaCanaBruta || 0;
             variables.cmn7 += d.moliendaCanaNeta || 0;
@@ -2512,10 +2527,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "La Florida"
-            // &&
-            // dataZafraTucuman.laFloridaInicioZafra &&
-            // dataZafraTucuman.laFloridaFinZafra
+            d.ingenioNombre === "La Florida" &&
+            dataZafraTucuman.laFloridaInicioZafra &&
+            dataZafraTucuman.laFloridaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laFloridaInicioZafra)
         ) {
             variables.cmb8 += d.moliendaCanaBruta || 0;
             variables.cmn8 += d.moliendaCanaNeta || 0;
@@ -2545,10 +2560,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "La Providencia"
-            // &&
-            // dataZafraTucuman.laProvidenciaInicioZafra &&
-            // dataZafraTucuman.laProvidenciaFinZafra
+            d.ingenioNombre === "La Providencia" &&
+            dataZafraTucuman.laProvidenciaInicioZafra &&
+            dataZafraTucuman.laProvidenciaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laProvidenciaInicioZafra)
         ) {
             variables.cmb9 += d.moliendaCanaBruta || 0;
             variables.cmn9 += d.moliendaCanaNeta || 0;
@@ -2578,10 +2593,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "La Trinidad"
-            // &&
-            // dataZafraTucuman.laTrinidadInicioZafra &&
-            // dataZafraTucuman.laTrinidadFinZafra
+            d.ingenioNombre === "La Trinidad" &&
+            dataZafraTucuman.laTrinidadInicioZafra &&
+            dataZafraTucuman.laTrinidadFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laTrinidadInicioZafra)
         ) {
             variables.cmb10 += d.moliendaCanaBruta || 0;
             variables.cmn10 += d.moliendaCanaNeta || 0;
@@ -2611,10 +2626,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Leales"
-            // &&
-            // dataZafraTucuman.lealesInicioZafra &&
-            // dataZafraTucuman.lealesFinZafra
+            d.ingenioNombre === "Leales" &&
+            dataZafraTucuman.lealesInicioZafra &&
+            dataZafraTucuman.lealesFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.lealesInicioZafra)
         ) {
             variables.cmb11 += d.moliendaCanaBruta || 0;
             variables.cmn11 += d.moliendaCanaNeta || 0;
@@ -2644,10 +2659,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Marapa"
-            // &&
-            // dataZafraTucuman.marapaInicioZafra &&
-            // dataZafraTucuman.marapaFinZafra
+            d.ingenioNombre === "Marapa" &&
+            dataZafraTucuman.marapaInicioZafra &&
+            dataZafraTucuman.marapaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.marapaInicioZafra)
         ) {
             variables.cmb12 += d.moliendaCanaBruta || 0;
             variables.cmn12 += d.moliendaCanaNeta || 0;
@@ -2677,10 +2692,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Ñuñorco"
-            // &&
-            // dataZafraTucuman.nunorcoInicioZafra &&
-            // dataZafraTucuman.nunorcoFinZafra
+            d.ingenioNombre === "Ñuñorco" &&
+            dataZafraTucuman.nunorcoInicioZafra &&
+            dataZafraTucuman.nunorcoFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.nunorcoInicioZafra)
         ) {
             variables.cmb13 += d.moliendaCanaBruta || 0;
             variables.cmn13 += d.moliendaCanaNeta || 0;
@@ -2710,10 +2725,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Santa Barbara"
-            // &&
-            // dataZafraTucuman.staBarbaraInicioZafra &&
-            // dataZafraTucuman.staBarbaraFinZafra
+            d.ingenioNombre === "Santa Barbara" &&
+            dataZafraTucuman.staBarbaraInicioZafra &&
+            dataZafraTucuman.staBarbaraFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staBarbaraInicioZafra)
         ) {
             variables.cmb14 += d.moliendaCanaBruta || 0;
             variables.cmn14 += d.moliendaCanaNeta || 0;
@@ -2743,10 +2758,10 @@ export const datosComparativosHook = (
             };
         }
         if (
-            d.ingenioNombre === "Santa Rosa"
-            // &&
-            // dataZafraTucuman.staRosaInicioZafra &&
-            // dataZafraTucuman.staRosaFinZafra
+            d.ingenioNombre === "Santa Rosa" &&
+            dataZafraTucuman.staRosaInicioZafra &&
+            dataZafraTucuman.staRosaFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staRosaInicioZafra)
         ) {
             variables.cmb15 += d.moliendaCanaBruta || 0;
             variables.cmn15 += d.moliendaCanaNeta || 0;
@@ -2799,90 +2814,90 @@ export const datosComparativosHook = (
         bellaVistaEnd.bellaVistaANHIDRO = bellaVistaEnd.bellaVistaANHIDRO + anhidroBellaVista2024
     }
 
-    aguilares.aguilaresRCMB = (Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMB) * 100
-    aguilares.aguilaresRCMN = (Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMN) * 100
+    aguilares.aguilaresRCMB = ((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMB) * 100).toFixed(2)
+    aguilares.aguilaresRCMN = ((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMN) * 100).toFixed(2)
 
-    bellaVista.bellaVistaRCMB = (Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMB) * 100
-    bellaVista.bellaVistaRCMN = (Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMN) * 100
+    bellaVista.bellaVistaRCMB = ((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMB) * 100).toFixed(2)
+    bellaVista.bellaVistaRCMN = ((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMN) * 100).toFixed(2)
 
-    concepcion.concepcionRCMB = (Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMB) * 100
-    concepcion.concepcionRCMN = (Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMN) * 100
+    concepcion.concepcionRCMB = ((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMB) * 100).toFixed(2)
+    concepcion.concepcionRCMN = ((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMN) * 100).toFixed(2)
 
-    cruzAlta.cruzAltaRCMB = (Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMB) * 100
-    cruzAlta.cruzAltaRCMN = (Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMN) * 100
+    cruzAlta.cruzAltaRCMB = ((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMB) * 100).toFixed(2)
+    cruzAlta.cruzAltaRCMN = ((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMN) * 100).toFixed(2)
 
-    famailla.famaillaRCMB = (Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMB) * 100
-    famailla.famaillaRCMN = (Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMN) * 100
+    famailla.famaillaRCMB = ((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMB) * 100).toFixed(2)
+    famailla.famaillaRCMN = ((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMN) * 100).toFixed(2)
 
-    laCorona.laCoronaRCMB = (Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMB) * 100
-    laCorona.laCoronaRCMN = (Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMN) * 100
+    laCorona.laCoronaRCMB = ((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMB) * 100).toFixed(2)
+    laCorona.laCoronaRCMN = ((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMN) * 100).toFixed(2)
 
-    laFlorida.laFloridaRCMB = (Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMB) * 100
-    laFlorida.laFloridaRCMN = (Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMN) * 100
+    laFlorida.laFloridaRCMB = ((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMB) * 100).toFixed(2)
+    laFlorida.laFloridaRCMN = ((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMN) * 100).toFixed(2)
 
-    laProvidencia.laProvidenciaRCMB = (Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMB) * 100
-    laProvidencia.laProvidenciaRCMN = (Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMN) * 100
+    laProvidencia.laProvidenciaRCMB = ((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMB) * 100).toFixed(2)
+    laProvidencia.laProvidenciaRCMN = ((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMN) * 100).toFixed(2)
 
-    laTrinidad.laTrinidadRCMB = (Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMB) * 100
-    laTrinidad.laTrinidadRCMN = (Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMN) * 100
+    laTrinidad.laTrinidadRCMB = ((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMB) * 100).toFixed(2)
+    laTrinidad.laTrinidadRCMN = ((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMN) * 100).toFixed(2)
 
-    leales.lealesRCMB = (Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMB) * 100
-    leales.lealesRCMN = (Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMN) * 100
+    leales.lealesRCMB = ((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMB) * 100).toFixed(2)
+    leales.lealesRCMN = ((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMN) * 100).toFixed(2)
 
-    marapa.marapaRCMB = (Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMB) * 100
-    marapa.marapaRCMN = (Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMN) * 100
+    marapa.marapaRCMB = ((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMB) * 100).toFixed(2)
+    marapa.marapaRCMN = ((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMN) * 100).toFixed(2)
 
-    nunorco.nunorcoRCMB = (Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMB) * 100
-    nunorco.nunorcoRCMN = (Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMN) * 100
+    nunorco.nunorcoRCMB = ((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMB) * 100).toFixed(2)
+    nunorco.nunorcoRCMN = ((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMN) * 100).toFixed(2)
 
-    staBarbara.staBarbaraRCMB = (Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMB) * 100
-    staBarbara.staBarbaraRCMN = (Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMN) * 100
+    staBarbara.staBarbaraRCMB = ((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMB) * 100).toFixed(2)
+    staBarbara.staBarbaraRCMN = ((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMN) * 100).toFixed(2)
 
-    staRosa.staRosaRCMB = (Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMB) * 100
-    staRosa.staRosaRCMN = (Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMN) * 100
+    staRosa.staRosaRCMB = ((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMB) * 100).toFixed(2)
+    staRosa.staRosaRCMN = ((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMN) * 100).toFixed(2)
 
 
-    aguilaresEnd.aguilaresRCMB = (Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMB) * 100
-    aguilaresEnd.aguilaresRCMN = (Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMN) * 100
+    aguilaresEnd.aguilaresRCMB = ((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMB) * 100).toFixed(2)
+    aguilaresEnd.aguilaresRCMN = ((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMN) * 100).toFixed(2)
 
-    bellaVistaEnd.bellaVistaRCMB = (Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMB) * 100
-    bellaVistaEnd.bellaVistaRCMN = (Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMN) * 100
+    bellaVistaEnd.bellaVistaRCMB = ((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMB) * 100).toFixed(2)
+    bellaVistaEnd.bellaVistaRCMN = ((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMN) * 100).toFixed(2)
 
-    concepcionEnd.concepcionRCMB = (Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMB) * 100
-    concepcionEnd.concepcionRCMN = (Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMN) * 100
+    concepcionEnd.concepcionRCMB = ((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMB) * 100).toFixed(2)
+    concepcionEnd.concepcionRCMN = ((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMN) * 100).toFixed(2)
 
-    cruzAltaEnd.cruzAltaRCMB = (Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMB) * 100
-    cruzAltaEnd.cruzAltaRCMN = (Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMN) * 100
+    cruzAltaEnd.cruzAltaRCMB = ((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMB) * 100).toFixed(2)
+    cruzAltaEnd.cruzAltaRCMN = ((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMN) * 100).toFixed(2)
 
-    famaillaEnd.famaillaRCMB = (Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMB) * 100
-    famaillaEnd.famaillaRCMN = (Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMN) * 100
+    famaillaEnd.famaillaRCMB = ((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMB) * 100).toFixed(2)
+    famaillaEnd.famaillaRCMN = ((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMN) * 100).toFixed(2)
 
-    laCoronaEnd.laCoronaRCMB = (Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMB) * 100
-    laCoronaEnd.laCoronaRCMN = (Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMN) * 100
+    laCoronaEnd.laCoronaRCMB = ((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMB) * 100).toFixed(2)
+    laCoronaEnd.laCoronaRCMN = ((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMN) * 100).toFixed(2)
 
-    laFloridaEnd.laFloridaRCMB = (Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMB) * 100
-    laFloridaEnd.laFloridaRCMN = (Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMN) * 100
+    laFloridaEnd.laFloridaRCMB = ((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMB) * 100).toFixed(2)
+    laFloridaEnd.laFloridaRCMN = ((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMN) * 100).toFixed(2)
 
-    laProvidenciaEnd.laProvidenciaRCMB = (Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMB) * 100
-    laProvidenciaEnd.laProvidenciaRCMN = (Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMN) * 100
+    laProvidenciaEnd.laProvidenciaRCMB = ((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMB) * 100).toFixed(2)
+    laProvidenciaEnd.laProvidenciaRCMN = ((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMN) * 100).toFixed(2)
 
-    laTrinidadEnd.laTrinidadRCMB = (Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMB) * 100
-    laTrinidadEnd.laTrinidadRCMN = (Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMN) * 100
+    laTrinidadEnd.laTrinidadRCMB = ((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMB) * 100).toFixed(2)
+    laTrinidadEnd.laTrinidadRCMN = ((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMN) * 100).toFixed(2)
 
-    lealesEnd.lealesRCMB = (Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMB) * 100
-    lealesEnd.lealesRCMN = (Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMN) * 100
+    lealesEnd.lealesRCMB = ((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMB) * 100).toFixed(2)
+    lealesEnd.lealesRCMN = ((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMN) * 100).toFixed(2)
 
-    marapaEnd.marapaRCMB = (Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMB) * 100
-    marapaEnd.marapaRCMN = (Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMN) * 100
+    marapaEnd.marapaRCMB = ((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMB) * 100).toFixed(2)
+    marapaEnd.marapaRCMN = ((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMN) * 100).toFixed(2)
 
-    nunorcoEnd.nunorcoRCMB = (Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMB) * 100
-    nunorcoEnd.nunorcoRCMN = (Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMN) * 100
+    nunorcoEnd.nunorcoRCMB = ((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMB) * 100).toFixed(2)
+    nunorcoEnd.nunorcoRCMN = ((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMN) * 100).toFixed(2)
 
-    staBarbaraEnd.staBarbaraRCMB = (Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMB) * 100
-    staBarbaraEnd.staBarbaraRCMN = (Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMN) * 100
+    staBarbaraEnd.staBarbaraRCMB = ((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMB) * 100).toFixed(2)
+    staBarbaraEnd.staBarbaraRCMN = ((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMN) * 100).toFixed(2)
 
-    staRosaEnd.staRosaRCMB = (Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMB) * 100
-    staRosaEnd.staRosaRCMN = (Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMN) * 100
+    staRosaEnd.staRosaRCMB = ((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMB) * 100).toFixed(2)
+    staRosaEnd.staRosaRCMN = ((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMN) * 100).toFixed(2)
     setAguilares(aguilares)
     setBellavista(bellaVista)
     setBellavistaDestileria(destBellaVista)
@@ -2998,6 +3013,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Esperanza" &&
             dataDestileriaNorte.laEsperanzaInicioDestileria &&
             dataDestileriaNorte.laEsperanzaFinDestileria &&
+            new Date(d.fechaParte) >= new Date(dataDestileriaNorte.laEsperanzaInicioDestileria) &&
             new Date(d.fechaParte) <= new Date(dataDestileriaNorte.laEsperanzaFinDestileria)
         ) {
             variables.producido16 += d.alcoholProducido || 0;
@@ -3012,6 +3028,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataDestileriaNorte.ledesmaInicioDestileria &&
             dataDestileriaNorte.ledesmaFinDestileria &&
+            new Date(d.fechaParte) >= new Date(dataDestileriaNorte.ledesmaInicioDestileria) &&
             new Date(d.fechaParte) <= new Date(dataDestileriaNorte.ledesmaFinDestileria)
         ) {
             variables.producido17 += d.alcoholProducido || 0;
@@ -3026,6 +3043,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataDestileriaNorte.rioGrandeInicioDestileria &&
             dataDestileriaNorte.rioGrandeFinDestileria &&
+            new Date(d.fechaParte) >= new Date(dataDestileriaNorte.rioGrandeInicioDestileria) &&
             new Date(d.fechaParte) <= new Date(dataDestileriaNorte.rioGrandeFinDestileria)
         ) {
 
@@ -3041,6 +3059,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataDestileriaNorte.sanIsidroInicioDestileria &&
             dataDestileriaNorte.sanIsidroFinDestileria &&
+            new Date(d.fechaParte) >= new Date(dataDestileriaNorte.sanIsidroInicioDestileria) &&
             new Date(d.fechaParte) <= new Date(dataDestileriaNorte.sanIsidroFinDestileria)
         ) {
             variables.producido19 += d.alcoholProducido || 0;
@@ -3056,6 +3075,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataDestileriaNorte.seaboardInicioDestileria &&
             dataDestileriaNorte.seaboardFinDestileria &&
+            new Date(d.fechaParte) >= new Date(dataDestileriaNorte.seaboardInicioDestileria) &&
             new Date(d.fechaParte) <= new Date(dataDestileriaNorte.seaboardFinDestileria)
         ) {
             variables.producido20 += d.alcoholProducido || 0;
@@ -3075,6 +3095,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Esperanza" &&
             dataAnhidroNorteEnd.laEsperanzaInicioAnhidroEnd &&
             dataAnhidroNorteEnd.laEsperanzaFinAnhidroEnd &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorteEnd.laEsperanzaInicioAnhidroEnd) &&
             new Date(d.fechaParte) <= new Date(dataAnhidroNorteEnd.laEsperanzaFinAnhidroEnd)
         ) {
             variablesEnd.anhidro16 += d.alcoholAnhidro || 0;
@@ -3089,6 +3110,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataAnhidroNorteEnd.ledesmaInicioAnhidroEnd &&
             dataAnhidroNorteEnd.ledesmaFinAnhidroEnd &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorteEnd.ledesmaInicioAnhidroEnd) &&
             new Date(d.fechaParte) <= new Date(dataAnhidroNorteEnd.ledesmaFinAnhidroEnd)
         ) {
             variablesEnd.anhidro17 += d.alcoholAnhidro || 0;
@@ -3103,6 +3125,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataAnhidroNorteEnd.rioGrandeInicioAnhidroEnd &&
             dataAnhidroNorteEnd.rioGrandeFinAnhidroEnd &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorteEnd.rioGrandeInicioAnhidroEnd) &&
             new Date(d.fechaParte) <= new Date(dataAnhidroNorteEnd.rioGrandeFinAnhidroEnd)
         ) {
             variablesEnd.anhidro18 += d.alcoholAnhidro || 0;
@@ -3117,6 +3140,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataAnhidroNorteEnd.sanIsidroInicioAnhidroEnd &&
             dataAnhidroNorteEnd.sanIsidroFinAnhidroEnd &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorteEnd.sanIsidroInicioAnhidroEnd) &&
             new Date(d.fechaParte) <= new Date(dataAnhidroNorteEnd.sanIsidroFinAnhidroEnd)
         ) {
             variablesEnd.anhidro19 += d.alcoholAnhidro || 0;
@@ -3131,6 +3155,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataAnhidroNorteEnd.seaboardInicioAnhidroEnd &&
             dataAnhidroNorteEnd.seaboardFinAnhidroEnd &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorteEnd.seaboardInicioAnhidroEnd) &&
             new Date(d.fechaParte) <= new Date(dataAnhidroNorteEnd.seaboardFinAnhidroEnd)
         ) {
             variablesEnd.anhidro20 += d.alcoholAnhidro || 0;
@@ -3148,7 +3173,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Esperanza" &&
             dataAnhidroNorte.laEsperanzaInicioAnhidro &&
             dataAnhidroNorte.laEsperanzaFinAnhidro &&
-            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.laEsperanzaFinAnhidro)
+            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.laEsperanzaFinAnhidro) &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorte.laEsperanzaInicioAnhidro)
         ) {
             variables.anhidro16 += d.alcoholAnhidro || 0;
             laEsperanza = {
@@ -3162,7 +3188,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataAnhidroNorte.ledesmaInicioAnhidro &&
             dataAnhidroNorte.ledesmaFinAnhidro &&
-            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.ledesmaFinAnhidro)
+            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.ledesmaFinAnhidro) &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorte.ledesmaInicioAnhidro)
         ) {
             variables.anhidro17 += d.alcoholAnhidro || 0;
             ledesma = {
@@ -3176,7 +3203,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataAnhidroNorte.rioGrandeInicioAnhidro &&
             dataAnhidroNorte.rioGrandeFinAnhidro &&
-            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.rioGrandeFinAnhidro)
+            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.rioGrandeFinAnhidro) &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorte.rioGrandeInicioAnhidro)
         ) {
             variables.anhidro18 += d.alcoholAnhidro || 0;
             rioGrande = {
@@ -3190,7 +3218,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataAnhidroNorte.sanIsidroInicioAnhidro &&
             dataAnhidroNorte.sanIsidroFinAnhidro &&
-            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.sanIsidroFinAnhidro)
+            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.sanIsidroFinAnhidro) &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorte.sanIsidroInicioAnhidro)
         ) {
             variables.anhidro19 += d.alcoholAnhidro || 0;
             sanIsidro = {
@@ -3204,7 +3233,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataAnhidroNorte.seaboardInicioAnhidro &&
             dataAnhidroNorte.seaboardFinAnhidro &&
-            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.seaboardFinAnhidro)
+            new Date(d.fechaParte) <= new Date(dataAnhidroNorte.seaboardFinAnhidro) &&
+            new Date(d.fechaParte) >= new Date(dataAnhidroNorte.seaboardInicioAnhidro)
         ) {
             variables.anhidro20 += d.alcoholAnhidro || 0;
             seaboard = {
@@ -3223,7 +3253,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Esperanza" &&
             dataZafraNorteEnd.laEsperanzaInicioZafraEnd &&
             dataZafraNorteEnd.laEsperanzaFinZafraEnd &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.laEsperanzaFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.laEsperanzaInicioZafraEnd)
+            //  &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.laEsperanzaFinZafraEnd)
         ) {
             variablesEnd.cmb16 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn16 += d.moliendaCanaNeta || 0;
@@ -3234,6 +3266,7 @@ export const datosComparativosHook = (
             variablesEnd.organico16 += d.azucarOrganico || 0;
             variablesEnd.crudo16 += d.azucarCrudoProducido || 0;
             variablesEnd.otros16 += d.otroAzucar || 0;
+            variablesEnd.fisicoTotal16 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             laEsperanzaEnd = {
                 laEsperanzaCMB: variablesEnd.cmb16,
                 laEsperanzaCMN: variablesEnd.cmn16,
@@ -3244,6 +3277,7 @@ export const datosComparativosHook = (
                 laEsperanzaORGANICO: variablesEnd.organico16,
                 laEsperanzaCRUDO: variablesEnd.crudo16,
                 laEsperanzaOTROS: variablesEnd.otros16,
+                laEsperanzaFISICOTOTAL: variablesEnd.fisicoTotal16,
                 laEsperanzaALCPRODUCIDO: laEsperanzaEnd.laEsperanzaALCPRODUCIDO,
                 laEsperanzaALCHIDRATADO: laEsperanzaEnd.laEsperanzaALCHIDRATADO,
                 laEsperanzaANHIDRO: laEsperanzaEnd.laEsperanzaANHIDRO,
@@ -3254,7 +3288,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataZafraNorteEnd.ledesmaInicioZafraEnd &&
             dataZafraNorteEnd.ledesmaFinZafraEnd &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.ledesmaFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.ledesmaInicioZafraEnd)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.ledesmaFinZafraEnd)
         ) {
             variablesEnd.cmb17 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn17 += d.moliendaCanaNeta || 0;
@@ -3263,8 +3299,9 @@ export const datosComparativosHook = (
             variablesEnd.blanco17 += d.azucarBlancoProducido || 0;
             variablesEnd.refinado17 += d.azucarRefinado || 0;
             variablesEnd.organico17 += d.azucarOrganico || 0;
-            variablesEnd.crudo17 += d.azucarCrudoProducido || 0;
+            variablesEnd.crudo17 += (d.azucarCrudoProducido <= 0 ? - d.azucarRefinado - d.otroAzucar : d.azucarCrudoProducido - d.azucarRefinado - d.otroAzucar);
             variablesEnd.otros17 += d.otroAzucar || 0;
+            variablesEnd.fisicoTotal17 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             ledesmaEnd = {
                 ledesmaCMB: variablesEnd.cmb17,
                 ledesmaCMN: variablesEnd.cmn17,
@@ -3275,6 +3312,7 @@ export const datosComparativosHook = (
                 ledesmaORGANICO: variablesEnd.organico17,
                 ledesmaCRUDO: variablesEnd.crudo17,
                 ledesmaOTROS: variablesEnd.otros17,
+                ledesmaFISICOTOTAL: variablesEnd.fisicoTotal17,
                 ledesmaALCPRODUCIDO: ledesmaEnd.ledesmaALCPRODUCIDO,
                 ledesmaALCHIDRATADO: ledesmaEnd.ledesmaALCPRODUCIDO,
                 ledesmaANHIDRO: ledesmaEnd.ledesmaANHIDRO,
@@ -3285,7 +3323,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataZafraNorteEnd.rioGrandeInicioZafraEnd &&
             dataZafraNorteEnd.rioGrandeFinZafraEnd &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.rioGrandeFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.rioGrandeInicioZafraEnd)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.rioGrandeFinZafraEnd)
         ) {
             variablesEnd.cmb18 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn18 += d.moliendaCanaNeta || 0;
@@ -3296,6 +3336,7 @@ export const datosComparativosHook = (
             variablesEnd.organico18 += d.azucarOrganico || 0;
             variablesEnd.crudo18 += d.azucarCrudoProducido || 0;
             variablesEnd.otros18 += d.otroAzucar || 0;
+            variablesEnd.fisicoTotal18 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             rioGrandeEnd = {
                 rioGrandeCMB: variablesEnd.cmb18,
                 rioGrandeCMN: variablesEnd.cmn18,
@@ -3306,6 +3347,7 @@ export const datosComparativosHook = (
                 rioGrandeORGANICO: variablesEnd.organico18,
                 rioGrandeCRUDO: variablesEnd.crudo18,
                 rioGrandeOTROS: variablesEnd.otros18,
+                rioGrandeFISICOTOTAL: variablesEnd.fisicoTotal18,
                 rioGrandeALCPRODUCIDO: rioGrandeEnd.rioGrandeALCPRODUCIDO,
                 rioGrandeALCHIDRATADO: rioGrandeEnd.rioGrandeALCPRODUCIDO,
                 rioGrandeANHIDRO: rioGrandeEnd.rioGrandeANHIDRO,
@@ -3316,7 +3358,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataZafraNorteEnd.sanIsidroInicioZafraEnd &&
             dataZafraNorteEnd.sanIsidroFinZafraEnd &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.sanIsidroFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.sanIsidroInicioZafraEnd)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.sanIsidroFinZafraEnd)
         ) {
             variablesEnd.cmb19 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn19 += d.moliendaCanaNeta || 0;
@@ -3327,6 +3371,7 @@ export const datosComparativosHook = (
             variablesEnd.organico19 += d.azucarOrganico || 0;
             variablesEnd.crudo19 += d.azucarCrudoProducido || 0;
             variablesEnd.otros19 += d.otroAzucar || 0;
+            variablesEnd.fisicoTotal19 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             sanIsidroEnd = {
                 sanIsidroCMB: variablesEnd.cmb19,
                 sanIsidroCMN: variablesEnd.cmn19,
@@ -3337,6 +3382,7 @@ export const datosComparativosHook = (
                 sanIsidroORGANICO: variablesEnd.organico19,
                 sanIsidroCRUDO: variablesEnd.crudo19,
                 sanIsidroOTROS: variablesEnd.otros19,
+                sanIsidroFISICOTOTAL: variablesEnd.fisicoTotal19,
                 sanIsidroALCPRODUCIDO: sanIsidroEnd.sanIsidroALCPRODUCIDO,
                 sanIsidroALCHIDRATADO: sanIsidroEnd.sanIsidroALCPRODUCIDO,
                 sanIsidroANHIDRO: sanIsidroEnd.sanIsidroANHIDRO,
@@ -3348,7 +3394,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataZafraNorteEnd.seaboardInicioZafraEnd &&
             dataZafraNorteEnd.seaboardFinZafraEnd &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.seaboardFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.seaboardInicioZafraEnd)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.seaboardFinZafraEnd)
         ) {
             variablesEnd.cmb20 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn20 += d.moliendaCanaNeta || 0;
@@ -3359,6 +3407,7 @@ export const datosComparativosHook = (
             variablesEnd.organico20 += d.azucarOrganico || 0;
             variablesEnd.crudo20 += d.azucarCrudoProducido || 0;
             variablesEnd.otros20 += d.otroAzucar || 0;
+            variablesEnd.fisicoTotal20 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             seaboardEnd = {
                 seaboardCMB: variablesEnd.cmb20,
                 seaboardCMN: variablesEnd.cmn20,
@@ -3369,6 +3418,7 @@ export const datosComparativosHook = (
                 seaboardORGANICO: variablesEnd.organico20,
                 seaboardCRUDO: variablesEnd.crudo20,
                 seaboardOTROS: variablesEnd.otros20,
+                seaboardFISICOTOTAL: variablesEnd.fisicoTotal20,
                 seaboardALCPRODUCIDO: seaboardEnd.seaboardALCPRODUCIDO,
                 seaboardALCHIDRATADO: seaboardEnd.seaboardALCPRODUCIDO,
                 seaboardANHIDRO: seaboardEnd.seaboardANHIDRO,
@@ -3383,7 +3433,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Esperanza" &&
             dataZafraNorte.laEsperanzaInicioZafra &&
             dataZafraNorte.laEsperanzaFinZafra &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorte.laEsperanzaFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.laEsperanzaInicioZafra)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorte.laEsperanzaFinZafra)
         ) {
             variables.cmb16 += d.moliendaCanaBruta || 0;
             variables.cmn16 += d.moliendaCanaNeta || 0;
@@ -3394,6 +3446,7 @@ export const datosComparativosHook = (
             variables.organico16 += d.azucarOrganico || 0;
             variables.crudo16 += d.azucarCrudoProducido || 0;
             variables.otros16 += d.otroAzucar || 0;
+            variables.fisicoTotal16 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             laEsperanza = {
                 laEsperanzaCMB: variables.cmb16,
                 laEsperanzaCMN: variables.cmn16,
@@ -3404,6 +3457,7 @@ export const datosComparativosHook = (
                 laEsperanzaORGANICO: variables.organico16,
                 laEsperanzaCRUDO: variables.crudo16,
                 laEsperanzaOTROS: variables.otros16,
+                laEsperanzaFISICOTOTAL: variables.fisicoTotal16,
                 laEsperanzaALCPRODUCIDO: laEsperanza.laEsperanzaALCPRODUCIDO,
                 laEsperanzaALCHIDRATADO: laEsperanza.laEsperanzaALCHIDRATADO,
                 laEsperanzaANHIDRO: laEsperanza.laEsperanzaANHIDRO,
@@ -3414,7 +3468,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataZafraNorte.ledesmaInicioZafra &&
             dataZafraNorte.ledesmaFinZafra &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorte.ledesmaFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.ledesmaInicioZafra)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorte.ledesmaFinZafra)
         ) {
             variables.cmb17 += d.moliendaCanaBruta || 0;
             variables.cmn17 += d.moliendaCanaNeta || 0;
@@ -3423,8 +3479,9 @@ export const datosComparativosHook = (
             variables.blanco17 += d.azucarBlancoProducido || 0;
             variables.refinado17 += d.azucarRefinado || 0;
             variables.organico17 += d.azucarOrganico || 0;
-            variables.crudo17 += d.azucarCrudoProducido || 0;
+            variables.crudo17 += (d.azucarCrudoProducido <= 0 ? - d.azucarRefinado - d.otroAzucar : d.azucarCrudoProducido - d.azucarRefinado - d.otroAzucar);
             variables.otros17 += d.otroAzucar || 0;
+            variables.fisicoTotal17 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             ledesma = {
                 ledesmaCMB: variables.cmb17,
                 ledesmaCMN: variables.cmn17,
@@ -3435,6 +3492,7 @@ export const datosComparativosHook = (
                 ledesmaORGANICO: variables.organico17,
                 ledesmaCRUDO: variables.crudo17,
                 ledesmaOTROS: variables.otros17,
+                ledesmaFISICOTOTAL: variables.fisicoTotal17,
                 ledesmaALCPRODUCIDO: ledesma.ledesmaALCPRODUCIDO,
                 ledesmaALCHIDRATADO: ledesma.ledesmaALCPRODUCIDO,
                 ledesmaANHIDRO: ledesma.ledesmaANHIDRO,
@@ -3445,7 +3503,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataZafraNorte.rioGrandeInicioZafra &&
             dataZafraNorte.rioGrandeFinZafra &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorte.rioGrandeFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.rioGrandeInicioZafra)
+            //  &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorte.rioGrandeFinZafra)
         ) {
             variables.cmb18 += d.moliendaCanaBruta || 0;
             variables.cmn18 += d.moliendaCanaNeta || 0;
@@ -3456,6 +3516,7 @@ export const datosComparativosHook = (
             variables.organico18 += d.azucarOrganico || 0;
             variables.crudo18 += d.azucarCrudoProducido || 0;
             variables.otros18 += d.otroAzucar || 0;
+            variables.fisicoTotal18 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             rioGrande = {
                 rioGrandeNHIDRO: variables.anhidro18,
                 rioGrandeCMB: variables.cmb18,
@@ -3467,6 +3528,7 @@ export const datosComparativosHook = (
                 rioGrandeORGANICO: variables.organico18,
                 rioGrandeCRUDO: variables.crudo18,
                 rioGrandeOTROS: variables.otros18,
+                rioGrandeFISICOTOTAL: variables.fisicoTotal18,
                 rioGrandeALCPRODUCIDO: rioGrande.rioGrandeALCPRODUCIDO,
                 rioGrandeALCHIDRATADO: rioGrande.rioGrandeALCPRODUCIDO,
                 rioGrandeANHIDRO: rioGrande.rioGrandeANHIDRO,
@@ -3477,7 +3539,9 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataZafraNorte.sanIsidroInicioZafra &&
             dataZafraNorte.sanIsidroFinZafra &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorte.sanIsidroFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.sanIsidroInicioZafra)
+            // &&
+            // new Date(d.fechaParte) <= new Date(dataZafraNorte.sanIsidroFinZafra)
         ) {
             variables.cmb19 += d.moliendaCanaBruta || 0;
             variables.cmn19 += d.moliendaCanaNeta || 0;
@@ -3488,6 +3552,7 @@ export const datosComparativosHook = (
             variables.organico19 += d.azucarOrganico || 0;
             variables.crudo19 += d.azucarCrudoProducido || 0;
             variables.otros19 += d.otroAzucar || 0;
+            variables.fisicoTotal19 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             sanIsidro = {
                 sanIsidroCMB: variables.cmb19,
                 sanIsidroCMN: variables.cmn19,
@@ -3498,6 +3563,7 @@ export const datosComparativosHook = (
                 sanIsidroORGANICO: variables.organico19,
                 sanIsidroCRUDO: variables.crudo19,
                 sanIsidroOTROS: variables.otros19,
+                sanIsidroFISICOTOTAL: variables.fisicoTotal19,
                 sanIsidroALCPRODUCIDO: sanIsidro.sanIsidroALCPRODUCIDO,
                 sanIsidroALCHIDRATADO: sanIsidro.sanIsidroALCPRODUCIDO,
                 sanIsidroANHIDRO: sanIsidro.sanIsidroANHIDRO,
@@ -3509,6 +3575,7 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataZafraNorte.seaboardInicioZafra &&
             dataZafraNorte.seaboardFinZafra &&
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.seaboardInicioZafra) &&
             new Date(d.fechaParte) <= new Date(dataZafraNorte.seaboardFinZafra)
         ) {
             variables.cmb20 += d.moliendaCanaBruta || 0;
@@ -3520,6 +3587,7 @@ export const datosComparativosHook = (
             variables.organico20 += d.azucarOrganico || 0;
             variables.crudo20 += d.azucarCrudoProducido || 0;
             variables.otros20 += d.otroAzucar || 0;
+            variables.fisicoTotal20 += d.azucarBlancoProducido + d.azucarCrudoProducido + d.azucarRefinado + d.azucarOrganico + d.otroAzucar
             seaboard = {
                 seaboardCMB: variables.cmb20,
                 seaboardCMN: variables.cmn20,
@@ -3530,6 +3598,7 @@ export const datosComparativosHook = (
                 seaboardORGANICO: variables.organico20,
                 seaboardCRUDO: variables.crudo20,
                 seaboardOTROS: variables.otros20,
+                seaboardFISICOTOTAL: variables.fisicoTotal20,
                 seaboardALCPRODUCIDO: seaboard.seaboardALCPRODUCIDO,
                 seaboardALCHIDRATADO: seaboard.seaboardALCPRODUCIDO,
                 seaboardANHIDRO: seaboard.seaboardANHIDRO,
@@ -3537,6 +3606,9 @@ export const datosComparativosHook = (
             };
         }
     })
+
+
+
     laEsperanza.laEsperanzaRCMB = (Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMB) * 100
     laEsperanza.laEsperanzaRCMN = (Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMN) * 100
 
@@ -3566,7 +3638,6 @@ export const datosComparativosHook = (
 
     seaboardEnd.seaboardRCMB = (Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMB) * 100
     seaboardEnd.seaboardRCMN = (Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMN) * 100
-
 
     setEsperanza(laEsperanza)
     setLedesma(ledesma)

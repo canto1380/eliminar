@@ -1,6 +1,6 @@
 import ListadoDatos from "./ListadoDatos";
-import { useState, useEffect } from "react";
-import { Collapse } from "antd";
+import { useState, useEffect, useMemo } from "react";
+import { Collapse, Tooltip } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { dateConverted } from "../../helpers/helpers";
 import { columns } from "./ColumnasTablaListadoDatos";
@@ -11,6 +11,8 @@ const ItemCollpse = ({
   dataQuincena,
   dataZafra,
   dataParteDiariosHistoricos,
+  dataParteDiariosHistoricosNorte,
+  dateInicioIngeniosItemCollapse
 }) => {
   const [aguilares, setAguilares] = useState([]);
   const [aguilaresMensual, setAguilaresMensual] = useState([]);
@@ -55,10 +57,27 @@ const ItemCollpse = ({
   const [nunorcoMensual, setNunorcoMensual] = useState([]);
   const [nunorcoZafra, setNunorcoZafra] = useState([]);
 
+  const [esperanza, setEsperanza] = useState([])
+  const [esperanzaMensual, setEsperanzaMensual] = useState([])
+  const [esperanzaZafra, setEsperanzaZafra] = useState([])
+  const [ledesma, setLedesma] = useState([])
+  const [ledesmaMensual, setLedesmaMensual] = useState([])
+  const [ledesmaZafra, setLedesmaZafra] = useState([])
+  const [rioGrande, setRioGrande] = useState([])
+  const [rioGrandeMensual, setRioGrandeMensual] = useState([])
+  const [rioGrandeZafra, setRioGrandeZafra] = useState([])
+  const [sanIsidro, setSanIsidro] = useState([])
+  const [sanIsidroMensual, setSanIsidroMensual] = useState([])
+  const [sanIsidroZafra, setSanIsidroZafra] = useState([])
+  const [seaboard, setSeaboard] = useState([])
+  const [seaboardMensual, setSeaboardMensual] = useState([])
+  const [seaboardZafra, setSeaboardZafra] = useState([])
+
   const panelStyle = {
     marginBottom: 24,
     border: "none",
   };
+
   useEffect(() => {
     // Limpiar todos los estados antes de procesar nuevos datos
     setAguilares([]);
@@ -104,12 +123,31 @@ const ItemCollpse = ({
     setNunorcoMensual([]);
     setNunorcoZafra([]);
 
+    setEsperanza([]);
+    setEsperanzaMensual([]);
+    setEsperanzaZafra([]);
+    setLedesma([]);
+    setLedesmaMensual([]);
+    setLedesmaZafra([]);
+    setRioGrande([]);
+    setRioGrandeMensual([]);
+    setRioGrandeZafra([]);
+    setSanIsidro([]);
+    setSanIsidroMensual([]);
+    setSanIsidroZafra([]);
+    setSeaboard([]);
+    setSeaboardMensual([]);
+    setSeaboardZafra([]);
+
+
     // Procesar los nuevos datos
     dataPorQuincena();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra, dataAnio, dataMes, dataQuincena, dataParteDiariosHistoricos]);
+  }, [dataZafra, dataAnio, dataMes, dataQuincena, dataParteDiariosHistoricos, dataParteDiariosHistoricosNorte, dateInicioIngeniosItemCollapse]);
+
 
   const dataPorQuincena = () => {
+    const dataUnida = [...dataParteDiariosHistoricos, ...dataParteDiariosHistoricosNorte]
     // Limpiar arrays antes de procesar nuevos datos
     let arrQuincenal = [];
     let arrMensual = [];
@@ -136,8 +174,9 @@ const ItemCollpse = ({
       });
     };
 
-    dataParteDiariosHistoricos?.forEach((data) => {
+    dataUnida?.forEach((data) => {
       const newDate = new Date(data.fechaParte);
+
       function getLastDayOfMonth(month) {
         const date = new Date();
         date.setMonth(month);
@@ -236,7 +275,30 @@ const ItemCollpse = ({
     setNunorco(filtrarPorIngenio(arrQuincenal, "Ñuñorco"));
     setNunorcoMensual(filtrarPorIngenio(arrMensual, "Ñuñorco"));
     setNunorcoZafra(filtrarPorIngenio(arrZafra, "Ñuñorco"));
+
+    setEsperanza(filtrarPorIngenio(arrQuincenal, "La Esperanza"));
+    setEsperanzaMensual(filtrarPorIngenio(arrMensual, "La Esperanza"));
+    setEsperanzaZafra(filtrarPorIngenio(arrZafra, "La Esperanza"));
+
+    setLedesma(filtrarPorIngenio(arrQuincenal, "Ledesma"));
+    setLedesmaMensual(filtrarPorIngenio(arrMensual, "Ledesma"));
+    setLedesmaZafra(filtrarPorIngenio(arrZafra, "Ledesma"));
+
+    setRioGrande(filtrarPorIngenio(arrQuincenal, "Río Grande"));
+    setRioGrandeMensual(filtrarPorIngenio(arrMensual, "Río Grande"));
+    setRioGrandeZafra(filtrarPorIngenio(arrZafra, "Río Grande"));
+
+    setSanIsidro(filtrarPorIngenio(arrQuincenal, "San Isidro"));
+    setSanIsidroMensual(filtrarPorIngenio(arrMensual, "San Isidro"));
+    setSanIsidroZafra(filtrarPorIngenio(arrZafra, "San Isidro"));
+
+    setSeaboard(filtrarPorIngenio(arrQuincenal, "Seaboard"));
+    setSeaboardMensual(filtrarPorIngenio(arrMensual, "Seaboard"));
+    setSeaboardZafra(filtrarPorIngenio(arrZafra, "Seaboard"));
   };
+
+
+
 
   /********** CALCULO TOTALES **********/
   const totalQuincenaAguilares = aguilares.reduce((acc, item) => {
@@ -634,6 +696,146 @@ const ItemCollpse = ({
     return acc;
   }, {});
 
+  const totalQuincenaLaEsperanza = esperanza.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalMesLaEsperanza = esperanzaMensual.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalZafraLaEsperanza = esperanzaZafra.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+
+  const totalQuincenaLedesma = ledesma.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalMesLedesma = ledesmaMensual.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalZafraLedesma = ledesmaZafra.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+
+  const totalQuincenaRioGrande = rioGrande.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalMesRioGrande = rioGrandeMensual.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalZafraRioGrande = rioGrandeZafra.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+
+  const totalQuincenaSanIsidro = sanIsidro.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalMesSanIsidro = sanIsidroMensual.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalZafraSanIsidro = sanIsidroZafra.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+
+  const totalQuincenaSeaboard = seaboard.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalMesSeaboard = seaboardMensual.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+  const totalZafraSeaboard = seaboardZafra.reduce((acc, item) => {
+    Object.keys(item).forEach((key) => {
+      const value = Number(item[key]);
+      if (!isNaN(value)) { // solo suma si el valor es numérico
+        acc[key] = (acc[key] || 0) + value;
+      }
+    });
+    return acc;
+  }, {});
+
   /********** FILA TOTALES **********/
   const aguilaresConTotales = [
     ...aguilares,
@@ -723,6 +925,41 @@ const ItemCollpse = ({
     { key: "total-mes-santarosa", fechaParte: "Total mes", ...totalMesStaRosa },
     { key: "total-zafra-santarosa", fechaParte: "Total zafra", ...totalZafraStaRosa },
   ];
+
+  const laEsperanzaConTotales = [
+    ...esperanza,
+    { key: "total-quincena-laEsperanza", fechaParte: "Total quincena", ...totalQuincenaLaEsperanza },
+    { key: "total-mes-laEsperanza", fechaParte: "Total mes", ...totalMesLaEsperanza },
+    { key: "total-zafra-laEsperanza", fechaParte: "Total zafra", ...totalZafraLaEsperanza },
+  ]
+
+  const ledesmaConTotales = [
+    ...ledesma,
+    { key: "total-quincena-ledesma", fechaParte: "Total quincena", ...totalQuincenaLedesma },
+    { key: "total-mes-ledesma", fechaParte: "Total mes", ...totalMesLedesma },
+    { key: "total-zafra-ledesma", fechaParte: "Total zafra", ...totalZafraLedesma },
+  ]
+
+  const rioGrandeConTotales = [
+    ...rioGrande,
+    { key: "total-quincena-rioGrande", fechaParte: "Total quincena", ...totalQuincenaRioGrande },
+    { key: "total-mes-rioGrande", fechaParte: "Total mes", ...totalMesRioGrande },
+    { key: "total-zafra-rioGrande", fechaParte: "Total zafra", ...totalZafraRioGrande },
+  ]
+
+  const sanIsidroConTotales = [
+    ...sanIsidro,
+    { key: "total-quincena-sanIsidro", fechaParte: "Total quincena", ...totalQuincenaSanIsidro },
+    { key: "total-mes-sanIsidro", fechaParte: "Total mes", ...totalMesSanIsidro },
+    { key: "total-zafra-sanIsidro", fechaParte: "Total zafra", ...totalZafraSanIsidro },
+  ]
+
+  const seaboardConTotales = [
+    ...seaboard,
+    { key: "total-quincena-seaboard", fechaParte: "Total quincena", ...totalQuincenaSeaboard },
+    { key: "total-mes-seaboard", fechaParte: "Total mes", ...totalMesSeaboard },
+    { key: "total-zafra-seaboard", fechaParte: "Total zafra", ...totalZafraSeaboard },
+  ]
 
   /********** CALCULO DE RENDIMIENTO **********/
   aguilaresConTotales.forEach((d) => {
@@ -922,6 +1159,80 @@ const ItemCollpse = ({
         : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
     }
   });
+  laEsperanzaConTotales.forEach((d) => {
+    if (
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
+    ) {
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
+    }
+  });
+
+  ledesmaConTotales.forEach((d) => {
+    if (
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
+    ) {
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
+    }
+  });
+
+  rioGrandeConTotales.forEach((d) => {
+    if (
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
+    ) {
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
+    }
+  });
+
+  sanIsidroConTotales.forEach((d) => {
+    if (
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
+    ) {
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
+    }
+  });
+
+  seaboardConTotales.forEach((d) => {
+    if (
+      d.fechaParte === "Total quincena" ||
+      d.fechaParte === "Total mes" ||
+      d.fechaParte === "Total zafra"
+    ) {
+      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
+      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
+        ? 0
+        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
+    }
+  });
 
   const getItems = () => [
     {
@@ -1070,6 +1381,69 @@ const ItemCollpse = ({
         />
       ),
     },
+
+    {
+      key: "15",
+      label: "La Esperanza",
+      children: (
+        <ListadoDatos
+          columns={columns}
+          scroll={1600}
+          data={laEsperanzaConTotales}
+        />
+      ),
+    },
+    {
+      key: "16",
+      label: (
+        <div>
+          <span>Ledesma</span>
+          <div style={{ fontSize: 12, color: "#888", fontWeight: 400 }}>
+            * Alcohol campaña 2025 están incorrectos. Revisar.
+          </div>
+        </div>
+      ),
+      children: (
+        <ListadoDatos
+          columns={columns}
+          scroll={1600}
+          data={ledesmaConTotales}
+        />
+      ),
+    },
+    {
+      key: "17",
+      label: "Río Grande",
+      children: (
+        <ListadoDatos
+          columns={columns}
+          scroll={1600}
+          data={rioGrandeConTotales}
+        />
+      ),
+    },
+    {
+      key: "18",
+      label: "San Isidro",
+      children: (
+        <ListadoDatos
+          columns={columns}
+          scroll={1600}
+          data={sanIsidroConTotales}
+        />
+      ),
+    },
+    {
+      key: "19",
+      label: "Seaboard",
+      children: (
+        <ListadoDatos
+          columns={columns}
+          scroll={1600}
+          data={seaboardConTotales}
+        />
+      ),
+    },
   ];
   return (
     <Collapse
@@ -1090,3 +1464,5 @@ const ItemCollpse = ({
   );
 };
 export default ItemCollpse;
+
+

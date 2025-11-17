@@ -227,7 +227,6 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       setLoadingDownloadReport(false);
     }
   };
-  console.log(diasParadas)
   return (
     <Container fluid>
       <TitlePage titlePage={"Días Parada"} />

@@ -13,6 +13,7 @@ import GraficasLinealComponent from "../../components/Graficas/TabsGraficasPerio
 import { DatabaseFilled } from "@ant-design/icons"
 import { Tabs } from "antd"
 import { itemsRportes } from "./ItemsGraficas"
+import { getIngenios } from "../../utils/queryAPI/ingenios"
 
 const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
     const [anioZafra, setAnioZafra] = useState(null)
@@ -65,6 +66,7 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
         setDataParteDiariosNorte(data);
     };
 
+
     /*** PERIODOS Y DATOS POR ZAFRA ELEGIDA ***/
     useEffect(() => {
         periodosPorZafra()
@@ -94,7 +96,6 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
             setDataAnhidroGraficaFilter(dataAnhidro1)
         }
     }, [periodosZafra, dataParteDiarios])
-
     /** POR DEFECTO ANIO ACTUAL **/
     useEffect(() => {
         const dataNow = new Date();
