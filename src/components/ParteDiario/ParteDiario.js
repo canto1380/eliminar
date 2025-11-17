@@ -1028,7 +1028,6 @@ const ParteDiario = ({
     items,
     onClick: handleMenuClick,
   };
-
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center px-4 pb-0 pt-2">
