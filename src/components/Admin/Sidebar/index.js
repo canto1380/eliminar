@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import {
   BsFillCaretRightFill,
@@ -6,21 +6,31 @@ import {
   BsNewspaper,
   BsClipboardData
 } from 'react-icons/bs'
+import { FaChartBar } from "react-icons/fa";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
-import { RiDatabaseLine } from "react-icons/ri"
+import { RiDatabaseLine, RiOpenaiFill } from "react-icons/ri"
+
 import './Sidebar.css'
 import {
   deleteCookies,
   deleteToken,
   getDataToken,
 } from '../../../helpers/helpers'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { SidebarContext } from '../../../context/SidebarProvider';
 
-const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
+const Sidebar = ({ inactivo, tokenAuth, dataUser }) => {
   const [initial, setInitial] = useState('')
   const [initialSurname, setInitialSurname] = useState('')
   const [nick, setNick] = useState('')
+
+  const { changeStatus } = useContext(SidebarContext)
+  const location = useLocation()
+
+  const changeOnSubmit = (e) => {
+    changeStatus(e)
+  }
 
   useEffect(() => {
     const data = getDataToken()
@@ -64,6 +74,16 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
       name: 'Reportes',
     },
     {
+      title: 'graficos',
+      iconName: <FaChartBar className='sizeIcon' />,
+      name: 'Gráficos',
+    },
+    {
+      title: 'IA',
+      iconName: <RiOpenaiFill className='sizeIcon' />,
+      name: 'IA',
+    },
+    {
       title: 'perfil',
       iconName: <BiUserCircle className='sizeIcon' />,
       name: 'Cuenta',
@@ -72,26 +92,20 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
 
   return (
     <div
-      className={`${
-        inactivo
-          ? `sidebarInactivo text-light bg-dark h-100`
-          : `sidebar text-light bg-dark h-100`
-      }`}
+      className={`${inactivo
+        ? `sidebarInactivo text-light bg-dark h-100`
+        : `sidebar text-light bg-dark h-100`
+        }`}
     >
       <Row
-        className={`${
-          inactivo
-            ? 'pt-4 pb-2 d-flex justify-content-center align-items-center m-0'
-            : 'pt-4 pb-2 d-flex justify-content-center align-items-center m-0'
-        }`}
+        className='pt-4 pb-2 d-flex justify-content-center align-items-center m-0'
       >
         <Col
           xs={3}
-          className={` ${
-            inactivo
-              ? `justify-content-center px-0 imgContainer`
-              : `text-center px-0`
-          }`}
+          className={` ${inactivo
+            ? `justify-content-center px-0 imgContainer`
+            : `text-center px-0`
+            }`}
         >
           <div className={`imgProfile text-center`}>
             {initial}
@@ -108,7 +122,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
           <Col
             xs={12}
             className={`text-light mt-3 text-center px-0`}
-            onClick={() => setInactivo(!inactivo)}
+            onClick={() => changeOnSubmit(!inactivo)}
           >
             {
               <BsFillCaretRightFill
@@ -121,7 +135,7 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
           <Col
             xs={2}
             className={`p-0 text-light`}
-            onClick={() => setInactivo(!inactivo)}
+            onClick={() => changeOnSubmit(!inactivo)}
           >
             {
               <BsFillCaretLeftFill
@@ -136,36 +150,43 @@ const Sidebar = ({ inactivo, setInactivo, tokenAuth, dataUser }) => {
       <ul
         className={`text-decoration-none list-unstyled sidebarList`}
       >
-        {itemsSideBar.map((items, i) => (
-          <Link
-            key={i}
-            className='text-white text-decoration-none'
-            to={`/admin/${items.title}`}
-          >
-            <li
-              title={items.title}
-              className={`${
-                inactivo
-                  ? `sidebarListRow d-flex justify-content-center align-items-center`
-                  : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
-              }`}
+        {itemsSideBar.map((items, i) => {
+          const isActive = location.pathname.includes(items.title)
+          return (
+            <Link
+              key={i}
+              className='text-white text-decoration-none'
+              to={`/admin/${items.title}`}
             >
-              <div className=''>{items.iconName}</div>
-              <div className={` ${inactivo ? `inactivo` : 'ms-3'}`}>
-                {items.name}
-              </div>
-            </li>
-          </Link>
-        ))}
+              <li
+                title={items.title}
+                className={`
+                  sidebarListRow 
+                  ${isActive ? 'rowActive' : ''} 
+                  ${inactivo
+                    ? 'd-flex justify-content-center align-items-center'
+                    : 'd-flex justify-content-start px-3 align-items-center'
+                  }
+                `}
+              >
+                <div className=''>{items.iconName}</div>
+                <div className={` ${inactivo ? `inactivo` : 'ms-3'}`}>
+                  {items.name}
+                </div>
+              </li>
+            </Link>
+          )
+        })}
+
+
 
         <li
           onClick={() => cerrarSesion()}
           title='Salir'
-          className={`${
-            inactivo
-              ? `sidebarListRow d-flex justify-content-center align-items-center`
-              : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
-          }`}
+          className={`${inactivo
+            ? `sidebarListRow d-flex justify-content-center align-items-center`
+            : `sidebarListRow d-flex justify-content-start px-3 align-items-center`
+            }`}
         >
           <div className=''>
             <BiLogOut className={`sizeIcon`} />

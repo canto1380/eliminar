@@ -1,446 +1,308 @@
-import { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
-import TitlePage from '../../components/TitlePages'
-import ParteDiario from '../../components/ParteDiario/ParteDiario'
-import Filtros from '../../components/Filtros'
-import { getDataPartesDiariosBE } from '../../utils/queryAPI/partesDiariosQuery'
-import Spinn from '../../components/Spinner'
-import MsgError from '../../components/Messages/MsgError'
-import { getPeriodoZafra } from '../../utils/queryAPI/periodosZafra'
-import { getIngenios } from '../../utils/queryAPI/ingenios'
-import MsgErrorServerJSON from '../../components/Messages/MsgErrorServerJSON'
+import { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import TitlePage from "../../components/TitlePages";
+import ParteDiario from "../../components/ParteDiario/ParteDiario";
+import Filtros from "../../components/Filtros";
+import { getDataPartesDiariosBE } from "../../utils/queryAPI/partesDiariosQuery";
+import Spinn from "../../components/Spinner";
+import MsgError from "../../components/Messages/MsgError";
+import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
+import { getIngenios } from "../../utils/queryAPI/ingenios";
+import MsgErrorServerJSON from "../../components/Messages/MsgErrorServerJSON";
+import { getParteDiarios } from "../../utils/queryAPI/parteDiarios";
+import "./ParteDiarioContainer.css";
+import { getActualizarPartesDiarios } from "../../utils/queryAPI/actualizarPartesDiarios";
+import { getActualizarPartesDiariosNorte } from "../../utils/queryAPI/actualizarPartesDiarios";
+import { getLastUpdated } from "../../utils/queryAPI/lastUpdated";
+import { toast } from "react-toastify";
+import { obtenerPeriodos } from "./hooks/ObtenerPeriodos";
+import { filtrarRegistrosPorPeriodos } from "./hooks/RegistrosPorPeriodo";
+import { getParteDiariosNorte } from "../../utils/queryAPI/ParteDiariosNorte";
 
 const ParteDiarioContainer = () => {
   const [errorServer, setErrorServer] = useState(false);
-  const [msgErrorServer, setMsgErrorServer] = useState('')
-  const [errorInterno, setErrorInterno] = useState(false)
-  const [msgErrorInterno, setMsgErrorInterno] = useState('')
-  const [dataEnd, setDataEnd] = useState(null)
-  const [dataZafra, setDataZafra] = useState(null)
-  const [dataAnio, setDataAnio] = useState(null)
-  const [dataMes, setDataMes] = useState(null)
-  const [dataQuincena, setDataQuincena] = useState(null)
-  const [dataParteDiariosHistoricos, setDataParteDiariosHistoricos] =
-    useState(null)
-  const [dataImport, setDataImport] = useState(null)
-  const [dataImportComparativa, setDataImportComparativa] = useState(null)
-  const [dataImportDestileria, setDataImportDestileria] = useState(null)
+  const [msgErrorServer, setMsgErrorServer] = useState("");
+  const [dataEnd, setDataEnd] = useState(null);
+  const [dataZafra, setDataZafra] = useState(null);
+  const [dataAnio, setDataAnio] = useState(null);
+  const [dataMes, setDataMes] = useState(null);
+  const [dataQuincena, setDataQuincena] = useState(null);
+  const [dataParteDiariosHistoricos, setDataParteDiariosHistoricos] = useState(null);
+  const [dataParteDiariosHistoricosNorte, setDataParteDiariosHistoricosNorte] = useState(null);
+
+  const [dataImport, setDataImport] = useState(null);
+  const [dataImportComparativa, setDataImportComparativa] = useState(null);
+  const [dataImportDestileria, setDataImportDestileria] = useState(null);
   const [dataImportDestileriaComparativa, setDataImportDestileriaComparativa] =
-    useState(null)
-  const [banderaDataNull, setBanderaDataNull] = useState(false)
-  const [dateInicioIngenios, setDateInicioIngenios] = useState(null)
-  const [dateFinIngenios, setDateFinIngenios] = useState(null)
-  const [dataIngenios, setDataIngenios] = useState(null)
-  const [zafraParteDiario, setZafraParteDiario] = useState(null)
+    useState(null);
+  const [dataImportAnhidro, setDataImportAnhidro] = useState(null);
+  const [dataImportAnhidroComparativa, setDataImportAnhidroComparativa] =
+    useState(null);
+  const [dataImportNorte, setDataImportNorte] = useState(null);
+  const [dataImportComparativaNorte, setDataImportComparativaNorte] = useState(null);
+  const [dataImportDestileriaNorte, setDataImportDestileriaNorte] = useState(null);
+  const [dataImportDestileriaComparativaNorte, setDataImportDestileriaComparativaNorte] =
+    useState(null);
+  const [dataImportAnhidroNorte, setDataImportAnhidroNorte] = useState(null);
+  const [dataImportAnhidroComparativaNorte, setDataImportAnhidroComparativaNorte] =
+    useState(null);
 
-  const [inicioZafra, setInicioZafra] = useState(null)
-  const [finZafra, setFinZafra] = useState(null)
-  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null)
-  const [finZafraComparativa, setFinZafraComparativa] = useState(undefined)
+  const [banderaDataNull, setBanderaDataNull] = useState(false);
+  const [dateInicioIngenios, setDateInicioIngenios] = useState(null);
+  const [dateFinIngenios, setDateFinIngenios] = useState(null);
+  const [dataIngenios, setDataIngenios] = useState(null);
+  const [zafraParteDiario, setZafraParteDiario] = useState(null);
+  const [dateInicioIngeniosItemCollapse, setDateInicioIngeniosItemCollapse] = useState(null);
+  
+  const [loading, setLoading] = useState(false);
+  const [dataParteDiarios, setDataParteDiarios] = useState([]);
+  const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState("");
 
-  const [inicioDestileria, setInicioDestileria] = useState(null)
-  const [finDestileria, setFinDestileria] = useState(null)
-  const [inicioDestileriaComparativa, setInicioDestileriaComparativa] =
-    useState(null)
-  const [finDestileriaComparativa, setFinDestileriaComparativa] =
-    useState(undefined)
+
   useEffect(() => {
     if (dataZafra !== null) {
-      getData()
+      getData();
+      getDataNorte()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra])
+  }, [dataZafra, dateInicioIngeniosItemCollapse, dataParteDiarios, dataParteDiariosNorte]);
+
+  useEffect(() => {
+    getDataParteDiarios();
+    getDataParteDiariosNorte();
+  }, []);
+  const getDataParteDiarios = async () => {
+    const data = await getParteDiarios();
+    setDataParteDiarios(data);
+  };
+  const getDataParteDiariosNorte = async () => {
+    const data = await getParteDiariosNorte();
+    setDataParteDiariosNorte(data);
+  };
+
+  useEffect(() => {
+    dataLastUpdated();
+  }, [loading]);
+
+  const dataLastUpdated = async () => {
+    const data = await getLastUpdated();
+    const fecha = new Date(data[0]?.fechaParte).toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+    setLastUpdated(fecha);
+  };
+
+  const getDataNorte = async() => {
+    const periodoActualNorte = obtenerPeriodos(dateInicioIngeniosItemCollapse, 2)
+    const {dataZafra1, dataDestileria1, dataAnhidro1} = filtrarRegistrosPorPeriodos(periodoActualNorte, dataParteDiariosNorte, new Date())
+    const datosProductivosNorte = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
+    setDataParteDiariosHistoricosNorte(datosProductivosNorte)
+  }
 
   const getData = async () => {
-    try {
-      setDataParteDiariosHistoricos(null)
-      const params = {
-        fechadesde: `01-04-${dataZafra}`,
-        fechahasta: `31-03-${dataZafra + 1}`,
-      }
-
-      /***** DESDE BACKEND *****/
-      const data = await getDataPartesDiariosBE(params, '/dataQuincenal') // DESDE BACKEND
-      if(data.status === 200){
-        setDataParteDiariosHistoricos(data?.data?.data?.ParteDiarios)
-      }
-      if(data.response.status === 503) {
-        setErrorServer(true)
-        setMsgErrorServer(data.response.data.error)
-      }
-      // setDataParteDiariosHistoricos(data)
-    } catch (error) {
-      setErrorInterno(true)
-      setMsgErrorInterno('Hubo un problema interno del servidor. Recargue la página.')
-      setTimeout(() => {
-        setErrorInterno(false)
-      }, 3000);
-    }
-  }
+      const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse,1);
+      const { dataZafra1, dataDestileria1, dataAnhidro1 } =filtrarRegistrosPorPeriodos(periodoActual, dataParteDiarios, new Date());
+      const datosProductivos = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
+      setDataParteDiariosHistoricos(datosProductivos)
+  };
   useEffect(() => {
-    if (dataEnd !== null) {
-      getDataImportZafra()
-      getDataImportDestileria()
+    if (dataEnd && dataParteDiarios && dataParteDiariosNorte && dateInicioIngenios && dateFinIngenios) {
+
+      /** TUCUMAN **/
+      const periodosActual = obtenerPeriodos(dateInicioIngenios,1);
+      const periodoComparativo = obtenerPeriodos(dateFinIngenios,1);
+
+
+      const { dataZafra1, dataDestileria1, dataAnhidro1 } =
+        filtrarRegistrosPorPeriodos(periodosActual, dataParteDiarios, dataEnd);
+      const {
+        dataZafra1: dataZafraComparativa,
+        dataDestileria1: dataDestileriaComparativa,
+        dataAnhidro1: dataZafraAnhidroComparativa,
+      } = filtrarRegistrosPorPeriodos(
+        periodoComparativo,
+        dataParteDiarios,
+        dataEnd
+      );
+
+      setDataImport(dataZafra1);
+      setDataImportComparativa(dataZafraComparativa);
+      setDataImportDestileria(dataDestileria1);
+      setDataImportDestileriaComparativa(dataDestileriaComparativa);
+      setDataImportAnhidro(dataAnhidro1);
+      setDataImportAnhidroComparativa(dataZafraAnhidroComparativa);
+
+
+      /**NORTE **/
+      const periodosActualNorte = obtenerPeriodos(dateInicioIngenios, 2);
+      const periodoComparativoNorte = obtenerPeriodos(dateFinIngenios, 2);
+
+
+      const { dataZafra1: dataZafraNorte, dataDestileria1: dataDestileriaNorte, dataAnhidro1: dataAnhidroNorte } =
+        filtrarRegistrosPorPeriodos(periodosActualNorte, dataParteDiariosNorte, dataEnd);
+      const {
+        dataZafra1: dataZafraComparativaNorte,
+        dataDestileria1: dataDestileriaComparativaNorte,
+        dataAnhidro1: dataZafraAnhidroComparativaNorte,
+      } = filtrarRegistrosPorPeriodos(
+        periodoComparativoNorte,
+        dataParteDiariosNorte,
+        dataEnd
+      );
+
+      setDataImportNorte(dataZafraNorte);
+      setDataImportComparativaNorte(dataZafraComparativaNorte);
+      setDataImportDestileriaNorte(dataDestileriaNorte);
+      setDataImportDestileriaComparativaNorte(dataDestileriaComparativaNorte);
+      setDataImportAnhidroNorte(dataAnhidroNorte);
+      setDataImportAnhidroComparativaNorte(dataZafraAnhidroComparativaNorte);
+
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    dataEnd,
-    inicioZafra,
-    finZafra,
-    inicioZafraComparativa,
-    finZafraComparativa,
-  ])
-  const getDataImportZafra = async () => {
-    const inicio = new Date(inicioZafra)
-    const fin = new Date(finZafra)
-    const inicioComparativa = new Date(inicioZafraComparativa)
-    const finComparativa = new Date(finZafraComparativa)
-    const fechaInicio =
-      inicioZafra === null
-        ? null
-        : `${inicio.getDate()}-${inicio.getMonth() + 1}-${zafraParteDiario}`
-
-    const fechaFin =
-      finZafra === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${fin.getDate()}-${fin.getMonth() + 1}-${fin.getFullYear()}`
-
-    const fechaInicioComparativo = `${inicioComparativa.getDate()}-${
-      inicioComparativa.getMonth() + 1
-    }-${zafraParteDiario - 1}`
-
-    const fechaFinComparativo =
-      finZafraComparativa === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${finComparativa.getDate()}-${finComparativa.getMonth() + 1}-${
-            zafraParteDiario - 1
-          }`
-
-    const params = {
-      fechadesde: fechaInicio,
-      fechahasta: fechaFin,
-    }
-    const params1 = {
-      fechadesde: fechaInicioComparativo,
-      fechahasta: fechaFinComparativo,
-    }
-
-    /***** DESDE BACKEND *****/
-    if (fechaInicio !== null) {
-      const data = await getDataPartesDiariosBE(params, '/parteDiario')
-      if(data?.status === 200){
-        const dataSinSanJuan = data.data.data.ParteDiarios.filter((d) => d.IngenioNombre !== 'San Juan')
-        setDataImport(dataSinSanJuan)
-      }
-      if(data?.response?.status === 503) {
-        setErrorServer(true)
-        setMsgErrorServer(data.response.data.error)
-      }
-      // const dataSinSanJuan = data.filter((d) => d.IngenioNombre !== 'San Juan')
-      // setDataImport(dataSinSanJuan)
-    } else {
-      setDataImport([])
-    }
-
-    const dataComparativa = await getDataPartesDiariosBE(
-      params1,
-      '/parteDiario'
-    )
-    if(dataComparativa?.status === 200){
-      const dataSinSanJuanComparativo = dataComparativa.data.data.ParteDiarios.filter((d) => d.IngenioNombre !== 'San Juan')
-      setDataImportComparativa(dataSinSanJuanComparativo)
-    }
-    if(dataComparativa?.response?.status === 503) {
-      setErrorServer(true)
-      setMsgErrorServer(dataComparativa.response.data.error)
-    }
-    // const dataSinSanJuanComparativo = dataComparativa.filter((d) => d.IngenioNombre !== 'San Juan')
-    // setDataImportComparativa(dataSinSanJuanComparativo)
-  }
-  const getDataImportDestileria = async () => {
-    const inicio = new Date(inicioDestileria)
-    const fin = new Date(finDestileria)
-    const inicioComparativa = new Date(inicioDestileriaComparativa)
-    const finComparativa = new Date(finDestileriaComparativa)
-
-    const fechaInicio =
-      inicioDestileria === null
-        ? null
-        : `${inicio.getDate()}-${inicio.getMonth() + 1}-${zafraParteDiario}`
-
-    const fechaFin =
-      finZafra === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${fin.getDate()}-${fin.getMonth() + 1}-${fin.getFullYear()}`
-
-    const fechaInicioComparativo = `${inicioComparativa.getDate()}-${
-      inicioComparativa.getMonth() + 1
-    }-${zafraParteDiario - 1}`
-
-    const fechaFinComparativo =
-      finDestileriaComparativa === null
-        ? `${dataEnd.getDate()}-${
-            dataEnd.getMonth() + 1
-          }-${dataEnd.getFullYear()}`
-        : `${finComparativa.getDate()}-${finComparativa.getMonth() + 1}-${
-            finComparativa.getFullYear()
-          }`
-
-    const params = {
-      fechadesde: fechaInicio,
-      fechahasta: fechaFin,
-    }
-    const params1 = {
-      fechadesde: fechaInicioComparativo,
-      fechahasta: fechaFinComparativo,
-    }
-
-    /***** DESDE BACKEND *****/
-    if (fechaInicio !== null) {
-      const data = await getDataPartesDiariosBE(params, '/parteDiario')
-      if(data?.status === 200){
-        setDataImportDestileria(data?.data?.data?.ParteDiarios)
-      }
-      if(data?.response?.status === 503) {
-        setErrorServer(true)
-        setMsgErrorServer(data.response.data.error)
-      }
-      // setDataImportDestileria(data)
-    } else {
-      setDataImportDestileria([])
-    }
-
-    const dataComparativa = await getDataPartesDiariosBE(
-      params1,
-      '/parteDiario'
-    )
-    if(dataComparativa?.status === 200) {
-      setDataImportDestileriaComparativa(dataComparativa?.data?.data?.ParteDiarios)
-    }
-    if(dataComparativa?.response?.status === 503) {
-      setErrorServer(true)
-      setMsgErrorServer(dataComparativa.response.data.error)
-    }
-      
-    // setDataImportDestileriaComparativa(dataComparativa)
-  }
+  }, [dataEnd, dataParteDiarios, dateInicioIngenios, dateFinIngenios]);
 
   useEffect(() => {
-    const dataNow = new Date()
+    const dataNow = new Date();
     if (dataZafra === null) {
-    setDataZafra(dataNow.getFullYear())
+      setDataZafra(dataNow.getFullYear());
     }
 
     if (dataAnio === null) {
-      setDataAnio(dataNow.getFullYear())
+      setDataAnio(dataNow.getFullYear());
     }
     if (dataMes === null) {
-      setDataMes(dataNow.getMonth() + 1)
+      setDataMes(dataNow.getMonth() + 1);
     }
     if (dataQuincena === null) {
       if (dataNow.getDate() <= 15) {
-        setDataQuincena(1)
+        setDataQuincena(1);
       } else {
-        setDataQuincena(2)
+        setDataQuincena(2);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   /*** LISTADO INGENIOS ***/
   useEffect(() => {
-    getDataIngenios()
-  }, [])
+    getDataIngenios();
+  }, []);
   const getDataIngenios = async () => {
-    const data = await getIngenios()
-    setDataIngenios(data)
-  }
+    const data = await getIngenios();
+    setDataIngenios(data);
+  };
   /******/
 
   /*** PERIODOS INGENIOS - ACTUAL Y COMPARATIVO ***/
   useEffect(() => {
     if (dataEnd) {
-      getDataPeriodos()
+      getDataPeriodos();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataEnd])
+  }, [dataEnd, zafraParteDiario]);
   const getDataPeriodos = async () => {
-    const params = { limit: 10000000, anio: zafraParteDiario, deleted: 0 }
-    const data = await getPeriodoZafra(params)
-    setDateInicioIngenios(data)
-
-    const params1 = { limit: 10000000, anio: zafraParteDiario - 1 }
-    const data1 = await getPeriodoZafra(params1)
-    setDateFinIngenios(data1)
-  }
+    const params = {
+      limit: 10000000,
+      anio: zafraParteDiario,
+      deleted: 0,
+    };
+    const data = await getPeriodoZafra(params);
+    setDateInicioIngenios(data);
+    const params1 = { limit: 10000000, anio: zafraParteDiario - 1 };
+    const data1 = await getPeriodoZafra(params1);
+    setDateFinIngenios(data1);
+  };
   /******/
 
-  /*** INICIO Y FIN DE ZAFRA ACTUAL Y COMPARATIVA ***/
+  /*** PERIODOS INGENIOS - ITEM COLLAPSE ***/
   useEffect(() => {
-    inicioPeriodoZafra()
-    finPeriodoZafra()
-    inicioPeriodoDestileria()
-    finPeriodoDestileria()
-    inicioPeriodoZafraComparativa()
-    finPeriodoZafraComparativa()
-    inicioPeriodoDestileriaComparativa()
-    finPeriodoDestileriaComparativa()
+    if (dataZafra) {
+      getDataPeriodosItemCollapse();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateInicioIngenios, dateFinIngenios])
+  }, [dataZafra]);
+  const getDataPeriodosItemCollapse = async () => {
+    const params = {
+      limit: 10000000,
+      anio: dataZafra,
+      deleted: 0,
+    };
+    const data = await getPeriodoZafra(params);
+    setDateInicioIngeniosItemCollapse(data);
 
-  let inicioZafra1 = new Date('3/10/2100')
-  let finZafra1 = new Date('1/1/1910')
+  };
+  /******/
 
-  const inicioPeriodoZafra = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      inicioZafra1 =
-        new Date(dateInicioIngenios[i].inicio_zafra) < inicioZafra1
-          ? new Date(dateInicioIngenios[i].inicio_zafra)
-          : inicioZafra1
-      setInicioZafra(inicioZafra1)
-    }
-  }
-  const finPeriodoZafra = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (dateInicioIngenios[i].fin_zafra === null) {
-        setFinZafra(null)
-        return
+  const actualizarPartesDiarios = async () => {
+    try {
+      setLoading(true);
+      
+      // Primero actualizar partes diarios de Tucumán
+      const data = await getActualizarPartesDiarios();
+      
+      if (data.status === 200) {
+        toast.success(data?.data?.message);
+        
+        // Si es exitoso, actualizar partes diarios del Norte
+        try {
+          const dataNorte = await getActualizarPartesDiariosNorte();
+          
+          if (dataNorte.status === 200) {
+            toast.success("Partes diarios del Norte actualizados correctamente");
+          } else {
+            toast.error(`Error al actualizar partes diarios del Norte: ${dataNorte?.response?.data?.error || 'Error desconocido'}`);
+          }
+        } catch (errorNorte) {
+          toast.error(`Error al actualizar partes diarios del Norte: ${errorNorte?.response?.data?.error || 'Error desconocido'}`);
+        }
       } else {
-        finZafra1 =
-          new Date(dateInicioIngenios[i].fin_zafra) > finZafra1
-            ? new Date(dateInicioIngenios[i].fin_zafra)
-            : finZafra1
-        setFinZafra(finZafra1)
+        toast.error(`Error al actualizar partes diarios: ${data?.response?.data?.error || 'Error desconocido'}`);
       }
+    } catch (error) {
+      toast.error(`Error al actualizar partes diarios: ${error?.response?.data?.error || 'Error desconocido'}`);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  let inicioDestileria1 = new Date('3/10/2100')
-  let finDestileria1 = new Date('1/1/1910')
-  const inicioPeriodoDestileria = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (dateInicioIngenios[i].inicio_destileria !== null) {
-        inicioDestileria1 =
-          new Date(dateInicioIngenios[i].inicio_destileria) < inicioDestileria1
-            ? new Date(dateInicioIngenios[i].inicio_destileria)
-            : inicioDestileria1
-        setInicioDestileria(inicioDestileria1)
-      }
-    }
-  }
-  const finPeriodoDestileria = () => {
-    for (let i = 0; i < dateInicioIngenios?.length; i++) {
-      if (
-        dateInicioIngenios[i].inicio_destileria !== null &&
-        dateInicioIngenios[i].fin_destileria === null
-      ) {
-        setFinDestileria('')
-      }
-      if (
-        dateInicioIngenios[i].inicio_destileria !== null &&
-        dateInicioIngenios[i].fin_destileria !== null
-      ) {
-        finDestileria1 =
-          new Date(dateInicioIngenios[i].fin_destileria) > finDestileria1
-            ? new Date(dateInicioIngenios[i].fin_destileria)
-            : finDestileria1
-        setFinDestileria(finDestileria1)
-      }
-    }
-  }
-
-  let inicioZafra2 = new Date('3/10/2100')
-  let finZafra2 = new Date('1/1/1910')
-  const inicioPeriodoZafraComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      inicioZafra2 =
-        new Date(dateFinIngenios[i].inicio_zafra) < inicioZafra2
-          ? new Date(dateFinIngenios[i].inicio_zafra)
-          : inicioZafra2
-      setInicioZafraComparativa(inicioZafra2)
-    }
-  }
-  const finPeriodoZafraComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (dateFinIngenios[i].fin_zafra === null) {
-        setFinZafraComparativa('')
-        return
-      } else {
-        finZafra2 =
-          new Date(dateFinIngenios[i].fin_zafra) > finZafra2
-            ? new Date(dateFinIngenios[i].fin_zafra)
-            : finZafra2
-        setFinZafraComparativa(finZafra2)
-      }
-    }
-  }
-  let inicioDestileria2 = new Date('3/10/2100')
-  let finDestileria2 = new Date('1/1/1910')
-  const inicioPeriodoDestileriaComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (dateFinIngenios[i].inicio_destileria !== null) {
-        inicioDestileria2 =
-          new Date(dateFinIngenios[i].inicio_destileria) < inicioDestileria2
-            ? new Date(dateFinIngenios[i].inicio_destileria)
-            : inicioDestileria2
-        setInicioDestileriaComparativa(inicioDestileria2)
-      }
-    }
-  }
-  const finPeriodoDestileriaComparativa = () => {
-    for (let i = 0; i < dateFinIngenios?.length; i++) {
-      if (
-        dateFinIngenios[i].inicio_destileria !== null &&
-        dateFinIngenios[i].fin_destileria === null
-      ) {
-        setFinDestileriaComparativa(null)
-        return
-      }
-      if (
-        dateFinIngenios[i].inicio_destileria !== null &&
-        dateFinIngenios[i].fin_destileria !== null
-      ) {
-        finDestileria2 =
-          new Date(dateFinIngenios[i].fin_destileria) > finDestileria2
-            ? new Date(dateFinIngenios[i].fin_destileria)
-            : finDestileria2
-        setFinDestileriaComparativa(finDestileria2)
-      }
-    }
-  }
   return (
     <Container fluid>
       {banderaDataNull && (
         <MsgError
-          text1='Estamos procesando la información.'
-          text2='Intente de nuevo.'
+          text1="Estamos procesando la información."
+          text2="Intente de nuevo."
         />
       )}
 
-      <TitlePage titlePage='Parte Diario Directorio' />
-      <hr className='mx-3 mt-1' />
-      {dataParteDiariosHistoricos === null || !dataParteDiariosHistoricos? (
+      <TitlePage
+        titlePage="Parte Diario Directorio"
+        btnOnClick={true}
+        titleBtnOnClick="Actualizar partes diarios"
+        functionOnClick={actualizarPartesDiarios}
+        lastUpdated={lastUpdated}
+      />
+      <hr className="mx-3 mt-1" />
+      {dataParteDiariosHistoricos === null || !dataParteDiariosHistoricos ? (
         errorServer ? (
-          <MsgErrorServerJSON msg1={msgErrorServer} btnLink='/admin/parte-diario' />
+          <MsgErrorServerJSON
+            msg1={msgErrorServer}
+            btnLink="/admin/parte-diario"
+          />
         ) : (
-        <div className='d-flex justify-content-center align-items-center text-center'>
-          <Spinn type='data' />
-        </div>
+          <div className="d-flex justify-content-center align-items-center text-center">
+            <Spinn type="data" />
+          </div>
         )
       ) : (
         <>
-          <div className='px-4'>
-            <span className='text-danger fw-bolder'>*</span>
-            <span className='text-legend'>
+          {/* <div className="px-4">
+            <span className="text-danger fw-bolder">*</span>
+            <span className="text-legend">
               Periodos desde 01/04 al 31/03 del siguiente año
             </span>
-          </div>
+          </div> */}
           <Filtros
             setDataEnd={setDataEnd}
             setDataAnio={setDataAnio}
@@ -467,15 +329,35 @@ const ParteDiarioContainer = () => {
             dataQuincena={dataQuincena}
             dataZafra={dataZafra}
             dataParteDiariosHistoricos={dataParteDiariosHistoricos}
+            dataParteDiariosHistoricosNorte={dataParteDiariosHistoricosNorte}
+            dateInicioIngeniosItemCollapse={dateInicioIngeniosItemCollapse}
             dataImport={dataImport}
             dataImportComparativa={dataImportComparativa}
             dataImportDestileria={dataImportDestileria}
             dataImportDestileriaComparativa={dataImportDestileriaComparativa}
+            dataImportAnhidro={dataImportAnhidro}
+            dataImportAnhidroComparativa={dataImportAnhidroComparativa}
+            dataImportNorte={dataImportNorte}
+            dataImportComparativaNorte={dataImportComparativaNorte}
+            dataImportDestileriaNorte={dataImportDestileriaNorte}
+            dataImportDestileriaComparativaNorte={dataImportDestileriaComparativaNorte}
+            dataImportAnhidroNorte={dataImportAnhidroNorte}
+            dataImportAnhidroComparativaNorte={dataImportAnhidroComparativaNorte}
             setBanderaDataNull={setBanderaDataNull}
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}
             setDataImportDestileria={setDataImportDestileria}
-            setDataImportDestileriaComparativa={setDataImportDestileriaComparativa}
+            setDataImportDestileriaComparativa={
+              setDataImportDestileriaComparativa
+            }
+            setDataImportAnhidro={setDataImportAnhidro}
+            setDataImportAnhidroComparativa={setDataImportAnhidroComparativa}
+            setDataImportNorte={setDataImportNorte}
+            setDataImportComparativaNorte={setDataImportComparativaNorte}
+            setDataImportDestileriaNorte={setDataImportDestileriaNorte}
+            setDataImportDestileriaComparativaNorte={setDataImportDestileriaComparativaNorte}
+            setDataImportAnhidroNorte={setDataImportAnhidroNorte}
+            setDataImportAnhidroComparativaNorte={setDataImportAnhidroComparativaNorte}
             dateInicioIngenios={dateInicioIngenios}
             dateFinIngenios={dateFinIngenios}
             dataIngenios={dataIngenios}
@@ -483,8 +365,12 @@ const ParteDiarioContainer = () => {
           />
         </>
       )}
-
+      {loading && (
+        <div className="loader-overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
     </Container>
-  )
-}
-export default ParteDiarioContainer
+  );
+};
+export default ParteDiarioContainer;

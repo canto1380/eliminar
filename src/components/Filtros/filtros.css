@@ -1,0 +1,9 @@
+.container-filtros {
+    border: 1px solid rgba(84, 84, 84, 0.469);
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.scrolled {
+    background-color: aquamarine;
+}

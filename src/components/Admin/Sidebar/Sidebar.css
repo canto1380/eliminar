@@ -1,33 +1,55 @@
 .textSidebar {
-  font-family: "Lobster", cursive;
+  /* font-family: "Lobster", cursive; */
   font-family: "Rubik", sans-serif;
+  color: #e8eaf6;
 }
 
 .sidebar {
   height: 770px;
-  width: 20%;
-  background-color: rgb(46, 53, 63);
+  width: 13%;
+  min-width: 220px;
+  background: linear-gradient(180deg, #1E1E2F 0%, #24243E 100%);
+  color: #e8eaf6;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
 }
 .sidebarInactivo {
-  width: 6%;
-  height: 770px;
-  background-color: rgb(46, 53, 63);
-  color: rgb(64, 64, 64);
+  width: 4%;
+  min-width: 80px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1E1E2F 0%, #24243E 100%);
+  color: #9fa8da;
+  transition: all 0.3s ease;
 }
 .sidebarList {
-  height: auto;
-  width: 100%;
+  flex-grow: 1;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
 }
 
 .imgProfile {
-  max-width: 40px;
-  max-height: 40px;
-  background-color: rgb(208, 105, 61) !important;
+  max-width: 50px;
+  max-height: 50px;
+  width: 50px;
+  height: 50px;
+  background: #00c2a8;
+  color: #ffffff;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(0, 194, 168, 0.5);
   padding: 8px 0px;
 }
 .sizeIcon {
   font-size: 20px;
+  min-width: 24px;
+  transition: transform 0.3s ease;
 }
 
 .imgContainer {
@@ -37,31 +59,69 @@
 }
 
 .sidebarListRow {
-  width: 100%;
-  height: 50px;
-}
-.sidebarListRow:hover {
-  background-color: rgb(31, 36, 53);
-  cursor: pointer;
-  font-weight: 600;
-}
-.rowActive {
-  border-right: 5px solid rgb(230, 230, 230);
+  /* width: 100%;
+  height: 50px; */
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 1rem;
+  
+  color: #e8eaf6;
+  transition: all 0.25s ease;
+  border-left: 3px solid transparent;
 }
 
-.inactivo {
-  visibility: hidden;
-  position: absolute;
+.sidebarListRow:hover {
+  background: #2c2c3e;
+  cursor: pointer;
+  font-weight: 600;
+  border-left: 3px solid #00c2a8;
+  color: #00c2a8;
 }
+.sidebarListRow:hover .sizeIcon {
+  transform: scale(1.2);
+}
+.rowActive {
+  border-left: 3px solid #00c2a8;
+  background: #2c2c3e;
+  font-weight: 600;
+  color: #00c2a8;
+}
+
+/* === Minimizado === */
+.inactivo {
+  display: none;
+}
+
 .parte2 {
   height: 100%;
   width: 100%;
   overflow-y: scroll;
 }
+
 .parte2Inactivo {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
+}
+
+/* === Botón de expansión / contracción === */
+.cursorPointer {
+  cursor: pointer;
+  color: #9fa8da;
+  transition: color 0.3s ease;
+}
+
+.cursorPointer:hover {
+  color: #00c2a8;
+}
+
+/* === Divider === */
+hr {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.5rem 0 1rem;
 }
 
 /** Media **/

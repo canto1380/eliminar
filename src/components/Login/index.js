@@ -97,7 +97,7 @@ const Login = ({ banderaLogin, setBanderaLogin }) => {
                 <Link to="/login" target="_parent">
                   <Image
                     src={ImageLogo}
-                    alt="Clara Calzados"
+                    alt="IPAAT-10-anios"
                     height="70"
                     width="70"
                   />

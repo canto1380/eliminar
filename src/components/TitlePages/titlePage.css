@@ -1,0 +1,64 @@
+.btn-actualizar {
+    background: linear-gradient(135deg, #236236, #46b19f);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px !important;
+    font-size: 15px;
+    padding: 0.6rem 1.75rem; /* un poco más alto */
+    box-shadow: 0 8px 16px rgba(0, 84, 148, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    letter-spacing: 0.02em;
+    border: none !important;
+  
+    /* 🔥 Centramos completamente el contenido */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* elimina espacios extra verticales */
+    vertical-align: middle;
+  }
+
+.btn-actualizar:hover,
+.btn-actualizar:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 84, 148, 0.3);
+  color: #fff;
+}
+
+.btn-actualizar:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 84, 148, 0.2);
+}
+
+.btn-actualizar.disabled,
+.btn-actualizar:disabled {
+  background: linear-gradient(135deg, #9da7b3, #b5bdc6);
+  color: #f6f7f8;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+    .container-button-update {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .button-update {
+        text-align: start;
+        padding-top: 10px !important;
+    }
+
+    .info-update {
+        text-align: start !important;
+        align-content: center;
+    }
+
+    .info-update p {
+        margin-bottom: 0 !important;
+    }
+}
+
+@media (max-width: 730px) {}

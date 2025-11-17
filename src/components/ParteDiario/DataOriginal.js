@@ -2,21 +2,21 @@
 import { dateConverted } from "../../helpers/helpers";
 
 let dataAguilares = {
-    E10: 0,
-    F10: 0,
-    G10: 0,
-    J10: 0,
-    K10: 0,
-    M10: 0,
-    N10: 0,
-    C43: 0,
-    D43: 0,
-    F43: 0,
-    G43: 0,
-    L44: 0,
-    O44: 0,
-    R44: 0,
-  },
+  E10: 0,
+  F10: 0,
+  G10: 0,
+  J10: 0,
+  K10: 0,
+  M10: 0,
+  N10: 0,
+  C43: 0,
+  D43: 0,
+  F43: 0,
+  G43: 0,
+  L44: 0,
+  O44: 0,
+  R44: 0,
+},
   dataCruzAlta = {
     E11: 0,
     F11: 0,
@@ -241,6 +241,107 @@ let dataAguilares = {
     O58: 0,
     R58: 0,
   },
+  dataDestBellaVista = {
+    E27: 0,
+    F27: 0,
+    G27: 0,
+    J27: 0,
+    K27: 0,
+    M27: 0,
+    N27: 0,
+    C59: 0,
+    D59: 0,
+    F59: 0,
+    G59: 0,
+    L59: 0,
+    O59: 0,
+    R59: 0,
+  },
+
+  /** Norte **/
+  dataLaEsperanza = {
+    E44: 0, //CMB
+    F44: 0, //CMN
+    G44: 0, //EQUIVALENTE
+    J44: 0, //BLANCO = SUMA DE REFINADO Y BLANCO
+    K44: 0, //CRUDO = SUMA DE CRUDO, ORGANICO Y OTROS
+    M44: 0, //MELAZA
+    N44: 0, //AlCOHOL PRODUCIDO
+    O44: 0, //HIDRATADO
+    P44: 0, //ANHIDRO
+    V44: 0, //BLANCO
+    W44: 0, //REFINADO
+    X44: 0, //ORGANICO
+    Y44: 0, //OTROS
+    Z44: 0, //CRUDO
+  },
+  dataLedesma = {
+    E45: 0, //CMB
+    F45: 0, //CMN
+    G45: 0, //EQUIVALENTE
+    J45: 0, //BLANCO = SUMA DE REFINADO Y BLANCO
+    K45: 0, //CRUDO = SUMA DE CRUDO, ORGANICO Y OTROS
+    M45: 0, //MELAZA
+    N45: 0, //ALCOHOL PRODUCIDO
+    O45: 0, //HIDRATADO
+    P45: 0, //ANHIDRO
+    V45: 0, //BLANCO
+    W45: 0, //REFINADO
+    X45: 0, //ORGANICO
+    Y45: 0, //OTROS
+    Z45: 0, //CRUDO
+  },
+  dataRioGrande = {
+    E46: 0, //CMB
+    F46: 0, //CMN
+    G46: 0, //EQUIVALENTE
+    J46: 0, //BLANCO = SUMA DE REFINADO Y BLANCO
+    K46: 0, //CRUDO = SUMA DE CRUDO, ORGANICO Y OTROS
+    M46: 0, //MELAZA
+    N46: 0, //ALCOHOL PRODUCIDO
+    O46: 0, //HIDRATADO
+    P46: 0, //ANHIDRO
+    V46: 0, //BLANCO
+    W46: 0, //REFINADO
+    X46: 0, //ORGANICO
+    Y46: 0, //OTROS
+    Z46: 0, //CRUDO
+  },
+  dataSanIsidro = {
+    E47: 0, //CMB
+    F47: 0, //CMN
+    G47: 0, //EQUIVALENTE
+    J47: 0, //BLANCO = SUMA DE REFINADO Y BLANCO
+    K47: 0, //CRUDO = SUMA DE CRUDO, ORGANICO Y OTROS
+    M47: 0, //MELAZA
+    N47: 0, //ALCOHOL PRODUCIDO
+    O47: 0, //HIDRATADO
+    P47: 0, //ANHIDRO
+    V47: 0, //BLANCO
+    W47: 0, //REFINADO
+    X47: 0, //ORGANICO
+    Y47: 0, //OTROS
+    Z47: 0, //CRUDO
+  },
+  dataSeaboard = {
+    E48: 0, //CMB
+    F48: 0, //CMN
+    G48: 0, //EQUIVALENTE
+    J48: 0, //BLANCO = SUMA DE REFINADO Y BLANCO
+    K48: 0, //CRUDO = SUMA DE CRUDO, ORGANICO Y OTROS
+    M48: 0, //MELAZA
+    N48: 0, //ALCOHOL PRODUCIDO
+    O48: 0, //HIDRATADO
+    P48: 0, //ANHIDRO
+    V48: 0, //BLANCO
+    W48: 0, //REFINADO
+    X48: 0, //ORGANICO
+    Y48: 0, //OTROS
+    Z48: 0, //CRUDO
+  },
+
+  /***** FECHAS *****/
+  /** ZAFRA - TUCUMAN **/
   dataInicioIngenios = {
     Cell10: 0,
     CellE10: 0,
@@ -272,8 +373,10 @@ let dataAguilares = {
     CellE25: 0,
     Cell26: 0,
     CellE26: 0,
+    bellaVistaInicio: 0,
+    bellaVistaFin: 0
   },
-  /** NORTE **/
+  /** ZAFRA - NORTE **/
   dataInicioIngeniosNorte = {
     Cell44: 0,
     CellE44: 0,
@@ -286,6 +389,8 @@ let dataAguilares = {
     Cell48: 0,
     CellE48: 0,
   },
+
+  /** DESTILERIA - TUCUMAN **/
   dataInicioDestileriaIngenios = {
     aguilInicio: null,
     aguilFin: null,
@@ -317,7 +422,10 @@ let dataAguilares = {
     staRosaFin: null,
     sanJuanInicio: null,
     sanJuanFin: null,
+    bellaVistaDestInicio: null,
+    bellaVistaDestFin: null,
   },
+  /** DESTILERIA - NORTE **/
   dataInicioDestileriaIngeniosNorte = {
     sanisidroInicio: null,
     sanisidroFin: null,
@@ -329,11 +437,64 @@ let dataAguilares = {
     riograndeFin: null,
     esperanzaInicio: null,
     esperanzaFin: null,
+  },
+  /** ANHIDRO - TUCUMAN **/
+  dataInicioAnhidroIngenios = {
+    aguilInicioAnhidro: null,
+    aguilFinAnhidro: null,
+    cruzInicioAnhidro: null,
+    cruzFinAnhidro: null,
+    floridaInicioAnhidro: null,
+    floridaFinAnhidro: null,
+    concepInicioAnhidro: null,
+    concepFinAnhidro: null,
+    marapaInicioAnhidro: null,
+    marapaFinAnhidro: null,
+    bellaInicioAnhidro: null,
+    bellaFinAnhidro: null,
+    famaillaInicioAnhidro: null,
+    famaillaFinAnhidro: null,
+    coronaInicioAnhidro: null,
+    coronaFinAnhidro: null,
+    provInicioAnhidro: null,
+    provFinAnhidro: null,
+    trinInicioAnhidro: null,
+    trinFinAnhidro: null,
+    lealesInicioAnhidro: null,
+    lealesFinAnhidro: null,
+    nunorcoInicioAnhidro: null,
+    nunorcoFinAnhidro: null,
+    staBarInicioAnhidro: null,
+    staBarFinAnhidro: null,
+    staRosaInicioAnhidro: null,
+    staRosaFinAnhidro: null,
+    sanJuanInicioAnhidro: null,
+    sanJuanFinAnhidro: null,
+    bellaVistaAnhidroInicio: null,
+    bellaVistaAnhidroFin: null
+  },
+
+  /** ANHIDRO - NORTE **/
+  dataInicioAnhidroIngeniosNorte = {
+    sanisidroInicioAnhidro: null,
+    sanisidroFinAnhidro: null,
+    seaboardInicioAnhidro: null,
+    seaboardFinAnhidro: null,
+    ledesmaInicioAnhidro: null,
+    ledesmaFinAnhidro: null,
+    riograndeInicioAnhidro: null,
+    riograndeFinAnhidro: null,
+    esperanzaInicioAnhidro: null,
+    esperanzaFinAnhidro: null,
   };
 
 export const dataPorTipo = (
   dataImport,
   dataImportDestileria,
+  dataImportAnhidro,
+  dataImportNorte,
+  dataImportDestileriaNorte,
+  dataImportAnhidroNorte,
   dataEnd,
   dateInicioIngenios,
   zafraParteDiario,
@@ -352,10 +513,18 @@ export const dataPorTipo = (
   setD13,
   setD14,
   setD15,
+  setDataDestBellaVista,
+  setN1,
+  setN2,
+  setN3,
+  setN4,
+  setN5,
   setFechasInicioIngenios,
   setFechasInicioDestileriaIngenios,
+  setFechasInicioAnhidroIngenios,
   setFechasInicioIngeniosNorte,
   setFechasInicioDestileriaIngeniosNorte,
+  setFechasInicioAnhidroIngeniosNorte,
   setPanelCMB,
   setPanelAzucar,
   setPanelAzucarEquivalente,
@@ -365,17 +534,19 @@ export const dataPorTipo = (
   setPanelAzucarOrganico,
   setPanelAzucarOtros,
   setPanelAlcohol,
+  setPanelAlcoholAnhidro
 ) => {
+
   let cmbPanel = 0;
   let azucarPanel = 0;
   let azucarPanelEquivalente = 0;
   let azucarPanelCrudo = 0;
   let azucarPanelBlancoA = 0
-  let azucarPanelRefinado =0
+  let azucarPanelRefinado = 0
   let azucarPanelOrganico = 0
   let azucarPanelOtros = 0
   let alcoholPanel = 0;
-
+  let alcoholAnhidroPanel
   /****  FECHAS INICIO  ****/
   const aguil = dateInicioIngenios?.find(
     (d) => d.nombre_ingenio === "Aguilares"
@@ -429,6 +600,9 @@ export const dataPorTipo = (
   const sanjuan = dateInicioIngenios?.find(
     (d) => d.nombre_ingenio === "San Juan"
   );
+  const destBellaVista = dateInicioIngenios?.find(
+    (d) => d.nombre_ingenio === "Destilería Bella Vista"
+  );
 
   /** NORTE **/
   const sanisidro = dateInicioIngenios?.find(
@@ -447,6 +621,7 @@ export const dataPorTipo = (
     (d) => d.nombre_ingenio === "La Esperanza"
   );
 
+  /** TUCUMAN **/
   dataInicioIngenios = {
     Cell10: aguil?.inicio_zafra,
     CellE10: aguil?.fin_zafra,
@@ -478,6 +653,8 @@ export const dataPorTipo = (
     CellE25: starosa?.fin_zafra,
     Cell26: sanjuan?.inicio_zafra,
     CellE26: sanjuan?.fin_zafra,
+    bellaVistaInicio: destBellaVista?.inicio_zafra,
+    bellaVistaFin: destBellaVista?.fin_zafra,
   };
   /** NORTE **/
   dataInicioIngeniosNorte = {
@@ -493,6 +670,7 @@ export const dataPorTipo = (
     CellE48: seaboard?.fin_zafra,
   };
 
+  /** DESTILERIA - TUCUMAN **/
   dataInicioDestileriaIngenios = {
     aguilInicio: aguil?.inicio_destileria,
     aguilFin: aguil?.fin_destileria,
@@ -524,8 +702,11 @@ export const dataPorTipo = (
     staRosaFin: starosa?.fin_destileria,
     sanJuanInicio: sanjuan?.inicio_destileria,
     sanJuanFin: sanjuan?.fin_destileria,
+    bellaVistaDestInicio: destBellaVista?.inicio_destileria,
+    bellaVistaDestFin: destBellaVista?.fin_destileria,
   };
 
+  /** DESTILERIA - NORTE **/
   dataInicioDestileriaIngeniosNorte = {
     esperanzaInicio: laesperanza?.inicio_destileria,
     esperanzaFin: laesperanza?.fin_destileria,
@@ -539,13 +720,66 @@ export const dataPorTipo = (
     sanisidroFin: sanisidro?.fin_destileria,
   };
 
+  /** ANHIDRO - TUCUMAN **/
+  dataInicioAnhidroIngenios = {
+    aguilInicioAnhidro: aguil?.inicio_anhidro,
+    aguilFinAnhidro: aguil?.fin_anhidro,
+    cruzInicioAnhidro: cruz?.inicio_anhidro,
+    cruzFinAnhidro: cruz?.fin_anhidro,
+    floridaInicioAnhidro: florida?.inicio_anhidro,
+    floridaFinAnhidro: florida?.fin_anhidro,
+    concepInicioAnhidro: concep?.inicio_anhidro,
+    concepFinAnhidro: concep?.fin_anhidro,
+    marapaInicioAnhidro: marapa?.inicio_anhidro,
+    marapaFinAnhidro: marapa?.fin_anhidro,
+    bellaInicioAnhidro: bellaVista?.inicio_anhidro,
+    bellaFinAnhidro: bellaVista?.fin_anhidro,
+    famaillaInicioAnhidro: famail?.inicio_anhidro,
+    famaillaFinAnhidro: famail?.fin_anhidro,
+    coronaInicioAnhidro: corona?.inicio_anhidro,
+    coronaFinAnhidro: corona?.fin_anhidro,
+    provInicioAnhidro: providencia?.inicio_anhidro,
+    provFinAnhidro: providencia?.fin_anhidro,
+    trinInicioAnhidro: trinidad?.inicio_anhidro,
+    trinFinAnhidro: trinidad?.fin_anhidro,
+    lealesInicioAnhidro: leales?.inicio_anhidro,
+    lealesFinAnhidro: leales?.fin_anhidro,
+    nunorcoInicioAnhidro: nunorco?.inicio_anhidro,
+    nunorcoFinAnhidro: nunorco?.fin_anhidro,
+    staBarInicioAnhidro: stabarbara?.inicio_anhidro,
+    staBarFinAnhidro: stabarbara?.fin_anhidro,
+    staRosaInicioAnhidro: starosa?.inicio_anhidro,
+    staRosaFinAnhidro: starosa?.fin_anhidro,
+    sanJuanInicioAnhidro: sanjuan?.inicio_anhidro,
+    sanJuanFinAnhidro: sanjuan?.fin_anhidro,
+    bellaVistaAnhidroInicio: destBellaVista?.inicio_anhidro,
+    bellaVistaAnhidroFin: destBellaVista?.fin_anhidro,
+  };
+
+  /** ANHIDRO - NORTE **/
+  dataInicioAnhidroIngeniosNorte = {
+    esperanzaInicioAnhidro: laesperanza?.inicio_anhidro,
+    esperanzaFinAnhidro: laesperanza?.fin_anhidro,
+    ledesmaInicioAnhidro: ledesma?.inicio_anhidro,
+    ledesmaFinAnhidro: ledesma?.fin_anhidro,
+    riograndeInicioAnhidro: riogrande?.inicio_anhidro,
+    riograndeFinAnhidro: riogrande?.fin_anhidro,
+    seaboardInicioAnhidro: seaboard?.inicio_anhidro,
+    seaboardFinAnhidro: seaboard?.fin_anhidro,
+    sanisidroInicioAnhidro: sanisidro?.inicio_anhidro,
+    sanisidroFinAnhidro: sanisidro?.fin_anhidro,
+  };
+
   setFechasInicioIngenios(dataInicioIngenios);
   setFechasInicioDestileriaIngenios(dataInicioDestileriaIngenios);
   setFechasInicioIngeniosNorte(dataInicioIngeniosNorte);
   setFechasInicioDestileriaIngeniosNorte(dataInicioDestileriaIngeniosNorte);
+  setFechasInicioAnhidroIngenios(dataInicioAnhidroIngenios)
+  setFechasInicioAnhidroIngeniosNorte(dataInicioAnhidroIngeniosNorte)
   /************/
 
-  for (let i = 1; i <= 15; i++) {
+  /** VARIABLES TUCUMAN (1-15) NORTE (16-20) **/
+  for (let i = 1; i <= 21; i++) {
     let varName1 = "a" + i;
     let varName2 = "b" + i;
     let varName3 = "c" + i;
@@ -576,274 +810,1143 @@ export const dataPorTipo = (
     window[varName13] = 0;
     window[varName14] = 0;
   }
+
   /****************************** DATOS DESTILERIA ALCOHOL ******************************/
-  
+  /** TUCUMAN **/
   dataImportDestileria?.forEach((data) => {
-    const newDate = dateConverted(data?.FechaParte);
+    const newDate = new Date(data.fechaParte)
+
+    const fechaParametroAguilares = dataInicioDestileriaIngenios.aguilFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.aguilFin)
+        ? new Date(dataInicioDestileriaIngenios.aguilFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroBellaVista = dataInicioDestileriaIngenios.bellaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.bellaFin)
+        ? new Date(dataInicioDestileriaIngenios.bellaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroConcepcion = dataInicioDestileriaIngenios.concepFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.concepFin)
+        ? new Date(dataInicioDestileriaIngenios.concepFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroCruzAlta = dataInicioDestileriaIngenios.cruzFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.cruzFin)
+        ? new Date(dataInicioDestileriaIngenios.cruzFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroDestileriaBellaVista = dataInicioDestileriaIngenios.bellaVistaDestFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.bellaVistaDestFin)
+        ? new Date(dataInicioDestileriaIngenios.bellaVistaDestFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroFamailla = dataInicioDestileriaIngenios.famaillaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.famaillaFin)
+        ? new Date(dataInicioDestileriaIngenios.famaillaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaCorona = dataInicioDestileriaIngenios.coronaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.coronaFin)
+        ? new Date(dataInicioDestileriaIngenios.coronaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaFlorida = dataInicioDestileriaIngenios.floridaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.floridaFin)
+        ? new Date(dataInicioDestileriaIngenios.floridaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaProvidencia = dataInicioDestileriaIngenios.provFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.provFin)
+        ? new Date(dataInicioDestileriaIngenios.provFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaTrinidad = dataInicioDestileriaIngenios.trinFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.trinFin)
+        ? new Date(dataInicioDestileriaIngenios.trinFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLeales = dataInicioDestileriaIngenios.lealesFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.lealesFin)
+        ? new Date(dataInicioDestileriaIngenios.lealesFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroMarapa = dataInicioDestileriaIngenios.marapaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.marapaFin)
+        ? new Date(dataInicioDestileriaIngenios.marapaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroNunorco = dataInicioDestileriaIngenios.nunorcoFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.nunorcoFin)
+        ? new Date(dataInicioDestileriaIngenios.nunorcoFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroStaBarbara = dataInicioDestileriaIngenios.staBarFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.staBarFin)
+        ? new Date(dataInicioDestileriaIngenios.staBarFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroStaRosa = dataInicioDestileriaIngenios.staRosaFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.staRosaFin)
+        ? new Date(dataInicioDestileriaIngenios.staRosaFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroSanJuan = dataInicioDestileriaIngenios.sanJuanFin
+      ? (dataEnd > new Date(dataInicioDestileriaIngenios.sanJuanFin)
+        ? new Date(dataInicioDestileriaIngenios.sanJuanFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-    
     if (
-      data.IngenioNombre === "Aguilares" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Aguilares" &&
+      newDate <= fechaParametroAguilares &&
       newDate >= new Date(dataInicioDestileriaIngenios.aguilInicio)
     ) {
-      g1 = g1 + data.AlcoholProducido;
-      o1 = o1 + data.AlcoholHidratado || 0;
-      r1 = r1 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g1 = g1 + data.alcoholProducido;
+      o1 = o1 + data.alcoholHidratado || 0;
       dataAguilares = {
         N10: g1,
         O44: o1,
-        R44: r1,
       };
     }
 
     if (
-      data.IngenioNombre === "Cruz Alta" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametroDestileriaBellaVista &&
+      newDate >= new Date(dataInicioDestileriaIngenios.bellaVistaDestInicio)
+    ) {
+      g21 = g21 + data.alcoholProducido;
+      o21 = o21 + data.alcoholHidratado || 0;
+      dataDestBellaVista = {
+        N27: g21,
+        O59: o21,
+      };
+    }
+
+
+    if (
+      data.ingenioNombre === "Cruz Alta" &&
+      newDate <= fechaParametroCruzAlta &&
       newDate >= new Date(dataInicioDestileriaIngenios.cruzInicio)
     ) {
-      g2 = g2 + data.AlcoholProducido;
-      o2 = o2 + data.AlcoholHidratado || 0;
-      r2 = r2 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g2 = g2 + data.alcoholProducido || 0;
+      o2 = o2 + data.alcoholHidratado || 0;
       dataCruzAlta = {
         N11: g2,
         O47: o2,
-        R47: r2,
       };
     }
 
     if (
-      data.IngenioNombre === "La Florida" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "La Florida" &&
+      newDate <= fechaParametroLaFlorida &&
       newDate >= new Date(dataInicioDestileriaIngenios.floridaInicio)
     ) {
-      
-      g3 = g3 + data.AlcoholProducido;
-      o3 = o3 + data.AlcoholHidratado || 0;
-      r3 = r3 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g3 = g3 + data.alcoholProducido;
+      o3 = o3 + data.alcoholHidratado || 0;
       dataLaFlorida = {
         N12: g3,
         O50: o3,
-        R50: r3,
       };
     }
 
     if (
-      data.IngenioNombre === "Concepción" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Concepción" &&
+      newDate <= fechaParametroConcepcion &&
       newDate >= new Date(dataInicioDestileriaIngenios.concepInicio)
     ) {
-      g4 = g4 + data.AlcoholProducido;
-      o4 = o4 + data.AlcoholHidratado || 0;
-      r4 = r4 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g4 = g4 + data.alcoholProducido;
+      o4 = o4 + data.alcoholHidratado || 0;
       dataConcepcion = {
         N14: g4,
         O46: o4,
-        R46: r4,
       };
     }
-
     if (
-      data.IngenioNombre === "Marapa" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Marapa" &&
+      newDate <= fechaParametroMarapa &&
       newDate >= new Date(dataInicioDestileriaIngenios.marapaInicio)
     ) {
-      g5 = g5 + data.AlcoholProducido;
-      o5 = o5 + data.AlcoholHidratado || 0;
-      r5 = r5 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g5 = g5 + data.alcoholProducido;
+      o5 = o5 + data.alcoholHidratado || 0;
       dataMarapa = {
         N15: g5,
         O54: o5,
-        R54: r5,
       };
     }
 
     if (
-      data.IngenioNombre === "Bella Vista" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Bella Vista" &&
+      newDate <= fechaParametroBellaVista &&
       newDate >= new Date(dataInicioDestileriaIngenios.bellaInicio)
     ) {
-      g6 = g6 + data.AlcoholProducido;
-      o6 = o6 + data.AlcoholHidratado || 0;
-      r6 = r6 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g6 = g6 + data.alcoholProducido;
+      o6 = o6 + data.alcoholHidratado || 0;
       dataBellaVista = {
         N17: g6,
         O45: o6,
-        R45: r6,
       };
     }
 
     if (
-      data.IngenioNombre === "Famaillá" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Famaillá" &&
+      newDate <= fechaParametroFamailla &&
       newDate >= new Date(dataInicioDestileriaIngenios.famaillaInicio)
     ) {
-      g7 = g7 + data.AlcoholProducido;
-      o7 = o7 + data.AlcoholHidratado || 0;
-      r7 = r7 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g7 = g7 + data.alcoholProducido;
+      o7 = o7 + data.alcoholHidratado || 0;
       dataFamailla = {
         N18: g7,
         O48: o7,
-        R48: r7,
       };
     }
     if (
-      data.IngenioNombre === "La Corona" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "La Corona" &&
+      newDate <= fechaParametroLaCorona &&
       newDate >= new Date(dataInicioDestileriaIngenios.coronaInicio)
     ) {
-      g8 = g8 + data.AlcoholProducido;
-      o8 = o8 + data.AlcoholHidratado || 0;
-      r8 = r8 + data.AlcoholAnhidro || 0;
-      // f8 = f8 + data.MelazaProducida;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g8 = g8 + data.alcoholProducido;
+      o8 = o8 + data.alcoholHidratado || 0;
       dataLaCorona = {
         N19: g8,
         O49: o8,
-        R49: r8,
-        // M19: f8,
       };
     }
 
     if (
-      data.IngenioNombre === "La Providencia" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "La Providencia" &&
+      newDate <= fechaParametroLaProvidencia &&
       newDate >= new Date(dataInicioDestileriaIngenios.provInicio)
     ) {
-      g9 = g9 + data.AlcoholProducido;
-      o9 = o9 + data.AlcoholHidratado || 0;
-      r9 = r9 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g9 = g9 + data.alcoholProducido;
+      o9 = o9 + data.alcoholHidratado || 0;
       dataLaProvidencia = {
         N20: g9,
         O51: o9,
-        R51: r9,
       };
     }
 
     if (
-      data.IngenioNombre === "La Trinidad" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "La Trinidad" &&
+      newDate <= fechaParametroLaTrinidad &&
       newDate >= new Date(dataInicioDestileriaIngenios.trinInicio)
     ) {
-      g10 = g10 + data.AlcoholProducido;
-      o10 = o10 + data.AlcoholHidratado || 0;
-      r10 = r10 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g10 = g10 + data.alcoholProducido;
+      o10 = o10 + data.alcoholHidratado || 0;
       dataLaTrinidad = {
         N21: g10,
         O52: o10,
-        R52: r10,
       };
     }
 
     if (
-      data.IngenioNombre === "Leales" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Leales" &&
+      newDate <= fechaParametroLeales &&
       newDate >= new Date(dataInicioDestileriaIngenios.lealesInicio)
     ) {
-      g11 = g11 + data.AlcoholProducido;
-      o11 = o11 + data.AlcoholHidratado || 0;
-      r11 = r11 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g11 = g11 + data.alcoholProducido;
+      o11 = o11 + data.alcoholHidratado || 0;
       dataLeales = {
         N22: g11,
         O53: o11,
-        R53: r11,
       };
     }
 
     if (
-      data.IngenioNombre === "Ñuñorco" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Ñuñorco" &&
+      newDate <= fechaParametroNunorco &&
       newDate >= new Date(dataInicioDestileriaIngenios.nunorcoInicio)
     ) {
-      g12 = g12 + data.AlcoholProducido;
-      o12 = o12 + data.AlcoholHidratado || 0;
-      r12 = r12 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g12 = g12 + data.alcoholProducido;
+      o12 = o12 + data.alcoholHidratado || 0;
       dataÑuñorco = {
         N23: g12,
         O55: o12,
-        R55: r12,
       };
     }
 
     if (
-      data.IngenioNombre === "Santa Barbara" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Santa Barbara" &&
+      newDate <= fechaParametroStaBarbara &&
       newDate >= new Date(dataInicioDestileriaIngenios.staBarInicio)
     ) {
-      g13 = g13 + data.AlcoholProducido;
-      o13 = o13 + data.AlcoholHidratado || 0;
-      r13 = r13 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g13 = g13 + data.alcoholProducido;
+      o13 = o13 + data.alcoholHidratado || 0;
       dataStaBarbara = {
         N24: g13,
         O56: o13,
-        R56: r13,
       };
     }
 
     if (
-      data.IngenioNombre === "Santa Rosa" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "Santa Rosa" &&
+      newDate <= fechaParametroStaRosa &&
       newDate >= new Date(dataInicioDestileriaIngenios.staRosaInicio)
     ) {
-      g14 = g14 + data.AlcoholProducido;
-      o14 = o14 + data.AlcoholHidratado || 0;
-      r14 = r14 + data.AlcoholAnhidro || 0;
-      alcoholPanel = alcoholPanel + data.AlcoholProducido;
+      g14 = g14 + data.alcoholProducido;
+      o14 = o14 + data.alcoholHidratado || 0;
       dataStaRosa = {
         N25: g14,
         O57: o14,
-        R57: r14,
       };
     }
 
     if (
-      data.IngenioNombre === "San Juan" &&
-      newDate <= fechaParametro &&
+      data.ingenioNombre === "San Juan" &&
+      newDate <= fechaParametroSanJuan &&
       newDate >= new Date(dataInicioDestileriaIngenios.sanJuanInicio)
     ) {
-      g15 = g15 + data.AlcoholProducido;
-      o15 = o15 + data.AlcoholHidratado || 0;
-      r15 = r15 + data.AlcoholAnhidro || 0;
+      g15 = g15 + data.alcoholProducido;
+      o15 = o15 + data.alcoholHidratado || 0;
       dataSanJuan = {
         N26: g15,
         O58: o15,
-        R58: r15,
       };
     }
   });
-  /*********************************************************************************/
+  alcoholPanel =
+    dataAguilares.N10 +
+    dataDestBellaVista.N27 +
+    dataCruzAlta.N11 +
+    dataLaFlorida.N12 +
+    dataConcepcion.N14 +
+    dataMarapa.N15 +
+    dataBellaVista.N17 +
+    dataFamailla.N18 +
+    dataLaCorona.N19 +
+    dataLaProvidencia.N20 +
+    dataLaTrinidad.N21 +
+    dataLeales.N22 +
+    dataÑuñorco.N23 +
+    dataStaBarbara.N24 +
+    dataStaRosa.N25 +
+    dataSanJuan.N26
 
-  /*********************************** DATOS ZAFRA ***********************************/
-  dataImport?.forEach((data) => {
-    const newDate = dateConverted(data?.FechaParte);
+  /** NORTE **/
+  dataImportDestileriaNorte?.forEach((data) => {
+    const newDate = new Date(data.fechaParte)
+    // const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const fechaParametroEsperanza = dataInicioDestileriaIngeniosNorte.esperanzaFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) ? new Date(dataInicioDestileriaIngeniosNorte.esperanzaFin) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroLedesma = dataInicioDestileriaIngeniosNorte.ledesmaFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) ? new Date(dataInicioDestileriaIngeniosNorte.ledesmaFin) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroRioGrande = dataInicioDestileriaIngeniosNorte.riograndeFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) ? new Date(dataInicioDestileriaIngeniosNorte.riograndeFin) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroSanIsidro = dataInicioDestileriaIngeniosNorte.sanisidroFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) ? new Date(dataInicioDestileriaIngeniosNorte.sanisidroFin) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroSeaboard = dataInicioDestileriaIngeniosNorte.seaboardFin ? (dataEnd > new Date(dataInicioDestileriaIngeniosNorte.seaboardFin) ? new Date(dataInicioDestileriaIngeniosNorte.seaboardFin) : new Date(dataEnd)) : new Date(dataEnd);
+    if (
+      data.ingenioNombre === "La Esperanza" &&
+      newDate <= fechaParametroEsperanza &&
+      newDate >= new Date(dataInicioDestileriaIngeniosNorte.esperanzaInicio)
+    ) {
+      g16 = g16 + data.alcoholProducido;
+      o16 = o16 + data.alcoholHidratado || 0;
+      dataLaEsperanza = {
+        N44: g16,
+        O44: o16,
+      };
+    }
+    if (
+      data.ingenioNombre === "Ledesma" &&
+      newDate <= fechaParametroLedesma &&
+      newDate >= new Date(dataInicioDestileriaIngeniosNorte.ledesmaInicio)
+    ) {
+      g17 = g17 + data.alcoholProducido;
+      o17 = o17 + data.alcoholHidratado || 0;
+      dataLedesma = {
+        N45: g17,
+        O45: o17,
+      };
+    }
+    if (
+      data.ingenioNombre === "Río Grande" &&
+      newDate <= fechaParametroRioGrande &&
+      newDate >= new Date(dataInicioDestileriaIngeniosNorte.riograndeInicio)
+    ) {
+      g18 = g18 + data.alcoholProducido;
+      o18 = o18 + data.alcoholHidratado || 0;
+      dataRioGrande = {
+        N46: g18,
+        O46: o18,
+      };
+    }
+    if (
+      data.ingenioNombre === "San Isidro" &&
+      newDate <= fechaParametroSanIsidro &&
+      newDate >= new Date(dataInicioDestileriaIngeniosNorte.sanisidroInicio)
+    ) {
+      g19 = g19 + data.alcoholProducido;
+      o19 = o19 + data.alcoholHidratado || 0;
+      dataSanIsidro = {
+        N47: g19,
+        O47: o19,
+      };
+    }
+    if (
+      data.ingenioNombre === "Seaboard" &&
+      newDate <= fechaParametroSeaboard &&
+      newDate >= new Date(dataInicioDestileriaIngeniosNorte.seaboardInicio)
+    ) {
+
+      g20 = g20 + data.alcoholProducido;
+      o20 = o20 + data.alcoholHidratado || 0;
+      dataSeaboard = {
+        N48: g20,
+        O48: o20,
+      };
+    }
+  });
+
+
+  /*********************************************************************************/
+  /****************************** DATOS ANHIDRO ALCOHOL ******************************/
+  /** TUCUMAN **/
+//2194476
+  // Datos de anhidro por documento para años 2024 y 2023
+  const anhidroLeales = [
+    { zafra: 2024, anio: 2024, mesNumero: 5, mesNombre: 'mayo', valor: 2194476 },
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 4133790 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2052522 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 4971944 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 2963470 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 1460000 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5347000 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 235750 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 4770000 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 3412785 },
+  ];
+
+  const anhidroConcepcion = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 2986603 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 8049602 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 6083561 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 6163307 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 5436241 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 5290243 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 5819557 },
+    { zafra: 2024, anio: 2025, mesNumero: 1, mesNombre: 'enero', valor: 6522224 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 5677674 },
+    { zafra: 2024, anio: 2025, mesNumero: 3, mesNombre: 'marzo', valor: 5928463 },
+    { zafra: 2024, anio: 2025, mesNumero: 4, mesNombre: 'abril', valor: 5551377 },
+  ];
+
+  const anhidroBellaVista = [
+    { zafra: 2024, anio: 2024, mesNumero: 6, mesNombre: 'junio', valor: 880968 },
+    { zafra: 2024, anio: 2024, mesNumero: 7, mesNombre: 'julio', valor: 2099136 },
+    { zafra: 2024, anio: 2024, mesNumero: 8, mesNombre: 'agosto', valor: 3135585 },
+    { zafra: 2024, anio: 2024, mesNumero: 9, mesNombre: 'septiembre', valor: 253748 },
+    { zafra: 2024, anio: 2024, mesNumero: 10, mesNombre: 'octubre', valor: 2483843 },
+    { zafra: 2024, anio: 2024, mesNumero: 11, mesNombre: 'noviembre', valor: 1098950 },
+    { zafra: 2024, anio: 2024, mesNumero: 12, mesNombre: 'diciembre', valor: 2031615 },
+    { zafra: 2024, anio: 2025, mesNumero: 2, mesNombre: 'febrero', valor: 2269182 },
+    { zafra: 2024, anio: 2025, mesNumero: 3, mesNombre: 'marzo', valor: 543734 },
+    { zafra: 2025, anio: 2025, mesNumero: 7, mesNombre: 'julio', valor: 623367 },
+    { zafra: 2025, anio: 2025, mesNumero: 8, mesNombre: 'agosto', valor: 2690072 },
+    { zafra: 2025, anio: 2025, mesNumero: 9, mesNombre: 'septiembre', valor: 999218 },
+  ];
+
+  // Datos de anhidro 2023 (valores acumulados)
+  const anhidroLeales2023 = 26464761;
+  const anhidroConcepcion2023 = 35668460;
+  const anhidroBellaVista2023 = 9669715;
+
+
+  dataImportAnhidro?.forEach((data) => {
+    const newDate = new Date(data.fechaParte)
+
+    const fechaParametroAguilares = dataInicioAnhidroIngenios.aguilFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.aguilFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.aguilFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroBellaVista = dataInicioAnhidroIngenios.bellaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroConcepcion = dataInicioAnhidroIngenios.concepFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.concepFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.concepFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroCruzAlta = dataInicioAnhidroIngenios.cruzFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.cruzFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.cruzFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroDestileriaBellaVista = dataInicioAnhidroIngenios.bellaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.bellaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroFamailla = dataInicioAnhidroIngenios.famaillaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.famaillaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.famaillaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaCorona = dataInicioAnhidroIngenios.coronaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.coronaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.coronaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaFlorida = dataInicioAnhidroIngenios.floridaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.floridaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.floridaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaProvidencia = dataInicioAnhidroIngenios.provFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.provFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.provFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLaTrinidad = dataInicioAnhidroIngenios.trinFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.trinFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.trinFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroLeales = dataInicioAnhidroIngenios.lealesFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.lealesFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.lealesFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroMarapa = dataInicioAnhidroIngenios.marapaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.marapaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.marapaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroNunorco = dataInicioAnhidroIngenios.nunorcoFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.nunorcoFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.nunorcoFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroStaBarbara = dataInicioAnhidroIngenios.staBarFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.staBarFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.staBarFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroStaRosa = dataInicioAnhidroIngenios.staRosaFinAnhidro
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.staRosaFinAnhidro)
+        ? new Date(dataInicioAnhidroIngenios.staRosaFinAnhidro)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
+    const fechaParametroSanJuan = dataInicioAnhidroIngenios.bellaVistaAnhidroFin
+      ? (dataEnd > new Date(dataInicioAnhidroIngenios.bellaVistaAnhidroFin)
+        ? new Date(dataInicioAnhidroIngenios.bellaVistaAnhidroFin)
+        : new Date(dataEnd))
+      : new Date(dataEnd)
+
     const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
-    if(newDate <= fechaParametro) {
-      cmbPanel = cmbPanel + data.MoliendaCanaBruta;
+    if (
+      data.ingenioNombre === "Aguilares" &&
+      newDate <= fechaParametroAguilares &&
+      newDate >= new Date(dataInicioAnhidroIngenios.aguilInicioAnhidro)
+    ) {
+      r1 = r1 + data.alcoholAnhidro || 0;
+      dataAguilares = {
+        R44: r1,
+        N10: dataAguilares.N10,
+        O44: dataAguilares.O44,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametroDestileriaBellaVista &&
+      newDate >= new Date(dataInicioAnhidroIngenios.bellaVistaAnhidroInicio)
+    ) {
+      r21 = r21 + data.alcoholAnhidro || 0;
+      dataDestBellaVista = {
+        R59: r21,
+        N27: dataDestBellaVista.N27,
+        O59: dataDestBellaVista.O59
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Cruz Alta" &&
+      newDate <= fechaParametroCruzAlta &&
+      newDate >= new Date(dataInicioAnhidroIngenios.cruzInicioAnhidro)
+    ) {
+      r2 = r2 + data.alcoholAnhidro || 0;
+      dataCruzAlta = {
+        R47: r2,
+        N11: dataCruzAlta.N11,
+        O47: dataCruzAlta.O47
+      };
+    }
+
+    if (
+      data.ingenioNombre === "La Florida" &&
+      newDate <= fechaParametroLaFlorida &&
+      newDate >= new Date(dataInicioAnhidroIngenios.floridaInicioAnhidro)
+    ) {
+
+      r3 = r3 + data.alcoholAnhidro || 0;
+      dataLaFlorida = {
+        R50: r3,
+        N12: dataLaFlorida.N12,
+        O50: dataLaFlorida.O50
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Concepción" &&
+      newDate <= fechaParametroConcepcion &&
+      newDate >= new Date(dataInicioAnhidroIngenios.concepInicioAnhidro)
+    ) {
+      r4 = r4 + data.alcoholAnhidro || 0;
+      dataConcepcion = {
+        R46: r4,
+        N14: dataConcepcion.N14,
+        O46: dataConcepcion.O46
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Marapa" &&
+      newDate <= fechaParametroMarapa &&
+      newDate >= new Date(dataInicioAnhidroIngenios.marapaInicioAnhidro)
+    ) {
+      r5 = r5 + data.alcoholAnhidro || 0;
+      dataMarapa = {
+        R54: r5,
+        N15: dataMarapa.N15,
+        O54: dataMarapa.O54
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Bella Vista" &&
+      newDate <= fechaParametroBellaVista &&
+      newDate >= new Date(dataInicioAnhidroIngenios.bellaInicioAnhidro)
+    ) {
+      r6 = r6 + data.alcoholAnhidro || 0;
+      dataBellaVista = {
+        R45: r6,
+        N17: dataBellaVista.N17,
+        O45: dataBellaVista.O45
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Famaillá" &&
+      newDate <= fechaParametroFamailla &&
+      newDate >= new Date(dataInicioAnhidroIngenios.famaillaInicioAnhidro)
+    ) {
+      r7 = r7 + data.alcoholAnhidro || 0;
+      dataFamailla = {
+        R48: r7,
+        N18: dataFamailla.N18,
+        O48: dataFamailla.O48
+      };
+    }
+    if (
+      data.ingenioNombre === "La Corona" &&
+      newDate <= fechaParametroLaCorona &&
+      newDate >= new Date(dataInicioAnhidroIngenios.coronaInicioAnhidro)
+    ) {
+      r8 = r8 + data.alcoholAnhidro || 0;
+      dataLaCorona = {
+        R49: r8,
+        N19: dataLaCorona.N19,
+        O49: dataLaCorona.O49
+      };
+    }
+
+    if (
+      data.ingenioNombre === "La Providencia" &&
+      newDate <= fechaParametroLaProvidencia &&
+      newDate >= new Date(dataInicioAnhidroIngenios.provInicioAnhidro)
+    ) {
+      r9 = r9 + data.alcoholAnhidro || 0;
+      dataLaProvidencia = {
+        R51: r9,
+        N20: dataLaProvidencia.N20,
+        O51: dataLaProvidencia.O51
+      };
+    }
+
+    if (
+      data.ingenioNombre === "La Trinidad" &&
+      newDate <= fechaParametroLaTrinidad &&
+      newDate >= new Date(dataInicioAnhidroIngenios.trinInicioAnhidro)
+    ) {
+
+      r10 = r10 + data.alcoholAnhidro || 0;
+      dataLaTrinidad = {
+        R52: r10,
+        N21: dataLaTrinidad.N21,
+        O52: dataLaTrinidad.O52
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Leales" &&
+      newDate <= fechaParametroLeales &&
+      newDate >= new Date(dataInicioAnhidroIngenios.lealesInicioAnhidro)
+    ) {
+      r11 = r11 + data.alcoholAnhidro || 0;
+      dataLeales = {
+        R53: r11,
+        N22: dataLeales.N22,
+        O53: dataLeales.O53
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Ñuñorco" &&
+      newDate <= fechaParametroNunorco &&
+      newDate >= new Date(dataInicioAnhidroIngenios.nunorcoInicioAnhidro)
+    ) {
+      r12 = r12 + data.alcoholAnhidro || 0;
+      dataÑuñorco = {
+        R55: r12,
+        N23: dataÑuñorco.N23,
+        O55: dataÑuñorco.O55
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Santa Barbara" &&
+      newDate <= fechaParametroStaBarbara &&
+      newDate >= new Date(dataInicioAnhidroIngenios.staBarInicioAnhidro)
+    ) {
+      r13 = r13 + data.alcoholAnhidro || 0;
+      dataStaBarbara = {
+        R56: r13,
+        N24: dataStaBarbara.N24,
+        O56: dataStaBarbara.O56
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Santa Rosa" &&
+      newDate <= fechaParametroStaRosa &&
+      newDate >= new Date(dataInicioAnhidroIngenios.staRosaInicioAnhidro)
+    ) {
+      r14 = r14 + data.alcoholAnhidro || 0;
+      dataStaRosa = {
+        R57: r14,
+        N25: dataStaRosa.N25,
+        O57: dataStaRosa.O57
+      };
+    }
+
+    if (
+      data.ingenioNombre === "San Juan" &&
+      newDate <= fechaParametroSanJuan &&
+      newDate >= new Date(dataInicioAnhidroIngenios.sanJuanInicioAnhidro)
+    ) {
+      r15 = r15 + data.alcoholAnhidro || 0;
+      dataSanJuan = {
+        R58: r15,
+        N26: dataSanJuan.N26,
+        O58: dataSanJuan.O58
+      };
+    }
+  });
+
+  // AGREGAR ANHIDRO POR DOCUMENTO PARA AÑOS 2025 2024 Y 2023
+  if (zafraParteDiario === 2025 && dataEnd !== null) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11
+    const currentDay = currentDate.getDate();
+
+    if (dataEnd.getFullYear() === 2025) {
+      // Bella Vista - Zafra 2025
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.anio === 2025 && anhidro.zafra === 2025 && anhidro.mesNumero < currentMonth) {
+          r21 = r21 + anhidro.valor;
+          dataDestBellaVista = {
+            R59: r21,
+            N27: dataDestBellaVista.N27,
+            O59: dataDestBellaVista.O59
+          }
+        }
+        if (anhidro.anio === 2025 && anhidro.zafra === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r21 = r21 + valorPorcentualPorDia;
+          dataDestBellaVista = {
+            R59: r21,
+            N27: dataDestBellaVista.N27,
+            O59: dataDestBellaVista.O59
+          }
+        }
+      })
+    }
+    if (dataEnd.getFullYear() === 2026) {
+      // Bella Vista - Zafra 2024 Anio 2026
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.anio === 2025 && anhidro.zafra === zafraParteDiario) {
+          r21 = r21 + anhidro.valor;
+          dataDestBellaVista = {
+            R59: r21,
+            N27: dataDestBellaVista.N27,
+            O59: dataDestBellaVista.O59
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2026 && anhidro.mesNumero < currentMonth) {
+          r21 = r21 + anhidro.valor;
+          dataDestBellaVista = {
+            R59: r21,
+            N27: dataDestBellaVista.N27,
+            O59: dataDestBellaVista.O59
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2026 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r21 = r21 + valorPorcentualPorDia;
+          dataDestBellaVista = {
+            R59: r21,
+            N27: dataDestBellaVista.N27,
+            O59: dataDestBellaVista.O59
+          }
+        }
+      })
+    }
+
+  }
+
+  if (zafraParteDiario === 2024 && dataEnd !== null) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() devuelve 0-11
+    const currentDay = currentDate.getDate();
+
+    if (dataEnd.getFullYear() === 2024) {
+      // Leales - Zafra 2024
+      anhidroLeales.forEach((anhidro) => {
+        if (anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r11 = r11 + anhidro.valor;
+
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r11 = r11 + valorPorcentualPorDia;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+      });
+
+      // Concepción - Zafra 2024
+      anhidroConcepcion.forEach((anhidro) => {
+        if (anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r4 = r4 + valorPorcentualPorDia;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+      })
+
+      // Bella Vista - Zafra 2024
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2024 && anhidro.mesNumero < currentMonth) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2024 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r6 = r6 + valorPorcentualPorDia;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+      })
+    }
+    if (dataEnd.getFullYear() === 2025) {
+      // Leales - Zafra 2024 Anio 2025
+      anhidroLeales.forEach((anhidro) => {
+        if (anhidro.anio === 2024) {
+          r11 = r11 + anhidro.valor;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r11 = r11 + anhidro.valor;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r11 = r11 + valorPorcentualPorDia;
+          dataLeales = {
+            R53: r11,
+            N22: dataLeales.N22,
+            O53: dataLeales.O53
+          }
+        }
+      });
+
+
+      // Concepción - Zafra 2024 Anio 2025
+      anhidroConcepcion.forEach((anhidro) => {
+        if (anhidro.anio === 2024) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r4 = r4 + anhidro.valor;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r4 = r4 + valorPorcentualPorDia;
+          dataConcepcion = {
+            R46: r4,
+            N14: dataConcepcion.N14,
+            O46: dataConcepcion.O46
+          }
+        }
+      })
+
+      // Bella Vista - Zafra 2024 Anio 2025
+      anhidroBellaVista.forEach((anhidro) => {
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2024) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero < currentMonth) {
+          r6 = r6 + anhidro.valor;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+        if (anhidro.zafra === zafraParteDiario && anhidro.anio === 2025 && anhidro.mesNumero === currentMonth) {
+          let valorPorcentualPorDia = (anhidro.valor / 30) * currentDay;
+          r6 = r6 + valorPorcentualPorDia;
+          dataBellaVista = {
+            R45: r6,
+            N17: dataBellaVista.N17,
+            O45: dataBellaVista.O45
+          }
+        }
+      })
+    }
+  }
+
+  if (zafraParteDiario === 2023) {
+    const currentDate = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentDay = currentDate.getDate();
+
+    // Para 2023 usamos valores acumulados distribuidos proporcionalmente
+    const diasEnAno = 365;
+    const diasTranscurridos = Math.min(
+      (currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (1000 * 60 * 60 * 24),
+      diasEnAno
+    );
+
+    // Leales - Zafra 2023
+    const valorLeales2023 = (anhidroLeales2023 / diasEnAno) * diasTranscurridos;
+    r11 = r11 + valorLeales2023;
+    dataLeales = {
+      R53: r11,
+      N22: dataLeales.N22,
+      O53: dataLeales.O53
+    };
+
+    // Concepción - Zafra 2023
+    const valorConcepcion2023 = (anhidroConcepcion2023 / diasEnAno) * diasTranscurridos;
+    r4 = r4 + valorConcepcion2023;
+    dataConcepcion = {
+      R46: r4,
+      N14: dataConcepcion.N14,
+      O46: dataConcepcion.O46
+    };
+
+    // Bella Vista - Zafra 2023
+    const valorBellaVista2023 = (anhidroBellaVista2023 / diasEnAno) * diasTranscurridos;
+    r6 = r6 + valorBellaVista2023;
+    dataBellaVista = {
+      R45: r6,
+      N17: dataBellaVista.N17,
+      O45: dataBellaVista.O45
+    };
+  }
+
+  alcoholAnhidroPanel =
+    dataAguilares.R44 +
+    dataDestBellaVista.R59 +
+    dataCruzAlta.R47 +
+    dataLaFlorida.R50 +
+    dataConcepcion.R46 +
+    dataMarapa.R54 +
+    dataBellaVista.R45 +
+    dataFamailla.R48 +
+    dataLaCorona.R49 +
+    dataLaProvidencia.R51 +
+    dataLaTrinidad.R52 +
+    dataLeales.R53 +
+    dataÑuñorco.R55 +
+    dataStaBarbara.R56 +
+    dataStaRosa.R57 +
+    dataSanJuan.R58
+
+  /** NORTE **/
+  dataImportAnhidroNorte?.forEach((data) => {
+    const newDate = new Date(data.fechaParte)
+    // const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    const fechaParametroEsperanza = dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro ? (dataEnd > new Date(dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro) ? new Date(dataInicioAnhidroIngeniosNorte.esperanzaFinAnhidro) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroLedesma = dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro ? (dataEnd > new Date(dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro) ? new Date(dataInicioAnhidroIngeniosNorte.ledesmaFinAnhidro) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroRioGrande = dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro ? (dataEnd > new Date(dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro) ? new Date(dataInicioAnhidroIngeniosNorte.riograndeFinAnhidro) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroSanIsidro = dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro ? (dataEnd > new Date(dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro) ? new Date(dataInicioAnhidroIngeniosNorte.sanisidroFinAnhidro) : new Date(dataEnd)) : new Date(dataEnd);
+    const fechaParametroSeaboard = dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro ? (dataEnd > new Date(dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro) ? new Date(dataInicioAnhidroIngeniosNorte.seaboardFinAnhidro) : new Date(dataEnd)) : new Date(dataEnd);
+    if (
+      data.ingenioNombre === "La Esperanza" &&
+      newDate <= fechaParametroEsperanza &&
+      newDate >= new Date(dataInicioAnhidroIngeniosNorte.esperanzaInicioAnhidro)
+    ) {
+      r16 = r16 + data.alcoholAnhidro || 0;
+      dataLaEsperanza = {
+        P44: r16,
+        N44: dataLaEsperanza.N44,
+        O44: dataLaEsperanza.O44,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Ledesma" &&
+      newDate <= fechaParametroLedesma &&
+      newDate >= new Date(dataInicioAnhidroIngeniosNorte.ledesmaInicioAnhidro)
+    ) {
+      r17 = r17 + data.alcoholAnhidro || 0;
+      dataLedesma = {
+        P45: r17,
+        O45: dataLedesma.O45,
+        N45: dataLedesma.N45
+      };
+    }
+    if (
+      data.ingenioNombre === "Río Grande" &&
+      newDate <= fechaParametroRioGrande &&
+      newDate >= new Date(dataInicioAnhidroIngeniosNorte.riograndeInicioAnhidro)
+    ) {
+      r18 = r18 + data.alcoholAnhidro || 0;
+      dataRioGrande = {
+        P46: r18,
+        N46: dataRioGrande.N46,
+        O46: dataRioGrande.O46,
+      };
+    }
+    if (
+      data.ingenioNombre === "San Isidro" &&
+      newDate <= fechaParametroSanIsidro &&
+      newDate >= new Date(dataInicioAnhidroIngeniosNorte.sanisidroInicioAnhidro)
+    ) {
+      r19 = r19 + data.alcoholAnhidro || 0;
+      dataSanIsidro = {
+        P47: r19,
+        N47: dataSanIsidro.N47,
+        O47: dataSanIsidro.O47,
+      };
+    }
+    if (
+      data.ingenioNombre === "Seaboard" &&
+      newDate <= fechaParametroSeaboard &&
+      newDate >= new Date(dataInicioAnhidroIngeniosNorte.seaboardInicioAnhidro)
+    ) {
+      r20 = r20 + data.alcoholAnhidro || 0;
+      dataSeaboard = {
+        P48: r20,
+        N48: dataSeaboard.N48,
+        O48: dataSeaboard.O48,
+      };
+    }
+  });
+
+  /*********************************************************************************/
+  /*********************************** DATOS ZAFRA ***********************************/
+  /** TUCUMAN **/
+  dataImport?.forEach((data) => {
+    const newDate = new Date(data.fechaParte)
+    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    if (newDate <= fechaParametro) {
+      cmbPanel = cmbPanel + data.moliendaCanaBruta;
       azucarPanel =
         azucarPanel +
-        data.AzucarBlancoProducido +
-        data.AzucarCrudoProducido +
-        data.AzucarRefinado +
-        data.AzucarOrganico +
-        data.OtroAzucar;
-      azucarPanelEquivalente = azucarPanelEquivalente + data?.AzucarEquivalente
-      azucarPanelCrudo = azucarPanelCrudo + data?.AzucarCrudoProducido
-      azucarPanelBlancoA = azucarPanelBlancoA + data?.AzucarBlancoProducido
-      azucarPanelRefinado = azucarPanelRefinado + data?.AzucarRefinado
-      azucarPanelOrganico = azucarPanelOrganico + data?.AzucarOrganico
-      azucarPanelOtros = azucarPanelOtros + data?.OtroAzucar
+        data.azucarBlancoProducido +
+        data.azucarCrudoProducido +
+        data.azucarRefinado +
+        data.azucarOrganico +
+        data.otroAzucar;
+      azucarPanelEquivalente = azucarPanelEquivalente + Number(data.azucarEquivalente.replace(/\./g, ''))
+      azucarPanelCrudo = azucarPanelCrudo + data?.azucarCrudoProducido
+      azucarPanelBlancoA = azucarPanelBlancoA + data?.azucarBlancoProducido
+      azucarPanelRefinado = azucarPanelRefinado + data?.azucarRefinado
+      azucarPanelOrganico = azucarPanelOrganico + data?.azucarOrganico
+      azucarPanelOtros = azucarPanelOtros + data?.otroAzucar
 
     }
     /*** Verifica
@@ -851,30 +1954,30 @@ export const dataPorTipo = (
      * fecha del parte diario del json sea menor o igual a la fecha elegida en el sistema
      * y que el inicio de zafra del ingenio exista ***/
     if (
-      data.IngenioNombre === "Aguilares" &&
+      data.ingenioNombre === "Aguilares" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell10 !== undefined &&
       dataInicioIngenios.Cell10 !== null
     ) {
-      a1 = a1 + data.MoliendaCanaBruta || 0;
-      b1 = b1 + data.MoliendaCanaNeta || 0;
-      c1 = c1 + data.AzucarEquivalente || 0;
-      z1 = z1 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      a1 = a1 + data.moliendaCanaBruta || 0;
+      b1 = b1 + data.moliendaCanaNeta || 0;
+      c1 = c1 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z1 = z1 + data.azucarBlancoProducido + data?.azucarRefinado;
       e1 = e1 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f1 = f1 + data.MelazaProducida || 0;
-      h1 = h1 + data.AzucarRefinado || 0;
-      i1 = i1 + data.AzucarOrganico || 0;
-      j1 = j1 + data.OtroAzucar || 0;
-      k1 = k1 + data.AzucarBlancoProducido;
-      l1 = l1 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f1 = f1 + data.melazaProducida || 0;
+      h1 = h1 + data.azucarRefinado || 0;
+      i1 = i1 + data.azucarOrganico || 0;
+      j1 = j1 + data.otroAzucar || 0;
+      k1 = k1 + data.azucarBlancoProducido;
+      l1 = l1 + data.azucarCrudoProducido;
 
       dataAguilares = {
         E10: a1,
         F10: b1,
-        G10: c1,
+        G10: c1 / 1000,
         J10: z1,
         K10: e1,
         M10: f1,
@@ -890,29 +1993,67 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Cruz Alta" &&
+      data.ingenioNombre === "Destilería Bella Vista" &&
+      newDate <= fechaParametro &&
+      dataInicioIngenios.bellaVistaInicio !== undefined &&
+      dataInicioIngenios.bellaVistaInicio !== null
+    ) {
+      a21 = a21 + data?.moliendaCanaBruta;
+      b21 = b21 + data?.moliendaCanaNeta;
+      c21 = c21 + Number(data?.azucarEquivalente.replace(/\./g, '')) || 0;
+      z21 = z21 + data?.azucarBlancoProducido + data?.azucarRefinado;
+      e21 = e21 +
+        (data?.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f21 = f21 + data?.melazaProducida;
+      h21 = h21 + data?.azucarRefinado || 0;
+      i21 = i21 + data?.azucarOrganico || 0;
+      j21 = j21 + data?.otroAzucar || 0;
+      k21 = k21 + data?.azucarBlancoProducido;
+      l21 = l21 + data?.azucarCrudoProducido;
+      dataDestBellaVista = {
+        E27: a21,
+        F27: b21,
+        G27: c21 / 1000,
+        J27: z21,
+        K27: e21,
+        M27: f21,
+        N27: dataDestBellaVista.N27,
+        C59: k21,
+        D59: h21,
+        F59: i21,
+        G59: j21,
+        L59: l21,
+        O59: dataDestBellaVista.O59,
+        R59: dataDestBellaVista.R59,
+      };
+    }
+
+    if (
+      data.ingenioNombre === "Cruz Alta" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell11 !== undefined &&
       dataInicioIngenios.Cell11 !== null
     ) {
-      a2 = a2 + data.MoliendaCanaBruta;
-      b2 = b2 + data.MoliendaCanaNeta;
-      c2 = c2 + data.AzucarEquivalente;
-      z2 = z2 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      a2 = a2 + data.moliendaCanaBruta;
+      b2 = b2 + data.moliendaCanaNeta;
+      c2 = c2 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z2 = z2 + data.azucarBlancoProducido + data?.azucarRefinado;
       e2 = e2 +
-        (data.AzucarCrudoProducido || 0) +
-        (data?.AzucarOrganico || 0) +
-        (data?.OtroAzucar || 0);
-      f2 = f2 + data.MelazaProducida;
-      h2 = h2 + data.AzucarRefinado || 0;
-      i2 = i2 + data.AzucarOrganico || 0;
-      j2 = j2 + data.OtroAzucar || 0;
-      k2 = k2 + data.AzucarBlancoProducido;
-      l2 = l2 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f2 = f2 + data.melazaProducida;
+      h2 = h2 + data.azucarRefinado || 0;
+      i2 = i2 + data.azucarOrganico || 0;
+      j2 = j2 + data.otroAzucar || 0;
+      k2 = k2 + data.azucarBlancoProducido;
+      l2 = l2 + data.azucarCrudoProducido;
       dataCruzAlta = {
         E11: a2,
         F11: b2,
-        G11: c2,
+        G11: c2 / 1000,
         J11: z2,
         K11: e2,
         M11: f2,
@@ -928,29 +2069,29 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "La Florida" &&
+      data.ingenioNombre === "La Florida" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell12 !== undefined &&
       dataInicioIngenios.Cell12 !== null
     ) {
-      a3 = a3 + data.MoliendaCanaBruta;
-      b3 = b3 + data.MoliendaCanaNeta;
-      c3 = c3 + data.AzucarEquivalente;
-      z3 = z3 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a3 = a3 + data.moliendaCanaBruta;
+      b3 = b3 + data.moliendaCanaNeta;
+      c3 = c3 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z3 = z3 + data.azucarBlancoProducido + data?.azucarRefinado;
       e3 = e3 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f3 = f3 + data.MelazaProducida;
-      h3 = h3 + data.AzucarRefinado || 0;
-      i3 = i3 + data.AzucarOrganico || 0;
-      j3 = j3 + data.OtroAzucar || 0;
-      k3 = k3 + data.AzucarBlancoProducido;
-      l3 = l3 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f3 = f3 + data.melazaProducida;
+      h3 = h3 + data.azucarRefinado || 0;
+      i3 = i3 + data.azucarOrganico || 0;
+      j3 = j3 + data.otroAzucar || 0;
+      k3 = k3 + data.azucarBlancoProducido;
+      l3 = l3 + data.azucarCrudoProducido;
       dataLaFlorida = {
         E12: a3,
         F12: b3,
-        G12: c3,
+        G12: c3 / 1000,
         J12: z3,
         K12: e3,
         M12: f3,
@@ -961,35 +2102,35 @@ export const dataPorTipo = (
         G50: j3,
         L50: l3,
         O50: dataLaFlorida.O50,
-        R50: dataLaFlorida.R50,
+        R50: dataLaFlorida.R50 || 0,
       };
     }
 
     if (
-      data.IngenioNombre === "Concepción" &&
+      data.ingenioNombre === "Concepción" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell14 !== undefined &&
       dataInicioIngenios.Cell14 !== null
     ) {
-      a4 = a4 + data.MoliendaCanaBruta;
-      b4 = b4 + data.MoliendaCanaNeta;
-      c4 = c4 + data.AzucarEquivalente;
-      z4 = z4 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
+      a4 = a4 + data.moliendaCanaBruta;
+      b4 = b4 + data.moliendaCanaNeta;
+      c4 = c4 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z4 = z4 + data.azucarBlancoProducido + (data.azucarRefinado || 0);
       e4 = e4 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f4 = f4 + data.MelazaProducida;
-      h4 = h4 + data.AzucarRefinado || 0;
-      i4 = i4 + data.AzucarOrganico || 0;
-      j4 = j4 + data.OtroAzucar || 0;
-      k4 = k4 + data.AzucarBlancoProducido;
-      l4 = l4 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f4 = f4 + data.melazaProducida;
+      h4 = h4 + data.azucarRefinado || 0;
+      i4 = i4 + data.azucarOrganico || 0;
+      j4 = j4 + data.otroAzucar || 0;
+      k4 = k4 + data.azucarBlancoProducido;
+      l4 = l4 + data.azucarCrudoProducido;
 
       dataConcepcion = {
         E14: a4,
         F14: b4,
-        G14: c4,
+        G14: c4 / 1000,
         J14: z4,
         K14: e4,
         M14: f4,
@@ -1005,29 +2146,29 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Marapa" &&
+      data.ingenioNombre === "Marapa" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell15 !== undefined &&
       dataInicioIngenios.Cell15 !== null
     ) {
-      a5 = a5 + data.MoliendaCanaBruta;
-      b5 = b5 + data.MoliendaCanaNeta;
-      c5 = c5 + data.AzucarEquivalente;
-      z5 = z5 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a5 = a5 + data.moliendaCanaBruta;
+      b5 = b5 + data.moliendaCanaNeta;
+      c5 = c5 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z5 = z5 + data.azucarBlancoProducido + data?.azucarRefinado;
       e5 = e5 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f5 = f5 + data.MelazaProducida;
-      h5 = h5 + data.AzucarRefinado || 0;
-      i5 = i5 + data.AzucarOrganico || 0;
-      j5 = j5 + data.OtroAzucar || 0;
-      k5 = k5 + data.AzucarBlancoProducido;
-      l5 = l5 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f5 = f5 + data.melazaProducida;
+      h5 = h5 + data.azucarRefinado || 0;
+      i5 = i5 + data.azucarOrganico || 0;
+      j5 = j5 + data.otroAzucar || 0;
+      k5 = k5 + data.azucarBlancoProducido;
+      l5 = l5 + data.azucarCrudoProducido;
       dataMarapa = {
         E15: a5,
         F15: b5,
-        G15: c5,
+        G15: c5 / 1000,
         J15: z5,
         K15: e5,
         M15: f5,
@@ -1043,30 +2184,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Bella Vista" &&
+      data.ingenioNombre === "Bella Vista" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell17 !== undefined &&
       dataInicioIngenios.Cell17 !== null
     ) {
-      a6 = a6 + data.MoliendaCanaBruta;
-      b6 = b6 + data.MoliendaCanaNeta;
-      c6 = c6 + data.AzucarEquivalente;
-      z6 = z6 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a6 = a6 + data.moliendaCanaBruta;
+      b6 = b6 + data.moliendaCanaNeta;
+      c6 = c6 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z6 = z6 + data.azucarBlancoProducido + data?.azucarRefinado;
       e6 = e6 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f6 = f6 + data.MelazaProducida;
-      h6 = h6 + data.AzucarRefinado || 0;
-      i6 = i6 + data.AzucarOrganico || 0;
-      j6 = j6 + data.OtroAzucar || 0;
-      k6 = k6 + data.AzucarBlancoProducido;
-      l6 = l6 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f6 = f6 + data.melazaProducida;
+      h6 = h6 + data.azucarRefinado || 0;
+      i6 = i6 + data.azucarOrganico || 0;
+      j6 = j6 + data.otroAzucar || 0;
+      k6 = k6 + data.azucarBlancoProducido;
+      l6 = l6 + data.azucarCrudoProducido;
 
       dataBellaVista = {
         E17: a6,
         F17: b6,
-        G17: c6,
+        G17: c6 / 1000,
         J17: z6,
         K17: e6,
         M17: f6,
@@ -1081,30 +2222,30 @@ export const dataPorTipo = (
       };
     }
     if (
-      data.IngenioNombre === "Famaillá" &&
+      data.ingenioNombre === "Famaillá" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell18 !== undefined &&
       dataInicioIngenios.Cell18 !== null
     ) {
-      a7 = a7 + data.MoliendaCanaBruta;
-      b7 = b7 + data.MoliendaCanaNeta;
-      c7 = c7 + data.AzucarEquivalente;
-      z7 = z7 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
+      a7 = a7 + data.moliendaCanaBruta;
+      b7 = b7 + data.moliendaCanaNeta;
+      c7 = c7 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z7 = z7 + data.azucarBlancoProducido + (data.azucarRefinado || 0);
       e7 = e7 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f7 = f7 + data.MelazaProducida;
-      h7 = h7 + data.AzucarRefinado || 0;
-      i7 = i7 + data.AzucarOrganico || 0;
-      j7 = j7 + data.OtroAzucar || 0;
-      k7 = k7 + data.AzucarBlancoProducido;
-      l7 = l7 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f7 = f7 + data.melazaProducida;
+      h7 = h7 + data.azucarRefinado || 0;
+      i7 = i7 + data.azucarOrganico || 0;
+      j7 = j7 + data.otroAzucar || 0;
+      k7 = k7 + data.azucarBlancoProducido;
+      l7 = l7 + data.azucarCrudoProducido;
 
       dataFamailla = {
         E18: a7,
         F18: b7,
-        G18: c7,
+        G18: c7 / 1000,
         J18: z7,
         K18: e7,
         M18: f7,
@@ -1120,30 +2261,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "La Corona" &&
+      data.ingenioNombre === "La Corona" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell19 !== undefined &&
       dataInicioIngenios.Cell19 !== null
     ) {
-      a8 = a8 + data.MoliendaCanaBruta;
-      b8 = b8 + data.MoliendaCanaNeta;
-      c8 = c8 + data.AzucarEquivalente;
-      z8 = z8 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a8 = a8 + data.moliendaCanaBruta;
+      b8 = b8 + data.moliendaCanaNeta;
+      c8 = c8 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z8 = z8 + data.azucarBlancoProducido + data?.azucarRefinado;
       e8 = e8 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f8 = f8 + data.MelazaProducida;
-      h8 = h8 + data.AzucarRefinado || 0;
-      i8 = i8 + data.AzucarOrganico || 0;
-      j8 = j8 + data.OtroAzucar || 0;
-      k8 = k8 + data.AzucarBlancoProducido;
-      l8 = l8 + data.AzucarCrudoProducido;
-      
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f8 = f8 + data.melazaProducida;
+      h8 = h8 + data.azucarRefinado || 0;
+      i8 = i8 + data.azucarOrganico || 0;
+      j8 = j8 + data.otroAzucar || 0;
+      k8 = k8 + data.azucarBlancoProducido;
+      l8 = l8 + data.azucarCrudoProducido;
+
       dataLaCorona = {
         E19: a8,
         F19: b8,
-        G19: c8,
+        G19: c8 / 1000,
         J19: z8,
         K19: e8,
         M19: f8,
@@ -1159,32 +2300,32 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "La Providencia" &&
+      data.ingenioNombre === "La Providencia" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell20 !== undefined &&
       dataInicioIngenios.Cell20 !== null
     ) {
-      a9 = a9 + data.MoliendaCanaBruta;
-      b9 = b9 + data.MoliendaCanaNeta;
-      c9 = c9 + data.AzucarEquivalente;
-      z9 = z9 + data.AzucarBlancoProducido + data?.AzucarRefinado;
+      a9 = a9 + data.moliendaCanaBruta;
+      b9 = b9 + data.moliendaCanaNeta;
+      c9 = c9 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z9 = z9 + data.azucarBlancoProducido + data?.azucarRefinado;
       e9 =
         e9 +
-        (data.AzucarCrudoProducido || 0) +
-        (data?.AzucarOrganico || 0) +
-        (data?.OtroAzucar || 0);
-      f9 = f9 + data.MelazaProducida;
-      h9 = h9 + data.AzucarRefinado || 0;
-      i9 = i9 + data.AzucarOrganico || 0;
-      j9 = j9 + data.OtroAzucar || 0;
-      k9 = k9 + data.AzucarBlancoProducido;
-      l9 = l9 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f9 = f9 + data.melazaProducida;
+      h9 = h9 + data.azucarRefinado || 0;
+      i9 = i9 + data.azucarOrganico || 0;
+      j9 = j9 + data.otroAzucar || 0;
+      k9 = k9 + data.azucarBlancoProducido;
+      l9 = l9 + data.azucarCrudoProducido;
 
 
       dataLaProvidencia = {
         E20: a9,
         F20: b9,
-        G20: c9,
+        G20: c9 / 1000,
         J20: z9,
         K20: e9,
         M20: f9,
@@ -1200,29 +2341,29 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "La Trinidad" &&
+      data.ingenioNombre === "La Trinidad" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell21 !== undefined &&
       dataInicioIngenios.Cell21 !== null
     ) {
-      a10 = a10 + data.MoliendaCanaBruta;
-      b10 = b10 + data.MoliendaCanaNeta;
-      c10 = c10 + data.AzucarEquivalente;
-      z10 = z10 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a10 = a10 + data.moliendaCanaBruta;
+      b10 = b10 + data.moliendaCanaNeta;
+      c10 = c10 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z10 = z10 + data.azucarBlancoProducido + data?.azucarRefinado;
       e10 = e10 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f10 = f10 + data.MelazaProducida;
-      h10 = h10 + data.AzucarRefinado || 0;
-      i10 = i10 + data.AzucarOrganico || 0;
-      j10 = j10 + data.OtroAzucar || 0;
-      k10 = k10 + data.AzucarBlancoProducido;
-      l10 = l10 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f10 = f10 + data.melazaProducida;
+      h10 = h10 + data.azucarRefinado || 0;
+      i10 = i10 + data.azucarOrganico || 0;
+      j10 = j10 + data.otroAzucar || 0;
+      k10 = k10 + data.azucarBlancoProducido;
+      l10 = l10 + data.azucarCrudoProducido;
       dataLaTrinidad = {
         E21: a10,
         F21: b10,
-        G21: c10,
+        G21: c10 / 1000,
         J21: z10,
         K21: e10,
         M21: f10,
@@ -1238,30 +2379,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Leales" &&
+      data.ingenioNombre === "Leales" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell22 !== undefined &&
       dataInicioIngenios.Cell22 !== null
     ) {
-      a11 = a11 + data.MoliendaCanaBruta;
-      b11 = b11 + data.MoliendaCanaNeta;
-      c11 = c11 + data.AzucarEquivalente;
-      z11 = z11 + data.AzucarBlancoProducido + (data.AzucarRefinado || 0);
+      a11 = a11 + data.moliendaCanaBruta;
+      b11 = b11 + data.moliendaCanaNeta;
+      c11 = c11 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z11 = z11 + data.azucarBlancoProducido + (data.azucarRefinado || 0);
       e11 = e11 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f11 = f11 + data.MelazaProducida;
-      h11 = h11 + data.AzucarRefinado || 0;
-      i11 = i11 + data.AzucarOrganico || 0;
-      j11 = j11 + data.OtroAzucar || 0;
-      k11 = k11 + data.AzucarBlancoProducido;
-      l11 = l11 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f11 = f11 + data.melazaProducida;
+      h11 = h11 + data.azucarRefinado || 0;
+      i11 = i11 + data.azucarOrganico || 0;
+      j11 = j11 + data.otroAzucar || 0;
+      k11 = k11 + data.azucarBlancoProducido;
+      l11 = l11 + data.azucarCrudoProducido;
 
       dataLeales = {
         E22: a11,
         F22: b11,
-        G22: c11,
+        G22: c11 / 1000,
         J22: z11,
         K22: e11,
         M22: f11,
@@ -1277,30 +2418,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Ñuñorco" &&
+      data.ingenioNombre === "Ñuñorco" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell23 !== undefined &&
       dataInicioIngenios.Cell23 !== null
     ) {
-      a12 = a12 + data?.MoliendaCanaBruta;
-      b12 = b12 + data?.MoliendaCanaNeta;
-      c12 = c12 + data?.AzucarEquivalente;
-      z12 = z12 + data?.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a12 = a12 + data?.moliendaCanaBruta;
+      b12 = b12 + data?.moliendaCanaNeta;
+      c12 = c12 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z12 = z12 + data?.azucarBlancoProducido + data?.azucarRefinado;
       e12 = e12 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f12 = f12 + data?.MelazaProducida;
-      h12 = h12 + data.AzucarRefinado || 0;
-      i12 = i12 + data.AzucarOrganico || 0;
-      j12 = j12 + data.OtroAzucar || 0;
-      k12 = k12 + data.AzucarBlancoProducido;
-      l12 = l12 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f12 = f12 + data?.melazaProducida;
+      h12 = h12 + data.azucarRefinado || 0;
+      i12 = i12 + data.azucarOrganico || 0;
+      j12 = j12 + data.otroAzucar || 0;
+      k12 = k12 + data.azucarBlancoProducido;
+      l12 = l12 + data.azucarCrudoProducido;
 
       dataÑuñorco = {
         E23: a12,
         F23: b12,
-        G23: c12,
+        G23: c12 / 1000,
         J23: z12,
         K23: e12,
         M23: f12,
@@ -1316,30 +2457,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Santa Barbara" &&
+      data.ingenioNombre === "Santa Barbara" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell24 !== undefined &&
       dataInicioIngenios.Cell24 !== null
     ) {
-      a13 = a13 + data.MoliendaCanaBruta;
-      b13 = b13 + data.MoliendaCanaNeta;
-      c13 = c13 + data.AzucarEquivalente;
-      z13 = z13 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a13 = a13 + data.moliendaCanaBruta;
+      b13 = b13 + data.moliendaCanaNeta;
+      c13 = c13 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z13 = z13 + data.azucarBlancoProducido + data?.azucarRefinado;
       e13 = e13 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f13 = f13 + data.MelazaProducida;
-      h13 = h13 + data.AzucarRefinado || 0;
-      i13 = i13 + data.AzucarOrganico || 0;
-      j13 = j13 + data.OtroAzucar || 0;
-      k13 = k13 + data.AzucarBlancoProducido;
-      l13 = l13 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f13 = f13 + data.melazaProducida;
+      h13 = h13 + data.azucarRefinado || 0;
+      i13 = i13 + data.azucarOrganico || 0;
+      j13 = j13 + data.otroAzucar || 0;
+      k13 = k13 + data.azucarBlancoProducido;
+      l13 = l13 + data.azucarCrudoProducido;
 
       dataStaBarbara = {
         E24: a13,
         F24: b13,
-        G24: c13,
+        G24: c13 / 1000,
         J24: z13,
         K24: e13,
         M24: f13,
@@ -1355,30 +2496,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "Santa Rosa" &&
+      data.ingenioNombre === "Santa Rosa" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell25 !== undefined &&
       dataInicioIngenios.Cell25 !== null
     ) {
-      a14 = a14 + data.MoliendaCanaBruta;
-      b14 = b14 + data.MoliendaCanaNeta;
-      c14 = c14 + data.AzucarEquivalente;
-      z14 = z14 + data.AzucarBlancoProducido + data?.AzucarRefinado; // + data?.AzucarRefinada
+      a14 = a14 + data.moliendaCanaBruta;
+      b14 = b14 + data.moliendaCanaNeta;
+      c14 = c14 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z14 = z14 + data.azucarBlancoProducido + data?.azucarRefinado;
       e14 = e14 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f14 = f14 + data.MelazaProducida;
-      h14 = h14 + data.AzucarRefinado || 0;
-      i14 = i14 + data.AzucarOrganico || 0;
-      j14 = j14 + data.OtroAzucar || 0;
-      k14 = k14 + data.AzucarBlancoProducido;
-      l14 = l14 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f14 = f14 + data.melazaProducida;
+      h14 = h14 + data.azucarRefinado || 0;
+      i14 = i14 + data.azucarOrganico || 0;
+      j14 = j14 + data.otroAzucar || 0;
+      k14 = k14 + data.azucarBlancoProducido;
+      l14 = l14 + data.azucarCrudoProducido;
 
       dataStaRosa = {
         E25: a14,
         F25: b14,
-        G25: c14,
+        G25: c14 / 1000,
         J25: z14,
         K25: e14,
         M25: f14,
@@ -1394,30 +2535,30 @@ export const dataPorTipo = (
     }
 
     if (
-      data.IngenioNombre === "San Juan" &&
+      data.ingenioNombre === "San Juan" &&
       newDate <= fechaParametro &&
       dataInicioIngenios.Cell26 !== undefined &&
       dataInicioIngenios.Cell26 !== null
     ) {
-      a15 = a15 + data.MoliendaCanaBruta;
-      b15 = b15 + data.MoliendaCanaNeta;
-      c15 = c15 + data.AzucarEquivalente;
-      z15 = z15 + data.AzucarBlancoProducido; // + data?.AzucarRefinada
+      a15 = a15 + data.moliendaCanaBruta;
+      b15 = b15 + data.moliendaCanaNeta;
+      c15 = c15 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z15 = z15 + data.azucarBlancoProducido;
       e15 = e15 +
-      (data.AzucarCrudoProducido || 0) +
-      (data?.AzucarOrganico || 0) +
-      (data?.OtroAzucar || 0);
-      f15 = f15 + data.MelazaProducida;
-      h15 = h15 + data.AzucarRefinado || 0;
-      i15 = i15 + data.AzucarOrganico || 0;
-      j15 = j15 + data.OtroAzucar || 0;
-      k15 = k15 + data.AzucarBlancoProducido;
-      l15 = l15 + data.AzucarCrudoProducido;
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f15 = f15 + data.melazaProducida;
+      h15 = h15 + data.azucarRefinado || 0;
+      i15 = i15 + data.azucarOrganico || 0;
+      j15 = j15 + data.otroAzucar || 0;
+      k15 = k15 + data.azucarBlancoProducido;
+      l15 = l15 + data.azucarCrudoProducido;
 
       dataSanJuan = {
         E26: a15,
         F26: b15,
-        G26: c15,
+        G26: c15 / 1000,
         J26: z15,
         K26: e15,
         L26: l15,
@@ -1432,7 +2573,206 @@ export const dataPorTipo = (
       };
     }
   });
+  /** NORTE **/
+  
+  dataImportNorte?.forEach((data) => {
+    const newDate = new Date(data.fechaParte)
+    // const fechaParametroEsperanza = dataInicioIngeniosNorte.esperanzaFin ? (dataEnd > new Date(dataInicioIngeniosNorte.esperanzaFin) ? new Date(dataInicioIngeniosNorte.esperanzaFin) : new Date(dataEnd)) : new Date(dataEnd);
+    // const fechaParametroLedesma = dataInicioIngeniosNorte.ledesmaFin ? (dataEnd > new Date(dataInicioIngeniosNorte.ledesmaFin) ? new Date(dataInicioIngeniosNorte.ledesmaFin) : new Date(dataEnd)) : new Date(dataEnd);
+    // const fechaParametroRioGrande = dataInicioIngeniosNorte.riograndeFin ? (dataEnd > new Date(dataInicioIngeniosNorte.riograndeFin) ? new Date(dataInicioIngeniosNorte.riograndeFin) : new Date(dataEnd)) : new Date(dataEnd);
+    // const fechaParametroSanIsidro = dataInicioIngeniosNorte.sanisidroFin ? (dataEnd > new Date(dataInicioIngeniosNorte.sanisidroFin) ? new Date(dataInicioIngeniosNorte.sanisidroFin) : new Date(dataEnd)) : new Date(dataEnd);
+    // const fechaParametroSeaboard = dataInicioIngeniosNorte.seaboardFin ? (dataEnd > new Date(dataInicioIngeniosNorte.seaboardFin) ? new Date(dataInicioIngeniosNorte.seaboardFin) : new Date(dataEnd)) : new Date(dataEnd);
+
+    const fechaParametro = dataEnd !== null ? new Date(dataEnd) : new Date();
+    if (
+      data.ingenioNombre === "La Esperanza" &&
+      newDate >= new Date(dataInicioIngeniosNorte.Cell44) &&
+      newDate <= fechaParametro
+    ) {
+      a16 = a16 + data.moliendaCanaBruta || 0;
+      b16 = b16 + data.moliendaCanaNeta || 0;
+      c16 = c16 + Number(data.azucarEquivalente || 0);
+      // c16 = c16 + Number(data.azucarEquivalente.replace(/\./g, '')) || 0;
+      z16 = z16 + data.azucarBlancoProducido + data?.azucarRefinado;
+      e16 = e16 +
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f16 = f16 + data.melazaProducida || 0;
+      h16 = h16 + data.azucarRefinado || 0;
+      i16 = i16 + data.azucarOrganico || 0;
+      j16 = j16 + data.otroAzucar || 0;
+      k16 = k16 + data.azucarBlancoProducido;
+      l16 = l16 + data.azucarCrudoProducido;
+      dataLaEsperanza = {
+        E44: a16,
+        F44: b16,
+        G44: c16,
+        J44: z16,
+        K44: e16,
+        M44: f16,
+        N44: dataLaEsperanza.N44,
+        O44: dataLaEsperanza.O44,
+        P44: dataLaEsperanza.P44,
+        V44: k16,
+        W44: h16,
+        X44: i16,
+        Y44: j16,
+        Z44: l16,
+      };
+    }
+    if (
+      data.ingenioNombre === "Ledesma" &&
+      newDate >= new Date(dataInicioIngeniosNorte.Cell45) &&
+      newDate <= fechaParametro
+    ) {
+      console.log(data.ingenioNombre, ' fecha:: ', data.fechaParte, 'refinado: ', data.azucarRefinado)
+      a17 = a17 + data.moliendaCanaBruta || 0;
+      b17 = b17 + data.moliendaCanaNeta || 0;
+      c17 = c17 + Number(data.azucarEquivalente || 0);
+      z17 = z17 + data.azucarBlancoProducido + data?.azucarRefinado;
+      e17 = e17 +
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f17 = f17 + data.melazaProducida || 0;
+      h17 = h17 + data.azucarRefinado || 0;
+      i17 = i17 + data.azucarOrganico || 0;
+      j17 = j17 + data.otroAzucar || 0;
+      k17 = k17 + data.azucarBlancoProducido;
+      l17 = l17 + (data.azucarCrudoProducido <= 0 ? - data.azucarRefinado - data.otroAzucar : data.azucarCrudoProducido - data.azucarRefinado - data.otroAzucar);
+
+      dataLedesma = {
+        E45: a17,
+        F45: b17,
+        G45: c17,
+        J45: z17,
+        K45: e17,
+        M45: f17,
+        N45: dataLedesma.N45,
+        O45: dataLedesma.O45,
+        P45: dataLedesma.P45,
+        V45: k17,
+        W45: h17,
+        X45: i17,
+        Y45: j17,
+        Z45: l17,
+      };
+    }
+    if (
+      data.ingenioNombre === "Río Grande" &&
+      newDate >= new Date(dataInicioIngeniosNorte.Cell46) &&
+      newDate <= fechaParametro
+    ) {
+      a18 = a18 + data.moliendaCanaBruta || 0;
+      b18 = b18 + data.moliendaCanaNeta || 0;
+      c18 = c18 + Number(data.azucarEquivalente || 0);
+      z18 = z18 + data.azucarBlancoProducido + data?.azucarRefinado;
+      e18 = e18 +
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f18 = f18 + data.melazaProducida || 0;
+      h18 = h18 + data.azucarRefinado || 0;
+      i18 = i18 + data.azucarOrganico || 0;
+      j18 = j18 + data.otroAzucar || 0;
+      k18 = k18 + data.azucarBlancoProducido;
+      l18 = l18 + data.azucarCrudoProducido;
+
+      dataRioGrande = {
+        E46: a18,
+        F46: b18,
+        G46: c18,
+        J46: z18,
+        K46: e18,
+        M46: f18,
+        N46: dataRioGrande.N46,
+        O46: dataRioGrande.O46,
+        P46: dataRioGrande.P46,
+        V46: k18,
+        W46: h18,
+        X46: i18,
+        Y46: j18,
+        Z46: l18,
+      };
+    }
+    if (
+      data.ingenioNombre === "San Isidro" &&
+      newDate >= new Date(dataInicioIngeniosNorte.Cell47) &&
+      newDate <= fechaParametro
+    ) {
+      a19 = a19 + data.moliendaCanaBruta || 0;
+      b19 = b19 + data.moliendaCanaNeta || 0;
+      c19 = c19 + Number(data.azucarEquivalente || 0);
+      z19 = z19 + data.azucarBlancoProducido + data?.azucarRefinado;
+      e19 = e19 +
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f19 = f19 + data.melazaProducida || 0;
+      h19 = h19 + data.azucarRefinado || 0;
+      i19 = i19 + data.azucarOrganico || 0;
+      j19 = j19 + data.otroAzucar || 0;
+      k19 = k19 + data.azucarBlancoProducido;
+      l19 = l19 + data.azucarCrudoProducido;
+
+      dataSanIsidro = {
+        E47: a19,
+        F47: b19,
+        G47: c19,
+        J47: z19,
+        K47: e19,
+        M47: f19,
+        N47: dataSanIsidro.N47,
+        O47: dataSanIsidro.O47,
+        P47: dataSanIsidro.P47,
+        V47: k19,
+        W47: h19,
+        X47: i19,
+        Y47: j19,
+        Z47: l19,
+      };
+    }
+    if (
+      data.ingenioNombre === "Seaboard" &&
+      newDate >= new Date(dataInicioIngeniosNorte.Cell48) &&
+      newDate <= fechaParametro
+    ) {
+      a20 = a20 + data.moliendaCanaBruta || 0;
+      b20 = b20 + data.moliendaCanaNeta || 0;
+      c20 = c20 + Number(data.azucarEquivalente || 0);
+      z20 = z20 + data.azucarBlancoProducido + data?.azucarRefinado;
+      e20 = e20 +
+        (data.azucarCrudoProducido || 0) +
+        (data?.azucarOrganico || 0) +
+        (data?.otroAzucar || 0);
+      f20 = f20 + data.melazaProducida || 0;
+      h20 = h20 + data.azucarRefinado || 0;
+      i20 = i20 + data.azucarOrganico || 0;
+      j20 = j20 + data.otroAzucar || 0;
+      k20 = k20 + data.azucarBlancoProducido;
+      l20 = l20 + data.azucarCrudoProducido;
+
+      dataSeaboard = {
+        E48: a20,
+        F48: b20,
+        G48: c20,
+        J48: z20,
+        K48: e20,
+        M48: f20,
+        N48: dataSeaboard.N48,
+        O48: dataSeaboard.O48,
+        P48: dataSeaboard.P48,
+        V48: k20,
+        W48: h20,
+        X48: i20,
+        Y48: j20,
+        Z48: l20,
+      };
+    }
+  })
   setPanelAlcohol(alcoholPanel);
+  setPanelAlcoholAnhidro(alcoholAnhidroPanel);
   setPanelCMB(cmbPanel);
   setPanelAzucar(azucarPanel);
   setPanelAzucarEquivalente(azucarPanelEquivalente);
@@ -1442,20 +2782,33 @@ export const dataPorTipo = (
   setPanelAzucarOrganico(azucarPanelOrganico);
   setPanelAzucarOtros(azucarPanelOtros);
 
-
   /*********************************************************************************/
   /*** ALCOHOL ANHIDRO QUE QUEDO DEFASADO ENTRE EL 5/05/2024 y 15/05/2024
    * QUE PERTENECE A LA ZAFRA 2023 ***/
-  if (zafraParteDiario === 2024) {
-    dataLaFlorida.R50 = dataLaFlorida.R50 - 2526587;
-  }
-  if (zafraParteDiario === 2023) {
-    dataLaFlorida.R50 = dataLaFlorida.R50 + 2526587;
-  }
-  /****************/
+  // if (zafraParteDiario === 2024) {
+  //   dataLaFlorida.R50 = dataLaFlorida.R50 - 2526587;
+  // }
+  // if (zafraParteDiario === 2023) {
+  //   dataLaFlorida.R50 = dataLaFlorida.R50 + 2526587;
+  // }
+  // /****************/
 
+
+  /****************************** ANHIDRO 2025 ******************************/
+  /****** CONCEPCION *****/
+  /*EMPEZO A DECLARAR EN EL PARTE DIARIO
+  *
+  *
+  * Mayo: 1.775.189
   
+  ACUMULADO: 1.775.189
+  */
+  //  if ( zafraParteDiario === 2025) {
+  //   dataConcepcion.R46 = dataConcepcion.R46 + 1775189
+  //  }
+  /**************************************************************************/
 
+  /****************************** ANHIDRO 2024 ******************************/
   /*** ALCOHOL ANHIDRO ZAFRA 2024 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
    * DECLARADO POR EMAIL
    ***/
@@ -1470,11 +2823,12 @@ export const dataPorTipo = (
   Diciembre: 235.750
   Enero: 4.770.000
   Febrero: 3.412.785
-  Acumulado: 31.541.737
+  Acumulado: 27.407.947
   */
-  if (zafraParteDiario === 2024) {
-    dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
-  }
+  // if (zafraParteDiario === 2024) {
+  //   // dataLeales.R53 = dataLeales.R53 + 2194476 + 2052522 + 4133790 + 4971944 + 2963470 + 1460000 + 5347000 + 235750 + 4770000 + 3412785;
+  //   // dataLeales.R53 = dataLeales.R53 + 31541737
+  // }
 
   /* CONCEPCION 
   Junio:2.986.603
@@ -1485,12 +2839,15 @@ export const dataPorTipo = (
   Noviembre:5.290.243
   Diciembre: 5.819.557
   Enero 2025: 6.522.224
-  EFebrero: 5.677.674
-  Acumulado: 52.029.419
+  Febrero: 5.677.674
+  Marzo: 5.928.463
+  abril: 5.551.377
+  Acumulado: 63.508.852
   */
-  if (zafraParteDiario === 2024) {
-    dataConcepcion.R46 = dataConcepcion.R46 + 52029419;
-  }
+  // if (zafraParteDiario === 2024) {
+  //   // dataConcepcion.R46 = dataConcepcion.R46 + 2986603;
+  //   dataConcepcion.R46 = dataConcepcion.R46 + 63509259;
+  // }
 
   /* BELLA VISTA 
   Junio: 880.968
@@ -1501,27 +2858,28 @@ export const dataPorTipo = (
   Noviembre: 1.098.950
   Diciembre: 2.031.615
   Enero:
-  Febrero: 
-  Acumulado: 11.983.845
+  Febrero: 2.269.182
+  Marzo: 543.734 
+  Acumulado: 14.796.761
   */
-  if (zafraParteDiario === 2024) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615;
-
-  }
-  /**********/
+  // if (zafraParteDiario === 2024) {
+  //   // dataBellaVista.R45 = dataBellaVista.R45 + 880968 + 2099136 + 3135585 + 253748 + 2483843 + 1098950 + 2031615 + 2269182 + 543734;
+  //   dataBellaVista.R45 = dataBellaVista.R45 + 14796761
+  // }
+  /************************************************************************/
 
   /*** ALCOHOL ANHIDRO ZAFRA 2023 NO DECLARADO POR LO INGENIOS EN LOS PARTES DIARIOS
    * DECLARADO POR EMAIL
    ***/
-  if (zafraParteDiario === 2023) {
-    dataBellaVista.R45 = dataBellaVista.R45 + 9669715;
-  }
-  if (zafraParteDiario === 2023) {
-    dataConcepcion.R46 = dataConcepcion.R46 + 35668460;
-  }
-  if (zafraParteDiario === 2023) {
-    dataLeales.R53 = dataLeales.R53 + 26464761;
-  }
+  // if (zafraParteDiario === 2023) {
+  //   dataBellaVista.R45 = dataBellaVista.R45 + 9669715;
+  // }
+  // if (zafraParteDiario === 2023) {
+  //   dataConcepcion.R46 = dataConcepcion.R46 + 35668460;
+  // }
+  // if (zafraParteDiario === 2023) {
+  //   dataLeales.R53 = dataLeales.R53 + 26464761;
+  // }
   /**********/
 
   setD1(dataAguilares);
@@ -1539,6 +2897,12 @@ export const dataPorTipo = (
   setD13(dataStaBarbara);
   setD14(dataStaRosa);
   setD15(dataSanJuan);
+  setDataDestBellaVista(dataDestBellaVista);
+  setN1(dataLaEsperanza);
+  setN2(dataLedesma);
+  setN3(dataRioGrande);
+  setN4(dataSanIsidro);
+  setN5(dataSeaboard);
 };
 
 // /***************** MEJORAS REGISTROS GLOBALES *********************/

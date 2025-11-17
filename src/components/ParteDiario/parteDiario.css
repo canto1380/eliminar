@@ -2,7 +2,6 @@
     border: 1px solid rgba(84, 84, 84, 0.469);
     border-radius: 10px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-
 }
 .encabezados-panel{
     font-size: 18px;
@@ -14,3 +13,20 @@
     color: rgb(11, 90, 209);
     font-weight: 500;
 }
+
+
+/**
+const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.3 } // 0.3 = se activa cuando el 30% del componente es visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+*/

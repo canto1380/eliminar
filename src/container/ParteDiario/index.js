@@ -9,14 +9,19 @@ import Unauthorized from "../../components/Unauthorized";
 import Spinn from "../../components/Spinner";
 import { User } from "../../context/UserProvider";
 import { inactivityTime } from "../../helpers/inactivityTime";
+import { SidebarContext } from "../../context/SidebarProvider";
 
 const ContainerIndexParteDiario = () => {
-  const [inactivo, setInactivo] = useState(true);
   const [tokenAuth, setTokenAuth] = useState(null);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loading, setLoading] = useState(false);
   
   const { dataUser } = useContext(User);
+  const {sidebarStatus} = useContext(SidebarContext)
+
+  useEffect(() => {
+  }, [sidebarStatus])
+
   useEffect(() => {
     const token = getToken();
     const tokenLS = getTokenLS();
@@ -59,12 +64,11 @@ const ContainerIndexParteDiario = () => {
             className={`containerAdmin p-0 d-flex justify-content-end`}
           >
             <Sidebar
-              inactivo={inactivo}
-              setInactivo={setInactivo}
+              inactivo={sidebarStatus}
               tokenAuth={tokenAuth}
               dataUser={dataUser}
             />
-            <div className={`${inactivo ? `parte2Inactivo` : `parte2`} `}>
+            <div className={`${sidebarStatus ? `parte2Inactivo` : `parte2`} `}>
               <ParteDiarioContainer tokenAuth={tokenAuth} />
             </div>
             {modalUnauthorized && (

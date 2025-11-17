@@ -3,7 +3,7 @@ import TitlePage from "../../components/TitlePages";
 import { useState, useEffect, useContext } from "react";
 import { getDiasParadas } from "../../utils/queryAPI/diaParadas";
 import { api } from "../../utils/api";
-import { Button, message, Space, Spin } from "antd";
+import { Button, message, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Spinn from "../../components/Spinner";
 import Filtros from "../../components/Filtros";
@@ -16,22 +16,22 @@ import { User } from "../../context/UserProvider";
 import { getDataToken } from "../../helpers/helpers";
 import { getIngenios } from "../../utils/queryAPI/ingenios";
 import { getPeriodoZafra } from "../../utils/queryAPI/periodosZafra";
+import { toast } from "react-toastify";
+import BtnDescargar from "../../components/Botones/BtnDescargar";
 
 const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   const [diasParadas, setDiasParadas] = useState(null);
   const [anioZafra, setAnioZafra] = useState(null);
   const [ingenio, setIngenio] = useState(null);
   const [search, setSearch] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [band, setBand] = useState(false);
-  const [anioExportDiaParada, setAnioExportDiaParada] = useState(null);
-  const [diasParadaExport, setDiasParadaExport] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [loadingDownloadReport, setLoadingDownloadReport] = useState(false);
   const [dataUserRegister, setDataUserRegister] = useState(undefined);
   const [ingeniosData, setIngeniosData] = useState(undefined);
   const [fechaInicioIngenios, setFechaInicioIngenios] = useState(undefined);
-  const [observacionesExcel, setObservacionesExcel] = useState('');
+  const [dataMes, setDataMes] = useState(null);
+  const [dataQuincena, setDataQuincena] = useState(null);
 
   const { dataUser } = useContext(User);
 
@@ -39,34 +39,38 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
     getDataUserRegister();
   }, [dataUser]);
   const getDataUserRegister = () => {
-    const data = getDataToken();
-    setDataUserRegister(data);
+    try {
+      const data = getDataToken();
+      setDataUserRegister(data);
+    } catch (error) {
+      toast.error(`Error: ${error}`);
+    } finally {
+      setLoading(false);
+    }
   };
-
+  
   useEffect(() => {
     dataDiasParadas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, anioZafra, ingenio, band]);
-
+  }, [search, anioZafra, ingenio, dataMes, dataQuincena]);
+  
   const dataDiasParadas = async () => {
-    const params = { search, anio: anioZafra, ingenio };
-    const Data = await getDiasParadas(params);
-    setDiasParadas(Data);
-  };
-
-  useEffect(() => {
-    if (anioExportDiaParada !== null && anioExportDiaParada !== "") {
-      dataDiasParadaExport();
+    try {
+      const params = {
+        search,
+        anio: anioZafra,
+        ingenio,
+        dataMes,
+        dataQuincena,
+      };
+      const Data = await getDiasParadas(params);
+      setDiasParadas(Data);
+    } catch (error) {
+      toast.error(`Error: ${error}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anioExportDiaParada]);
-
-  const dataDiasParadaExport = async () => {
-    const params = { anio: anioExportDiaParada };
-    const data = await getDiasParadas(params);
-    setDiasParadaExport(data);
   };
 
+  const dataIngenios = ingenio ? ingeniosData?.filter((d) => d.nombre_ingenio === ingenio) : ingeniosData
   /** LISTADO INGENIOS TUCUMAN**/
   useEffect(() => {
     getIngeniosData();
@@ -74,21 +78,21 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   const getIngeniosData = async () => {
     const params = { region: 1 };
     const data = await getIngenios(params);
-    const res = data.filter((d) => d.nombre_ingenio !== "San Juan");
+    const res = data.filter((d) => d.nombre_ingenio !== "San Juan" && d.nombre_ingenio != 'Destilería Bella Vista');
     setIngeniosData(res);
   };
 
   /** INICIO Y FIN PERIODOS **/
   useEffect(() => {
-    if (anioExportDiaParada) {
+    if (anioZafra) {
       getDataPeriodos();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anioExportDiaParada]);
+  }, [anioZafra]);
   const getDataPeriodos = async () => {
     const params = {
       limit: 10000000,
-      anio: anioExportDiaParada,
+      anio: anioZafra,
       deleted: 0,
       region: 1,
     };
@@ -99,6 +103,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
 
   const handleDelete = async (id) => {
     try {
+      setLoading(true);
       const res = await api(
         "DELETE",
         `${routeAPI}/delete/${id}`,
@@ -106,11 +111,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
         tokenAuth
       );
       if (res.status === 200) {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setBand(!band);
-        }, 2500);
+        toast.success("Registro eliminado.");
       } else if (res.response.status === 401) {
         setModalUnauthorized(true);
       } else {
@@ -118,6 +119,8 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       }
     } catch (error) {
       message.error("Error en el servidor. Recargue e intente nuevamente", 5);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -186,15 +189,17 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
   ];
   const exportarDiasParadas = async () => {
     try {
+      setLoadingDownloadReport(true);
       const date = new Date();
-    const dateFormat = moment(date).format("DD-MM-YYYY");
+      const dateFormat = moment(date).format("DD-MM-YYYY");
       const dataSend = [
         {
-          diasParadas: diasParadaExport,
+          diasParadas: diasParadas,
           usuario: dataUserRegister,
-          anio: anioExportDiaParada,
           ingenios: ingeniosData,
           fechaInicioFin: fechaInicioIngenios,
+          anioZafra: anioZafra,
+          ingenio: dataIngenios,
         },
       ];
       const res = await apiExportExcel("POST", "diaParada/descargar", dataSend);
@@ -205,19 +210,21 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
 
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `Dias paradas - Zafra ${dateFormat}`; // Nombre del archivo
+        link.download = `Dias paradas ${dateFormat} - Zafra ${anioZafra}`; // Nombre del archivo
         link.click();
         link.remove();
         window.URL.revokeObjectURL(link);
-        setAnioExportDiaParada("")
-        setDiasParadaExport(null)
+        setAnioZafra("");
+        setDiasParadas(null);
         message.success("Descarga realizada correctamente", 5);
         window.location.reload();
       } else {
-        console.error("Error al generar");
+        toast.error(`Error al descargar el archivo: ${res?.data?.response?.data?.error || 'Error desconocido'}`)
       }
     } catch (error) {
-      console.error("Error en el fetch:", error);
+      toast.error(`Error al descargar el archivo: ${error?.data?.response?.data?.error || 'Error desconocido'}`)
+    } finally {
+      setLoadingDownloadReport(false);
     }
   };
   return (
@@ -232,19 +239,28 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
         <>
           <Filtros
             setSearch={setSearch}
+            dataZafra={anioZafra}
             setDataZafra={setAnioZafra}
             setIngenio={setIngenio}
+            setDataMes={setDataMes}
+            setDataQuincena={setDataQuincena}
             bandFilterZafraAnio={true}
             bandFilterSearch={true}
             bandFilterIngenio={true}
+            bandFilterMes={true}
+            bandFilterQuincena={true}
             placeHolderSearch="Valor"
-            anioExportDiaParada={anioExportDiaParada}
-            diasParadaExport={diasParadaExport}
-            setAnioExportDiaParada={setAnioExportDiaParada}
-            bandFilterDiasParadaAnioZafra={true}
+            diasParadas={diasParadas}
+            // bandFilterDiasParadaAnioZafra={true}
+            // loadingDownloadReport={loadingDownloadReport}
+            // exportarDiasParadas={exportarDiasParadas}
+          />
+          <BtnDescargar
             loadingDownloadReport={loadingDownloadReport}
-            setLoadingDownloadReport={setLoadingDownloadReport}
-            exportarDiasParadas={exportarDiasParadas}
+            dataZafra={anioZafra}
+            data={diasParadas}
+            funcionExportar={exportarDiasParadas}
+            bandExportDiasParadas={true}
           />
           <ListHeader
             title={"Paradas de los ingenios"}
@@ -258,11 +274,6 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
             />
           </div>
         </>
-      )}
-      {loading && (
-        <div className="loadingSpin">
-          <Spin />
-        </div>
       )}
       {modalUnauthorized && (
         <div>
