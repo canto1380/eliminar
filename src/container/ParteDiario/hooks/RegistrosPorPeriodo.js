@@ -9,9 +9,8 @@ const dataFin = new Date(dataEnd)
       return fecha >= inicio && fecha <= fin;
     });
   };
-
   return {
-    dataZafra1: filtrar(periodos.inicio_zafra, periodos.fin_zafra),
+    dataZafra1: filtrar(periodos.inicio_zafra, new Date(periodos.fin_zafra) >= new Date(periodos.fin_datos_zafra) ? periodos.fin_zafra : periodos.fin_datos_zafra),
     dataDestileria1: filtrar(periodos.inicio_destileria, periodos.fin_destileria),
     dataAnhidro1: filtrar(periodos.inicio_anhidro, periodos.fin_anhidro)
   };

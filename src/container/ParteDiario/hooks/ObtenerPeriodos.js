@@ -5,7 +5,8 @@ export function obtenerPeriodos(data, regionId) {
     inicio_destileria: null,
     fin_destileria: null,
     inicio_anhidro: null,
-    fin_anhidro: null
+    fin_anhidro: null,
+    fin_datos_zafra: null,
   };
 
   // Filtrar los datos por regionId antes del forEach
@@ -15,7 +16,6 @@ export function obtenerPeriodos(data, regionId) {
   const todosTienenFinZafra = datosFiltrados.length > 0 && datosFiltrados.every(item => item.fin_zafra);
   const todosTienenFinDestileria = datosFiltrados.length > 0 && datosFiltrados.every(item => item.fin_destileria);
   const todosTienenFinAnhidro = datosFiltrados.length > 0 && datosFiltrados.every(item => item.fin_anhidro);
-
   datosFiltrados.forEach(item => {
     // Zafra
     if (item.inicio_zafra) {
@@ -47,9 +47,14 @@ export function obtenerPeriodos(data, regionId) {
     datosFiltrados.forEach(item => {
       if (item.fin_zafra) {
         const fin = new Date(item.fin_zafra);
+        const fin_datos_zafra = new Date(item.fin_datos_zafra)
         periodos.fin_zafra = !periodos.fin_zafra || fin > new Date(periodos.fin_zafra)
           ? fin.toString()
           : periodos.fin_zafra;
+        
+        periodos.fin_datos_zafra = !periodos.fin_datos_zafra || fin_datos_zafra > new Date(periodos.fin_datos_zafra)
+          ? fin_datos_zafra.toString()
+          : periodos.fin_datos_zafra
       }
     });
   }

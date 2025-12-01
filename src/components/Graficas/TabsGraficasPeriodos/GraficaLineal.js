@@ -32,21 +32,40 @@ const GraficasLinealComponent = ({
     dataZafraGrafica,
     dataDestilacionGrafica,
     dataAnhidroGrafica,
+    dataZafraGraficaNorte,
+    dataDestilacionGraficaNorte,
+    dataAnhidroGraficaNorte,
     dataUserRegister,
     ingenio,
     datePeriodoStart,
     datePeriodoEnd,
-    routeAPI
+    routeAPI,
+    region
 }) => {
-
-    const chartRef = useRef(null)
     const graficasRefs = useRef([]); // guardamos refs a los componentes hijos
     const [graficasSeleccionadas, setGraficasSeleccionadas] = useState([]);
 
-    // Preparar datos reales a partir de dataZafraGrafica
-    const registrosZafra = Array.isArray(dataZafraGrafica) ? [...dataZafraGrafica] : [];
-    const registrosDestilacion = Array.isArray(dataDestilacionGrafica) ? [...dataDestilacionGrafica] : [];
-    const registrosAnhidro = Array.isArray(dataAnhidroGrafica) ? [...dataAnhidroGrafica] : [];
+    const regionId = !region || region === 'Todos'
+        ? 'Todos'
+        : typeof region === 'string'
+            ? parseInt(region, 10)
+            : region;
+
+    const mostrarTucuman = regionId === 'Todos' || regionId === undefined || regionId === 1;
+    const mostrarNorte = regionId === 'Todos' || regionId === undefined || regionId === 2;
+
+    const registrosZafra = [
+        ...(mostrarTucuman && Array.isArray(dataZafraGrafica) ? dataZafraGrafica : []),
+        ...(mostrarNorte && Array.isArray(dataZafraGraficaNorte) ? dataZafraGraficaNorte : []),
+    ];
+    const registrosDestilacion = [
+        ...(mostrarTucuman && Array.isArray(dataDestilacionGrafica) ? dataDestilacionGrafica : []),
+        ...(mostrarNorte && Array.isArray(dataDestilacionGraficaNorte) ? dataDestilacionGraficaNorte : []),
+    ];
+    const registrosAnhidro = [
+        ...(mostrarTucuman && Array.isArray(dataAnhidroGrafica) ? dataAnhidroGrafica : []),
+        ...(mostrarNorte && Array.isArray(dataAnhidroGraficaNorte) ? dataAnhidroGraficaNorte : []),
+    ];
 
 
     /**** PROCESAMIENTO DE DATOS DE ZAFRA ****/
@@ -73,7 +92,11 @@ const GraficasLinealComponent = ({
         acc[fecha].moliendaCanaBruta += Number(r?.moliendaCanaBruta || 0);
         acc[fecha].moliendaCanaNeta += Number(r?.moliendaCanaNeta || 0);
         acc[fecha].azucarBlanco += Number(r?.azucarBlancoProducido || 0);
-        acc[fecha].azucarCrudo += Number(r?.azucarCrudoProducido || 0);
+        if(r.ingenioNombre === 'Ledesma') {
+            acc[fecha].azucarCrudo += Number(r?.azucarCrudoProducido < 0 ? r?.azucarRefinado - r?.otroAzucar : r?.azucarCrudoProducido - r?.azucarRefinado - r?.otroAzucar);
+        } else {
+            acc[fecha].azucarCrudo += Number(r?.azucarCrudoProducido || 0);
+        }
         acc[fecha].azucarEquivalente += Number(r?.azucarEquivalente || 0);
         acc[fecha].azucarOrganico += Number(r?.azucarOrganico || 0);
         acc[fecha].azucarRefinado += Number(r?.azucarRefinado || 0);
@@ -251,7 +274,7 @@ const GraficasLinealComponent = ({
         graficasRefs.current.forEach(ref => {
             if (ref && ref.resetCheckbox) ref.resetCheckbox();
         });
-    }, [ingenio, datePeriodoStart, datePeriodoEnd]);
+    }, [ingenio, datePeriodoStart, datePeriodoEnd, region]);
 
     const handleSeleccionGrafica = (graficaInfo, checked) => {
         setGraficasSeleccionadas(prev => {

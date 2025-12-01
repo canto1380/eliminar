@@ -12,10 +12,13 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   const [errorPKDuplicate, setErrorPKDuplicate] = useState("");
   const [serverError, setServerError] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const [inicioZafra, setInicioZafra] = useState(
     dataRegisterEdit?.inicio_zafra
   );
   const [finZafra, setFinZafra] = useState(dataRegisterEdit?.fin_zafra);
+  const [finalDatos, setFinalDatos] = useState(dataRegisterEdit?.fin_datos_zafra)
+
   const [inicioDestileria, setInicioDestileria] = useState(
     dataRegisterEdit?.inicio_destileria
   );
@@ -38,6 +41,9 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   };
   const changeFinInicio = (e) => {
     setFinZafra(e.target.value);
+  };
+  const changeFinalDatos = (e) => {
+    setFinalDatos(e.target.value);
   };
 
   const changeInicioDestileria = (e) => {
@@ -64,6 +70,7 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   const createPeriodo = async (values) => {
     values.inicio_zafra = inicioZafra;
     values.fin_zafra = finZafra;
+    values.fin_datos_zafra = finalDatos;
     values.inicio_destileria = inicioDestileria;
     values.fin_destileria = finDestileria;
     values.inicio_anhidro = inicioAnhidro
@@ -107,6 +114,7 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   const updatePeriodo = async (values) => {
     values.inicio_zafra = inicioZafra === null ? inicioZafra : moment(inicioZafra).format("YYYY-MM-DD");
     values.fin_zafra = finZafra === null ? finZafra : moment(finZafra).format("YYYY-MM-DD");
+    values.fin_datos_zafra = finalDatos === null ? finalDatos : moment(finalDatos).format("YYYY-MM-DD")
     values.inicio_destileria = inicioDestileria === null ? inicioDestileria : moment(inicioDestileria).format("YYYY-MM-DD");
     values.fin_destileria = finDestileria === null ? finDestileria : moment(finDestileria).format("YYYY-MM-DD");
     values.inicio_anhidro = inicioAnhidro === null ? inicioAnhidro : moment(inicioAnhidro).format("YYYY-MM-DD");
@@ -163,6 +171,9 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
   const dataInicioConvertido = moment(dataEditInicio).format("YYYY-MM-DD");
   const dataEditFin = new Date(dataRegisterEdit?.fin_zafra);
   const dataFinConvertido = moment(dataEditFin).format("YYYY-MM-DD");
+
+  const dataEditFinalDatos = new Date(dataRegisterEdit?.fin_datos_zafra)
+  const dataFinalDatosConvertido = moment(dataEditFinalDatos).format("YYYY-MM-DD")
 
   /*** FECHAS DESTILERIA ***/
   const dataEditInicioDestileria = new Date(
@@ -254,7 +265,7 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={24} sm={11}>
+          <Col xs={24} sm={7}>
             <p className="mb-1">Inicio zafra</p>
             <input
               className="p-1 bg-white text-dark border border-1 input-date "
@@ -263,13 +274,22 @@ const FormAddEditPeriodos = ({ dataRegisterEdit, aniosData, ingeniosData }) => {
               onChange={changeDataInicio}
             />
           </Col>
-          <Col xs={24} sm={11}>
+          <Col xs={24} sm={7}>
             <p className="mb-1">Fin zafra</p>
             <input
               className="p-1 bg-white text-dark border border-1 input-date "
               type="date"
               defaultValue={`${dataFinConvertido}`}
               onChange={changeFinInicio}
+            />
+          </Col>
+          <Col xs={24} sm={7}>
+            <p className="mb-1">Final de datos</p>
+            <input
+              className="p-1 bg-white text-dark border border-1 input-date "
+              type="date"
+              defaultValue={`${dataFinalDatosConvertido}`}
+              onChange={changeFinalDatos}
             />
           </Col>
         </Row>

@@ -53,7 +53,6 @@ export const CreateExcelWorkbook = async (
   finZafra,
   finZafraComparativa,
   dataComparativa,
-  fechaInicioDestileria,
   zafraParteDiario,
   fechasInicioDestileriaIngenios,
   fechasInicioDestileriaIngeniosComparativa,
@@ -3917,11 +3916,11 @@ page1.getCell("O61").value = {
     page2.getCell("H1").fill = bgAzul;
 
     page2.mergeCells("H3:N3");
-    page2.getCell("H3").value = `TIPOS DE ALCOHOLES (M3) | INICIO: ${
-      fechaInicioDestileria !== null
-        ? moment(fechaInicioDestileria).format("DD/MM/YYYY")
-        : ""
-    }`;
+    // page2.getCell("H3").value = `TIPOS DE ALCOHOLES (M3) | INICIO: ${
+    //   fechaInicioDestileria !== null
+    //     ? moment(fechaInicioDestileria).format("DD/MM/YYYY")
+    //     : ""
+    // }`;
     page2.getCell("H3").font = functionFont("Barlow", true, 16);
     page2.getCell("H3").alignment = alignCenter;
     page2.getCell("H3").fill = bgGris;

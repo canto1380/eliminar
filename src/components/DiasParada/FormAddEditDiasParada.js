@@ -61,7 +61,6 @@ const FormAddEditDiasParada = ({
       }, 3000);
     }
   };
-  console.log(diaParada)
   const createDiaParada = async (values) => {
     const idPeriodo = periodosData.filter(
       (d) =>
@@ -140,7 +139,7 @@ const FormAddEditDiasParada = ({
   });
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    return errorInfo
   };
 
   const dataEditInicio = new Date(dataRegisterEdit?.dia);

@@ -1,22 +1,22 @@
 // Función helper para renderizar fechas o texto
 const renderFechaOTexto = (text) => {
   if (text === undefined || text === null) return '';
-  
+
   // Si es texto que no parece fecha (como "Total quincena"), devolver el texto tal como está
   if (typeof text === 'string' && !Date.parse(text)) {
     return text;
   }
-  
+
   // Intentar convertir a fecha
   const date = new Date(text);
   if (!isNaN(date.getTime())) {
-    return date.toLocaleDateString('es-AR', { 
-      day: '2-digit', 
-      month: '2-digit', 
-      year: 'numeric' 
+    return date.toLocaleDateString('es-AR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
     });
   }
-  
+
   // Fallback: devolver el valor original
   return text;
 };
@@ -52,7 +52,7 @@ export const columns = [
     dataIndex: 'moliendaCanaNeta',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.moliendaCanaNeta > b.moliendaCanaNeta,
-    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) :0,
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
   {
     key: 'Id',
@@ -68,8 +68,8 @@ export const columns = [
     dataIndex: 'azucarEquivalente',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.azucarEquivalente > b.azucarEquivalente,
-    render: (value) => value !== undefined ? value?.toLocaleString('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }) :0 ,
-    
+    render: (value) => value !== undefined ? value?.toLocaleString('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }) : 0,
+
   },
   {
     key: 'Id',
@@ -85,7 +85,28 @@ export const columns = [
     dataIndex: 'azucarCrudoProducido',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.azucarCrudoProducido > b.azucarCrudoProducido,
-    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
+    render: (text, record) => {
+      const value = Number(text) || 0;
+      const esLedesma =
+        record.ingenioNombre === 'Ledesma' ||
+        (record.key && record.key.toString().includes('Ledesma'));
+      // 🔍 Si el ingenio es Ledesma → aplicar cálculo especial
+      if (esLedesma) {
+        return new Intl.NumberFormat('es-AR').format(
+          Number(record.azucarCrudoProducido) -
+          Number(record.azucarRefinado) -
+          Number(record.otroAzucar)
+        );
+      }
+
+      // 🔍 Si NO es Ledesma → mostrar valor normal
+      return new Intl.NumberFormat('es-AR').format(value);
+    },
+    // render: (text) => text.ingenioNombre !== 'Ledesma' || text.key === 'Ledesma'
+    //   ? (text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0)
+    //   : new Intl.NumberFormat('es-AR').format(
+    //     Number(text.azucarCrudoProducido) - Number(text.azucarRefinado) - Number(text.otroAzucar) + 10000000
+    //   ),
   },
   {
     key: 'Id',
@@ -113,6 +134,42 @@ export const columns = [
   },
   {
     key: 'Id',
+    title: 'Az. Total',
+    // dataIndex: 'otroAzucar',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => (Number(a.azucarBlancoProducido) +
+      Number(a.azucarCrudoProducido) +
+      Number(a.azucarRefinado) +
+      Number(a.azucarOrganico) +
+      Number(a.otroAzucar)) -
+      (Number(b.azucarBlancoProducido) +
+        Number(b.azucarCrudoProducido) +
+        Number(b.azucarRefinado) +
+        Number(b.azucarOrganico) +
+        Number(b.otroAzucar)),
+    render: (_, record) => {
+      const esLedesma =
+        record.ingenioNombre === 'Ledesma' ||
+        (record.key && record.key.toString().includes('Ledesma'));
+
+      if (esLedesma) {
+        return new Intl.NumberFormat('es-AR').format(
+          Number(record.azucarBlancoProducido ?? 0) +
+          Number(record.azucarCrudoProducido ?? 0) 
+        )
+      } else {
+        new Intl.NumberFormat('es-AR').format(
+          Number(record.azucarBlancoProducido ?? 0) +
+          Number(record.azucarCrudoProducido ?? 0) +
+          Number(record.azucarRefinado ?? 0) +
+          Number(record.azucarOrganico ?? 0) +
+          Number(record.otroAzucar ?? 0)
+        )
+      }
+    }
+  },
+  {
+    key: 'Id',
     title: 'Melaza',
     dataIndex: 'melazaProducida',
     defaultSortOrder: 'descend',
@@ -127,6 +184,14 @@ export const columns = [
     sorter: (a, b) => a.alcoholProducido > b.alcoholProducido,
     render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
   },
-  
+  {
+    key: 'Id',
+    title: 'Alcohol Anhidro',
+    dataIndex: 'alcoholAnhidro',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.alcoholAnhidro > b.alcoholAnhidro,
+    render: (text) => text !== undefined ? new Intl.NumberFormat('es-AR').format(text) : 0,
+  },
+
 
 ]

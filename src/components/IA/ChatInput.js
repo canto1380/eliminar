@@ -104,7 +104,7 @@ const ChatInput = ({ onSend, dataUserRegister }) => {
 
         try {
             const res = await api("POST", "chatbot", formData);
-            // const res = await axios.post("http://localhost:4000/api/chat", formData, {
+            // const res = await axios.post("http://localhost:4001/api/chat", formData, {
             //     headers: { "Content-Type": "multipart/form-data" },
             // });
 

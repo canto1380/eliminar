@@ -14,25 +14,51 @@ import { DatabaseFilled } from "@ant-design/icons"
 import { Tabs } from "antd"
 import { itemsRportes } from "./ItemsGraficas"
 import { getIngenios } from "../../utils/queryAPI/ingenios"
+import { procesarTodosLosIngenios } from "../../utils/hooks/procesarIngeniosHooks"
 
 const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
-    const [anioZafra, setAnioZafra] = useState(null)
-    const [periodosZafra, setPeriodosZafra] = useState(undefined)
-    const [datePeriodoStart, setDatePeriodoStart] = useState(undefined)
-    const [datePeriodoEnd, setDatePeriodoEnd] = useState(undefined)
+    /** Filtros tab 1 **/
     const [ingenio, setIngenio] = useState(undefined)
-    const [region, setRegion] = useState(undefined)
-    const [dataParteDiarios, setDataParteDiarios] = useState([]);
-    const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
-    const [dataZafraGrafica, setDataZafraGrafica] = useState(undefined)
-    const [dataDestilacionGrafica, setDataDestilacionGrafica] = useState(undefined)
-    const [dataAnhidroGrafica, setDataAnhidroGrafica] = useState(undefined)
+    const [anioZafra, setAnioZafra] = useState(null)
+    const [datePeriodoEnd, setDatePeriodoEnd] = useState(undefined)
+    const [datePeriodoStart, setDatePeriodoStart] = useState(undefined)
+
+    /** Filtros tabs 2 */
     const [anioStart, setAnioStart] = useState(undefined)
     const [anioEnd, setAnioEnd] = useState(undefined)
     const [itemsComaprativosZafra, setItemsComaprativosZafra] = useState(['CMB'])
+
+    /** Filtros tab 1 y 2**/
+    const [region, setRegion] = useState(undefined)
+
+    /** state para guardar los periodos tab 1 */
+    const [periodosZafra, setPeriodosZafra] = useState(undefined)
+
+    /** State para guardar todos los partes diarios del norte y tucuman (tab 1 y 2) */
+    const [dataParteDiarios, setDataParteDiarios] = useState([]);
+    const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
+
+    /**State de datos de tucuman para graficas (tab 1) **/
+    const [dataZafraGrafica, setDataZafraGrafica] = useState(undefined)
+    const [dataDestilacionGrafica, setDataDestilacionGrafica] = useState(undefined)
+    const [dataAnhidroGrafica, setDataAnhidroGrafica] = useState(undefined)
+    const [dataZafraGraficaFilter, setDataZafraGraficaFilter] = useState(undefined)
+    const [dataDestilacionGraficaFilter, setDataDestilacionGraficaFilter] = useState(undefined)
+    const [dataAnhidroGraficaFilter, setDataAnhidroGraficaFilter] = useState(undefined)
+
+    /**State de datos del norte para graficas (tab 1) **/
+    const [dataZafraGraficaNorte, setDataZafraGraficaNorte] = useState(undefined)
+    const [dataDestilacionGraficaNorte, setDataDestilacionGraficaNorte] = useState(undefined)
+    const [dataAnhidroGraficaNorte, setDataAnhidroGraficaNorte] = useState(undefined)
+    const [dataZafraGraficaNorteFilter, setDataZafraGraficaNorteFilter] = useState(undefined)
+    const [dataDestilacionGraficaNorteFilter, setDataDestilacionGraficaNorteFilter] = useState(undefined)
+    const [dataAnhidroGraficaNorteFilter, setDataAnhidroGraficaNorteFilter] = useState(undefined)
+
+    /** State para periodos de anios (tab 2) **/
     const [periodosAnioStart, setPeriodosAnioStart] = useState(undefined)
     const [periodosAnioEnd, setPeriodosAnioEnd] = useState(undefined)
 
+    /** State de datos para comparativos tucuman (tab 2) **/
     const [dataAnioStartZafraTucuman, setDataAnioStartZafraTucuman] = useState(undefined)
     const [dataAnioStartDestileriaTucuman, setDataAnioStartDestileriaTucuman] = useState(undefined)
     const [dataAnioStartAnhidroTucuman, setDataAnioStartAnhidroTucuman] = useState(undefined)
@@ -40,6 +66,7 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
     const [dataAnioEndDestileriaTucuman, setDataAnioEndDestileriaTucuman] = useState(undefined)
     const [dataAnioEndAnhidroTucuman, setDataAnioEndAnhidroTucuman] = useState(undefined)
 
+    /** State de datos para comparativos norte (tab 2) **/
     const [dataAnioStartZafraNorte, setDataAnioStartZafraNorte] = useState(undefined)
     const [dataAnioStartDestileriaNorte, setDataAnioStartDestileriaNorte] = useState(undefined)
     const [dataAnioStartAnhidroNorte, setDataAnioStartAnhidroNorte] = useState(undefined)
@@ -47,9 +74,6 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
     const [dataAnioEndDestileriaNorte, setDataAnioEndDestileriaNorte] = useState(undefined)
     const [dataAnioEndAnhidroNorte, setDataAnioEndAnhidroNorte] = useState(undefined)
 
-    const [dataZafraGraficaFilter, setDataZafraGraficaFilter] = useState(undefined)
-    const [dataDestilacionGraficaFilter, setDataDestilacionGraficaFilter] = useState(undefined)
-    const [dataAnhidroGraficaFilter, setDataAnhidroGraficaFilter] = useState(undefined)
 
 
     /*** PARTES DIARIOS DB - TUCUMAN Y NORTE ***/
@@ -72,6 +96,8 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
         periodosPorZafra()
     }, [anioZafra])
 
+
+    /********************************************************* TABS 1 *******************************************************/
     const periodosPorZafra = async () => {
         if (!anioZafra) return; // evitar consulta sin año definido
         const params = { anio: anioZafra };
@@ -83,19 +109,60 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
     /** FILTRA PERIODO Y DATOS EN PERIODO ELEGIDO POR ANIO **/
     useEffect(() => {
         if (dataParteDiarios && periodosZafra) {
-            const periodoActualTucuman = obtenerPeriodos(periodosZafra, 1)
-            const { dataZafra1, dataDestileria1, dataAnhidro1 } =
-                filtrarRegistrosPorPeriodos(periodoActualTucuman, dataParteDiarios, new Date())
+            const regionId = typeof region === 'string' && region !== 'Todos' ? parseInt(region) : region;
 
-            setDataZafraGrafica(dataZafra1)
-            setDataDestilacionGrafica(dataDestileria1)
-            setDataAnhidroGrafica(dataAnhidro1)
+            // Si no hay región seleccionada o es 'Todos', mostrar ambas regiones
+            const mostrarTucuman = !region || region === 'Todos' || regionId === 1;
+            const mostrarNorte = !region || region === 'Todos' || regionId === 2;
 
-            setDataZafraGraficaFilter(dataZafra1)
-            setDataDestilacionGraficaFilter(dataDestileria1)
-            setDataAnhidroGraficaFilter(dataAnhidro1)
+            /** TUCUMAN **/
+            if (mostrarTucuman) {
+                const periodoActualTucuman = obtenerPeriodos(periodosZafra, 1)
+                const { dataZafra1, dataDestileria1, dataAnhidro1 } =
+                    filtrarRegistrosPorPeriodos(periodoActualTucuman, dataParteDiarios, new Date())
+                setDataZafraGrafica(dataZafra1)
+                setDataDestilacionGrafica(dataDestileria1)
+                setDataAnhidroGrafica(dataAnhidro1)
+
+                setDataZafraGraficaFilter(dataZafra1)
+                setDataDestilacionGraficaFilter(dataDestileria1)
+                setDataAnhidroGraficaFilter(dataAnhidro1)
+
+                const resultado = procesarTodosLosIngenios(
+                    periodosZafra,
+                    dataZafra1,
+                    dataDestileria1,
+                    dataAnhidro1,
+                    1
+                )
+            } else {
+                setDataZafraGraficaFilter(undefined)
+                setDataDestilacionGraficaFilter(undefined)
+                setDataAnhidroGraficaFilter(undefined)
+            }
+
+            /** NORTE **/
+            if (mostrarNorte) {
+                const periodosActualNorte = obtenerPeriodos(periodosZafra, 2)
+                const { dataZafra1, dataDestileria1, dataAnhidro1 } =
+                    filtrarRegistrosPorPeriodos(periodosActualNorte, dataParteDiariosNorte, new Date())
+
+                setDataZafraGraficaNorte(dataZafra1)
+                setDataDestilacionGraficaNorte(dataDestileria1)
+                setDataAnhidroGraficaNorte(dataAnhidro1)
+
+                setDataZafraGraficaNorteFilter(dataZafra1)
+                setDataDestilacionGraficaNorteFilter(dataDestileria1)
+                setDataAnhidroGraficaNorteFilter(dataAnhidro1)
+            } else {
+                setDataZafraGraficaNorteFilter(undefined)
+                setDataDestilacionGraficaNorteFilter(undefined)
+                setDataAnhidroGraficaNorteFilter(undefined)
+            }
+
         }
-    }, [periodosZafra, dataParteDiarios])
+    }, [periodosZafra, dataParteDiarios, region])
+
     /** POR DEFECTO ANIO ACTUAL **/
     useEffect(() => {
         const dataNow = new Date();
@@ -108,82 +175,118 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
     const normalize = (str) =>
         str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-    /** FILTRA POR INGENIO AL ELEGIR SELECT **/
+    /** FILTRA POR INGENIO / FECHAS (TAB 1) **/
     useEffect(() => {
-        if (!dataZafraGrafica || !dataDestilacionGrafica || !dataAnhidroGrafica) return;
+        const regionId = typeof region === 'string' && region !== 'Todos' ? parseInt(region) : region;
+        const mostrarTucuman = !region || region === 'Todos' || regionId === 1;
+        const mostrarNorte = !region || region === 'Todos' || regionId === 2;
 
-        // Copias de los datos originales
-        let zafraFiltered = [...dataZafraGrafica];
-        let destilacionFiltered = [...dataDestilacionGrafica];
-        let anhidroFiltered = [...dataAnhidroGrafica];
+        const aplicarFiltros = (zafraData, destData, anhidroData) => {
+            if (!Array.isArray(zafraData) || !Array.isArray(destData) || !Array.isArray(anhidroData)) {
+                return {
+                    zafra: undefined,
+                    destilacion: undefined,
+                    anhidro: undefined
+                };
+            }
 
-        if (ingenio) {
-            const periodoIngenioSeleccionado = periodosZafra.filter((d) => normalize(d.nombre_ingenio) === normalize(ingenio))
+            let zafraFiltered = [...zafraData];
+            let destilacionFiltered = [...destData];
+            let anhidroFiltered = [...anhidroData];
 
-            const inicioZafra = new Date(periodoIngenioSeleccionado[0].inicio_zafra);
-            const finZafra = periodoIngenioSeleccionado[0].fin_zafra
-                ? new Date(periodoIngenioSeleccionado[0].fin_zafra)
-                : new Date();
+            if (ingenio && periodosZafra) {
+                const periodoIngenioSeleccionado = periodosZafra.filter(
+                    (d) => normalize(d.nombre_ingenio) === normalize(ingenio)
+                );
 
-            const inicioDestileria = new Date(periodoIngenioSeleccionado[0].inicio_destileria);
-            const finDestileria = periodoIngenioSeleccionado[0].fin_destileria
-                ? new Date(periodoIngenioSeleccionado[0].fin_destileria)
-                : new Date();
+                if (periodoIngenioSeleccionado.length) {
+                    const inicioZafra = new Date(periodoIngenioSeleccionado[0].inicio_zafra);
+                    const finZafra = periodoIngenioSeleccionado[0].fin_zafra
+                        ? new Date(periodoIngenioSeleccionado[0].fin_zafra) >= periodoIngenioSeleccionado[0].fin_datos_zafra
+                            ? new Date(periodoIngenioSeleccionado[0].fin_zafra)
+                            : new Date(periodoIngenioSeleccionado[0].fin_datos_zafra)
+                        : new Date();
 
-            const inicioAnhidro = new Date(periodoIngenioSeleccionado[0].inicio_anhidro);
-            const finAnhidro = periodoIngenioSeleccionado[0].fin_anhidro
-                ? new Date(periodoIngenioSeleccionado[0].fin_anhidro)
-                : new Date();
+                    const inicioDestileria = new Date(periodoIngenioSeleccionado[0].inicio_destileria);
+                    const finDestileria = periodoIngenioSeleccionado[0].fin_destileria
+                        ? new Date(periodoIngenioSeleccionado[0].fin_destileria)
+                        : new Date();
 
-            zafraFiltered = zafraFiltered.filter((a) => {
-                const dateRegistro = new Date(a.fechaParte)
-                return (
-                    normalize(a.ingenioNombre) === normalize(ingenio) &&
-                    dateRegistro >= inicioZafra &&
-                    dateRegistro <= finZafra
-                )
-            });
-            destilacionFiltered = destilacionFiltered.filter((a) => {
-                const dateRegistro = new Date(a.fechaParte)
-                return (
-                    normalize(a.ingenioNombre) === normalize(ingenio) &&
-                    dateRegistro >= inicioDestileria &&
-                    dateRegistro <= finDestileria
-                )
-            });
-            anhidroFiltered = anhidroFiltered.filter((a) => {
-                const dateRegistro = new Date(a.fechaParte)
-                return (
-                    normalize(a.ingenioNombre) === normalize(ingenio) &&
-                    dateRegistro >= inicioAnhidro &&
-                    dateRegistro <= finAnhidro
-                )
-            });
-        }
+                    const inicioAnhidro = new Date(periodoIngenioSeleccionado[0].inicio_anhidro);
+                    const finAnhidro = periodoIngenioSeleccionado[0].fin_anhidro
+                        ? new Date(periodoIngenioSeleccionado[0].fin_anhidro)
+                        : new Date();
 
-        // --- FILTRO POR PERIODO ---
-        if (datePeriodoStart && datePeriodoEnd) {
-            const start = new Date(datePeriodoStart);
-            const end = new Date(datePeriodoEnd);
+                    const filtrarPorIngenioYPeriodo = (arr, inicio, fin) =>
+                        arr.filter((item) => {
+                            const registroFecha = new Date(item.fechaParte);
+                            return (
+                                normalize(item.ingenioNombre) === normalize(ingenio) &&
+                                registroFecha >= inicio &&
+                                registroFecha <= fin
+                            );
+                        });
 
-            const byDate = (a) => {
-                const fecha = new Date(a.fechaParte);
-                return fecha >= start && fecha <= end;
+                    zafraFiltered = filtrarPorIngenioYPeriodo(zafraFiltered, inicioZafra, finZafra);
+                    destilacionFiltered = filtrarPorIngenioYPeriodo(destilacionFiltered, inicioDestileria, finDestileria);
+                    anhidroFiltered = filtrarPorIngenioYPeriodo(anhidroFiltered, inicioAnhidro, finAnhidro);
+                }
+            }
+
+            if (datePeriodoStart && datePeriodoEnd) {
+                const start = new Date(datePeriodoStart);
+                const end = new Date(datePeriodoEnd);
+
+                const byDate = (a) => {
+                    const fecha = new Date(a.fechaParte);
+                    return fecha >= start && fecha <= end;
+                };
+
+                zafraFiltered = zafraFiltered.filter(byDate);
+                destilacionFiltered = destilacionFiltered.filter(byDate);
+                anhidroFiltered = anhidroFiltered.filter(byDate);
+            }
+
+            const sortByDate = (arr) =>
+                [...arr].sort((a, b) => new Date(a.fechaParte) - new Date(b.fechaParte));
+
+            return {
+                zafra: sortByDate(zafraFiltered),
+                destilacion: sortByDate(destilacionFiltered),
+                anhidro: sortByDate(anhidroFiltered)
             };
+        };
 
-            zafraFiltered = zafraFiltered.filter(byDate);
-            destilacionFiltered = destilacionFiltered.filter(byDate);
-            anhidroFiltered = anhidroFiltered.filter(byDate);
-        }
+        const { zafra: zafraTucuman, destilacion: destTucuman, anhidro: anhidroTucuman } =
+            mostrarTucuman
+                ? aplicarFiltros(dataZafraGrafica, dataDestilacionGrafica, dataAnhidroGrafica)
+                : { zafra: undefined, destilacion: undefined, anhidro: undefined };
 
-        // --- ORDENAR POR FECHA ---
-        const sortByDate = (arr) =>
-            arr.sort((a, b) => new Date(a.fechaParte) - new Date(b.fechaParte));
+        const { zafra: zafraNorte, destilacion: destNorte, anhidro: anhidroNorte } =
+            mostrarNorte
+                ? aplicarFiltros(dataZafraGraficaNorte, dataDestilacionGraficaNorte, dataAnhidroGraficaNorte)
+                : { zafra: undefined, destilacion: undefined, anhidro: undefined };
 
-        setDataZafraGraficaFilter(sortByDate(zafraFiltered));
-        setDataDestilacionGraficaFilter(sortByDate(destilacionFiltered));
-        setDataAnhidroGraficaFilter(sortByDate(anhidroFiltered));
-    }, [ingenio, datePeriodoStart, datePeriodoEnd, dataZafraGrafica, dataDestilacionGrafica, dataAnhidroGrafica])
+        setDataZafraGraficaFilter(zafraTucuman);
+        setDataDestilacionGraficaFilter(destTucuman);
+        setDataAnhidroGraficaFilter(anhidroTucuman);
+
+        setDataZafraGraficaNorteFilter(zafraNorte);
+        setDataDestilacionGraficaNorteFilter(destNorte);
+        setDataAnhidroGraficaNorteFilter(anhidroNorte);
+    }, [
+        ingenio,
+        datePeriodoStart,
+        datePeriodoEnd,
+        dataZafraGrafica,
+        dataDestilacionGrafica,
+        dataAnhidroGrafica,
+        dataZafraGraficaNorte,
+        dataDestilacionGraficaNorte,
+        dataAnhidroGraficaNorte,
+        periodosZafra,
+        region
+    ])
 
     /********************************************************* TABS 2 *******************************************************/
 
@@ -213,6 +316,7 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
             const mostrarTucuman = !region || region === 'Todos' || regionId === 1;
             const mostrarNorte = !region || region === 'Todos' || regionId === 2;
 
+            /** TUCUMAN  **/
             if (mostrarTucuman) {
                 const periodoStartTucuman = obtenerPeriodos(periodosAnioStart, 1)
                 const { dataZafra1, dataDestileria1, dataAnhidro1 } =
@@ -244,6 +348,7 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
                 const periodoStartNorte = obtenerPeriodos(periodosAnioStart, 2)
                 const { dataZafra1: dataZafra3, dataDestileria1: dataDestileria3, dataAnhidro1: dataAnhidro3 } =
                     filtrarRegistrosPorPeriodos(periodoStartNorte, dataParteDiariosNorte, new Date())
+
                 setDataAnioStartZafraNorte(dataZafra3)
                 setDataAnioStartDestileriaNorte(dataDestileria3)
                 setDataAnioStartAnhidroNorte(dataAnhidro3)
@@ -251,6 +356,7 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
                 const periodoEndNorte = obtenerPeriodos(periodosAnioEnd, 2)
                 const { dataZafra1: dataZafra4, dataDestileria1: dataDestileria4, dataAnhidro1: dataAnhidro4 } =
                     filtrarRegistrosPorPeriodos(periodoEndNorte, dataParteDiariosNorte, new Date())
+
                 setDataAnioEndZafraNorte(dataZafra4)
                 setDataAnioEndDestileriaNorte(dataDestileria4)
                 setDataAnioEndAnhidroNorte(dataAnhidro4)
@@ -280,41 +386,44 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
                     <Tabs
                         defaultActiveKey="1"
                         items={itemsRportes({
-                            anioZafra,
-                            setAnioZafra,
-                            setDatePeriodoStart,
-                            setDatePeriodoEnd,
-                            setAnioStart,
-                            setAnioEnd,
-                            setItemsComaprativosZafra,
-                            setIngenio,
-                            setRegion,
-                            dataZafraGraficaFilter,
-                            dataDestilacionGraficaFilter,
-                            dataAnhidroGraficaFilter,
-                            dataUserRegister,
-                            ingenio,
-                            datePeriodoStart,
-                            datePeriodoEnd,
-                            routeAPI,
-                            periodosAnioStart,
-                            periodosAnioEnd,
-                            dataAnioStartZafraTucuman,
-                            dataAnioStartDestileriaTucuman,
-                            dataAnioStartAnhidroTucuman,
-                            dataAnioEndZafraTucuman,
-                            dataAnioEndDestileriaTucuman,
-                            dataAnioEndAnhidroTucuman,
-                            dataAnioStartZafraNorte,
-                            dataAnioStartDestileriaNorte,
-                            dataAnioStartAnhidroNorte,
-                            dataAnioEndZafraNorte,
-                            dataAnioEndDestileriaNorte,
-                            dataAnioEndAnhidroNorte,
-                            anioStart,
-                            anioEnd,
-                            itemsComaprativosZafra,
-                            region
+                            anioZafra, // Filtro 1
+                            setAnioZafra, // Filtro 1
+                            setDatePeriodoStart, // Filtro 1
+                            setDatePeriodoEnd, // Filtro 1
+                            setIngenio, // Filtro 1
+                            setAnioStart, // Filtro 2
+                            setAnioEnd, // Filtro 2
+                            setItemsComaprativosZafra, // Filtro 2
+                            setRegion, // Filtro 1 y 2
+                            dataZafraGraficaFilter, // TAB 1
+                            dataDestilacionGraficaFilter, // TAB 1
+                            dataAnhidroGraficaFilter, // TAB 1
+                            dataZafraGraficaNorteFilter, // TAB 1
+                            dataDestilacionGraficaNorteFilter, // TAB 1
+                            dataAnhidroGraficaNorteFilter, // TAB 1
+                            ingenio, // TAB 1
+                            datePeriodoStart, // TAB 1
+                            datePeriodoEnd, // TAB 1
+                            periodosAnioStart, // TAB 2
+                            periodosAnioEnd, // TAB 2
+                            dataAnioStartZafraTucuman, // TAB 2
+                            dataAnioStartDestileriaTucuman, // TAB 2
+                            dataAnioStartAnhidroTucuman, // TAB 2
+                            dataAnioEndZafraTucuman, // TAB 2
+                            dataAnioEndDestileriaTucuman, // TAB 2
+                            dataAnioEndAnhidroTucuman, // TAB 2
+                            dataAnioStartZafraNorte, // TAB 2
+                            dataAnioStartDestileriaNorte, // TAB 2
+                            dataAnioStartAnhidroNorte, // TAB 2
+                            dataAnioEndZafraNorte, // TAB 2
+                            dataAnioEndDestileriaNorte, // TAB 2
+                            dataAnioEndAnhidroNorte, // TAB 2
+                            anioStart, // TAB 2
+                            anioEnd, // TAB 2
+                            itemsComaprativosZafra, // TAB 2
+                            region, // TAB 2
+                            dataUserRegister, // TAB 1 y 2
+                            routeAPI, // TAB 1 y 2
                         })}
                     />
                 </>

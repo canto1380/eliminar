@@ -124,7 +124,6 @@ const FormAddEditDataComparativa = ({
 
   const handleSubmit = async (values) => {
     if (!dataRegisterEdit) {
-      console.log(values)
       createDataComparativa(values);
     } else {
       updateDataComparativa(values);
@@ -183,7 +182,7 @@ const FormAddEditDataComparativa = ({
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    return errorInfo;
   };
 
   // Manejador para cuando se selecciona un año
