@@ -23,9 +23,6 @@ const ReportesDataContainer = ({
   const [fechasInformeFin, setFechasInformeFin] = useState(undefined);
   const [periodosZafra, setPeriodosZafra] = useState(undefined)
 
-  console.log(dataZafraInicio, dataZafraFin)
-  console.log(fechasInformeInicio, fechasInformeFin)
-  
   useEffect(() => {
     const fetchPeriodosZafra = async() => {
       const data = await getPeriodoZafra({limit: 100000})
@@ -91,17 +88,6 @@ const ReportesDataContainer = ({
         return new Date(actual.fin_zafra) > new Date(min.fin_zafra) ? actual : min;
       })
 
-
-      console.log(periodoInicio)
-      console.log(periodoInicioFechaInicioCMB)
-      console.log(periodoInicioFechaFinalCMB)
-      console.log(periodoInicioFechaInicioALCOHOL)
-      console.log(periodoInicioFechaFinalALCOHOL)
-      console.log(periodoFin)
-      console.log(periodoFinalFechaInicioCMB)
-      console.log(PeriodoFinalFechaFinalCMB)
-      console.log(periodoFinalFechaInicioALCOHOL)
-      console.log(PeriodoFinalFechaFinalALCOHOL)
     }
   }
 

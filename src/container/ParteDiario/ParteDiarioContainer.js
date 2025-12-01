@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { obtenerPeriodos } from "./hooks/ObtenerPeriodos";
 import { filtrarRegistrosPorPeriodos } from "./hooks/RegistrosPorPeriodo";
 import { getParteDiariosNorte } from "../../utils/queryAPI/ParteDiariosNorte";
+import { procesarTodosLosIngenios } from "../../utils/hooks/procesarIngeniosHooks";
 
 const ParteDiarioContainer = () => {
   const [errorServer, setErrorServer] = useState(false);
@@ -53,16 +54,21 @@ const ParteDiarioContainer = () => {
   const [dataIngenios, setDataIngenios] = useState(null);
   const [zafraParteDiario, setZafraParteDiario] = useState(null);
   const [dateInicioIngeniosItemCollapse, setDateInicioIngeniosItemCollapse] = useState(null);
-  
+
   const [loading, setLoading] = useState(false);
   const [dataParteDiarios, setDataParteDiarios] = useState([]);
   const [dataParteDiariosNorte, setDataParteDiariosNorte] = useState([]);
   const [lastUpdated, setLastUpdated] = useState("");
 
+  const [periodosTucumanActual, setPeriodosTucumanActual] = useState(null)
+  const [periodosTucumanComparativo, setPeriodosTucumanComparativo] = useState(null)
+  const [periodosNorteActual, setPeriodosNorteActual] = useState(null)
+  const [periodosNorteComparativo, setPeriodosNorteComparativo] = useState(null)
+
 
   useEffect(() => {
-    if (dataZafra !== null) {
-      getData();
+    if (dataZafra !== null && dateInicioIngeniosItemCollapse !== null) {
+      getDataTucuman();
       getDataNorte()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,26 +101,43 @@ const ParteDiarioContainer = () => {
     setLastUpdated(fecha);
   };
 
-  const getDataNorte = async() => {
+
+  const getDataNorte = async () => {
     const periodoActualNorte = obtenerPeriodos(dateInicioIngeniosItemCollapse, 2)
-    const {dataZafra1, dataDestileria1, dataAnhidro1} = filtrarRegistrosPorPeriodos(periodoActualNorte, dataParteDiariosNorte, new Date())
-    const datosProductivosNorte = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
-    setDataParteDiariosHistoricosNorte(datosProductivosNorte)
+    const { dataZafra1, dataDestileria1, dataAnhidro1 } = filtrarRegistrosPorPeriodos(periodoActualNorte, dataParteDiariosNorte, new Date())
+    const resultado = procesarTodosLosIngenios(
+      dateInicioIngeniosItemCollapse,
+      dataZafra1,
+      dataDestileria1,
+      dataAnhidro1,
+      2
+    );
+    setDataParteDiariosHistoricosNorte(resultado)
   }
 
-  const getData = async () => {
-      const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse,1);
-      const { dataZafra1, dataDestileria1, dataAnhidro1 } =filtrarRegistrosPorPeriodos(periodoActual, dataParteDiarios, new Date());
-      const datosProductivos = [...dataZafra1, ...dataDestileria1, ...dataAnhidro1]
-      setDataParteDiariosHistoricos(datosProductivos)
+  const getDataTucuman = async () => {
+    const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse, 1);
+    
+    const { dataZafra1, dataDestileria1, dataAnhidro1 } = filtrarRegistrosPorPeriodos(periodoActual, dataParteDiarios, new Date());
+    const resultado = procesarTodosLosIngenios(
+      dateInicioIngeniosItemCollapse,
+      dataZafra1,
+      dataDestileria1,
+      dataAnhidro1,
+      1
+    );
+    setDataParteDiariosHistoricos(resultado)
   };
+
+  /************************** DATOS OBTENIDOS PARA SER USADOS EN EL REPORTE PARTE DIARIO COMPARATIVO *****************************/
   useEffect(() => {
     if (dataEnd && dataParteDiarios && dataParteDiariosNorte && dateInicioIngenios && dateFinIngenios) {
 
       /** TUCUMAN **/
-      const periodosActual = obtenerPeriodos(dateInicioIngenios,1);
-      const periodoComparativo = obtenerPeriodos(dateFinIngenios,1);
-
+      const periodosActual = obtenerPeriodos(dateInicioIngenios, 1);
+      setPeriodosTucumanActual(periodosActual)
+      const periodoComparativo = obtenerPeriodos(dateFinIngenios, 1);
+      setPeriodosTucumanComparativo(periodoComparativo)
 
       const { dataZafra1, dataDestileria1, dataAnhidro1 } =
         filtrarRegistrosPorPeriodos(periodosActual, dataParteDiarios, dataEnd);
@@ -138,8 +161,9 @@ const ParteDiarioContainer = () => {
 
       /**NORTE **/
       const periodosActualNorte = obtenerPeriodos(dateInicioIngenios, 2);
+      setPeriodosNorteActual(periodosActualNorte)
       const periodoComparativoNorte = obtenerPeriodos(dateFinIngenios, 2);
-
+      setPeriodosNorteComparativo(periodoComparativoNorte)
 
       const { dataZafra1: dataZafraNorte, dataDestileria1: dataDestileriaNorte, dataAnhidro1: dataAnhidroNorte } =
         filtrarRegistrosPorPeriodos(periodosActualNorte, dataParteDiariosNorte, dataEnd);
@@ -162,6 +186,7 @@ const ParteDiarioContainer = () => {
 
     }
   }, [dataEnd, dataParteDiarios, dateInicioIngenios, dateFinIngenios]);
+  /**************************************************************************************************************************/
 
   useEffect(() => {
     const dataNow = new Date();
@@ -238,17 +263,17 @@ const ParteDiarioContainer = () => {
   const actualizarPartesDiarios = async () => {
     try {
       setLoading(true);
-      
+
       // Primero actualizar partes diarios de Tucumán
       const data = await getActualizarPartesDiarios();
-      
+
       if (data.status === 200) {
         toast.success(data?.data?.message);
-        
+
         // Si es exitoso, actualizar partes diarios del Norte
         try {
           const dataNorte = await getActualizarPartesDiariosNorte();
-          
+
           if (dataNorte.status === 200) {
             toast.success("Partes diarios del Norte actualizados correctamente");
           } else {
@@ -343,6 +368,10 @@ const ParteDiarioContainer = () => {
             dataImportDestileriaComparativaNorte={dataImportDestileriaComparativaNorte}
             dataImportAnhidroNorte={dataImportAnhidroNorte}
             dataImportAnhidroComparativaNorte={dataImportAnhidroComparativaNorte}
+            periodosTucumanActual={periodosTucumanActual}
+            periodosTucumanComparativo={periodosTucumanComparativo}
+            periodosNorteActual={periodosNorteActual}
+            periodosNorteComparativo={periodosNorteComparativo}
             setBanderaDataNull={setBanderaDataNull}
             setDataImport={setDataImport}
             setDataImportComparativa={setDataImportComparativa}

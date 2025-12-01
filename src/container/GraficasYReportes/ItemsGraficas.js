@@ -8,19 +8,20 @@ export const itemsRportes = (props = {}) => {
         setAnioZafra,
         setDatePeriodoStart,
         setDatePeriodoEnd,
+        setIngenio,
         setAnioStart,
         setAnioEnd,
-        setIngenio,
+        setItemsComaprativosZafra,
         setRegion,
         dataZafraGraficaFilter,
         dataDestilacionGraficaFilter,
         dataAnhidroGraficaFilter,
-        dataUserRegister,
-        setItemsComaprativosZafra,
+        dataZafraGraficaNorteFilter,
+        dataDestilacionGraficaNorteFilter,
+        dataAnhidroGraficaNorteFilter,
         ingenio,
         datePeriodoStart,
         datePeriodoEnd,
-        routeAPI,
         periodosAnioStart,
         periodosAnioEnd,
         dataAnioStartZafraTucuman,
@@ -38,7 +39,10 @@ export const itemsRportes = (props = {}) => {
         anioStart,
         anioEnd,
         itemsComaprativosZafra,
-        region
+        region,
+        dataUserRegister,
+        routeAPI,
+
     } = props;
 
     return [
@@ -53,22 +57,28 @@ export const itemsRportes = (props = {}) => {
                         setDatePeriodoStart={setDatePeriodoStart}
                         setDatePeriodoEnd={setDatePeriodoEnd}
                         setIngenio={setIngenio}
+                        setRegion={setRegion}
                         bandFilterZafraAnio={true}
                         bandFilterPeriodo={true}
                         bandFilterIngenio={true}
-                        bandFilterIngenioRegion={1}
+                        bandFilterIngenioRegion={null}
                         fixedComponent={true}
+                        bandFilterRegion={true}
                     />
 
                     <GraficasLinealComponent
                         dataZafraGrafica={dataZafraGraficaFilter}
                         dataDestilacionGrafica={dataDestilacionGraficaFilter}
                         dataAnhidroGrafica={dataAnhidroGraficaFilter}
+                        dataZafraGraficaNorte={dataZafraGraficaNorteFilter}
+                        dataDestilacionGraficaNorte={dataDestilacionGraficaNorteFilter}
+                        dataAnhidroGraficaNorte={dataAnhidroGraficaNorteFilter}
                         dataUserRegister={dataUserRegister}
                         ingenio={ingenio}
                         datePeriodoStart={datePeriodoStart}
                         datePeriodoEnd={datePeriodoEnd}
                         routeAPI={routeAPI}
+                        region={region}
                     />
                 </>
             ),

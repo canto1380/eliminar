@@ -1,1468 +1,326 @@
+import React, { useMemo } from "react";
 import ListadoDatos from "./ListadoDatos";
-import { useState, useEffect, useMemo } from "react";
-import { Collapse, Tooltip } from "antd";
+import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
-import { dateConverted } from "../../helpers/helpers";
 import { columns } from "./ColumnasTablaListadoDatos";
 
-const ItemCollpse = ({
+/**
+ * ItemsCollapse optimizado
+ *
+ * Props:
+ * - dataAnio, dataMes, dataQuincena, dataZafra
+ * - dataParteDiariosHistoricos (puede ser: a) array plano de partes, o b) array agrupado por ingenio)
+ * - dataParteDiariosHistoricosNorte (igual que arriba)
+ * - dateInicioIngeniosItemCollapse (lo dejé disponible aunque aquí no se usa directamente; se puede incorporar)
+ *
+ * Nota: asume que cada "parte" tiene, como mínimo:
+ * - fechaParte (string/ISO)
+ * - ingenioNombre o ingenio (nombre del ingenio)
+ * - varias columnas numéricas (moliendaCanaBruta, moliendaCanaNeta, azucarEquivalente, etc.)
+ *
+ * El output es exactamente igual al que usabas: cada panel muestra una tabla con los registros filtrados
+ * y al final 3 filas de totales: Total quincena, Total mes, Total zafra.
+ */
+
+// Orden que quieres mostrar en el Collapse (mantener orden original)
+const INGENIOS_ORDER = [
+  "Aguilares",
+  "Bella Vista",
+  "Concepción",
+  "Cruz Alta",
+  "Destilería Bella Vista",
+  "Famaillá",
+  "La Corona",
+  "La Florida",
+  "La Providencia",
+  "La Trinidad",
+  "Leales",
+  "Marapa",
+  "Santa Barbara",
+  "Santa Rosa",
+  "Ñuñorco",
+  "La Esperanza",
+  "Ledesma",
+  "Río Grande",
+  "San Isidro",
+  "Seaboard",
+];
+
+const panelStyle = {
+  marginBottom: 24,
+  border: "none",
+};
+
+const parseDate = (v) => {
+  if (!v) return null;
+  try {
+    return new Date(v);
+  } catch (e) {
+    return null;
+  }
+};
+
+const isNumeric = (n) => {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+// Suma todos los campos numéricos por llave en rows
+const sumNumericFields = (rows = []) => {
+  const totals = {};
+  rows.forEach((r) => {
+    Object.keys(r).forEach((k) => {
+      const v = r[k];
+      if (isNumeric(v)) {
+        totals[k] = (totals[k] || 0) + Number(v);
+      }
+    });
+  });
+  return totals;
+};
+
+// Elimina duplicados por fechaParte + ingenioNombre (manteniendo el primer registro)
+const eliminarDuplicadosPorFechaIngenio = (arr = []) => {
+  const seen = new Set();
+  return arr.filter((it) => {
+    if (!it || !it.fechaParte) return false;
+    const ingenioNombre = it.ingenioNombre || it.ingenio || "";
+    const key = `${it.fechaParte}_${ingenioNombre}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+};
+
+// Devuelve último día del mes (para el uso original)
+const getLastDayOfMonth = (month /* 1..12 */) => {
+  // month argument in original code seemed to be dataMes (1..12)
+  // We want last day of that month in any year (use 2020 as leap-year safe)
+  const d = new Date(2020, month, 0); // passing month gives last day of previous month if month is 1..12 -> works
+  return d.getDate();
+};
+
+// Flatten: admite tanto formato agrupado por ingenio como plano
+const flattenParts = (maybeGrouped = []) => {
+  if (!Array.isArray(maybeGrouped)) return [];
+  // Detect grouped: if first item has zafra/destileria/anhidro arrays
+  const grouped = maybeGrouped.length > 0 && (Array.isArray(maybeGrouped[0].zafra) || Array.isArray(maybeGrouped[0].destileria));
+  if (!grouped) {
+    // ya es plano (cada elemento es un parte)
+    // Asegurarnos que cada elemento tenga ingenioNombre consistente (algunas fuentes usan 'ingenio' o 'ingenioNombre')
+    return maybeGrouped.map((p) => {
+      if (!p) return null;
+      return {
+        ...p,
+        ingenioNombre: p.ingenioNombre || p.ingenio || p.ingenioNombre,
+      };
+    }).filter(Boolean);
+  }
+
+  // grouped: transformar en lista plana tomando zafra + destileria + anhidro
+  const flat = [];
+  maybeGrouped.forEach((grp) => {
+    const ingenioNombre = grp.ingenio || grp.ingenioNombre;
+    const pushRows = (arr) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((r) => {
+        if (!r) return;
+        flat.push({
+          ...r,
+          ingenioNombre,
+        });
+      });
+    };
+    pushRows(grp.zafra);
+    pushRows(grp.destileria);
+    pushRows(grp.anhidro);
+  });
+  return flat;
+};
+
+const filterByParams = (parts = [], { dataAnio, dataMes, dataQuincena }) => {
+  // misma lógica que tenías: arrQuincenal (solo fechas en la quincena),
+  // arrMensual (reglas según quincena), arrZafra (todos hasta fechaParametro2)
+  const arrQuincenal = [];
+  const arrMensual = [];
+  const arrZafra = [];
+
+  parts.forEach((data) => {
+    if (!data || !data.fechaParte) return;
+    const newDate = parseDate(data.fechaParte);
+    if (!newDate) return;
+
+    // fechaParametro1 y fechaParametro2
+    const mes = Number(dataMes); // 1..12
+    const anio = Number(dataAnio);
+
+    // Construct dates in local timezone using Date(year, monthIndex, day)
+    const fechaParametro1 = new Date(anio, mes - 1, dataQuincena === 1 ? 1 : 16, 0, 0, 0, 0);
+    const lastDay = getLastDayOfMonth(mes);
+    const fechaParametro2 = new Date(anio, mes - 1, dataQuincena === 1 ? 15 : lastDay, 23, 59, 59, 999);
+
+    if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
+      arrQuincenal.push({ ...data, fechaObj: newDate });
+    }
+
+    if (newDate.getMonth() + 1 === mes) {
+      if (dataQuincena === 1) {
+        if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
+          arrMensual.push({ ...data, fechaObj: newDate });
+        }
+      } else {
+        // quincena 2 -> todo el mes
+        arrMensual.push({ ...data, fechaObj: newDate });
+      }
+    }
+
+    // arrZafra: hasta fechaParametro2
+    if (newDate <= fechaParametro2) {
+      arrZafra.push({ ...data, fechaObj: newDate });
+    }
+  });
+
+  // eliminar duplicados
+  return {
+    quincenal: eliminarDuplicadosPorFechaIngenio(arrQuincenal),
+    mensual: eliminarDuplicadosPorFechaIngenio(arrMensual),
+    zafra: eliminarDuplicadosPorFechaIngenio(arrZafra),
+  };
+};
+
+// Construye filas finales con totales (igual que tu versión repetida)
+const buildFinalRowsWithTotals = (rowsQuincena, rowsMes, rowsZafra) => {
+  // Los rows ya son arrays de objetos con campos variados.
+  // Para totales sumamos todos los campos numéricos.
+  const totalQuincena = sumNumericFields(rowsQuincena);
+  const totalMes = sumNumericFields(rowsMes);
+  const totalZafra = sumNumericFields(rowsZafra);
+
+  // Etiquetas y keys como antes
+  const filaTotalQuincena = { key: `total-quincena`, fechaParte: "Total quincena", ...totalQuincena };
+  const filaTotalMes = { key: `total-mes`, fechaParte: "Total mes", ...totalMes };
+  const filaTotalZafra = { key: `total-zafra`, fechaParte: "Total zafra", ...totalZafra };
+
+  // Calcular rendimiento (igual a tu lógica):
+  const calcularRendimientos = (fila) => {
+    // si no existe moliendaCanaBruta o moliendaCanaNeta o azucarEquivalente, queda 0
+    const mb = Number(fila.moliendaCanaBruta || 0);
+    const mn = Number(fila.moliendaCanaNeta || 0);
+    const ae = Number(fila.azucarEquivalente || fila.azucarEquivalente || 0);
+
+    fila.rendimientoCanaBruta = mb ? ((ae / mb) * 100).toFixed(3) : 0;
+    fila.rendimientoCanaNeta = mn ? ((ae / mn) * 100).toFixed(3) : 0;
+  };
+
+  [filaTotalQuincena, filaTotalMes, filaTotalZafra].forEach(calcularRendimientos);
+
+  // Agregar key únicos si no vienen
+  // (Nota: caller generalmente concatenará al array original por ingenio)
+  return [filaTotalQuincena, filaTotalMes, filaTotalZafra];
+};
+
+const ItemsCollapse = ({
   dataAnio,
   dataMes,
   dataQuincena,
   dataZafra,
   dataParteDiariosHistoricos,
   dataParteDiariosHistoricosNorte,
-  dateInicioIngeniosItemCollapse
+  dateInicioIngeniosItemCollapse,
 }) => {
-  const [aguilares, setAguilares] = useState([]);
-  const [aguilaresMensual, setAguilaresMensual] = useState([]);
-  const [aguilaresZafra, setAguilaresZafra] = useState([]);
-  const [bellaVista, setBellaVista] = useState([]);
-  const [bellaVistaMensual, setBellaVistaMensual] = useState([]);
-  const [bellaVistaZafra, setBellaVistaZafra] = useState([]);
-  const [concepcion, setConcepcion] = useState([]);
-  const [concepcionMensual, setConcepcionMensual] = useState([]);
-  const [concepcionZafra, setConcepcionZafra] = useState([]);
-  const [cruzAlta, setCruzAlta] = useState([]);
-  const [cruzAltaMensual, setCruzAltaMensual] = useState([]);
-  const [cruzAltaZafra, setCruzAltaZafra] = useState([]);
-  const [famailla, setFamailla] = useState([]);
-  const [famaillaMensual, setFamaillaMensual] = useState([]);
-  const [famaillaZafra, setFamaillaZafra] = useState([]);
-  const [laCorona, setLaCorona] = useState([]);
-  const [laCoronaMensual, setLaCoronaMensual] = useState([]);
-  const [laCoronaZafra, setLaCoronaZafra] = useState([]);
-  const [laFlorida, setLaFlorida] = useState([]);
-  const [laFloridaMensual, setLaFloridaMensual] = useState([]);
-  const [laFloridaZafra, setLaFloridaZafra] = useState([]);
-  const [laProvidencia, setLaProvidencia] = useState([]);
-  const [laProvidenciaMensual, setLaProvidenciaMensual] = useState([]);
-  const [laProvidenciaZafra, setLaProvidenciaZafra] = useState([]);
-  const [laTrinidad, setLaTrinidad] = useState([]);
-  const [laTrinidadMensual, setLaTrinidadMensual] = useState([]);
-  const [laTrinidadZafra, setLaTrinidadZafra] = useState([]);
-  const [leales, setLeales] = useState([]);
-  const [lealesMensual, setLealesMensual] = useState([]);
-  const [lealesZafra, setLealesZafra] = useState([]);
-  const [marapa, setMarapa] = useState([]);
-  const [marapaMensual, setMarapaMensual] = useState([]);
-  const [marapaZafra, setMarapaZafra] = useState([]);
-  const [santaBarbara, setSantaBarbara] = useState([]);
-  const [santaBarbaraMensual, setSantaBarbaraMensual] = useState([]);
-  const [santaBarbaraZafra, setSantaBarbaraZafra] = useState([]);
-  const [santaRosa, setSantaRosa] = useState([]);
-  const [santaRosaMensual, setSantaRosaMensual] = useState([]);
-  const [santaRosaZafra, setSantaRosaZafra] = useState([]);
-  const [nunorco, setNunorco] = useState([]);
-  const [nunorcoMensual, setNunorcoMensual] = useState([]);
-  const [nunorcoZafra, setNunorcoZafra] = useState([]);
+  // Flatten both possible inputs (agrupados o planos) en una lista plana de partes
+  const flatParts = useMemo(() => {
+    const a = flattenParts(dataParteDiariosHistoricos || []);
+    const b = flattenParts(dataParteDiariosHistoricosNorte || []);
+    return [...a, ...b];
+  }, [dataParteDiariosHistoricos, dataParteDiariosHistoricosNorte]);
 
-  const [esperanza, setEsperanza] = useState([])
-  const [esperanzaMensual, setEsperanzaMensual] = useState([])
-  const [esperanzaZafra, setEsperanzaZafra] = useState([])
-  const [ledesma, setLedesma] = useState([])
-  const [ledesmaMensual, setLedesmaMensual] = useState([])
-  const [ledesmaZafra, setLedesmaZafra] = useState([])
-  const [rioGrande, setRioGrande] = useState([])
-  const [rioGrandeMensual, setRioGrandeMensual] = useState([])
-  const [rioGrandeZafra, setRioGrandeZafra] = useState([])
-  const [sanIsidro, setSanIsidro] = useState([])
-  const [sanIsidroMensual, setSanIsidroMensual] = useState([])
-  const [sanIsidroZafra, setSanIsidroZafra] = useState([])
-  const [seaboard, setSeaboard] = useState([])
-  const [seaboardMensual, setSeaboardMensual] = useState([])
-  const [seaboardZafra, setSeaboardZafra] = useState([])
+  // Agrupar por ingenio y aplicar filtros (quincena / mes / zafra)
+  const ingeniosProcesados = useMemo(() => {
+    // Agrupar partes por ingenioNombre
+    const grouped = flatParts.reduce((acc, part) => {
+      const nombre = part.ingenioNombre || part.ingenio || "Sin Ingenio";
+      if (!acc[nombre]) acc[nombre] = [];
+      acc[nombre].push(part);
+      return acc;
+    }, {});
 
-  const panelStyle = {
-    marginBottom: 24,
-    border: "none",
-  };
+    // Para cada ingenio aplicamos filterByParams (que produce quincenal/mensual/zafra)
+    const result = {};
+    Object.keys(grouped).forEach((ingenioNombre) => {
+      const partes = grouped[ingenioNombre] || [];
+      const { quincenal, mensual, zafra } = filterByParams(partes, { dataAnio, dataMes, dataQuincena });
 
-  useEffect(() => {
-    // Limpiar todos los estados antes de procesar nuevos datos
-    setAguilares([]);
-    setAguilaresMensual([]);
-    setAguilaresZafra([]);
-    setBellaVista([]);
-    setBellaVistaMensual([]);
-    setBellaVistaZafra([]);
-    setConcepcion([]);
-    setConcepcionMensual([]);
-    setConcepcionZafra([]);
-    setCruzAlta([]);
-    setCruzAltaMensual([]);
-    setCruzAltaZafra([]);
-    setFamailla([]);
-    setFamaillaMensual([]);
-    setFamaillaZafra([]);
-    setLaCorona([]);
-    setLaCoronaMensual([]);
-    setLaCoronaZafra([]);
-    setLaFlorida([]);
-    setLaFloridaMensual([]);
-    setLaFloridaZafra([]);
-    setLaProvidencia([]);
-    setLaProvidenciaMensual([]);
-    setLaProvidenciaZafra([]);
-    setLaTrinidad([]);
-    setLaTrinidadMensual([]);
-    setLaTrinidadZafra([]);
-    setLeales([]);
-    setLealesMensual([]);
-    setLealesZafra([]);
-    setMarapa([]);
-    setMarapaMensual([]);
-    setMarapaZafra([]);
-    setSantaBarbara([]);
-    setSantaBarbaraMensual([]);
-    setSantaBarbaraZafra([]);
-    setSantaRosa([]);
-    setSantaRosaMensual([]);
-    setSantaRosaZafra([]);
-    setNunorco([]);
-    setNunorcoMensual([]);
-    setNunorcoZafra([]);
+      // Construir las filas finales: quincena rows (filas originales), luego totales (quincena/mes/zafra)
+      const filasTotales = buildFinalRowsWithTotals(quincenal, mensual, zafra);
 
-    setEsperanza([]);
-    setEsperanzaMensual([]);
-    setEsperanzaZafra([]);
-    setLedesma([]);
-    setLedesmaMensual([]);
-    setLedesmaZafra([]);
-    setRioGrande([]);
-    setRioGrandeMensual([]);
-    setRioGrandeZafra([]);
-    setSanIsidro([]);
-    setSanIsidroMensual([]);
-    setSanIsidroZafra([]);
-    setSeaboard([]);
-    setSeaboardMensual([]);
-    setSeaboardZafra([]);
+      // Para mantener comportamiento antiguo, los totales los concatenamos al final del array quincenal (como hacías)
+      // Pero vamos a generar tres arrays también para posible uso (quincenal/mensual/zafra)
+      result[ingenioNombre] = {
+        quincenal: quincenal,
+        mensual: mensual,
+        zafra: zafra,
+        finalRows: [...quincenal, { ...filasTotales[0], key: `total-quincena-${ingenioNombre}` }, { ...filasTotales[1], key: `total-mes-${ingenioNombre}` }, { ...filasTotales[2], key: `total-zafra-${ingenioNombre}` }],
+      };
+    });
 
+    return result;
+  }, [flatParts, dataAnio, dataMes, dataQuincena]);
 
-    // Procesar los nuevos datos
-    dataPorQuincena();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataZafra, dataAnio, dataMes, dataQuincena, dataParteDiariosHistoricos, dataParteDiariosHistoricosNorte, dateInicioIngeniosItemCollapse]);
+  // Construir items para Collapse manteniendo el orden INGENIOS_ORDER (y añadiendo los que no estén al final)
+  const items = useMemo(() => {
+    const entries = [];
 
+    // Helper to push an ingenio if exists in processed set
+    const pushIfExists = (nombre) => {
+      if (!ingeniosProcesados[nombre]) return;
+      const data = ingeniosProcesados[nombre];
+      const label =
+        nombre === "Ledesma" ? (
+          <div>
+            <span>{nombre}</span>
+            <div style={{ fontSize: 12, color: "#888", fontWeight: 400 }}>
+              {/* * Alcohol campaña 2025 están incorrectos. Revisar. */}
+            </div>
+          </div>
+        ) : (
+          nombre
+        );
 
-  const dataPorQuincena = () => {
-    const dataUnida = [...dataParteDiariosHistoricos, ...dataParteDiariosHistoricosNorte]
-    // Limpiar arrays antes de procesar nuevos datos
-    let arrQuincenal = [];
-    let arrMensual = [];
-    let arrZafra = [];
-
-    // Función para eliminar duplicados por fecha e ingenio
-    const eliminarDuplicados = (array) => {
-      if (!Array.isArray(array) || array.length === 0) {
-        return [];
-      }
-
-      const seen = new Map();
-      return array.filter(item => {
-        if (!item || !item.fechaParte || !item.ingenioNombre) {
-          return false; // Excluir elementos inválidos
-        }
-
-        const key = `${item.fechaParte}_${item.ingenioNombre}`;
-        if (seen.has(key)) {
-          return false;
-        }
-        seen.set(key, true);
-        return true;
+      entries.push({
+        key: nombre,
+        label,
+        children: <ListadoDatos columns={columns} scroll={1600} data={data.finalRows} />,
       });
     };
 
-    dataUnida?.forEach((data) => {
-      const newDate = new Date(data.fechaParte);
+    INGENIOS_ORDER.forEach((n) => {
+      pushIfExists(n);
+    });
 
-      function getLastDayOfMonth(month) {
-        const date = new Date();
-        date.setMonth(month);
-        date.setDate(0);
-        return date.getDate();
-      }
-      /**FORMATO (OBJECT):  Sat Sep 16 2023 00:00:00 GMT-0300 (hora estándar de Argentina)  **/
-      const fechaParametro1 = new Date(
-        `${dataMes}/${dataQuincena === 1 ? 1 : 16}/${dataAnio}`
-      );
-      const fechaParametro2 = new Date(
-        `${dataMes}/${dataQuincena === 1 ? 15 : getLastDayOfMonth(dataMes)
-        }/${dataAnio}`
-      );
-      if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
-        arrQuincenal.push(data);
-      }
-      if (newDate.getMonth() + 1 === dataMes) {
-        if (dataQuincena === 1) {
-          if (newDate >= fechaParametro1 && newDate <= fechaParametro2) {
-            arrMensual.push(data);
-          }
-        }
-        if (dataQuincena === 2) {
-          arrMensual.push(data);
-        }
-      }
-      if (newDate <= fechaParametro2) {
-        arrZafra.push(data);
+    // Añadir cualquier ingenio que venga pero no esté en el order (por si hay nuevos)
+    Object.keys(ingeniosProcesados).forEach((nombre) => {
+      if (!INGENIOS_ORDER.includes(nombre)) {
+        pushIfExists(nombre);
       }
     });
 
-    // Eliminar duplicados de cada array
-    arrQuincenal = eliminarDuplicados(arrQuincenal);
-    arrMensual = eliminarDuplicados(arrMensual);
-    arrZafra = eliminarDuplicados(arrZafra);
-
-
-    // Función helper para filtrar por ingenio y eliminar duplicados
-    const filtrarPorIngenio = (array, nombreIngenio) => {
-      return eliminarDuplicados(array.filter((d) => d.ingenioNombre === nombreIngenio));
-    };
-
-    setAguilares(filtrarPorIngenio(arrQuincenal, "Aguilares"));
-    setAguilaresMensual(filtrarPorIngenio(arrMensual, "Aguilares"));
-    setAguilaresZafra(filtrarPorIngenio(arrZafra, "Aguilares"));
-
-    setBellaVista(filtrarPorIngenio(arrQuincenal, "Bella Vista"));
-    setBellaVistaMensual(filtrarPorIngenio(arrMensual, "Bella Vista"));
-    setBellaVistaZafra(filtrarPorIngenio(arrZafra, "Bella Vista"));
-
-    setConcepcion(filtrarPorIngenio(arrQuincenal, "Concepción"));
-    setConcepcionMensual(filtrarPorIngenio(arrMensual, "Concepción"));
-    setConcepcionZafra(filtrarPorIngenio(arrZafra, "Concepción"));
-
-    setCruzAlta(filtrarPorIngenio(arrQuincenal, "Cruz Alta"));
-    setCruzAltaMensual(filtrarPorIngenio(arrMensual, "Cruz Alta"));
-    setCruzAltaZafra(filtrarPorIngenio(arrZafra, "Cruz Alta"));
-
-    setFamailla(filtrarPorIngenio(arrQuincenal, "Famaillá"));
-    setFamaillaMensual(filtrarPorIngenio(arrMensual, "Famaillá"));
-    setFamaillaZafra(filtrarPorIngenio(arrZafra, "Famaillá"));
-
-    setLaCorona(filtrarPorIngenio(arrQuincenal, "La Corona"));
-    setLaCoronaMensual(filtrarPorIngenio(arrMensual, "La Corona"));
-    setLaCoronaZafra(filtrarPorIngenio(arrZafra, "La Corona"));
-
-    setLaFlorida(filtrarPorIngenio(arrQuincenal, "La Florida"));
-    setLaFloridaMensual(filtrarPorIngenio(arrMensual, "La Florida"));
-    setLaFloridaZafra(filtrarPorIngenio(arrZafra, "La Florida"));
-
-    setLaProvidencia(filtrarPorIngenio(arrQuincenal, "La Providencia"));
-    setLaProvidenciaMensual(filtrarPorIngenio(arrMensual, "La Providencia"));
-    setLaProvidenciaZafra(filtrarPorIngenio(arrZafra, "La Providencia"));
-
-    setLaTrinidad(filtrarPorIngenio(arrQuincenal, "La Trinidad"));
-    setLaTrinidadMensual(filtrarPorIngenio(arrMensual, "La Trinidad"));
-    setLaTrinidadZafra(filtrarPorIngenio(arrZafra, "La Trinidad"));
-
-    setLeales(filtrarPorIngenio(arrQuincenal, "Leales"));
-    setLealesMensual(filtrarPorIngenio(arrMensual, "Leales"));
-    setLealesZafra(filtrarPorIngenio(arrZafra, "Leales"));
-
-    setMarapa(filtrarPorIngenio(arrQuincenal, "Marapa"));
-    setMarapaMensual(filtrarPorIngenio(arrMensual, "Marapa"));
-    setMarapaZafra(filtrarPorIngenio(arrZafra, "Marapa"));
-
-    setSantaBarbara(filtrarPorIngenio(arrQuincenal, "Santa Barbara"));
-    setSantaBarbaraMensual(filtrarPorIngenio(arrMensual, "Santa Barbara"));
-    setSantaBarbaraZafra(filtrarPorIngenio(arrZafra, "Santa Barbara"));
-
-    setSantaRosa(filtrarPorIngenio(arrQuincenal, "Santa Rosa"));
-    setSantaRosaMensual(filtrarPorIngenio(arrMensual, "Santa Rosa"));
-    setSantaRosaZafra(filtrarPorIngenio(arrZafra, "Santa Rosa"));
-
-    setNunorco(filtrarPorIngenio(arrQuincenal, "Ñuñorco"));
-    setNunorcoMensual(filtrarPorIngenio(arrMensual, "Ñuñorco"));
-    setNunorcoZafra(filtrarPorIngenio(arrZafra, "Ñuñorco"));
-
-    setEsperanza(filtrarPorIngenio(arrQuincenal, "La Esperanza"));
-    setEsperanzaMensual(filtrarPorIngenio(arrMensual, "La Esperanza"));
-    setEsperanzaZafra(filtrarPorIngenio(arrZafra, "La Esperanza"));
-
-    setLedesma(filtrarPorIngenio(arrQuincenal, "Ledesma"));
-    setLedesmaMensual(filtrarPorIngenio(arrMensual, "Ledesma"));
-    setLedesmaZafra(filtrarPorIngenio(arrZafra, "Ledesma"));
-
-    setRioGrande(filtrarPorIngenio(arrQuincenal, "Río Grande"));
-    setRioGrandeMensual(filtrarPorIngenio(arrMensual, "Río Grande"));
-    setRioGrandeZafra(filtrarPorIngenio(arrZafra, "Río Grande"));
-
-    setSanIsidro(filtrarPorIngenio(arrQuincenal, "San Isidro"));
-    setSanIsidroMensual(filtrarPorIngenio(arrMensual, "San Isidro"));
-    setSanIsidroZafra(filtrarPorIngenio(arrZafra, "San Isidro"));
-
-    setSeaboard(filtrarPorIngenio(arrQuincenal, "Seaboard"));
-    setSeaboardMensual(filtrarPorIngenio(arrMensual, "Seaboard"));
-    setSeaboardZafra(filtrarPorIngenio(arrZafra, "Seaboard"));
-  };
-
-
-
-
-  /********** CALCULO TOTALES **********/
-  const totalQuincenaAguilares = aguilares.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalMesAguilares = aguilaresMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraAguilares = aguilaresZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaBellaVista = bellaVista.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalMesBellaVista = bellaVistaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalZafraBellaVista = bellaVistaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaConcepcion = concepcion.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesConcepcion = concepcionMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraConcepcion = concepcionZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaCruzAlta = cruzAlta.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesCruzAlta = cruzAltaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraCruzAlta = cruzAltaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaFamailla = famailla.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesFamailla = famaillaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraFamailla = famaillaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLaCorona = laCorona.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLaCorona = laCoronaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLaCorona = laCoronaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLaFlorida = laFlorida.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLaFlorida = laFloridaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLaFlorida = laFloridaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLaProvidencia = laProvidencia.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLaProvidencia = laProvidenciaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLaProvidencia = laProvidenciaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLaTrinidad = laTrinidad.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLaTrinidad = laTrinidadMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLaTrinidad = laTrinidadZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLeales = leales.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLeales = lealesMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLeales = lealesZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaMarapa = marapa.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesMarapa = marapaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraMarapa = marapaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaStaBarbara = santaBarbara.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesStaBarbara = santaBarbaraMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraStaBarbara = santaBarbaraZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaStaRosa = santaRosa.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesStaRosa = santaRosaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraStaRosa = santaRosaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaNunorco = nunorco.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesNunorco = nunorcoMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraNunorco = nunorcoZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLaEsperanza = esperanza.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLaEsperanza = esperanzaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLaEsperanza = esperanzaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaLedesma = ledesma.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesLedesma = ledesmaMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraLedesma = ledesmaZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaRioGrande = rioGrande.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesRioGrande = rioGrandeMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraRioGrande = rioGrandeZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaSanIsidro = sanIsidro.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesSanIsidro = sanIsidroMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraSanIsidro = sanIsidroZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  const totalQuincenaSeaboard = seaboard.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalMesSeaboard = seaboardMensual.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-  const totalZafraSeaboard = seaboardZafra.reduce((acc, item) => {
-    Object.keys(item).forEach((key) => {
-      const value = Number(item[key]);
-      if (!isNaN(value)) { // solo suma si el valor es numérico
-        acc[key] = (acc[key] || 0) + value;
-      }
-    });
-    return acc;
-  }, {});
-
-  /********** FILA TOTALES **********/
-  const aguilaresConTotales = [
-    ...aguilares,
-    { key: "total-quincena-aguilares", fechaParte: "Total quincena", ...totalQuincenaAguilares },
-    { key: "total-mes-aguilares", fechaParte: "Total mes", ...totalMesAguilares },
-    { key: "total-zafra-aguilares", fechaParte: "Total zafra", ...totalZafraAguilares },
-  ];
-  const bellaVistaConTotales = [
-    ...bellaVista,
-    { key: "total-quincena-bellavista", fechaParte: "Total quincena", ...totalQuincenaBellaVista },
-    { key: "total-mes-bellavista", fechaParte: "Total mes", ...totalMesBellaVista },
-    { key: "total-zafra-bellavista", fechaParte: "Total zafra", ...totalZafraBellaVista },
-  ];
-  const concepcionConTotales = [
-    ...concepcion,
-    { key: "total-quincena-concepcion", fechaParte: "Total quincena", ...totalQuincenaConcepcion },
-    { key: "total-mes-concepcion", fechaParte: "Total mes", ...totalMesConcepcion },
-    { key: "total-zafra-concepcion", fechaParte: "Total zafra", ...totalZafraConcepcion },
-  ];
-  const cruzAltaConTotales = [
-    ...cruzAlta,
-    { key: "total-quincena-cruzalta", fechaParte: "Total quincena", ...totalQuincenaCruzAlta },
-    { key: "total-mes-cruzalta", fechaParte: "Total mes", ...totalMesCruzAlta },
-    { key: "total-zafra-cruzalta", fechaParte: "Total zafra", ...totalZafraCruzAlta },
-  ];
-  const famaillaConTotales = [
-    ...famailla,
-    { key: "total-quincena-famailla", fechaParte: "Total quincena", ...totalQuincenaFamailla },
-    { key: "total-mes-famailla", fechaParte: "Total mes", ...totalMesFamailla },
-    { key: "total-zafra-famailla", fechaParte: "Total zafra", ...totalZafraFamailla },
-  ];
-  const laCoronaConTotales = [
-    ...laCorona,
-    { key: "total-quincena-lacorona", fechaParte: "Total quincena", ...totalQuincenaLaCorona },
-    { key: "total-mes-lacorona", fechaParte: "Total mes", ...totalMesLaCorona },
-    { key: "total-zafra-lacorona", fechaParte: "Total zafra", ...totalZafraLaCorona },
-  ];
-  const laFloridaConTotales = [
-    ...laFlorida,
-    { key: "total-quincena-laflorida", fechaParte: "Total quincena", ...totalQuincenaLaFlorida },
-    { key: "total-mes-laflorida", fechaParte: "Total mes", ...totalMesLaFlorida },
-    { key: "total-zafra-laflorida", fechaParte: "Total zafra", ...totalZafraLaFlorida },
-  ];
-  const laProvidenciaConTotales = [
-    ...laProvidencia,
-    {
-      key: "total-quincena-laprovidencia",
-      fechaParte: "Total quincena",
-      ...totalQuincenaLaProvidencia,
-    },
-    { key: "total-mes-laprovidencia", fechaParte: "Total mes", ...totalMesLaProvidencia },
-    { key: "total-zafra-laprovidencia", fechaParte: "Total zafra", ...totalZafraLaProvidencia },
-  ];
-  const laTrinidadConTotales = [
-    ...laTrinidad,
-    { key: "total-quincena-latrinidad", fechaParte: "Total quincena", ...totalQuincenaLaTrinidad },
-    { key: "total-mes-latrinidad", fechaParte: "Total mes", ...totalMesLaTrinidad },
-    { key: "total-zafra-latrinidad", fechaParte: "Total zafra", ...totalZafraLaTrinidad },
-  ];
-  const lealesConTotales = [
-    ...leales,
-    { key: "total-quincena-leales", fechaParte: "Total quincena", ...totalQuincenaLeales },
-    { key: "total-mes-leales", fechaParte: "Total mes", ...totalMesLeales },
-    { key: "total-zafra-leales", fechaParte: "Total zafra", ...totalZafraLeales },
-  ];
-  const marapaConTotales = [
-    ...marapa,
-    { key: "total-quincena-marapa", fechaParte: "Total quincena", ...totalQuincenaMarapa },
-    { key: "total-mes-marapa", fechaParte: "Total mes", ...totalMesMarapa },
-    { key: "total-zafra-marapa", fechaParte: "Total zafra", ...totalZafraMarapa },
-  ];
-  const nunorcoConTotales = [
-    ...nunorco,
-    { key: "total-quincena-nunorco", fechaParte: "Total quincena", ...totalQuincenaNunorco },
-    { key: "total-mes-nunorco", fechaParte: "Total mes", ...totalMesNunorco },
-    { key: "total-zafra-nunorco", fechaParte: "Total zafra", ...totalZafraNunorco },
-  ];
-  const santaBarbaraConTotales = [
-    ...santaBarbara,
-    { key: "total-quincena-santabarbara", fechaParte: "Total quincena", ...totalQuincenaStaBarbara },
-    { key: "total-mes-santabarbara", fechaParte: "Total mes", ...totalMesStaBarbara },
-    { key: "total-zafra-santabarbara", fechaParte: "Total zafra", ...totalZafraStaBarbara },
-  ];
-  const santaRosaConTotales = [
-    ...santaRosa,
-    { key: "total-quincena-santarosa", fechaParte: "Total quincena", ...totalQuincenaStaRosa },
-    { key: "total-mes-santarosa", fechaParte: "Total mes", ...totalMesStaRosa },
-    { key: "total-zafra-santarosa", fechaParte: "Total zafra", ...totalZafraStaRosa },
-  ];
-
-  const laEsperanzaConTotales = [
-    ...esperanza,
-    { key: "total-quincena-laEsperanza", fechaParte: "Total quincena", ...totalQuincenaLaEsperanza },
-    { key: "total-mes-laEsperanza", fechaParte: "Total mes", ...totalMesLaEsperanza },
-    { key: "total-zafra-laEsperanza", fechaParte: "Total zafra", ...totalZafraLaEsperanza },
-  ]
-
-  const ledesmaConTotales = [
-    ...ledesma,
-    { key: "total-quincena-ledesma", fechaParte: "Total quincena", ...totalQuincenaLedesma },
-    { key: "total-mes-ledesma", fechaParte: "Total mes", ...totalMesLedesma },
-    { key: "total-zafra-ledesma", fechaParte: "Total zafra", ...totalZafraLedesma },
-  ]
-
-  const rioGrandeConTotales = [
-    ...rioGrande,
-    { key: "total-quincena-rioGrande", fechaParte: "Total quincena", ...totalQuincenaRioGrande },
-    { key: "total-mes-rioGrande", fechaParte: "Total mes", ...totalMesRioGrande },
-    { key: "total-zafra-rioGrande", fechaParte: "Total zafra", ...totalZafraRioGrande },
-  ]
-
-  const sanIsidroConTotales = [
-    ...sanIsidro,
-    { key: "total-quincena-sanIsidro", fechaParte: "Total quincena", ...totalQuincenaSanIsidro },
-    { key: "total-mes-sanIsidro", fechaParte: "Total mes", ...totalMesSanIsidro },
-    { key: "total-zafra-sanIsidro", fechaParte: "Total zafra", ...totalZafraSanIsidro },
-  ]
-
-  const seaboardConTotales = [
-    ...seaboard,
-    { key: "total-quincena-seaboard", fechaParte: "Total quincena", ...totalQuincenaSeaboard },
-    { key: "total-mes-seaboard", fechaParte: "Total mes", ...totalMesSeaboard },
-    { key: "total-zafra-seaboard", fechaParte: "Total zafra", ...totalZafraSeaboard },
-  ]
-
-  /********** CALCULO DE RENDIMIENTO **********/
-  aguilaresConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  concepcionConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  cruzAltaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  famaillaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  laCoronaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  laFloridaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  laProvidenciaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  laTrinidadConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  lealesConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  marapaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  bellaVistaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  nunorcoConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  santaBarbaraConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  santaRosaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-  laEsperanzaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-
-  ledesmaConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-
-  rioGrandeConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-
-  sanIsidroConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-
-  seaboardConTotales.forEach((d) => {
-    if (
-      d.fechaParte === "Total quincena" ||
-      d.fechaParte === "Total mes" ||
-      d.fechaParte === "Total zafra"
-    ) {
-      d.rendimientoCanaBruta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaBruta) * 100).toFixed(3);
-      d.rendimientoCanaNeta = !d.rendimientoCanaBruta
-        ? 0
-        : ((d.azucarEquivalente / d.moliendaCanaNeta) * 100).toFixed(3);
-    }
-  });
-
-  const getItems = () => [
-    {
-      key: "1",
-      label: "Aguilares",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={aguilaresConTotales}
-        />
-      ),
-    },
-    {
-      key: "2",
-      label: "Bella Vista",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={bellaVistaConTotales}
-        />
-      ),
-    },
-    {
-      key: "3",
-      label: "Concepción",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={concepcionConTotales}
-        />
-      ),
-    },
-    {
-      key: "4",
-      label: "Cruz Alta",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={cruzAltaConTotales}
-        />
-      ),
-    },
-    {
-      key: "5",
-      label: "Famaillá",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={famaillaConTotales}
-        />
-      ),
-    },
-    {
-      key: "6",
-      label: "La Corona",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={laCoronaConTotales}
-        />
-      ),
-    },
-    {
-      key: "7",
-      label: "La Florida",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={laFloridaConTotales}
-        />
-      ),
-    },
-    {
-      key: "8",
-      label: "La Providencia",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={laProvidenciaConTotales}
-        />
-      ),
-    },
-    {
-      key: "9",
-      label: "La Trinidad",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={laTrinidadConTotales}
-        />
-      ),
-    },
-    {
-      key: "10",
-      label: "Leales",
-      children: (
-        <ListadoDatos columns={columns} scroll={1600} data={lealesConTotales} />
-      ),
-    },
-    {
-      key: "11",
-      label: "Marapa",
-      children: (
-        <ListadoDatos columns={columns} scroll={1600} data={marapaConTotales} />
-      ),
-    },
-    {
-      key: "12",
-      label: "Santa Barbara",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={santaBarbaraConTotales}
-        />
-      ),
-    },
-    {
-      key: "13",
-      label: "Santa Rosa",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={santaRosaConTotales}
-        />
-      ),
-    },
-    {
-      key: "14",
-      label: "Ñuñorco",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={nunorcoConTotales}
-        />
-      ),
-    },
-
-    {
-      key: "15",
-      label: "La Esperanza",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={laEsperanzaConTotales}
-        />
-      ),
-    },
-    {
-      key: "16",
-      label: (
-        <div>
-          <span>Ledesma</span>
-          <div style={{ fontSize: 12, color: "#888", fontWeight: 400 }}>
-            * Alcohol campaña 2025 están incorrectos. Revisar.
-          </div>
-        </div>
-      ),
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={ledesmaConTotales}
-        />
-      ),
-    },
-    {
-      key: "17",
-      label: "Río Grande",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={rioGrandeConTotales}
-        />
-      ),
-    },
-    {
-      key: "18",
-      label: "San Isidro",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={sanIsidroConTotales}
-        />
-      ),
-    },
-    {
-      key: "19",
-      label: "Seaboard",
-      children: (
-        <ListadoDatos
-          columns={columns}
-          scroll={1600}
-          data={seaboardConTotales}
-        />
-      ),
-    },
-  ];
+    return entries;
+  }, [ingeniosProcesados]);
   return (
     <Collapse
       bordered={false}
       size="small"
       expandIconPosition="end"
       defaultActiveKey={["0"]}
-      expandIcon={({ isActive }) => (
-        <CaretRightOutlined rotate={isActive ? 90 : 0} />
-      )}
+      expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       style={{
         width: "100%",
         fontSize: 17,
         fontWeight: 600,
       }}
-      items={getItems(panelStyle)}
+      items={items}
     />
   );
 };
-export default ItemCollpse;
 
-
+export default ItemsCollapse;

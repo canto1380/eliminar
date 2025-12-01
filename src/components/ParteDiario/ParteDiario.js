@@ -40,6 +40,10 @@ const ParteDiario = ({
   dataImportDestileriaComparativaNorte,
   dataImportAnhidroNorte,
   dataImportAnhidroComparativaNorte,
+  periodosTucumanActual,
+  periodosNorteActual,
+  periodosTucumanComparativo,
+  periodosNorteComparativo,
   setDataImport,
   setDataImportComparativa,
   setDataImportDestileria,
@@ -58,8 +62,8 @@ const ParteDiario = ({
   zafraParteDiario,
 
 }) => {
-/***** TUCUMAN *****/
-/** D - Data Periodo actual **/
+  /***** TUCUMAN *****/
+  /** D - Data Periodo actual **/
   const [d1, setD1] = useState([]);
   const [d2, setD2] = useState([]);
   const [d3, setD3] = useState([]);
@@ -93,7 +97,7 @@ const ParteDiario = ({
   const [dc14, setDc14] = useState([]);
   const [dc15, setDc15] = useState([]);
   const [dataDestBellaVistaComparativa, setDataDestBellaVistaComparativa] = useState([]);
-  
+
   /***** NORTE *****/
   /** N - Data Periodo actual **/
   const [n1, setN1] = useState([]);
@@ -113,16 +117,32 @@ const ParteDiario = ({
 
   /** Fecha de inicio y fin de zafras TUCUMAN **/
   const [inicioZafra, setInicioZafra] = useState(null);
-  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
   const [finZafra, setFinZafra] = useState("");
+  const [inicioDestileria, setInicioDestileria] = useState(null);
+  const [finDestileria, setFinDestileria] = useState("");
+  const [inicioAnhidro, setInicioAnhidro] = useState(null);
+  const [finAnhidro, setFinAnhidro] = useState("");
+  const [inicioZafraComparativa, setInicioZafraComparativa] = useState(null);
   const [finZafraComparativa, setFinZafraComparativa] = useState("");
+  const [inicioDestileriaComparativa, setInicioDestileriaComparativa] = useState(null);
+  const [finDestileriaComparativa, setFinDestileriaComparativa] = useState("");
+  const [inicioAnhidroComparativa, setInicioAnhidroComparativa] = useState(null);
+  const [finAnhidroComparativa, setFinAnhidroComparativa] = useState("");
 
   /** Fecha de inicio y fin de zafras NORTE **/
   const [inicioZafraNorte, setInicioZafraNorte] = useState(null);
-  const [inicioZafraNorteComparativa, setInicioZafraNorteComparativa] =
-    useState(null);
   const [finZafraNorte, setFinZafraNorte] = useState("");
+  const [inicioDestileriaNorte, setInicioDestileriaNorte] = useState(null);
+  const [finDestileriaNorte, setFinDestileriaNorte] = useState("");
+  const [inicioAnhidroNorte, setInicioAnhidroNorte] = useState(null);
+  const [finAnhidroNorte, setFinAnhidroNorte] = useState("");
+
+  const [inicioZafraNorteComparativa, setInicioZafraNorteComparativa] = useState(null);
   const [finZafraNorteComparativa, setFinZafraNorteComparativa] = useState("");
+  const [inicioDestileriaNorteComparativa, setInicioDestileriaNorteComparativa] = useState(null);
+  const [finDestileriaNorteComparativa, setFinDestileriaNorteComparativa] = useState("");
+  const [inicioAnhidroNorteComparativa, setInicioAnhidroNorteComparativa] = useState(null);
+  const [finAnhidroNorteComparativa, setFinAnhidroNorteComparativa] = useState("");
 
   /** FECHAS DE TODOS LOS INGENIOS DE INICIO Y FIN TUCUMAN **/
   const [fechasInicioIngenios, setFechasInicioIngenios] = useState(null);
@@ -170,13 +190,19 @@ const ParteDiario = ({
 
   /** Cantidad de dias de zafra TUCUMAN **/
   const [dataDiasZafra, setDataDiasZafra] = useState(null);
-  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] =
-    useState(null);
+  const [dataDiasDestileria, setDataDiasDestileria] = useState(null);
+  const [dataDiasAnhidro, setDataDiasAnhidro] = useState(null);
+  const [dataDiasZafraComparativa, setDataDiasZafraComparativa] = useState(null);
+  const [dataDiasDestileriaComparativa, setDataDiasDestileriaComparativa] = useState(null);
+  const [dataDiasAnhidroComparativa, setDataDiasAnhidroComparativa] = useState(null);
 
   /** Cantidad de dias de zafra NORTE **/
   const [dataDiasZafraNorte, setDataDiasZafraNorte] = useState(null);
-  const [dataDiasZafraNorteComparativa, setDataDiasZafraNorteComparativa] =
-    useState(null);
+  const [dataDiasZafraNorteComparativa, setDataDiasZafraNorteComparativa] = useState(null);
+  const [dataDiasDestileriaNorte, setDataDiasDestileriaNorte] = useState(null);
+  const [dataDiasDestileriaNorteComparativa, setDataDiasDestileriaNorteComparativa] = useState(null);
+  const [dataDiasAnhidroNorte, setDataDiasAnhidroNorte] = useState(null);
+  const [dataDiasAnhidroNorteComparativa, setDataDiasAnhidroNorteComparativa] = useState(null);
 
   /** DATOS TOTALES AL DIA ELEGIDO **/
   const [panelCMB, setPanelCMB] = useState(null);
@@ -195,7 +221,6 @@ const ParteDiario = ({
 
   const [loadingDownload, setLoadingDownload] = useState(false);
   const [dataComparativa, setDataComparativa] = useState(undefined);
-  const [fechaInicioDestileria, setFechaInicioDestileria] = useState(undefined);
   const [dataUserRegister, setDataUserRegister] = useState(undefined);
   const { dataUser } = useContext(User);
 
@@ -303,10 +328,10 @@ const ParteDiario = ({
       setFechasInicioDestileriaIngeniosNorteComparativa,
       setFechasInicioAnhidroIngeniosNorteComparativa
     );
-    dataFinZafra();
-    dataFinZafraComparativa();
-    dataFinZafraNorte();
-    dataFinZafraComparativaNorte();
+    // dataFinZafra();
+    // dataFinZafraComparativa();
+    // dataFinZafraNorte();
+    // dataFinZafraComparativaNorte();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -324,6 +349,7 @@ const ParteDiario = ({
     dataImportAnhidroComparativaNorte,
     zafraParteDiario
   ]);
+
   /*** DATOS DIAS PARADAS ***/
   useEffect(() => {
     if (dataAnio !== null && dataEnd !== null) {
@@ -337,321 +363,482 @@ const ParteDiario = ({
     setDiasParadaExport(data);
   };
 
-  useEffect(() => {
-    dataFinZafra();
-    dataFinZafraComparativa();
-    dataFinZafraNorte();
-    dataFinZafraComparativaNorte();
-  }, [fechasInicioIngenios, fechasInicioIngeniosNorte])
-
   /************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS TUCUMAN *************/
-  let inicioZafraa = new Date("3/10/2100");
-  let finZafraa = null;
-  const dataFinZafra = () => {
-    for (let clave in fechasInicioIngenios) {
-      if (fechasInicioIngenios[clave] === null) {
-        setFinZafra("");
-        return finZafraa;
-      } else {
-        finZafraa =
-          new Date(fechasInicioIngenios[clave]) > finZafraa
-            ? new Date(fechasInicioIngenios[clave])
-            : finZafraa;
-        setFinZafra(finZafraa);
-      }
-      for (let clave in fechasInicioIngenios) {
-        if (
-          fechasInicioIngenios[clave] &&
-          fechasInicioIngenios[clave] !== null
-        ) {
-          inicioZafraa =
-            new Date(fechasInicioIngenios[clave]) < inicioZafraa
-              ? new Date(fechasInicioIngenios[clave])
-              : inicioZafraa;
-          setInicioZafra(inicioZafraa);
-        }
-      }
+  useEffect(() => {
+    if (periodosTucumanActual && periodosTucumanComparativo) {
+      fechasInicioYFinTucuman()
     }
-  };
+  }, [periodosTucumanActual, periodosTucumanComparativo])
 
-  let inicioZafraaComparativa = new Date("3/10/2100");
-  let finZafraaComparativa = null;
-  const dataFinZafraComparativa = () => {
-    for (let clave in fechasInicioIngeniosComparativa) {
-      if (fechasInicioIngeniosComparativa[clave] === null) {
-        setFinZafraComparativa("");
+  const fechasInicioYFinTucuman = () => {
+    const fechaInicioZafra = periodosTucumanActual.inicio_zafra && periodosTucumanActual.inicio_zafra !== null
+      ? new Date(periodosTucumanActual.inicio_zafra)
+      : null
+    const fechaFinZafra = periodosTucumanActual.fin_zafra && periodosTucumanActual.fin_zafra !== null
+      ? new Date(periodosTucumanActual.fin_zafra)
+      : null
 
-        return finZafraaComparativa;
-      } else {
-        finZafraaComparativa =
-          new Date(fechasInicioIngeniosComparativa[clave]) >
-            finZafraaComparativa
-            ? new Date(fechasInicioIngeniosComparativa[clave])
-            : finZafraaComparativa;
-        setFinZafraComparativa(finZafraaComparativa);
+    const fechaInicioDestileria = periodosTucumanActual.inicio_destileria && periodosTucumanActual.inicio_destileria !== null
+      ? new Date(periodosTucumanActual.inicio_destileria)
+      : null
+    const fechaFinDestileria = periodosTucumanActual.fin_destileria && periodosTucumanActual.fin_destileria !== null
+      ? new Date(periodosTucumanActual.fin_destileria)
+      : null
 
-        inicioZafraaComparativa =
-          new Date(fechasInicioIngeniosComparativa[clave]) <
-            inicioZafraaComparativa
-            ? new Date(fechasInicioIngeniosComparativa[clave])
-            : inicioZafraaComparativa;
-        setInicioZafraComparativa(inicioZafraaComparativa);
-      }
-    }
-  };
+    const fechaInicioAnhidro = periodosTucumanActual.inicio_anhidro && periodosTucumanActual.inicio_anhidro !== null
+      ? new Date(periodosTucumanActual.inicio_anhidro)
+      : null
+    const fechaFinAnhidro = periodosTucumanActual.fin_anhidro && periodosTucumanActual.fin_anhidro !== null
+      ? new Date(periodosTucumanActual.fin_anhidro)
+      : null
+
+    setInicioZafra(fechaInicioZafra)
+    setFinZafra(fechaFinZafra)
+    setInicioDestileria(fechaInicioDestileria)
+    setFinDestileria(fechaFinDestileria)
+    setInicioAnhidro(fechaInicioAnhidro)
+    setFinAnhidro(fechaFinAnhidro)
+
+
+    const fechaInicioZafraComparativo = periodosTucumanComparativo.inicio_zafra && periodosTucumanComparativo.inicio_zafra !== null
+      ? new Date(periodosTucumanComparativo.inicio_zafra)
+      : null
+    const fechaFinZafraComparativo = periodosTucumanComparativo.fin_zafra && periodosTucumanComparativo.fin_zafra !== null
+      ? new Date(periodosTucumanComparativo.fin_zafra)
+      : null
+
+    const fechaInicioDestileriaComparativo = periodosTucumanComparativo.inicio_destileria && periodosTucumanComparativo.inicio_destileria !== null
+      ? new Date(periodosTucumanComparativo.inicio_destileria)
+      : null
+    const fechaFinDestileriaComparativo = periodosTucumanComparativo.fin_destileria && periodosTucumanComparativo.fin_destileria !== null
+      ? new Date(periodosTucumanComparativo.fin_destileria)
+      : null
+
+    const fechaInicioAnhidroComparativo = periodosTucumanComparativo.inicio_anhidro && periodosTucumanComparativo.inicio_anhidro !== null
+      ? new Date(periodosTucumanComparativo.inicio_anhidro)
+      : null
+    const fechaFinAnhidroComparativo = periodosTucumanComparativo.fin_anhidro && periodosTucumanComparativo.fin_anhidro !== null
+      ? new Date(periodosTucumanComparativo.fin_anhidro)
+      : null
+
+    setInicioZafraComparativa(fechaInicioZafraComparativo)
+    setFinZafraComparativa(fechaFinZafraComparativo)
+    setInicioDestileriaComparativa(fechaInicioDestileriaComparativo)
+    setFinDestileriaComparativa(fechaFinDestileriaComparativo)
+    setInicioAnhidroComparativa(fechaInicioAnhidroComparativo)
+    setFinAnhidroComparativa(fechaFinAnhidroComparativo)
+
+  }
   /***************************************************************************************/
 
   /************* CALCULO PARA OBTENER FECHA DE INICIO Y FIN DE ZAFRAS NORTE *************/
-  let inicioZafraaNorte = new Date("3/10/2100");
-  let finZafraaNorte = null;
-  const dataFinZafraNorte = () => {
-    for (let clave in fechasInicioIngeniosNorte) {
-      if (fechasInicioIngeniosNorte[clave] === null) {
-        setFinZafraNorte(null);
-        return finZafraaNorte;
-      } else {
-        finZafraaNorte =
-          new Date(fechasInicioIngeniosNorte[clave]) > finZafraaNorte
-            ? new Date(fechasInicioIngeniosNorte[clave])
-            : finZafraaNorte;
-        setFinZafraNorte(finZafraaNorte);
-      }
-      for (let clave in fechasInicioIngeniosNorte) {
-        if (
-          fechasInicioIngeniosNorte[clave] &&
-          fechasInicioIngeniosNorte[clave] !== null
-        ) {
-          inicioZafraaNorte =
-            new Date(fechasInicioIngeniosNorte[clave]) < inicioZafraaNorte
-              ? new Date(fechasInicioIngeniosNorte[clave])
-              : inicioZafraaNorte;
-          setInicioZafraNorte(inicioZafraaNorte);
-        }
-      }
+  useEffect(() => {
+    if (periodosNorteActual && periodosNorteComparativo) {
+      fechasInicioYFinNorte()
     }
-  };
-  let inicioZafraaComparativaNorte = new Date("3/10/2100");
-  let finZafraaComparativaNorte = null;
-  const dataFinZafraComparativaNorte = () => {
-    for (let clave in fechasInicioIngeniosNorteComparativa) {
-      if (fechasInicioIngeniosNorteComparativa[clave] === null) {
-        setFinZafraNorteComparativa("");
+  }, [periodosNorteActual, periodosNorteComparativo])
 
-        return finZafraaComparativaNorte;
-      } else {
-        finZafraaComparativaNorte =
-          new Date(fechasInicioIngeniosNorteComparativa[clave]) >
-            finZafraaComparativaNorte
-            ? new Date(fechasInicioIngeniosNorteComparativa[clave])
-            : finZafraaComparativaNorte;
-        setFinZafraNorteComparativa(finZafraaComparativaNorte);
+  const fechasInicioYFinNorte = () => {
+    const fechaInicioZafra = periodosNorteActual.inicio_zafra && periodosNorteActual.inicio_zafra !== null
+      ? new Date(periodosNorteActual.inicio_zafra)
+      : null
+    const fechaFinZafra = periodosNorteActual.fin_zafra && periodosNorteActual.fin_zafra !== null
+      ? new Date(periodosNorteActual.fin_zafra)
+      : null
 
-        inicioZafraaComparativaNorte =
-          new Date(fechasInicioIngeniosNorteComparativa[clave]) <
-            inicioZafraaComparativaNorte
-            ? new Date(fechasInicioIngeniosNorteComparativa[clave])
-            : inicioZafraaComparativaNorte;
-        setInicioZafraNorteComparativa(inicioZafraaComparativaNorte);
-      }
-    }
-  };
+    const fechaInicioDestileria = periodosNorteActual.inicio_destileria && periodosNorteActual.inicio_destileria !== null
+      ? new Date(periodosNorteActual.inicio_destileria)
+      : null
+    const fechaFinDestileria = periodosNorteActual.fin_destileria && periodosNorteActual.fin_destileria !== null
+      ? new Date(periodosNorteActual.fin_destileria)
+      : null
+
+    const fechaInicioAnhidro = periodosNorteActual.inicio_anhidro && periodosNorteActual.inicio_anhidro !== null
+      ? new Date(periodosNorteActual.inicio_anhidro)
+      : null
+    const fechaFinAnhidro = periodosNorteActual.fin_anhidro && periodosNorteActual.fin_anhidro !== null
+      ? new Date(periodosNorteActual.fin_anhidro)
+      : null
+
+    setInicioZafraNorte(fechaInicioZafra)
+    setFinZafraNorte(fechaFinZafra)
+    setInicioDestileriaNorte(fechaInicioDestileria)
+    setFinDestileriaNorte(fechaFinDestileria)
+    setInicioAnhidroNorte(fechaInicioAnhidro)
+    setFinAnhidroNorte(fechaFinAnhidro)
+
+
+    const fechaInicioZafraComparativo = periodosNorteComparativo.inicio_zafra && periodosNorteComparativo.inicio_zafra !== null
+      ? new Date(periodosNorteComparativo.inicio_zafra)
+      : null
+    const fechaFinZafraComparativo = periodosNorteComparativo.fin_zafra && periodosNorteComparativo.fin_zafra !== null
+      ? new Date(periodosNorteComparativo.fin_zafra)
+      : null
+
+    const fechaInicioDestileriaComparativo = periodosNorteComparativo.inicio_destileria && periodosNorteComparativo.inicio_destileria !== null
+      ? new Date(periodosNorteComparativo.inicio_destileria)
+      : null
+    const fechaFinDestileriaComparativo = periodosNorteComparativo.fin_destileria && periodosNorteComparativo.fin_destileria !== null
+      ? new Date(periodosNorteComparativo.fin_destileria)
+      : null
+
+    const fechaInicioAnhidroComparativo = periodosNorteComparativo.inicio_anhidro && periodosNorteComparativo.inicio_anhidro !== null
+      ? new Date(periodosNorteComparativo.inicio_anhidro)
+      : null
+    const fechaFinAnhidroComparativo = periodosNorteComparativo.fin_anhidro && periodosNorteComparativo.fin_anhidro !== null
+      ? new Date(periodosNorteComparativo.fin_anhidro)
+      : null
+
+    setInicioZafraNorteComparativa(fechaInicioZafraComparativo)
+    setFinZafraNorteComparativa(fechaFinZafraComparativo)
+    setInicioDestileriaNorteComparativa(fechaInicioDestileriaComparativo)
+    setFinDestileriaNorteComparativa(fechaFinDestileriaComparativo)
+    setInicioAnhidroNorteComparativa(fechaInicioAnhidroComparativo)
+    setFinAnhidroNorteComparativa(fechaFinAnhidroComparativo)
+  }
+
   /***************************************************************************************/
 
   /************************** CANTIDAD DIAS DE ZAFRA **************************/
   /***** TUCUMAN *****/
-  const diasZafra = (dataEnd &&
-    new Date(inicioZafra).getTime() !== new Date('3/10/2100').getTime())
-    ? dataEnd - inicioZafra
-    : 0
-  const diasZafraFormat = diasZafra / (1000 * 60 * 60 * 24);
   useEffect(() => {
-    cantDiasZafraComparativa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafraComparativa, finZafraComparativa]);
-  const cantDiasZafraComparativa = () => {
-    const date = new Date(dataEnd);
-    const anioDate = date.getFullYear() - 1;
-    const dateComparativa = new Date(date);
-    dateComparativa.setFullYear(anioDate);
+    cantidadDiasZafraTucuman()
+    cantidadDiasZafraComparativaTucuman()
+  }, [inicioZafra, finZafra, inicioZafraComparativa, finZafraComparativa])
 
-    if (inicioZafraComparativa === "") {
-      setDataDiasZafraComparativa(0);
-    }
+  const cantidadDiasZafraTucuman = () => {
+    let diasZafra = 0
+    const fin = new Date(finZafra)
+    const inicio = new Date(inicioZafra)
+    const fechaParteSeleccionada = new Date(dataEnd)
 
-    if (
-      inicioZafraComparativa !== "" &&
-      dateComparativa < inicioZafraComparativa
-    ) {
-      setDataDiasZafraComparativa(0);
-    }
-    if (
-      inicioZafraComparativa !== "" &&
-      finZafraComparativa === "" &&
-      dateComparativa >= inicioZafraComparativa
-    ) {
-      const diffDates =
-        new Date(dateComparativa).getTime() -
-        new Date(inicioZafraComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    if (inicioZafra && finZafra) {
+      if (fechaParteSeleccionada < finZafra) {
+        diasZafra = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finZafra) {
+        diasZafra = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
     }
 
-    if (
-      inicioZafraComparativa !== "" &&
-      finZafraComparativa !== "" &&
-      dateComparativa >= inicioZafraComparativa &&
-      dateComparativa > finZafraComparativa
-    ) {
-      const diffDates =
-        new Date(finZafraComparativa).getTime() -
-        new Date(inicioZafraComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    if (inicioZafra && (!finZafra || finZafra === null)) {
+      diasZafra = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioZafra || inicioZafra === null) {
+      diasZafra = 0
+    }
+    setDataDiasZafra(diasZafra)
+  }
+
+  const cantidadDiasZafraComparativaTucuman = () => {
+    let diasZafra = 0
+    const fin = new Date(finZafraComparativa)
+    const inicio = new Date(inicioZafraComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioZafraComparativa && finZafraComparativa) {
+      if (fechaParteComparativaSeleccionada < finZafraComparativa) {
+        diasZafra = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finZafraComparativa) {
+        diasZafra = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
     }
 
-    if (
-      inicioZafraComparativa !== "" &&
-      finZafraComparativa !== "" &&
-      dateComparativa >= inicioZafraComparativa &&
-      dateComparativa <= finZafraComparativa
-    ) {
-      const diffDates =
-        new Date(dateComparativa).getTime() -
-        new Date(inicioZafraComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraComparativa(Math.ceil(diffTotal));
+    if (inicioZafraComparativa && (!finZafraComparativa || finZafraComparativa === null)) {
+      diasZafra = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
     }
-  };
-
-  /***** NORTE *****/
-  useEffect(() => {
-    cantDiasZafraNorte();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafraNorte, finZafraNorte]);
-  const cantDiasZafraNorte = () => {
-    if (inicioZafraNorte === "") {
-      setDataDiasZafraNorte(0);
+    if (!inicioZafraComparativa || inicioZafraComparativa === null) {
+      diasZafra = 0
     }
-
-    if (inicioZafraNorte !== "" && dataEnd < inicioZafraNorte) {
-      setDataDiasZafraNorte(0);
-    }
-
-    if (
-      inicioZafraNorte !== "" &&
-      finZafraNorte === null &&
-      dataEnd >= inicioZafraNorte
-    ) {
-      const diffDates =
-        new Date(dataEnd).getTime() - new Date(inicioZafraNorte).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorte(Math.ceil(diffTotal));
-    }
-
-    if (
-      inicioZafraNorte !== "" &&
-      finZafraNorte !== null &&
-      dataEnd >= inicioZafraNorte &&
-      dataEnd > finZafraNorte
-    ) {
-      const diffDates =
-        new Date(finZafraNorte).getTime() -
-        new Date(inicioZafraNorte).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorte(Math.ceil(diffTotal));
-    }
-
-    if (
-      inicioZafraNorte !== "" &&
-      finZafraNorte !== null &&
-      dataEnd >= inicioZafraNorte &&
-      dataEnd <= finZafraNorte
-    ) {
-      const diffDates =
-        new Date(dataEnd).getTime() - new Date(inicioZafraNorte).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorte(Math.ceil(diffTotal));
-    }
-  };
+    setDataDiasZafraComparativa(diasZafra)
+  }
 
   useEffect(() => {
-    cantDiasZafraNorteComparativa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inicioZafraNorteComparativa, finZafraNorteComparativa]);
-  const cantDiasZafraNorteComparativa = () => {
-    const date = new Date(dataEnd);
-    const anioDate = date.getFullYear() - 1;
-    const dateComparativa = new Date(date);
-    dateComparativa.setFullYear(anioDate);
+    cantidadDiasDestileriaTucuman()
+    cantidadDiasDestileriaComparativaTucuman()
+  }, [inicioDestileria, finDestileria, inicioDestileriaComparativa, finDestileriaComparativa])
 
-    if (inicioZafraNorteComparativa === "") {
-      setDataDiasZafraNorteComparativa(0);
-    }
+  const cantidadDiasDestileriaTucuman = () => {
+    let diasDestileria = 0
+    const fin = new Date(finDestileria)
+    const inicio = new Date(inicioDestileria)
+    const fechaParteSeleccionada = new Date(dataEnd)
 
-    if (
-      inicioZafraNorteComparativa !== "" &&
-      dateComparativa < inicioZafraNorteComparativa
-    ) {
-      setDataDiasZafraNorteComparativa(0);
-    }
-    if (
-      inicioZafraNorteComparativa !== "" &&
-      finZafraNorteComparativa === "" &&
-      dateComparativa >= inicioZafraNorteComparativa
-    ) {
-      const diffDates =
-        new Date(dateComparativa).getTime() -
-        new Date(inicioZafraNorteComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorteComparativa(Math.ceil(diffTotal));
+    if (inicioDestileria && finDestileria) {
+      if (fechaParteSeleccionada < finDestileria) {
+        diasDestileria = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finDestileria) {
+        diasDestileria = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
     }
 
-    if (
-      inicioZafraNorteComparativa !== "" &&
-      finZafraNorteComparativa !== "" &&
-      dateComparativa >= inicioZafraNorteComparativa &&
-      dateComparativa > finZafraNorteComparativa
-    ) {
-      const diffDates =
-        new Date(finZafraNorteComparativa).getTime() -
-        new Date(inicioZafraNorteComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorteComparativa(Math.ceil(diffTotal));
+    if (inicioDestileria && (!finDestileria || finDestileria === null)) {
+      diasDestileria = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioDestileria || inicioDestileria === null) {
+      diasDestileria = 0
+    }
+    setDataDiasDestileria(diasDestileria)
+  }
+  const cantidadDiasDestileriaComparativaTucuman = () => {
+    let diasDestileria = 0
+    const fin = new Date(finDestileriaComparativa)
+    const inicio = new Date(inicioDestileriaComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioDestileriaComparativa && finDestileriaComparativa) {
+      if (fechaParteComparativaSeleccionada < finDestileriaComparativa) {
+        diasDestileria = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finDestileriaComparativa) {
+        diasDestileria = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
     }
 
-    if (
-      inicioZafraNorteComparativa !== "" &&
-      finZafraNorteComparativa !== "" &&
-      dateComparativa >= inicioZafraNorteComparativa &&
-      dateComparativa <= finZafraNorteComparativa
-    ) {
-      const diffDates =
-        new Date(dateComparativa).getTime() -
-        new Date(inicioZafraNorteComparativa).getTime();
-      const diffTotal = diffDates / (1000 * 60 * 60 * 24);
-      setDataDiasZafraNorteComparativa(Math.ceil(diffTotal));
+    if (inicioDestileriaComparativa && (!finDestileriaComparativa || finDestileriaComparativa === null)) {
+      diasDestileria = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+
     }
-  };
+    if (!inicioDestileriaComparativa || inicioDestileriaComparativa === null) {
+      diasDestileria = 0
+    }
+    setDataDiasDestileriaComparativa(diasDestileria)
+  }
+
+  useEffect(() => {
+    cantidadDiasAnhidroTucuman()
+    cantidadDiasAnhidroComparativaTucuman()
+  }, [inicioAnhidro, finAnhidro, inicioAnhidroComparativa, finAnhidroComparativa])
+
+  const cantidadDiasAnhidroTucuman = () => {
+    let diasAnhidro = 0
+    const fin = new Date(finAnhidro)
+    const inicio = new Date(inicioAnhidro)
+    const fechaParteSeleccionada = new Date(dataEnd)
+
+    if (inicioAnhidro && finAnhidro) {
+      if (fechaParteSeleccionada < finAnhidro) {
+        diasAnhidro = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finAnhidro) {
+        diasAnhidro = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioAnhidro && (!finAnhidro || finAnhidro === null)) {
+      diasAnhidro = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioAnhidro || inicioAnhidro === null) {
+      diasAnhidro = 0
+    }
+    setDataDiasAnhidro(diasAnhidro)
+  }
+  const cantidadDiasAnhidroComparativaTucuman = () => {
+    let diasAnhidro = 0
+    const fin = new Date(finAnhidroComparativa)
+    const inicio = new Date(inicioAnhidroComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioAnhidroComparativa && finAnhidroComparativa) {
+      if (fechaParteComparativaSeleccionada < finAnhidroComparativa) {
+        diasAnhidro = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finAnhidroComparativa) {
+        diasAnhidro = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioAnhidroComparativa && (!finAnhidroComparativa || finAnhidroComparativa === null)) {
+      diasAnhidro = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+
+    }
+    if (!inicioAnhidroComparativa || inicioAnhidroComparativa === null) {
+      diasAnhidro = 0
+    }
+    setDataDiasAnhidroComparativa(diasAnhidro)
+  }
+
+  /********** NORTE **********/
+  useEffect(() => {
+    cantidadDiasZafraNorte()
+    cantidadDiasZafraComparativaNorte()
+  }, [inicioZafraNorte, finZafraNorte, inicioZafraNorteComparativa, finZafraNorteComparativa])
+
+  const cantidadDiasZafraNorte = () => {
+    let diasZafra = 0
+    const fin = new Date(finZafraNorte)
+    const inicio = new Date(inicioZafraNorte)
+    const fechaParteSeleccionada = new Date(dataEnd)
+
+    if (inicioZafraNorte && finZafraNorte) {
+      if (fechaParteSeleccionada < finZafraNorte) {
+        diasZafra = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finZafraNorte) {
+        diasZafra = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioZafraNorte && (!finZafraNorte || finZafraNorte === null)) {
+      diasZafra = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioZafraNorte || inicioZafraNorte === null) {
+      diasZafra = 0
+    }
+    setDataDiasZafraNorte(diasZafra)
+  }
+
+  const cantidadDiasZafraComparativaNorte = () => {
+    let diasZafra = 0
+    const fin = new Date(finZafraNorteComparativa)
+    const inicio = new Date(inicioZafraNorteComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioZafraNorteComparativa && finZafraNorteComparativa) {
+      if (fechaParteComparativaSeleccionada < finZafraNorteComparativa) {
+        diasZafra = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finZafraNorteComparativa) {
+        diasZafra = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioZafraNorteComparativa && (!finZafraNorteComparativa || finZafraNorteComparativa === null)) {
+      diasZafra = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioZafraNorteComparativa || inicioZafraNorteComparativa === null) {
+      diasZafra = 0
+    }
+    setDataDiasZafraNorteComparativa(diasZafra)
+  }
+
+  useEffect(() => {
+    cantidadDiasDestileriaNorte()
+    cantidadDiasDestileriaComparativaNorte()
+  }, [inicioDestileriaNorte, finDestileriaNorte, inicioDestileriaNorteComparativa, finDestileriaNorteComparativa])
+
+  const cantidadDiasDestileriaNorte = () => {
+    let diasDestileria = 0
+    const fin = new Date(finDestileriaNorte)
+    const inicio = new Date(inicioDestileriaNorte)
+    const fechaParteSeleccionada = new Date(dataEnd)
+
+    if (inicioDestileriaNorte && finDestileriaNorte) {
+      if (fechaParteSeleccionada < finDestileriaNorte) {
+        diasDestileria = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finDestileriaNorte) {
+        diasDestileria = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioDestileriaNorte && (!finDestileriaNorte || finDestileriaNorte === null)) {
+      diasDestileria = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioDestileriaNorte || inicioDestileriaNorte === null) {
+      diasDestileria = 0
+    }
+    setDataDiasDestileriaNorte(diasDestileria)
+  }
+  const cantidadDiasDestileriaComparativaNorte = () => {
+    let diasDestileria = 0
+    const fin = new Date(finDestileriaNorteComparativa)
+    const inicio = new Date(inicioDestileriaNorteComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioDestileriaNorteComparativa && finDestileriaNorteComparativa) {
+      if (fechaParteComparativaSeleccionada < finDestileriaNorteComparativa) {
+        diasDestileria = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finDestileriaNorteComparativa) {
+        diasDestileria = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioDestileriaNorteComparativa && (!finDestileriaNorteComparativa || finDestileriaNorteComparativa === null)) {
+      diasDestileria = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+
+    }
+    if (!inicioDestileriaNorteComparativa || inicioDestileriaNorteComparativa === null) {
+      diasDestileria = 0
+    }
+    setDataDiasDestileriaNorteComparativa(diasDestileria)
+  }
+
+  useEffect(() => {
+    cantidadDiasAnhidroNorte()
+    cantidadDiasAnhidroComparativaNorte()
+  }, [inicioAnhidroNorte, finAnhidroNorte, inicioAnhidroNorteComparativa, finAnhidroNorteComparativa])
+
+  const cantidadDiasAnhidroNorte = () => {
+    let diasAnhidro = 0
+    const fin = new Date(finAnhidroNorte)
+    const inicio = new Date(inicioAnhidroNorte)
+    const fechaParteSeleccionada = new Date(dataEnd)
+
+    if (inicioAnhidroNorte && finAnhidroNorte) {
+      if (fechaParteSeleccionada < finAnhidroNorte) {
+        diasAnhidro = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteSeleccionada >= finAnhidroNorte) {
+        diasAnhidro = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioAnhidroNorte && (!finAnhidroNorte || finAnhidroNorte === null)) {
+      diasAnhidro = ((fechaParteSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+    }
+    if (!inicioAnhidroNorte || inicioAnhidroNorte === null) {
+      diasAnhidro = 0
+    }
+    setDataDiasAnhidroNorte(diasAnhidro)
+  }
+  const cantidadDiasAnhidroComparativaNorte = () => {
+    let diasAnhidro = 0
+    const fin = new Date(finAnhidroNorteComparativa)
+    const inicio = new Date(inicioAnhidroNorteComparativa)
+    const fechaParteSeleccionada = new Date(dataEnd)
+    const anioFechaParteComparativaSeleccionada = fechaParteSeleccionada.getFullYear() - 1
+    const fechaParteComparativaSeleccionada = new Date(fechaParteSeleccionada)
+    fechaParteComparativaSeleccionada.setFullYear(anioFechaParteComparativaSeleccionada)
+
+    if (inicioAnhidroNorteComparativa && finAnhidroNorteComparativa) {
+      if (fechaParteComparativaSeleccionada < finAnhidroNorteComparativa) {
+        diasAnhidro = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+      if (fechaParteComparativaSeleccionada >= finAnhidroNorteComparativa) {
+        diasAnhidro = ((fin - inicio) / (1000 * 60 * 60 * 24)) + 1
+      }
+    }
+
+    if (inicioAnhidroNorteComparativa && (!finAnhidroNorteComparativa || finAnhidroNorteComparativa === null)) {
+      diasAnhidro = ((fechaParteComparativaSeleccionada - inicio) / (1000 * 60 * 60 * 24)) + 1
+
+    }
+    if (!inicioAnhidroNorteComparativa || inicioAnhidroNorteComparativa === null) {
+      diasAnhidro = 0
+    }
+    setDataDiasAnhidroNorteComparativa(diasAnhidro)
+  }
 
   /*******************************************************************/
-
-  useEffect(() => {
-    fechaInicioDestilerias();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateInicioIngenios]);
-
-  let inicioDestileria = new Date("3/10/2100");
-  const fechaInicioDestilerias = () => {
-    dateInicioIngenios?.forEach((d) => {
-      if (d.inicio_destileria !== null) {
-        inicioDestileria =
-          new Date(d.inicio_destileria) < inicioDestileria
-            ? new Date(d.inicio_destileria)
-            : inicioDestileria;
-      }
-    });
-    setFechaInicioDestileria(inicioDestileria);
-  };
 
   /*** ESTIMACIONES ***/
   let estimacionEEAOC;
@@ -662,13 +849,6 @@ const ParteDiario = ({
       estimacionEEAOC = 0
     }
   });
-
-  /** CANTIDAD DIAS DE DESTILERIA **/
-  const diasDestileria = (dataEnd &&
-    new Date(fechaInicioDestileria).getTime() !== new Date("3/10/2100").getTime())
-    ? dataEnd - fechaInicioDestileria
-    : "";
-  const diasDestileriaFormat = diasDestileria / (1000 * 60 * 60 * 24);
   /** Exportacion ZAFRA ACTUAL **/
   const exportarParteComparativo = async () => {
     try {
@@ -676,9 +856,7 @@ const ParteDiario = ({
       const dateFormat = moment(dataEnd).format("DD-MM-YYYY");
       const dataSend = [
         {
-          dataEnd,
-          diasParadaExport,
-          /** TUCUMAN **/
+          /** DATOS TUCUMAN **/
           d1,
           d2,
           d3,
@@ -695,13 +873,7 @@ const ParteDiario = ({
           d14,
           d15,
           dataDestBellaVista,
-          /** NORTE **/
-          n1,
-          n2,
-          n3,
-          n4,
-          n5,
-          /** TUCUMAN - COMPARATIVA **/
+          /** DATOS TUCUMAN - COMPARATIVA **/
           dc1,
           dc2,
           dc3,
@@ -718,51 +890,107 @@ const ParteDiario = ({
           dc14,
           dc15,
           dataDestBellaVistaComparativa,
-          /** NORTE - COMPARATIVA **/
+          /** DATOS NORTE **/
+          n1,
+          n2,
+          n3,
+          n4,
+          n5,
+          /** DATOS NORTE - COMPARATIVA **/
           nc1,
           nc2,
           nc3,
           nc4,
           nc5,
-          dataImport,
-          dataImportComparativa,
-          dataImportNorte,
-          dataUser,
-          dataUserRegister,
-          setBanderaDataNull,
-          inicioZafra,
-          inicioZafraComparativa,
-          fechasInicioIngenios,
-          diasZafraFormat,
-          fechasInicioIngeniosComparativa,
-          dataDiasZafraComparativa,
-          setDataImport,
-          setDataImportComparativa,
-          setDataImportDestileria,
-          setDataImportDestileriaComparativa,
-          dataIngenios,
-          finZafra,
-          finZafraComparativa,
-          dataComparativa,
-          fechaInicioDestileria,
-          zafraParteDiario,
-          fechasInicioDestileriaIngenios,
-          fechasInicioDestileriaIngeniosComparativa,
-          observaciones,
-          /**NORTE **/
-          inicioZafraNorte,
-          inicioZafraNorteComparativa,
-          finZafraNorte,
-          finZafraNorteComparativa,
-          fechasInicioIngeniosNorte,
-          fechasInicioIngeniosNorteComparativa,
-          fechasInicioDestileriaIngeniosNorte,
-          fechasInicioDestileriaIngeniosNorteComparativa,
-          dataDiasZafraNorte,
-          dataDiasZafraNorteComparativa,
+          /*********************/
+          /** GENERALES **/
+          zafraParteDiario,   // Anio de fecha actual
+          dataEnd,  // fecha elegida del parte
+          dataUser,   // TOKEN
+          dataUserRegister,   // Datos del usuario en sesion 
+          observaciones,   // 
+
+          /** FECHAS TUCUMAN **/
+          /*zafra*/
+          inicioZafra,   //  FEcha Inicio de zafra actual
+          inicioZafraComparativa,   // Fecha Inicio de zafra comparativa
+          finZafra,   // fin zafra actual
+          finZafraComparativa,   //  fin zafra comparativa
+          dataDiasZafra,   // dias de zafra actual
+          dataDiasZafraComparativa,   // Dias de zafra comparativa
+          
+          fechasInicioIngenios,   // Fechas de incios y fin de ingenios (Forma antigua) USADAS PARA COLUMNA C D Y AZ
+          fechasInicioIngeniosComparativa,   // Fechas de incios y fin de ingenios de zafra comparativa (Forma antigua)
+          
+          /* destileria */
+          inicioDestileria,
+          inicioDestileriaComparativa,
+          finDestileria,
+          finDestileriaComparativa,
+          dataDiasDestileria,
+          dataDiasDestileriaComparativa,
+
+          fechasInicioDestileriaIngenios,   // Fechas de inciio y fin de destilerias 
+          fechasInicioDestileriaIngeniosComparativa,   // Fecha de inicio y fin destilerias comparativa
+          /*anhidro*/
+          inicioAnhidro,
+          inicioAnhidroComparativa,
+          finAnhidro,
+          finAnhidroComparativa,
+          dataDiasAnhidro,
+          dataDiasAnhidroComparativa,
+
+          fechasInicioAnhidroIngenios,
+          fechasInicioAnhidroIngeniosComparativa,
+          
+          /** FECHAS NORTE **/
+          /*zafra*/
+          inicioZafraNorte,   //  Inicio zafra actual del norte
+          inicioZafraNorteComparativa,   // Inicio de zafra comparativa del norte
+          finZafraNorte,   //  fin zafra actual del norte
+          finZafraNorteComparativa,   //  fin zafra comparativa del norte
+          dataDiasZafraNorte,   // dias de zafra actual del norte
+          dataDiasZafraNorteComparativa,   // dias de zafra comparativa dle norte
+
+          fechasInicioIngeniosNorte,   //  fechas incio, fin y fin_datos zafra actual del norte
+          fechasInicioIngeniosNorteComparativa,   // fechas incio, fin y fin_datos zafra comparativa del norte
+          /*destileria*/
+          inicioDestileriaNorte,
+          inicioDestileriaNorteComparativa,
+          finDestileriaNorte,
+          finDestileriaNorteComparativa,
+          dataDiasDestileriaNorte,
+          dataDiasDestileriaNorteComparativa,
+
+          fechasInicioDestileriaIngeniosNorte,   // fechas inicio y fin destileria actual del norte
+          fechasInicioDestileriaIngeniosNorteComparativa,   // fechas inicio y fin destileria comparativa del norte
+          /*anhidro*/
+          inicioAnhidroNorte,
+          inicioAnhidroNorteComparativa,
+          finAnhidroNorte,
+          finAnhidroNorteComparativa,
+          dataDiasAnhidroNorte,
+          dataDiasAnhidroNorteComparativa,
+
+          fechasInicioAnhidroIngeniosNorte,
+          fechasInicioAnhidroIngeniosNorteComparativa,
+
+          /** REPORTE DIAS PARADAS **/
+          diasParadaExport,   // Registros de dias de parada
+          
+          /** DATOS GENERALES TUCUMAN Y NORTE ***/
+          dataImport,   // Datos de tucuman - Usado para verificar si hay datos desde el backend
+          dataImportComparativa,   // Datos comparativas de tucuman
+          dataImportNorte,   // Datos del norte
+
+          /** INGENIOS LISTADO **/
+          dataIngenios,   // Informacion de ingenios. Listado basico
+
+          /** ESTIMACIONES EEAOC Y CAA **/
+          dataComparativa,   // Datos de estimaciones de EEAOC
         },
       ];
-      
+
       const res = await apiExportExcel("POST", "descargar", dataSend);
       if (res.status === 200) {
         const blob = new Blob([res.data], {
@@ -969,7 +1197,6 @@ const ParteDiario = ({
               finZafra,
               finZafraComparativa,
               dataComparativa,
-              fechaInicioDestileria,
               zafraParteDiario,
               fechasInicioDestileriaIngenios,
               fechasInicioDestileriaIngeniosComparativa,
@@ -1041,15 +1268,15 @@ const ParteDiario = ({
               Datos hasta: {dataEnd ? moment(dataEnd).format("DD-MM-YYYY") : ""}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
-              Días de zafra: {Math.ceil(diasZafraFormat)}
+              Días de zafra: {Math.trunc(dataDiasZafra)}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
-              Días de Destilería: {Math.ceil(diasDestileriaFormat)}
+              Días de Destilería: {Math.trunc(dataDiasDestileria)}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
               Rto CMB(%):{" "}
               {panelCMB
-                ? ((panelAzucarEquivalente / panelCMB) / 10).toFixed(2)
+                ? ((panelAzucarEquivalente / panelCMB) * 100).toFixed(2)
                 : ""}
             </Col>
             <Col className="mb-1 encabezados-panel fw-bolder">
@@ -1152,11 +1379,11 @@ const ParteDiario = ({
           <Dropdown menu={menuProps}>
             <Button
               className={`btn-descargar ${(dataEnd === null ||
-                  dataImport === null ||
-                  dataImportComparativa === null ||
-                  fechasInicioIngenios === null ||
-                  loadingDownload === true ||
-                  fechasInicioIngeniosComparativa === null) &&
+                dataImport === null ||
+                dataImportComparativa === null ||
+                fechasInicioIngenios === null ||
+                loadingDownload === true ||
+                fechasInicioIngeniosComparativa === null) &&
                 "disabled"
                 }`}
             >
@@ -1197,7 +1424,7 @@ const ParteDiario = ({
           </Dropdown>
         </Col>
       </Row>
-      <Row className="d-flex justify-content-start align-items-center pb-1 px-4"> 
+      <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
         <Col>
           <ItemCollpse
             dataAnio={dataAnio}

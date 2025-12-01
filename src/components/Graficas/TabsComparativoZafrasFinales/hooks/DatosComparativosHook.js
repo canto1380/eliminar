@@ -51,90 +51,130 @@ const ingenios = [
 let dataZafraTucuman = {
     aguilaresInicioZafra: null,
     aguilaresFinZafra: null,
+    aguilaresFinDatosZafra: null,
     bellaVistaInicioZafra: null,
     bellaVistaFinZafra: null,
+    bellaVistaFinDatosZafra: null,
     concepcionInicioZafra: null,
     concepcionFinZafra: null,
+    concepcionFinDatosZafra: null,
     cruzAltaInicioZafra: null,
     cruzAltaFinZafra: null,
+    cruzAltaFinDatosZafra: null,
     famaillaInicioZafra: null,
     famaillaFinZafra: null,
+    famaillaFinDatosZafra: null,
     laCoronaInicioZafra: null,
     laCoronaFinZafra: null,
+    laCoronaFinDatosZafra: null,
     laFloridaInicioZafra: null,
     laFloridaFinZafra: null,
+    laFloridaFinDatosZafra: null,
     laProvidenciaInicioZafra: null,
     laProvidenciaFinZafra: null,
+    laProvidenciaFinDatosZafra: null,
     laTrinidadInicioZafra: null,
     laTrinidadFinZafra: null,
+    laTrinidadFinDatosZafra: null,
     lealesInicioZafra: null,
     lealesFinZafra: null,
+    lealesFinDatosZafra: null,
     marapaInicioZafra: null,
     marapaFinZafra: null,
+    marapaFinDatosZafra: null,
     nunorcoInicioZafra: null,
     nunorcoFinZafra: null,
+    nunorcoFinDatosZafra: null,
     staBarbaraInicioZafra: null,
     staBarbaraFinZafra: null,
+    staBarbaraFinDatosZafra: null,
     staRosaInicioZafra: null,
     staRosaFinZafra: null,
+    staRosaFinDatosZafra: null,
     sanJuanInicioZafra: null,
     sanJuanFinZafra: null,
+    sanJuanFinDatosZafra: null,
 };
 let dataZafraTucumanEnd = {
     aguilaresInicioZafraEnd: null,
     aguilaresFinZafraEnd: null,
+    aguilaresFinDatosZafraEnd: null,
     bellaVistaInicioZafraEnd: null,
     bellaVistaFinZafraEnd: null,
+    bellaVistaFinDatosZafraEnd: null,
     concepcionInicioZafraEnd: null,
     concepcionFinZafraEnd: null,
+    concepcionFinDatosZafraEnd: null,
     cruzAltaInicioZafraEnd: null,
     cruzAltaFinZafraEnd: null,
+    cruzAltaFinDatosZafraEnd: null,
     famaillaInicioZafraEnd: null,
     famaillaFinZafraEnd: null,
+    famaillaFinDatosZafraEnd: null,
     laCoronaInicioZafraEnd: null,
     laCoronaFinZafraEnd: null,
+    laCoronaFinDatosZafraEnd: null,
     laFloridaInicioZafraEnd: null,
     laFloridaFinZafraEnd: null,
+    laFloridaFinDatosZafraEnd: null,
     laProvidenciaInicioZafraEnd: null,
     laProvidenciaFinZafraEnd: null,
+    laProvidenciaFinDatosZafraEnd: null,
     laTrinidadInicioZafraEnd: null,
     laTrinidadFinZafraEnd: null,
+    laTrinidadFinDatosZafraEnd: null,
     lealesInicioZafraEnd: null,
     lealesFinZafraEnd: null,
+    lealesFinDatosZafraEnd: null,
     marapaInicioZafraEnd: null,
     marapaFinZafraEnd: null,
+    marapaFinDatosZafraEnd: null,
     nunorcoInicioZafraEnd: null,
     nunorcoFinZafraEnd: null,
+    nunorcoFinDatosZafraEnd: null,
     staBarbaraInicioZafraEnd: null,
     staBarbaraFinZafraEnd: null,
+    staBarbaraFinDatosZafraEnd: null,
     staRosaInicioZafraEnd: null,
     staRosaFinZafraEnd: null,
+    staRosaFinDatosZafraEnd: null,
     sanJuanInicioZafraEnd: null,
     sanJuanFinZafraEnd: null,
+    sanJuanFinDatosZafraEnd: null,
 };
 let dataZafraNorte = {
     laEsperanzaInicioZafra: null,
     laEsperanzaFinZafra: null,
+    laEsperanzaFinDatosZafra: null,
     ledesmaInicioZafra: null,
     ledesmaFinZafra: null,
+    ledesmaFinDatosZafra: null,
     rioGrandeInicioZafra: null,
     rioGrandeFinZafra: null,
+    rioGrandeFinDatosZafra: null,
     sanIsidroInicioZafra: null,
     sanIsidroFinZafra: null,
+    sanIsidroFinDatosZafra: null,
     seaboardInicioZafra: null,
     seaboardFinZafra: null,
+    seaboardFinDatosZafra: null,
 };
 let dataZafraNorteEnd = {
     laEsperanzaInicioZafraEnd: null,
     laEsperanzaFinZafraEnd: null,
+    laEsperanzaFinDatosZafraEnd: null,
     ledesmaInicioZafraEnd: null,
     ledesmaFinZafraEnd: null,
+    ledesmaFinDatosZafraEnd: null,
     rioGrandeInicioZafraEnd: null,
     rioGrandeFinZafraEnd: null,
+    rioGrandeFinDatosZafraEnd: null,
     sanIsidroInicioZafraEnd: null,
     sanIsidroFinZafraEnd: null,
+    sanIsidroFinDatosZafraEnd: null,
     seaboardInicioZafraEnd: null,
     seaboardFinZafraEnd: null,
+    seaboardFinDatosZafraEnd: null,
 };
 
 let dataDestileriaTucuman = {
@@ -605,91 +645,131 @@ export const datosComparativosHook = (
     dataZafraTucuman = {
         aguilaresInicioZafra: aguilaresPeriodo?.inicio_zafra,
         aguilaresFinZafra: aguilaresPeriodo?.fin_zafra,
+        aguilaresFinDatosZafra: aguilaresPeriodo?.fin_datos_zafra,
         bellaVistaInicioZafra: bellaVistaPeriodo?.inicio_zafra,
         bellaVistaFinZafra: bellaVistaPeriodo?.fin_zafra,
+        bellaVistaFinDatosZafra: bellaVistaPeriodo?.fin_datos_zafra,
         concepcionInicioZafra: concepcionPeriodo?.inicio_zafra,
         concepcionFinZafra: concepcionPeriodo?.fin_zafra,
+        concepcionFinDatosZafra: concepcionPeriodo?.fin_datos_zafra,
         cruzAltaInicioZafra: cruzaltaPeriodo?.inicio_zafra,
         cruzAltaFinZafra: cruzaltaPeriodo?.fin_zafra,
+        cruzAltaFinDatosZafra: cruzaltaPeriodo?.fin_datos_zafra,
         famaillaInicioZafra: famaillaPeriodo?.inicio_zafra,
         famaillaFinZafra: famaillaPeriodo?.fin_zafra,
+        famaillaFinDatosZafra: famaillaPeriodo?.fin_datos_zafra,
         laCoronaInicioZafra: coronaPeriodo?.inicio_zafra,
         laCoronaFinZafra: coronaPeriodo?.fin_zafra,
+        laCoronaFinDatosZafra: coronaPeriodo?.fin_datos_zafra,
         laFloridaInicioZafra: floridaPeriodo?.inicio_zafra,
         laFloridaFinZafra: floridaPeriodo?.fin_zafra,
+        laFloridaFinDatosZafra: floridaPeriodo?.fin_datos_zafra,
         laProvidenciaInicioZafra: providenciaPeriodo?.inicio_zafra,
         laProvidenciaFinZafra: providenciaPeriodo?.fin_zafra,
+        laProvidenciaFinDatosZafra: providenciaPeriodo?.fin_datos_zafra,
         laTrinidadInicioZafra: trinidadPeriodo?.inicio_zafra,
         laTrinidadFinZafra: trinidadPeriodo?.fin_zafra,
+        laTrinidadFinDatosZafra: trinidadPeriodo?.fin_datos_zafra,
         lealesInicioZafra: lealesPeriodo?.inicio_zafra,
         lealesFinZafra: lealesPeriodo?.fin_zafra,
+        lealesFinDatosZafra: lealesPeriodo?.fin_datos_zafra,
         marapaInicioZafra: marapaPeriodo?.inicio_zafra,
         marapaFinZafra: marapaPeriodo?.fin_zafra,
+        marapaFinDatosZafra: marapaPeriodo?.fin_datos_zafra,
         nunorcoInicioZafra: nunorcoPeriodo?.inicio_zafra,
         nunorcoFinZafra: nunorcoPeriodo?.fin_zafra,
+        nunorcoFinDatosZafra: nunorcoPeriodo?.fin_datos_zafra,
         staBarbaraInicioZafra: stabarbaraPeriodo?.inicio_zafra,
         staBarbaraFinZafra: stabarbaraPeriodo?.fin_zafra,
+        staBarbaraFinDatosZafra: stabarbaraPeriodo?.fin_datos_zafra,
         staRosaInicioZafra: starosaPeriodo?.inicio_zafra,
         staRosaFinZafra: starosaPeriodo?.fin_zafra,
+        staRosaFinDatosZafra: starosaPeriodo?.fin_datos_zafra,
         sanJuanInicioZafra: sanjuanPeriodo?.inicio_zafra,
         sanJuanFinZafra: sanjuanPeriodo?.fin_zafra,
+        sanJuanFinDatosZafra: sanjuanPeriodo?.fin_datos_zafra,
     };
     dataZafraTucumanEnd = {
         aguilaresInicioZafraEnd: aguilaresPeriodoEnd?.inicio_zafra,
         aguilaresFinZafraEnd: aguilaresPeriodoEnd?.fin_zafra,
+        aguilaresFinDatosZafraEnd: aguilaresPeriodoEnd?.fin_datos_zafra,
         bellaVistaInicioZafraEnd: bellaVistaPeriodoEnd?.inicio_zafra,
         bellaVistaFinZafraEnd: bellaVistaPeriodoEnd?.fin_zafra,
+        bellaVistaFinDatosZafraEnd: bellaVistaPeriodoEnd?.fin_datos_zafra,
         concepcionInicioZafraEnd: concepcionPeriodoEnd?.inicio_zafra,
         concepcionFinZafraEnd: concepcionPeriodoEnd?.fin_zafra,
+        concepcionFinDatosZafraEnd: concepcionPeriodoEnd?.fin_datos_zafra,
         cruzAltaInicioZafraEnd: cruzaltaPeriodoEnd?.inicio_zafra,
         cruzAltaFinZafraEnd: cruzaltaPeriodoEnd?.fin_zafra,
+        cruzAltaFinDatosZafraEnd: cruzaltaPeriodoEnd?.fin_datos_zafra,
         famaillaInicioZafraEnd: famaillaPeriodoEnd?.inicio_zafra,
         famaillaFinZafraEnd: famaillaPeriodoEnd?.fin_zafra,
+        famaillaFinDatosZafraEnd: famaillaPeriodoEnd?.fin_datos_zafra,
         laCoronaInicioZafraEnd: coronaPeriodoEnd?.inicio_zafra,
         laCoronaFinZafraEnd: coronaPeriodoEnd?.fin_zafra,
+        laCoronaFinDatosZafraEnd: coronaPeriodoEnd?.fin_datos_zafra,
         laFloridaInicioZafraEnd: floridaPeriodoEnd?.inicio_zafra,
         laFloridaFinZafraEnd: floridaPeriodoEnd?.fin_zafra,
+        laFloridaFinDatosZafraEnd: floridaPeriodoEnd?.fin_datos_zafra,
         laProvidenciaInicioZafraEnd: providenciaPeriodoEnd?.inicio_zafra,
         laProvidenciaFinZafraEnd: providenciaPeriodoEnd?.fin_zafra,
+        laProvidenciaFinDatosZafraEnd: providenciaPeriodoEnd?.fin_datos_zafra,
         laTrinidadInicioZafraEnd: trinidadPeriodoEnd?.inicio_zafra,
         laTrinidadFinZafraEnd: trinidadPeriodoEnd?.fin_zafra,
+        laTrinidadFinDatosZafraEnd: trinidadPeriodoEnd?.fin_datos_zafra,
         lealesInicioZafraEnd: lealesPeriodoEnd?.inicio_zafra,
         lealesFinZafraEnd: lealesPeriodoEnd?.fin_zafra,
+        lealesFinDatosZafraEnd: lealesPeriodoEnd?.fin_datos_zafra,
         marapaInicioZafraEnd: marapaPeriodoEnd?.inicio_zafra,
         marapaFinZafraEnd: marapaPeriodoEnd?.fin_zafra,
+        marapaFinDatosZafraEnd: marapaPeriodoEnd?.fin_datos_zafra,
         nunorcoInicioZafraEnd: nunorcoPeriodoEnd?.inicio_zafra,
         nunorcoFinZafraEnd: nunorcoPeriodoEnd?.fin_zafra,
+        nunorcoFinDatosZafraEnd: nunorcoPeriodoEnd?.fin_datos_zafra,
         staBarbaraInicioZafraEnd: stabarbaraPeriodoEnd?.inicio_zafra,
         staBarbaraFinZafraEnd: stabarbaraPeriodoEnd?.fin_zafra,
+        staBarbaraFinDatosZafraEnd: stabarbaraPeriodoEnd?.fin_datos_zafra,
         staRosaInicioZafraEnd: starosaPeriodoEnd?.inicio_zafra,
         staRosaFinZafraEnd: starosaPeriodoEnd?.fin_zafra,
+        staRosaFinDatosZafraEnd: starosaPeriodoEnd?.fin_datos_zafra,
         sanJuanInicioZafraEnd: sanjuanPeriodoEnd?.inicio_zafra,
         sanJuanFinZafraEnd: sanjuanPeriodoEnd?.fin_zafra,
+        sanJuanFinDatosZafraEnd: sanjuanPeriodoEnd?.fin_datos_zafra,
     };
     /** NORTE **/
     dataZafraNorte = {
         laEsperanzaInicioZafra: laesperanzaPeriodo?.inicio_zafra,
         laEsperanzaFinZafra: laesperanzaPeriodo?.fin_zafra,
+        laEsperanzaFinDatosZafra: laesperanzaPeriodo?.fin_datos_zafra,
         ledesmaInicioZafra: ledesmaPeriodo?.inicio_zafra,
         ledesmaFinZafra: ledesmaPeriodo?.fin_zafra,
+        ledesmaFinDatosZafra: ledesmaPeriodo?.fin_datos_zafra,
         rioGrandeInicioZafra: riograndePeriodo?.inicio_zafra,
         rioGrandeFinZafra: riograndePeriodo?.fin_zafra,
+        rioGrandeFinDatosZafra: riograndePeriodo?.fin_datos_zafra,
         sanIsidroInicioZafra: sanisidroPeriodo?.inicio_zafra,
         sanIsidroFinZafra: sanisidroPeriodo?.fin_zafra,
+        sanIsidroFinDatosZafra: sanisidroPeriodo?.fin_datos_zafra,
         seaboardInicioZafra: seaboardPeriodo?.inicio_zafra,
         seaboardFinZafra: seaboardPeriodo?.fin_zafra,
+        seaboardFinDatosZafra: seaboardPeriodo?.fin_datos_zafra,
     };
     dataZafraNorteEnd = {
         laEsperanzaInicioZafraEnd: laesperanzaPeriodoEnd?.inicio_zafra,
         laEsperanzaFinZafraEnd: laesperanzaPeriodoEnd?.fin_zafra,
+        laEsperanzaFinDatosZafraEnd: laesperanzaPeriodoEnd?.fin_datos_zafra,
         ledesmaInicioZafraEnd: ledesmaPeriodoEnd?.inicio_zafra,
         ledesmaFinZafraEnd: ledesmaPeriodoEnd?.fin_zafra,
+        ledesmaFinDatosZafraEnd: ledesmaPeriodoEnd?.fin_datos_zafra,
         rioGrandeInicioZafraEnd: riograndePeriodoEnd?.inicio_zafra,
         rioGrandeFinZafraEnd: riograndePeriodoEnd?.fin_zafra,
+        rioGrandeFinDatosZafraEnd: riograndePeriodoEnd?.fin_datos_zafra,
         sanIsidroInicioZafraEnd: sanisidroPeriodoEnd?.inicio_zafra,
         sanIsidroFinZafraEnd: sanisidroPeriodoEnd?.fin_zafra,
+        sanIsidroFinDatosZafraEnd: sanisidroPeriodoEnd?.fin_datos_zafra,
         seaboardInicioZafraEnd: seaboardPeriodoEnd?.inicio_zafra,
         seaboardFinZafraEnd: seaboardPeriodoEnd?.fin_zafra,
+        seaboardFinDatosZafraEnd: seaboardPeriodoEnd?.fin_datos_zafra,
     };
 
     /** DESTILERIA - TUCUMAN **/
@@ -1853,12 +1933,73 @@ export const datosComparativosHook = (
 
     /****************************** DATOS ZAFRA ******************************/
     /********* TUCUMAN ANIO ACTUAL *********/
+    const ultimoRegistroAguilares = new Date(dataZafraTucumanEnd.aguilaresFinZafraEnd) >= new Date(dataZafraTucumanEnd.aguilaresFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.aguilaresFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.aguilaresFinDatosZafraEnd)
+
+    const ultimoRegistroBellaVista = new Date(dataZafraTucumanEnd.bellaVistaFinZafraEnd) >= new Date(dataZafraTucumanEnd.bellaVistaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.bellaVistaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.bellaVistaFinDatosZafraEnd)
+
+    const ultimoRegistroConcepcion = new Date(dataZafraTucumanEnd.concepcionFinZafraEnd) >= new Date(dataZafraTucumanEnd.concepcionFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.concepcionFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.concepcionFinDatosZafraEnd)
+
+    const ultimoRegistroCruzAlta = new Date(dataZafraTucumanEnd.cruzAltaFinZafraEnd) >= new Date(dataZafraTucumanEnd.cruzAltaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.cruzAltaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.cruzAltaFinDatosZafraEnd)
+
+    const ultimoRegistroFamailla = new Date(dataZafraTucumanEnd.famaillaFinZafraEnd) >= new Date(dataZafraTucumanEnd.famaillaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.famaillaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.famaillaFinDatosZafraEnd)
+
+    const ultimoRegistroLaCorona = new Date(dataZafraTucumanEnd.laCoronaFinZafraEnd) >= new Date(dataZafraTucumanEnd.laCoronaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.laCoronaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.laCoronaFinDatosZafraEnd)
+
+    const ultimoRegistroLaFlorida = new Date(dataZafraTucumanEnd.laFloridaFinZafraEnd) >= new Date(dataZafraTucumanEnd.laFloridaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.laFloridaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.laFloridaFinDatosZafraEnd)
+
+    const ultimoRegistroLaProvidencia = new Date(dataZafraTucumanEnd.laProvidenciaFinZafraEnd) >= new Date(dataZafraTucumanEnd.laProvidenciaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.laProvidenciaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.laProvidenciaFinDatosZafraEnd)
+
+    const ultimoRegistroLaTrinidad = new Date(dataZafraTucumanEnd.laTrinidadFinZafraEnd) >= new Date(dataZafraTucumanEnd.laTrinidadFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.laTrinidadFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.laTrinidadFinDatosZafraEnd)
+
+    const ultimoRegistroLeales = new Date(dataZafraTucumanEnd.lealesFinZafraEnd) >= new Date(dataZafraTucumanEnd.lealesFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.lealesFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.lealesFinDatosZafraEnd)
+
+    const ultimoRegistroMarapa = new Date(dataZafraTucumanEnd.marapaFinZafraEnd) >= new Date(dataZafraTucumanEnd.marapaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.marapaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.marapaFinDatosZafraEnd)
+
+    const ultimoRegistroNunorco = new Date(dataZafraTucumanEnd.nunorcoFinZafraEnd) >= new Date(dataZafraTucumanEnd.nunorcoFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.nunorcoFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.nunorcoFinDatosZafraEnd)
+
+    const ultimoRegistroStaBarbara = new Date(dataZafraTucumanEnd.staBarbaraFinZafraEnd) >= new Date(dataZafraTucumanEnd.staBarbaraFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.staBarbaraFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.staBarbaraFinDatosZafraEnd)
+
+    const ultimoRegistroStaRosa = new Date(dataZafraTucumanEnd.staRosaFinZafraEnd) >= new Date(dataZafraTucumanEnd.staRosaFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.staRosaFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.staRosaFinDatosZafraEnd)
+
+    const ultimoRegistroSanJuan = new Date(dataZafraTucumanEnd.sanJuanFinZafraEnd) >= new Date(dataZafraTucumanEnd.sanJuanFinDatosZafraEnd)
+        ? new Date(dataZafraTucumanEnd.sanJuanFinZafraEnd)
+        : new Date(dataZafraTucumanEnd.sanJuanFinDatosZafraEnd)
+
     dataAnioEndZafraTucuman?.forEach((d) => {
         if (
             d.ingenioNombre === "Aguilares" &&
             dataZafraTucumanEnd.aguilaresInicioZafraEnd &&
             dataZafraTucumanEnd.aguilaresFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.aguilaresInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.aguilaresInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroAguilares
         ) {
             variablesEnd.cmb1 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn1 += d.moliendaCanaNeta || 0;
@@ -1891,7 +2032,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Bella Vista" &&
             dataZafraTucumanEnd.bellaVistaInicioZafraEnd &&
             dataZafraTucumanEnd.bellaVistaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.bellaVistaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.bellaVistaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroBellaVista
         ) {
             variablesEnd.cmb2 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn2 += d.moliendaCanaNeta || 0;
@@ -1924,7 +2066,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Concepción" &&
             dataZafraTucumanEnd.concepcionInicioZafraEnd &&
             dataZafraTucumanEnd.concepcionFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.concepcionInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.concepcionInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroConcepcion
         ) {
 
             variablesEnd.cmb3 += d.moliendaCanaBruta || 0;
@@ -1959,7 +2102,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Cruz Alta" &&
             dataZafraTucumanEnd.cruzAltaInicioZafraEnd &&
             dataZafraTucumanEnd.cruzAltaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.cruzAltaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.cruzAltaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroCruzAlta
         ) {
             variablesEnd.cmb4 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn4 += d.moliendaCanaNeta || 0;
@@ -1993,7 +2137,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Famaillá" &&
             dataZafraTucumanEnd.famaillaInicioZafraEnd &&
             dataZafraTucumanEnd.famaillaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.famaillaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.famaillaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroFamailla
         ) {
             variablesEnd.cmb6 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn6 += d.moliendaCanaNeta || 0;
@@ -2026,7 +2171,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Corona" &&
             dataZafraTucumanEnd.laCoronaInicioZafraEnd &&
             dataZafraTucumanEnd.laCoronaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laCoronaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laCoronaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaCorona
         ) {
             variablesEnd.cmb7 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn7 += d.moliendaCanaNeta || 0;
@@ -2060,7 +2206,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Florida" &&
             dataZafraTucumanEnd.laFloridaInicioZafraEnd &&
             dataZafraTucumanEnd.laFloridaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laFloridaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laFloridaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaFlorida
         ) {
             variablesEnd.cmb8 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn8 += d.moliendaCanaNeta || 0;
@@ -2094,7 +2241,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Providencia" &&
             dataZafraTucumanEnd.laProvidenciaInicioZafraEnd &&
             dataZafraTucumanEnd.laProvidenciaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laProvidenciaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laProvidenciaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaProvidencia
         ) {
             variablesEnd.cmb9 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn9 += d.moliendaCanaNeta || 0;
@@ -2127,7 +2275,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Trinidad" &&
             dataZafraTucumanEnd.laTrinidadInicioZafraEnd &&
             dataZafraTucumanEnd.laTrinidadFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laTrinidadInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.laTrinidadInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaTrinidad
         ) {
             variablesEnd.cmb10 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn10 += d.moliendaCanaNeta || 0;
@@ -2160,7 +2309,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Leales" &&
             dataZafraTucumanEnd.lealesInicioZafraEnd &&
             dataZafraTucumanEnd.lealesFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.lealesInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.lealesInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLeales
         ) {
             variablesEnd.cmb11 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn11 += d.moliendaCanaNeta || 0;
@@ -2193,7 +2343,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Marapa" &&
             dataZafraTucumanEnd.marapaInicioZafraEnd &&
             dataZafraTucumanEnd.marapaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.marapaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.marapaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroMarapa
         ) {
             variablesEnd.cmb12 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn12 += d.moliendaCanaNeta || 0;
@@ -2226,7 +2377,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ñuñorco" &&
             dataZafraTucumanEnd.nunorcoInicioZafraEnd &&
             dataZafraTucumanEnd.nunorcoFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.nunorcoInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.nunorcoInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroNunorco
         ) {
             variablesEnd.cmb13 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn13 += d.moliendaCanaNeta || 0;
@@ -2259,7 +2411,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Santa Barbara" &&
             dataZafraTucumanEnd.staBarbaraInicioZafraEnd &&
             dataZafraTucumanEnd.staBarbaraFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staBarbaraInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staBarbaraInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroStaBarbara
         ) {
             variablesEnd.cmb14 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn14 += d.moliendaCanaNeta || 0;
@@ -2292,7 +2445,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Santa Rosa" &&
             dataZafraTucumanEnd.staRosaInicioZafraEnd &&
             dataZafraTucumanEnd.staRosaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staRosaInicioZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraTucumanEnd.staRosaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroStaRosa
         ) {
             variablesEnd.cmb15 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn15 += d.moliendaCanaNeta || 0;
@@ -2325,12 +2479,73 @@ export const datosComparativosHook = (
 
 
     /********* TUCUMAN ANIO COMPARATIVO *********/
+    const ultimoRegistroAguilareComparativo = new Date(dataZafraTucuman.aguilaresFinZafra) >= new Date(dataZafraTucuman.aguilaresFinDatosZafra)
+        ? new Date(dataZafraTucuman.aguilaresFinZafra)
+        : new Date(dataZafraTucuman.aguilaresFinDatosZafra)
+
+    const ultimoRegistroBellaVistaComparativo = new Date(dataZafraTucuman.bellaVistaFinZafra) >= new Date(dataZafraTucuman.bellaVistaFinDatosZafra)
+        ? new Date(dataZafraTucuman.bellaVistaFinZafra)
+        : new Date(dataZafraTucuman.bellaVistaFinDatosZafra)
+
+    const ultimoRegistroConcepcionComparativo = new Date(dataZafraTucuman.concepcionFinZafra) >= new Date(dataZafraTucuman.concepcionFinDatosZafra)
+        ? new Date(dataZafraTucuman.concepcionFinZafra)
+        : new Date(dataZafraTucuman.concepcionFinDatosZafra)
+
+    const ultimoRegistroCruzAltaComparativo = new Date(dataZafraTucuman.cruzAltaFinZafra) >= new Date(dataZafraTucuman.cruzAltaFinDatosZafra)
+        ? new Date(dataZafraTucuman.cruzAltaFinZafra)
+        : new Date(dataZafraTucuman.cruzAltaFinDatosZafra)
+
+    const ultimoRegistroFamaillaComparativo = new Date(dataZafraTucuman.famaillaFinZafra) >= new Date(dataZafraTucuman.famaillaFinDatosZafra)
+        ? new Date(dataZafraTucuman.famaillaFinZafra)
+        : new Date(dataZafraTucuman.famaillaFinDatosZafra)
+
+    const ultimoRegistroLaCoronaComparativo = new Date(dataZafraTucuman.laCoronaFinZafra) >= new Date(dataZafraTucuman.laCoronaFinDatosZafra)
+        ? new Date(dataZafraTucuman.laCoronaFinZafra)
+        : new Date(dataZafraTucuman.laCoronaFinDatosZafra)
+
+    const ultimoRegistroLaFloridaComparativo = new Date(dataZafraTucuman.laFloridaFinZafra) >= new Date(dataZafraTucuman.laFloridaFinDatosZafra)
+        ? new Date(dataZafraTucuman.laFloridaFinZafra)
+        : new Date(dataZafraTucuman.laFloridaFinDatosZafra)
+
+    const ultimoRegistroLaProvidenciaComparativo = new Date(dataZafraTucuman.laProvidenciaFinZafra) >= new Date(dataZafraTucuman.laProvidenciaFinDatosZafra)
+        ? new Date(dataZafraTucuman.laProvidenciaFinZafra)
+        : new Date(dataZafraTucuman.laProvidenciaFinDatosZafra)
+
+    const ultimoRegistroLaTrinidadComparativo = new Date(dataZafraTucuman.laTrinidadFinZafra) >= new Date(dataZafraTucuman.laTrinidadFinDatosZafra)
+        ? new Date(dataZafraTucuman.laTrinidadFinZafra)
+        : new Date(dataZafraTucuman.laTrinidadFinDatosZafra)
+
+    const ultimoRegistroLealesComparativo = new Date(dataZafraTucuman.lealesFinZafra) >= new Date(dataZafraTucuman.lealesFinDatosZafra)
+        ? new Date(dataZafraTucuman.lealesFinZafra)
+        : new Date(dataZafraTucuman.lealesFinDatosZafra)
+
+    const ultimoRegistroMarapaComparativo = new Date(dataZafraTucuman.marapaFinZafra) >= new Date(dataZafraTucuman.marapaFinDatosZafra)
+        ? new Date(dataZafraTucuman.marapaFinZafra)
+        : new Date(dataZafraTucuman.marapaFinDatosZafra)
+
+    const ultimoRegistroNunorcoComparativo = new Date(dataZafraTucuman.nunorcoFinZafra) >= new Date(dataZafraTucuman.nunorcoFinDatosZafra)
+        ? new Date(dataZafraTucuman.nunorcoFinZafra)
+        : new Date(dataZafraTucuman.nunorcoFinDatosZafra)
+
+    const ultimoRegistroStaBarbaraComparativo = new Date(dataZafraTucuman.staBarbaraFinZafra) >= new Date(dataZafraTucuman.staBarbaraFinDatosZafra)
+        ? new Date(dataZafraTucuman.staBarbaraFinZafra)
+        : new Date(dataZafraTucuman.staBarbaraFinDatosZafra)
+
+    const ultimoRegistroStaRosaComparativo = new Date(dataZafraTucuman.staRosaFinZafra) >= new Date(dataZafraTucuman.staRosaFinDatosZafra)
+        ? new Date(dataZafraTucuman.staRosaFinZafra)
+        : new Date(dataZafraTucuman.staRosaFinDatosZafra)
+
+    const ultimoRegistroSanJuanComparativo = new Date(dataZafraTucuman.sanJuanFinZafra) >= new Date(dataZafraTucuman.sanJuanFinDatosZafra)
+        ? new Date(dataZafraTucuman.sanJuanFinZafra)
+        : new Date(dataZafraTucuman.sanJuanFinDatosZafra)
+
     dataAnioStartZafraTucuman?.forEach((d) => {
         if (
             d.ingenioNombre === "Aguilares" &&
             dataZafraTucuman.aguilaresInicioZafra &&
             dataZafraTucuman.aguilaresFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.aguilaresInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.aguilaresInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroAguilareComparativo
         ) {
             variables.cmb1 += d.moliendaCanaBruta || 0;
             variables.cmn1 += d.moliendaCanaNeta || 0;
@@ -2363,7 +2578,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Bella Vista" &&
             dataZafraTucuman.bellaVistaInicioZafra &&
             dataZafraTucuman.bellaVistaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.bellaVistaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.bellaVistaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroBellaVistaComparativo
         ) {
             variables.cmb2 += d.moliendaCanaBruta || 0;
             variables.cmn2 += d.moliendaCanaNeta || 0;
@@ -2396,7 +2612,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Concepción" &&
             dataZafraTucuman.concepcionInicioZafra &&
             dataZafraTucuman.concepcionFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.concepcionInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.concepcionInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroConcepcionComparativo
         ) {
 
             variables.cmb3 += d.moliendaCanaBruta || 0;
@@ -2430,7 +2647,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Cruz Alta" &&
             dataZafraTucuman.cruzAltaInicioZafra &&
             dataZafraTucuman.cruzAltaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.cruzAltaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.cruzAltaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroCruzAltaComparativo
         ) {
             variables.cmb4 += d.moliendaCanaBruta || 0;
             variables.cmn4 += d.moliendaCanaNeta || 0;
@@ -2464,7 +2682,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Famaillá" &&
             dataZafraTucuman.famaillaInicioZafra &&
             dataZafraTucuman.famaillaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.famaillaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.famaillaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroFamaillaComparativo
         ) {
             variables.cmb6 += d.moliendaCanaBruta || 0;
             variables.cmn6 += d.moliendaCanaNeta || 0;
@@ -2497,7 +2716,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Corona" &&
             dataZafraTucuman.laCoronaInicioZafra &&
             dataZafraTucuman.laCoronaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laCoronaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laCoronaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaCoronaComparativo
         ) {
             variables.cmb7 += d.moliendaCanaBruta || 0;
             variables.cmn7 += d.moliendaCanaNeta || 0;
@@ -2530,7 +2750,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Florida" &&
             dataZafraTucuman.laFloridaInicioZafra &&
             dataZafraTucuman.laFloridaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laFloridaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laFloridaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaFloridaComparativo
         ) {
             variables.cmb8 += d.moliendaCanaBruta || 0;
             variables.cmn8 += d.moliendaCanaNeta || 0;
@@ -2563,7 +2784,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Providencia" &&
             dataZafraTucuman.laProvidenciaInicioZafra &&
             dataZafraTucuman.laProvidenciaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laProvidenciaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laProvidenciaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaProvidenciaComparativo
         ) {
             variables.cmb9 += d.moliendaCanaBruta || 0;
             variables.cmn9 += d.moliendaCanaNeta || 0;
@@ -2596,7 +2818,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "La Trinidad" &&
             dataZafraTucuman.laTrinidadInicioZafra &&
             dataZafraTucuman.laTrinidadFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laTrinidadInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.laTrinidadInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaTrinidadComparativo
         ) {
             variables.cmb10 += d.moliendaCanaBruta || 0;
             variables.cmn10 += d.moliendaCanaNeta || 0;
@@ -2629,7 +2852,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Leales" &&
             dataZafraTucuman.lealesInicioZafra &&
             dataZafraTucuman.lealesFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.lealesInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.lealesInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLealesComparativo
         ) {
             variables.cmb11 += d.moliendaCanaBruta || 0;
             variables.cmn11 += d.moliendaCanaNeta || 0;
@@ -2662,7 +2886,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Marapa" &&
             dataZafraTucuman.marapaInicioZafra &&
             dataZafraTucuman.marapaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.marapaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.marapaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroMarapaComparativo
         ) {
             variables.cmb12 += d.moliendaCanaBruta || 0;
             variables.cmn12 += d.moliendaCanaNeta || 0;
@@ -2695,7 +2920,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ñuñorco" &&
             dataZafraTucuman.nunorcoInicioZafra &&
             dataZafraTucuman.nunorcoFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.nunorcoInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.nunorcoInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroNunorcoComparativo
         ) {
             variables.cmb13 += d.moliendaCanaBruta || 0;
             variables.cmn13 += d.moliendaCanaNeta || 0;
@@ -2728,7 +2954,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Santa Barbara" &&
             dataZafraTucuman.staBarbaraInicioZafra &&
             dataZafraTucuman.staBarbaraFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staBarbaraInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staBarbaraInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroStaBarbaraComparativo
         ) {
             variables.cmb14 += d.moliendaCanaBruta || 0;
             variables.cmn14 += d.moliendaCanaNeta || 0;
@@ -2761,7 +2988,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Santa Rosa" &&
             dataZafraTucuman.staRosaInicioZafra &&
             dataZafraTucuman.staRosaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staRosaInicioZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraTucuman.staRosaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroStaRosaComparativo
         ) {
             variables.cmb15 += d.moliendaCanaBruta || 0;
             variables.cmn15 += d.moliendaCanaNeta || 0;
@@ -3248,14 +3476,34 @@ export const datosComparativosHook = (
 
     /****************************** NORTE DATOS ZAFRA ******************************/
     /********* NORTE ANIO ACTUAL *********/
+
+    const ultimoRegistroLaEsperanza = new Date(dataZafraNorteEnd.laEsperanzaFinZafraEnd) >= new Date(dataZafraNorteEnd.laEsperanzaFinDatosZafraEnd)
+        ? new Date(dataZafraNorteEnd.laEsperanzaFinZafraEnd)
+        : new Date(dataZafraNorteEnd.laEsperanzaFinDatosZafraEnd)
+
+    const ultimoRegistroLedesma = new Date(dataZafraNorteEnd.ledesmaFinZafraEnd) >= new Date(dataZafraNorteEnd.ledesmaFinDatosZafraEnd)
+        ? new Date(dataZafraNorteEnd.ledesmaFinZafraEnd)
+        : new Date(dataZafraNorteEnd.ledesmaFinDatosZafraEnd)
+
+    const ultimoRegistroRioGrande = new Date(dataZafraNorteEnd.rioGrandeFinZafraEnd) >= new Date(dataZafraNorteEnd.rioGrandeFinDatosZafraEnd)
+        ? new Date(dataZafraNorteEnd.rioGrandeFinZafraEnd)
+        : new Date(dataZafraNorteEnd.rioGrandeFinDatosZafraEnd)
+
+    const ultimoRegistroSanIsidro = new Date(dataZafraNorteEnd.sanIsidroFinZafraEnd) >= new Date(dataZafraNorteEnd.sanIsidroFinDatosZafraEnd)
+        ? new Date(dataZafraNorteEnd.sanIsidroFinZafraEnd)
+        : new Date(dataZafraNorteEnd.sanIsidroFinDatosZafraEnd)
+
+    const ultimoRegistroSeaboard = new Date(dataZafraNorteEnd.seaboardFinZafraEnd) >= new Date(dataZafraNorteEnd.seaboardFinDatosZafraEnd)
+        ? new Date(dataZafraNorteEnd.seaboardFinZafraEnd)
+        : new Date(dataZafraNorteEnd.seaboardFinDatosZafraEnd)
+
     dataAnioEndZafraNorte?.forEach((d) => {
         if (
             d.ingenioNombre === "La Esperanza" &&
             dataZafraNorteEnd.laEsperanzaInicioZafraEnd &&
             dataZafraNorteEnd.laEsperanzaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.laEsperanzaInicioZafraEnd)
-            //  &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.laEsperanzaFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.laEsperanzaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaEsperanza
         ) {
             variablesEnd.cmb16 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn16 += d.moliendaCanaNeta || 0;
@@ -3288,9 +3536,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataZafraNorteEnd.ledesmaInicioZafraEnd &&
             dataZafraNorteEnd.ledesmaFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.ledesmaInicioZafraEnd)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.ledesmaFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.ledesmaInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroLedesma
         ) {
             variablesEnd.cmb17 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn17 += d.moliendaCanaNeta || 0;
@@ -3323,9 +3570,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataZafraNorteEnd.rioGrandeInicioZafraEnd &&
             dataZafraNorteEnd.rioGrandeFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.rioGrandeInicioZafraEnd)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.rioGrandeFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.rioGrandeInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroRioGrande
         ) {
             variablesEnd.cmb18 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn18 += d.moliendaCanaNeta || 0;
@@ -3358,9 +3604,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataZafraNorteEnd.sanIsidroInicioZafraEnd &&
             dataZafraNorteEnd.sanIsidroFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.sanIsidroInicioZafraEnd)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.sanIsidroFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.sanIsidroInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroSanIsidro
         ) {
             variablesEnd.cmb19 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn19 += d.moliendaCanaNeta || 0;
@@ -3394,9 +3639,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Seaboard" &&
             dataZafraNorteEnd.seaboardInicioZafraEnd &&
             dataZafraNorteEnd.seaboardFinZafraEnd &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.seaboardInicioZafraEnd)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorteEnd.seaboardFinZafraEnd)
+            new Date(d.fechaParte) >= new Date(dataZafraNorteEnd.seaboardInicioZafraEnd) &&
+            new Date(d.fechaParte) <= ultimoRegistroSeaboard
         ) {
             variablesEnd.cmb20 += d.moliendaCanaBruta || 0;
             variablesEnd.cmn20 += d.moliendaCanaNeta || 0;
@@ -3428,14 +3672,34 @@ export const datosComparativosHook = (
     })
 
     /********* NORTE ANIO COMPARATIVO *********/
+
+    const ultimoRegistroLaEsperanzaComparativo = new Date(dataZafraNorte.laEsperanzaFinZafra) >= new Date(dataZafraNorte.laEsperanzaFinDatosZafra)
+        ? new Date(dataZafraNorte.laEsperanzaFinZafra)
+        : new Date(dataZafraNorte.laEsperanzaFinDatosZafra)
+
+    const ultimoRegistroLedesmaComparativo = new Date(dataZafraNorte.ledesmaFinZafra) >= new Date(dataZafraNorte.ledesmaFinDatosZafra)
+        ? new Date(dataZafraNorte.ledesmaFinZafra)
+        : new Date(dataZafraNorte.ledesmaFinDatosZafra)
+
+    const ultimoRegistroRioGrandeComparativo = new Date(dataZafraNorte.rioGrandeFinZafra) >= new Date(dataZafraNorte.rioGrandeFinDatosZafra)
+        ? new Date(dataZafraNorte.rioGrandeFinZafra)
+        : new Date(dataZafraNorte.rioGrandeFinDatosZafra)
+
+    const ultimoRegistroSanIsidroComparativo = new Date(dataZafraNorte.sanIsidroFinZafra) >= new Date(dataZafraNorte.sanIsidroFinDatosZafra)
+        ? new Date(dataZafraNorte.sanIsidroFinZafra)
+        : new Date(dataZafraNorte.sanIsidroFinDatosZafra)
+
+    const ultimoRegistroSeaboardComparativo = new Date(dataZafraNorte.seaboardFinZafra) >= new Date(dataZafraNorte.seaboardFinDatosZafra)
+        ? new Date(dataZafraNorte.seaboardFinZafra)
+        : new Date(dataZafraNorte.seaboardFinDatosZafra)
+
     dataAnioStartZafraNorte?.forEach((d) => {
         if (
             d.ingenioNombre === "La Esperanza" &&
             dataZafraNorte.laEsperanzaInicioZafra &&
             dataZafraNorte.laEsperanzaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorte.laEsperanzaInicioZafra)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorte.laEsperanzaFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.laEsperanzaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLaEsperanzaComparativo
         ) {
             variables.cmb16 += d.moliendaCanaBruta || 0;
             variables.cmn16 += d.moliendaCanaNeta || 0;
@@ -3468,9 +3732,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Ledesma" &&
             dataZafraNorte.ledesmaInicioZafra &&
             dataZafraNorte.ledesmaFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorte.ledesmaInicioZafra)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorte.ledesmaFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.ledesmaInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroLedesmaComparativo
         ) {
             variables.cmb17 += d.moliendaCanaBruta || 0;
             variables.cmn17 += d.moliendaCanaNeta || 0;
@@ -3503,9 +3766,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "Río Grande" &&
             dataZafraNorte.rioGrandeInicioZafra &&
             dataZafraNorte.rioGrandeFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorte.rioGrandeInicioZafra)
-            //  &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorte.rioGrandeFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.rioGrandeInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroRioGrandeComparativo
         ) {
             variables.cmb18 += d.moliendaCanaBruta || 0;
             variables.cmn18 += d.moliendaCanaNeta || 0;
@@ -3539,9 +3801,8 @@ export const datosComparativosHook = (
             d.ingenioNombre === "San Isidro" &&
             dataZafraNorte.sanIsidroInicioZafra &&
             dataZafraNorte.sanIsidroFinZafra &&
-            new Date(d.fechaParte) >= new Date(dataZafraNorte.sanIsidroInicioZafra)
-            // &&
-            // new Date(d.fechaParte) <= new Date(dataZafraNorte.sanIsidroFinZafra)
+            new Date(d.fechaParte) >= new Date(dataZafraNorte.sanIsidroInicioZafra) &&
+            new Date(d.fechaParte) <= ultimoRegistroSanIsidroComparativo
         ) {
             variables.cmb19 += d.moliendaCanaBruta || 0;
             variables.cmn19 += d.moliendaCanaNeta || 0;
@@ -3576,7 +3837,7 @@ export const datosComparativosHook = (
             dataZafraNorte.seaboardInicioZafra &&
             dataZafraNorte.seaboardFinZafra &&
             new Date(d.fechaParte) >= new Date(dataZafraNorte.seaboardInicioZafra) &&
-            new Date(d.fechaParte) <= new Date(dataZafraNorte.seaboardFinZafra)
+            new Date(d.fechaParte) <= ultimoRegistroSeaboardComparativo
         ) {
             variables.cmb20 += d.moliendaCanaBruta || 0;
             variables.cmn20 += d.moliendaCanaNeta || 0;

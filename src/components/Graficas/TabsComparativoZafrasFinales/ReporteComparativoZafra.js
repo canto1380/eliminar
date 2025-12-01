@@ -28,6 +28,7 @@ const ReportesComparativoZafras = ({
     dataUserRegister,
     region
 }) => {
+
     // 📊 Ingenios Tucumán
     const [aguilares, setAguilares] = useState([]);
     const [aguilaresComp, setAguilaresComp] = useState([]);
@@ -349,7 +350,6 @@ const ReportesComparativoZafras = ({
         const ingenios = ingeniosCombinados.map((nombre) => {
             const itemsData = {};
             const dataIngenio = dataPorIngenio[nombre];
-            console.log(dataIngenio)
             if (!dataIngenio) return null;
 
             // 👇 Determinar qué items mostrar según el tipo de finalización
@@ -398,7 +398,6 @@ const ReportesComparativoZafras = ({
                 items: itemsData,
             };
         }).filter(Boolean);
-        console.log(ingenios)
         // 🧮 Preparar los datos de la tabla
         data = ingenios.map((ing) => {
             if (anioStart && anioEnd) {
