@@ -2814,90 +2814,90 @@ export const datosComparativosHook = (
         bellaVistaEnd.bellaVistaANHIDRO = bellaVistaEnd.bellaVistaANHIDRO + anhidroBellaVista2024
     }
 
-    aguilares.aguilaresRCMB = ((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMB) * 100).toFixed(2)
-    aguilares.aguilaresRCMN = ((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMN) * 100).toFixed(2)
+    aguilares.aguilaresRCMB = Math.round((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMB)* 100 * 100 ) / 100
+    aguilares.aguilaresRCMN = Math.round((Number(aguilares?.aguilaresEQUIVALENTE) / aguilares?.aguilaresCMN)* 100 * 100 ) / 100
 
-    bellaVista.bellaVistaRCMB = ((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMB) * 100).toFixed(2)
-    bellaVista.bellaVistaRCMN = ((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMN) * 100).toFixed(2)
+    bellaVista.bellaVistaRCMB = Math.round((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMB)* 100 * 100 ) / 100
+    bellaVista.bellaVistaRCMN = Math.round((Number(bellaVista?.bellaVistaEQUIVALENTE) / bellaVista?.bellaVistaCMN)* 100 * 100 ) / 100
 
-    concepcion.concepcionRCMB = ((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMB) * 100).toFixed(2)
-    concepcion.concepcionRCMN = ((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMN) * 100).toFixed(2)
+    concepcion.concepcionRCMB = Math.round((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMB)* 100 * 100 ) / 100
+    concepcion.concepcionRCMN = Math.round((Number(concepcion?.concepcionEQUIVALENTE) / concepcion?.concepcionCMN)* 100 * 100 ) / 100
 
-    cruzAlta.cruzAltaRCMB = ((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMB) * 100).toFixed(2)
-    cruzAlta.cruzAltaRCMN = ((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMN) * 100).toFixed(2)
+    cruzAlta.cruzAltaRCMB = Math.round((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMB)* 100 * 100 ) / 100
+    cruzAlta.cruzAltaRCMN = Math.round((Number(cruzAlta?.cruzAltaEQUIVALENTE) / cruzAlta?.cruzAltaCMN)* 100 * 100 ) / 100
 
-    famailla.famaillaRCMB = ((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMB) * 100).toFixed(2)
-    famailla.famaillaRCMN = ((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMN) * 100).toFixed(2)
+    famailla.famaillaRCMB = Math.round((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMB)* 100 * 100 ) / 100
+    famailla.famaillaRCMN = Math.round((Number(famailla?.famaillaEQUIVALENTE) / famailla?.famaillaCMN)* 100 * 100 ) / 100
 
-    laCorona.laCoronaRCMB = ((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMB) * 100).toFixed(2)
-    laCorona.laCoronaRCMN = ((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMN) * 100).toFixed(2)
+    laCorona.laCoronaRCMB = Math.round((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMB)* 100 * 100 ) / 100
+    laCorona.laCoronaRCMN = Math.round((Number(laCorona?.laCoronaEQUIVALENTE) / laCorona?.laCoronaCMN)* 100 * 100 ) / 100
 
-    laFlorida.laFloridaRCMB = ((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMB) * 100).toFixed(2)
-    laFlorida.laFloridaRCMN = ((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMN) * 100).toFixed(2)
+    laFlorida.laFloridaRCMB = Math.round((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMB)* 100 * 100 ) / 100
+    laFlorida.laFloridaRCMN = Math.round((Number(laFlorida?.laFloridaEQUIVALENTE) / laFlorida?.laFloridaCMN)* 100 * 100 ) / 100
 
-    laProvidencia.laProvidenciaRCMB = ((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMB) * 100).toFixed(2)
-    laProvidencia.laProvidenciaRCMN = ((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMN) * 100).toFixed(2)
+    laProvidencia.laProvidenciaRCMB = Math.round((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMB)* 100 * 100 ) / 100
+    laProvidencia.laProvidenciaRCMN = Math.round((Number(laProvidencia?.laProvidenciaEQUIVALENTE) / laProvidencia?.laProvidenciaCMN)* 100 * 100 ) / 100
 
-    laTrinidad.laTrinidadRCMB = ((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMB) * 100).toFixed(2)
-    laTrinidad.laTrinidadRCMN = ((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMN) * 100).toFixed(2)
+    laTrinidad.laTrinidadRCMB = Math.round((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMB)* 100 * 100 ) / 100
+    laTrinidad.laTrinidadRCMN = Math.round((Number(laTrinidad?.laTrinidadEQUIVALENTE) / laTrinidad?.laTrinidadCMN)* 100 * 100 ) / 100
 
-    leales.lealesRCMB = ((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMB) * 100).toFixed(2)
-    leales.lealesRCMN = ((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMN) * 100).toFixed(2)
+    leales.lealesRCMB = Math.round((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMB)* 100 * 100 ) / 100
+    leales.lealesRCMN = Math.round((Number(leales?.lealesEQUIVALENTE) / leales?.lealesCMN)* 100 * 100 ) / 100
 
-    marapa.marapaRCMB = ((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMB) * 100).toFixed(2)
-    marapa.marapaRCMN = ((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMN) * 100).toFixed(2)
+    marapa.marapaRCMB = Math.round((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMB)* 100 * 100 ) / 100
+    marapa.marapaRCMN = Math.round((Number(marapa?.marapaEQUIVALENTE) / marapa?.marapaCMN)* 100 * 100 ) / 100
 
-    nunorco.nunorcoRCMB = ((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMB) * 100).toFixed(2)
-    nunorco.nunorcoRCMN = ((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMN) * 100).toFixed(2)
+    nunorco.nunorcoRCMB = Math.round((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMB)* 100 * 100 ) / 100
+    nunorco.nunorcoRCMN = Math.round((Number(nunorco?.nunorcoEQUIVALENTE) / nunorco?.nunorcoCMN)* 100 * 100 ) / 100
 
-    staBarbara.staBarbaraRCMB = ((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMB) * 100).toFixed(2)
-    staBarbara.staBarbaraRCMN = ((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMN) * 100).toFixed(2)
+    staBarbara.staBarbaraRCMB = Math.round((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMB)* 100 * 100 ) / 100
+    staBarbara.staBarbaraRCMN = Math.round((Number(staBarbara?.staBarbaraEQUIVALENTE) / staBarbara?.staBarbaraCMN)* 100 * 100 ) / 100
 
-    staRosa.staRosaRCMB = ((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMB) * 100).toFixed(2)
-    staRosa.staRosaRCMN = ((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMN) * 100).toFixed(2)
+    staRosa.staRosaRCMB = Math.round((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMB)* 100 * 100 ) / 100
+    staRosa.staRosaRCMN = Math.round((Number(staRosa?.staRosaEQUIVALENTE) / staRosa?.staRosaCMN)* 100 * 100 ) / 100
 
 
-    aguilaresEnd.aguilaresRCMB = ((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMB) * 100).toFixed(2)
-    aguilaresEnd.aguilaresRCMN = ((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMN) * 100).toFixed(2)
+    aguilaresEnd.aguilaresRCMB = Math.round((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMB)* 100 * 100 ) / 100
+    aguilaresEnd.aguilaresRCMN = Math.round((Number(aguilaresEnd?.aguilaresEQUIVALENTE) / aguilaresEnd?.aguilaresCMN)* 100 * 100 ) / 100
 
-    bellaVistaEnd.bellaVistaRCMB = ((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMB) * 100).toFixed(2)
-    bellaVistaEnd.bellaVistaRCMN = ((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMN) * 100).toFixed(2)
+    bellaVistaEnd.bellaVistaRCMB = Math.round((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMB)* 100 * 100 ) / 100
+    bellaVistaEnd.bellaVistaRCMN = Math.round((Number(bellaVistaEnd?.bellaVistaEQUIVALENTE) / bellaVistaEnd?.bellaVistaCMN)* 100 * 100 ) / 100
 
-    concepcionEnd.concepcionRCMB = ((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMB) * 100).toFixed(2)
-    concepcionEnd.concepcionRCMN = ((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMN) * 100).toFixed(2)
+    concepcionEnd.concepcionRCMB = Math.round((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMB)* 100 * 100 ) / 100
+    concepcionEnd.concepcionRCMN = Math.round((Number(concepcionEnd?.concepcionEQUIVALENTE) / concepcionEnd?.concepcionCMN)* 100 * 100 ) / 100
 
-    cruzAltaEnd.cruzAltaRCMB = ((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMB) * 100).toFixed(2)
-    cruzAltaEnd.cruzAltaRCMN = ((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMN) * 100).toFixed(2)
+    cruzAltaEnd.cruzAltaRCMB = Math.round((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMB)* 100 * 100 ) / 100
+    cruzAltaEnd.cruzAltaRCMN = Math.round((Number(cruzAltaEnd?.cruzAltaEQUIVALENTE) / cruzAltaEnd?.cruzAltaCMN)* 100 * 100 ) / 100
 
-    famaillaEnd.famaillaRCMB = ((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMB) * 100).toFixed(2)
-    famaillaEnd.famaillaRCMN = ((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMN) * 100).toFixed(2)
+    famaillaEnd.famaillaRCMB = Math.round((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMB)* 100 * 100 ) / 100
+    famaillaEnd.famaillaRCMN = Math.round((Number(famaillaEnd?.famaillaEQUIVALENTE) / famaillaEnd?.famaillaCMN)* 100 * 100 ) / 100
 
-    laCoronaEnd.laCoronaRCMB = ((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMB) * 100).toFixed(2)
-    laCoronaEnd.laCoronaRCMN = ((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMN) * 100).toFixed(2)
+    laCoronaEnd.laCoronaRCMB = Math.round((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMB)* 100 * 100 ) / 100
+    laCoronaEnd.laCoronaRCMN = Math.round((Number(laCoronaEnd?.laCoronaEQUIVALENTE) / laCoronaEnd?.laCoronaCMN)* 100 * 100 ) / 100
 
-    laFloridaEnd.laFloridaRCMB = ((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMB) * 100).toFixed(2)
-    laFloridaEnd.laFloridaRCMN = ((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMN) * 100).toFixed(2)
+    laFloridaEnd.laFloridaRCMB = Math.round((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMB)* 100 * 100 ) / 100
+    laFloridaEnd.laFloridaRCMN = Math.round((Number(laFloridaEnd?.laFloridaEQUIVALENTE) / laFloridaEnd?.laFloridaCMN)* 100 * 100 ) / 100
 
-    laProvidenciaEnd.laProvidenciaRCMB = ((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMB) * 100).toFixed(2)
-    laProvidenciaEnd.laProvidenciaRCMN = ((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMN) * 100).toFixed(2)
+    laProvidenciaEnd.laProvidenciaRCMB = Math.round((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMB)* 100 * 100 ) / 100
+    laProvidenciaEnd.laProvidenciaRCMN = Math.round((Number(laProvidenciaEnd?.laProvidenciaEQUIVALENTE) / laProvidenciaEnd?.laProvidenciaCMN)* 100 * 100 ) / 100
 
-    laTrinidadEnd.laTrinidadRCMB = ((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMB) * 100).toFixed(2)
-    laTrinidadEnd.laTrinidadRCMN = ((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMN) * 100).toFixed(2)
+    laTrinidadEnd.laTrinidadRCMB = Math.round((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMB)* 100 * 100 ) / 100
+    laTrinidadEnd.laTrinidadRCMN = Math.round((Number(laTrinidadEnd?.laTrinidadEQUIVALENTE) / laTrinidadEnd?.laTrinidadCMN)* 100 * 100 ) / 100
 
-    lealesEnd.lealesRCMB = ((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMB) * 100).toFixed(2)
-    lealesEnd.lealesRCMN = ((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMN) * 100).toFixed(2)
+    lealesEnd.lealesRCMB = Math.round((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMB)* 100 * 100 ) / 100
+    lealesEnd.lealesRCMN = Math.round((Number(lealesEnd?.lealesEQUIVALENTE) / lealesEnd?.lealesCMN)* 100 * 100 ) / 100
 
-    marapaEnd.marapaRCMB = ((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMB) * 100).toFixed(2)
-    marapaEnd.marapaRCMN = ((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMN) * 100).toFixed(2)
+    marapaEnd.marapaRCMB = Math.round((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMB)* 100 * 100 ) / 100
+    marapaEnd.marapaRCMN = Math.round((Number(marapaEnd?.marapaEQUIVALENTE) / marapaEnd?.marapaCMN)* 100 * 100 ) / 100
 
-    nunorcoEnd.nunorcoRCMB = ((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMB) * 100).toFixed(2)
-    nunorcoEnd.nunorcoRCMN = ((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMN) * 100).toFixed(2)
+    nunorcoEnd.nunorcoRCMB = Math.round((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMB)* 100 * 100 ) / 100
+    nunorcoEnd.nunorcoRCMN = Math.round((Number(nunorcoEnd?.nunorcoEQUIVALENTE) / nunorcoEnd?.nunorcoCMN)* 100 * 100 ) / 100
 
-    staBarbaraEnd.staBarbaraRCMB = ((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMB) * 100).toFixed(2)
-    staBarbaraEnd.staBarbaraRCMN = ((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMN) * 100).toFixed(2)
+    staBarbaraEnd.staBarbaraRCMB = Math.round((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMB)* 100 * 100 ) / 100
+    staBarbaraEnd.staBarbaraRCMN = Math.round((Number(staBarbaraEnd?.staBarbaraEQUIVALENTE) / staBarbaraEnd?.staBarbaraCMN)* 100 * 100 ) / 100
 
-    staRosaEnd.staRosaRCMB = ((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMB) * 100).toFixed(2)
-    staRosaEnd.staRosaRCMN = ((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMN) * 100).toFixed(2)
+    staRosaEnd.staRosaRCMB = Math.round((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMB)* 100 * 100 ) / 100
+    staRosaEnd.staRosaRCMN = Math.round((Number(staRosaEnd?.staRosaEQUIVALENTE) / staRosaEnd?.staRosaCMN)* 100 * 100 ) / 100
     setAguilares(aguilares)
     setBellavista(bellaVista)
     setBellavistaDestileria(destBellaVista)
@@ -3609,35 +3609,37 @@ export const datosComparativosHook = (
 
 
 
-    laEsperanza.laEsperanzaRCMB = (Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMB) * 100
-    laEsperanza.laEsperanzaRCMN = (Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMN) * 100
+    laEsperanza.laEsperanzaRCMB = Math.round((Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMB) * 100 * 100 ) / 100
+    laEsperanza.laEsperanzaRCMN = Math.round((Number(laEsperanza?.laEsperanzaEQUIVALENTE) / laEsperanza?.laEsperanzaCMN) * 100 * 100 ) / 100
 
-    ledesma.ledesmaRCMB = (Number(ledesma?.ledesmaEQUIVALENTE) / ledesma?.ledesmaCMB) * 100
-    ledesma.ledesmaRCMN = (Number(ledesma?.ledesmaEQUIVALENTE) / ledesma?.ledesmaCMN) * 100
+    ledesma.ledesmaRCMB = Math.round((Number(ledesma?.ledesmaEQUIVALENTE) / ledesma?.ledesmaCMB) * 100 * 100 ) / 100
+    ledesma.ledesmaRCMN = Math.round((Number(ledesma?.ledesmaEQUIVALENTE) / ledesma?.ledesmaCMN) * 100 * 100 ) / 100
 
-    rioGrande.rioGrandeRCMB = (Number(rioGrande?.rioGrandeEQUIVALENTE) / rioGrande?.rioGrandeCMB) * 100
-    rioGrande.rioGrandeRCMN = (Number(rioGrande?.rioGrandeEQUIVALENTE) / rioGrande?.rioGrandeCMN) * 100
+    rioGrande.rioGrandeRCMB = Math.round((Number(rioGrande?.rioGrandeEQUIVALENTE) / rioGrande?.rioGrandeCMB) * 100 * 100 ) / 100
+    rioGrande.rioGrandeRCMN = Math.round((Number(rioGrande?.rioGrandeEQUIVALENTE) / rioGrande?.rioGrandeCMN) * 100 * 100 ) / 100
 
-    sanIsidro.sanIsidroRCMB = (Number(sanIsidro?.sanIsidroEQUIVALENTE) / sanIsidro?.sanIsidroCMB) * 100
-    sanIsidro.sanIsidroRCMN = (Number(sanIsidro?.sanIsidroEQUIVALENTE) / sanIsidro?.sanIsidroCMN) * 100
+    sanIsidro.sanIsidroRCMB = Math.round((Number(sanIsidro?.sanIsidroEQUIVALENTE) / sanIsidro?.sanIsidroCMB) * 100 * 100 ) / 100
+    sanIsidro.sanIsidroRCMN = Math.round((Number(sanIsidro?.sanIsidroEQUIVALENTE) / sanIsidro?.sanIsidroCMN) * 100 * 100 ) / 100
 
-    seaboard.seaboardRCMB = (Number(seaboard?.seaboardEQUIVALENTE) / seaboard?.seaboardCMB) * 100
-    seaboard.seaboardRCMN = (Number(seaboard?.seaboardEQUIVALENTE) / seaboard?.seaboardCMN) * 100
+    seaboard.seaboardRCMB = Math.round((Number(seaboard?.seaboardEQUIVALENTE) / seaboard?.seaboardCMB) * 100 * 100 ) / 100
+    seaboard.seaboardRCMN = Math.round((Number(seaboard?.seaboardEQUIVALENTE) / seaboard?.seaboardCMN) * 100 * 100 ) / 100
 
-    laEsperanzaEnd.laEsperanzaRCMB = (Number(laEsperanzaEnd?.laEsperanzaEQUIVALENTE) / laEsperanzaEnd?.laEsperanzaCMB) * 100
-    laEsperanzaEnd.laEsperanzaRCMN = (Number(laEsperanzaEnd?.laEsperanzaEQUIVALENTE) / laEsperanzaEnd?.laEsperanzaCMN) * 100
+    laEsperanzaEnd.laEsperanzaRCMB = Math.round((Number(laEsperanzaEnd?.laEsperanzaEQUIVALENTE) / laEsperanzaEnd?.laEsperanzaCMB) * 100 * 100 ) / 100
+    laEsperanzaEnd.laEsperanzaRCMN = Math.round((Number(laEsperanzaEnd?.laEsperanzaEQUIVALENTE) / laEsperanzaEnd?.laEsperanzaCMN) * 100 * 100 ) / 100
 
-    ledesmaEnd.ledesmaRCMB = (Number(ledesmaEnd?.ledesmaEQUIVALENTE) / ledesmaEnd?.ledesmaCMB) * 100
-    ledesmaEnd.ledesmaRCMN = (Number(ledesmaEnd?.ledesmaEQUIVALENTE) / ledesmaEnd?.ledesmaCMN) * 100
+    ledesmaEnd.ledesmaRCMB = Math.round((Number(ledesmaEnd?.ledesmaEQUIVALENTE) / ledesmaEnd?.ledesmaCMB) * 100 * 100 ) / 100
+    ledesmaEnd.ledesmaRCMN = Math.round((Number(ledesmaEnd?.ledesmaEQUIVALENTE) / ledesmaEnd?.ledesmaCMN) * 100 * 100 ) / 100
 
-    rioGrandeEnd.rioGrandeRCMB = (Number(rioGrandeEnd?.rioGrandeEQUIVALENTE) / rioGrandeEnd?.rioGrandeCMB) * 100
-    rioGrandeEnd.rioGrandeRCMN = (Number(rioGrandeEnd?.rioGrandeEQUIVALENTE) / rioGrandeEnd?.rioGrandeCMN) * 100
+    rioGrandeEnd.rioGrandeRCMB = Math.round((Number(rioGrandeEnd?.rioGrandeEQUIVALENTE) / rioGrandeEnd?.rioGrandeCMB) * 100 * 100 ) / 100
+    rioGrandeEnd.rioGrandeRCMN = Math.round((Number(rioGrandeEnd?.rioGrandeEQUIVALENTE) / rioGrandeEnd?.rioGrandeCMN) * 100 * 100 ) / 100
 
-    sanIsidroEnd.sanIsidroRCMB = (Number(sanIsidroEnd?.sanIsidroEQUIVALENTE) / sanIsidroEnd?.sanIsidroCMB) * 100
-    sanIsidroEnd.sanIsidroRCMN = (Number(sanIsidroEnd?.sanIsidroEQUIVALENTE) / sanIsidroEnd?.sanIsidroCMN) * 100
+    sanIsidroEnd.sanIsidroRCMB = Math.round((Number(sanIsidroEnd?.sanIsidroEQUIVALENTE) / sanIsidroEnd?.sanIsidroCMB) * 100 * 100 ) / 100
+    sanIsidroEnd.sanIsidroRCMN = Math.round((Number(sanIsidroEnd?.sanIsidroEQUIVALENTE) / sanIsidroEnd?.sanIsidroCMN) * 100 * 100 ) / 100
 
-    seaboardEnd.seaboardRCMB = (Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMB) * 100
-    seaboardEnd.seaboardRCMN = (Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMN) * 100
+    seaboardEnd.seaboardRCMB = Math.round((Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMB) * 100 * 100 ) / 100
+    seaboardEnd.seaboardRCMN = Math.round((Number(seaboardEnd?.seaboardEQUIVALENTE) / seaboardEnd?.seaboardCMN) * 100 * 100 ) / 100
+
+
 
     setEsperanza(laEsperanza)
     setLedesma(ledesma)
