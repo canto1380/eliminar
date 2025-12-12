@@ -9,6 +9,7 @@ import { inactivityTime } from "../../helpers/inactivityTime";
 import DiasParadaContainer from "./DiasParadaContainer";
 import { SidebarContext } from "../../context/SidebarProvider";
 import Title from "../../components/Title";
+import { message } from "antd";
 
 const DiasParada = () => {
   const [loading, setLoading] = useState(false);
@@ -22,15 +23,24 @@ const DiasParada = () => {
   }, [sidebarStatus])
 
   useEffect(() => {
-    const token = getToken();
+  tokenData()    
+  }, []);
+
+  const tokenData = () => {
+    try {
+      setLoading(true)
+      const token = getToken();
     const tokenLS = getTokenLS();
     if (token === tokenLS) {
       setTokenAuth(token);
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+    } catch (error) {
+      message.error("Error al obtener datos del usuario.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     if (tokenAuth === null && dataUser) {
       setTokenAuth(dataUser);

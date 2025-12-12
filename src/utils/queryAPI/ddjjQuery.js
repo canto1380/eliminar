@@ -1,10 +1,6 @@
-import { apiBEPATH } from "./api"
+import { apiParams } from "../api";
 
-export const getDataDDJJBE = async (params, urlPath) => {
-  const res = await apiBEPATH('GET', params, urlPath, '')
-  if (res.status === 200) {
-    const data = res?.data?.data?.DeclaracionesJuradas
-
-    return data
-  }
-}
+export const getDDJJ = async (params) => {
+  const res = await apiParams("GET", params, `declaracionJurada/`, "");
+ return res
+};

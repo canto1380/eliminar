@@ -86,16 +86,18 @@ export const columns = [
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.azucarCrudoProducido > b.azucarCrudoProducido,
     render: (text, record) => {
-      const value = Number(text) || 0;
+      // Normalizamos todos los valores numéricos a 0 cuando vienen undefined/null
+      const value = Number(text ?? 0) || 0;
       const esLedesma =
         record.ingenioNombre === 'Ledesma' ||
         (record.key && record.key.toString().includes('Ledesma'));
       // 🔍 Si el ingenio es Ledesma → aplicar cálculo especial
       if (esLedesma) {
+        const azCrudo = Number(record.azucarCrudoProducido ?? 0);
+        const azRefinado = Number(record.azucarRefinado ?? 0);
+        const otrosAzucares = Number(record.otroAzucar ?? 0);
         return new Intl.NumberFormat('es-AR').format(
-          Number(record.azucarCrudoProducido) -
-          Number(record.azucarRefinado) -
-          Number(record.otroAzucar)
+          (azCrudo - azRefinado - otrosAzucares) || 0
         );
       }
 
@@ -155,16 +157,16 @@ export const columns = [
       if (esLedesma) {
         return new Intl.NumberFormat('es-AR').format(
           Number(record.azucarBlancoProducido ?? 0) +
-          Number(record.azucarCrudoProducido ?? 0) 
+          Number(record.azucarCrudoProducido ?? 0)
         )
       } else {
-        new Intl.NumberFormat('es-AR').format(
+        return new Intl.NumberFormat('es-AR').format(
           Number(record.azucarBlancoProducido ?? 0) +
           Number(record.azucarCrudoProducido ?? 0) +
           Number(record.azucarRefinado ?? 0) +
           Number(record.azucarOrganico ?? 0) +
           Number(record.otroAzucar ?? 0)
-        )
+        );
       }
     }
   },

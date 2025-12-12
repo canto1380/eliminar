@@ -117,7 +117,6 @@ const ParteDiarioContainer = () => {
 
   const getDataTucuman = async () => {
     const periodoActual = obtenerPeriodos(dateInicioIngeniosItemCollapse, 1);
-    
     const { dataZafra1, dataDestileria1, dataAnhidro1 } = filtrarRegistrosPorPeriodos(periodoActual, dataParteDiarios, new Date());
     const resultado = procesarTodosLosIngenios(
       dateInicioIngeniosItemCollapse,
@@ -265,6 +264,7 @@ const ParteDiarioContainer = () => {
       setLoading(true);
 
       // Primero actualizar partes diarios de Tucumán
+      console.log('aasd')
       const data = await getActualizarPartesDiarios();
 
       if (data.status === 200) {

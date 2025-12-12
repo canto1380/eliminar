@@ -1,0 +1,33 @@
+export const optionsQuincenal = [
+    { label: "Toda la zafra", value: "0-0" },
+    { label: "1° quincena Enero", value: "1-1" },
+    { label: "2° quincena Enero", value: "1-2" },
+    { label: "1° quincena Febrero", value: "2-1" },
+    { label: "2° quincena Febrero", value: "2-2" },
+    { label: "2° quincena Marzo", value: "3-1" },
+    { label: "1° quincena Marzo", value: "3-2" },
+    { label: "1° quincena Abril", value: "4-1" },
+    { label: "2° quincena Abril", value: "4-2" },
+    { label: "1° quincena Mayo", value: "5-1" },
+    { label: "2° quincena Mayo", value: "5-2" },
+    { label: "1° quincena Junio", value: "6-1" },
+    { label: "2° quincena Junio", value: "6-2" },
+    { label: "1° quincena Julio", value: "7-1" },
+    { label: "2° quincena Julio", value: "7-2" },
+    { label: "1° quincena Agosto", value: "8-1" },
+    { label: "2° quincena Agosto", value: "8-2" },
+    { label: "1° quincena Septiembre", value: "9-1" },
+    { label: "2° quincena Septiembre", value: "9-2" },
+    { label: "1° quincena Octubre", value: "10-1" },
+    { label: "2° quincena Octubre", value: "10-2" },
+    { label: "1° quincena Noviembre", value: "11-1" },
+    { label: "2° quincena Noviembre", value: "11-2" },
+    { label: "1° quincena Diciembre", value: "12-1" },
+    { label: "2° quincena Diciembre", value: "12-2" },
+]
+
+export const optionsDDJJEstado = [
+    { label: "Pendiente de Presentación Impresa", value: "Pendiente de Presentación Impresa" },
+    { label: "Pendiente de Aprobación", value: "Pendiente de Aprobación" },
+    { label: "Aprobado", value: "Aprobado" },
+]

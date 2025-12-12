@@ -11,6 +11,7 @@ import DiasParada from '../container/DiasParda'
 import AddEditDiasParada from '../container/DiasParda/AddEditDiasParada'
 import GraficasContainer from '../container/GraficasYReportes'
 import IAContainer from '../container/IA'
+import DDJJIndex from '../container/DDJJ'
 
 const PrivateRoutes = ({ token }) => {
   return (
@@ -20,6 +21,7 @@ const PrivateRoutes = ({ token }) => {
       ) : null}
       <Route exact path='/admin/perfil' element={<Perfil />} />
       <Route exact path='/admin/parte-diario' element={<ContainerIndexParteDiario />} />
+      <Route exact path='/admin/ddjj' element={<DDJJIndex/>}  />
       <Route exact path='/admin/datos-comparativos' element={<DataComparativa />} />
       <Route exact path='/admin/datos-comparativos/nuevo' element={<NewData />} />
       <Route exact path='/admin/datos-comparativos/editar/:anio' element={<NewData />} />

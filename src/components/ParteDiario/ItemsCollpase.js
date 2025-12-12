@@ -249,12 +249,15 @@ const ItemsCollapse = ({
     Object.keys(grouped).forEach((ingenioNombre) => {
       const partes = grouped[ingenioNombre] || [];
       const { quincenal, mensual, zafra } = filterByParams(partes, { dataAnio, dataMes, dataQuincena });
-
+      if(ingenioNombre === 'Ledesma') {
+        console.log(partes)
+      }
       // Construir las filas finales: quincena rows (filas originales), luego totales (quincena/mes/zafra)
       const filasTotales = buildFinalRowsWithTotals(quincenal, mensual, zafra);
 
       // Para mantener comportamiento antiguo, los totales los concatenamos al final del array quincenal (como hacías)
       // Pero vamos a generar tres arrays también para posible uso (quincenal/mensual/zafra)
+      
       result[ingenioNombre] = {
         quincenal: quincenal,
         mensual: mensual,

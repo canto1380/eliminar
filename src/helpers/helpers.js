@@ -63,3 +63,23 @@ export const dateConverted = (date) => {
   const newDate = new Date(fechaFormato)
   return newDate
 }
+/**
+ * CONVIERTE MES Y QUINCENA A FECHA REAL
+ * RECIBE {year: 2025, month: 5, quincena: 1} → {from: Date, to: Date}
+ * quincena 1: del día 1 al 15
+ * quincena 2: del día 16 al último día del mes
+ */
+export const getDateFromQuincena = ({ year, month, quincena }) => {
+  if (!month || !quincena || !year) return null;
+
+  const startDay = quincena === 1 ? 1 : 16;
+  const endDay =
+    quincena === 1
+      ? 15
+      : new Date(year, month, 0).getDate(); // último día del mes
+
+  return {
+    from: new Date(year, month - 1, startDay, 0, 0, 0, 0),
+    to: new Date(year, month - 1, endDay, 23, 59, 59, 999)
+  };
+};

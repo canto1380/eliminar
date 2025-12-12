@@ -10,6 +10,7 @@ import { FaChartBar } from "react-icons/fa";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { BiUserCircle, BiLogOut } from 'react-icons/bi'
 import { RiDatabaseLine, RiOpenaiFill } from "react-icons/ri"
+import { TbBrandDjango } from "react-icons/tb";
 
 import './Sidebar.css'
 import {
@@ -52,6 +53,11 @@ const Sidebar = ({ inactivo, tokenAuth, dataUser }) => {
       title: 'parte-diario',
       iconName: <BsNewspaper className='sizeIcon' />,
       name: 'Parte diario',
+    },
+    {
+      title: 'ddjj',
+      iconName: <TbBrandDjango className='sizeIcon' />,
+      name: 'Declaraciones juradas',
     },
     {
       title: 'datos-comparativos',

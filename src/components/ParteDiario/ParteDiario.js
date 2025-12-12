@@ -1255,6 +1255,7 @@ const ParteDiario = ({
     items,
     onClick: handleMenuClick,
   };
+
   return (
     <>
       <Row className="d-flex justify-content-start align-items-center px-4 pb-0 pt-2">
@@ -1293,7 +1294,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelCMB?.toLocaleString("es-ES")} [Tn]
+              {panelCMB?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
@@ -1303,7 +1304,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelAzucar?.toLocaleString("es-ES")} [Tn]
+              {panelAzucar?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
@@ -1313,7 +1314,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelAzucarCrudo?.toLocaleString("es-ES")} [Tn]
+              {panelAzucarCrudo?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
@@ -1325,7 +1326,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelAzucarBlancoA?.toLocaleString("es-ES")} [Tn]
+              {panelAzucarBlancoA?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
@@ -1337,7 +1338,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelAzucarRefinado?.toLocaleString("es-ES")} [Tn]
+              {panelAzucarRefinado?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
@@ -1349,7 +1350,7 @@ const ParteDiario = ({
           </div>
           <div>
             <p className="text-center mb-1 dato-panel">
-              {panelAzucarOrganico?.toLocaleString("es-ES")} [Tn]
+              {panelAzucarOrganico?.toLocaleString("es-ES")} [tn]
             </p>
           </div>
         </Col>
