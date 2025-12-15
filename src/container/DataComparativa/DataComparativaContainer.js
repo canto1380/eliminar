@@ -71,7 +71,7 @@ const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
           setModalUnauthorized(true);
         }
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const columnsData = [
@@ -148,6 +148,7 @@ const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
       ) : (
         <>
           <Filtros
+            bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
             setSearch={setSearch}
             setDataZafra={setDataZafra}
             bandFilterZafraAnio={true}

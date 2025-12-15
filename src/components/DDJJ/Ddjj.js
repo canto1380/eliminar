@@ -20,8 +20,6 @@ const DdjjComponent = ({
     setDdjjInformacionParseada(returnData)
   }, [ddjjInformacionFilter])
 
-  console.log(ddjjInformacionParseada)
-
   return (
     <Row className="d-flex justify-content-start align-items-center px-4 pb-4 pt-2">
       <Col xs={12} className="mb-2">

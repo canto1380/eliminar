@@ -48,12 +48,12 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     dataDiasParadas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, anioZafra, ingenio, dataMes, dataQuincena]);
-  
+
   const dataDiasParadas = async () => {
     try {
       const params = {
@@ -238,6 +238,7 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
       ) : (
         <>
           <Filtros
+            bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
             setSearch={setSearch}
             dataZafra={anioZafra}
             setDataZafra={setAnioZafra}
@@ -251,9 +252,9 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
             bandFilterQuincena={true}
             placeHolderSearch="Valor"
             diasParadas={diasParadas}
-            // bandFilterDiasParadaAnioZafra={true}
-            // loadingDownloadReport={loadingDownloadReport}
-            // exportarDiasParadas={exportarDiasParadas}
+          // bandFilterDiasParadaAnioZafra={true}
+          // loadingDownloadReport={loadingDownloadReport}
+          // exportarDiasParadas={exportarDiasParadas}
           />
           <BtnDescargar
             loadingDownloadReport={loadingDownloadReport}

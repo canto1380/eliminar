@@ -264,7 +264,6 @@ const ParteDiarioContainer = () => {
       setLoading(true);
 
       // Primero actualizar partes diarios de Tucumán
-      console.log('aasd')
       const data = await getActualizarPartesDiarios();
 
       if (data.status === 200) {
@@ -307,6 +306,7 @@ const ParteDiarioContainer = () => {
         titleBtnOnClick="Actualizar partes diarios"
         functionOnClick={actualizarPartesDiarios}
         lastUpdated={lastUpdated}
+        type='parteDiario'
       />
       <hr className="mx-3 mt-1" />
       {dataParteDiariosHistoricos === null || !dataParteDiariosHistoricos ? (
@@ -329,6 +329,7 @@ const ParteDiarioContainer = () => {
             </span>
           </div> */}
           <Filtros
+            bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
             setDataEnd={setDataEnd}
             setDataAnio={setDataAnio}
             setDataMes={setDataMes}

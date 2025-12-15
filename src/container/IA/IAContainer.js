@@ -26,15 +26,16 @@ const IADataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
             ) : (
                 <>
                     <Filtros
-                        // dataZafra={anioZafra}
-                        // setDataZafra={setAnioZafra}
-                        // setDatePeriodoStart={setDatePeriodoStart}
-                        // setDatePeriodoEnd={setDatePeriodoEnd}
-                        // setIngenio={setIngenio}
-                        // bandFilterZafraAnio={true}
-                        // bandFilterPeriodo={true}
-                        // bandFilterIngenio={true}
-                        // bandFilterIngenioRegion={1}
+                    // bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
+                    // dataZafra={anioZafra}
+                    // setDataZafra={setAnioZafra}
+                    // setDatePeriodoStart={setDatePeriodoStart}
+                    // setDatePeriodoEnd={setDatePeriodoEnd}
+                    // setIngenio={setIngenio}
+                    // bandFilterZafraAnio={true}
+                    // bandFilterPeriodo={true}
+                    // bandFilterIngenio={true}
+                    // bandFilterIngenioRegion={1}
                     />
                     <IAComponent
                         dataUserRegister={dataUserRegister}

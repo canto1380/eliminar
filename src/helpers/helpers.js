@@ -83,3 +83,63 @@ export const getDateFromQuincena = ({ year, month, quincena }) => {
     to: new Date(year, month - 1, endDay, 23, 59, 59, 999)
   };
 };
+
+export const parseQuincenaLabel = (label) => {
+  if (!label) return null
+
+  // "2° quincena Julio"
+  const regex = /(\d)° quincena (\w+)/i
+  const match = label.match(regex)
+
+  if (!match) return null
+
+  const quincena = Number(match[1])
+  const mesTexto = match[2].toLowerCase()
+
+  const meses = {
+    enero: 1,
+    febrero: 2,
+    marzo: 3,
+    abril: 4,
+    mayo: 5,
+    junio: 6,
+    julio: 7,
+    agosto: 8,
+    septiembre: 9,
+    octubre: 10,
+    noviembre: 11,
+    diciembre: 12
+  }
+
+  return {
+    month: meses[mesTexto],
+    quincena
+  }
+}
+
+
+/**
+ * RECIBE UN REGISTRO E ITEM SELECCIONADO
+ * VALIDA QUE EL ITEM SELECCIONADO SEA UNA FILA DEL REGISTRO
+ * 
+ * 
+ **/
+export const tieneItemSeleccionado = (registro, itemsSeleccionados) => {
+  return itemsSeleccionados.some(item => {
+    const valor = registro[item]
+
+    if (valor === null || valor === undefined) return false
+
+    // strings numéricos tipo "0.000"
+    if (typeof valor === 'string') {
+      return Number(valor) !== 0
+    }
+
+    // números
+    if (typeof valor === 'number') {
+      return valor !== 0
+    }
+
+    return false
+  })
+}

@@ -1,5 +1,5 @@
-import { Row, Col } from 'react-bootstrap'
-import { Select, DatePicker, Input, Space } from "antd";
+import { Col } from 'react-bootstrap'
+import { Select } from "antd";
 import '../Filtros/filtros.css'
 import { optionsDDJJEstado, optionsQuincenal } from '../Filtros/dataFilter';
 

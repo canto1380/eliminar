@@ -1,4 +1,7 @@
 /**
+ * BANDERA PARA DETERMINAR SI MUESTRA TITULO
+ * bandTitlePrincipal
+ * 
  * FILTROS GENERICOS
  * 1- año zafra >> bandFilterZafraAnio >> function handleZafra - state setDataZafra
  * 2- año calendarios >> bandFilterAnio >> function handleAnio - setDataAnio
@@ -28,7 +31,6 @@ import { getQuincenas } from "../../utils/queryAPI/quincenas";
 import { useEffect, useRef, useState } from "react";
 import './filtros.css'
 import { getRegion } from "../../utils/queryAPI/region";
-import { optionsDDJJEstado, optionsQuincenal } from "./dataFilter";
 import FiltrosDDJJ from "../DDJJ/FiltrosDDJJ";
 
 const { RangePicker } = DatePicker;
@@ -37,6 +39,8 @@ const { Search } = Input;
 
 const Filtros = ({
   /* GENERICOS */
+  bandTitlePrincipal,
+
   dataZafra,
 
   setDataZafra,
@@ -241,25 +245,18 @@ const Filtros = ({
     setItemsComaprativosZafra(value)
   };
 
-
-  let optionsQuincnealFilter = []
-  optionsQuincenal?.forEach((d) => {
-    const option = {
-      value: d.value,
-      label: d.label
-    }
-    optionsQuincnealFilter.push(option)
-  })
-
   return (
     <div className={`${fixedComponent ? 'position-sticky top-0 bg-white' : ''} `} style={{ zIndex: 1000 }}>
-      <Row>
-        <Col className="mt-3">
-          <div className={`pt-3 pb-0 px-4`}>
-            <p className="fw-bolder">Filtros información</p>
-          </div>
-        </Col>
-      </Row>
+      {bandTitlePrincipal && (
+        <Row>
+          <Col className="mt-3">
+            <div className={`pt-3 pb-0 px-4`}>
+              <p className="fw-bolder">Filtros información</p>
+            </div>
+          </Col>
+        </Row>
+
+      )}
       <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
         {/* FILTRO GENERICO PARA EL ANIO DE ZAFRA */}
         {bandFilterZafraAnio && (

@@ -9,6 +9,7 @@ const TitlePage = ({
   titleBtnOnClick,
   functionOnClick,
   lastUpdated,
+  type
 }) => {
   return (
     <Row className="d-flex justify-content-between align-items-center ">
@@ -44,7 +45,7 @@ const TitlePage = ({
             </Button>
           </div>
           <div className={`ps-4 pe-3 text-end info-update`}>
-            <p className={`mb-1`}>última actualización: {lastUpdated}</p>
+            <p className={`mb-1`}>{type === 'parteDiario' ? 'Última actualización: ' : 'DDJJ hasta: '}{lastUpdated}</p>
           </div>
         </Col>
       )}

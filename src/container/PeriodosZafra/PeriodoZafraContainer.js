@@ -30,7 +30,7 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
   const [modalUnauthorized, setModalUnauthorized] = useState(false);
   const [dataUserRegister, setDataUserRegister] = useState(undefined);
 
-  const {dataUser} = useContext(User)
+  const { dataUser } = useContext(User)
   useEffect(() => {
     getDataUserRegister()
   }, [dataUser])
@@ -248,6 +248,7 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
       ) : (
         <>
           <Filtros
+            bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
             setSearch={setSearch}
             setDataZafra={setYearZafra}
             bandFilterZafraAnio={true}

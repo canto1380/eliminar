@@ -52,6 +52,7 @@ export const itemsRportes = (props = {}) => {
             children: (
                 <>
                     <Filtros
+                        bandTitlePrincipal={true} // HABILITA TITULO PRINCIPAL
                         dataZafra={anioZafra}
                         setDataZafra={setAnioZafra}
                         setDatePeriodoStart={setDatePeriodoStart}
