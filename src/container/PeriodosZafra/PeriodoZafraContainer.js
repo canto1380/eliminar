@@ -254,14 +254,17 @@ const PeriodoZafraContainer = ({ tokenAuth, routeAPI }) => {
             bandFilterZafraAnio={true}
             bandFilterSearch={true}
             placeHolderSearch="Valor"
+            zafraOpcionTodos={true}
           />
+
           <BtnDescargar
-            dataZafra={yearZafra}
-            data={periodosZafra}
-            funcionExportar={exportarPeriodos}
-            bandExportPeriodos={true}
+            enabled={!!yearZafra && !!periodosZafra}
             loading={loading}
+            processing={!periodosZafra}
+            onClick={exportarPeriodos}
+            text="Descargar informe"
           />
+
           <ListHeader
             title={"Periodos de Zafra"}
             btnLink={"/admin/periodos-zafra/nuevo"}

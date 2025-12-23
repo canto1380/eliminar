@@ -74,11 +74,11 @@ const Sidebar = ({ inactivo, tokenAuth, dataUser }) => {
       iconName: <FaRegCalendarDays className='sizeIcon' />,
       name: 'Días Parada',
     },
-    {
-      title: 'reportes',
-      iconName: <BsClipboardData className='sizeIcon' />,
-      name: 'Reportes',
-    },
+    // {
+    //   title: 'reportes',
+    //   iconName: <BsClipboardData className='sizeIcon' />,
+    //   name: 'Reportes',
+    // },
     {
       title: 'graficos',
       iconName: <FaChartBar className='sizeIcon' />,

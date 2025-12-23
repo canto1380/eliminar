@@ -143,3 +143,50 @@ export const tieneItemSeleccionado = (registro, itemsSeleccionados) => {
     return false
   })
 }
+
+/**
+ * RECIBE UNA FECHA
+ * DEVUELVE PERIODO 1` DE OCTUBRE
+ * 
+ **/
+export const getPeriodoQuincenal = (fecha) => {
+  if (!fecha) return "-";
+
+  const m = moment(fecha);
+  const dia = m.date();
+  const quincena = dia < 16 ? "1°" : "2°";
+  const mes = m.format("MMMM");
+  const anio = m.format("YYYY")
+
+  return `${quincena} de ${mes} de ${anio}`;
+};
+
+
+/**
+ * FUNCION QUE RECIBE UNA FECHA 
+ * DEVUELVE UNA QUINCENA DE LA FECHA RECIBIDA, SIN CONTEMPLAR EL ANIO
+ * 
+ * "2023-01-16T03:00:00.000Z" >>>>>>>>>>>>>>>>>>>>> {month: 1, quincena: 2}
+ * 
+ **/
+export const getMesYQuincena = (date) => {
+  const d = new Date(date)
+  const month = d.getMonth() + 1 // 1–12
+  const day = d.getDate()
+  const quincena = day <= 15 ? 1 : 2
+
+  return { month, quincena }
+}
+
+
+/**
+ * FUNCION QUE CONVIERTE UN NUMERO EN FORMATO ESPANOL
+ * 
+ **/
+export const formatValue = (value) => {
+  if (value === null || value === undefined) return "–"
+  if (typeof value !== "number") return value
+  return value.toLocaleString("es-ES", {
+    maximumFractionDigits: 2
+  })
+}

@@ -30,4 +30,6 @@ export const optionsDDJJEstado = [
     { label: "Pendiente de Presentación Impresa", value: "Pendiente de Presentación Impresa" },
     { label: "Pendiente de Aprobación", value: "Pendiente de Aprobación" },
     { label: "Aprobado", value: "Aprobado" },
+    { label: "Anulado", value: "Anulado" },
+    { label: "Verificado sin presentación", value: "Verificado sin presentación" },
 ]

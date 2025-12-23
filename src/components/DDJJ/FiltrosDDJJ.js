@@ -5,10 +5,15 @@ import { optionsDDJJEstado, optionsQuincenal } from '../Filtros/dataFilter';
 
 const FiltrosDDJJ = ({
   estadoDDJJInformacion,
+  quincenasOptions,
+  quincenasHastaOptions,
+  fechaDesdeInformacion,
+  fechaHastaInformacion,
   setFechaDesdeInformacion,
   setFechaHastaInformacion,
   setEstadoDDJJInformacion,
 }) => {
+  const getOrdenQuincena = (month, quincena) => month * 10 + quincena;
 
   return (
     <>
@@ -16,10 +21,11 @@ const FiltrosDDJJ = ({
         <span className="me-4">Desde:</span>
         <Select
           onChange={(v) => {
-            const [month, quincena] = v.split("-");
+            const [quincena, month, anio] = v.split("-");
             setFechaDesdeInformacion({
               month: Number(month),
-              quincena: Number(quincena)
+              quincena: Number(quincena),
+              anio: Number(anio)
             });
           }}
           style={{ width: "100%" }}
@@ -27,17 +33,19 @@ const FiltrosDDJJ = ({
           optionFilterProp="label"
           optionLabelProp="label"   // <- CLAVE
           labelInValue={false}
-          options={optionsQuincenal}
+          options={quincenasOptions}
         />
       </Col>
       <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
         <span className="me-4">Hasta:</span>
         <Select
+
           onChange={(v) => {
-            const [month, quincena] = v.split("-");
+            const [quincena, month, anio] = v.split("-");
             setFechaHastaInformacion({
               month: Number(month),
-              quincena: Number(quincena)
+              quincena: Number(quincena),
+              anio: Number(anio)
             });
           }}
           style={{ width: "100%" }}
@@ -45,7 +53,7 @@ const FiltrosDDJJ = ({
           optionFilterProp="label"
           optionLabelProp="label"   // <- CLAVE
           labelInValue={false}
-          options={optionsQuincenal}
+          options={quincenasHastaOptions}
         />
       </Col>
       <Col xs={12} md={6} lg={3} className="mb-1 mt-1">

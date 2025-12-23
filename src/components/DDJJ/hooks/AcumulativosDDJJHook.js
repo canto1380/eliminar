@@ -76,18 +76,7 @@ export const datosAcumuladosDDJJHook = (
   })
 
   ddjjInformacionFilter?.forEach((d, i) => {
-    // console.log(d.estado)
-    // if (d.ingenioNombre === "Aguilares") {
-    //   console.log('fechas: ', d.fechaDesde , ' - ', d.fechaHasta, 'valor: ',d.canaBrutaMolidaTotal)
-    //   aguilares.aguilarescmb += Number(d.canaBrutaMolidaTotal) || 0
-    //   aguilares.aguilaresazCrudo += Number(d.azucarCrudoProducido) || 0
-    //   aguilares.aguilaresazBlanco += Number(d.azucarBlancoProducido) || 0
-    //   aguilares.aguilaresazRefinado += Number(d.azucarRefinado) || 0
-    //   aguilares.aguilaresazOrganico += Number(d.azucarOrganico) || 0
-    //   aguilares.aguilaresazFisico += Number(d.azucarFisicoTotal) || 0
-    //   aguilares.aguilaresazEquivalente += Number(d.azucarEquivalenteDj) || 0
-    //   aguilares.aguilaresalcoholElaborado += Number(d.alcoholTotalProducido) || 0
-    // }
+    
     const ing = normalizar(d.ingenioNombre)
     // Si el ingenio no existe en tu data, lo ignoramos
     if (!data[ing]) return

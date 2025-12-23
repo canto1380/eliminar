@@ -15,3 +15,83 @@ table th {
     background-color: #fcfcfc;
   }
   
+
+  .reporte-panel {
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  
+  .reporte-header {
+    margin-bottom: 8px;
+  }
+  
+  .reporte-header h6 {
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .reporte-subtitle {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  .reporte-table-wrapper {
+    overflow-x: auto;
+    max-height: 65vh;
+  }
+  
+  .table {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  
+  /* HEADER */
+  .header-zafra {
+    background: #e6f4ff;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .header-quincena {
+    background: #f0f5ff;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .header-item {
+    background: #fafafa;
+    font-weight: 400;
+    font-size: 11px;
+  }
+  
+  /* STICKY */
+  .sticky-col {
+    position: sticky;
+    left: 0;
+    background: #ffffff;
+    z-index: 2;
+    border-right: 1px solid #d9d9d9;
+  }
+  
+  .sticky-header {
+    z-index: 3;
+    background: #f5f5f5;
+  }
+  
+  /* DATA */
+  .data-cell {
+    padding: 4px 8px;
+  }
+  
+  .data-empty {
+    color: #9ca3af;
+    text-align: center;
+  }
+  
+  /* HOVER */
+  tbody tr:hover td {
+    background: #f0f9ff;
+  }
+  

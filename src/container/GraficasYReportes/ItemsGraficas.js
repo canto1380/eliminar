@@ -65,6 +65,7 @@ export const itemsRportes = (props = {}) => {
                         bandFilterIngenioRegion={null}
                         fixedComponent={true}
                         bandFilterRegion={true}
+                        zafraOpcionTodos={false}
                     />
 
                     <GraficasLinealComponent

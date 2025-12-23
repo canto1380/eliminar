@@ -13,7 +13,7 @@ import TitlePage from "../../components/TitlePages"
 import { Container } from "react-bootstrap"
 import Spinn from "../../components/Spinner"
 import Filtros from "../../components/Filtros"
-import { getDateFromQuincena, parseQuincenaLabel, tieneItemSeleccionado } from "../../helpers/helpers"
+import { getDateFromQuincena, getMesYQuincena, parseQuincenaLabel, tieneItemSeleccionado } from "../../helpers/helpers"
 import '../ParteDiario/ParteDiarioContainer.css'
 import DdjjComponent from "../../components/DDJJ/Ddjj"
 import BtnDescargar from "../../components/Botones/BtnDescargar"
@@ -24,9 +24,9 @@ import { getActualizarDDJJTucuman } from "../../utils/queryAPI/actualizarDDJJ"
 import { getLastUpdatedDDJJ } from "../../utils/queryAPI/lastUpdatedDDJJ"
 import FiltrosReporteDDJJ from "../../components/DDJJ/ReporteDinamico/FiltrosReporteDDJJ"
 import DdjjReporteComponent from "../../components/DDJJ/ReporteDinamico/DdjjReporteComponent"
-import BtnGenerarReporte from "../../components/DDJJ/ReporteDinamico/BtnGenerarReporte"
 import { optionsQuincenal } from "../../components/Filtros/dataFilter"
 import { DDJJ_ITEMS_REPORTE } from "../../components/DDJJ/ReporteDinamico/ItemsFilter"
+import moment from "moment"
 
 const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
   const [errorServer, setErrorServer] = useState(false)
@@ -51,13 +51,12 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
   const [ddjjInformacion, setDdjjInformacion] = useState(undefined) // para info mostrada en la pagina
   const [ddjjInformacionFilter, setDdjjInformacionFilter] = useState(undefined) // para info mostrada en la pagina
   const [ddjjReporte, setDdjjReporte] = useState(undefined) // para info a exportar
-  // const [ddjjReporteFilter, setDdjjReporteFilter] = useState(undefined) // para info a exportar
 
   /** STATE DE DATOS PARSEADOS PARA EXPORTAR **/
   const [ddjjInformacionParseada, setDdjjInformacionParseada] = useState(undefined)
-  const [ddjjReporteParseada, setDdjjReporteParseada] = useState(undefined)
 
   const [loadingUpdated, setLoadingUpdated] = useState(false)
+  const [loadingDownloadDynamicReport, setLoadingDownloadDynamicReport] = useState(false)
   const [loadingDownloadReport, setLoadingDownloadReport] = useState(false);
   const [banderaDataNull, setBanderaDataNull] = useState(false)
   const [lastUpdated, setLastUpdated] = useState(undefined)
@@ -69,6 +68,8 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
     if (zafraInformacion && zafraInformacion !== null) {
       getDataDDJJInformacion()
     }
+    setQuincenaDesdeInformacion(undefined)
+    setQuincenaHastaInformacion(undefined)
   }, [zafraInformacion])
 
   const getDataDDJJInformacion = async () => {
@@ -83,22 +84,87 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
     }
   }
 
+  const quincenasOptions = useMemo(() => {
+    if (!ddjjInformacion || !Array.isArray(ddjjInformacion)) return [{ label: 'Seleccione quincena', value: undefined }];
+
+    const unique = new Set();
+    const options = [{ label: 'Seleccione quincena', value: undefined }];
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    // Ordenar cronológicamente
+    const sorted = [...ddjjInformacion].sort((a, b) => new Date(a.fechaDesde) - new Date(b.fechaDesde));
+    sorted.forEach(d => {
+      const m = moment(d.fechaDesde);
+      const year = m.year();
+      const month = m.month();
+      const day = m.date();
+      const q = day <= 15 ? 1 : 2;
+
+      const key = `${year}-${month}-${q}`;
+      if (!unique.has(key)) {
+        unique.add(key);
+        options.push({
+          label: `${q}° quincena de ${meses[month]} ${year}`,
+          value: `${q}-${month + 1}-${year}`
+        });
+      }
+    });
+    return options;
+  }, [ddjjInformacion]);
+
+  const quincenasHastaOptions = useMemo(() => {
+    if (!quincenaDesdeInformacion) {
+      return quincenasOptions;
+    }
+    // console.log(quincenaDesdeInformacion)
+    const { month: desdeM, quincena: desdeQ, anio: desdeY } = quincenaDesdeInformacion
+    const desdeDate = new Date(desdeY, desdeM - 1, desdeQ === 1 ? 1 : 16);
+
+    return quincenasOptions.map(option => {
+      if (!option.value) return option;
+
+      const [hastaQ, hastaM, hastaY] = option.value.split('-').map(Number);
+      const hastaDate = new Date(hastaY, hastaM - 1, hastaQ === 1 ? 1 : 16);
+
+      return {
+        ...option,
+        disabled: hastaDate < desdeDate
+      };
+    });
+  }, [quincenasOptions, quincenaDesdeInformacion]);
+
+  useEffect(() => {
+    if (quincenaDesdeInformacion && quincenaHastaInformacion) {
+      const { month: desdeM, quincena: desdeQ, anio: desdeY } = quincenaDesdeInformacion
+      const desdeDate = new Date(desdeY, desdeM - 1, desdeQ === 1 ? 1 : 16);
+
+      const { month: hastaM, quincena: hastaQ, anio: hastaY } = quincenaHastaInformacion
+      const hastaDate = new Date(hastaY, hastaM - 1, hastaQ === 1 ? 1 : 16);
+
+      if (hastaDate < desdeDate) {
+        setQuincenaHastaInformacion(undefined);
+      }
+    }
+  }, [quincenaDesdeInformacion, quincenaHastaInformacion]);
+
   /**
   * FILTROS DE INFORMACION
   * USEEFFECT PARA PARSEAR LAS FECHAS DE DDJJ INFORMACION SEGUN LAS QUINCENAS ELEGIDAS
   **/
   useEffect(() => {
-    if (quincenaDesdeInformacion && quincenaHastaInformacion && zafraInformacion) {
+    if (quincenaDesdeInformacion && quincenaHastaInformacion) {
       // Calcular fecha desde: inicio de la quincena seleccionada en "desde"
+      const yearDesde = quincenaDesdeInformacion.anio || zafraInformacion;
       const fechaDesde = getDateFromQuincena({
-        year: zafraInformacion,
+        year: yearDesde,
         month: quincenaDesdeInformacion.month,
         quincena: quincenaDesdeInformacion.quincena
       });
 
-      // Calcular fecha hasta: final de la quincena seleccionada en "hasta"
+      // // Calcular fecha hasta: final de la quincena seleccionada en "hasta"
+      const yearHasta = quincenaHastaInformacion.anio || zafraInformacion;
       const fechaHasta = getDateFromQuincena({
-        year: zafraInformacion,
+        year: yearHasta,
         month: quincenaHastaInformacion.month,
         quincena: quincenaHastaInformacion.quincena
       });
@@ -108,11 +174,11 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
         setFechaDesdeInformacion(fechaDesde.from);
         // Guardar el final de la quincena "hasta"
         setFechaHastaInformacion(fechaHasta.to);
+      } else {
+        // Si no hay quincenas seleccionadas, limpiar las fechas
+        setFechaDesdeInformacion(undefined);
+        setFechaHastaInformacion(undefined);
       }
-    } else {
-      // Si no hay quincenas seleccionadas, limpiar las fechas
-      setFechaDesdeInformacion(undefined);
-      setFechaHastaInformacion(undefined);
     }
   }, [quincenaDesdeInformacion, quincenaHastaInformacion, zafraInformacion])
 
@@ -158,11 +224,8 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
 
       // 2) Si hay estado, validar estado
       const inEstado = tieneEstado
-        ? (estadoDDJJInformacion === 'todas'
-          ? true
-          : item.estado === estadoDDJJInformacion)
+        ? item.estado === estadoDDJJInformacion
         : true; // si NO hay estado, pasa todo
-
       return inRange && inEstado;
     });
 
@@ -210,7 +273,7 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
           anioZafra: zafraInformacion,
           periodoDesde: fechaDesdeInformacion,
           periodoHasta: fechaHastaInformacion,
-          titulo: titulo
+          titulo: titulo,
         }
       ]
       const res = await apiExportExcel("POST", 'declaracionJurada/descargarInforme', dataSend)
@@ -239,7 +302,7 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
   /*********************************** MODULO DE REPORTE DINAMICO ***************************************/
   /**
   * Datos para DDJJ Reportes
-  */
+  // */
   useEffect(() => {
     getDataDDJJReporte()
   }, [])
@@ -247,7 +310,8 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
   const getDataDDJJReporte = async () => {
     const dataDDJJ = await getDDJJHistorico()
     if (dataDDJJ.status === 200) {
-      setDdjjReporte(dataDDJJ.data)
+      const ddjjAprobadas = dataDDJJ.data.filter((d) => d.estado === 'Aprobado')
+      setDdjjReporte(ddjjAprobadas)
       // setDdjjReporteFilter(dataDDJJ.data)
     } else {
       setErrorServer(dataDDJJ.response.status)
@@ -298,12 +362,19 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
     itemsReporte
   ])
 
+  const quincenasSeleccionadas = useMemo(() => {
+    return quincenasReporte
+      .map(label => {
+        const parsed = parseQuincenaLabel(label)
+        if (!parsed) return null
+        return {
+          month: parsed.month,
+          quincena: parsed.quincena
+        }
+      })
+      .filter(Boolean)
+  }, [quincenasReporte])
 
-  const intersectaRango = (ddjj, rango) => {
-    const desde = new Date(ddjj.fechaDesde)
-    const hasta = new Date(ddjj.fechaHasta)
-    return desde <= rango.to && hasta >= rango.from
-  }
 
   const ddjjReporteFilter = useMemo(() => {
     if (!ddjjReporte) return []
@@ -319,27 +390,19 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
       ingeniosReporte.includes(r.ingenioNombre)
     )
 
-    const rangos = quincenasReporte.flatMap(label => {
-      const parsed = parseQuincenaLabel(label)
-      if (!parsed) return []
+    filtered = filtered.filter(ddjj => {
+      const desde = getMesYQuincena(ddjj.fechaDesde)
+      const hasta = getMesYQuincena(ddjj.fechaHasta)
 
-      return zafraReportes.map(anio =>
-        getDateFromQuincena({
-          year: anio,
-          month: parsed.month,
-          quincena: parsed.quincena
-        })
+      return quincenasSeleccionadas.some(q =>
+        (desde.month === q.month && desde.quincena === q.quincena) ||
+        (hasta.month === q.month && hasta.quincena === q.quincena)
       )
     })
-
-    filtered = filtered.filter(ddjj =>
-      rangos.some(rango => intersectaRango(ddjj, rango))
-    )
 
     filtered = filtered.filter(r =>
       tieneItemSeleccionado(r, itemsReporte)
     )
-
     return filtered
   }, [
     ddjjReporte,
@@ -349,12 +412,6 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
     itemsReporte,
     puedeMostrarReporte
   ])
-  // console.log(ddjjReporte)
-  // console.log(zafraReportes)
-  // console.log(ingeniosReporte)
-  // console.log(quincenasReporte)
-  // console.log(itemsReporte)
-  // console.log(puedeMostrarReporte)
 
   const filtrosReporte = useMemo(() => ({
     zafras: zafraReportes,
@@ -370,11 +427,46 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
 
 
 
-  const exportarReporteDinamico = () => {
-    console.log('exportando')
+  const exportarReporteDinamico = async () => {
+    try {
+      setLoadingDownloadDynamicReport(true)
+      const date = new Date()
+      const dateFormatted = moment(date).format("DD-MM-YYYY")
+      const titulo = `${dateFormatted} - Reporte DDJJ`
+      const dataSend = [{
+        dataDDJJ: ddjjReporteFilter,
+        usuario: dataUserRegister,
+        anioZafra: zafraReportes,
+        titulo,
+        dateFormatted,
+        filtros: filtrosReporte
+      }]
+      const res = await apiExportExcel("POST", 'declaracionJurada/descargarReporte', dataSend)
+      if (res.status === 200) {
+        const blob = new Blob([res.data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${dateFormatted} - Reporte DDJJ`; // Nombre del archivo
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(link);
+        message.success("Descarga realizada correctamente", 5);
+        window.location.reload();
+      } else {
+        toast.error(`Error al descargar el archivo: ${res?.data?.response?.data?.error || 'Error desconocido'}`)
+      }
+
+    } catch (error) {
+      toast.error(`Error al descargar el archivo: ${error?.data?.response?.data?.error || 'Error desconocido'}`)
+    } finally {
+      setLoadingDownloadDynamicReport(false);
+    }
+
+
   }
   /*****************************************************************************************************/
-
   return (
     <Container fluid>
       {banderaDataNull && (
@@ -411,6 +503,8 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
             bandFilterZafraAnio={true} // FILTRO GENERAL
 
             /** ESTADOS **/
+            fechaDesdeInformacion={quincenaDesdeInformacion}
+            fechaHastaInformacion={quincenaHastaInformacion}
             setFechaDesdeInformacion={setQuincenaDesdeInformacion}
             setFechaHastaInformacion={setQuincenaHastaInformacion}
             setEstadoDDJJInformacion={setEstadoDDJJInformacion}
@@ -418,24 +512,31 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
             dataZafra={zafraInformacion} // ESTADO DE ANIO ZAFRA. VALOR POR DEFECTO
             estadoDDJJInformacion={estadoDDJJInformacion} // STATE DE ESTADO DE DDJJ. VALOR POR DEFECTO
             setDataZafra={setZafraInformacion}
+            quincenasOptions={quincenasOptions}
+            quincenasHastaOptions={quincenasHastaOptions}
 
+            zafraOpcionTodos={false}
           />
           <DdjjComponent
             anioZafra={zafraInformacion}
             fechaDesdeInformacion={fechaDesdeInformacion}
             fechaHastaInformacion={fechaHastaInformacion}
+            ddjjInformacion={ddjjInformacion}
             ddjjInformacionFilter={ddjjInformacionFilter}
             ddjjInformacionParseada={ddjjInformacionParseada}
+            estadoDDJJInformacion={estadoDDJJInformacion}
             setDdjjInformacionParseada={setDdjjInformacionParseada}
           />
 
-          <BtnDescargar
-            loadingDownloadReport={loadingDownloadReport}
-            dataZafra={zafraInformacion}
-            data={ddjjInformacionFilter}
-            funcionExportar={exportarDDJJInformes}
-            bandExportDDJJInforme={true}
-          />
+          {estadoDDJJInformacion === "Aprobado" && (
+            <BtnDescargar
+              enabled={!!zafraInformacion && !!ddjjInformacionFilter}
+              loading={loadingDownloadReport}
+              processing={!ddjjInformacionFilter}
+              onClick={exportarDDJJInformes}
+              text="Descargar informe"
+            />
+          )}
 
           {/* REPORTE DINAMICO  */}
           <hr className="mx-3 mt-4" />
@@ -461,20 +562,21 @@ const DDJJContainer = ({ tokenAuth, dataUserRegister }) => {
           />
 
           {!puedeMostrarReporte ? (
-            <p>Debe seleccionar los filtros.</p>
+            <p className='px-4'>Debe seleccionar los filtros.</p>
           ) : (
-
 
             <DdjjReporteComponent
               data={ddjjReporteFilter}
               filtros={filtrosReporte}
-              setDataParseada={setDdjjReporteParseada}
             />
           )}
 
-          <BtnGenerarReporte
-            loading={loadingDownloadReport}
+          <BtnDescargar
+            enabled={puedeMostrarReporte && ddjjReporteFilter.length > 0}
+            loading={loadingDownloadDynamicReport}
+            processing={!ddjjReporteFilter}
             onClick={exportarReporteDinamico}
+            text="Descargar reporte"
           />
         </>
       )

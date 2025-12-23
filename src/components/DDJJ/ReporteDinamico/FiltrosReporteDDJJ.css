@@ -1,0 +1,46 @@
+.filtros-reporte-container {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 24px;
+}
+
+.filtro-box {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  height: 100%;
+}
+
+.filtro-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.filtro-select {
+  width: 100%;
+}
+
+.filtro-divider {
+  margin: 16px 0;
+}
+
+.checkbox-box {
+  background: #f9fafb;
+}
+
+.checkbox-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px 16px;
+}
+
+.checkbox-group-grid .ant-checkbox-wrapper {
+  font-size: 13px;
+}

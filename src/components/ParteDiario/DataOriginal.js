@@ -2869,16 +2869,11 @@ export const dataPorTipo = (
       ? new Date(dataInicioIngeniosNorte.CellE45)
       : new Date(dataInicioIngeniosNorte.CellF45)
 
-    // console.log(new Date(dataInicioIngeniosNorte.CellE45), new Date(dataInicioIngeniosNorte.CellF45))
-
     const fechaParametroLedesma = dataInicioIngeniosNorte.CellE45
       ? (dataEnd > ultimoRegistroLedesma
         ? ultimoRegistroLedesma
         : new Date(dataEnd))
       : new Date(dataEnd);
-
-    console.log(fechaParametroLedesma)
-
 
     /** Rio Grande **/
     const ultimoRegistroRiogrande = new Date(dataInicioIngeniosNorte.CellE46) >= new Date(dataInicioIngeniosNorte.CellF46)
@@ -2969,10 +2964,7 @@ export const dataPorTipo = (
       i17 = i17 + data.azucarOrganico || 0;
       j17 = j17 + data.otroAzucar || 0;
       k17 = k17 + data.azucarBlancoProducido;
-      console.log('antes: ', l17)
       l17 = l17 + (data.azucarCrudoProducido <= 0 ? - data.azucarRefinado - data.otroAzucar : data.azucarCrudoProducido - data.azucarRefinado - data.otroAzucar);
-      console.log('despues: ', (data.azucarCrudoProducido <= 0 ? - data.azucarRefinado - data.otroAzucar : data.azucarCrudoProducido - data.azucarRefinado - data.otroAzucar))
-      console.log(l17)
       dataLedesma = {
         E45: a17,
         F45: b17,
@@ -3102,8 +3094,6 @@ export const dataPorTipo = (
       };
     }
   })
-
-  console.log(dataLedesma)
 
   setPanelAlcohol(alcoholPanel);
   setPanelAlcoholAnhidro(alcoholAnhidroPanel);

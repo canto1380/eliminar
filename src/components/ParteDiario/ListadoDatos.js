@@ -1,6 +1,7 @@
 import { Table } from "antd";
+// import './listadoDatos.css'
 
-const ListadoDatos = ({ columns, scroll, data, handleDelete }) => {
+const ListadoDatos = ({ columns, scroll, data }) => {
   return (
     <>
       <Table
@@ -9,10 +10,9 @@ const ListadoDatos = ({ columns, scroll, data, handleDelete }) => {
         style={{
           fontSize: 10,
         }}
-        // key={data?.id}
-        rowKey={(record) => `${record?.fechaParte} ${record?.ingenioNombre} ${record?.id} ${record?.anio}`}
+        rowKey={(record) => `${record?.fechaParte} ${record?.ingenioNombre} ${record?.id} ${record?.anio} ${record?.identificadorDeclaracion}`}
+
         size="small"
-        scroll={{ x: scroll, y: 600 }}
         pagination={{ defaultPageSize: "1000", hideOnSinglePage: true }}
       />
     </>

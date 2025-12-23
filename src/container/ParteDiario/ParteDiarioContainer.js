@@ -347,6 +347,7 @@ const ParteDiarioContainer = () => {
             BandFilterDiaParteDirectorio={true}
             zafraParteDiario={zafraParteDiario}
             setZafraParteDiario={setZafraParteDiario}
+            zafraOpcionTodos={false}
           />
           <ParteDiario
             dataEnd={dataEnd}

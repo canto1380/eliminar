@@ -372,7 +372,6 @@ const GraficasDataContainer = ({ tokenAuth, dataUserRegister, routeAPI }) => {
 
         }
     }, [dataParteDiarios, periodosAnioEnd, periodosAnioStart, region])
-
     return (
         <Container fluid>
             <TitlePage titlePage="Gráficos" />

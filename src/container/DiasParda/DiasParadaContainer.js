@@ -252,17 +252,17 @@ const DiasParadaContainer = ({ tokenAuth, routeAPI }) => {
             bandFilterQuincena={true}
             placeHolderSearch="Valor"
             diasParadas={diasParadas}
-          // bandFilterDiasParadaAnioZafra={true}
-          // loadingDownloadReport={loadingDownloadReport}
-          // exportarDiasParadas={exportarDiasParadas}
+            zafraOpcionTodos={true}
           />
+
           <BtnDescargar
-            loadingDownloadReport={loadingDownloadReport}
-            dataZafra={anioZafra}
-            data={diasParadas}
-            funcionExportar={exportarDiasParadas}
-            bandExportDiasParadas={true}
+            enabled={!!anioZafra && !!diasParadas}
+            loading={loadingDownloadReport}
+            processing={!diasParadas}
+            onClick={exportarDiasParadas}
+            text="Descargar informe"
           />
+
           <ListHeader
             title={"Paradas de los ingenios"}
             btnLink={"/admin/dias-parada/nuevo"}

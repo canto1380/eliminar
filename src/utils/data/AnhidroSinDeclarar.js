@@ -39,6 +39,7 @@ export const anhidroBellaVista = [
     { zafra: 2025, anio: 2025, mesNumero: 8, mesNombre: 'agosto', valor: 2690072 },
     { zafra: 2025, anio: 2025, mesNumero: 9, mesNombre: 'septiembre', valor: 999218 },
     { zafra: 2025, anio: 2025, mesNumero: 10, mesNombre: 'octubre', valor: 1971143},
+    { zafra: 2025, anio: 2025, mesNumero: 11, mesNombre: 'noviembre', valor: 1098950},
 ];
 
 // Datos de anhidro 2023 (valores acumulados)

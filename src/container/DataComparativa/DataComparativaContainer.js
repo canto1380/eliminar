@@ -154,6 +154,7 @@ const DataComparativaContainer = ({ tokenAuth, routeAPI }) => {
             bandFilterZafraAnio={true}
             bandFilterSearch={true}
             placeHolderSearch="Valor"
+            zafraOpcionTodos={true}
           />
           <ListHeader
             title={"Datos comparativos"}

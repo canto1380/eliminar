@@ -43,6 +43,8 @@ const Filtros = ({
 
   dataZafra,
 
+  zafraOpcionTodos, // Habilitar opcion 'TODOS' en filtro ZAFRA
+
   setDataZafra,
   setDataAnio,
   setIngenio,
@@ -57,7 +59,11 @@ const Filtros = ({
 
   /* DDJJ */
   estadoDDJJInformacion,
+  quincenasOptions,
+  quincenasHastaOptions,
 
+  fechaDesdeInformacion,
+  fechaHastaInformacion,
   setFechaDesdeInformacion,
   setFechaHastaInformacion,
   setEstadoDDJJInformacion,
@@ -188,7 +194,7 @@ const Filtros = ({
     optionsMeses.push(option);
   });
 
-  let optionsAnios = [{ value: "", label: "Todos" }];
+  let optionsAnios = [zafraOpcionTodos === true ? { value: "", label: "Todos" } : []];
   dataAnios?.forEach((d) => {
     const option = {
       value: d.anio_zafra,
@@ -250,7 +256,7 @@ const Filtros = ({
       {bandTitlePrincipal && (
         <Row>
           <Col className="mt-3">
-            <div className={`pt-3 pb-0 px-4`}>
+            <div className={`pt-1 pb-0 px-4`}>
               <p className="fw-bolder">Filtros información</p>
             </div>
           </Col>
@@ -352,6 +358,10 @@ const Filtros = ({
         {bandFilterDDJJ && (
           <FiltrosDDJJ
             estadoDDJJInformacion={estadoDDJJInformacion}
+            quincenasOptions={quincenasOptions}
+            quincenasHastaOptions={quincenasHastaOptions}
+            fechaDesdeInformacion={fechaDesdeInformacion}
+            fechaHastaInformacion={fechaHastaInformacion}
             setFechaDesdeInformacion={setFechaDesdeInformacion}
             setFechaHastaInformacion={setFechaHastaInformacion}
             setEstadoDDJJInformacion={setEstadoDDJJInformacion}

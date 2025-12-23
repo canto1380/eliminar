@@ -1,64 +1,94 @@
-import { Select, Checkbox } from "antd"
-import '../../Filtros/filtros.css'
-import { Col, Row } from "react-bootstrap"
+import { Select, Checkbox, Divider } from "antd";
+import { Col, Row } from "react-bootstrap";
+import "./FiltrosReporteDDJJ.css";
 
 const FiltrosReporteDDJJ = ({
-    zafras, ingenios, quincenas, items,
-    zafraReportes, setZafraReportes,
-    ingeniosReporte, setIngeniosReporte,
-    quincenasReporte, setQuincenasReporte,
-    itemsReporte, setItemsReporte, itemsReporteValidos
+  zafras,
+  ingenios,
+  quincenas,
+  items,
+  zafraReportes,
+  setZafraReportes,
+  ingeniosReporte,
+  setIngeniosReporte,
+  quincenasReporte,
+  setQuincenasReporte,
+  itemsReporte,
+  setItemsReporte,
+  itemsReporteValidos
 }) => {
+  return (
+    <div className="filtros-reporte-container">
+      <Row className="g-3">
+        <Col className="mt-3">
+          <div className={`pt-1 pb-0 `}>
+            <p className="fw-bolder">Filtros reporte dinámico</p>
+          </div>
+        </Col>
+      </Row>
+      <Row className="g-3">
+        <Col xs={12} md={6} lg={4}>
+          <div className="filtro-box">
+            <label className="filtro-label">Zafras</label>
+            <Select
+              mode="multiple"
+              placeholder="Seleccionar zafras"
+              options={zafras.map(z => ({ label: z, value: z }))}
+              value={zafraReportes}
+              onChange={setZafraReportes}
+              className="filtro-select"
+            />
+          </div>
+        </Col>
 
-    return (
-        <Row className="d-flex justify-content-start align-items-center pb-1 px-4">
-            <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-                <span className="me-4">Zafras:</span>
-                <Select
-                    mode="multiple"
-                    placeholder="Zafras"
-                    options={zafras.map(z => ({ label: z, value: z }))}
-                    value={zafraReportes}
-                    onChange={setZafraReportes}
-                    style={{ width: "100%", marginBottom: 10 }}
-                />
-            </Col>
-            <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-                <span className="me-4">Ingenios:</span>
-                <Select
-                    mode="multiple"
-                    placeholder="Ingenios"
-                    options={ingenios.map(i => ({ label: i, value: i }))}
-                    value={ingeniosReporte}
-                    onChange={setIngeniosReporte}
-                    style={{ width: "100%", marginBottom: 10 }}
-                />
-            </Col>
-            <Col xs={12} md={6} lg={3} className="mb-1 mt-1">
-                <span className="me-4">Quincenas:</span>
-                <Select
-                    mode="multiple"
-                    placeholder="Quincenas"
-                    options={quincenas.map(q => ({ label: q, value: q }))}
-                    value={quincenasReporte}
-                    onChange={setQuincenasReporte}
-                    style={{ width: "100%", marginBottom: 10 }}
-                />
-            </Col>
-            <Col xs={12} className="mb-1 mt-1">
-                <span className="me-4">Items</span>
-                <Checkbox.Group
-                    options={items.map(i => ({
-                        label: i.label,
-                        value: i.key
-                    }))}
-                    value={itemsReporteValidos}
-                    onChange={setItemsReporte}
-                />
-            </Col>
+        <Col xs={12} md={6} lg={4}>
+          <div className="filtro-box">
+            <label className="filtro-label">Ingenios</label>
+            <Select
+              mode="multiple"
+              placeholder="Seleccionar ingenios"
+              options={ingenios.map(i => ({ label: i, value: i }))}
+              value={ingeniosReporte}
+              onChange={setIngeniosReporte}
+              className="filtro-select"
+            />
+          </div>
+        </Col>
 
-        </Row>
-    )
-}
+        <Col xs={12} md={6} lg={4}>
+          <div className="filtro-box">
+            <label className="filtro-label">Quincenas</label>
+            <Select
+              mode="multiple"
+              placeholder="Seleccionar quincenas"
+              options={quincenas.map(q => ({ label: q, value: q }))}
+              value={quincenasReporte}
+              onChange={setQuincenasReporte}
+              className="filtro-select"
+            />
+          </div>
+        </Col>
+      </Row>
 
-export default FiltrosReporteDDJJ
+      <Divider className="filtro-divider" />
+
+      <div className="filtro-box checkbox-box">
+        <label className="filtro-label">Items del reporte</label>
+
+        <Checkbox.Group
+          value={itemsReporteValidos}
+          onChange={setItemsReporte}
+          className="checkbox-group-grid"
+        >
+          {items.map(item => (
+            <Checkbox key={item.key} value={item.key}>
+              {item.label}
+            </Checkbox>
+          ))}
+        </Checkbox.Group>
+      </div>
+    </div>
+  );
+};
+
+export default FiltrosReporteDDJJ;

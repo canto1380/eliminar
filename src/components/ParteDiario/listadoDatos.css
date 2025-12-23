@@ -1,0 +1,25 @@
+.table-row-light {
+  background-color: #ffffff;
+}
+
+.table-row-dark {
+  background-color: #083b7a17;
+}
+
+.ant-table-row.ant-table-row-expanded {
+  background-color: #e6f4ff !important;
+}
+
+.ant-table-small .ant-table-tbody > tr > td {
+  padding: 6px 8px !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #f0f2f5;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.ant-table-tbody > tr:hover > td {
+  background-color: #e6f4ff;
+}
